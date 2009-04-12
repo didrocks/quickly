@@ -1,6 +1,27 @@
 import sys
 import os
 
+def file_from_template(template_dir, template_file, target_dir, project_name, rename = False):
+ if rename:
+  frags = template_file.split(".")
+  target_file = project_name
+  if len(frags) > 1:
+   target_file += "." + frags[1]
+ else:
+  target_file = template_file
+
+ print "Creating " + target_dir + "/" + target_file
+ fin = open(template_dir + template_file,'r')
+ file_contents1 = fin.read().replace("project_name",project_name)
+ fout = open(target_dir + target_file, 'w')
+ fout.write(file_contents1)
+ fout.flush()
+ fout.close()
+ fout.close()
+ print target_dir + "/" + target_file + " created\n"
+ 
+
+
 #get the name of the project
 if len(sys.argv)< 2:
  print ""
@@ -8,6 +29,9 @@ if len(sys.argv)< 2:
  print "usage is xxxx"
  print "Aborting"
  sys.exit(0)
+
+pathname = os.path.dirname(sys.argv[0])
+abs_path =  os.path.abspath(pathname)
 
 project_name = sys.argv[1]
 
@@ -42,6 +66,10 @@ os.mkdir(media_dir)
 print "Directoy " + media_dir + " created\n"
 
 #copy files
+template_glade_dir = abs_path + "/glade/"
+target_glade_dir = project_name + "/glade/"
+file_from_template(template_glade_dir, "project_name.glade", target_glade_dir, project_name, True)
+file_from_template(template_glade_dir, "about.glade", target_glade_dir, project_name)
 
 #set permissions
 
@@ -49,6 +77,7 @@ print "Directoy " + media_dir + " created\n"
 
 #print next steps
 
-
 print "finishing"
 sys.exit(0)
+
+
