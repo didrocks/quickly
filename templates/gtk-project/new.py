@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+import subprocess
 
 def file_from_template(template_dir, template_file, target_dir, project_name, rename = False):
  if rename:
@@ -86,6 +87,8 @@ print "Media files copied to " + target_media_dir + "\n"
 #print next steps
 
 print "finishing"
+subprocess.call(["python",project_name + ".py"], cwd=project_name + "/python/")
+
 sys.exit(0)
 
 
