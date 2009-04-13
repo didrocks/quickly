@@ -1,5 +1,6 @@
 import sys
 import os
+import shutil
 
 def file_from_template(template_dir, template_file, target_dir, project_name, rename = False):
  if rename:
@@ -20,8 +21,6 @@ def file_from_template(template_dir, template_file, target_dir, project_name, re
  fout.close()
  print target_dir + "/" + target_file + " created\n"
  
-
-
 #get the name of the project
 if len(sys.argv)< 2:
  print ""
@@ -34,9 +33,6 @@ pathname = os.path.dirname(sys.argv[0])
 abs_path =  os.path.abspath(pathname)
 
 project_name = sys.argv[1]
-
-#check the project_name is there
-#check that sys.argv[1]
 
 #bail if the name if taken
 if os.path.exists(project_name):
@@ -70,6 +66,18 @@ template_glade_dir = abs_path + "/glade/"
 target_glade_dir = project_name + "/glade/"
 file_from_template(template_glade_dir, "project_name.glade", target_glade_dir, project_name, True)
 file_from_template(template_glade_dir, "about.glade", target_glade_dir, project_name)
+
+template_python_dir = abs_path + "/python/"
+target_python_dir = project_name + "/python/"
+file_from_template(template_python_dir, "project_name.py", target_python_dir, project_name, True)
+file_from_template(template_python_dir, "about.py", target_python_dir, project_name)
+
+template_media_dir = abs_path + "/media/"
+target_media_dir = project_name + "/media/"
+print "Copying media files to " + target_media_dir
+shutil.copy2(template_media_dir + "background.png",target_media_dir)
+shutil.copy2(template_media_dir + "logo.png",target_media_dir)
+print "Media files copied to " + target_media_dir + "\n"
 
 #set permissions
 

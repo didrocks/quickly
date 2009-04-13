@@ -2,10 +2,10 @@ import sys
 import gtk
 from about import About
 
-class demo:
+class project_name:
  def __init__(self):
   builder = gtk.Builder()
-  builder.add_from_file("../glade/demo.glade")
+  builder.add_from_file("../glade/project_name.glade")
   self.window = builder.get_object("window")
   builder.connect_signals(self)
     
@@ -18,7 +18,7 @@ class demo:
 
 
 if __name__ == "__main__":
-    d = demo()
+    d = project_name()
     d.window.show()
     gtk.main()
 
