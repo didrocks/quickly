@@ -16,8 +16,8 @@ if len(sys.argv) < 3:
  sys.exit(0)
 
 #get the template and command
-template = sys.argv[1]
-command = sys.argv[2]
+command = sys.argv[1]
+template = sys.argv[2]
 if len(sys.argv) > 3:
  command_arg = sys.argv[3]
 else:
