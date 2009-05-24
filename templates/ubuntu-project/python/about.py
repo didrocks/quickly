@@ -4,7 +4,7 @@ import gtk
 class About:
  def __init__(self):
   builder = gtk.Builder()
-  builder.add_from_file("../glade/about.glade")
+  builder.add_from_file("../glade/about.ui")
   self.dialog = builder.get_object("about_dialog")
   builder.connect_signals(self)
 

@@ -65,8 +65,8 @@ print "Directoy " + media_dir + " created\n"
 #copy files
 template_glade_dir = abs_path + "/glade/"
 target_glade_dir = project_name + "/glade/"
-file_from_template(template_glade_dir, "project_name.glade", target_glade_dir, project_name, True)
-file_from_template(template_glade_dir, "about.glade", target_glade_dir, project_name)
+file_from_template(template_glade_dir, "project_name.ui", target_glade_dir, project_name, True)
+file_from_template(template_glade_dir, "about.ui", target_glade_dir, project_name)
 
 template_python_dir = abs_path + "/python/"
 target_python_dir = project_name + "/python/"

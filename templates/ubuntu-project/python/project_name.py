@@ -5,7 +5,7 @@ from about import About
 class project_name:
  def __init__(self):
   builder = gtk.Builder()
-  builder.add_from_file("../glade/project_name.glade")
+  builder.add_from_file("../glade/project_name.ui")
   self.window = builder.get_object("window")
   builder.connect_signals(self)
     
