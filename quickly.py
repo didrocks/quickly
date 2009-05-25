@@ -12,7 +12,12 @@ template_directory = abs_path + "/templates"
 
 #make sure the user entered enough arguments
 if len(sys.argv) < 3:
- print "usage instructions"
+ print "quickly.py <template> <command [...]>"
+ print
+ print "Commands:"
+ print "  new <project-name>"
+ print
+ print "Example:  ./quickly.py ubuntu-project new foobar"
  sys.exit(0)
 
 #get the template and command
