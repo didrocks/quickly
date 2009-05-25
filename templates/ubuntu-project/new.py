@@ -35,18 +35,7 @@ abs_path =  os.path.abspath(pathname)
 
 project_name = sys.argv[1]
 
-#bail if the name if taken
-if os.path.exists(project_name):
- print ""
- print "There is already a file or directory named " + project_name
- print "Aborting"
- sys.exit(0)
-
-#create directories
-print "Creating project directory " + project_name
-os.mkdir(project_name)
-print "Directoy " + project_name + " created\n"
-
+# create additional directories
 glade_dir = project_name + "/glade"
 print "Creating project directory " + glade_dir
 os.mkdir(glade_dir)

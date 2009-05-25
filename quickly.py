@@ -53,6 +53,8 @@ def process_command_line(template_directory):
       print "Aborting\n"
       usage()
       return 1
+    else:
+      project_name = opt_command[1]
 
   #if no template provided, guess it from the current tree
   if not opt_has_template:
@@ -69,7 +71,7 @@ don't want to create a new projet or that your are in your directory project.'''
   template_path = template_directory + "/" + opt_template
   if not os.path.exists(template_path):
     print "ERROR: Template '" + opt_template + "' not found."
-    print "Aborting\n"
+    print "Aborting"
     return 1
 
   #ensure the command exists
@@ -86,8 +88,23 @@ don't want to create a new projet or that your are in your directory project.'''
       print "Aborting"
       return 1
 
+    if opt_new:
+
+      #bail if the name if taken
+      if os.path.exists(project_name):
+        print "There is already a file or directory named " + project_name
+        print "Aborting"
+        return 1
+
+      #create directory and template file
+      print "Creating project directory " + project_name
+      os.mkdir(project_name)
+      print "Directory " + project_name + " created\n"
+      f = open(project_name + '/.quickly', 'w')
+      f.write(opt_template)
+      f.close
+
     #execute the command
-    print ["python",command_path, opt_command[1:]]
     return subprocess.call(["python", command_path, " ".join(opt_command[1:])])
 
 
