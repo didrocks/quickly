@@ -17,7 +17,7 @@ if len(sys.argv) < 3:
  print "Commands:"
  print "  new <project-name>"
  print
- print "Example:  ./quickly.py ubuntu-project new foobar"
+ print "Example:  ./quickly.py new ubuntu-project project_name"
  sys.exit(0)
 
 #get the template and command
