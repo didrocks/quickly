@@ -5,42 +5,98 @@ import os
 import sys
 import subprocess
 
-#figure out where the templage are kept
-pathname = os.path.dirname(sys.argv[0])
-abs_path =  os.path.abspath(pathname)
-template_directory = abs_path + "/templates"
+def usage():
+  print "quickly.py [-t <template> | --template <template>] <command [...]>"
+  print
+  print "Commands:"
+  print "  new <project-name>"
+  print "      (template is mandatory for this command)"
+  print "  push <describe your changes>"
+  print
+  print "Examples:  quickly.py -t ubuntu-project new foobar"
+  print "           quickly.py push 'awesome new comment system'"
 
-#make sure the user entered enough arguments
-if len(sys.argv) < 3:
- print "quickly.py <template> <command [...]>"
- print
- print "Commands:"
- print "  new <project-name>"
- print
- print "Example:  ./quickly.py new ubuntu-project project_name"
- sys.exit(0)
+def process_command_line(template_directory):
+  """ Entry point for command line processing
 
-#get the template and command
-command = sys.argv[1]
-template = sys.argv[2]
-if len(sys.argv) > 3:
- command_arg = sys.argv[3]
-else:
- command_arg = ""
+  :return: exit code of quickly command.
+  """
+  opt_command = []
+  opt_new = False
+  opt_has_template = False
+  argv = sys.argv
+  i = 1
+  while i < len(argv):
+    arg = argv[i]
+    if arg == 'new':
+      opt_new = True
+      opt_command.append(arg)
+    elif arg == '--template' or arg == '-t':
+      opt_has_template = True
+      opt_template = argv[i + 1]
+      i += 1
+    else:
+      opt_command.append(arg)
+    i += 1
 
-#ensure the template and command exist
-template_path = template_directory + "/" + template
-if not os.path.exists(template_path):
- print "ERROR: Template " + template + " not found."
- print "Aborting"
- sys.exit(1)
+  #if processing new project, template argument and project name
+  #must be there (with -t, --template or just following new)
+  if opt_new:
+    if not opt_has_template:
+      print "ERROR: new command need a template name"
+      print "Aborting\n"
+      usage()
+      return 1
+    # also need project name
+    if len(opt_command) < 2:
+      print "ERROR: new command must be followed by a project name"
+      print "Aborting\n"
+      usage()
+      return 1
 
-command_path = template_path + "/" + command + ".py"
-if not os.path.exists(command_path):
- print "ERROR: command " + command + " in " + template + " not found."
- print "Aborting"
- sys.exit(1)
+  #if no template provided, guess it from the current tree
+  if not opt_has_template:
+    try:
+      f = open('.quickly', 'r')
+      opt_template = f.readline()
+      f.close()
+    except IOError:
+      print '''ERROR: No template provided and none found in the current tree. Ensure you 
+don't want to create a new projet or that your are in your directory project.'''
+      print "Aborting"
+      return 1
 
-#execute the command
-subprocess.call(["python",command_path, command_arg])
+  template_path = template_directory + "/" + opt_template
+  if not os.path.exists(template_path):
+    print "ERROR: Template '" + opt_template + "' not found."
+    print "Aborting\n"
+    return 1
 
+  #ensure the command exists
+  if not opt_command:
+    print "ERROR: No command found"
+    print "Aborting\n"
+    usage()
+    return 1   
+
+  else:
+    command_path = template_path + "/" + opt_command[0] + ".py"
+    if not os.path.exists(command_path):
+      print "ERROR: command '" + opt_command[0] + "' in '" + opt_template + "' not found."
+      print "Aborting"
+      return 1
+
+    #execute the command
+    print ["python",command_path, opt_command[1:]]
+    return subprocess.call(["python", command_path, " ".join(opt_command[1:])])
+
+
+if __name__ == '__main__':
+
+  #figure out where the templates are kept
+  pathname = os.path.dirname(sys.argv[0])
+  abs_path =  os.path.abspath(pathname)
+  template_directory = abs_path + "/templates"
+
+  #process the command line to send the right instructions
+  exit(process_command_line(template_directory))
