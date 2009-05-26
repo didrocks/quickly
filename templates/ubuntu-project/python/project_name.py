@@ -13,6 +13,9 @@ class project_name:
   about = About()
   about.run()
 
+ def main_quit(self, widget, data=None):
+  gtk.main_quit()
+
  def on_window_destroy(self, widget, data=None):
   gtk.main_quit()
 
