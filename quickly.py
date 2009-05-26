@@ -54,7 +54,7 @@ def check_this_command(command_name, template_path, opt_template):
     if hasattr(main, command_name):
       commands[opt_template] = getattr(main, command_name)
     else:
-      print "ERROR: command '" + command_name + "' in '" + opt_template + "' not found."
+      print "ERROR: command '%s' in '%s' not found." % (command_name, opt_template)
       print "Aborting"
       exit(1)    
 
@@ -119,14 +119,14 @@ def process_command_line(template_directory):
       opt_template = f.readline()
       f.close()
     except IOError:
-      print '''ERROR: No template provided and none found in the current tree. Ensure you 
-don't want to create a new projet or that your are in your directory project.'''
+      print "ERROR: No template provided and none found in the current tree. Ensure you" \
+            "don't want to create a new projet or that your are in your directory project."
       print "Aborting"
       return 1
 
   template_path = template_directory + "/" + opt_template
   if not os.path.exists(template_path):
-    print "ERROR: Template '" + opt_template + "' not found."
+    print "ERROR: Template '%s' not found." % opt_template
     print "Aborting"
     return 1
 

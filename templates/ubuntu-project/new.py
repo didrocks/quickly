@@ -12,7 +12,7 @@ def file_from_template(template_dir, template_file, target_dir, project_name, re
  else:
   target_file = template_file
 
- print "Creating " + target_dir + "/" + target_file
+ print "Creating %s" % (target_dir + "/" + target_file,)
  fin = open(template_dir + template_file,'r')
  file_contents1 = fin.read().replace("project_name",project_name)
  fout = open(target_dir + target_file, 'w')
@@ -20,7 +20,7 @@ def file_from_template(template_dir, template_file, target_dir, project_name, re
  fout.flush()
  fout.close()
  fout.close()
- print target_dir + "/" + target_file + " created\n"
+ print  "%s created\n" % (target_dir + "/" + target_file,)
  
 #get the name of the project
 if len(sys.argv)< 2:
@@ -37,19 +37,19 @@ project_name = sys.argv[1]
 
 # create additional directories
 glade_dir = project_name + "/glade"
-print "Creating project directory " + glade_dir
+print "Creating project directory %s" % glade_dir
 os.mkdir(glade_dir)
 print "Directoy " + glade_dir + " created\n"
 
 python_dir = project_name + "/python"
-print "Creating project directory " + python_dir
+print "Creating project directory %s" % python_dir
 os.mkdir(python_dir)
-print "Directoy " + python_dir + " created\n"
+print "Directoy %s created\n" % python_dir
 
 media_dir = project_name + "/media"
-print "Creating project directory " + media_dir
+print "Creating project directory %s" % media_dir
 os.mkdir(media_dir)
-print "Directoy " + media_dir + " created\n"
+print "Directoy %s created\n" % media_dir
 
 #copy files
 template_glade_dir = abs_path + "/glade/"
@@ -64,10 +64,10 @@ file_from_template(template_python_dir, "about.py", target_python_dir, project_n
 
 template_media_dir = abs_path + "/media/"
 target_media_dir = project_name + "/media/"
-print "Copying media files to " + target_media_dir
+print "Copying media files to %s" % target_media_dir
 shutil.copy2(template_media_dir + "background.png",target_media_dir)
 shutil.copy2(template_media_dir + "logo.png",target_media_dir)
-print "Media files copied to " + target_media_dir + "\n"
+print "Media files copied to %s\n" % target_media_dir
 
 #set permissions
 
