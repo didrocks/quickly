@@ -35,6 +35,9 @@ def process_command_line(template_directory):
       opt_has_template = True
       opt_template = argv[i + 1]
       i += 1
+    elif arg == '--help' or arg == '-h':
+      usage()
+      return 0
     else:
       opt_command.append(arg)
     i += 1
