@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from builtins import main
 import os
 import sys
 import subprocess
@@ -16,11 +17,63 @@ def usage():
   print "Examples:  quickly.py -t ubuntu-project new foobar"
   print "           quickly.py push 'awesome new comment system'"
 
+def look_for_commands(template_path=None):
+  """ seek for availables commands
+  
+TEMPLATE direct…
+  template_path: where template are located. None if we want to list all commands for all templates.
+
+  : return tuples with list of available commands and origin (default or template)
+  """
+
+  if template_path is not None:
+    print "in progress"
+
+
+def check_this_command(command_name, template_path, opt_template):
+  """ check if the command exist in and in a template
+
+      For instance, for a command like foo, the inside template foo.py script file is prefered
+      to built-in foo() function.
+      There can be pre_foo() and post_foo() built-in functions.
+
+      :command_name
+      :template_path
+
+      return list of commands ready to be launched
+  """
+
+  commands = {}
+
+  # check for template command
+  command_path = template_path + "/" + command_name + ".py"
+  if os.path.exists(command_path):
+    commands[opt_template] = command_path
+  else:
+    #check for built-in command
+    if hasattr(main, command_name):
+      commands[opt_template] = getattr(main, command_name)
+    else:
+      print "ERROR: command '" + command_name + "' in '" + opt_template + "' not found."
+      print "Aborting"
+      exit(1)    
+
+  #check for pre-post built-in commands
+  for hook in ("pre", "post"):
+    if hasattr(main, hook + '_' + command_name):
+      commands[hook] = getattr(main, hook + '_' + command_name)
+  
+  return commands
+
+
 def process_command_line(template_directory):
   """ Entry point for command line processing
 
+  template_directory: where template are located
+
   :return: exit code of quickly command.
   """
+
   opt_command = []
   opt_new = False
   opt_has_template = False
@@ -84,32 +137,38 @@ don't want to create a new projet or that your are in your directory project.'''
     usage()
     return 1   
 
+  #else, execute the commands
   else:
-    command_path = template_path + "/" + opt_command[0] + ".py"
-    if not os.path.exists(command_path):
-      print "ERROR: command '" + opt_command[0] + "' in '" + opt_template + "' not found."
+    commands_to_execute = check_this_command(opt_command[0], template_path, opt_template)
+    return_code = 0
+    #pre-hook
+    if 'pre' in commands_to_execute:
+      return_code = commands_to_execute['pre'](opt_template, opt_command[1:])
+    if return_code != 0:
+      print "ERROR: pre_%s command failed" % opt_command[0]
       print "Aborting"
-      return 1
+      return return_code
 
-    if opt_new:
+    #main execution
+    if callable(commands_to_execute[opt_template]):
+      return_code = commands_to_execute[opt_template](opt_template, opt_command[1:])
+    else:
+      return_code = subprocess.call(["python", commands_to_execute[opt_template], " ".join(opt_command[1:])])
 
-      #bail if the name if taken
-      if os.path.exists(project_name):
-        print "There is already a file or directory named " + project_name
-        print "Aborting"
-        return 1
+    if return_code != 0:
+      print "ERROR: %s command failed" % opt_command[0]
+      print "Aborting"
+      return return_code
 
-      #create directory and template file
-      print "Creating project directory " + project_name
-      os.mkdir(project_name)
-      print "Directory " + project_name + " created\n"
-      f = open(project_name + '/.quickly', 'w')
-      f.write(opt_template)
-      f.close
+    #post-hook
+    if 'post' in commands_to_execute:
+       commands_to_execute['post'](opt_template, opt_command[1:])
+    if return_code != 0:
+      print "ERROR: post_%s command failed" % opt_command[0]
+      print "Aborting"
+      return return_code
 
-    #execute the command
-    return subprocess.call(["python", command_path, " ".join(opt_command[1:])])
-
+    return 0
 
 if __name__ == '__main__':
 
