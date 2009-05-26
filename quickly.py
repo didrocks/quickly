@@ -10,12 +10,13 @@ def usage():
   print "quickly.py [-t <template> | --template <template>] <command [...]>"
   print
   print "Commands:"
-  print "  new <project-name>"
+  print "  new <template> <project-name>"
   print "      (template is mandatory for this command)"
   print "  push <describe your changes>"
   print
-  print "Examples:  quickly.py -t ubuntu-project new foobar"
+  print "Examples:  quickly.py new ubuntu-project foobar"
   print "           quickly.py push 'awesome new comment system'"
+  print "           quickly.py -t cool-template push 'awesome new comment system'"
 
 def look_for_commands(template_path=None):
   """ seek for availables commands
@@ -99,18 +100,19 @@ def process_command_line(template_directory):
   #must be there (with -t, --template or just following new)
   if opt_new:
     if not opt_has_template:
-      print "ERROR: new command need a template name"
-      print "Aborting\n"
-      usage()
-      return 1
-    # also need project name
-    if len(opt_command) < 2:
-      print "ERROR: new command must be followed by a project name"
-      print "Aborting\n"
-      usage()
-      return 1
-    else:
-      project_name = opt_command[1]
+      if len(opt_command) < 3:
+        print "ERROR: new command must be followed by a template and project name"
+        print "Aborting\n"
+        usage()
+        return 1
+      else:
+        opt_template = opt_command[1]
+        opt_command.remove(opt_command[1])
+        opt_has_template = True
+
+    #in every cases, the project name is now in first position.
+    project_name = opt_command[1]
+
 
   #if no template provided, guess it from the current tree
   if not opt_has_template:
