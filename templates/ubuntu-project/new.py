@@ -73,7 +73,7 @@ print "Media files copied to %s\n" % target_media_dir
 print "Creating bzr repository and commiting"
 subprocess.call(["bzr", "init"], cwd=project_name)
 subprocess.call(["bzr", "add"], cwd=project_name)
-subprocess.call(["bzr", "commit", "-m 'initial project creation'"], cwd=project_name)
+subprocess.call(["bzr", "commit", "-m",  "initial project creation"], cwd=project_name)
 
 print "finishing"
 
