@@ -40,17 +40,17 @@ project_name = sys.argv[1]
 glade_dir = project_name + "/glade"
 print "Creating project directory %s" % glade_dir
 os.mkdir(glade_dir)
-print "Directoy " + glade_dir + " created\n"
+print "Directory " + glade_dir + " created\n"
 
 python_dir = project_name + "/python"
 print "Creating project directory %s" % python_dir
 os.mkdir(python_dir)
-print "Directoy %s created\n" % python_dir
+print "Directory %s created\n" % python_dir
 
 media_dir = project_name + "/media"
 print "Creating project directory %s" % media_dir
 os.mkdir(media_dir)
-print "Directoy %s created\n" % media_dir
+print "Directory %s created\n" % media_dir
 
 #copy files
 template_glade_dir = abs_path + "/glade/"
