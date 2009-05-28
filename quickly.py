@@ -19,10 +19,10 @@ def usage():
   print "           quickly.py -t cool-template push 'awesome new comment system'"
 
 def look_for_commands(template_path=None):
-  """ seek for availables commands
-  
+  """ seek for available commands
+
 TEMPLATE direct…
-  template_path: where template are located. None if we want to list all commands for all templates.
+  template_path: where templates are located. None if we want to list all commands for all templates.
 
   : return tuples with list of available commands and origin (default or template)
   """
@@ -32,10 +32,10 @@ TEMPLATE direct…
 
 
 def check_this_command(command_name, template_path, opt_template):
-  """ check if the command exist in and in a template
+  """ check if the command exist in a template
 
-      For instance, for a command like foo, the inside template foo.py script file is prefered
-      to built-in foo() function.
+      For instance, for a command like foo, the inside template foo.py script
+      file is preferred to built-in foo() function.
       There can be pre_foo() and post_foo() built-in functions.
 
       :command_name
@@ -70,7 +70,7 @@ def check_this_command(command_name, template_path, opt_template):
 def process_command_line(template_directory):
   """ Entry point for command line processing
 
-  template_directory: where template are located
+  template_directory: where templates are located
 
   :return: exit code of quickly command.
   """
