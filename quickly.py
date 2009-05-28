@@ -175,7 +175,9 @@ def process_command_line(template_directory):
 if __name__ == '__main__':
 
   # default to looking up templates in the current dir
-  template_directory = 'templates'
+  pathname = os.path.dirname(sys.argv[0])
+  abs_path =  os.path.abspath(pathname)
+  template_directory = abs_path + '/templates'
   if os.path.exists('/usr/share/quickly/templates'):
       template_directory = '/usr/share/quickly/templates'
   template_directory =  os.path.abspath(template_directory)
