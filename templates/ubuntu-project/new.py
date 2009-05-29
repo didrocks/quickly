@@ -5,6 +5,9 @@ import os
 import shutil
 import subprocess
 
+import gettext
+from gettext import gettext as _
+
 def file_from_template(template_dir, template_file, target_dir, project_name, rename = False):
   if rename:
    frags = template_file.split(".")
@@ -25,12 +28,14 @@ def file_from_template(template_dir, template_file, target_dir, project_name, re
   print  "%s created\n" % (target_dir + "/" + target_file,)
  
 
+#set domain text
+gettext.textdomain('quickly')
 
 #get the name of the project
 if len(sys.argv)< 2:
-  print ""
-  print "Error, project name not defined. Usage is project_name"
-  print "Aborting"
+  print _("""
+Error, project name not defined. Usage is project_name
+Aborting""")
   sys.exit(0)
 
 pathname = os.path.dirname(sys.argv[0])
@@ -40,19 +45,19 @@ project_name = sys.argv[1]
 
 # create additional directories
 glade_dir = project_name + "/glade"
-print "Creating project directory %s" % glade_dir
+print _("Creating project directory %s") % glade_dir
 os.mkdir(glade_dir)
-print "Directory " + glade_dir + " created\n"
+print _("Directory %s created\n") % glade_dir
 
 python_dir = project_name + "/python"
-print "Creating project directory %s" % python_dir
+print _("Creating project directory %s") % python_dir
 os.mkdir(python_dir)
-print "Directory %s created\n" % python_dir
+print _("Directory %s created\n") % python_dir
 
 media_dir = project_name + "/media"
-print "Creating project directory %s" % media_dir
+print _("Creating project directory %s") % media_dir
 os.mkdir(media_dir)
-print "Directory %s created\n" % media_dir
+print _("Directory %s created\n") % media_dir
 
 #copy files
 template_glade_dir = abs_path + "/glade/"
@@ -67,17 +72,17 @@ file_from_template(template_python_dir, "about.py", target_python_dir, project_n
 
 template_media_dir = abs_path + "/media/"
 target_media_dir = project_name + "/media/"
-print "Copying media files to %s" % target_media_dir
+print _("Copying media files to %s") % target_media_dir
 shutil.copy2(template_media_dir + "background.png",target_media_dir)
 shutil.copy2(template_media_dir + "logo.png",target_media_dir)
-print "Media files copied to %s\n" % target_media_dir
+print _("Media files copied to %s\n") % target_media_dir
 
-print "Creating bzr repository and commiting"
+print _("Creating bzr repository and commiting")
 subprocess.call(["bzr", "init"], cwd=project_name)
 subprocess.call(["bzr", "add"], cwd=project_name)
 subprocess.call(["bzr", "commit", "-m",  "initial project creation"], cwd=project_name)
 
-print "finishing"
+print _("finishing")
 
 #run the program
 subprocess.call(["python",project_name + ".py"], cwd=project_name + "/python/")
