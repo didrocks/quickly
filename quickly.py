@@ -7,16 +7,16 @@ import sys
 import subprocess
 
 def usage():
-  print """quickly.py [-t <template> | --template <template>] <command [...]>
+  print """quickly [-t <template> | --template <template>] <command [...]>
 
 Commands:
   new <template> <project-name>
       (template is mandatory for this command)
   push <describe your changes>
 
-Examples:  quickly.py new ubuntu-project foobar
-           quickly.py push 'awesome new comment system'
-           quickly.py -t cool-template push 'awesome new comment system'"""
+Examples:  quickly new ubuntu-project foobar
+           quickly push 'awesome new comment system'
+           quickly -t cool-template push 'awesome new comment system'"""
 
 def look_for_commands(template_path=None):
   """ seek for available commands
