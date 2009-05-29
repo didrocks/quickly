@@ -10,7 +10,7 @@ prefix ?= usr
 libdir ?= $(prefix)/lib/quickly
 bindir ?= $(prefix)/bin
 datadir ?= $(prefix)/share
-templatedir = $(datadir)/quickly
+templatedir = $(datadir)/quickly/templates
 localedir = $(datadir)/locale
 
 install: all
