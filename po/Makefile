@@ -5,7 +5,16 @@ include Makevars
 
 translated := $(addprefix $(top_srcdir)/,$(shell cat POTFILES.in))
 
-default: pot
+default: all
+
+all: mos pot
+
+%.mo: %.po
+	msgfmt $< -o $@
+
+pos := $(wildcard *.po)
+
+mos: $(pos:%.po=%.mo)
 
 pot: $(DOMAIN).pot
 $(DOMAIN).pot: $(translated)
@@ -14,6 +23,9 @@ $(DOMAIN).pot: $(translated)
 missing: FORCE
 	intltool-update --maintain
 
+clean:
+	rm -f *.mo
+
 FORCE:
 
-.PHONY: default pot FORCE
+.PHONY: default all pot clean FORCE
