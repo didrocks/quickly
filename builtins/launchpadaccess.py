@@ -28,10 +28,10 @@ def initialize_lpi():
     print _("Get Launchpad Settings")
     launchpad = lp_libsupport.get_launchpad("quickly")
   except ImportError:
-    suggestion = _("check whether python-launchpadlib is installed")
+    suggestion = _("Check whether python-launchpadlib is installed")
   except IOError:
     print _("Initial Launchpad creation")
-    email = raw_input(_('Mail of your Launchpad account:'))
+    email = raw_input(_('E-mail of your Launchpad account:'))
     password = getpass.getpass(_('Your Launchpad password:'))
     return_code = subprocess.call(["manage-credentials", "create", "-c", "quickly", "-l", "2",
                                    "--email", email, "--password", password])
@@ -40,7 +40,7 @@ def initialize_lpi():
     bzrbinding.bzr_set_login(lp_user_login)
     launchpad = lp_libsupport.get_launchpad("quickly")
   if launchpad is None:
-    die(_("Couldn't setup Launchpad for the quickly consumer; %s") % suggestion)
+    die(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
   print _("Launchpad connexion is ok")
 
   return launchpad

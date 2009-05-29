@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-29 10:58+0200\n"
+"POT-Creation-Date: 2009-05-29 16:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../quickly.py:12
+#: ../quickly.py:13
 msgid ""
 "quickly [-t <template> | --template <template>] <command [...]>\n"
 "\n"
@@ -30,50 +30,120 @@ msgid ""
 "           quickly -t cool-template push 'awesome new comment system'"
 msgstr ""
 
-#: ../quickly.py:33
+#: ../quickly.py:34
 msgid "in progress"
 msgstr ""
 
-#: ../quickly.py:60
+#: ../quickly.py:61
 #, python-format
 msgid "ERROR: command '%s' in '%s' not found."
 msgstr ""
 
-#: ../quickly.py:61 ../quickly.py:107 ../quickly.py:129 ../quickly.py:135
-#: ../quickly.py:141 ../quickly.py:155 ../quickly.py:166 ../quickly.py:174
+#: ../quickly.py:62 ../quickly.py:108 ../quickly.py:130 ../quickly.py:136
+#: ../quickly.py:142 ../quickly.py:156 ../quickly.py:167 ../quickly.py:175
 msgid "Aborting"
 msgstr ""
 
-#: ../quickly.py:106
+#: ../quickly.py:107
 msgid "ERROR: new command must be followed by a template and project name"
 msgstr ""
 
-#: ../quickly.py:127
+#: ../quickly.py:128
 msgid ""
 "ERROR: No template provided and none found in the current tree. Ensure you "
 "don't want to create a new projet or that your are in your directory project."
 msgstr ""
 
-#: ../quickly.py:134
+#: ../quickly.py:135
 #, python-format
 msgid "ERROR: Template '%s' not found."
 msgstr ""
 
-#: ../quickly.py:140
+#: ../quickly.py:141
 msgid "ERROR: No command found"
 msgstr ""
 
-#: ../quickly.py:154
+#: ../quickly.py:155
 #, python-format
 msgid "ERROR: pre_%s command failed"
 msgstr ""
 
-#: ../quickly.py:165
+#: ../quickly.py:166
 #, python-format
 msgid "ERROR: %s command failed"
 msgstr ""
 
-#: ../quickly.py:173
+#: ../quickly.py:174
 #, python-format
 msgid "ERROR: post_%s command failed"
+msgstr ""
+
+#: ../builtins/launchpadaccess.py:15
+msgid "Fatal: "
+msgstr ""
+
+#: ../builtins/launchpadaccess.py:28
+msgid "Get Launchpad Settings"
+msgstr ""
+
+#: ../builtins/launchpadaccess.py:31
+msgid "Check whether python-launchpadlib is installed"
+msgstr ""
+
+#: ../builtins/launchpadaccess.py:33
+msgid "Initial Launchpad creation"
+msgstr ""
+
+#: ../builtins/launchpadaccess.py:34
+msgid "E-mail of your Launchpad account:"
+msgstr ""
+
+#: ../builtins/launchpadaccess.py:35
+msgid "Your Launchpad password:"
+msgstr ""
+
+#: ../builtins/launchpadaccess.py:43
+#, python-format
+msgid "Couldn't setup Launchpad for quickly ; %s"
+msgstr ""
+
+#: ../builtins/launchpadaccess.py:44
+msgid "Launchpad connexion is ok"
+msgstr ""
+
+#: ../templates/ubuntu-project/new.py:36
+msgid ""
+"\n"
+"ERROR: project name not defined. Usage is project_name\n"
+"Aborting"
+msgstr ""
+
+#: ../templates/ubuntu-project/new.py:48 ../templates/ubuntu-project/new.py:53
+#: ../templates/ubuntu-project/new.py:58
+#, python-format
+msgid "Creating project directory %s"
+msgstr ""
+
+#: ../templates/ubuntu-project/new.py:50 ../templates/ubuntu-project/new.py:55
+#: ../templates/ubuntu-project/new.py:60
+#, python-format
+msgid "Directory %s created\n"
+msgstr ""
+
+#: ../templates/ubuntu-project/new.py:75
+#, python-format
+msgid "Copying media files to %s"
+msgstr ""
+
+#: ../templates/ubuntu-project/new.py:78
+#, python-format
+msgid "Media files copied to %s\n"
+msgstr ""
+
+#: ../templates/ubuntu-project/new.py:80
+msgid "Creating bzr repository and commiting"
+msgstr ""
+
+#: ../templates/ubuntu-project/new.py:85
+msgid "Finishing"
 msgstr ""

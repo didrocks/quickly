@@ -34,7 +34,7 @@ gettext.textdomain('quickly')
 #get the name of the project
 if len(sys.argv)< 2:
   print _("""
-Error, project name not defined. Usage is project_name
+ERROR: project name not defined. Usage is project_name
 Aborting""")
   sys.exit(0)
 
@@ -82,7 +82,7 @@ subprocess.call(["bzr", "init"], cwd=project_name)
 subprocess.call(["bzr", "add"], cwd=project_name)
 subprocess.call(["bzr", "commit", "-m",  "initial project creation"], cwd=project_name)
 
-print _("finishing")
+print _("Finishing")
 
 #run the program
 subprocess.call(["python",project_name + ".py"], cwd=project_name + "/python/")
