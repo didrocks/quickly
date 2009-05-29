@@ -6,6 +6,7 @@ import os
 import sys
 import subprocess
 
+import gettext
 from gettext import gettext as _
 
 def usage():
@@ -177,6 +178,8 @@ def process_command_line(template_directory):
     return 0
 
 if __name__ == '__main__':
+
+  gettext.textdomain('quickly')
 
   # default to looking up templates in the current dir
   pathname = os.path.dirname(sys.argv[0])
