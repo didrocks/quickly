@@ -6,8 +6,10 @@ import os
 import sys
 import subprocess
 
+from gettext import gettext as _
+
 def usage():
-  print """quickly [-t <template> | --template <template>] <command [...]>
+  print _("""quickly [-t <template> | --template <template>] <command [...]>
 
 Commands:
   new <template> <project-name>
@@ -16,7 +18,7 @@ Commands:
 
 Examples:  quickly new ubuntu-project foobar
            quickly push 'awesome new comment system'
-           quickly -t cool-template push 'awesome new comment system'"""
+           quickly -t cool-template push 'awesome new comment system'""")
 
 def look_for_commands(template_path=None):
   """ seek for available commands
@@ -28,7 +30,7 @@ TEMPLATE direct…
   """
 
   if template_path is not None:
-    print "in progress"
+    print _("in progress")
 
 
 def check_this_command(command_name, template_path, opt_template):
@@ -55,8 +57,8 @@ def check_this_command(command_name, template_path, opt_template):
     if hasattr(main, command_name):
       commands[opt_template] = getattr(main, command_name)
     else:
-      print "ERROR: command '%s' in '%s' not found." % (command_name, opt_template)
-      print "Aborting"
+      print _("ERROR: command '%s' in '%s' not found.") % (command_name, opt_template)
+      print _("Aborting")
       exit(1)    
 
   #check for pre-post built-in commands
@@ -101,8 +103,9 @@ def process_command_line(template_directory):
   if opt_new:
     if not opt_has_template:
       if len(opt_command) < 3:
-        print "ERROR: new command must be followed by a template and project name"
-        print "Aborting\n"
+        print _("ERROR: new command must be followed by a template and project name")
+        print _("Aborting")
+        print
         usage()
         return 1
       else:
@@ -121,21 +124,22 @@ def process_command_line(template_directory):
       opt_template = f.readline()
       f.close()
     except IOError:
-      print "ERROR: No template provided and none found in the current tree. Ensure you" \
-            "don't want to create a new projet or that your are in your directory project."
-      print "Aborting"
+      print _("ERROR: No template provided and none found in the current tree. Ensure you" \
+            "don't want to create a new projet or that your are in your directory project.")
+      print _("Aborting")
       return 1
 
   template_path = template_directory + "/" + opt_template
   if not os.path.exists(template_path):
-    print "ERROR: Template '%s' not found." % opt_template
-    print "Aborting"
+    print _("ERROR: Template '%s' not found.") % opt_template
+    print _("Aborting")
     return 1
 
   #ensure the command exists
   if not opt_command:
-    print "ERROR: No command found"
-    print "Aborting\n"
+    print _("ERROR: No command found")
+    print _("Aborting")
+    print
     usage()
     return 1   
 
@@ -147,8 +151,8 @@ def process_command_line(template_directory):
     if 'pre' in commands_to_execute:
       return_code = commands_to_execute['pre'](opt_template, opt_command[1:])
     if return_code != 0:
-      print "ERROR: pre_%s command failed" % opt_command[0]
-      print "Aborting"
+      print _("ERROR: pre_%s command failed") % opt_command[0]
+      print _("Aborting")
       return return_code
 
     #main execution
@@ -158,16 +162,16 @@ def process_command_line(template_directory):
       return_code = subprocess.call(["python", commands_to_execute[opt_template], " ".join(opt_command[1:])])
 
     if return_code != 0:
-      print "ERROR: %s command failed" % opt_command[0]
-      print "Aborting"
+      print _("ERROR: %s command failed") % opt_command[0]
+      print _("Aborting")
       return return_code
 
     #post-hook
     if 'post' in commands_to_execute:
        commands_to_execute['post'](opt_template, opt_command[1:])
     if return_code != 0:
-      print "ERROR: post_%s command failed" % opt_command[0]
-      print "Aborting"
+      print _("ERROR: post_%s command failed") % opt_command[0]
+      print _("Aborting")
       return return_code
 
     return 0
