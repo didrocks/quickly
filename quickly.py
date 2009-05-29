@@ -124,7 +124,7 @@ def process_command_line(template_directory):
       opt_template = f.readline()
       f.close()
     except IOError:
-      print _("ERROR: No template provided and none found in the current tree. Ensure you" \
+      print _("ERROR: No template provided and none found in the current tree. Ensure you " \
             "don't want to create a new projet or that your are in your directory project.")
       print _("Aborting")
       return 1

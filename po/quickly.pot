@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-29 10:40+0200\n"
+"POT-Creation-Date: 2009-05-29 10:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,9 +50,8 @@ msgstr ""
 
 #: ../quickly.py:127
 msgid ""
-"ERROR: No template provided and none found in the current tree. Ensure "
-"youdon't want to create a new projet or that your are in your directory "
-"project."
+"ERROR: No template provided and none found in the current tree. Ensure you "
+"don't want to create a new projet or that your are in your directory project."
 msgstr ""
 
 #: ../quickly.py:134
