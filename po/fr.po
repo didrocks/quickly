@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: quickly VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-29 10:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Loïc Minier <lool@dooz.org>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../quickly.py:12
+msgid ""
+"quickly [-t <template> | --template <template>] <command [...]>\n"
+"\n"
+"Commands:\n"
+"  new <template> <project-name>\n"
+"      (template is mandatory for this command)\n"
+"  push <describe your changes>\n"
+"\n"
+"Examples:  quickly new ubuntu-project foobar\n"
+"           quickly push 'awesome new comment system'\n"
+"           quickly -t cool-template push 'awesome new comment system'"
+msgstr ""
+"quickly [-t <modèle> | --template <modèle>] <commande [...]>\n"
+"\n"
+"Commandes:\n"
+"  new <modèle> <nom-du-projet>\n"
+"      (modèle est requis pour cette commande)\n"
+"  push <décrivez vos modifications>\n"
+"\n"
+"Examples:  quickly new ubuntu-project foobar\n"
+"           quickly push 'super nouveau système de commentaires'\n"
+"           quickly -t super-modèle push 'super nouveau système de commentaires'"
+
+#: ../quickly.py:33
+msgid "in progress"
+msgstr "en cours"
+
+#: ../quickly.py:60
+#, python-format
+msgid "ERROR: command '%s' in '%s' not found."
+msgstr "ERREUR: commande '%s' introuvable dans '%s'."
+
+#: ../quickly.py:61 ../quickly.py:107 ../quickly.py:129 ../quickly.py:135
+#: ../quickly.py:141 ../quickly.py:155 ../quickly.py:166 ../quickly.py:174
+msgid "Aborting"
+msgstr "Abandon"
+
+#: ../quickly.py:106
+msgid "ERROR: new command must be followed by a template and project name"
+msgstr "ERREUR: la commande new doit être suivie d'un modèle et d'un nom de projet"
+
+#: ../quickly.py:127
+msgid ""
+"ERROR: No template provided and none found in the current tree. Ensure "
+"youdon't want to create a new projet or that your are in your directory "
+"project."
+msgstr ""
+"ERREUR: Aucun modèle fourni et aucun modèle dans le répertoire courant. "
+"Vérifiez que vous ne voulez pas créer un nouveau projet ou que vous êtes "
+"dans le répertoire de votre projet."
+
+#: ../quickly.py:134
+#, python-format
+msgid "ERROR: Template '%s' not found."
+msgstr "ERREUR: Modèle '%s' introuvable"
+
+#: ../quickly.py:140
+msgid "ERROR: No command found"
+msgstr "ERREUR: Aucune commande trouvée"
+
+#: ../quickly.py:154
+#, python-format
+msgid "ERROR: pre_%s command failed"
+msgstr "ERREUR: la commande pre_%s a échoué"
+
+#: ../quickly.py:165
+#, python-format
+msgid "ERROR: %s command failed"
+msgstr "ERREUR: la commande %s a échoué"
+
+#: ../quickly.py:173
+#, python-format
+msgid "ERROR: post_%s command failed"
+msgstr "ERREUR: la commande post_%s a échoué"
