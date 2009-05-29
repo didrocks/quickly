@@ -4,4 +4,5 @@ debian/*.substvars
 debian/files
 debian/quickly/
 debian/quickly-ubuntu-templates/
+debian/tmp/
 po/*.mo
