@@ -33,7 +33,7 @@ install: all
 	for file in po/*.mo; do \
 	    lang=`basename $$file .mo`; \
 	    $(INSTALL) -m 755 -d $(DESTDIR)/$(localedir)/$$lang/LC_MESSAGES; \
-	    $(INSTALL) -m 644 $$file $(DESTDIR)/$(localedir)/$$lang/LC_MESSAGES; \
+	    $(INSTALL) -m 644 $$file $(DESTDIR)/$(localedir)/$$lang/LC_MESSAGES/quickly.mo; \
 	done
 
 .PHONY: default all install
