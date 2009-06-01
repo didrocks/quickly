@@ -70,10 +70,10 @@ def check_this_command(command_name, template_path, opt_template):
   return commands
 
 
-def process_command_line(template_directory):
+def process_command_line(template_directories):
   """ Entry point for command line processing
 
-  template_directory: where templates are located
+  template_directories: where templates are located
 
   :return: exit code of quickly command.
   """
@@ -130,8 +130,16 @@ def process_command_line(template_directory):
       print _("Aborting")
       return 1
 
-  template_path = template_directory + "/" + opt_template
-  if not os.path.exists(template_path):
+  #check for the first available template in template_directories
+  for template_directory in template_directories:
+    template_path = template_directory + "/" + opt_template
+    if os.path.exists(template_path):
+      template_found = True
+      break
+    template_found = False
+
+  #if still false, no template found in template_directories
+  if not template_found:
     print _("ERROR: Template '%s' not found.") % opt_template
     print _("Aborting")
     return 1
@@ -182,12 +190,19 @@ if __name__ == '__main__':
   gettext.textdomain('quickly')
 
   # default to looking up templates in the current dir
+  template_directories = []
+  if os.path.exists(os.path.expanduser('~/.quickly/templates/')):
+    template_directories.append(os.path.expanduser('~/.quickly/templates/'))
   pathname = os.path.dirname(sys.argv[0])
   abs_path =  os.path.abspath(pathname)
-  template_directory = abs_path + '/templates'
+  if os.path.exists(abs_path + '/templates'):
+    template_directories.append(abs_path + '/templates')
   if os.path.exists('/usr/share/quickly/templates'):
-      template_directory = '/usr/share/quickly/templates'
-  template_directory =  os.path.abspath(template_directory)
+    template_directories.append('/usr/share/quickly/templates')
+
+  if not template_directories:
+    print _("No template directory found. Aborting")
+    exit(1)
 
   #process the command line to send the right instructions
-  exit(process_command_line(template_directory))
+  exit(process_command_line(template_directories))
