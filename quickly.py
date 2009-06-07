@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from builtins import main, configurationhandler
+from builtins import main, configurationhandler, tools
 import os
 import sys
 import subprocess
@@ -70,23 +70,21 @@ def check_this_command(command_name, template_path, opt_template):
     return commands
 
 
-def process_command_line(template_directories):
+def process_command_line():
     """ Entry point for command line processing
-
-    template_directories: where templates are located
 
     :return: exit code of quickly command.
     """
 
     opt_command = []
-    opt_new = False
+    with_explicit_template = False
     opt_has_template = False
     argv = sys.argv
     i = 1
     while i < len(argv):
         arg = argv[i]
-        if arg == 'new':
-            opt_new = True
+        if arg == 'new' or  arg == 'quickly':
+            with_explicit_template = True
             opt_command.append(arg)
         elif arg == '--template' or arg == '-t':
             opt_has_template = True
@@ -99,12 +97,12 @@ def process_command_line(template_directories):
             opt_command.append(arg)
         i += 1
 
-    #if processing new project, template argument and project name
-    #must be there (with -t, --template or just following new)
-    if opt_new:
+    #if processing command with explicit template, template argument and project name
+    #must be there (with -t, --template or just following the command): new, quickly
+    if with_explicit_template:
         if not opt_has_template:
-            if len(opt_command) < 3:
-                print _("ERROR: new command must be followed by a template and project name")
+            if len(opt_command) < 3: #TODO: MOVE THIS TEST in pre_new and quickly command
+                print _("ERROR: command must be followed by a template and destination name")
                 print _("Aborting")
                 print
                 usage()
@@ -126,26 +124,14 @@ def process_command_line(template_directories):
         try:
             opt_template = configurationhandler.config['template']
         except KeyError:
-            opt_template = ""
-        if not opt_template:
-            print _("ERROR: No template provided and none found in the current tree. Ensure you " \
-                        "don't want to create a new projet or that your are in your directory project.")
-            print _("Aborting")
-            return 1
+            if not opt_template:
+                print _("ERROR: No template provided and none found in the current tree. Ensure you " \
+                            "don't want to create a new project or that your are in your directory project.")
+                print _("Aborting")
+                return 1
 
-    #check for the first available template in template_directories
-    for template_directory in template_directories:
-        template_path = template_directory + "/" + opt_template
-        if os.path.exists(template_path):
-            template_found = True
-            break
-        template_found = False
-
-    #if still false, no template found in template_directories
-    if not template_found:
-        print _("ERROR: Template '%s' not found.") % opt_template
-        print _("Aborting")
-        return 1
+    # get the template path
+    template_path = tools.get_template_directory(opt_template)
 
     #ensure the command exists
     if not opt_command:
@@ -192,20 +178,5 @@ if __name__ == '__main__':
 
     gettext.textdomain('quickly')
 
-    # default to looking up templates in the current dir
-    template_directories = []
-    if os.path.exists(os.path.expanduser('~/.quickly/templates/')):
-        template_directories.append(os.path.expanduser('~/.quickly/templates/'))
-    pathname = os.path.dirname(sys.argv[0])
-    abs_path = os.path.abspath(pathname)
-    if os.path.exists(abs_path + '/templates'):
-        template_directories.append(abs_path + '/templates')
-    if os.path.exists('/usr/share/quickly/templates'):
-        template_directories.append('/usr/share/quickly/templates')
-
-    if not template_directories:
-        print _("No template directory found. Aborting")
-        exit(1)
-
     #process the command line to send the right instructions
-    exit(process_command_line(template_directories))
+    exit(process_command_line())
