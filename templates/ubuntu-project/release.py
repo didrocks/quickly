@@ -7,9 +7,13 @@ pathname = os.path.dirname(sys.argv[0])
 builtins_directory = pathname + '/../../builtins/'
 if os.path.exists('/usr/share/quickly/builtins'):
     builtins_directory = '/usr/share/quickly/builtins'
-builtins_directory =    os.path.abspath(builtins_directory)
+builtins_directory =  os.path.abspath(builtins_directory)
 sys.path.append(builtins_directory)
 
+# connect to LP
 import launchpadaccess
-launchpadaccess.initialize_lpi()
+launchpad = launchpadaccess.initialize_lpi()
+
+# get the project
+#launchpadaccess.get_project(launchpad)
 

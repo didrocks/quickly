@@ -25,7 +25,7 @@ def file_from_template(template_dir, template_file, target_dir, project_name, re
     fout.flush()
     fout.close()
     fout.close()
-    print    "%s created\n" % (target_dir + "/" + target_file,)
+    print "%s created\n" % (target_dir + "/" + target_file,)
  
 
 #set domain text

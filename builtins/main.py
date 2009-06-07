@@ -1,4 +1,5 @@
 import os
+import configurationhandler
 
 def pre_new(template, command_args):
     '''Create the project directory before new call'''
@@ -13,9 +14,8 @@ def pre_new(template, command_args):
     print "Creating project directory %s" % project_name
     os.mkdir(project_name)
     print "Directory %s created\n" % project_name
-    f = open(project_name + '/.quickly', 'w')
-    f.write(template)
-    f.close
+    configurationhandler.config['template'] = template
+    configurationhandler.saveConfig(project_name)
 
     return 0
 

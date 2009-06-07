@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from builtins import main
+from builtins import main, configurationhandler
 import os
 import sys
 import subprocess
@@ -116,15 +116,18 @@ def process_command_line(template_directories):
 
         #in every cases, the project name is now in first position.
         project_name = opt_command[1]
+    # the config file already exist, load it.
+    else:
+        configurationhandler.loadConfig()
 
 
     #if no template provided, guess it from the current tree
     if not opt_has_template:
         try:
-            f = open('.quickly', 'r')
-            opt_template = f.readline()
-            f.close()
-        except IOError:
+            opt_template = configurationhandler.config['template']
+        except KeyError:
+            opt_template = ""
+        if not opt_template:
             print _("ERROR: No template provided and none found in the current tree. Ensure you " \
                         "don't want to create a new projet or that your are in your directory project.")
             print _("Aborting")
@@ -194,7 +197,7 @@ if __name__ == '__main__':
     if os.path.exists(os.path.expanduser('~/.quickly/templates/')):
         template_directories.append(os.path.expanduser('~/.quickly/templates/'))
     pathname = os.path.dirname(sys.argv[0])
-    abs_path =    os.path.abspath(pathname)
+    abs_path = os.path.abspath(pathname)
     if os.path.exists(abs_path + '/templates'):
         template_directories.append(abs_path + '/templates')
     if os.path.exists('/usr/share/quickly/templates'):

@@ -56,8 +56,13 @@ Another reason can be a network error.''')
     return launchpad
 
 
-
-# common settings
-home_dir = os.path.expanduser("~")
-launchpadlib_dir = home_dir + "/.launchpadlib/"
+def get_project(launchpad):
+    ''' Get quickly project through launchpad. Create it if needed.
+    
+            :return project launchpad object
+    '''
+    
+    
+    
+    return project
 
