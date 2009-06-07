@@ -29,12 +29,22 @@ def initialize_lpi():
     except ImportError:
         suggestion = _("Check whether python-launchpadlib is installed")
     except IOError:
-        print _("Initial Launchpad creation")
-        email = raw_input(_('E-mail of your Launchpad account: '))
-        password = getpass.getpass(_('Your Launchpad password: '))
-        return_code = subprocess.call(["manage-credentials", "create", "-c", "quickly", "-l", "2",
-                                                                     "--email", email, "--password", password])
-        launchpad = lp_libsupport.get_launchpad("quickly")
+        print _("Initial Launchpad binding")
+        valid_user = False
+        while(valid_user == False):
+            email = raw_input(_('E-mail of your Launchpad account: '))
+            password = getpass.getpass(_('Your Launchpad password: '))
+            try:
+               subprocess.call(["manage-credentials", "create", "-c", "quickly", "-l", "2",
+                                                       "--email", email, "--password", password])
+               launchpad = lp_libsupport.get_launchpad("quickly")
+            #except HTTPError:
+            #    print "test" doesn't work, when importing launchpadlib.errors
+            except IOError:
+                print _('''ERROR: email or password does not match a valid user in Launchpad. Be sure you are registered at http://www.launchpad.net.
+Another reason can be a network error.''')
+            else:
+                valid_user = True
 
         me = launchpad.me
         bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email)        
