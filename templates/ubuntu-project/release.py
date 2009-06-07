@@ -6,8 +6,8 @@ import sys
 pathname = os.path.dirname(sys.argv[0])
 builtins_directory = pathname + '/../../builtins/'
 if os.path.exists('/usr/share/quickly/builtins'):
-  builtins_directory = '/usr/share/quickly/builtins'
-builtins_directory =  os.path.abspath(builtins_directory)
+    builtins_directory = '/usr/share/quickly/builtins'
+builtins_directory =    os.path.abspath(builtins_directory)
 sys.path.append(builtins_directory)
 
 import launchpadaccess
