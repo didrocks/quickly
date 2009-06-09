@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from builtins import main, configurationhandler, tools
+from builtins import commands, configurationhandler, tools
 import os
 import sys
 import subprocess
@@ -55,8 +55,8 @@ def check_this_command(command_name, template_path, opt_template):
         commands[opt_template] = command_path
     else:
         #check for built-in command
-        if hasattr(main, command_name):
-            commands[opt_template] = getattr(main, command_name)
+        if hasattr(commands, command_name):
+            commands[opt_template] = getattr(commands, command_name)
         else:
             print _("ERROR: command '%s' in '%s' not found.") % (command_name, opt_template)
             print _("Aborting")
@@ -64,8 +64,8 @@ def check_this_command(command_name, template_path, opt_template):
 
     #check for pre-post built-in commands
     for hook in ("pre", "post"):
-        if hasattr(main, hook + '_' + command_name):
-            commands[hook] = getattr(main, hook + '_' + command_name)
+        if hasattr(commands, hook + '_' + command_name):
+            commands[hook] = getattr(commands, hook + '_' + command_name)
     
     return commands
 
