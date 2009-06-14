@@ -47,16 +47,16 @@ def check_this_command(command_name, template_path, opt_template):
             return list of commands ready to be launched
     """
 
-    commands = {}
+    commands_available = {}
 
     # check for template command
     command_path = template_path + "/" + command_name + ".py"
     if os.path.exists(command_path):
-        commands[opt_template] = command_path
+        commands_available[opt_template] = command_path
     else:
         #check for built-in command
         if hasattr(commands, command_name):
-            commands[opt_template] = getattr(commands, command_name)
+            commands_available[opt_template] = getattr(commands, command_name)
         else:
             print _("ERROR: command '%s' in '%s' not found.") % (command_name, opt_template)
             print _("Aborting")
@@ -65,9 +65,9 @@ def check_this_command(command_name, template_path, opt_template):
     #check for pre-post built-in commands
     for hook in ("pre", "post"):
         if hasattr(commands, hook + '_' + command_name):
-            commands[hook] = getattr(commands, hook + '_' + command_name)
-    
-    return commands
+            commands_available[hook] = getattr(commands, hook + '_' + command_name)
+
+    return commands_available
 
 
 def process_command_line():
