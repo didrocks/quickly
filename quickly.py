@@ -124,11 +124,10 @@ def process_command_line():
         try:
             opt_template = configurationhandler.config['template']
         except KeyError:
-            if not opt_template:
-                print _("ERROR: No template provided and none found in the current tree. Ensure you " \
-                            "don't want to create a new project or that your are in your directory project.")
-                print _("Aborting")
-                return 1
+            print _("ERROR: No template provided and none found in the current tree. Ensure you " \
+                        "don't want to create a new project or that your are in your directory project.")
+            print _("Aborting")
+            return 1
 
     # get the template path
     template_path = tools.get_template_directory(opt_template)
