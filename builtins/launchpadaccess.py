@@ -5,7 +5,14 @@ import os
 import sys
 import subprocess
 
-import ubuntutools.lp.libsupport as lp_libsupport
+try:
+    from launchpadlib.launchpad import Launchpad, EDGE_SERVICE_ROOT, STAGING_SERVICE_ROOT
+    from launchpadlib.errors import HTTPError
+    from launchpadlib.credentials import Credentials
+except ImportError:
+    suggestion = _("Check whether python-launchpadlib is installed")
+
+
 import bzrbinding
 
 import gettext
@@ -23,33 +30,52 @@ def initialize_lpi():
     '''
 
     launchpad = None
+
+    # setup right cache, credential and server
+    lp_cache_dir = os.path.expanduser('~/.quickly-data/cache/')
+    if not os.path.isdir(lp_cache_dir):
+        os.makedirs(lp_cache_dir)
+
+    lp_cred_dir = os.path.expanduser("~/.quickly-data/lp_credentials/")
+    if not os.path.isdir(lp_cred_dir):
+        os.makedirs(lp_cred_dir)
+        os.chmod(lp_cred_dir, 0700)
+
+    lp_server = "edge"
+    # check if there is no global variable specifying staging
+    if os.getenv('QUICKLY') is not None and "staging" in os.getenv('QUICKLY').lower():
+        lp_server = "staging"
+
+    # check which server to address
+    if lp_server == "staging":
+        lp_cred = lp_cred_dir + "quickly-cred-staging"
+        SERVICE_ROOT = STAGING_SERVICE_ROOT
+    else:
+        lp_cred = lp_cred_dir + "quickly-cred"
+        SERVICE_ROOT = EDGE_SERVICE_ROOT
+
+    # load stored LP credentials
     try:
         print _("Get Launchpad Settings")
-        launchpad = lp_libsupport.get_launchpad("quickly")
-    except ImportError:
-        suggestion = _("Check whether python-launchpadlib is installed")
+        lp_cred_file = open(lp_cred, 'r')
+        credentials = Credentials()
+        credentials.load(lp_cred_file)
+        lp_cred_file.close()
+        launchpad = Launchpad(credentials, SERVICE_ROOT, lp_cache_dir)
     except IOError:
         print _("Initial Launchpad binding")
-        valid_user = False
-        while(valid_user == False):
-            email = raw_input(_('E-mail of your Launchpad account: '))
-            password = getpass.getpass(_('Your Launchpad password: '))
-            try:
-               subprocess.call(["manage-credentials", "create", "-c", "quickly", "-l", "2",
-                                                       "--email", email, "--password", password])
-               launchpad = lp_libsupport.get_launchpad("quickly")
-            #except HTTPError:
-            #    print "test" doesn't work, when importing launchpadlib.errors
-            except IOError:
-                print _('''ERROR: email or password does not match a valid user in Launchpad. Be sure you are registered at http://www.launchpad.net.
-Another reason can be a network error.''')
-            else:
-                valid_user = True
+        launchpad = Launchpad.get_token_and_login('quickly', SERVICE_ROOT, lp_cache_dir)
+        lp_cred_file = open(lp_cred, 'w')
+        launchpad.credentials.save(lp_cred_file)
+        lp_cred_file.close()
 
+        # try to setup bzr
         me = launchpad.me
         bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email)        
 
     if launchpad is None:
+        if suggestion is None:
+             suggestion = _("Unknown reason")
         die(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
     print _("Launchpad connexion is ok")
 
@@ -62,7 +88,7 @@ def get_project(launchpad):
             :return project launchpad object
     '''
     
+    print "ufw project test: " + str(launchpad.projects['ufw'])
     
-    
-    return project
+    #return project
 

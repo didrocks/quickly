@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from builtins import commands, configurationhandler, tools
+from builtins import commands, configurationhandler, tools, launchpadaccess
 import os
 import sys
 import subprocess
@@ -90,6 +90,8 @@ def process_command_line():
             opt_has_template = True
             opt_template = argv[i + 1]
             i += 1
+        elif arg == '--staging':
+            os.environ['QUICKLY'] = "staging " + os.environ['QUICKLY']
         elif arg == '--help' or arg == '-h':
             usage()
             return 0
@@ -104,7 +106,6 @@ def process_command_line():
             if len(opt_command) < 3: #TODO: MOVE THIS TEST in pre_new and quickly command
                 print _("ERROR: command must be followed by a template and destination name")
                 print _("Aborting")
-                print
                 usage()
                 return 1
             else:
@@ -136,7 +137,6 @@ def process_command_line():
     if not opt_command:
         print _("ERROR: No command found")
         print _("Aborting")
-        print
         usage()
         return 1     
 

@@ -15,5 +15,5 @@ import launchpadaccess
 launchpad = launchpadaccess.initialize_lpi()
 
 # get the project
-#launchpadaccess.get_project(launchpad)
+launchpadaccess.get_project(launchpad)
 

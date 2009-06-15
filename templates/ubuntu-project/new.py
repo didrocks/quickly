@@ -39,7 +39,7 @@ Aborting""")
     sys.exit(0)
 
 pathname = os.path.dirname(sys.argv[0])
-abs_path =    os.path.abspath(pathname)
+abs_path = os.path.abspath(pathname)
 
 project_name = sys.argv[1]
 
@@ -82,10 +82,12 @@ subprocess.call(["bzr", "init"], cwd=project_name)
 subprocess.call(["bzr", "add"], cwd=project_name)
 subprocess.call(["bzr", "commit", "-m",    "initial project creation"], cwd=project_name)
 
-print _("Finishing")
+print _("Launching a first demo")
 
 #run the program
 subprocess.call(["python",project_name + ".py"], cwd=project_name + "/python/")
+
+print _("Congrats, your new project is setup! You can now cd %s and start hacking.") % project_name
 
 sys.exit(0)
 
