@@ -23,7 +23,7 @@ def check_config_file(config_file_path=None):
 
     for related_directory in ('./', './', '../', '../../', '../../../', '../../../../'):
         quickly_file_path = os.path.abspath(current_path + '/' + related_directory + ".quickly")
-        if os.path.exists(quickly_file_path):
+        if os.path.isfile(quickly_file_path):
             return quickly_file_path
     return ""
         
