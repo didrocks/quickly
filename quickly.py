@@ -91,7 +91,10 @@ def process_command_line():
             opt_template = argv[i + 1]
             i += 1
         elif arg == '--staging':
-            os.environ['QUICKLY'] = "staging " + os.environ['QUICKLY']
+            oldenv = ""
+            if os.environ.has_key('QUICKLY'):
+                oldenv = os.environ['QUICKLY']
+            os.environ['QUICKLY'] = "staging " + oldenv
         elif arg == '--help' or arg == '-h':
             usage()
             return 0
