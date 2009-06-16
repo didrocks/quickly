@@ -20,6 +20,7 @@ def pre_new(template, command_args):
     print _("Creating project directory %s" % project_name)
     os.mkdir(project_name)
     print _("Directory %s created\n" % project_name)
+    configurationhandler.config['project'] = project_name
     configurationhandler.config['template'] = template
     configurationhandler.saveConfig(project_name)
 
