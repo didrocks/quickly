@@ -153,7 +153,7 @@
             <property name="visible">True</property>
             <property name="xpad">5</property>
             <property name="ypad">5</property>
-            <property name="label" translatable="yes">Welcome to you applications. To get started changing your user interface, double click on the glade file demo.glade. To start chaning the behavior, edit the python code in demo.py.</property>
+            <property name="label" translatable="yes">Welcome to your application. To get started changing your user interface, double click on the glade file glade/project_name.glade. To start changing the behavior, edit the python code in python/project_name.py.</property>
             <property name="wrap">True</property>
           </object>
           <packing>
