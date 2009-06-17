@@ -10,16 +10,22 @@ import gettext
 from gettext import gettext as _
 
 def usage():
-    print _("""quickly [-t <template> | --template <template>] <command [...]>
+    print _("""Usage:
+    quickly [OPTIONS] command ...
+    
+Options:
+    -t, --template <template>  Template to use
+    --staging                  ??
+    -h, --help                 Show help information
 
 Commands:
-    new <template> <project-name>
-            (template is mandatory for this command)
+    new <template> <project-name> (template is mandatory for this command)
     push <describe your changes>
 
-Examples:    quickly new ubuntu-project foobar
-                     quickly push 'awesome new comment system'
-                     quickly -t cool-template push 'awesome new comment system'""")
+Examples:
+    quickly new ubuntu-project foobar
+    quickly push 'awesome new comment system'
+    quickly -t cool-template push 'awesome new comment system'""")
 
 def look_for_commands(template_path=None):
     """ seek for available commands
@@ -75,31 +81,44 @@ def process_command_line():
 
     :return: exit code of quickly command.
     """
+    if len(sys.argv) == 1:
+        usage()
+        return 0
 
     opt_command = []
     with_explicit_template = False
     opt_has_template = False
     argv = sys.argv
+    in_command = False
     i = 1
     while i < len(argv):
         arg = argv[i]
-        if arg == 'new' or  arg == 'quickly':
+        if in_command:
+            opt_command.append(arg)
+        elif arg.startswith('-'):
+            if arg == '--template' or arg == '-t':
+                opt_has_template = True
+                opt_template = argv[i + 1]
+                i += 1
+            elif arg == '--staging':
+                oldenv = ""
+                if os.environ.has_key('QUICKLY'):
+                    oldenv = os.environ['QUICKLY']
+                os.environ['QUICKLY'] = "staging " + oldenv
+            elif arg == '--help' or arg == '-h':
+                usage()
+                return 0
+            else:
+                print 'Unknown argument %s' % arg
+                usage()
+                return 1
+        elif arg == 'new' or arg == 'quickly':
             with_explicit_template = True
             opt_command.append(arg)
-        elif arg == '--template' or arg == '-t':
-            opt_has_template = True
-            opt_template = argv[i + 1]
-            i += 1
-        elif arg == '--staging':
-            oldenv = ""
-            if os.environ.has_key('QUICKLY'):
-                oldenv = os.environ['QUICKLY']
-            os.environ['QUICKLY'] = "staging " + oldenv
-        elif arg == '--help' or arg == '-h':
-            usage()
-            return 0
         else:
-            opt_command.append(arg)
+            print 'Unknown command: %s' % arg
+            usage()
+            return 1
         i += 1
 
     #if processing command with explicit template, template argument and project name
