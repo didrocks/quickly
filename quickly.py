@@ -14,8 +14,10 @@ def usage():
     quickly [OPTIONS] command ...
     
 Options:
-    -t, --template <template>  Template to use
-    --staging                  ??
+    -t, --template <template>  Template to use if it differs from default
+                               project one
+                               one used to create the project)
+    --staging                  Target launchpad staging server
     -h, --help                 Show help information
 
 Commands:
