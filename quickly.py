@@ -113,6 +113,7 @@ def process_command_line():
                 usage()
                 return 1
         elif arg == 'new' or arg == 'quickly':
+            in_command = True
             with_explicit_template = True
             opt_command.append(arg)
         else:
