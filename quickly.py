@@ -89,37 +89,25 @@ def process_command_line():
     with_explicit_template = False
     opt_has_template = False
     argv = sys.argv
-    in_command = False
     i = 1
     while i < len(argv):
         arg = argv[i]
-        if in_command:
-            opt_command.append(arg)
-        elif arg.startswith('-'):
-            if arg == '--template' or arg == '-t':
-                opt_has_template = True
-                opt_template = argv[i + 1]
-                i += 1
-            elif arg == '--staging':
-                oldenv = ""
-                if os.environ.has_key('QUICKLY'):
-                    oldenv = os.environ['QUICKLY']
-                os.environ['QUICKLY'] = "staging " + oldenv
-            elif arg == '--help' or arg == '-h':
-                usage()
-                return 0
-            else:
-                print 'Unknown argument %s' % arg
-                usage()
-                return 1
-        elif arg == 'new' or arg == 'quickly':
-            in_command = True
-            with_explicit_template = True
-            opt_command.append(arg)
-        else:
-            print 'Unknown command: %s' % arg
+        if arg == '--template' or arg == '-t':
+            opt_has_template = True
+            opt_template = argv[i + 1]
+            i += 1
+        elif arg == '--staging':
+            oldenv = ""
+            if os.environ.has_key('QUICKLY'):
+                oldenv = os.environ['QUICKLY']
+            os.environ['QUICKLY'] = "staging " + oldenv
+        elif arg == '--help' or arg == '-h':
             usage()
-            return 1
+            return 0
+        else:
+            if arg == 'new' or arg == 'quickly':
+                with_explicit_template = True
+            opt_command.append(arg)
         i += 1
 
     #if processing command with explicit template, template argument and project name
