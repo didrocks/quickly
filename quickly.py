@@ -116,8 +116,8 @@ def process_command_line():
     #must be there (with -t, --template or just following the command): new, quickly
     if with_explicit_template:
         if not opt_has_template:
-            if len(opt_command) < 3: #TODO: MOVE THIS TEST in pre_new and quickly command
-                print _("ERROR: command must be followed by a template and destination name")
+            if len(opt_command) < 3 or opt_command[1].startswith('-'):
+                print _("ERROR: %s command must be followed by a template and destination name" % opt_command[0])
                 print _("Aborting")
                 usage()
                 return 1
