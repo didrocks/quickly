@@ -1,0 +1,11 @@
+<glade-catalog name="project_name_window" domain="glade-3" 
+               depends="gtk+" version="1.0">
+  <glade-widget-classes>
+    <glade-widget-class title="sentence_name Window" name="camel_case_nameWindow" 
+                        generic-name="camel_case_nameWindow" parent="GtkWindow"
+                        icon-name="widget-gtk-window"/>
+  </glade-widget-classes>
+  <glade-widget-group name="camel_case_nameWidgets" title="sentence_name Widgets">
+    <glade-widget-class-ref name="camel_case_nameWindow"/>
+  </glade-widget-group>
+</glade-catalog>
