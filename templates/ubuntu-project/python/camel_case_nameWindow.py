@@ -3,30 +3,57 @@ import gtk
 from about import About
 
 class camel_case_nameWindow(gtk.Window):
- __gtype_name__ = "camel_case_nameWindow"
- def __init__(self):
-     print '__init__'
+    __gtype_name__ = "camel_case_nameWindow"
 
- def about(self, widget, data=None):
-    about = About()
-    about.run()
+    def __init__(self):
+        """__init__ - This function is typically not called directly.
+        Creation a camel_case_nameWindow requires redeading the associated ui
+        file and parsing the ui definition extrenally, 
+        and then calling camel_case_nameWindow.finish_initializing().
+    
+        Use the convenience function Newcamel_case_nameWindow to create 
+        camel_case_nameWindow object.
+    
+        """
+        pass
 
- def main_quit(self, widget, data=None):
-    gtk.main_quit()
+    def finish_initializing(self, builder):
+        """finish_initalizing should be called after parsing the ui definition
+        and creating a camel_case_nameWindow object with it in order to finish
+        initializing the start of the new camel_case_nameWindow instance.
+    
+        """
+        #get a reference to the builder and set up the signals
+        self.builder = builder
+        self.builder.connect_signals(self)
 
- def on_window_destroy(self, widget, data=None):
-    gtk.main_quit()
+        #code for other initialization actions should be added here
 
- def _onNew(self, *args):
-    print '_onNew', args
+    def about(self, widget, data=None):
+        """about - display the about box for project_name """
+        about = About()
+        about.run()
+
+    def quit(self, widget, data=None):
+        """quit - signal handler for closing the camel_case_nameWindow"""
+        self.destroy()
+
+    def on_destroy(self, widget, data=None):
+        """on_destroy - called when the camel_case_nameWindow is close. """
+        #clean up code for saving application state should be added here
+
+        gtk.main_quit()
 
 def Newcamel_case_nameWindow():
+    """Newcamel_case_nameWindow - returns a fully instantiated
+    camel_case_nameWindow object. Use this function rather than
+    creating a camel_case_nameWindow directly.
+    
+    """
     builder = gtk.Builder()
-    builder.add_from_file("../ui/camel_case_nameWindow.ui")
-    
+    builder.add_from_file("../ui/camel_case_nameWindow.ui")    
     window = builder.get_object("project_name_window")
-    builder.connect_signals(window)
-    
+    window.finish_initializing(builder)
     return window
 
 if __name__ == "__main__":
