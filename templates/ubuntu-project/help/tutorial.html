@@ -72,11 +72,11 @@ Choose the Save menu item, and it will be selected in Glade.
 
 Then choose the "Signals" tab of the properties window.
 <IMG SRC="./images/glade8.png" ALT="signals tab in glade" />
-In pygtk, menu items are "activated" when a user chooses the item from the menu.  Since we want a function to run when the user chooses Save, we want to specify a function to respond to the activate signal from the menu item. We'll call the function "save". Simply type the function name into the box for the activate signal. Make sure to save the glade file.
-<IMG SRC="./images/glade9.png" ALT="activate signal set to 'save'" />
+In pygtk, menu items are "activated" when a user chooses the item from the menu.  Since we want a function to run when the user chooses Save, we want to specify a function to respond to the activate signal from the menu item. We'll call the function "save_file". Simply type the function name into the box for the activate signal. Make sure to save the glade file.
+<IMG SRC="./images/glade9.png" ALT="activate signal set to 'save_file'" />
 
-<H3>Implement the Save Function</H3>
-Of course, this won't make the file actually save, because we haven't created the "save" function yet. So it's time to write a little code.
+<H3>Create the Save File Signal Handler</H3>
+Of course, this won't make the file actually save, because we haven't created the "save_file" function yet. So it's time to write a little code.
 
 The code for SuperTextWindow is stored in the file SuperTextWindow.py. 
 <DIV class="note">
@@ -90,22 +90,129 @@ super_text$quickly edit
 This will open the default Ubuntu text editor "Gedit" with any python files in the python directory. In this case, just SuperTextWindow.py and about.py.
 <IMG SRC="./images/gedit1.png" ALT="python files ready to edit" />
 
-SuperTextWindow.ui is now expecting to find a function SuperTextWindow.save(), so we simply add one to the SuperTextWindow class:
+SuperTextWindow.ui is now expecting to find a function SuperTextWindow.save_file(), so we simply add one to the SuperTextWindow class:
 <DIV class="code">
- def save(self, widget, data=None):
+ def save_file(self, widget, data=None):
     print "save"
 </DIV>
-This will print the word "save" to the terminal when run. The method signature is the standard signature expected in a signal handler. If you are new to python, be sure to follow the indentations exactly, as the indentation level is very important in python.
+This will print the word "save" to the terminal when run. The method signature is the standard signature expected in a signal handler. If you are new to python, be sure to copy the indentations exactly, as the indentation level is very important in python.
 <IMG SRC="./images/gedit2.png" ALT="the save command" />
+Save the file, and run it again:
+<DIV class="termnial">
+$cd super_text
+super_text$./super_text
+</DIV>
+Choose "File->Save" from the menu, and you'll see the word "save" printing out interminal. That's all there is to hookig up the functions!
+<IMG SRC="./images/application1.png" ALT="The command finishes by running the empty application." />
 
+<H3>Implementing Save</H3>
+Now we'll write a little code in the signal handler to actually save the file. The code will do the following:
+<OL>
+<LI>Open the standard save dialog box from Ubuntu to get the file location.</LI>
+<LI>Check if the user chose "Save" or "Cancel".</LI>
+<LI>Get the filepath from the Save Dialog</LI>
+<LI>Retrieve the text from the TextView</LI>
+<LI>Write the file to disk at the specified location.</LI>
+</OL>
 
+<H4>Here's the code to create the file dialog:</H4>
+pygtk has a file dialog that can be used for selecting files and folders for operations like saving and opening files. We need to do a little setup to configure it for saving a file, like setting the title, and creating a set of buttons that include associated responses. The stock Cancel/Save butons and stock Cancel/Ok responses work well for this.
+<DIV class="code">
+    #Create the save file dialog
+    title = "Choose a File Location"
+    buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+    chooser = gtk.FileChooserDialog(title=title, parent=self, buttons=buttons,action=gtk.FILE_CHOOSER_ACTION_SAVE)
+</DIV>
 
-    d. respond to the save command
-    e. save the file
-    f. respond to the open command
-    g. load the file
-    h. respond to the new command
-    i. clear it out
+<H4>Here's the code to run the dialog, check if the user chose Save or Cancel, and get the path the user chose:</H4>
+In pygtk, dialogs have a "run" function which displays the dialog. When the function returns, you should check the result to decide how to proceed. You also need to destroy the dilalog, or it won't get out of the user's way! Since we associated gtk.RESPONSE_OK with the Save button, we'll only set a file_path if the user chose Save. If file_path is set to nothing, then we'll just return from the function without doing anything else.
+<DIV class="code">
+    #run the dialog and get the path name
+    file_path = None
+    if chooser.run() == gtk.RESPONSE_OK:
+        file_path = chooser.get_filename()
+    chooser.destroy()
+
+    #if there's no file_path, we're done      
+    if file_path == None:
+        return
+</DIV>
+
+<H4>Here's the code to get pull the text out of the TextView:</H4>
+In pygtk, TextView widgets have a text buffer that stores the text. So you ask the TextView for it's TextBuffer, and then you ask the TextBuffer for the text. You use iters to determine from which part of the text buffer you want text. Since we want all the text, it's easy to just get the start and end iters.
+<DIV class="code">
+    #get the string
+    buff = self.builder.get_object("textview1").get_buffer()
+    start_iter = buff.get_start_iter()
+    end_iter = buff.get_end_iter()
+
+    text = buff.get_text(start_iter,end_iter)
+</DIV>
+
+Here's the code to write the file:
+Writing text files in Python is easy. You just use the "open" function, telling it what file to open, and the mode, in this case 'w' for "write". If the specified file does not exist, Python will simply create it for. Write the text and close the file.
+<DIV class="code">
+    #save the file
+    f = open(file_path,'w')
+    f.write(text)
+    f.flush()
+    f.close()
+</DIV>
+
+<H4>So the whole function should look like this:</H4>
+<DIV class="code">
+ def save_file(self, widget, data=None):
+    #Create the save file dialog
+    title = "Choose a File Location"
+    buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+    chooser = gtk.FileChooserDialog(title="Save File", parent=self, buttons=buttons,action=gtk.FILE_CHOOSER_ACTION_SAVE)
+
+    #run the dialog and get the path name
+    file_path = None
+    if chooser.run() == gtk.RESPONSE_OK:
+        file_path = chooser.get_filename()
+    chooser.destroy()
+
+    #if there's no file_path, we're done      
+    if file_path == None:
+        return
+    
+    #get the string
+    buff = self.builder.get_object("textview1").get_buffer()
+    start_iter = buff.get_start_iter()
+    end_iter = buff.get_end_iter()
+
+    text = buff.get_text(start_iter,end_iter)
+
+    #save the file
+    f = open(file_path,'w')
+    f.write(text)
+    f.flush()
+    f.close()
+</DIV>
+
+<H3>Implementing Open and New</H3>
+<H4>Implementing Open is essentially the reverse of Save:</H4>
+Follow these steps:
+<OL>
+<LI>Open the standard open dialog box from Ubuntu to get the file location.</LI>
+<LI>Check if the user chose "Open" or "Cancel".</LI>
+<LI>Get the filepath from the Open Dialog.</LI>
+<LI>Retrieve the text from the file.</LI>
+<LI>Put the text from the file into the TextView.</LI>
+</OL>
+<DIV class="code">
+
+</DIV>
+<H4>To implement New, we'll just clear out the text, like this:</H4>
+<DIV class="code">
+
+</DIV>
+
+To make them work, add these function to the SuperTextWindow class, and save. Then go back and connect the functions to the activate signals for the Open and New menu items.
+
+When you are done, your SuperTextWindow.py file should look like this:
+
 
 3. Save your work
     1. commit it
