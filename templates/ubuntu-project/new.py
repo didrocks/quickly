@@ -104,6 +104,9 @@ shutil.copy2(template_media_dir + "background.png",target_media_dir)
 shutil.copy2(template_media_dir + "logo.png",target_media_dir)
 print _("Media files copied to %s\n") % target_media_dir
 
+#(template_dir, template_file, target_dir, project_name, rename = False):
+file_from_template(abs_path,"/project_name",project_name, project_name, True)
+
 print _("Creating bzr repository and commiting")
 subprocess.call(["bzr", "init"], cwd=project_name)
 subprocess.call(["bzr", "add"], cwd=project_name)
