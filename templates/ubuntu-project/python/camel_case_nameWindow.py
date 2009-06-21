@@ -22,7 +22,7 @@ class camel_case_nameWindow(gtk.Window):
 
 def Newcamel_case_nameWindow():
     builder = gtk.Builder()
-    builder.add_from_file("../ui/project_name_window.ui")
+    builder.add_from_file("../ui/camel_case_nameWindow.ui")
     
     window = builder.get_object("project_name_window")
     builder.connect_signals(window)

@@ -88,7 +88,7 @@ sentence_name, camel_case_name = conventional_names(project_name)
 #copy files
 template_ui_dir = abs_path + "/ui/"
 target_ui_dir = project_name + "/ui/"
-file_from_template(template_ui_dir, "project_name_window.ui", target_ui_dir, project_name, True)
+file_from_template(template_ui_dir, "camel_case_nameWindow.ui", target_ui_dir, project_name, True)
 file_from_template(template_ui_dir, "about.ui", target_ui_dir, project_name)
 file_from_template(template_ui_dir, "project_name_window.xml", target_ui_dir, project_name, True)
 
