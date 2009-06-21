@@ -1,0 +1,11 @@
+<glade-catalog name="about_project_name_dialog" domain="glade-3" 
+               depends="gtk+" version="1.0">
+  <glade-widget-classes>
+    <glade-widget-class title="About sentence_name Dialog" name="Aboutcamel_case_nameDialog" 
+                        generic-name="Aboutcamel_case_nameDialog" parent="GtkAboutDialog"
+                        icon-name="widget-gtk-about-dialog"/>
+  </glade-widget-classes>
+  <glade-widget-group name="camel_case_nameWidgets" title="sentence_name Widgets">
+    <glade-widget-class-ref name="Aboutcamel_case_nameDialog"/>
+  </glade-widget-group>
+</glade-catalog>
