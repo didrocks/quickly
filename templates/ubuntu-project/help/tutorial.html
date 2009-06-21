@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>Quickly Tutorial Part 1</TITLE>
+</HEAD>
+<BODY>
+<H1>What is Quicly</H1>
+
+<H1>Installing Quickly</H1>
+
+<H1>The Goal Project</H1>
+
+<H1>Creating a Quickly Project</H1>
+<H2>Creating the Empty Project</H2>
+Creating an empty but working program couldn't be simpler. First, open a terminal window to type commands into. When it's open, type the command:
+<DIV class="termnial">
+$quickly new ubuntu-project super_text
+</DIV>
+<IMG SRC="./images/terminal1.png" ALT="type 'quickly new ubuntu-project super_text' into terminal" />
+This will create a super_text sub directory containing a complete directory tree and files for an empty python appliction. The command finishes by running the newly created empty application.
+<IMG SRC="./images/application1.png" ALT="The command finishes by running the empty application." />
+
+<H2>Testing the Empty Application</H2>
+The are populated and set up, and you can resize the window. Notice that quickly interfered that the application title is "Super Text". Only a few of menu items do anything in the empty application, Help->About, Edit->Preferences, and File->Quit.
+<IMG SRC="./images/application2.png" ALT="The menus are populated and set up." />
+
+<H2>Running the Applicatin</H2>
+Close the application by closing the window or using the Quit command. Since the empty application isn't installed into Ubuntu yet, you can't start the application from the application menu yet. To start the applicaton, use the terminal to first cd into the new subdirectory, and then issue the command to start the program.
+<DIV class="termnial">
+$cd super_text
+super_text$./super_text
+</DIV>
+<IMG SRC="./images/terminal3.png" ALT="run the empty application from the terminal" />
+
+<H2>Edit the User Interface</H2>
+Quickly programs use Glade to edit the user interface. Start Glade with quickly in order to set up Glade for editing the empty applicaton.
+<DIV class="termnial">
+super_text$quickly glade
+</DIV>
+<IMG SRC="./images/terminal4.png" ALT="start glade with the 'quickly glade' command " />
+Glade will open with the project loaded up and ready to edit.
+<IMG SRC="./images/glade1.png" ALT="glade loads the project " />
+Use the Project Menu to choose "SuperTextWindow.ui" for editing.
+<IMG SRC="./images/glade2.png" ALT="choose SuperTextWindow.ui from the project menu " />
+We want to create a text area for typing into. There are some default Widgets added to the Window. We won't need these so we'll start with deleting them. Click on the label, and press delete, and it will disappear from the window.
+<IMG SRC="./images/glade3.png" ALT="select the label" />
+
+<IMG SRC="./images/glade4.png" ALT="delete the label from the window" />
+Do the same with the image widget.
+<IMG SRC="./images/glade4.png" ALT="select the image" />
+<IMG SRC="./images/glade5.png" ALT="delete the image from the window" />
+This leave us two free slots.
+<IMG SRC="./images/glade6.png" ALT="two empty slots in the window" />
+We'll use the bottom slot to add a TextView widget for the user to type into. In the toolbox, click on the TextView widget. Then click in the empty slot.
+<IMG SRC="./images/glade7.png" ALT="click on the text view widget" />
+<IMG SRC="./images/glade6.png" ALT="click in the empty slot" />
+Make sure you save the file in Glade, or your changes won't take! Then run the application from terminal again. The window now has a place where the user can type.
+<IMG SRC="./images/application3.png" ALT="the applicaton permits typing" />
+
+<H2>Add Saving Capabilities</H2>
+
+2. Open it
+    a. quickly glade
+    b. switching projects
+    c. add a text view
+    d. respond to the save command
+    e. save the file
+    f. respond to the open command
+    g. load the file
+    h. respond to the new command
+    i. clear it out
+
+3. Save your work
+    1. commit it
+    2. create a launchpad account
+    3. push it
+    4. pull it
+
+4. package it
+    1. edit setup.py
+    1. quickly package
+    2. run the deb
+    3. try it out
+    
+4. Make a PPA
+    1. already editted setup.py
+    2. already have a launchpad acocunt
+    3. quickly release
+
+</BODY>
+</HTML>
