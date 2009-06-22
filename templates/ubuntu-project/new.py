@@ -92,11 +92,14 @@ file_from_template(template_ui_dir, "camel_case_nameWindow.ui", target_ui_dir, p
 file_from_template(template_ui_dir, "project_name_window.xml", target_ui_dir, project_name, True)
 file_from_template(template_ui_dir, "Aboutcamel_case_nameDialog.ui", target_ui_dir, project_name, True)
 file_from_template(template_ui_dir, "about_project_name_dialog.xml", target_ui_dir, project_name, True)
+file_from_template(template_ui_dir, "camel_case_namePreferencesDialog.ui", target_ui_dir, project_name, True)
+file_from_template(template_ui_dir, "project_name_preferences_dialog.xml", target_ui_dir, project_name, True)
 
 template_python_dir = abs_path + "/python/"
 target_python_dir = project_name + "/python/"
 file_from_template(template_python_dir, "camel_case_nameWindow.py", target_python_dir, project_name, True)
 file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, project_name, True)
+file_from_template(template_python_dir, "camel_case_namePreferencesDialog.py", target_python_dir, project_name, True)
 
 template_media_dir = abs_path + "/media/"
 target_media_dir = project_name + "/media/"

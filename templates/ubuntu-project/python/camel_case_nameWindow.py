@@ -1,6 +1,7 @@
 import sys
 import gtk
 import Aboutcamel_case_nameDialog
+import camel_case_namePreferencesDialog
 
 class camel_case_nameWindow(gtk.Window):
     __gtype_name__ = "camel_case_nameWindow"
@@ -28,13 +29,25 @@ class camel_case_nameWindow(gtk.Window):
         self.builder.connect_signals(self)
 
         #code for other initialization actions should be added here
-
+        #TODO: check if there are preferences to load
+        
     def about(self, widget, data=None):
         """about - display the about box for what_the_heck """
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
         response = about.run()
         about.hide()
         about.destroy
+
+    def preferences(self, widget, data=None):
+        """about - display the preferences window for project_name """
+        prefs = camel_case_namePreferencesDialog.Newcamel_case_namePreferencesDialog()
+        response = prefs.run()
+        if response == gtk.RESPONSE_OK:
+            #make any updates based on changed preferences here            
+            #TODO: save the preferences
+            pass
+        prefs.hide()
+        prefs.destroy
 
     def quit(self, widget, data=None):
         """quit - signal handler for closing the camel_case_nameWindow"""
