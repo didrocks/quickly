@@ -92,6 +92,7 @@ def process_command_line():
     opt_has_template = False
     argv = sys.argv
     i = 1
+
     while i < len(argv):
         arg = argv[i]
         if arg == '--template' or arg == '-t':
@@ -114,6 +115,7 @@ def process_command_line():
 
     #if processing command with explicit template, template argument and project name
     #must be there (with -t, --template or just following the command): new, quickly
+
     if with_explicit_template:
         if not opt_has_template:
             if len(opt_command) < 3 or opt_command[1].startswith('-'):
@@ -131,7 +133,6 @@ def process_command_line():
     # the config file already exist, load it.
     else:
         configurationhandler.loadConfig()
-
 
     #if no template provided, guess it from the current tree
     if not opt_has_template:

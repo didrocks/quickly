@@ -9,6 +9,18 @@ import subprocess
 import gettext
 from gettext import gettext as _
 
+def quickly_name(project_name):
+    project_name = project_name.lower()
+    permitted_characters = string.ascii_lowercase
+    permitted_characters += "_"
+    for c in project_name:
+        if c not in permitted_characters:
+            print _("""
+ERROR: unpermitted character in project name.
+Letters and underscore ("_") only.""")
+            sys.exit(0)
+    return project_name
+
 def conventional_names(project_name):
     words = project_name.split("_")
     sentence_name = project_name.replace("_"," ")
@@ -40,6 +52,7 @@ def file_from_template(template_dir, template_file, target_dir, project_name, re
     fout.close()
     fout.close()
     print "%s created\n" % (target_dir + "/" + target_file,)
+
  
 
 #set domain text
@@ -55,17 +68,7 @@ Aborting""")
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)
 
-project_name = sys.argv[1]
-
-project_name = project_name.lower()
-permitted_characters = string.ascii_lowercase
-permitted_characters += "_"
-for c in project_name:
-    if c not in permitted_characters:
-        print _("""
-ERROR: unpermitted character in project name.
-Letters and underscore ("_") only.""")
-        sys.exit(0)
+project_name = quickly_name(sys.argv[1])
 
 # create additional directories
 ui_dir = project_name + "/ui"
@@ -82,6 +85,7 @@ media_dir = project_name + "/media"
 print _("Creating project directory %s") % media_dir
 os.mkdir(media_dir)
 print _("Directory %s created\n") % media_dir
+
 
 sentence_name, camel_case_name = conventional_names(project_name)
 
@@ -125,4 +129,5 @@ print _("Congrats, your new project is setup! You can now cd %s and start hackin
 
 sys.exit(0)
 
-
+if __name__== "__main__":
+ print "main"
