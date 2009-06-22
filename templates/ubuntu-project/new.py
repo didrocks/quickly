@@ -5,55 +5,11 @@ import sys
 import os
 import shutil
 import subprocess
+import quicklyutils
 
 import gettext
 from gettext import gettext as _
 
-def quickly_name(project_name):
-    project_name = project_name.lower()
-    permitted_characters = string.ascii_lowercase
-    permitted_characters += "_"
-    for c in project_name:
-        if c not in permitted_characters:
-            print _("""
-ERROR: unpermitted character in project name.
-Letters and underscore ("_") only.""")
-            sys.exit(0)
-    return project_name
-
-def conventional_names(project_name):
-    words = project_name.split("_")
-    sentence_name = project_name.replace("_"," ")
-    sentence_name = string.capwords(sentence_name)
-    camel_case_name = sentence_name.replace(" ","")
-    return sentence_name, camel_case_name
-
-def file_from_template(template_dir, template_file, target_dir, project_name, rename = False):
-    sentence_name, camel_case_name = conventional_names(project_name)
-    if rename:
-        frags = template_file.split(".")
-        target_file = frags[0].replace("project_name",project_name)
-        target_file = target_file.replace("camel_case_name",camel_case_name)
-
-        if len(frags) > 1:
-            target_file += "." + frags[1]
-    else:
-        target_file = template_file
-
-    print "Creating %s" % target_dir + "/" + target_file
-    fin = open(template_dir + template_file,'r')
-    file_contents = fin.read().replace("project_name",project_name)
-    file_contents = file_contents.replace("camel_case_name",camel_case_name)
-    file_contents = file_contents.replace("sentence_name",sentence_name)
-
-    fout = open(target_dir + target_file, 'w')
-    fout.write(file_contents)
-    fout.flush()
-    fout.close()
-    fout.close()
-    print "%s created\n" % (target_dir + "/" + target_file,)
-
- 
 
 #set domain text
 gettext.textdomain('quickly')
@@ -68,7 +24,7 @@ Aborting""")
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)
 
-project_name = quickly_name(sys.argv[1])
+project_name = quicklyutils.quickly_name(sys.argv[1])
 
 # create additional directories
 ui_dir = project_name + "/ui"
@@ -87,23 +43,29 @@ os.mkdir(media_dir)
 print _("Directory %s created\n") % media_dir
 
 
-sentence_name, camel_case_name = conventional_names(project_name)
+sentence_name, camel_case_name = quicklyutils.conventional_names(project_name)
 
 #copy files
 template_ui_dir = abs_path + "/ui/"
 target_ui_dir = project_name + "/ui/"
-file_from_template(template_ui_dir, "camel_case_nameWindow.ui", target_ui_dir, project_name, True)
-file_from_template(template_ui_dir, "project_name_window.xml", target_ui_dir, project_name, True)
-file_from_template(template_ui_dir, "Aboutcamel_case_nameDialog.ui", target_ui_dir, project_name, True)
-file_from_template(template_ui_dir, "about_project_name_dialog.xml", target_ui_dir, project_name, True)
-file_from_template(template_ui_dir, "camel_case_namePreferencesDialog.ui", target_ui_dir, project_name, True)
-file_from_template(template_ui_dir, "project_name_preferences_dialog.xml", target_ui_dir, project_name, True)
+
+substitutions = (("project_name",project_name),
+            ("camel_case_name",camel_case_name),
+            ("sentence_name",sentence_name),)
+
+
+quicklyutils.file_from_template(template_ui_dir, "camel_case_nameWindow.ui", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "project_name_window.xml", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "Aboutcamel_case_nameDialog.ui", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "about_project_name_dialog.xml", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "camel_case_namePreferencesDialog.ui", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "project_name_preferences_dialog.xml", target_ui_dir, substitutions)
 
 template_python_dir = abs_path + "/python/"
 target_python_dir = project_name + "/python/"
-file_from_template(template_python_dir, "camel_case_nameWindow.py", target_python_dir, project_name, True)
-file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, project_name, True)
-file_from_template(template_python_dir, "camel_case_namePreferencesDialog.py", target_python_dir, project_name, True)
+quicklyutils.file_from_template(template_python_dir, "camel_case_nameWindow.py", target_python_dir, substitutions)
+quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
+quicklyutils.file_from_template(template_python_dir, "camel_case_namePreferencesDialog.py", target_python_dir, substitutions)
 
 template_media_dir = abs_path + "/media/"
 target_media_dir = project_name + "/media/"
@@ -113,7 +75,7 @@ shutil.copy2(template_media_dir + "logo.png",target_media_dir)
 print _("Media files copied to %s\n") % target_media_dir
 
 #(template_dir, template_file, target_dir, project_name, rename = False):
-file_from_template(abs_path,"/project_name",project_name, project_name, True)
+quicklyutils.file_from_template(abs_path,"/project_name",project_name, substitutions)
 
 print _("Creating bzr repository and commiting")
 subprocess.call(["bzr", "init"], cwd=project_name)

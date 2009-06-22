@@ -28,6 +28,8 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
         self.builder.connect_signals(self)
 
         #code for other initialization actions should be added here
+        #TODO: check if there are preferences to set, and if so, set them
+
     def get_preferences(self):
         return self.preferences
 

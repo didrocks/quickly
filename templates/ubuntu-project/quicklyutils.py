@@ -1,21 +1,21 @@
 import string 
 
 
-def quickly_name(project_name):
-    project_name = project_name.lower()
+def quickly_name(name):
+    name = name.lower()
     permitted_characters = string.ascii_lowercase
     permitted_characters += "_"
-    for c in project_name:
+    for c in name:
         if c not in permitted_characters:
             print _("""
-ERROR: unpermitted character in project name.
+ERROR: unpermitted character in name.
 Letters and underscore ("_") only.""")
             sys.exit(0)
-    return project_name
+    return name
 
-def conventional_names(project_name):
-    words = project_name.split("_")
-    sentence_name = project_name.replace("_"," ")
+def conventional_names(name):
+    words = name.split("_")
+    sentence_name = name.replace("_"," ")
     sentence_name = string.capwords(sentence_name)
     camel_case_name = sentence_name.replace(" ","")
     return sentence_name, camel_case_name

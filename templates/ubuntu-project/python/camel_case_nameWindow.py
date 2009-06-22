@@ -27,10 +27,13 @@ class camel_case_nameWindow(gtk.Window):
         #get a reference to the builder and set up the signals
         self.builder = builder
         self.builder.connect_signals(self)
+        
+        #uncomment the following code to read in preferences at start up
+        #dlg = camel_case_namePreferencesDialog.Newcamel_case_namePreferencesDialog()
+        #self.preferences = dlg.get_preferences()
 
         #code for other initialization actions should be added here
-        #TODO: check if there are preferences to load
-        
+
     def about(self, widget, data=None):
         """about - display the about box for what_the_heck """
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
@@ -44,7 +47,6 @@ class camel_case_nameWindow(gtk.Window):
         response = prefs.run()
         if response == gtk.RESPONSE_OK:
             #make any updates based on changed preferences here            
-            #TODO: save the preferences
             pass
         prefs.hide()
         prefs.destroy
