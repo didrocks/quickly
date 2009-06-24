@@ -66,8 +66,23 @@ We'll use the bottom slot to add a TextView widget for the user to type into. In
 Make sure you save the file in Glade, or your changes won't take! Then run the application from terminal again. The window now has a place where the user can type.
 <IMG SRC="./images/application3.png" ALT="the applicaton permits typing" />
 
+Now we'll add the entry field for the title, and also a label for it. We'll use the top empty slot for that. First, click on HBox in the pallette, and then click on the top slot. A dialog box will open, tell it that you want two items.
+<IMG SRC="./images/glade8.png" ALT="tell the hbox you want two items" />
+The HBox is a container that arranges it's children horizontally. Add a label to the empty left hand box, and a Text Entry to the right hand one.
+<IMG SRC="./images/glade9.png" ALT="text entry is added" />
+
+Before going on, let's clean up the UI just a tad here. For the new HBox, go to the Packing tab, and set Expand and Fill to "No". 
+<IMG SRC="./images/glade10.png" ALT="no expand and fill" />
+
+Go to the General tab, and set spacing to 5.
+<IMG SRC="./images/glade11.png" ALT="spacing is 5" />
+
+Set expand and fill to "no" for the label, but keep it "yes" for the entry. Set the padding for both to 5 (also on the Packing tab).
+<IMG SRC="./images/glade12.png" ALT="glade all cleaned up" />
+
+
 <H2>Add the Save, Open, and New Features</H2>
-After the user types something, they may want to save it. A File->Save menu item was automatically created in the empty was created, but it's not hooked up to any code. To make Save work, we need tell the menu item what function to call, and then create a funtion to actually do the saving.
+After the user types something, they may want to save it. A File->Save menu item was automatically created in the empty was created, but it's not hooked up to any code. To make Save work, we need tell the menu item what function to call, and then create a function to actually do the saving.
 
 <H3>Set the Signal Handler in Glade</H3>
 To tell the menu item what function to call, open up the window in glade:
@@ -116,36 +131,41 @@ Choose "File->Save" from the menu, and you'll see the word "save" printing out i
 <IMG SRC="./images/application1.png" ALT="The command finishes by running the empty application." />
 
 <H3>Implementing Save</H3>
-Now we'll write a little code in the signal handler to actually save the file. The code will do the following:
-<OL>
-<LI>Open the standard save dialog box from Ubuntu to get the file location.</LI>
-<LI>Check if the user chose "Save" or "Cancel".</LI>
-<LI>Get the filepath from the Save Dialog</LI>
-<LI>Retrieve the text from the TextView</LI>
-<LI>Write the file to disk at the specified location.</LI>
-</OL>
+Now we'll write a little code in the signal handler to actually save the text. Because we want it to be easy for users to do things like syncronize their Super Text documents between computers, back it up, etc... we'll use couchdb as our backend. Note that if you are not interested in learning about how to save to and read from couchdb, you can just snipe the code.
 
-<H4>Here's the code to create the file dialog:</H4>
-pygtk has a file dialog that can be used for selecting files and folders for operations like saving and opening files. We need to do a little setup to configure it for saving a file, like setting the title, and creating a set of buttons that include associated responses. The stock Cancel/Save butons and stock Cancel/Ok responses work well for this.
-<DIV class="code"><TEXTAREA rows="5" cols="80">
-    #Create the save file dialog
-    title = "Choose a File Location"
-    buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK)
-    chooser = gtk.FileChooserDialog(title=title, parent=self, buttons=buttons,action=gtk.FILE_CHOOSER_ACTION_SAVE)
+First, you may need to install couchdb and python-couchdb. The fastest way to do this is from ther terminal:
+<DIV class="termnial"><TEXTAREA rows = "1" cols="80">
+$sudo apt-get install couchdb python-couchdb
 </TEXTAREA></DIV>
 
-<H4>Here's the code to run the dialog, check if the user chose Save or Cancel, and get the path the user chose:</H4>
-In pygtk, dialogs have a "run" function which displays the dialog. When the function returns, you should check the result to decide how to proceed. You also need to destroy the dilalog, or it won't get out of the user's way! Since we associated gtk.RESPONSE_OK with the Save button, we'll only set a file_path if the user chose Save. If file_path is set to nothing, then we'll just return from the function without doing anything else.
-<DIV class="code"><TEXTAREA rows="10" cols="80">
-    #run the dialog and get the path name
-    file_path = None
-    if chooser.run() == gtk.RESPONSE_OK:
-        file_path = chooser.get_filename()
-    chooser.destroy()
+After couchdb and python-couchdb is installed, you can write the code. The code will do the following:
+<OL>
+<LI>Get a handle to the couchdb database to save into.</LI>
+<LI>Get the title of the document and the text from the user interface.</LI>
+<LI>Check if there is already a document with the same title, and if so overwrite it.</LI>
+<LI>If there is not a document already, create one.</LI>
+</OL>
 
-    #if there's no file_path, we're done      
-    if file_path == None:
-        return
+<H4>Specify where the database lives</H4>
+We'll just hard code a reference to the database on the user's computer. If we want to point to a couchdb instance somewhere else later, it will be easy to change. We also want to name the datbase something reasonably unique, we'll use "super_text". Since we want these lines to run every time the Super Text window is created, put these at the end of the finish_initializing function:
+<DIV class="code"><TEXTAREA rows="2" cols="80">
+        self.server = Server('http://127.0.0.1:5984/')
+        self.db_name = "super_text"
+</TEXTAREA></DIV>
+<H4>Get a reference to the database</H4>
+Now in our save_file function, we want to get a reference to the database. However, if this is the first time that the application is run, the database may not have been created yet. Fortunately, it's an easy matter to check for the database, and if it's not there to create it.
+<DIV class="code"><TEXTAREA rows="5" cols="80">
+        #get a handle the database, or create one if needed
+        if self.db_name in self.server:
+            db = self.server[self.db_name]
+        else:
+            db = self.server.create(self.db_name)
+</TEXTAREA></DIV>
+
+<H4>Here's the code to pull the title out of the title entry:</H4>
+<DIV class="code"><TEXTAREA rows="2" cols="80">
+        #get the title for the note
+        title = self.builder.get_object("entry1").get_text()
 </TEXTAREA></DIV>
 
 <H4>Here's the code to get pull the text out of the TextView:</H4>
@@ -159,88 +179,112 @@ In pygtk, TextView widgets have a text buffer that stores the text. So you ask t
     text = buff.get_text(start_iter,end_iter)
 </TEXTAREA></DIV>
 
-Here's the code to write the file:
-Writing text files in Python is easy. You just use the "open" function, telling it what file to open, and the mode, in this case 'w' for "write". If the specified file does not exist, Python will simply create it for. Write the text and close the file.
-<DIV class="code"><TEXTAREA rows="6" cols="80">
-    #save the file
-    f = open(file_path,'w')
-    f.write(text)
-    f.flush()
-    f.close()
+<H4>Saving a document to Couchdb</H4>
+A document in couch is essentially a python dictionary. So we can save the document to couch like this:
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+            db.create({"title":title, "text":text}) #create a new doc
+</TEXTAREA></DIV>
+
+<H4>Check for a pre-existing note with the same title</H4>
+Before we just write the new document though, we have to take note of the fact that couch will allow you to create as many documents as you want with the same title. We probably don't want this, so we we'll have to write a little code to check if there is already a document in couch with the same title, and if there is, update that document rather than create a new one.
+
+To do this:
+<OL>
+<LI>Write filtering function in javascript.</LI>
+<LI>Query the database with this function.</LI>
+<LI>Get the id for the first returned document</LI>
+<LI>Use that id to get a reference to the docuemnt.</LI>
+<LI>Change the text in the document.</LI>
+<LI>Overwrite the document in the database with the one you just created.</LI>
+</OL>
+
+This all may sound very weird, but in code, it's not quite so complicated:
+<DIV class="code"><TEXTAREA rows="9" cols="80">
+        #check if there is a doucment with the same title already in the database
+        code = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
+        results = db.query(code)
+        
+        if len(results) > 0: #there is doc with that title
+            document_id = results.rows[0].key
+            doc = db[document_id]
+            doc["text"] = text
+            db[doc.id] = doc #overwrite the text for the doc
 </TEXTAREA></DIV>
 
 <H4>So the whole function should look like this:</H4>
 <DIV class="code"><TEXTAREA rows="20" cols="80">
     def save_file(self, widget, data=None):
-        #Create the save file dialog
-        title = "Choose a File Location"
-        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK)
-        chooser = gtk.FileChooserDialog(title="Save File", parent=self, buttons=buttons,action=gtk.FILE_CHOOSER_ACTION_SAVE)
+        #get a handle the database, or create one if needed
+        if self.db_name in self.server:
+            db = self.server[self.db_name]
+        else:
+            db = self.server.create(self.db_name)
 
-        #run the dialog and get the path name
-        file_path = None
-        if chooser.run() == gtk.RESPONSE_OK:
-            file_path = chooser.get_filename()
-        chooser.destroy()
+        #get the title for the note
+        title = self.builder.get_object("entry1").get_text()
 
-        #if there's no file_path, we're done      
-        if file_path == None:
-            return
-    
-        #get the string
+        #get the text to save
         buff = self.builder.get_object("textview1").get_buffer()
         start_iter = buff.get_start_iter()
         end_iter = buff.get_end_iter()
-
         text = buff.get_text(start_iter,end_iter)
 
-        #save the file
-        f = open(file_path,'w')
-        f.write(text)
-        f.flush()
-        f.close()
+        #check if there is a doucment with the same title already in the database
+        code = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
+        results = db.query(code)
+        
+        if len(results) > 0: #there is doc with that title
+            document_id = results.rows[0].key
+            doc = db[document_id]
+            doc["text"] = text
+            db[doc.id] = doc #overwrite the text for the doc
+
+        else: 
+            db.create({"title":title, "text":text}) #create a new doc
 </TEXTAREA></DIV>
 
+Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:
+<DIV><A HREF="http://localhost:5984/_utils/">http://localhost:5984/_utils/</A></DIV>
+<IMG SRC="./images/couch1.png" ALT="open couchdb in a browser" />
+
 <H3>Implementing Open and New</H3>
+To open a saved document, the user will type the title of the document that they want to open in the text entry, and choose "Open" from the main menu. If there is no matching document there, it will just clear out the text view, ready for input. This is probably not too intuitive, so we'll add a dialog box for prompting the user for the title, but that's for later in the tutorial. For now, we'll just use the same text entry field.
+
 <H4>Implementing Open is essentially the reverse of Save:</H4>
 Follow these steps:
 <OL>
-<LI>Open the standard open dialog box from Ubuntu to get the file location.</LI>
-<LI>Check if the user chose "Open" or "Cancel".</LI>
-<LI>Get the filepath from the Open Dialog.</LI>
-<LI>Retrieve the text from the file.</LI>
-<LI>Put the text from the file into the TextView.</LI>
+<LI>Check if the database has been created, or if this is a first run.</LI>
+<LI>Get the title the user is looking for from the text entry</LI>
+<LI>Query the database, and pull out the text matching the title, if any</LI>
+<LI>Set the text view to display the new text</LI>
 </OL>
 So the open_file function looks like so:
 <DIV class="code"><TEXTAREA rows="20" cols="80">
     def open_file(self, widget, data=None):
-        #Create the open file dialog
-        title = "Choose a File To Open"
-        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK)
-        chooser = gtk.FileChooserDialog(title=title, parent=self, buttons=buttons,action=gtk.FILE_CHOOSER_ACTION_SAVE)
-    
-        #run the dialog and get the path name
-        file_path = None
-        if chooser.run() == gtk.RESPONSE_OK:
-            file_path = chooser.get_filename()
-        chooser.destroy()
-
-        #if there's no file_path, we're done      
-        if file_path == None:
+        #get a handle to the database, or return if there isn't one yest
+        if self.db_name in self.server:
+            db = self.server[self.db_name]
+        else:
             return
 
-        #read int he file the file
-        f = open(file_path,'r')
-        text = f.read()
+        #get the name of the document to open
+        title = self.builder.get_object("title_entry").get_text()
+        text = ""
 
-        #set the buffer to display the string
+        #get the text for the document from the database
+        code = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc.text); } }""" %title
+        results = db.query(code)
+        if len(results) > 0:
+            text = results.rows[0].value
+        
+        #set the UI to display the string
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text(text)
-
 </TEXTAREA></DIV>
 <H4>To implement New, we'll just clear out the text, like this:</H4>
 <DIV class="code"><TEXTAREA rows="4" cols="80">
-    def new_file(self, widget, data = None):
+    def new_file(self, widget, data=None):
+        self.builder.get_object("title_entry").set_text("Note Title")
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text("")
 </TEXTAREA rows="20" cols="80"></DIV>
