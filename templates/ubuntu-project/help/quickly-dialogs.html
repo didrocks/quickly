@@ -1,0 +1,355 @@
+<HTML>
+<HEAD>
+<TITLE>Quickly Tutorial Part 2</TITLE>
+<STYLE>
+img
+{
+    display: block;
+    width:668px;
+    padding-top:10px;
+}
+p
+{
+    width: 800px;
+}
+
+</STYLE>
+</HEAD>
+<BODY>
+<H1>Introduction to Part 2</H1>
+<P>In part 1, we created an application that can read and write text files, and persist them in the couchdb backend. However, the application has a hideous usability flaw, in the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix thay by adding a save and an open dialog.
+
+</P>
+
+<H2>Help Index</H2>
+<P>There should be an index to other parts of quickly help here:</P>
+<OL>
+<LI>making a package</LI>
+<LI>releasing</LI>
+<LI>adding a toolbar</LI>
+<LI>adding a dialogbox or window</LI>
+<LI>creating and reusing a custom widget</LI>
+<LI>saving user preferences</LI>
+<LI>quickly reference</LI>
+</OL>
+
+<H1>Creating a Quickly Dialog</H1>
+<H2>Creating the Empty Dialog</H2>
+<P>It's simple to add an empty, but working dialog to your project. Simply specify the name of the new dialog, and it will be added automatically. Assuming that you are in the super_text project directory:</P>
+<DIV class="termnial"><TEXTAREA rows = "1" cols="80">
+$quickly dialog save
+</TEXTAREA></DIV>
+<P>This will add the dialog to your project.</P>
+<H2>Editing the New Dialog</H2>
+<P>To edit the UI for the dialog, you'll need to load it into Glade again. If you already have an instance of glade running, you might want to go ahead and close it first, as it may get confusing if you have more than one open at a time. After closing glade, simply open it again:</P>
+<DIV class="termnial"><TEXTAREA rows = "1" cols="80">
+$quickly glade
+</TEXTAREA></DIV>
+<P>Then use the project menu to switch to newly created SaveDialog.ui file.</P>
+<IMG SRC="./images/glade17.png" ALT="save dialog ready to edit" />
+<P>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for SuperTextWindow in part 1.</P>
+<IMG SRC="./images/glade18.png" ALT="save dialog all edited" />
+<H2>Code the Dialog</H2>
+<P>This dialog needs very little additional code to work. Essentially, you just need a way to retrieve the string specified by the user. We'll add a qiuck accessor method for this:</P>
+<DIV class="code"><TEXTAREA rows="2" cols="80">
+    def get_title_text(self):
+        return self.builder.get_object("entry1").get_text()
+</DIV></TEXTAREA>
+<P>We don't need to write any code for the Ok and Cancel buttons, as they were automatically hooked up by quickly when it created the dialog.</P>
+<P>Before we go on to invoking the dialog, delete HBox from SuperTextWindow that holds the text entry and label, as we won't be needing those.</P>
+<IMG SRC="./images/glade19.png" ALT="text entry now deleted" />
+
+<H1>Calling the Save Dialog</H1>
+<P>To use the dialog in SuperTextWindow, we need to follow these steps:</P>
+<OL>
+<LI>Import SaveDialog in SuperTextWindow</LI>
+<LI>In the save_file function, create an instance of SaveDialog</LI>
+<LI>Run the Dialog</LI>
+<LI>Get the String</LI>
+<LI>Destroy the dialog</LI>
+<LI>Check the response before proceeding</LI>
+</OL>
+<H2>Importing the SaveDialog</H2>
+Simply add the SaveDialog to your import statements at the top of the file:
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+import SaveDialog
+</DIV></TEXTAREA>
+
+<H2>Create an instance of the dialog and run it</H2>
+<P>When the user chooses Save, we want to open the SaveDialog and collect the title of the note from the user. So we need to modify our save_file function.</P>
+
+<P>To create an instance of the dialog, use the NewSaveDialog() function in the SaveDialog module. It's important that you don't create an instance of SaveDialog directly, as it won't have a chance to load up it's UI that way, and it won't work. So whenever you use a quickly dialog, do it like this:</P>
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+        saver = SaveDialog.NewSaveDialog()
+</DIV></TEXTAREA>
+
+<P>To make the dialog appear, simply use the run() method. However, we want to check the result, so we'll need to store that in a variable. After it runs, we want to collect the string from the user, like this:</P>
+<DIV class="code"><TEXTAREA rows="2" cols="80">
+        result = saver.run()
+        title = saver.get_title_text()
+</DIV></TEXTAREA>
+
+<H2>Clean up the dialog</H2>
+<P>We need to tell the dialog to not show itself anymore. We could call saver.hide() to make it hide, but since we don't need it hanging around, we'll just destroy it. Before we go on, though, we need to ensure that the user actually wants to save, so if we didn't get the Ok result, we should just return out of the function:</P>
+<DIV class="code"><TEXTAREA rows="2" cols="80">
+        saver.destroy()
+        if result != gtk.RESPONSE_OK:
+            return
+</TEXTAREA></DIV>
+
+<P>Since we're now getting the title from the dialog instead of the text entry, we should delete the line of the code that sents it from entry1. So except for the addition of the dialog code, the save_file function looks pretty much the same as it did in part 1:</P>
+
+<DIV class="code"><TEXTAREA rows="35" cols="80">
+    def save_file(self, widget, data=None):
+        #get the title from the user
+        saver = SaveDialog.NewSaveDialog()
+        result = saver.run()
+        title = saver.get_title_text()
+
+        saver.destroy()
+        if result != gtk.RESPONSE_OK:
+            return
+ 
+        #get a handle the database, or create one if needed 
+        if self.db_name in self.server:
+            db = self.server[self.db_name]
+        else:
+            db = self.server.create(self.db_name)
+
+
+        #get the text to save
+        buff = self.builder.get_object("textview1").get_buffer()
+        start_iter = buff.get_start_iter()
+        end_iter = buff.get_end_iter()
+        text = buff.get_text(start_iter,end_iter)
+
+        #check if there is a doucment with the same title already in the database
+        filter = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
+        results = db.query(filter)
+        
+        if len(results) > 0: #there is doc with that title
+            document_id = results.rows[0].key
+            doc = db[document_id]
+            doc["text"] = text
+            db[doc.id] = doc #overwrite the text for the doc
+
+        else: 
+            db.create({"title":title, "text":text}) #create a new doc:
+</TEXTAREA></DIV>
+
+Now when we choose save, we get the SaveDialog instead:
+<IMG SRC="./images/application4.png" ALT="save file dialog works much better" />
+
+
+
+
+
+
+<H1>Creating a Dialog with a TreeView</H1>
+We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. This will introduce one of the most powerful widgets in the pygtk library, the TreeView. We will be using the TreeView to display the titles of the documents stored in couchdb, but also to store the id's for those documents, so that they can be opened and inserted into the UI.
+
+<H2>Create the Open Dialog</H2>
+<DIV class="termnial"><TEXTAREA rows = "1" cols="80">
+$quickly dialog open
+</TEXTAREA></DIV>
+<H2>Editing the New Dialog</H2>
+<P>Start out by closing, and then reopening glade again:</P>
+<DIV class="termnial"><TEXTAREA rows = "1" cols="80">
+$quickly glade
+</TEXTAREA></DIV>
+Start by adding an HBox and label in the sammer manner as in the Save Dialog above.
+
+
+<H2>Create the TreeView</H2>
+<P>When the dialog loads, we will read all of the documents from couch db, and display the titles in the open dialog using a TreeView. However, to use a TreeView involves coordinating the following components:</P>
+<UL>
+<OL>A gtk.TreeView that is the top level container</OL>
+<OL>A model to hold the data for the TreeView, in this case a gtk.ListStore</OL>
+<OL>A set of columns to display in the TreeView, in this case, only one column is needed</OL>
+<OL>A CellRendered to tell the column what to display from the store</OL>
+</UL>
+
+<P>These are a lot of pieces to get working together, but the TreeView is a very powerful UI element, and we'll only be touching the surface in this Tutorial. Fortunately, we can use Glade to set most of this up.</P>
+
+<H3>Creating the TreeView and ListStore</H3>
+<P>Start by clicking on the TreeView widget in the Control and Display section, and then clicking in the empty space of the HBox. You will be prompting with the "Create a Treeview" dialog to add a Model:</P>
+<IMG SRC="./images/glade20.png" ALT="prompt to define treeview model" />
+<P>Click the builder button ([...]), to bring up the Model chooser. The list is empty, since there are no TreeView models in the project yet.<P> 
+<IMG SRC="./images/glade21.png" ALT="prompt to pick a treeview model" />
+<P>Click the "New" button and a ListStore will be added to the project and will populated in the Create a Treeview dialog. Hit Ok.</P> 
+
+<H3>Set up the ListStore</H3>
+<P>liststore1 is a model that was added to the Objects section of the inspector. You may need to scroll the inspector window to see it. A liststore is the simplest model for a treeview, as it is a grid of data that is designed so that a TreeView can present that data in a grid as well. However, you get to choose what data in liststore1 you want to display in the grid, you don't have to display it all. We'll take advantage of that by creating two columns of data in the list store. The first column will be for the titles, which we will display, and the second will be for the actual text, which we won't display, but that we will return to the SuperTextWindow to display.</P>
+<P>To set up the columns, select listore1 in the inspector. Switch to the General tab of the properties window so we can add the columns.</P>
+<IMG SRC="./images/glade22.png" ALT="liststore1 ready to have columns added" />
+<P>Both columns will be strings. For Glade, this translates to a "gchararry". Click where it says "define new column", and choose gchararray from the list. Then hit enter. This will create a default title for the column. Call this column "title".</P>
+<IMG SRC="./images/glade23.png" ALT="liststore1 with title column defined" />
+<P>Repeat this process to create the "text" column.
+<IMG SRC="./images/glade24.png" ALT="liststore1 with text column defined" />
+<P>There is no data in liststore1 yet. We'll add it from couchdb in code after we are done setting up the TreeView in glade.</P>
+
+<H3>Create a Column in the TreeView</H3>
+<P>We've created two columns in liststore1. But these columns are just in the model. They store data, they don't display it. The TreeView needs a column for displaying the title of each document so that the user can pick one. To get started, select treeview1 in the inspector, then click "Edit" in the toolbar above. This will bring up the Tree View Editor window.</P>
+<IMG SRC="./images/glade25.png" ALT="Tree View Editor" />
+<P>Click the hierarchy tab, where you can edit children of the treeview.</P>
+<IMG SRC="./images/glade26.png" ALT="Tree View Editor Hierarchy Tab" />
+Click the "Add" button. This will add a Column to the Treeview. In the right hand side, scroll down if needed to set the title to "Title".
+<IMG SRC="./images/glade27.png" ALT="new column in treeview called title" />
+
+<H3>Create a CellRender in the Column</H3>
+<P>Now the treeview has a column, but the column doesn't know what to display or how. We need to give it a cell rendered to display the text from the 0th column of liststore1. Right click on column, and choose "Add Child Text Item".</P> 
+<IMG SRC="./images/glade27.png" ALT="cellrendered added" />
+<P>To tell the cell rendered to display the titles stored in liststore1, look at the Text property, and notice that it is unset. Click on the dropdown that says "unset", and choose the column called "title". This tells the cellrender to tell the column that it is in to display the titles in liststore1.</P>
+<IMG SRC="./images/glade28.png" ALT="cellrendered is set up" />
+<P>Close the editor and save, becuase now it's time to write some code.</P>
+
+<H3>Populating the TreeView with Titles</H3>
+<P>Now that the UI is ready, we need to write some code to make it work. Populating the TreeView with the titles requires the following steps:</P>
+<OL>
+<LI>Create a function that loads titles</LI>
+<LI>Getting a list of titles and text from couchdb</LI>
+<LI>Getting a reference to the ListStore that holds the data for the TreeView</LI>
+<LI>Adding each title and document set to the list store</LI>
+</OL>
+
+<H4>Create the load_titles function</H4>
+<P>The function is going to be called by SuperTextWindow, which will pass in a reference to a couchdb database to use. So the function signature should be like this:</P>
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+    def load_titles(self, db):
+</TEXTAREA></DIV>
+
+<H4>Get a list of titles and text</H4>
+<P>Next we ask couchdb for all of the titles and text that it has in the database. We tweak the javascript filter function to return title and text for each row before getting the results:</P>
+<DIV class="code"><TEXTAREA rows="3" cols="80">
+        #get all the titles and text
+        filter = """function(doc) { emit(doc._id, [doc.title, doc.text]); }"""
+        results = db.query(filter)
+</TEXTAREA></DIV>
+
+<H4>Get a reference to the ListStore and add the titles and text to it</H4>
+<P>Once we have the results, we can iterate through them and add them to liststore1. Our filter function asked for the title to be returned in the 0th position of the value array, and the text in the 1th position.</P>
+<DIV class="code"><TEXTAREA rows="6" cols="80">
+        #put the results into the list store for the treeview
+        store = self.builder.get_object("liststore1")        
+        for r in results:
+            title = r.value[0]
+            text = r.value[1]
+            store.append([title,text])
+</TEXTAREA></DIV>
+
+<P>The whole load_title function looks like this:</P>
+<DIV class="code"><TEXTAREA rows="11" cols="80">
+    def load_titles(self, db):
+        #get all the titles and text
+        filter = """function(doc) { emit(doc._id, [doc.title, doc.text]); }"""
+        results = db.query(filter)
+
+        #put the results into the list store for the treeview
+        store = self.builder.get_object("liststore1")        
+        for r in results:
+            title = r.value[0]
+            text = r.value[1]
+            store.append([title,text])
+</TEXTAREA></DIV>
+
+<H3>Create the get_selection function</H3>
+<P>The dialog still needs a bit more code to work. It needs to return the user's selectin, if there is one. To do this, we need to ask the TreeView what is selected. This involes:</P>
+<OL>
+<LI>Getting a reference to the selected rows in the TreeView, including a reference to a model that represents the data in the selected row</LI>
+<LI>Return nothing if nothing was selected</LI>
+<LI>Get a reference to the first (and only) selected row</LI>
+<LI>Use that reference to pull the text and title out of the selected row, and return them.</LI>
+</OL>
+<P>This sounds more complicated than it probably is. So here's the code:</P>
+<DIV class="code"><TEXTAREA rows="11" cols="80">
+    def get_selection(self):
+        #get the model and selected rows for the treeivew
+        model, rows = self.builder.get_object("treeview1").get_selection().get_selected_rows()
+
+        if len(rows) < 1: #just return nothing if nothing is selected
+            return (None, None)
+
+        else: #pull titles and text out of the selected row and return
+            iter = model.get_iter(rows[0])
+            title = model.get_value(iter,0)
+            text = model.get_value(iter,1)
+            return (title, text)
+</TEXTAREA></DIV>
+
+<H1>Calling the Open Dialog</H1>
+<P>Now we want to use the Open Dialog in the SuperTextWindow open_file function. To call the OpenDialog, we need to follow these steps:</P>
+<OL>
+<LI>Import OpenDialog in SuperTextWindow</LI>
+<LI>In the open_file function, create an instance of OpenDialog</LI>
+<LI>Tell the dialog to get the list of titles</LI>
+<LI>Run the Dialog</LI>
+<LI>Get the titel and text</LI>
+<LI>Destroy the dialog</LI>
+<LI>Check the response before proceeding</LI>
+</OL>
+
+<H2>Import OpenDialog</H2>
+<P>Just like the SaveDialog, add the import line to the list of imports:</P>
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+import OpenDialog
+</TEXTAREA></DIV>
+
+<H2>Create an instance of the dialog and run it</H2>
+<P>So now we're ready to call the dialog from the SuperTextWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</P>
+<DIV class="code"><TEXTAREA rows="3" cols="80">
+        opener = OpenDialog.NewOpenDialog()
+        opener.load_titles(db)
+        result = opener.run()
+</TEXTAREA></DIV>
+
+<H2>Retrieve the Title and Text</H2>
+<P>Now use the get_selection function to retrieve the title and text from the dialog. Don't forget to check the response type before going on.</P>
+<DIV class="code"><TEXTAREA rows="5" cols="80">
+        title,  text = opener.get_selection()
+        opener.destroy()
+
+        if result != gtk.RESPONSE_OK or text == None:
+            return
+</TEXTAREA></DIV>
+
+<H2>Update the UI</H2>
+<P>Now just put the text into the texview:</P>
+<DIV class="code"><TEXTAREA rows="3" cols="80">
+        #set the UI to display the string
+        buff = self.builder.get_object("textview1").get_buffer()
+        buff.set_text(text)
+</TEXTAREA></DIV>
+<P>That's all there is to it. So the whole open_file function looks like this:</P>
+<DIV class="code"><TEXTAREA rows="3" cols="80">
+    def open_file(self, widget, data=None):
+        #get a handle to the database, or return if there isn't one yest
+        if self.db_name in self.server:
+            db = self.server[self.db_name]
+        else:
+            return
+
+        opener = OpenDialog.NewOpenDialog()
+        opener.load_titles(db)
+        result = opener.run()
+                
+        title,  text = opener.get_selection()
+        opener.destroy()
+
+        if result != gtk.RESPONSE_OK or text == None:
+            return
+        
+        #set the UI to display the string
+        buff = self.builder.get_object("textview1").get_buffer()
+        buff.set_text(text)
+</TEXTAREA></DIV>
+<H1>Finsihing the Application</H1>
+<P>Now opening a saved document is much more intuitive.</P>
+<IMG SRC="./images/application5.png" ALT="open file dialog works much better" />
+<P>However, the application is not complete. There are a few things left for you to do:</P>
+<UL>
+<LI>Set the title of the SuperTextWindow to display the note title. Try self.set_text(title).</LI>
+<LI>The Save command works more like "Save As". The application probably shouldn't pop up a SaveDialog every time you want to save. If it's already been saved, you probably just want to save it, but use a SaveDialog when the user choose Save As, or is saving a document for the first time.</LI>
+<LI>The OpenDialog should probably return when the user double clicks on an item in the list. Try connecting to the "select-cursor-row" signal on the TreeView, and calling self.response(gtk.RESPONSE_OK) in the handler.</LI>
+<LI>Perhaps the Ok button in the OpenDialog should be disabled if nothing is selected. Try setting the "sensitivity" in Glade, and the set_sensitive function for the Ok button.</LI>
+</UL>
+</BODY>
