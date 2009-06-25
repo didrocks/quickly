@@ -32,43 +32,64 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
         #set up couchdb and the preference info
         self.server = Server('http://127.0.0.1:5984/')
         self.db_name = "project_name_preferences"
-        self.preferences = None
+        self.__preferences = None
         self.key = None
-        self.preferences = self.get_preferences()
+        self.__preferences = self.get_preferences()
 
         #TODO:code for other initialization actions should be added here
 
     def get_preferences(self):
-        if self.preferences == None: #the dialog is initializing
+        """get_preferences  -returns a dictionary object that contain
+        preferences for project_name."
+
+
+        """
+        if self.__preferences == None: #the dialog is initializing
+            #TODO: add prefernces to the self.__preferences dict
+            self.__preferences = {"preference1":"value1"}
+
             if self.db_name in self.server: #check for preferences already stored
                 db = self.server[self.db_name]
                 filt = """function(doc) { emit(doc._id, doc); }"""
                 results = db.query(filt)
-                if len(results) > 0:
-                    self.preferences = results.rows[0].value
+            
+                if len(results) > 0: #there are preferences saved
+                    self.__preferences = results.rows[0].value
                     self.key = results.rows[0].key
+                else: #there are no preferences saved
+                    db.create(self.__preferences)
 
-            else:
-                db = self.server.create(self.db_name) #this is the first run
-                #TODO: set default preferences here
-                self.preferences = {"preference1":"value1"} 
-                db.create(self.preferences)
-        return self.preferences
+            else:#this is the first run, create db and preferences
+                db = self.server.create(self.db_name) 
+                db.create(self.__preferences)
+
+        return self.__preferences
+
+    
+    def __save_preferences(self):
+        db = self.server[self.db_name]
+        filt = """function(doc) { emit(doc._id, doc); }"""
+        results = db.query(filt)
+        document_id = results.rows[0].key
+        doc = db[document_id]
+        doc = self.__preferences
+        db[document_id] = doc
 
     def ok(self, widget, data=None):
         """ok - The user has elected to save the changes.
         Called before the dialog returns gtk.RESONSE_OK from run().
 
         """
-        #make any updates to self.preferences here
-        pass
+        #make any updates to self.__preferences here
+        self.__preferences["preference1"] = "value2"
+        self.__save_preferences()
 
     def cancel(self, widget, data=None):
         """cancel - The user has elected cancel changes.
         Called before the dialog returns gtk.RESPONSE_CANCEL for run()
 
         """         
-        #restore any changes to self.preferences here
+        #restore any changes to self.__preferences here
         pass
 
 def Newcamel_case_namePreferencesDialog():
