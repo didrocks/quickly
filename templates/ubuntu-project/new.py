@@ -37,11 +37,6 @@ print _("Creating project directory %s") % python_dir
 os.mkdir(python_dir)
 print _("Directory %s created\n") % python_dir
 
-media_dir = project_name + "/media"
-print _("Creating project directory %s") % media_dir
-os.mkdir(media_dir)
-print _("Directory %s created\n") % media_dir
-
 
 sentence_name, camel_case_name = quicklyutils.conventional_names(project_name)
 
@@ -69,10 +64,12 @@ quicklyutils.file_from_template(template_python_dir, "camel_case_namePreferences
 
 template_media_dir = abs_path + "/media/"
 target_media_dir = project_name + "/media/"
-print _("Copying media files to %s") % target_media_dir
-shutil.copy2(template_media_dir + "background.png",target_media_dir)
-shutil.copy2(template_media_dir + "logo.png",target_media_dir)
-print _("Media files copied to %s\n") % target_media_dir
+shutil.copytree(template_media_dir,target_media_dir)
+
+template_help_dir = abs_path + "/help"
+target_help_dir = project_name + "/help"
+shutil.copytree(template_help_dir,target_help_dir)
+
 
 #(template_dir, template_file, target_dir, project_name, rename = False):
 quicklyutils.file_from_template(abs_path,"/project_name",project_name, substitutions)
