@@ -104,6 +104,11 @@ def process_command_line():
             if os.environ.has_key('QUICKLY'):
                 oldenv = os.environ['QUICKLY']
             os.environ['QUICKLY'] = "staging " + oldenv
+        elif arg == '--verbose':
+            oldenv = ""
+            if os.environ.has_key('QUICKLY'):
+                oldenv = os.environ['QUICKLY']
+            os.environ['QUICKLY'] = "verbose " + oldenv
         elif arg == '--help' or arg == '-h':
             usage()
             return 0
