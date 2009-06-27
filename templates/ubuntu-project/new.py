@@ -72,7 +72,7 @@ shutil.copytree(template_help_dir,target_help_dir)
 
 
 #(template_dir, template_file, target_dir, project_name, rename = False):
-quicklyutils.file_from_template(abs_path,"/project_name",project_name, substitutions)
+quicklyutils.file_from_template(abs_path,"/internal/project_name",project_name, substitutions)
 
 print _("Creating bzr repository and commiting")
 subprocess.call(["bzr", "init"], cwd=project_name)
