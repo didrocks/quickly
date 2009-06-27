@@ -5,7 +5,5 @@
                         generic-name="camel_case_namePreferenceDialog" parent="GtkDialog"
                         icon-name="widget-gtk-dialog"/>
   </glade-widget-classes>
-  <glade-widget-group name="camel_case_nameWidgets" title="sentence_name Widgets">
-    <glade-widget-class-ref name="camel_case_namePreferencesDialog"/>
-  </glade-widget-group>
+
 </glade-catalog>

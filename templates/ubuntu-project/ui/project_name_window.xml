@@ -5,7 +5,4 @@
                         generic-name="camel_case_nameWindow" parent="GtkWindow"
                         icon-name="widget-gtk-window"/>
   </glade-widget-classes>
-  <glade-widget-group name="camel_case_nameWidgets" title="sentence_name Widgets">
-    <glade-widget-class-ref name="camel_case_nameWindow"/>
-  </glade-widget-group>
 </glade-catalog>
