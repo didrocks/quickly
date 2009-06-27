@@ -47,7 +47,7 @@ $quickly glade
 </TEXTAREA></DIV>
 <P>Then use the project menu to switch to newly created SaveDialog.ui file.</P>
 <IMG SRC="./images/glade17.png" ALT="save dialog ready to edit" />
-<P>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for SuperTextWindow in part 1.</P>
+<P>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for SuperTextWindow in part 1. Set the padding and expand properties as well.</P>
 <IMG SRC="./images/glade18.png" ALT="save dialog all edited" />
 <H2>Code the Dialog</H2>
 <P>This dialog needs very little additional code to work. Essentially, you just need a way to retrieve the string specified by the user. We'll add a qiuck accessor method for this:</P>
@@ -138,7 +138,7 @@ import SaveDialog
 </TEXTAREA></DIV>
 
 Now when we choose save, we get the SaveDialog instead:
-<IMG SRC="./images/application4.png" ALT="save file dialog works much better" />
+<IMG SRC="./images/application5.png" ALT="save file dialog works much better" />
 
 
 
@@ -185,7 +185,7 @@ Start by adding an HBox and label in the sammer manner as in the Save Dialog abo
 <P>Both columns will be strings. For Glade, this translates to a "gchararry". Click where it says "define new column", and choose gchararray from the list. Then hit enter. This will create a default title for the column. Call this column "title".</P>
 <IMG SRC="./images/glade23.png" ALT="liststore1 with title column defined" />
 <P>Repeat this process to create the "text" column.
-<IMG SRC="./images/glade24.png" ALT="liststore1 with text column defined" />
+
 <P>There is no data in liststore1 yet. We'll add it from couchdb in code after we are done setting up the TreeView in glade.</P>
 
 <H3>Create a Column in the TreeView</H3>
@@ -198,9 +198,9 @@ Click the "Add" button. This will add a Column to the Treeview. In the right han
 
 <H3>Create a CellRender in the Column</H3>
 <P>Now the treeview has a column, but the column doesn't know what to display or how. We need to give it a cell rendered to display the text from the 0th column of liststore1. Right click on column, and choose "Add Child Text Item".</P> 
-<IMG SRC="./images/glade27.png" ALT="cellrendered added" />
+<IMG SRC="./images/glade28.png" ALT="cellrendered added" />
 <P>To tell the cell rendered to display the titles stored in liststore1, look at the Text property, and notice that it is unset. Click on the dropdown that says "unset", and choose the column called "title". This tells the cellrender to tell the column that it is in to display the titles in liststore1.</P>
-<IMG SRC="./images/glade28.png" ALT="cellrendered is set up" />
+<IMG SRC="./images/glade29.png" ALT="cellrendered is set up" />
 <P>Close the editor and save, becuase now it's time to write some code.</P>
 
 <H3>Populating the TreeView with Titles</H3>
@@ -344,12 +344,13 @@ import OpenDialog
 </TEXTAREA></DIV>
 <H1>Finsihing the Application</H1>
 <P>Now opening a saved document is much more intuitive.</P>
-<IMG SRC="./images/application5.png" ALT="open file dialog works much better" />
+<IMG SRC="./images/application6.png" ALT="open file dialog works much better" />
 <P>However, the application is not complete. There are a few things left for you to do:</P>
 <UL>
 <LI>Set the title of the SuperTextWindow to display the note title. Try self.set_text(title).</LI>
 <LI>The Save command works more like "Save As". The application probably shouldn't pop up a SaveDialog every time you want to save. If it's already been saved, you probably just want to save it, but use a SaveDialog when the user choose Save As, or is saving a document for the first time.</LI>
 <LI>The OpenDialog should probably return when the user double clicks on an item in the list. Try connecting to the "select-cursor-row" signal on the TreeView, and calling self.response(gtk.RESPONSE_OK) in the handler.</LI>
 <LI>Perhaps the Ok button in the OpenDialog should be disabled if nothing is selected. Try setting the "sensitivity" in Glade, and the set_sensitive function for the Ok button.</LI>
+<LI>It would be more consistent for the Open and Close dialogs to have "Open" and "Close" for buttons instead of "Ok". You can set a different type in the properties window in Glade.</LI>
 </UL>
 </BODY>
