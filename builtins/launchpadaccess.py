@@ -82,6 +82,54 @@ def initialize_lpi():
 
     return launchpad
 
+
+def link_project(launchpad, question):
+    ''' Link to launchpad project, erasing previous one if already set
+    
+    
+        :return project object'''
+
+    # if config not already loaded
+    if not configurationhandler.config:
+        configurationhandler.loadConfig()
+
+    choice = "0"
+    while choice == "0":    
+        
+        lp_id = raw_input("%s, leave blank to abort.\nLaunchpad project name: " % question)
+        if lp_id == "":
+            print _("No launchpad project give, aborting.")
+            exit(1)
+            
+        prospective_projects = launchpad.projects.search(text=lp_id)
+        project_number = 1
+        project_names = []
+        for project in prospective_projects:
+            print ("---------------- [%s] ----------------") % project_number
+            print "  " + project.title
+            print ("--------------------------------------")
+            print _("Project name: %s") % project.display_name
+            print _("Launchpad url: https://launchpad.net/%s") % project.name
+            project_names.append(project.name)
+            print project.summary
+            project_number += 1            
+        print
+        choice = raw_input("Choose your project number, leave blank to abort, 0 for another search.\nYour project number: ")
+
+    try:
+        choice = int(choice)
+        if choice in range(1, project_number):
+            project = launchpad.projects[project_names[choice - 1]]
+        else:
+            raise ValueError
+    except ValueError:
+        print _("No right number given, aborting.")
+        exit(1)
+    configurationhandler.config['lp_id'] = project.name
+    configurationhandler.saveConfig()
+    
+    return project
+
 def get_project(launchpad):
     ''' Get quickly project through launchpad.
     
@@ -90,8 +138,7 @@ def get_project(launchpad):
 
     # if config not already loaded
     if not configurationhandler.config:
-        configurationhandler.loadConfig()
-        
+        configurationhandler.loadConfig()        
         
     # try to get project
     try:
@@ -100,40 +147,7 @@ def get_project(launchpad):
        
     # else, bind the project to LP
     except KeyError:        
-        choice = "0"
-        while choice == "0":    
-        
-            lp_id = raw_input("No Launchpad project set, leave blank to abort.\nLaunchpad project name: ")
-            if lp_id == "":
-                print _("No launchpad project give, aborting.")
-                exit(1)
-                
-            prospective_projects = launchpad.projects.search(text=lp_id)
-            project_number = 1
-            project_names = []
-            for project in prospective_projects:
-                print ("---------------- [%s] ----------------") % project_number
-                print "  " + project.title
-                print ("--------------------------------------")
-                print _("Project name: %s") % project.display_name
-                print _("Launchpad url: https://launchpad.net/%s") % project.name
-                project_names.append(project.name)
-                print project.summary
-                project_number += 1            
-            print
-            choice = raw_input("Choose your project number, leave blank to abort, 0 for another search.\nYour project number: ")
-
-        try:
-            choice = int(choice)
-            if choice in range(1, project_number):
-                project = launchpad.projects[project_names[choice - 1]]
-            else:
-                raise ValueError
-        except ValueError:
-            print _("No right number given, aborting.")
-            exit(1)
-        configurationhandler.config['lp_id'] = project.name
-        configurationhandler.saveConfig()
+        project = link_project(launchpad, "No Launchpad project set")
         
     return project
 
