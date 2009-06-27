@@ -84,7 +84,6 @@ subprocess.call(["bzr", "init"], cwd=project_name)
 subprocess.call(["bzr", "add"], cwd=project_name)
 subprocess.call(["bzr", "commit", "-m",    "initial project creation"], cwd=project_name)
 
-
 #run the new application
 print _("Launching a first demo")
 subprocess.call(["python", camel_case_name + "Window.py"], cwd=project_name + "/python/")
