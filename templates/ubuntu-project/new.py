@@ -49,6 +49,7 @@ substitutions = (("project_name",project_name),
             ("sentence_name",sentence_name),)
 
 
+#reate the files for glade to use
 quicklyutils.file_from_template(template_ui_dir, "camel_case_nameWindow.ui", target_ui_dir, substitutions)
 quicklyutils.file_from_template(template_ui_dir, "project_name_window.xml", target_ui_dir, substitutions)
 quicklyutils.file_from_template(template_ui_dir, "Aboutcamel_case_nameDialog.ui", target_ui_dir, substitutions)
@@ -56,32 +57,36 @@ quicklyutils.file_from_template(template_ui_dir, "about_project_name_dialog.xml"
 quicklyutils.file_from_template(template_ui_dir, "camel_case_namePreferencesDialog.ui", target_ui_dir, substitutions)
 quicklyutils.file_from_template(template_ui_dir, "project_name_preferences_dialog.xml", target_ui_dir, substitutions)
 
+#create the python directory and files
 template_python_dir = abs_path + "/python/"
 target_python_dir = project_name + "/python/"
 quicklyutils.file_from_template(template_python_dir, "camel_case_nameWindow.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "camel_case_namePreferencesDialog.py", target_python_dir, substitutions)
 
+#create the media directory, and copy the media
 template_media_dir = abs_path + "/media/"
 target_media_dir = project_name + "/media/"
 shutil.copytree(template_media_dir,target_media_dir)
 
+#coopy over the help
 template_help_dir = abs_path + "/help"
 target_help_dir = project_name + "/help"
 shutil.copytree(template_help_dir,target_help_dir)
 
-
-#(template_dir, template_file, target_dir, project_name, rename = False):
+#copy the executable file, set the mode to executable
 quicklyutils.file_from_template(abs_path,"/internal/project_name",project_name, substitutions)
+os.chmod(project_name + "/" + project_name, 0755)
 
+#add it to revision control
 print _("Creating bzr repository and commiting")
 subprocess.call(["bzr", "init"], cwd=project_name)
 subprocess.call(["bzr", "add"], cwd=project_name)
 subprocess.call(["bzr", "commit", "-m",    "initial project creation"], cwd=project_name)
 
-print _("Launching a first demo")
 
-#run the program
+#run the new application
+print _("Launching a first demo")
 subprocess.call(["python", camel_case_name + "Window.py"], cwd=project_name + "/python/")
 
 print _("Congrats, your new project is setup! cd %s to start hacking. Then '$quickly help' for quickly tutorial and reference") % project_name
