@@ -84,7 +84,7 @@ print _("Launching a first demo")
 #run the program
 subprocess.call(["python", camel_case_name + "Window.py"], cwd=project_name + "/python/")
 
-print _("Congrats, your new project is setup! You can now cd %s and start hacking.") % project_name
+print _("Congrats, your new project is setup! cd %s to start hacking. Then '$quickly help' for quickly tutorial and reference") % project_name
 
 sys.exit(0)
 
