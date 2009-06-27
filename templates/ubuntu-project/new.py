@@ -5,7 +5,7 @@ import sys
 import os
 import shutil
 import subprocess
-import quicklyutils
+import internal.quicklyutils as quicklyutils
 
 import gettext
 from gettext import gettext as _

@@ -1,6 +1,6 @@
 import os
 import sys
-import quicklyutils
+import internal.quicklyutils as quicklyutils
 
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)

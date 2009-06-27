@@ -46,15 +46,3 @@ def quickly(template, command_args):
     return 0
 
 
-def foo(template, args):
-    print "built-in foo"
-    return 0
-
-def pre_foo(template, args):
-    print "prefoo"
-    return 0
-
-def post_foo(template, args):
-    print "postfoo"
-    return 0
-
