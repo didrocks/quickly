@@ -18,6 +18,7 @@ Options:
                                project one
                                one used to create the project)
     --staging                  Target launchpad staging server
+    --verbose                  Verbose mode
     -h, --help                 Show help information
 
 Commands:
