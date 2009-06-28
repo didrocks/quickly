@@ -176,7 +176,7 @@ def process_command_line():
         if callable(commands_to_execute[opt_template]):
             return_code = commands_to_execute[opt_template](opt_template, opt_command[1:])
         else:
-            return_code = subprocess.call(["python", commands_to_execute[opt_template], " ".join(opt_command[1:])])
+            return_code = subprocess.call(["python", commands_to_execute[opt_template]] + opt_command[1:])
 
         if return_code != 0:
             print _("ERROR: %s command failed") % opt_command[0]

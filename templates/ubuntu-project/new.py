@@ -17,9 +17,8 @@ gettext.textdomain('quickly')
 #get the name of the project
 if len(sys.argv)< 2:
     print _("""
-ERROR: project name not defined. Usage is project_name
-Aborting""")
-    sys.exit(0)
+ERROR: project name not defined. Usage is project_name""")
+    sys.exit(1)
 
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)
