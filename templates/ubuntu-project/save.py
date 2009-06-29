@@ -15,27 +15,13 @@ sys.path.append(builtins_directory)
 import gettext
 from gettext import gettext as _
 
-from optparse import OptionParser
-import sys
-
-#set domain text
 gettext.textdomain('quickly')
 
-# parse entry parameter
-option_message = {'name': ('-m', '--message'), 'dest': 'commit_message',
-                  'help': _('Description of the new revision')}
+commit_msg = _('quickly saved')
 
-options = [option_message]
-parser = OptionParser()
-for option in options:
-    param = option['name']
-    del option['name']
-    parser.add_option(*param, **option)
-options, args = parser.parse_args()
+if len(sys.argv) > 1:
+ commit_msg = sys.argv[1]
 
-# commit!
-additional_bzr_option = ['-m', " ".join(args)]
-if options.commit_message:
-    additional_bzr_option = ['-m'] + [options.commit_message]
-subprocess.call(["bzr", "commit"] + additional_bzr_option)
+subprocess.call(["bzr", "add"])
+subprocess.call(["bzr", "commit", "-m" + commit_msg])
 
