@@ -89,7 +89,7 @@ def process_command_line():
         return 0
 
     opt_command = []
-    with_explicit_template = False
+    out_off_project_tree = False
     opt_has_template = False
     argv = sys.argv
     i = 1
@@ -115,14 +115,14 @@ def process_command_line():
             return 0
         else:
             if arg == 'new' or arg == 'quickly':
-                with_explicit_template = True
+                out_off_project_tree = True
             opt_command.append(arg)
         i += 1
 
-    #if processing command with explicit template, template argument and project name
-    #must be there (with -t, --template or just following the command): new, quickly
+    # if processing a "out_off_project_tree command", we need an explicit template, template argument
+    # and project name must be there (with -t, --template or just following the command): new, quickly
 
-    if with_explicit_template:
+    if out_off_project_tree:
         if not opt_has_template:
             if len(opt_command) < 3 or opt_command[1].startswith('-'):
                 print _("ERROR: %s command must be followed by a template and destination name" % opt_command[0])
@@ -136,8 +136,15 @@ def process_command_line():
 
         #in every cases, the project name is now in first position.
         project_name = opt_command[1]
-    # the config file already exist, load it.
+        project_dir = os.path.abspath(os.getcwd() + '/' + project_name)
+
+    # the config file already exist, get project path and load configuration.
     else:
+        try:
+            project_dir = tools.get_root_project_path()
+        except tools.project_path_not_found:
+            print _("ERROR: Can't find project in %s.\nEnsure you launch this command from a quicklyproject directory.") % os.getcwd()
+            sys.exit(1)        
         configurationhandler.loadConfig()
 
     #if no template provided, guess it from the current tree
@@ -153,39 +160,39 @@ def process_command_line():
     # get the template path
     template_path = tools.get_template_directory(opt_template)
 
-    #ensure the command exists
+    # ensure the command exists
     if not opt_command:
         print _("ERROR: No command found")
         print _("Aborting")
         usage()
         return 1     
 
-    #else, execute the commands
+    # else, execute the commands
     else:
         commands_to_execute = check_this_command(opt_command[0], template_path, opt_template)
         return_code = 0
-        #pre-hook
+        # pre-hook
         if 'pre' in commands_to_execute:
-            return_code = commands_to_execute['pre'](opt_template, opt_command[1:])
+            return_code = commands_to_execute['pre'](opt_template, project_dir, opt_command[1:])
         if return_code != 0:
             print _("ERROR: pre_%s command failed") % opt_command[0]
             print _("Aborting")
             return return_code
 
-        #main execution
+        # main execution
         if callable(commands_to_execute[opt_template]):
-            return_code = commands_to_execute[opt_template](opt_template, opt_command[1:])
+            return_code = commands_to_execute[opt_template](opt_template, project_dir, opt_command[1:])
         else:
-            return_code = subprocess.call(["python", commands_to_execute[opt_template]] + opt_command[1:])
+            return_code = subprocess.call(["python", commands_to_execute[opt_template]] + opt_command[1:], cwd=project_dir)
 
         if return_code != 0:
             print _("ERROR: %s command failed") % opt_command[0]
             print _("Aborting")
             return return_code
 
-        #post-hook
+        # post-hook
         if 'post' in commands_to_execute:
-             commands_to_execute['post'](opt_template, opt_command[1:])
+             commands_to_execute['post'](opt_template, project_dir, opt_command[1:])
         if return_code != 0:
             print _("ERROR: post_%s command failed") % opt_command[0]
             print _("Aborting")
@@ -197,5 +204,5 @@ if __name__ == '__main__':
 
     gettext.textdomain('quickly')
 
-    #process the command line to send the right instructions
+    # process the command line to send the right instructions
     exit(process_command_line())
