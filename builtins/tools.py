@@ -5,6 +5,8 @@ import sys
 import gettext
 from gettext import gettext as _
 
+class project_path_not_found(Exception):
+    pass
 
 def get_template_directories():
     '''Retreive all directories where quickly templates are
@@ -48,4 +50,27 @@ def get_template_directory(template):
         exit(1)
 
     return template_path
+
+
+def get_root_project_path(config_file_path=None):
+    '''Try to guess where the .quickly config file is.
     
+    config_file_path is optional (needed by the new command, for instance).
+    getcwd() is taken by default.
+    If nothing found, try to find it up to 6 parent directory
+    
+    :return project_path. Raise a project_path_not_found elsewhere.
+    '''
+
+    if config_file_path is None:
+        current_path = os.getcwd()
+    else:
+        current_path = config_file_path
+
+    for related_directory in ('./', './', '../', '../../', '../../../', '../../../../', '../../../../../', '../../../../../../'):
+        quickly_file_path = os.path.abspath(current_path + '/' + related_directory)
+        quickly_file = quickly_file_path + "/.quickly"
+        if os.path.isfile(quickly_file):
+            return quickly_file_path
+    raise project_path_not_found()
+

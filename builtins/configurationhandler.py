@@ -1,47 +1,22 @@
 import os
 import sys
-import ConfigParser
+import tools
 
 import gettext
 from gettext import gettext as _
 
 config = {}
 
-def check_config_file(config_file_path=None):
-    '''Try to guess where the .quickly config file is.
-    
-    config_file_path is optional (needed by the new command, for instance).
-    getcwd() is taken by default.
-    
-    If nothing found, try to find it up to 4 parent directory
-    '''
-
-    if config_file_path is None:
-        current_path = os.getcwd()
-    else:
-        current_path = config_file_path
-
-    for related_directory in ('./', './', '../', '../../', '../../../', '../../../../'):
-        quickly_file_path = os.path.abspath(current_path + '/' + related_directory + ".quickly")
-        if os.path.isfile(quickly_file_path):
-            return quickly_file_path
-    return ""
-        
-    
-#project-name=
-#template=
-#project-lp-id=
-
 
 def loadConfig():
     """ load configuration from quickly_file_path"""
-
+    dir(tools)
     # retrieve .quickly file
-    quickly_file_path = check_config_file()
-    # if no .quickly, create it in cwd
-    if not quickly_file_path:
+    try:
+        quickly_file_path = tools.get_root_project_path()  + '/.quickly'
+    except tools.project_path_not_found:
         print _("ERROR: Can't load configuration in current path or its parent ones.")
-        return 1    
+        sys.exit(1)
         
     try:
         fileconfig = file(quickly_file_path, 'rb')
@@ -54,7 +29,7 @@ def loadConfig():
         fileconfig.close()
     except (OSError, IOError), e:
         print _("ERROR: Can't load configuration in %s: %s" % (quickly_file_path, e))
-        return 1
+        sys.exit(1)
 
 
 def saveConfig(config_file_path=None):
@@ -66,15 +41,15 @@ def saveConfig(config_file_path=None):
     keep commentaries and layout from original file """
 
     # retrieve .quickly file
-    quickly_file_path = check_config_file(config_file_path)
-    
+    try:
+        quickly_file_path = tools.get_root_project_path(config_file_path) + '/.quickly'
     # if no .quickly, create it using config_file_path or cwd
-    if not quickly_file_path:
+    except tools.project_path_not_found:
         if config_file_path is not None:
             quickly_file_path = os.path.abspath(config_file_path) + '/.quickly'
         else:
             quickly_file_path = os.getcwd() + "/.quickly"
-        print _("ERROR: No .quickly file found. Initiate a new one")
+        print _("WARNING: No .quickly file found. Initiate a new one")
     
     try:
         filedest = file(quickly_file_path + '.swp', 'w')

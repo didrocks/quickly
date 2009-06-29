@@ -33,24 +33,9 @@ for option in options:
     parser.add_option(*param, **option)
 options, args = parser.parse_args()
 
-if len(args) < 1:
-    print _("""
-ERROR: Release command must have a release name""")
-    sys.exit(1)
-
-# connect to LP
-import launchpadaccess
-launchpad = launchpadaccess.initialize_lpi()
-
-# get the project
-launchpadaccess.get_project(launchpad)
-
-# commit and push !
-additional_bzr_option = ['-m', _('Releasing %s') % " ".join(args)]
+# commit!
+additional_bzr_option = ['-m', " ".join(args)]
 if options.commit_message:
     additional_bzr_option = ['-m'] + [options.commit_message]
 subprocess.call(["bzr", "commit"] + additional_bzr_option)
 
-subprocess.call(["bzr", "tag"] + [" ".join(args)])
-
-# now pull and push, but wait for staging to work again.

@@ -7,7 +7,7 @@ import tools
 import gettext
 from gettext import gettext as _
 
-def pre_new(template, command_args):
+def pre_new(template, project_dir, command_args):
     '''Create the project directory before new command call'''
 
     project_name = command_args[0]
@@ -26,7 +26,7 @@ def pre_new(template, command_args):
 
     return 0
 
-def quickly(template, command_args):
+def quickly(template, project_dir, command_args):
     ''' Create a new quickly template from an existing one'''
 
     destination_path = os.path.expanduser("~/.quickly-data/templates/")

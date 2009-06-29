@@ -1,6 +1,13 @@
 import os
 import string 
+import sys
 
+import gettext
+from gettext import gettext as _
+
+
+#set domain text
+gettext.textdomain('quickly')
 
 def quickly_name(name):
     name = name.lower()

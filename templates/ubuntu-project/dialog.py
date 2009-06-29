@@ -12,8 +12,8 @@ dialog_name = quicklyutils.quickly_name(sys.argv[1])
 
 template_ui_dir = abs_path + "/ui/"
 template_python_dir = abs_path + "/python/"
-target_ui_dir = "ui/"
-target_python_dir = "python/"
+target_ui_dir = "ui"
+target_python_dir = "python"
 
 dialog_sentence_name, dialog_camel_case_name = quicklyutils.conventional_names(dialog_name)
 project_sentence_name, project_camel_case_name = quicklyutils.conventional_names(project_name)
