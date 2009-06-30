@@ -16,15 +16,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 #set either a default message or the specified message
-commit_msg = ""
-if len(sys.argv) > 1:
- i = 1
- while i < len(sys.argv):
-  if i > 1:
-   commit_msg += " "
-  commit_msg += sys.argv[i]
-  i += 1
-
+commit_msg = " ".join(sys.argv[2:])
 if commit_msg == "":
  commit_msg = _('quickly saved')
 
