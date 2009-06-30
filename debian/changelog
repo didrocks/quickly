@@ -1,3 +1,12 @@
+quickly (0.0-0ubuntu2) karmic; urgency=low
+
+  * New release
+  * debian/control:
+    - quickly recommends python-launchpadlib, bzr
+    - quickly-ubuntu-templates depends on python-couchdb, python-gtk2, glade
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Tue, 30 Jun 2009 17:34:06 +1000
+
 quickly (0.0-0ubuntu1~dooz1) karmic; urgency=low
 
   * Initial release.

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from builtins import commands, configurationhandler, tools, launchpadaccess
 import os
 import sys
 import subprocess
-
 import gettext
 from gettext import gettext as _
+
+from builtins import commands, configurationhandler, tools, launchpadaccess
 
 def usage():
     print _("""Usage:

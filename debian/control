@@ -10,8 +10,11 @@ Homepage: https://launchpad.net/quickly
 
 Package: quickly
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}
-Recommends: quickly-ubuntu-templates | quickly-templates
+Depends: ${misc:Depends},
+         ${python:Depends}
+Recommends: quickly-ubuntu-templates | quickly-templates,
+            python-launchpadlib,
+            bzr
 Description: build new Ubuntu apps quickly
  Quickly enables for prospective programmer a way to build easily new
  apps for Ubuntu based on templates and other systems for helping them
@@ -21,8 +24,11 @@ Description: build new Ubuntu apps quickly
 Package: quickly-ubuntu-templates
 Architecture: all
 Provides: quickly-templates
-Depends: ${misc:Depends}, ${python:Depends}
-Recommends: python-gtk2, glade-gnome
+Depends: ${misc:Depends},
+         ${python:Depends},
+         python-gtk2,
+         glade,
+	 python-couchdb
 Description: templates for Quickly Ubuntu projects
  Quickly enables for prospective programmer a way to build easily new
  apps for Ubuntu.
