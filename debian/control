@@ -28,7 +28,9 @@ Depends: ${misc:Depends},
          ${python:Depends},
          python-gtk2,
          glade,
-	 python-couchdb
+         python-couchdb,
+         python-launchpadlib,
+         bzr
 Description: templates for Quickly Ubuntu projects
  Quickly enables for prospective programmer a way to build easily new
  apps for Ubuntu.
