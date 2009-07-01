@@ -3,14 +3,18 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-requires project_name_window 1.0 -->
   <!-- interface-naming-policy project-wide -->
+  <!-- interface-local-resource-path /home/rick/quickly/templates/ubuntu-project/media -->
   <object class="camel_case_nameWindow" id="project_name_window">
-    <property name="width_request">550</property>
-    <property name="height_request">400</property>
+    <property name="width_request">6000</property>
+    <property name="height_request">450</property>
+    <property name="title" translatable="yes">sentence_name</property>
+    <property name="icon">../media/icon.png</property>
     <signal name="destroy" handler="on_destroy"/>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">5</property>
         <child>
           <object class="GtkMenuBar" id="menubar1">
             <property name="visible">True</property>
@@ -171,7 +175,7 @@
             <property name="visible">True</property>
             <property name="xpad">5</property>
             <property name="ypad">5</property>
-            <property name="label" translatable="yes">Welcome to your application. To get started changing your user interface, double click on the glade file ui/project_name_window.ui. To start changing the behavior, edit the python code in python/cam_case_nameWindow.py.</property>
+            <property name="label" translatable="yes">Welcome to your application. To get started changing your user interface, double click on the glade file ui/project_name_window.ui. To start changing the behavior, edit the python code in python/camel_case_nameWindow.py.</property>
             <property name="wrap">True</property>
           </object>
           <packing>
@@ -186,6 +190,7 @@
             <property name="pixbuf">../media/background.png</property>
           </object>
           <packing>
+            <property name="padding">15</property>
             <property name="position">2</property>
           </packing>
         </child>
