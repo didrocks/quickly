@@ -51,6 +51,7 @@ def initialize_lpi():
     if lp_server == "staging":
         lp_cred = lp_cred_dir + "quickly-cred-staging"
         SERVICE_ROOT = STAGING_SERVICE_ROOT
+        print _("WARNING: you are using staging and not launchpad real production server")
     else:
         lp_cred = lp_cred_dir + "quickly-cred"
         SERVICE_ROOT = EDGE_SERVICE_ROOT
@@ -64,7 +65,7 @@ def initialize_lpi():
         lp_cred_file.close()
         launchpad = Launchpad(credentials, SERVICE_ROOT, lp_cache_dir)
     except IOError:
-        print _("Initial Launchpad binding")
+        print _('Initial Launchpad binding. You must choose "Change Anything"')
         launchpad = Launchpad.get_token_and_login('quickly', SERVICE_ROOT, lp_cache_dir)
         lp_cred_file = open(lp_cred, 'w')
         launchpad.credentials.save(lp_cred_file)
@@ -72,7 +73,7 @@ def initialize_lpi():
 
         # try to setup bzr
         me = launchpad.me
-        bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email)        
+        bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email, me.name)        
 
     if launchpad is None:
         if suggestion is None:
