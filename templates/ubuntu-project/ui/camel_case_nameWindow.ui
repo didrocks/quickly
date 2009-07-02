@@ -5,7 +5,7 @@
   <!-- interface-naming-policy project-wide -->
   <!-- interface-local-resource-path /home/rick/quickly/templates/ubuntu-project/media -->
   <object class="camel_case_nameWindow" id="project_name_window">
-    <property name="width_request">6000</property>
+    <property name="width_request">600</property>
     <property name="height_request">450</property>
     <property name="title" translatable="yes">sentence_name</property>
     <property name="icon">../media/icon.png</property>
