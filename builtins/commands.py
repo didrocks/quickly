@@ -45,4 +45,15 @@ def quickly(template, project_dir, command_args):
     shutil.copytree(tools.get_template_directory(template), template_destination_path)
     return 0
 
+def start(template, project_dir, command_args):
+    print _('''-------------------------------
+    Welcome to quickly!
+-------------------------------
 
+You can create a project in executing 'quickly new <template_name> <your project>'.
+
+Example:
+$ quickly new ubuntu-project my_awesome_project
+
+Have Fun!''')
+    return 0

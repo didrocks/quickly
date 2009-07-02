@@ -92,7 +92,7 @@ print _("Launching a first demo")
 subprocess.call(["./" + project_name])
 
 
-print _("Congrats, your new project is setup! cd %s to start hacking. Then '$quickly help' for quickly tutorial and reference") % project_name
+print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$quickly help' for quickly tutorial and reference") % project_name
 
 sys.exit(0)
 

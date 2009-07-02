@@ -175,7 +175,7 @@
             <property name="visible">True</property>
             <property name="xpad">5</property>
             <property name="ypad">5</property>
-            <property name="label" translatable="yes">Welcome to your application. To get started changing your user interface, double click on the glade file ui/project_name_window.ui. To start changing the behavior, edit the python code in python/camel_case_nameWindow.py.</property>
+            <property name="label" translatable="yes">Welcome to your application. To get started changing your user interface, execute within your project quickly glade to open ui/project_name_window.ui. To start changing the behavior, edit the python code in executin quickly edit to change python/camel_case_nameWindow.py.</property>
             <property name="wrap">True</property>
           </object>
           <packing>

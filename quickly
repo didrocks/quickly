@@ -23,7 +23,8 @@ Options:
 
 Commands:
     new <template> <project-name> (template is mandatory for this command)
-    push <describe your changes>
+    quickly <template_origin> <template_dest> to create a new derived template
+    start to get some starting hints
 
 Examples:
     quickly new ubuntu-project foobar
@@ -89,8 +90,9 @@ def process_command_line():
         return 0
 
     opt_command = []
-    out_off_project_tree = False
+    out_off_project_tree_command = False
     opt_has_template = False
+    need_template = True
     argv = sys.argv
     i = 1
 
@@ -115,90 +117,100 @@ def process_command_line():
             return 0
         else:
             if arg == 'new' or arg == 'quickly':
-                out_off_project_tree = True
+                out_off_project_tree_command = True
+            elif arg == 'start':
+                out_off_project_tree_command = True
+                need_template = False
             opt_command.append(arg)
         i += 1
-
-    # if processing a "out_off_project_tree command", we need an explicit template, template argument
-    # and project name must be there (with -t, --template or just following the command): new, quickly
-
-    if out_off_project_tree:
-        if not opt_has_template:
-            if len(opt_command) < 3 or opt_command[1].startswith('-'):
-                print _("ERROR: %s command must be followed by a template and destination name" % opt_command[0])
-                print _("Aborting")
-                usage()
-                return 1
-            else:
-                opt_template = opt_command[1]
-                opt_command.remove(opt_command[1])
-                opt_has_template = True
-
-        #in every cases, the project name is now in first position.
-        project_name = opt_command[1]
-        project_dir = os.path.abspath(os.getcwd() + '/' + project_name)
-
-    # the config file already exist, get project path and load configuration.
-    else:
-        try:
-            project_dir = tools.get_root_project_path()
-        except tools.project_path_not_found:
-            print _("ERROR: Can't find project in %s.\nEnsure you launch this command from a quicklyproject directory.") % os.getcwd()
-            sys.exit(1)        
-        configurationhandler.loadConfig()
-
-    #if no template provided, guess it from the current tree
-    if not opt_has_template:
-        try:
-            opt_template = configurationhandler.config['template']
-        except KeyError:
-            print _("ERROR: No template provided and none found in the current tree. Ensure you " \
-                        "don't want to create a new project or that your are in your directory project.")
-            print _("Aborting")
-            return 1
-
-    # get the template path
-    template_path = tools.get_template_directory(opt_template)
 
     # ensure the command exists
     if not opt_command:
         print _("ERROR: No command found")
         print _("Aborting")
         usage()
-        return 1     
+        return 1
 
-    # else, execute the commands
-    else:
-        commands_to_execute = check_this_command(opt_command[0], template_path, opt_template)
-        return_code = 0
-        # pre-hook
-        if 'pre' in commands_to_execute:
-            return_code = commands_to_execute['pre'](opt_template, project_dir, opt_command[1:])
-        if return_code != 0:
-            print _("ERROR: pre_%s command failed") % opt_command[0]
-            print _("Aborting")
-            return return_code
+    # get the template if needed
+    if need_template:
+        # if processing a "out_off_project_tree_command", template argument
+        # and project name must be there (with -t, --template or just following the command): new, quickly
+        if out_off_project_tree_command:
+            if not opt_has_template:
+                if len(opt_command) < 3 or opt_command[1].startswith('-'):
+                    print _("ERROR: %s command must be followed by a template and destination name" % opt_command[0])
+                    print _("Aborting")
+                    usage()
+                    return 1
+                else:
+                    opt_template = opt_command[1]
+                    opt_command.remove(opt_command[1])
+                    opt_has_template = True
 
-        # main execution
-        if callable(commands_to_execute[opt_template]):
-            return_code = commands_to_execute[opt_template](opt_template, project_dir, opt_command[1:])
+            #in every cases, the project name is now in first position.
+            project_name = opt_command[1]
+            project_dir = os.path.abspath(os.getcwd() + '/' + project_name)
+
+        # the config file already exist, get project path and load configuration.
         else:
-            return_code = subprocess.call(["python", commands_to_execute[opt_template]] + opt_command[1:], cwd=project_dir)
+            try:
+                project_dir = tools.get_root_project_path()
+            except tools.project_path_not_found:
+                print _("ERROR: Can't find project in %s.\nEnsure you launch this command from a quickly project directory.") % os.getcwd()
+                sys.exit(1)        
+            configurationhandler.loadConfig()
 
-        if return_code != 0:
-            print _("ERROR: %s command failed") % opt_command[0]
-            print _("Aborting")
-            return return_code
+        #if no template provided, guess it from the current tree
+        if not opt_has_template and need_template:
+            try:
+                opt_template = configurationhandler.config['template']
+            except KeyError:
+                print _("ERROR: No template provided and none found in the current tree. Ensure you " \
+                            "don't want to create a new project or that your are in your directory project.")
+                print _("Aborting")
+                return 1
 
-        # post-hook
-        if 'post' in commands_to_execute:
-             commands_to_execute['post'](opt_template, project_dir, opt_command[1:])
-        if return_code != 0:
-            print _("ERROR: post_%s command failed") % opt_command[0]
-            print _("Aborting")
-            return return_code
+        # get the template path
+        template_path = tools.get_template_directory(opt_template)   
 
-        return 0
+    # no template needed, empty them
+    else:
+        template_path = ''
+        opt_template = ''
+        project_dir = ''
+
+
+    # execute the command
+    commands_to_execute = check_this_command(opt_command[0], template_path, opt_template)
+    return_code = 0
+    # pre-hook
+    if 'pre' in commands_to_execute:
+        return_code = commands_to_execute['pre'](opt_template, project_dir, opt_command[1:])
+    if return_code != 0:
+        print _("ERROR: pre_%s command failed") % opt_command[0]
+        print _("Aborting")
+        return return_code
+
+    # main execution
+    if callable(commands_to_execute[opt_template]):
+        return_code = commands_to_execute[opt_template](opt_template, project_dir, opt_command[1:])
+    else:
+        return_code = subprocess.call(["python", commands_to_execute[opt_template]] + opt_command[1:], cwd=project_dir)
+
+    if return_code != 0:
+        print _("ERROR: %s command failed") % opt_command[0]
+        print _("Aborting")
+        return return_code
+
+    # post-hook
+    if 'post' in commands_to_execute:
+         commands_to_execute['post'](opt_template, project_dir, opt_command[1:])
+    if return_code != 0:
+        print _("ERROR: post_%s command failed") % opt_command[0]
+        print _("Aborting")
+        return return_code
+
+    return 0
 
 if __name__ == '__main__':
 
