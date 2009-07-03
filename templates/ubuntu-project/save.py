@@ -26,4 +26,4 @@ print commit_msg
 subprocess.call(["bzr", "add"])
 return_code = subprocess.call(["bzr", "commit", "-m" + commit_msg])
 
-return(return_code)
+sys.exit(return_code)
