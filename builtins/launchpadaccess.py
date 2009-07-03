@@ -115,7 +115,12 @@ def link_project(launchpad, question):
             print project.summary
             project_number += 1            
         print
-        choice = raw_input("Choose your project number, leave blank to abort, 0 for another search.\nYour project number: ")
+
+        if not list(prospective_projects):
+            message = _("No project found")
+        else:
+            message = _("Choose your project number")
+        choice = raw_input("%s, leave blank to abort, 0 for another search.\nYour choice: " % message)
 
     try:
         choice = int(choice)
