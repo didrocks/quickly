@@ -1,4 +1,4 @@
 import subprocess
 
-subprocess.Popen("gedit python/*.py", shell=True)
+subprocess.Popen("gnome-open python/*.py", shell=True)
 
