@@ -188,9 +188,10 @@ from couchdb.schema import Document
 <H4>Saving a document to Couchdb</H4>
 <P>A document in couch is essentially a python dictionary. So we can save the document to couch like this:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
-            db.create({"record_type":"super_text_doc","title":title, "text":text}) #create a new doc
+            rt = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+            db.create({"record_type": rt,"title":title, "text":text}) #create a new doc
 </TEXTAREA></DIV>
-The "record_type" field is not really required, but among other things, it makes it easy to fetch the documents later.
+The "record_type" field is not really required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.
 
 <H4>Check for a pre-existing note with the same title</H4>
 <P>Before we just write the new document though, we have to take note of the fact that couch will allow you to create as many documents as you want with the same title. We probably don't want this, so we we'll have to write a little code to check if there is already a document in couch with the same title, and if there is, update that document rather than create a new one.<P>
@@ -247,7 +248,8 @@ The "record_type" field is not really required, but among other things, it makes
             db[doc.id] = doc #overwrite the text for the doc
 
         else: 
-            db.create({"record_type":super_text_doc","title":title, "text":text}) #create a new doc
+            rt = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+            db.create({"record_type":rt,"title":title, "text":text}) #create a new doc
 </TEXTAREA></DIV>
 
 <P>Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</P>

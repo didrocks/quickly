@@ -46,7 +46,8 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
         """
         if self.__preferences == None: #the dialog is initializing
             #TODO: add prefernces to the self.__preferences dict
-            self.__preferences = {"record_type":"preference"}
+            rt = "http://wiki.ubuntu.com/QuicklyPreferences"
+            self.__preferences = {"record_type":rt}
 
             if self.db_name in self.server: #check for preferences already stored
                 db = self.server[self.db_name]
