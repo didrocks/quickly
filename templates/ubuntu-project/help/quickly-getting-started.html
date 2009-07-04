@@ -147,7 +147,6 @@ $sudo apt-get install couchdb python-couchdb
 <H4>Import the stuff you'll need from python-couchdb.</H4>
 <P>Add these import statements along with the other imports to the top of SuperTextWindow.py:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
-import SuperTextPreferencesDialog
 from couchdb.client import Server
 from couchdb.schema import Document
 </TEXTAREA></DIV>
@@ -189,8 +188,9 @@ from couchdb.schema import Document
 <H4>Saving a document to Couchdb</H4>
 <P>A document in couch is essentially a python dictionary. So we can save the document to couch like this:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
-            db.create({"title":title, "text":text}) #create a new doc
+            db.create({"record_type":"super_text_doc","title":title, "text":text}) #create a new doc
 </TEXTAREA></DIV>
+The "record_type" field is not really required, but among other things, it makes it easy to fetch the documents later.
 
 <H4>Check for a pre-existing note with the same title</H4>
 <P>Before we just write the new document though, we have to take note of the fact that couch will allow you to create as many documents as you want with the same title. We probably don't want this, so we we'll have to write a little code to check if there is already a document in couch with the same title, and if there is, update that document rather than create a new one.<P>
@@ -247,7 +247,7 @@ from couchdb.schema import Document
             db[doc.id] = doc #overwrite the text for the doc
 
         else: 
-            db.create({"title":title, "text":text}) #create a new doc
+            db.create({"record_type":super_text_doc","title":title, "text":text}) #create a new doc
 </TEXTAREA></DIV>
 
 <P>Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</P>

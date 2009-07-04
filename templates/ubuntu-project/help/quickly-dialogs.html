@@ -42,7 +42,7 @@ $quickly glade
 <DIV class="code"><TEXTAREA rows="2" cols="80">
     def get_title_text(self):
         return self.builder.get_object("entry1").get_text()
-</DIV></TEXTAREA>
+</TEXTAREA></DIV>
 <P>We don't need to write any code for the Ok and Cancel buttons, as they were automatically hooked up by quickly when it created the dialog.</P>
 <P>Before we go on to invoking the dialog, delete HBox from SuperTextWindow that holds the text entry and label, as we won't be needing those.</P>
 <IMG SRC="./images/glade19.png" ALT="text entry now deleted" />
@@ -61,7 +61,7 @@ $quickly glade
 Simply add the SaveDialog to your import statements at the top of the file:
 <DIV class="code"><TEXTAREA rows="1" cols="80">
 import SaveDialog
-</DIV></TEXTAREA>
+</TEXTAREA></DIV>
 
 <H2>Create an instance of the dialog and run it</H2>
 <P>When the user chooses Save, we want to open the SaveDialog and collect the title of the note from the user. So we need to modify our save_file function.</P>
@@ -69,13 +69,13 @@ import SaveDialog
 <P>To create an instance of the dialog, use the NewSaveDialog() function in the SaveDialog module. It's important that you don't create an instance of SaveDialog directly, as it won't have a chance to load up it's UI that way, and it won't work. So whenever you use a quickly dialog, do it like this:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
         saver = SaveDialog.NewSaveDialog()
-</DIV></TEXTAREA>
-
+</TEXTAREA></DIV>
+d
 <P>To make the dialog appear, simply use the run() method. However, we want to check the result, so we'll need to store that in a variable. After it runs, we want to collect the string from the user, like this:</P>
 <DIV class="code"><TEXTAREA rows="2" cols="80">
         result = saver.run()
         title = saver.get_title_text()
-</DIV></TEXTAREA>
+</TEXTAREA></DIV>
 
 <H2>Clean up the dialog</H2>
 <P>We need to tell the dialog to not show itself anymore. We could call saver.hide() to make it hide, but since we don't need it hanging around, we'll just destroy it. Before we go on, though, we need to ensure that the user actually wants to save, so if we didn't get the Ok result, we should just return out of the function:</P>
@@ -122,13 +122,11 @@ import SaveDialog
             db[doc.id] = doc #overwrite the text for the doc
 
         else: 
-            db.create({"title":title, "text":text}) #create a new doc:
+            db.create({"record_type":"super_text_doc","title":title, "text":text}) #create a new doc:
 </TEXTAREA></DIV>
 
 Now when we choose save, we get the SaveDialog instead:
 <IMG SRC="./images/application5.png" ALT="save file dialog works much better" />
-
-
 
 
 
@@ -200,6 +198,15 @@ Click the "Add" button. This will add a Column to the Treeview. In the right han
 <LI>Adding each title and document set to the list store</LI>
 </OL>
 
+<H4>Import CouchDB</H4>
+<P>As per usual, add the import functions.</P>
+<DIV class="code"><TEXTAREA rows="2" cols="80">
+from couchdb.client import Server
+from couchdb.schema import Document
+</TEXTAREA></DEV>
+
+
+
 <H4>Create the load_titles function</H4>
 <P>The function is going to be called by SuperTextWindow, which will pass in a reference to a couchdb database to use. So the function signature should be like this:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
@@ -210,7 +217,7 @@ Click the "Add" button. This will add a Column to the Treeview. In the right han
 <P>Next we ask couchdb for all of the titles and text that it has in the database. We tweak the javascript filter function to return title and text for each row before getting the results:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
         #get all the titles and text
-        filter = """function(doc) { emit(doc._id, [doc.title, doc.text]); }"""
+        filter = """function(doc) { if( doc.record_type == 'super_text_doc') {emit(doc._id, [doc.title, doc.text]); }}"""
         results = db.query(filter)
 </TEXTAREA></DIV>
 
@@ -229,7 +236,7 @@ Click the "Add" button. This will add a Column to the Treeview. In the right han
 <DIV class="code"><TEXTAREA rows="11" cols="80">
     def load_titles(self, db):
         #get all the titles and text
-        filter = """function(doc) { emit(doc._id, [doc.title, doc.text]); }"""
+        filter = """function(doc) { if( doc.record_type == 'super_text_doc') {emit(doc._id, [doc.title, doc.text]); }}"""
         results = db.query(filter)
 
         #put the results into the list store for the treeview
@@ -283,7 +290,7 @@ import OpenDialog
 </TEXTAREA></DIV>
 
 <H2>Create an instance of the dialog and run it</H2>
-<P>So now we're ready to call the dialog from the SuperTextWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</P>
+l<P>So now we're ready to call the dialog from the SuperTextWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
         opener = OpenDialog.NewOpenDialog()
         opener.load_titles(db)
@@ -308,7 +315,7 @@ import OpenDialog
         buff.set_text(text)
 </TEXTAREA></DIV>
 <P>That's all there is to it. So the whole open_file function looks like this:</P>
-<DIV class="code"><TEXTAREA rows="3" cols="80">
+<DIV class="code"><TEXTAREA rows="20f" cols="80">
     def open_file(self, widget, data=None):
         #get a handle to the database, or return if there isn't one yest
         if self.db_name in self.server:
@@ -340,5 +347,6 @@ import OpenDialog
 <LI>The OpenDialog should probably return when the user double clicks on an item in the list. Try connecting to the "select-cursor-row" signal on the TreeView, and calling self.response(gtk.RESPONSE_OK) in the handler.</LI>
 <LI>Perhaps the Ok button in the OpenDialog should be disabled if nothing is selected. Try setting the "sensitivity" in Glade, and the set_sensitive function for the Ok button.</LI>
 <LI>It would be more consistent for the Open and Close dialogs to have "Open" and "Close" for buttons instead of "Ok". You can set a different type in the properties window in Glade.</LI>
+<LI>Loading every document into the open dialog is probably a bit inefficient. Perhaps storing the document id and using that to retrieve the document would be a better implementation.</LI>
 </UL>
 </BODY>

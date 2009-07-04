@@ -31,7 +31,7 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
 
         #set up couchdb and the preference info
         self.server = Server('http://127.0.0.1:5984/')
-        self.db_name = "project_name_preferences"
+        self.db_name = "project_name"
         self.__preferences = None
         self.key = None
         self.__preferences = self.get_preferences()
@@ -46,7 +46,7 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
         """
         if self.__preferences == None: #the dialog is initializing
             #TODO: add prefernces to the self.__preferences dict
-            self.__preferences = {"preference1":"value1"}
+            self.__preferences = {"record_type":"preference"}
 
             if self.db_name in self.server: #check for preferences already stored
                 db = self.server[self.db_name]
@@ -72,7 +72,8 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
         results = db.query(filt)
         document_id = results.rows[0].key
         doc = db[document_id]
-        doc = self.__preferences
+        for k, v in self.__preferences.items():
+            doc[k] = v
         db[document_id] = doc
 
     def ok(self, widget, data=None):
@@ -81,7 +82,7 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
 
         """
         #make any updates to self.__preferences here
-        self.__preferences["preference1"] = "value2"
+        #self.__preferences["preference1"] = "value2"
         self.__save_preferences()
 
     def cancel(self, widget, data=None):
