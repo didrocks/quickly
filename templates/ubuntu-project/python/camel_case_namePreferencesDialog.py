@@ -34,8 +34,10 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
         self.db_name = "project_name"
         self.__preferences = None
         self.key = None
-        self.__preferences = self.get_preferences()
 
+        #set the record type and then initalize the preferences
+        self.record_type = "http://wiki.ubuntu.com/Quickly/RecordTypes/camel_case_name/Preferences"
+        self.__preferences = self.get_preferences()
         #TODO:code for other initialization actions should be added here
 
     def get_preferences(self):
@@ -46,12 +48,11 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
         """
         if self.__preferences == None: #the dialog is initializing
             #TODO: add prefernces to the self.__preferences dict
-            rt = "http://wiki.ubuntu.com/QuicklyPreferences"
-            self.__preferences = {"record_type":rt}
+            self.__preferences = {"record_type":self.record_type}
 
             if self.db_name in self.server: #check for preferences already stored
                 db = self.server[self.db_name]
-                filt = """function(doc) { emit(doc._id, doc); }"""
+                filt = "function(doc) { if(doc.record_type == '%s') {emit(doc._id, doc); }}" %self.record_type
                 results = db.query(filt)
             
                 if len(results) > 0: #there are preferences saved
