@@ -30,47 +30,49 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
         self.builder.connect_signals(self)
 
         #set up couchdb and the preference info
-        self.server = Server('http://127.0.0.1:5984/')
-        self.db_name = "project_name"
+        self.__server = Server('http://127.0.0.1:5984/')
+        self.__db_name = "project_name"
         self.__preferences = None
-        self.key = None
+        self.__key = None
 
         #set the record type and then initalize the preferences
-        self.record_type = "http://wiki.ubuntu.com/Quickly/RecordTypes/camel_case_name/Preferences"
+        self.__record_type = "http://wiki.ubuntu.com/Quickly/RecordTypes/camel_case_name/Preferences"
         self.__preferences = self.get_preferences()
         #TODO:code for other initialization actions should be added here
 
     def get_preferences(self):
         """get_preferences  -returns a dictionary object that contain
-        preferences for project_name."
+        preferences for project_name. Creates a couchdb record if
+        necessary.
 
 
         """
+
         if self.__preferences == None: #the dialog is initializing
             #TODO: add prefernces to the self.__preferences dict
-            self.__preferences = {"record_type":self.record_type}
+            self.__preferences = {"record_type":self.__record_type}
 
-            if self.db_name in self.server: #check for preferences already stored
-                db = self.server[self.db_name]
-                filt = "function(doc) { if(doc.record_type == '%s') {emit(doc._id, doc); }}" %self.record_type
+            if self.__db_name in self.__server: #check for preferences already stored
+                db = self.__server[self.__db_name]
+                filt = "function(doc) { if(doc.record_type == '%s') {emit(doc._id, doc); }}" %self.__record_type
                 results = db.query(filt)
             
                 if len(results) > 0: #there are preferences saved
                     self.__preferences = results.rows[0].value
-                    self.key = results.rows[0].key
+                    self.__key = results.rows[0].key
                 else: #there are no preferences saved
                     db.create(self.__preferences)
 
             else:#this is the first run, create db and preferences
-                db = self.server.create(self.db_name) 
+                db = self.__server.create(self.__db_name) 
                 db.create(self.__preferences)
 
         return self.__preferences
 
     
     def __save_preferences(self):
-        db = self.server[self.db_name]
-        filt = """function(doc) {if(doc.record_type == '%s') { emit(doc._id, doc); }}""" %self.record_type
+        db = self.__server[self.__db_name]
+        filt = """function(doc) {if(doc.record_type == '%s') { emit(doc._id, doc); }}""" %self.__record_type
         results = db.query(filt)
         document_id = results.rows[0].key
         doc = db[document_id]
