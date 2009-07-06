@@ -70,7 +70,7 @@ class camel_case_namePreferencesDialog(gtk.Dialog):
     
     def __save_preferences(self):
         db = self.server[self.db_name]
-        filt = """function(doc) { emit(doc._id, doc); }"""
+        filt = """function(doc) {if(doc.record_type == '%s') { emit(doc._id, doc); }}""" %self.record_type
         results = db.query(filt)
         document_id = results.rows[0].key
         doc = db[document_id]
