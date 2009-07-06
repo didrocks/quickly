@@ -62,6 +62,7 @@ target_python_dir = "python"
 quicklyutils.file_from_template(template_python_dir, "camel_case_nameWindow.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "camel_case_namePreferencesDialog.py", target_python_dir, substitutions)
+quicklyutils.file_from_template(template_python_dir, "__init__.py", target_python_dir)
 
 #create the media directory, and copy the media
 template_media_dir = abs_path + "/media/"
