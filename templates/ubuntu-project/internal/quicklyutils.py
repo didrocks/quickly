@@ -28,7 +28,7 @@ def conventional_names(name):
     camel_case_name = sentence_name.replace(" ","")
     return sentence_name, camel_case_name
 
-def file_from_template(template_dir, template_file, target_dir, substitutions, rename = True):
+def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
     target_file = os.path.basename(template_file) # to get only file name
     if rename:
         for s in substitutions:
