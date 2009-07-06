@@ -43,6 +43,8 @@ sentence_name, camel_case_name = quicklyutils.conventional_names(project_name)
 template_ui_dir = abs_path + "/ui/"
 target_ui_dir = "ui"
 
+print project_name
+
 substitutions = (("project_name",project_name),
             ("camel_case_name",camel_case_name),
             ("sentence_name",sentence_name),)
@@ -62,13 +64,15 @@ target_python_dir = "python"
 quicklyutils.file_from_template(template_python_dir, "camel_case_nameWindow.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "camel_case_namePreferencesDialog.py", target_python_dir, substitutions)
+
+#copy the files needed for packaging
+quicklyutils.file_from_template(abs_path, "/setup.py", "./", substitutions)
 quicklyutils.file_from_template(template_python_dir, "__init__.py", target_python_dir)
 
 #create the media directory, and copy the media
 template_media_dir = abs_path + "/media/"
 target_media_dir = "media"
 shutil.copytree(template_media_dir,target_media_dir)
-
 
 #copy over the help
 template_help_dir = abs_path + "/help"
