@@ -1,4 +1,5 @@
 import sys
+import os
 import gtk
 
 class dialog_camel_case_nameDialog(gtk.Dialog):
@@ -47,8 +48,17 @@ def Newdialog_camel_case_nameDialog():
     creating dialog_camel_case_nameDialog instance directly.
     
     """
+
+    #look for the ui file that describes the ui
+    if os.path.exists(os.path.join('ui', 'dialog_camel_case_nameDialog.ui')):
+        ui_filename = os.path.join('ui', 'dialog_camel_case_nameDialog.ui')
+    elif os.path.exists(os.path.join('/usr/share/project_name/', 'dialog_camel_case_nameDialog.ui')):
+        ui_filename = os.path.join('/usr/share/project_name/', 'dialog_camel_case_nameDialog.ui')
+    else:
+        ui_filename = None
+
     builder = gtk.Builder()
-    builder.add_from_file("../ui/dialog_camel_case_nameDialog.ui")    
+    builder.add_from_file(ui_filename)    
     dialog = builder.get_object("dialog_name_dialog")
     dialog.finish_initializing(builder)
     return dialog

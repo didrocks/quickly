@@ -1,4 +1,5 @@
 import sys
+import os
 import gtk
 
 class Aboutcamel_case_nameDialog(gtk.AboutDialog):
@@ -8,7 +9,7 @@ class Aboutcamel_case_nameDialog(gtk.AboutDialog):
         """__init__ - This function is typically not called directly.
         Creation of a Aboutcamel_case_nameDialog requires redeading the associated ui
         file and parsing the ui definition extrenally, 
-        and then calling camel_case_nameWindow.finish_initializing().
+        and then calling Aboutcamel_case_nameDialog.finish_initializing().
     
         Use the convenience function NewAboutcamel_case_nameDialog to create 
         NewAboutcamel_case_nameDialog objects.
@@ -34,8 +35,17 @@ def NewAboutcamel_case_nameDialog():
     creating a Aboutcamel_case_nameDialog instance directly.
     
     """
+
+    #look for the ui file that describes the ui
+    if os.path.exists(os.path.join('ui', 'Aboutcamel_case_nameDialog.ui')):
+        ui_filename = os.path.join('ui', 'Aboutcamel_case_nameDialog.ui')
+    elif os.path.exists(os.path.join('/usr/share/project_name/', 'Aboutcamel_case_nameDialog.ui')):
+        ui_filename = os.path.join('/usr/share/project_name/', 'Aboutcamel_case_nameDialog.ui')
+    else:
+        ui_filename = None
+
     builder = gtk.Builder()
-    builder.add_from_file("../ui/Aboutcamel_case_nameDialog.ui")    
+    builder.add_from_file(ui_filename)    
     dialog = builder.get_object("about_project_name_dialog")
     dialog.finish_initializing(builder)
     return dialog

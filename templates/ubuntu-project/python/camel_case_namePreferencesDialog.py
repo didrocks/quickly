@@ -1,4 +1,5 @@
 import sys
+import os
 import gtk
 from couchdb.client import Server
 from couchdb.schema import Document
@@ -103,8 +104,17 @@ def Newcamel_case_namePreferencesDialog():
     creating a Aboutcamel_case_nameDialog instance directly.
     
     """
+
+    #look for the ui file that describes the ui
+    if os.path.exists(os.path.join('ui', 'camel_case_namePreferencesDialog.ui')):
+        ui_filename = os.path.join('ui', 'camel_case_namePreferencesDialog.ui')
+    elif os.path.exists(os.path.join('/usr/share/project_name/', 'camel_case_namePreferencesDialog.ui')):
+        ui_filename = os.path.join('/usr/share/project_name/', 'camel_case_namePreferencesDialog.ui')
+    else:
+        ui_filename = None
+
     builder = gtk.Builder()
-    builder.add_from_file("../ui/camel_case_namePreferencesDialog.ui")    
+    builder.add_from_file(ui_filename)    
     dialog = builder.get_object("project_name_preferences_dialog")
     dialog.finish_initializing(builder)
     return dialog

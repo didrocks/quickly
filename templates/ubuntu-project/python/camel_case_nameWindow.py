@@ -69,6 +69,7 @@ def Newcamel_case_nameWindow():
     
     """
 
+    #look for the ui file that describes the ui
     if os.path.exists(os.path.join('ui', 'camel_case_nameWindow.ui')):
         ui_filename = os.path.join('ui', 'camel_case_nameWindow.ui')
     elif os.path.exists(os.path.join('/usr/share/project_name/', 'camel_case_nameWindow.ui')):
