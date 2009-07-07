@@ -1,4 +1,5 @@
 import sys
+import os
 import gtk
 import Aboutcamel_case_nameDialog
 import camel_case_namePreferencesDialog
@@ -67,8 +68,16 @@ def Newcamel_case_nameWindow():
     creating a camel_case_nameWindow directly.
     
     """
+
+    if os.path.exists(os.path.join('ui', 'camel_case_nameWindow.ui')):
+        ui_filename = os.path.join('ui', 'camel_case_nameWindow.ui')
+    elif os.path.exists(os.path.join('/usr/share/project_name/', 'camel_case_nameWindow.ui')):
+        ui_filename = os.path.join('/usr/share/project_name/', 'camel_case_nameWindow.ui')
+    else:
+        ui_filename = None
+
     builder = gtk.Builder()
-    builder.add_from_file("../ui/camel_case_nameWindow.ui")    
+    builder.add_from_file(ui_filename)    
     window = builder.get_object("project_name_window")
     window.finish_initializing(builder)
     return window

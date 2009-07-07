@@ -1,3 +1,2 @@
 #!/bin/bash
-cd python
-exec python camel_case_nameWindow.py
+exec python python/camel_case_nameWindow.py
