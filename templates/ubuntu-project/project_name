@@ -1,2 +1,102 @@
-#!/bin/bash
-exec python python/camel_case_nameWindow.py
+#!/usr/bin/python
+
+import sys
+import os
+import gtk
+
+# Check if we are working in the source tree or from the installed 
+# package and mangle the python path accordingly
+if os.path.dirname(sys.argv[0]) != ".":
+    if sys.argv[0][0] == "/":
+        fullPath = os.path.dirname(sys.argv[0])
+    else:
+        fullPath = os.getcwd() + "/" + os.path.dirname(sys.argv[0])
+else:
+    fullPath = os.getcwd()
+sys.path.insert(0, os.path.dirname(fullPath))
+from project_name import *
+
+class camel_case_nameWindow(gtk.Window):
+    __gtype_name__ = "camel_case_nameWindow"
+
+    def __init__(self):
+        """__init__ - This function is typically not called directly.
+        Creation a camel_case_nameWindow requires redeading the associated ui
+        file and parsing the ui definition extrenally, 
+        and then calling camel_case_nameWindow.finish_initializing().
+    
+        Use the convenience function Newcamel_case_nameWindow to create 
+        camel_case_nameWindow object.
+    
+        """
+        pass
+
+    def finish_initializing(self, builder):
+        """finish_initalizing should be called after parsing the ui definition
+        and creating a camel_case_nameWindow object with it in order to finish
+        initializing the start of the new camel_case_nameWindow instance.
+    
+        """
+        #get a reference to the builder and set up the signals
+        self.builder = builder
+        self.builder.connect_signals(self)
+        
+        #uncomment the following code to read in preferences at start up
+        #dlg = camel_case_namePreferencesDialog.Newcamel_case_namePreferencesDialog()
+        #self.preferences = dlg.get_preferences()
+
+        #code for other initialization actions should be added here
+
+    def about(self, widget, data=None):
+        """about - display the about box for what_the_heck """
+        about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
+        response = about.run()
+        about.hide()
+        about.destroy
+
+    def preferences(self, widget, data=None):
+        """about - display the preferences window for project_name """
+        prefs = camel_case_namePreferencesDialog.Newcamel_case_namePreferencesDialog()
+        response = prefs.run()
+        if response == gtk.RESPONSE_OK:
+            #make any updates based on changed preferences here            
+            pass
+        prefs.hide()
+        prefs.destroy
+
+    def quit(self, widget, data=None):
+        """quit - signal handler for closing the camel_case_nameWindow"""
+        self.destroy()
+
+    def on_destroy(self, widget, data=None):
+        """on_destroy - called when the camel_case_nameWindow is close. """
+        #clean up code for saving application state should be added here
+
+        gtk.main_quit()
+
+def Newcamel_case_nameWindow():
+    """Newcamel_case_nameWindow - returns a fully instantiated
+    camel_case_nameWindow object. Use this function rather than
+    creating a camel_case_nameWindow directly.
+    
+    """
+
+    #look for the ui file that describes the ui
+    if os.path.exists(os.path.join('ui', 'camel_case_nameWindow.ui')):
+        ui_filename = os.path.join('ui', 'camel_case_nameWindow.ui')
+    elif os.path.exists(os.path.join('/usr/share/project_name/', 'camel_case_nameWindow.ui')):
+        ui_filename = os.path.join('/usr/share/project_name/', 'camel_case_nameWindow.ui')
+    else:
+        ui_filename = None
+
+    builder = gtk.Builder()
+    builder.add_from_file(ui_filename)    
+    window = builder.get_object("project_name_window")
+    window.finish_initializing(builder)
+    return window
+
+if __name__ == "__main__":
+    window = Newcamel_case_nameWindow()
+    window.show()
+    gtk.main()
+

@@ -31,11 +31,15 @@ print _("Creating project directory %s") % ui_dir
 os.mkdir(ui_dir)
 print _("Directory %s created\n") % ui_dir
 
-python_dir = "python"
+python_dir = project_name
 print _("Creating project directory %s") % python_dir
 os.mkdir(python_dir)
 print _("Directory %s created\n") % python_dir
 
+bin_dir = "bin"
+print _("Creating project directory %s") % bin_dir
+os.mkdir(bin_dir)
+print _("Directory %s created\n") % bin_dir
 
 sentence_name, camel_case_name = quicklyutils.conventional_names(project_name)
 
@@ -60,8 +64,7 @@ quicklyutils.file_from_template(template_ui_dir, "project_name_preferences_dialo
 
 #create the python directory and files
 template_python_dir = abs_path + "/python/"
-target_python_dir = "python"
-quicklyutils.file_from_template(template_python_dir, "camel_case_nameWindow.py", target_python_dir, substitutions)
+target_python_dir = project_name
 quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "camel_case_namePreferencesDialog.py", target_python_dir, substitutions)
 
@@ -83,8 +86,8 @@ shutil.copytree(template_help_dir,target_help_dir)
 
 #def file_from_template(template_dir, template_file, target_dir, substitutions, rename = True):
 #copy the executable file, set the mode to executable
-quicklyutils.file_from_template(abs_path ,"/project_name",".", substitutions)
-os.chmod(project_name, 0755)
+quicklyutils.file_from_template(abs_path ,"/project_name","./bin/", substitutions)
+os.chmod("./bin/" + project_name, 0755)
 
 #add it to revision control
 print _("Creating bzr repository and commiting")
@@ -94,7 +97,7 @@ subprocess.call(["bzr", "commit", "-m", "Initial project creation"])
 
 #run the new application
 print _("Launching a first demo")
-subprocess.call(["./" + project_name])
+subprocess.call(["./bin/" + project_name])
 
 
 print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly help' for quickly tutorial and reference") % project_name
