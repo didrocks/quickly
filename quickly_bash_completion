@@ -1,0 +1,27 @@
+# -*- shell-script -*-
+
+# quickly bash completion inspired from bzr one (Martin Pool)
+# author: Didier Roche
+
+_quickly_call()
+{
+    # if current is empty, give it empty to quickly shell parser
+    if [ -z "${COMP_WORDS[COMP_CWORD]}" ] ; then
+        echo $(quickly shell-completion $* '')
+    else
+        echo $(quickly shell-completion $*)
+    fi
+}
+
+_quickly()
+{
+    cur=${COMP_WORDS[COMP_CWORD]}
+    #prev=${COMP_WORDS[COMP_CWORD-1]}
+    #echo "$(_quickly_call ${COMP_WORDS[*]})"a
+    #echo "current: "$cur
+    COMPREPLY=( $( compgen -W "$(_quickly_call ${COMP_WORDS[*]})" $cur ) )
+
+    return 0
+}
+complete -F _quickly -o default quickly
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
+import os, re
 import sys
 import subprocess
 import gettext
@@ -31,17 +31,64 @@ Examples:
     quickly push 'awesome new comment system'
     quickly -t cool-template push 'awesome new comment system'""")
 
-def look_for_commands(template_path=None):
-    """ seek for available commands
+def get_templates():
+    ''' get all available templates '''
 
-TEMPLATE direct…
-    template_path: where templates are located. None if we want to list all commands for all templates.
+def get_commands():
+    """ seek for available commands for shell completion
 
     : return tuples with list of available commands and origin (default or template)
     """
+    available_completion = []
 
-    if template_path is not None:
-        print _("in progress")
+    (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command) = process_command_line(sys.argv[3:])
+
+    # seek for template if exists
+    if not opt_template:
+        try:
+            project_dir = tools.get_root_project_path()
+            configurationhandler.loadConfig()
+            opt_template = configurationhandler.config['template']
+        except tools.project_path_not_found:
+            pass
+
+    # get available templates
+    if sys.argv[-2] in ("-t", "--template"):
+        for template_dir in tools.get_template_directories():
+                for template in os.listdir(template_dir):
+                    available_completion.append(os.path.basename(template))        
+
+    elif len(opt_command) > 1:
+        # if no template, check the new command for templates proposal or -t completion
+        if (("new" or "quickly") in opt_command and not opt_template):
+            for template_dir in tools.get_template_directories():
+                for template in os.listdir(template_dir):
+                    available_completion.append(os.path.basename(template))        
+
+    else:
+    
+    
+        # get the template path if exists
+        if opt_template:
+            template_path = tools.get_template_directory(opt_template)
+            files = []
+            for fullname in os.listdir(template_path):
+                files.append(os.path.basename(fullname))
+            
+            for found_file in files:
+                command = re.search('(.*)\.py$', found_file)
+                if command:
+                    available_completion.append(command.group(1))
+        
+        # builtins commands
+        not_real_commands = ['configurationhandler', 'gettext', 'os', 'shutil', 'tools']
+        commands_in_module = [ command for command in dir(commands) if not command.startswith('_') and not command.startswith('pre_') \
+                                                      and not command.startswith('post_') and not command in not_real_commands]
+        commands_in_module.append('new')
+        available_completion.extend(commands_in_module)
+        
+    print " ".join(available_completion)
+    sys.exit(0)
 
 
 def check_this_command(command_name, template_path, opt_template):
@@ -80,24 +127,28 @@ def check_this_command(command_name, template_path, opt_template):
     return commands_available
 
 
-def process_command_line():
+def process_command_line(argv):
     """ Entry point for command line processing
+    
+    use sys.argv by default if no args to parse
 
-    :return: exit code of quickly command.
+    :return: options
     """
-    if len(sys.argv) == 1:
-        usage()
-        return 0
 
     opt_command = []
+    opt_template = ''
     out_off_project_tree_command = False
     opt_has_template = False
     need_template = True
-    argv = sys.argv
-    i = 1
+    i = 0
+
+    if len(argv) == 0:
+        usage()
+        return 0
 
     while i < len(argv):
         arg = argv[i]
+
         if arg == '--template' or arg == '-t':
             opt_has_template = True
             opt_template = argv[i + 1]
@@ -123,6 +174,17 @@ def process_command_line():
                 need_template = False
             opt_command.append(arg)
         i += 1
+
+    return (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command)
+    
+    
+def main():
+    ''' Main ubuntu command line processor
+    
+    :return: exit code of quickly command.
+    '''
+    
+    (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command) = process_command_line(sys.argv[1:])
 
     # ensure the command exists
     if not opt_command:
@@ -217,4 +279,7 @@ if __name__ == '__main__':
     gettext.textdomain('quickly')
 
     # process the command line to send the right instructions
-    exit(process_command_line())
+    if 'shell-completion' in sys.argv:
+        get_commands()
+    else:
+        exit(main())
