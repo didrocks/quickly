@@ -6,7 +6,7 @@
   <!-- interface-local-resource-path /home/rick/quickly/templates/ubuntu-project/media -->
   <object class="camel_case_nameWindow" id="project_name_window">
     <property name="width_request">600</property>
-    <property name="height_request">450</property>
+    <property name="height_request">500</property>
     <property name="title" translatable="yes">sentence_name</property>
     <property name="icon">../media/icon.png</property>
     <signal name="destroy" handler="on_destroy"/>
@@ -175,7 +175,11 @@
             <property name="visible">True</property>
             <property name="xpad">5</property>
             <property name="ypad">5</property>
-            <property name="label" translatable="yes">Welcome to your application. To get started changing your user interface, execute within your project 'quickly glade' to open ui/project_name_window.ui. To start changing the behavior and editing the python code, execute 'quickly edit'.</property>
+            <property name="label" translatable="yes">Your application has been created!
+
+To start changing this user interface, run 'quickly glade', which will open the file 'ui/testmore_window.ui'.
+
+To change the behavior and edit the python code, run 'quickly edit', which will bring up a text editor.</property>
             <property name="wrap">True</property>
           </object>
           <packing>
