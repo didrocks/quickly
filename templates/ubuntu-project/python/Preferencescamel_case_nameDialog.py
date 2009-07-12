@@ -10,22 +10,22 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
 
     def __init__(self):
         """__init__ - This function is typically not called directly.
-        Creation of a camel_case_namePreferencesDialog requires redeading the associated ui
+        Creation of a Preferencescamel_case_nameDialog requires redeading the associated ui
         file and parsing the ui definition extrenally,
-        and then calling camel_case_namePreferencesDialog.finish_initializing().
+        and then calling Preferencescamel_case_nameDialog.finish_initializing().
 
         Use the convenience function NewPreferencescamel_case_nameDialog to create
         NewAboutcamel_case_nameDialog objects.
-
         """
+
         pass
 
     def finish_initializing(self, builder):
         """finish_initalizing should be called after parsing the ui definition
         and creating a Aboutcamel_case_nameDialog object with it in order to finish
         initializing the start of the new Aboutcamel_case_nameDialog instance.
-
         """
+
         #get a reference to the builder and set up the signals
         self.builder = builder
         self.builder.connect_signals(self)
@@ -101,6 +101,7 @@ def NewPreferencescamel_case_nameDialog():
     Preferencescamel_case_nameDialog object. Use this function rather than
     creating a Preferencescamel_case_nameDialog instance directly.
     """
+
     ui_file = 'Preferencescamel_case_nameDialog.ui'
     #look for the ui file that describes the ui
     if os.path.exists(os.path.join('ui', ui_file)):
@@ -111,7 +112,7 @@ def NewPreferencescamel_case_nameDialog():
         ui_filename = None
 
     builder = gtk.Builder()
-    builder.add_from_file(ui_filename)    
+    builder.add_from_file(ui_filename)
     dialog = builder.get_object("preferences_project_name_dialog")
     dialog.finish_initializing(builder)
     return dialog

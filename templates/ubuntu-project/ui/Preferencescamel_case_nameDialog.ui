@@ -3,7 +3,7 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-requires project_name_preferences_dialog 1.0 -->
   <!-- interface-naming-policy project-wide -->
-  <object class="camel_case_namePreferencesDialog" id="project_name_preferences_dialog">
+  <object class="Preferencescamel_case_nameDialog" id="preferences_project_name_dialog">
     <property name="border_width">5</property>
     <property name="icon">../media/icon.png</property>
     <property name="type_hint">normal</property>
