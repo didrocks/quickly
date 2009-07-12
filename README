@@ -39,7 +39,7 @@ You are now ready to start programming with quickly.
 HOW TO GET STARTED
 ------------------
 
-1.) Create a Ubuntu Project and run the tutorial:
+1) Create a Ubuntu Project and run the tutorial:
 $ quickly new ubuntu-project foo
 $ cd foo
 $ quickly help
