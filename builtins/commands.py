@@ -8,7 +8,7 @@ import gettext
 from gettext import gettext as _
 
 def pre_new(template, project_dir, command_args):
-    '''Create the project directory before new command call'''
+    """Create the project directory before new command call"""
 
     project_name = command_args[0]
     #bail if the name if taken
@@ -27,7 +27,7 @@ def pre_new(template, project_dir, command_args):
     return 0
 
 def quickly(template, project_dir, command_args):
-    ''' Create a new quickly template from an existing one'''
+    """Create a new quickly template from an existing one"""
 
     destination_path = os.path.expanduser("~/.quickly-data/templates/")
     # create ~/.quickly-data/templates/ if needed
@@ -38,7 +38,7 @@ def quickly(template, project_dir, command_args):
     if os.path.exists(template_destination_path):
         print _("%s already exists." % template_destination_path)
         return 1
-    
+
     if not os.path.exists(template_destination_path):
         print _("Copy %s to create new %s template") % (template, template_destination_path)
 
