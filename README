@@ -1,0 +1,69 @@
+QUICKLY
+=======
+
+Quickly is a set of choices about writing apps for Ubuntu. Out of all the
+wonderful richness and variety of programming for Linux, Quickly make some
+very opinionated choices about what tools to use, and how to combine them.
+The criteria for these choices was to make it easy and fun to write and
+release Linux applications, even if it's your first time trying, but also
+in a way that delivers the full power and flexibility of the platform.
+One benefit of these choices, is that it's also easier to write tools that
+make it even easier and more fun. So Quickly is also a set of commands.
+Currently there is only one template, for Ubuntu Projects.
+
+However, it is easy to create your own templates for other kinds of projects.
+So if you are a fan of language, you can create a foo-project template.
+Or if you want to help people making plugins for your killer app, you can
+make a killer-app-plugin template, etc...
+
+
+INSTALLING
+----------
+
+1) Install couchdb, python-couchdb, python launchpadlib and bzr
+$ sudo apt-get install couchdb python-couchdb python-launchpadlib bzr
+
+2) Get the latest version of quickly:
+$ bzr branch lp:quickly
+
+3) Check that Couch is running, go to:
+
+     http://localhost:5984/_utils/
+
+You may need to start couchdb:
+$ sudo couchdb
+
+You are now ready to start programming with quickly.
+
+
+HOW TO GET STARTED
+------------------
+
+1.) Create a Ubuntu Project and run the tutorial:
+$ quickly new ubuntu-project foo
+$ cd foo
+$ quickly help
+
+You can also try:
+$ quickly edit
+$ quickly glade
+
+How to play with package and release:
+If you are running Karmic:
+$ sudo apt-get install python-distutils-extra
+
+if you are running Jaunty (or earlier), get it from the PPA:
+https://launchpad.net/~pitti/+archive/ppa
+
+Then try:
+$ sudo quickly package (no implemented yet)
+$ sudo quickly release
+
+
+GETTING HELP
+------------
+
+Bugs and feature requests are tracked on Launchpad at:
+
+    https://bugs.launchpad.net/quickly
+
