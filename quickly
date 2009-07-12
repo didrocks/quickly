@@ -12,7 +12,7 @@ from builtins import commands, configurationhandler, tools, launchpadaccess
 def usage():
     print _("""Usage:
     quickly [OPTIONS] command ...
-    
+
 Options:
     -t, --template <template>  Template to use if it differs from default
                                project one
@@ -32,7 +32,7 @@ Examples:
     quickly -t cool-template push 'awesome new comment system'""")
 
 def get_templates():
-    ''' get all available templates '''
+    """ get all available templates """
 
 def get_commands():
     """ seek for available commands for shell completion
@@ -56,37 +56,35 @@ def get_commands():
     if sys.argv[-2] in ("-t", "--template"):
         for template_dir in tools.get_template_directories():
                 for template in os.listdir(template_dir):
-                    available_completion.append(os.path.basename(template))        
+                    available_completion.append(os.path.basename(template))
 
     elif len(opt_command) > 1:
         # if no template, check the new command for templates proposal or -t completion
         if (("new" or "quickly") in opt_command and not opt_template):
             for template_dir in tools.get_template_directories():
                 for template in os.listdir(template_dir):
-                    available_completion.append(os.path.basename(template))        
-
+                    available_completion.append(os.path.basename(template))
     else:
-    
-    
         # get the template path if exists
         if opt_template:
             template_path = tools.get_template_directory(opt_template)
             files = []
             for fullname in os.listdir(template_path):
                 files.append(os.path.basename(fullname))
-            
+
             for found_file in files:
                 command = re.search('(.*)\.py$', found_file)
                 if command:
                     available_completion.append(command.group(1))
-        
+
         # builtins commands
-        not_real_commands = ['configurationhandler', 'gettext', 'os', 'shutil', 'tools']
+        not_real_commands = ['configurationhandler', 'gettext',
+                             'os', 'shutil', 'tools']
         commands_in_module = [ command for command in dir(commands) if not command.startswith('_') and not command.startswith('pre_') \
                                                       and not command.startswith('post_') and not command in not_real_commands]
         commands_in_module.append('new')
         available_completion.extend(commands_in_module)
-        
+
     print " ".join(available_completion)
     sys.exit(0)
 
@@ -117,7 +115,7 @@ def check_this_command(command_name, template_path, opt_template):
         else:
             print _("ERROR: command '%s' in '%s' not found.") % (command_name, opt_template)
             print _("Aborting")
-            exit(1)        
+            exit(1)
 
     #check for pre-post built-in commands
     for hook in ("pre", "post"):
@@ -129,7 +127,7 @@ def check_this_command(command_name, template_path, opt_template):
 
 def process_command_line(argv):
     """ Entry point for command line processing
-    
+
     use sys.argv by default if no args to parse
 
     :return: options
@@ -176,14 +174,14 @@ def process_command_line(argv):
         i += 1
 
     return (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command)
-    
-    
+
+
 def main():
     ''' Main ubuntu command line processor
-    
+
     :return: exit code of quickly command.
     '''
-    
+
     (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command) = process_command_line(sys.argv[1:])
 
     # ensure the command exists
@@ -218,8 +216,9 @@ def main():
             try:
                 project_dir = tools.get_root_project_path()
             except tools.project_path_not_found:
-                print _("ERROR: Can't find project in %s.\nEnsure you launch this command from a quickly project directory.") % os.getcwd()
-                sys.exit(1)        
+                print _("ERROR: Can't find project in %s.\nEnsure you launch " \
+                        "this command from a quickly project directory.") % os.getcwd()
+                sys.exit(1)
             configurationhandler.loadConfig()
 
         #if no template provided, guess it from the current tree
@@ -233,7 +232,7 @@ def main():
                 return 1
 
         # get the template path
-        template_path = tools.get_template_directory(opt_template)   
+        template_path = tools.get_template_directory(opt_template)
 
     # no template needed, empty them
     else:
