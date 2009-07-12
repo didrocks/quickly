@@ -15,7 +15,7 @@ else:
     fullPath = os.getcwd()
 sys.path.insert(0, os.path.dirname(fullPath))
 
-from project_name import Aboutcamel_case_nameDialog, camel_case_namePreferencesDialog
+from project_name import Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog
 
 class camel_case_nameWindow(gtk.Window):
     __gtype_name__ = "camel_case_nameWindow"
@@ -57,7 +57,7 @@ class camel_case_nameWindow(gtk.Window):
 
     def preferences(self, widget, data=None):
         """preferences - display the preferences window for project_name """
-        prefs = camel_case_namePreferencesDialog.Newcamel_case_namePreferencesDialog()
+        prefs = Preferencescamel_case_nameDialog.NewPreferencescamel_case_nameDialog()
         response = prefs.run()
         if response == gtk.RESPONSE_OK:
             #make any updates based on changed preferences here
