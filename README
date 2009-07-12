@@ -26,7 +26,11 @@ $ sudo apt-get install couchdb python-couchdb python-launchpadlib bzr
 2) Get the latest version of quickly:
 $ bzr branch lp:quickly
 
-3) Check that Couch is running, go to:
+3) Install quickly on you system:
+$ cd quickly
+$ sudo make install
+
+4) Check that Couch is running, go to:
 
      http://localhost:5984/_utils/
 
