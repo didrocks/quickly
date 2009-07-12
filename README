@@ -48,15 +48,19 @@ You can also try:
 $ quickly edit
 $ quickly glade
 
-How to play with package and release:
-If you are running Karmic:
+
+PLAYING WITH PACKAGE AND RELEASE
+--------------------------------
+
+If you are running Ubuntu Karmic 9.10:
 $ sudo apt-get install python-distutils-extra
 
-if you are running Jaunty (or earlier), get it from the PPA:
-https://launchpad.net/~pitti/+archive/ppa
+if you are running Jaunty 9.04 (or earlier), get it from the PPA:
+
+    https://launchpad.net/~pitti/+archive/ppa
 
 Then try:
-$ sudo quickly package (no implemented yet)
+$ sudo quickly package (not implemented yet)
 $ sudo quickly release
 
 
