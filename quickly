@@ -172,7 +172,8 @@ def process_command_line(argv):
             opt_command.append(arg)
         i += 1
 
-    return (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command)
+    return (opt_command, need_template, opt_has_template, opt_template,
+             out_off_project_tree_command)
 
 
 def main():
