@@ -14,7 +14,8 @@ if os.path.dirname(sys.argv[0]) != ".":
 else:
     fullPath = os.getcwd()
 sys.path.insert(0, os.path.dirname(fullPath))
-from project_name import *
+
+from project_name import Aboutcamel_case_nameDialog, camel_case_namePreferencesDialog
 
 class camel_case_nameWindow(gtk.Window):
     __gtype_name__ = "camel_case_nameWindow"
