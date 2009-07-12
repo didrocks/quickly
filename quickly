@@ -163,7 +163,6 @@ def process_command_line(argv):
             os.environ['QUICKLY'] = "verbose " + oldenv
         elif arg == '--help' or arg == '-h':
             usage()
-            return 0
         else:
             if arg == 'new' or arg == 'quickly':
                 out_off_project_tree_command = True
@@ -177,12 +176,13 @@ def process_command_line(argv):
 
 
 def main():
-    ''' Main ubuntu command line processor
+    """ Main ubuntu command line processor
 
     :return: exit code of quickly command.
-    '''
+    """
 
-    (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command) = process_command_line(sys.argv[1:])
+    (opt_command, need_template, opt_has_template, opt_template,
+      out_off_project_tree_command) = process_command_line(sys.argv[1:])
 
     # ensure the command exists
     if not opt_command:
