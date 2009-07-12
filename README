@@ -20,8 +20,8 @@ make a killer-app-plugin template, etc...
 INSTALLING
 ----------
 
-1) Install couchdb, python-couchdb, python launchpadlib and bzr
-$ sudo apt-get install couchdb python-couchdb python-launchpadlib bzr
+1) Install couchdb, python-couchdb, python-launchpadlib, glade and bzr
+$ sudo apt-get install couchdb python-couchdb python-launchpadlib glade bzr
 
 2) Get the latest version of quickly:
 $ bzr branch lp:quickly
