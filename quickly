@@ -45,7 +45,7 @@ def get_commands():
     
     # option completion
     if sys.argv[-1].startswith("-"):
-        options = ("-t", "--template", "--staging", "--verbose")
+        options = ("-h", "--help", "-t", "--template", "--staging", "--verbose")
         available_completion = [option for option in options if option.startswith(sys.argv[-1])]
         
     else:
@@ -174,7 +174,7 @@ def process_command_line(argv):
             os.environ['QUICKLY'] = "verbose " + oldenv
         elif arg == '--help' or arg == '-h':
             usage()
-            return 0
+            sys.exit(0)
         else:
             if arg in command_followed_by_template: # need template (default) and out of tree command
                 out_off_project_tree_command = True
