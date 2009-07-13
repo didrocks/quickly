@@ -19,11 +19,8 @@ templates/ubuntu-project/change-lp-project.py
 templates/ubuntu-project/python/Preferencescamel_case_nameDialog.py
 templates/ubuntu-project/python/Aboutcamel_case_nameDialog.py
 templates/ubuntu-project/python/dialog_camel_case_nameDialog.py
-quickly/launchpadaccess.pyc
 quickly/tools.pyc
-quickly/commands.pyc
 quickly/tools.py
-quickly/configurationhandler.pyc
 quickly/commands.py
 quickly/configurationhandler.py
 quickly/launchpadaccess.py
