@@ -9,6 +9,8 @@ from gettext import gettext as _
 
 from builtins import commands, configurationhandler, tools, launchpadaccess
 
+command_followed_by_template = ('new', 'quickly')
+
 def usage():
     print _("""Usage:
     quickly [OPTIONS] command ...
@@ -32,65 +34,73 @@ Examples:
     quickly -t cool-template push 'awesome new comment system'""")
 
 def get_templates():
-    """ get all available templates """
+    """get all available templates"""
 
 def get_commands():
-    """ seek for available commands for shell completion
+    """seek for available commands for shell completion
 
     : return tuples with list of available commands and origin (default or template)
     """
+
     available_completion = []
 
-    (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command) = process_command_line(sys.argv[3:])
+    # option completion
+    if sys.argv[-1].startswith("-"):
+        options = ("-h", "--help", "-t", "--template", "--staging", "--verbose")
+        available_completion = [option for option in options if option.startswith(sys.argv[-1])]
 
-    # seek for template if exists
-    if not opt_template:
-        try:
-            project_dir = tools.get_root_project_path()
-            configurationhandler.loadConfig()
-            opt_template = configurationhandler.config['template']
-        except tools.project_path_not_found:
-            pass
-
-    # get available templates
-    if sys.argv[-2] in ("-t", "--template"):
-        for template_dir in tools.get_template_directories():
-                for template in os.listdir(template_dir):
-                    available_completion.append(os.path.basename(template))
-
-    elif len(opt_command) > 1:
-        # if no template, check the new command for templates proposal or -t completion
-        if (("new" or "quickly") in opt_command and not opt_template):
-            for template_dir in tools.get_template_directories():
-                for template in os.listdir(template_dir):
-                    available_completion.append(os.path.basename(template))
     else:
-        # get the template path if exists
-        if opt_template:
-            template_path = tools.get_template_directory(opt_template)
-            files = []
-            for fullname in os.listdir(template_path):
-                files.append(os.path.basename(fullname))
+        (opt_command, need_template, opt_has_template, opt_template, 
+          out_off_project_tree_command) = process_command_line(sys.argv[3:])
 
-            for found_file in files:
-                command = re.search('(.*)\.py$', found_file)
-                if command:
-                    available_completion.append(command.group(1))
+        # seek for template if exists
+        if not opt_template:
+            try:
+                project_dir = tools.get_root_project_path()
+                configurationhandler.loadConfig()
+                opt_template = configurationhandler.config['template']
+            except tools.project_path_not_found:
+                pass
 
-        # builtins commands
-        not_real_commands = ['configurationhandler', 'gettext',
-                             'os', 'shutil', 'tools']
-        commands_in_module = [ command for command in dir(commands) if not command.startswith('_') and not command.startswith('pre_') \
-                                                      and not command.startswith('post_') and not command in not_real_commands]
-        commands_in_module.append('new')
-        available_completion.extend(commands_in_module)
+        # get available templates
+        if sys.argv[-2] in ("-t", "--template"):
+            for template_dir in tools.get_template_directories():
+                    for template in os.listdir(template_dir):
+                        available_completion.append(os.path.basename(template))
+
+        elif len(opt_command) > 1:
+            # if no template, check the new command for templates proposal or -t completion
+            # (-1 is space or template begining)
+            if (opt_command[len(opt_command) - 2] in command_followed_by_template and not opt_template):
+                for template_dir in tools.get_template_directories():
+                    for template in os.listdir(template_dir):
+                        available_completion.append(os.path.basename(template))
+        else:
+            # get the template path if exists
+            if opt_template:
+                template_path = tools.get_template_directory(opt_template)
+                files = []
+                for fullname in os.listdir(template_path):
+                    files.append(os.path.basename(fullname))
+
+                for found_file in files:
+                    command = re.search('(.*)\.py$', found_file)
+                    if command:
+                        available_completion.append(command.group(1))
+
+            # builtins commands
+            not_real_commands = ['configurationhandler', 'gettext', 'os', 'shutil', 'tools']
+            commands_in_module = [ command for command in dir(commands) if not command.startswith('_') and not command.startswith('pre_') \
+                                                          and not command.startswith('post_') and not command in not_real_commands]
+            commands_in_module.append('new')
+            available_completion.extend(commands_in_module)
 
     print " ".join(available_completion)
     sys.exit(0)
 
 
 def check_this_command(command_name, template_path, opt_template):
-    """ check if the command exist in a template
+    """check if the command exist in a template
 
             For instance, for a command like foo, the inside template foo.py script
             file is preferred to built-in foo() function.
@@ -126,8 +136,7 @@ def check_this_command(command_name, template_path, opt_template):
 
 
 def process_command_line(argv):
-    """ Entry point for command line processing
-
+    """Entry point for command line processing
     use sys.argv by default if no args to parse
 
     :return: options
@@ -164,7 +173,7 @@ def process_command_line(argv):
         elif arg == '--help' or arg == '-h':
             usage()
         else:
-            if arg == 'new' or arg == 'quickly':
+            if arg in command_followed_by_template: # need template (default) and out of tree command
                 out_off_project_tree_command = True
             elif arg == 'getstarted':
                 out_off_project_tree_command = True
@@ -172,18 +181,15 @@ def process_command_line(argv):
             opt_command.append(arg)
         i += 1
 
-    return (opt_command, need_template, opt_has_template, opt_template,
-             out_off_project_tree_command)
-
+    return (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command)
 
 def main():
-    """ Main ubuntu command line processor
+    """Main ubuntu command line processor
 
     :return: exit code of quickly command.
     """
 
-    (opt_command, need_template, opt_has_template, opt_template,
-      out_off_project_tree_command) = process_command_line(sys.argv[1:])
+    (opt_command, need_template, opt_has_template, opt_template, out_off_project_tree_command) = process_command_line(sys.argv[1:])
 
     # ensure the command exists
     if not opt_command:
@@ -217,9 +223,8 @@ def main():
             try:
                 project_dir = tools.get_root_project_path()
             except tools.project_path_not_found:
-                print _("ERROR: Can't find project in %s.\nEnsure you launch " \
-                        "this command from a quickly project directory.") % os.getcwd()
-                sys.exit(1)
+                print _("ERROR: Can't find project in %s.\nEnsure you launch this command from a quickly project directory.") % os.getcwd()
+                sys.exit(1)        
             configurationhandler.loadConfig()
 
         #if no template provided, guess it from the current tree

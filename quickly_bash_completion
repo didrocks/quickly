@@ -19,7 +19,7 @@ _quickly()
     #prev=${COMP_WORDS[COMP_CWORD-1]}
     #echo "$(_quickly_call ${COMP_WORDS[*]})"a
     #echo "current: "$cur
-    COMPREPLY=( $( compgen -W "$(_quickly_call ${COMP_WORDS[*]})" $cur ) )
+    COMPREPLY=( $( compgen -W "$(_quickly_call ${COMP_WORDS[*]})" -- $cur ) )
 
     return 0
 }
