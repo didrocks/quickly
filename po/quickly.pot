@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-29 16:44+0200\n"
+"POT-Creation-Date: 2009-07-13 17:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,134 +16,269 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../quickly.py:13
-msgid ""
-"quickly [-t <template> | --template <template>] <command [...]>\n"
-"\n"
-"Commands:\n"
-"  new <template> <project-name>\n"
-"      (template is mandatory for this command)\n"
-"  push <describe your changes>\n"
-"\n"
-"Examples:  quickly new ubuntu-project foobar\n"
-"           quickly push 'awesome new comment system'\n"
-"           quickly -t cool-template push 'awesome new comment system'"
-msgstr ""
-
-#: ../quickly.py:34
-msgid "in progress"
-msgstr ""
-
-#: ../quickly.py:61
-#, python-format
-msgid "ERROR: command '%s' in '%s' not found."
-msgstr ""
-
-#: ../quickly.py:62 ../quickly.py:108 ../quickly.py:130 ../quickly.py:136
-#: ../quickly.py:142 ../quickly.py:156 ../quickly.py:167 ../quickly.py:175
-msgid "Aborting"
-msgstr ""
-
-#: ../quickly.py:107
-msgid "ERROR: new command must be followed by a template and project name"
-msgstr ""
-
-#: ../quickly.py:128
-msgid ""
-"ERROR: No template provided and none found in the current tree. Ensure you "
-"don't want to create a new projet or that your are in your directory project."
-msgstr ""
-
-#: ../quickly.py:135
-#, python-format
-msgid "ERROR: Template '%s' not found."
-msgstr ""
-
-#: ../quickly.py:141
-msgid "ERROR: No command found"
-msgstr ""
-
-#: ../quickly.py:155
-#, python-format
-msgid "ERROR: pre_%s command failed"
-msgstr ""
-
-#: ../quickly.py:166
-#, python-format
-msgid "ERROR: %s command failed"
-msgstr ""
-
-#: ../quickly.py:174
-#, python-format
-msgid "ERROR: post_%s command failed"
-msgstr ""
-
-#: ../builtins/launchpadaccess.py:15
-msgid "Fatal: "
-msgstr ""
-
-#: ../builtins/launchpadaccess.py:28
-msgid "Get Launchpad Settings"
-msgstr ""
-
-#: ../builtins/launchpadaccess.py:31
-msgid "Check whether python-launchpadlib is installed"
-msgstr ""
-
-#: ../builtins/launchpadaccess.py:33
-msgid "Initial Launchpad creation"
-msgstr ""
-
-#: ../builtins/launchpadaccess.py:34
-msgid "E-mail of your Launchpad account:"
-msgstr ""
-
-#: ../builtins/launchpadaccess.py:35
-msgid "Your Launchpad password:"
-msgstr ""
-
-#: ../builtins/launchpadaccess.py:43
-#, python-format
-msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr ""
-
-#: ../builtins/launchpadaccess.py:44
-msgid "Launchpad connexion is ok"
-msgstr ""
-
-#: ../templates/ubuntu-project/new.py:36
+#: ../templates/ubuntu-project/new.py:19
 msgid ""
 "\n"
-"ERROR: project name not defined. Usage is project_name\n"
-"Aborting"
+"ERROR: project name not defined. Usage is project_name"
 msgstr ""
 
-#: ../templates/ubuntu-project/new.py:48 ../templates/ubuntu-project/new.py:53
-#: ../templates/ubuntu-project/new.py:58
+#. create directory and template file
+#: ../templates/ubuntu-project/new.py:30 ../templates/ubuntu-project/new.py:35
+#: ../templates/ubuntu-project/new.py:40 ../quickly/commands.py:20
 #, python-format
 msgid "Creating project directory %s"
 msgstr ""
 
-#: ../templates/ubuntu-project/new.py:50 ../templates/ubuntu-project/new.py:55
-#: ../templates/ubuntu-project/new.py:60
+#: ../templates/ubuntu-project/new.py:32 ../templates/ubuntu-project/new.py:37
+#: ../templates/ubuntu-project/new.py:42 ../quickly/commands.py:22
 #, python-format
 msgid "Directory %s created\n"
 msgstr ""
 
-#: ../templates/ubuntu-project/new.py:75
-#, python-format
-msgid "Copying media files to %s"
-msgstr ""
-
-#: ../templates/ubuntu-project/new.py:78
-#, python-format
-msgid "Media files copied to %s\n"
-msgstr ""
-
-#: ../templates/ubuntu-project/new.py:80
+#. add it to revision control
+#: ../templates/ubuntu-project/new.py:93
 msgid "Creating bzr repository and commiting"
 msgstr ""
 
-#: ../templates/ubuntu-project/new.py:85
-msgid "Finishing"
+#. run the new application
+#: ../templates/ubuntu-project/new.py:99
+msgid "Launching your newly created project!"
+msgstr ""
+
+#: ../templates/ubuntu-project/new.py:103
+#, python-format
+msgid ""
+"Congrats, your new project is setup! cd %s/ to start hacking. Then '$ "
+"quickly help' for quickly tutorial and reference"
+msgstr ""
+
+#: ../templates/ubuntu-project/build.py:13
+msgid "Ubuntu package has been created"
+msgstr ""
+
+#: ../templates/ubuntu-project/build.py:15
+#: ../templates/ubuntu-project/package.py:15
+#: ../templates/ubuntu-project/package.py:23
+msgid "An error has occurred"
+msgstr ""
+
+#: ../templates/ubuntu-project/release.py:23
+msgid "quickly released"
+msgstr ""
+
+#: ../templates/ubuntu-project/release.py:26
+#, python-format
+msgid "quickly released: %s"
+msgstr ""
+
+#: ../templates/ubuntu-project/release.py:46
+#, python-format
+msgid ""
+"ERROR: quickly can't release: %s seems to be already released. Choose "
+"another name."
+msgstr ""
+
+#: ../templates/ubuntu-project/release.py:54
+msgid ""
+"ERROR: quickly can't release as it can't commit. Are you sure you made any "
+"changes?"
+msgstr ""
+
+#: ../templates/ubuntu-project/release.py:80
+#: ../templates/ubuntu-project/release.py:98
+msgid "ERROR: quickly can't release: can't push to launchpad."
+msgstr ""
+
+#: ../templates/ubuntu-project/release.py:86
+msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
+msgstr ""
+
+#: ../templates/ubuntu-project/release.py:93
+msgid "ERROR: quickly can't release: can't pull from launchpad."
+msgstr ""
+
+#: ../templates/ubuntu-project/release.py:101
+#, python-format
+msgid "%s released!"
+msgstr ""
+
+#: ../templates/ubuntu-project/package.py:13
+msgid "Ubuntu packaging created in debian/"
+msgstr ""
+
+#: ../templates/ubuntu-project/package.py:21
+msgid "Ubuntu package sources have been created"
+msgstr ""
+
+#: ../templates/ubuntu-project/save.py:13
+msgid "quickly saved"
+msgstr ""
+
+#: ../quickly/tools.py:32
+msgid "No template directory found. Aborting"
+msgstr ""
+
+#: ../quickly/tools.py:51
+#, python-format
+msgid "ERROR: Template '%s' not found."
+msgstr ""
+
+#: ../quickly/tools.py:52 ../src/quickly:135 ../src/quickly:205
+#: ../src/quickly:217 ../src/quickly:245 ../src/quickly:266 ../src/quickly:277
+#: ../src/quickly:285
+msgid "Aborting"
+msgstr ""
+
+#: ../quickly/commands.py:16
+#, python-format
+msgid "There is already a file or directory named %s"
+msgstr ""
+
+#: ../quickly/commands.py:39
+#, python-format
+msgid "%s already exists."
+msgstr ""
+
+#: ../quickly/commands.py:43
+#, python-format
+msgid "Copy %s to create new %s template"
+msgstr ""
+
+#: ../quickly/commands.py:49
+msgid ""
+"-------------------------------\n"
+"    Welcome to quickly!\n"
+"-------------------------------\n"
+"\n"
+"You can create a project in executing 'quickly new <template_name> <your "
+"project>'.\n"
+"\n"
+"Example:\n"
+"$ quickly new ubuntu-project my_awesome_project\n"
+"\n"
+"Have Fun!"
+msgstr ""
+
+#: ../quickly/configurationhandler.py:18
+msgid "ERROR: Can't load configuration in current path or its parent ones."
+msgstr ""
+
+#: ../quickly/configurationhandler.py:31
+#, python-format
+msgid "ERROR: Can't load configuration in %s: %s"
+msgstr ""
+
+#: ../quickly/configurationhandler.py:52
+msgid "WARNING: No .quickly file found. Initiate a new one"
+msgstr ""
+
+#: ../quickly/configurationhandler.py:83
+#, python-format
+msgid "ERROR: Can't save configuration in %s"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:13
+msgid "Check whether python-launchpadlib is installed"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:23
+msgid "Fatal: "
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:54
+msgid "WARNING: you are using staging and not launchpad real production server"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:61
+msgid "Get Launchpad Settings"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:68
+msgid "Initial Launchpad binding. You must choose \"Change Anything\""
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:80
+msgid "Unknown reason"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:81
+#, python-format
+msgid "Couldn't setup Launchpad for quickly ; %s"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:82
+msgid "Launchpad connexion is ok"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:102
+msgid "No launchpad project give, aborting."
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:112
+#, python-format
+msgid "Project name: %s"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:113
+#, python-format
+msgid "Launchpad url: https://launchpad.net/%s"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:120
+msgid "No project found"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:122
+msgid "Choose your project number"
+msgstr ""
+
+#: ../quickly/launchpadaccess.py:132
+msgid "No right number given, aborting."
+msgstr ""
+
+#: ../src/quickly:23
+msgid "Usage:"
+msgstr ""
+
+#: ../src/quickly:134
+#, c-format
+msgid "ERROR: command '%s' in '%s' not found."
+msgstr ""
+
+#: ../src/quickly:204
+msgid "ERROR: No command found"
+msgstr ""
+
+#: ../src/quickly:216
+#, c-format
+msgid "ERROR: %s command must be followed by a template and destination name"
+msgstr ""
+
+#: ../src/quickly:234
+#, c-format
+msgid ""
+"ERROR: Can't find project in %s.\n"
+"Ensure you launch this command from a quickly project directory."
+msgstr ""
+
+#: ../src/quickly:243
+msgid ""
+"ERROR: No template provided and none found in the current tree. Ensure you "
+"don't want to create a new project or that your are in your directory "
+"project."
+msgstr ""
+
+#: ../src/quickly:265
+#, c-format
+msgid "ERROR: pre_%s command failed"
+msgstr ""
+
+#: ../src/quickly:276
+#, c-format
+msgid "ERROR: %s command failed"
+msgstr ""
+
+#: ../src/quickly:284
+#, c-format
+msgid "ERROR: post_%s command failed"
 msgstr ""
