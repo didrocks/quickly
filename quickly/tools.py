@@ -18,13 +18,16 @@ def get_template_directories():
     template_directories = []
     if os.path.exists(os.path.expanduser('~/.quickly-data/templates/')):
         template_directories.append(os.path.expanduser('~/.quickly-data/templates/'))
+    # for trunk usage
     pathname = os.path.dirname(sys.argv[0])
-    abs_path = os.path.abspath(pathname)
-    if os.path.exists(abs_path + '/templates'):
-        template_directories.append(abs_path + '/templates')
-    if os.path.exists('/usr/share/quickly/templates'):
-        template_directories.append('/usr/share/quickly/templates')
-
+    abs_template_path = os.path.abspath(pathname + '../templates')
+    if os.path.exists(abs_template_path):
+        template_directories.append(abs_template_path)
+    # for installed usage
+    pathname = os.path.dirname(__file__)
+    abs_template_path = os.path.abspath(pathname + '/../templates')
+    if os.path.exists(abs_template_path):
+        template_directories.append(abs_template_path)
     if not template_directories:
         print _("No template directory found. Aborting")
         exit(1)
