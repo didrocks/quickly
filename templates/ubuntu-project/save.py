@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import osimport sys
+import sys
 import subprocess
 
 import gettext
@@ -19,3 +19,4 @@ subprocess.call(["bzr", "add"])
 return_code = subprocess.call(["bzr", "commit", "-m" + commit_msg])
 
 sys.exit(return_code)
+
