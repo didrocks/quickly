@@ -18,6 +18,7 @@
 
 
 from distutils.core import setup
+from DistUtilsExtra.command import *
 import os
 
 
@@ -44,5 +45,7 @@ setup(name='quickly',
       data_files=[('/etc/bash_completion.d', ['completion/bash/quickly']),
                    ('quickly', list_files('templates'))],
       scripts=['src/quickly'],
+      cmdclass = { "build" : build_extra.build_extra,
+                   "build_i18n" :  build_i18n.build_i18n }
       )
 

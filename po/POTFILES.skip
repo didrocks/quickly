@@ -1,4 +1,0 @@
-# these should be translated via quickly but there's no gettext support in
-# quickly projects yet
-templates/ubuntu-project/glade/about.ui
-templates/ubuntu-project/glade/project_name.ui
