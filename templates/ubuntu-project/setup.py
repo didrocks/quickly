@@ -8,6 +8,6 @@ setup(
     #   author_email='email@ubuntu.com',
     #description='UI for managing third-party and non-free drivers',
     #url='https://launchpad.net/project_name',
- 
+
     )
 

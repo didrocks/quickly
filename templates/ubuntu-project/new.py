@@ -59,14 +59,14 @@ quicklyutils.file_from_template(template_ui_dir, "camel_case_nameWindow.ui", tar
 quicklyutils.file_from_template(template_ui_dir, "project_name_window.xml", target_ui_dir, substitutions)
 quicklyutils.file_from_template(template_ui_dir, "Aboutcamel_case_nameDialog.ui", target_ui_dir, substitutions)
 quicklyutils.file_from_template(template_ui_dir, "about_project_name_dialog.xml", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "camel_case_namePreferencesDialog.ui", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "project_name_preferences_dialog.xml", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "Preferencescamel_case_nameDialog.ui", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "preferences_project_name_dialog.xml", target_ui_dir, substitutions)
 
 #create the python directory and files
 template_python_dir = abs_path + "/python/"
 target_python_dir = project_name
 quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
-quicklyutils.file_from_template(template_python_dir, "camel_case_namePreferencesDialog.py", target_python_dir, substitutions)
+quicklyutils.file_from_template(template_python_dir, "Preferencescamel_case_nameDialog.py", target_python_dir, substitutions)
 
 #copy the files needed for packaging
 quicklyutils.file_from_template(abs_path, "/setup.py", "./", substitutions)
@@ -93,10 +93,10 @@ os.chmod("./bin/" + project_name, 0755)
 print _("Creating bzr repository and commiting")
 subprocess.call(["bzr", "init"])
 subprocess.call(["bzr", "add"])
-subprocess.call(["bzr", "commit", "-m", "Initial project creation"])
+subprocess.call(["bzr", "commit", "-m", "Initial project creation with Quickly!"])
 
 #run the new application
-print _("Launching a first demo")
+print _("Launching your newly created project!")
 subprocess.call(["./bin/" + project_name])
 
 
