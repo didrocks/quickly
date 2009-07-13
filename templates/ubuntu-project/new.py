@@ -84,8 +84,8 @@ shutil.copytree(template_help_dir,target_help_dir)
 
 #def file_from_template(template_dir, template_file, target_dir, substitutions, rename = True):
 #copy the executable file, set the mode to executable
-quicklyutils.file_from_template(abs_path ,"internal/project_name","./bin/", substitutions)
-os.chmod("./bin/" + project_name, 0755)
+quicklyutils.file_from_template(abs_path ,"internal/project_name","bin", substitutions)
+os.chmod("bin/" + project_name, 0755)
 
 #add it to revision control
 print _("Creating bzr repository and commiting")
