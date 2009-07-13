@@ -22,14 +22,13 @@ Letters and underscore ("_") only.""")
     return name
 
 def conventional_names(name):
-    words = name.split("_")
     sentence_name = name.replace("_"," ")
     sentence_name = string.capwords(sentence_name)
     camel_case_name = sentence_name.replace(" ","")
     return sentence_name, camel_case_name
 
 def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
-    target_file = os.path.basename(template_file) # to get only file name
+    target_file = os.path.basename(template_file) # to get only file name (template_file can be internal/file)
     if rename:
         for s in substitutions:
             pattern, sub = s
