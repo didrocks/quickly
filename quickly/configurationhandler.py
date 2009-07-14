@@ -78,7 +78,7 @@ def saveConfig(config_file_path=None):
             filedest.write("\n".join(elem + " = " + config[elem] for elem in config))
         finally:
             filedest.close()
-            os.rename(quickly_file_path + '.swp', quickly_file_path)
+            os.rename(filedest.name, quickly_file_path)
     except AttributeError, e:
         print _("ERROR: Can't save configuration in %s" % quickly_file_path)
         return 1

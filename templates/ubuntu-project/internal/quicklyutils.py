@@ -6,6 +6,9 @@ import gettext
 from gettext import gettext as _
 
 
+class cant_deal_with_setup_value(Exception):
+    pass
+
 #set domain text
 gettext.textdomain('quickly')
 
@@ -18,7 +21,7 @@ def quickly_name(name):
             print _("""
 ERROR: unpermitted character in name.
 Letters and underscore ("_") only.""")
-            sys.exit(0)
+            sys.exit(1)
     return name
 
 def conventional_names(name):
@@ -45,6 +48,68 @@ def file_from_template(template_dir, template_file, target_dir, substitutions=[]
     fout.write(file_contents)
     fout.flush()
     fout.close()
-    fout.close()
+    fin.close()
     print "%s created\n" % (target_dir + "/" + target_file,)
 
+def get_setup_value(key):
+    """ get value from setup.py file.
+    
+    raise cant_deal_with_setup_value if nothing found
+    : return found value"""
+    
+    result = None
+    try:
+        fsetup = file('setup.py', 'r')
+        for line in fsetup: 
+            fields = line.split('=') # Separate variable from value
+            if key in fields[0]:
+                result = fields[1].partition(',')[0].strip()
+                result = result[1:-1]
+                break
+        fsetup.close()
+    except (OSError, IOError), e:
+        print _("ERROR: Can't load setup.py file")
+        sys.exit(1)
+
+    if result is None:
+        raise cant_deal_with_setup_value()
+    return result
+
+def set_setup_value(key, value):
+    """ set value from setup.py file
+    
+        it adds new key in the setup() function if not found.
+        it uncomments a commented value if changed.
+        
+        exit with 0 if everything's all right
+    """
+
+    has_changed_something = False
+    setup_found = False
+    try:
+        fsetup = file('setup.py', 'r')
+        fdest = file(fsetup.name + '.swp', 'w')
+        for line in fsetup:
+            fields = line.split('=') # Separate variable from value
+            if key in fields[0]:
+                # add new value, uncommenting it if present
+                line = "%s='%s',\n" % (fields[0].replace('#',''), value)
+                has_changed_something = True
+
+            if "setup(" in line:
+                setup_found = True
+            # add it if the value was not present and ")" found from "setup(" function
+            if not has_changed_something and setup_found and ")" in line:
+                fdest.write("    %s='%s',\n" % (key, value))
+                has_changed_something = True # to avoid to be troubled by another following )
+            fdest.write(line)
+        
+        fdest.flush
+        fdest.close()
+        fsetup.close()
+        os.rename(fdest.name, fsetup.name)
+    except (OSError, IOError), e:
+        print _("ERROR: Can't load setup.py file")
+        sys.exit(1)
+
+    return 0

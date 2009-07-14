@@ -5,6 +5,11 @@ import os
 import sys
 import subprocess
 
+LAUNCHPAD_URL = "https://launchpad.net"
+LAUNCHPAD_STAGING_URL = "https://staging.launchpad.net"
+LAUNCHPAD_CODE_STAGING_URL = "https://code.staging.launchpad.net"
+
+
 try:
     from launchpadlib.launchpad import Launchpad, EDGE_SERVICE_ROOT, STAGING_SERVICE_ROOT
     from launchpadlib.errors import HTTPError
@@ -18,6 +23,22 @@ import configurationhandler
 
 import gettext
 from gettext import gettext as _
+
+
+# if config not already loaded
+if not configurationhandler.config:
+    configurationhandler.loadConfig()
+
+# check if there is no global variable specifying staging
+if os.getenv('QUICKLY') is not None and "staging" in os.getenv('QUICKLY').lower():
+    launchpad_url = LAUNCHPAD_STAGING_URL
+    lp_server = "staging"
+else:
+    launchpad_url = LAUNCHPAD_URL
+    lp_server = "edge"
+
+
+
 
 def die(message):
     print >> sys.stderr, _("Fatal: ") + message
@@ -41,11 +62,6 @@ def initialize_lpi():
     if not os.path.isdir(lp_cred_dir):
         os.makedirs(lp_cred_dir)
         os.chmod(lp_cred_dir, 0700)
-
-    lp_server = "edge"
-    # check if there is no global variable specifying staging
-    if os.getenv('QUICKLY') is not None and "staging" in os.getenv('QUICKLY').lower():
-        lp_server = "staging"
 
     # check which server to address
     if lp_server == "staging":
@@ -90,10 +106,6 @@ def link_project(launchpad, question):
     
         :return project object'''
 
-    # if config not already loaded
-    if not configurationhandler.config:
-        configurationhandler.loadConfig()
-
     choice = "0"
     while choice == "0":    
         
@@ -110,7 +122,7 @@ def link_project(launchpad, question):
             print "  " + project.title
             print ("--------------------------------------")
             print _("Project name: %s") % project.display_name
-            print _("Launchpad url: https://launchpad.net/%s") % project.name
+            print _("Launchpad url: %s/%s") % (launchpad_url, project.name)
             project_names.append(project.name)
             print project.summary
             project_number += 1            
@@ -141,10 +153,6 @@ def get_project(launchpad):
     
         :return project object
     '''
-
-    # if config not already loaded
-    if not configurationhandler.config:
-        configurationhandler.loadConfig()        
         
     # try to get project
     try:

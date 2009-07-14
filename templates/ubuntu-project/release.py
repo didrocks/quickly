@@ -9,6 +9,7 @@ import webbrowser
 pathname = os.path.dirname(sys.argv[0])
 
 from quickly import launchpadaccess
+from internal import quicklyutils
 
 import gettext
 from gettext import gettext as _
@@ -18,32 +19,50 @@ gettext.textdomain('quickly')
 args = sys.argv
 
 if len(args) == 1:
-    # TODO: try to guess new release name in setup.py
-    release_name = ""
+    # TODO: try to guess new release version in setup.py
+    try:
+        release_version = quicklyutils.get_setup_value('version')
+    except quicklyutils.cant_deal_with_setup_value:
+        print _("Release version not found in setup.py and no version specified in command line.")
+        sys.exit(1)       
     commit_msg = _('quickly released')
 elif len(args) == 2:
-    release_name = args[1]
-    commit_msg = _('quickly released: %s' % release_name)
+    release_version = args[1]
+    # add .0 to release if nothing specified (avoid for mess in search in bzr tags)
+    if "." not in release_version:
+        release_version + '.0'
+    commit_msg = _('quickly released: %s' % release_version)
 elif len(args) > 2:
-    release_name = args[1]
+    release_version = args[1]
     commit_msg = " ".join(args[2:])
-    
+
+try:
+    float(release_version)
+except ValueError:
+    print _("Release version specified in command arguments or in setup.py " \
+            "is not a valid number.")
+    sys.exit(1)
+
 launchpad = None
 project = None
 
 # connect to LP
 launchpad = launchpadaccess.initialize_lpi()
 
-# get the project
-project = launchpadaccess.get_project(launchpad)
+# changed upstream author and email
+quicklyutils.set_setup_value('author', launchpad.me.display_name)
+quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
 
+# get the project now and save the url into setup.py
+project = launchpadaccess.get_project(launchpad)
+quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + project.name)
     
 # check if already released with this name
-if release_name: # TODO: remove test when release detected
+if release_version: # TODO: remove test when release detected
     bzr_instance = subprocess.Popen(["bzr", "tags"], stdout=subprocess.PIPE)
     bzr_tags = bzr_instance.stdout.read()
-    if release_name in bzr_tags:
-        print _("ERROR: quickly can't release: %s seems to be already released. Choose another name.") % release_name
+    if release_version in bzr_tags:
+        print _("ERROR: quickly can't release: %s seems to be already released. Choose another name.") % release_version
         sys.exit(1)
         
     
@@ -53,9 +72,11 @@ return_code = subprocess.call(["bzr", "commit", '-m', commit_msg])
 if return_code != 0:
     print _("ERROR: quickly can't release as it can't commit. Are you sure you made any changes?")
     sys.exit(1)
+subprocess.call(["bzr", "tag", release_version]) # tag revision
 
-if release_name: # TODO: remove test when release detected
-    subprocess.call(["bzr", "tag", release_name])
+# now, we can bump version for next release
+next_release_version = float(release_version) + 0.1
+quicklyutils.set_setup_value('version', next_release_version)
 
 # TODO: handle bzr rm
 
@@ -65,9 +86,10 @@ bzr_info = bzr_instance.stdout.read()
 
 # TODO: see if we want a strategy to set main branch in the project
 
-bzr_staging = ""
-if ("staging" in os.getenv('QUICKLY').lower()):
+if (launchpadaccess.lp_server == "staging"):
     bzr_staging = "//staging/"
+else:
+    bzr_staging = ""
 
 branch_location = []
 # if no branch, create it in ~user_name/project_name/quickly_trunk
@@ -98,11 +120,11 @@ else:
         print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(1)
 
-print _("%s released!") % release_name
+print _("%s released!") % release_version
 
 # as launchpad-open doesn't support staging server, put an url
 if bzr_staging:
-    webbrowser.open('https://code.staging.launchpad.net/~' + launchpad.me.name + '/' + project.name + '/quickly_trunk')
+    webbrowser.open(launchpadaccess.LAUNCHPAD_CODE_STAGING_URL + '/~' + launchpad.me.name + '/' + project.name + '/quickly_trunk')
 else:
     subprocess.call(["bzr", "launchpad-open"])
 

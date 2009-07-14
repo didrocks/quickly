@@ -5,7 +5,7 @@ import sys
 import os
 import shutil
 import subprocess
-import internal.quicklyutils as quicklyutils
+from internal import quicklyutils
 
 import gettext
 from gettext import gettext as _
@@ -97,6 +97,8 @@ subprocess.call(["bzr", "commit", "-m", "Initial project creation with Quickly!"
 print _("Launching your newly created project!")
 subprocess.call(["./bin/" + project_name])
 
+# put project name in setup.py
+quicklyutils.set_setup_value('name', sentence_name)
 
 print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly help' for quickly tutorial and reference") % project_name
 
