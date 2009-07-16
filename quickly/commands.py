@@ -2,6 +2,7 @@ import os
 import shutil
 
 import configurationhandler
+import quicklyconfig
 import tools
 
 import gettext
@@ -20,9 +21,12 @@ def pre_new(template, project_dir, command_args):
     print _("Creating project directory %s" % project_name)
     os.mkdir(project_name)
     print _("Directory %s created\n" % project_name)
-    configurationhandler.config['project'] = project_name
-    configurationhandler.config['template'] = template
-    configurationhandler.saveConfig(project_name)
+
+    # creating quickly file
+    configurationhandler.project_config['format'] = quicklyconfig.VERSION
+    configurationhandler.project_config['project'] = project_name
+    configurationhandler.project_config['template'] = template
+    configurationhandler.saveConfig(config_file_path=project_name)
 
     return 0
 

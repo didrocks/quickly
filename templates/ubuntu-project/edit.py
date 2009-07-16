@@ -10,11 +10,11 @@ for root, dirs, files in os.walk('./'):
             filelist += os.path.join(root, name) + ' '
 
 # if config not already loaded
-if not configurationhandler.config:
+if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 
 # add launcher which does not end with .py
-filelist += 'bin/' + configurationhandler.config['project'].lower()
+filelist += 'bin/' + configurationhandler.project_config['project'].lower()
 
 editor = "gedit"
 default_editor = os.environ.get("EDITOR")

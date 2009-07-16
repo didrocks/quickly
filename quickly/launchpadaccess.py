@@ -26,7 +26,7 @@ from gettext import gettext as _
 
 
 # if config not already loaded
-if not configurationhandler.config:
+if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 
 # check if there is no global variable specifying staging
@@ -143,7 +143,7 @@ def link_project(launchpad, question):
     except ValueError:
         print _("No right number given, aborting.")
         exit(1)
-    configurationhandler.config['lp_id'] = project.name
+    configurationhandler.project_config['lp_id'] = project.name
     configurationhandler.saveConfig()
     
     return project
@@ -156,7 +156,7 @@ def get_project(launchpad):
         
     # try to get project
     try:
-        lp_id = configurationhandler.config['lp_id']
+        lp_id = configurationhandler.project_config['lp_id']
         project = launchpad.projects[lp_id]
        
     # else, bind the project to LP

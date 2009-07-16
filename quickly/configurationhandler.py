@@ -1,22 +1,29 @@
 import os
 import sys
-import tools
 
 import gettext
 from gettext import gettext as _
 
-config = {}
+import tools
 
+global_config = {} # retreive from /etc/quickly
+project_config = {} # retreived from project/.quickly
 
-def loadConfig():
-    """ load configuration from quickly_file_path"""
-    dir(tools)
-    # retrieve .quickly file
-    try:
-        quickly_file_path = tools.get_root_project_path()  + '/.quickly'
-    except tools.project_path_not_found:
-        print _("ERROR: Can't load configuration in current path or its parent ones.")
-        sys.exit(1)
+def loadConfig(global_config=None):
+    """ load configuration from /etc/quickly or .quickly file"""
+
+    if global_config:
+        quickly_file_path = '/etc/quickly'
+        config = global_config
+    else:
+        # retrieve .quickly file
+        try:
+            quickly_file_path = tools.get_root_project_path()  + '/.quickly'
+            config = project_config
+        except tools.project_path_not_found:
+            print _("ERROR: Can't load configuration in current path or its parent ones.")
+            sys.exit(1)
+        
         
     try:
         fileconfig = file(quickly_file_path, 'rb')
@@ -32,24 +39,29 @@ def loadConfig():
         sys.exit(1)
 
 
-def saveConfig(config_file_path=None):
-    """ save the configuration file from config dictionnary
+def saveConfig(global_config=None, config_file_path=None):
+    """ save the configuration file from config dictionnary in project or global quuickly file
 
     config_file_path is optional (needed by the new command, for instance).
     getcwd() is taken by default.    
     
     keep commentaries and layout from original file """
 
-    # retrieve .quickly file
-    try:
-        quickly_file_path = tools.get_root_project_path(config_file_path) + '/.quickly'
-    # if no .quickly, create it using config_file_path or cwd
-    except tools.project_path_not_found:
-        if config_file_path is not None:
-            quickly_file_path = os.path.abspath(config_file_path) + '/.quickly'
-        else:
-            quickly_file_path = os.getcwd() + "/.quickly"
-        print _("WARNING: No .quickly file found. Initiate a new one")
+    if global_config:
+        quickly_file_path = '/etc/quickly'
+        config = global_config
+    else:
+        # retrieve .quickly file
+        try:
+            quickly_file_path = tools.get_root_project_path(config_file_path) + '/.quickly'
+        # if no .quickly, create it using config_file_path or cwd
+        except tools.project_path_not_found:
+            if config_file_path is not None:
+                quickly_file_path = os.path.abspath(config_file_path) + '/.quickly'
+            else:
+                quickly_file_path = os.getcwd() + "/.quickly"
+            print _("WARNING: No .quickly file found. Initiate a new one")
+        config = project_config
     
     try:
         filedest = file(quickly_file_path + '.swp', 'w')
@@ -62,20 +74,20 @@ def saveConfig(config_file_path=None):
                 fields = fields.split('=') # Separate variable from value
                 # normally, we have two fields in "fields" and it should be used by config tabular
                 if len(fields) == 2 and fields[0].strip() in remaingconfigtosave:
-                    line = fields[0].strip() + " = " + remaingconfigtosave.pop(fields[0].strip())
+                    line = fields[0].strip() + " = " + str(remaingconfigtosave.pop(fields[0].strip()))
                     if len(fieldsafter) > 0:
                         line = line + " #" + "#".join(fieldsafter) # fieldsafter already contains \n
                     else:
                         line = line + "\n"
                 filedest.write(line) # commentaries or empty lines, anything other things which is not useful will be printed unchanged
-            filedest.write("") # write an empty line after known value
+            filedest.write("\n") # write an empty line after known value
             # write remaining data if some (new data not in the old config file).
-            filedest.write("".join(elem + " = " + remaingconfigtosave[elem] + '\n' for elem in remaingconfigtosave)) #\n here for last element (and not be added, when no iteration to do)
+            filedest.write("".join(elem + " = " + str(remaingconfigtosave[elem]) + '\n' for elem in remaingconfigtosave)) #\n here for last element (and not be added, when no iteration to do)
 #            print "\n".join(elem + " = " + remaingconfigtosave[elem] for elem in remaingconfigtosave)
             fileconfig.close()
         except (OSError, IOError), e:      
             # write config file from scratch (no previous file found)
-            filedest.write("\n".join(elem + " = " + config[elem] for elem in config))
+            filedest.write("\n".join(elem + " = " + str(config[elem]) for elem in config) + "\n")
         finally:
             filedest.close()
             os.rename(filedest.name, quickly_file_path)

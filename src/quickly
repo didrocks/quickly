@@ -66,7 +66,7 @@ def get_commands():
             try:
                 project_dir = tools.get_root_project_path()
                 configurationhandler.loadConfig()
-                opt_template = configurationhandler.config['template']
+                opt_template = configurationhandler.project_config['template']
             except tools.project_path_not_found:
                 pass
 
@@ -238,7 +238,7 @@ def main():
         #if no template provided, guess it from the current tree
         if not opt_has_template and need_template:
             try:
-                opt_template = configurationhandler.config['template']
+                opt_template = configurationhandler.project_config['template']
             except KeyError:
                 print _("ERROR: No template provided and none found in the current tree. Ensure you " \
                             "don't want to create a new project or that your are in your directory project.")
