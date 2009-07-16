@@ -12,18 +12,6 @@ class cant_deal_with_setup_value(Exception):
 #set domain text
 gettext.textdomain('quickly')
 
-def quickly_name(name):
-    name = name.lower()
-    permitted_characters = string.ascii_lowercase
-    permitted_characters += "_"
-    for c in name:
-        if c not in permitted_characters:
-            print _("""
-ERROR: unpermitted character in name.
-Letters and underscore ("_") only.""")
-            sys.exit(1)
-    return name
-
 def conventional_names(name):
     sentence_name = name.replace("_"," ")
     sentence_name = string.capwords(sentence_name)

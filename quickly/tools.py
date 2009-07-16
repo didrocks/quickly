@@ -1,9 +1,26 @@
 
 import os
+import string
 import sys
 
 import gettext
 from gettext import gettext as _
+
+def quickly_name(name):
+    """Enforce quickly name to be ascii only and lowercase
+    
+    return formated name"""
+    name = name.lower()
+    permitted_characters = string.ascii_lowercase
+    permitted_characters += "_"
+    for c in name:
+        if c not in permitted_characters:
+            print _("""
+ERROR: unpermitted character in name.
+Letters and underscore ("_") only.""")
+            sys.exit(1)
+    return name
+
 
 class project_path_not_found(Exception):
     pass

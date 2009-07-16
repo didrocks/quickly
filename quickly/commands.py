@@ -12,6 +12,10 @@ def pre_new(template, project_dir, command_args):
     """Create the project directory before new command call"""
 
     project_name = command_args[0]
+    
+    # check that project name follow quickly rules and reformat it.
+    quickly_project_name = tools.quickly_name(command_args[0])
+
     #bail if the name if taken
     if os.path.exists(project_name):
         print _("There is already a file or directory named %s") % project_name
@@ -24,7 +28,7 @@ def pre_new(template, project_dir, command_args):
 
     # creating quickly file
     configurationhandler.project_config['format'] = quicklyconfig.VERSION
-    configurationhandler.project_config['project'] = project_name
+    configurationhandler.project_config['project'] = quickly_project_name
     configurationhandler.project_config['template'] = template
     configurationhandler.saveConfig(config_file_path=project_name)
 

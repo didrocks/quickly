@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import string
 import sys
 import os
 import shutil
 import subprocess
+
+import quickly.tools
 from internal import quicklyutils
 
 import gettext
@@ -23,7 +24,7 @@ ERROR: project name not defined. Usage is project_name""")
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname) + "/"
 
-project_name = quicklyutils.quickly_name(sys.argv[1])
+project_name = quickly.tools.quickly_name(sys.argv[1])
 
 # create additional directories
 ui_dir = "ui"
@@ -98,7 +99,7 @@ print _("Launching your newly created project!")
 subprocess.call(["./bin/" + project_name])
 
 # put project name in setup.py
-quicklyutils.set_setup_value('name', sentence_name)
+quicklyutils.set_setup_value('name', project_name)
 
 print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly help' for quickly tutorial and reference") % project_name
 
