@@ -14,7 +14,7 @@ if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 
 # add launcher which does not end with .py
-filelist += 'bin/' + configurationhandler.project_config['project'].lower()
+filelist += 'bin/' + configurationhandler.project_config['project']
 
 editor = "gedit"
 default_editor = os.environ.get("EDITOR")
