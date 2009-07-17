@@ -75,7 +75,7 @@ def get_commands():
 
     # option completion
     if sys.argv[-1].startswith("-"):
-        options = ("-h", "--help", "-t", "--template", "--staging", "--verbose")
+        options = ("-h", "--help", "-t", "--template", "--staging", "--verbose", "--version")
         available_completion = [option for option in options if option.startswith(sys.argv[-1])]
 
     else:
