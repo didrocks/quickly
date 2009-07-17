@@ -27,7 +27,7 @@ def pre_new(template, project_dir, command_args):
     print _("Directory %s created\n" % project_name)
 
     # creating quickly file
-    configurationhandler.project_config['format'] = quicklyconfig.VERSION
+    configurationhandler.project_config['format'] = quicklyconfig.__version__
     configurationhandler.project_config['project'] = quickly_project_name
     configurationhandler.project_config['template'] = template
     configurationhandler.saveConfig(config_file_path=project_name)
