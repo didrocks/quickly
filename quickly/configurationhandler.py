@@ -80,7 +80,6 @@ def saveConfig(global_config=None, config_file_path=None):
                     else:
                         line = line + "\n"
                 filedest.write(line) # commentaries or empty lines, anything other things which is not useful will be printed unchanged
-            filedest.write("\n") # write an empty line after known value
             # write remaining data if some (new data not in the old config file).
             filedest.write("".join(elem + " = " + str(remaingconfigtosave[elem]) + '\n' for elem in remaingconfigtosave)) #\n here for last element (and not be added, when no iteration to do)
 #            print "\n".join(elem + " = " + remaingconfigtosave[elem] for elem in remaingconfigtosave)

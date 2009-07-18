@@ -21,7 +21,7 @@ def updatepackaging():
     else:
         print _("An error has occurred")
         return(return_code)
-        
+
     # check if first python-mkdebian (debian/ creation) to commit it
     # that means debian/ under unknown
     bzr_instance = subprocess.Popen(["bzr", "status"], stdout=subprocess.PIPE)
@@ -66,11 +66,10 @@ def check_for_ppa(launchpad, lp_team_or_user):
     """ check if ppa exist """
 
     # check that the owner really has an ppa:
-    #TODO: change this if we finally release to a team ppa
     if launchpadaccess.lp_server == "staging":
         ppa_name_dest = 'staging'
     else:
-        ppa_name_dest = 'ppafdsfs'
+        ppa_name_dest = 'ppa'
 
     ppa_found = False
     for ppa in lp_team_or_user.ppas:

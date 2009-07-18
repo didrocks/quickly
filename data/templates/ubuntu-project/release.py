@@ -5,8 +5,6 @@ import sys
 import subprocess
 import webbrowser
 
-# default to looking up lpi integration related to the current dir
-pathname = os.path.dirname(sys.argv[0])
 
 from quickly import launchpadaccess, configurationhandler
 from internal import quicklyutils, packaging
@@ -39,9 +37,17 @@ elif len(args) > 2:
 try:
     float(release_version)
 except ValueError:
-    print _("Release version specified in command arguments or in setup.py " \
-            "is not a valid number.")
-    sys.exit(1)
+    # two cases:
+    # a "quickly share" has already be done, and so, we just remove all the ~privateX stuff
+    splitted_release_version = release_version.split("~public")
+    if len(splitted_release_version) > 1:
+        release_version = splitted_release_version[0]
+
+    # elsewhere, it's an error
+    else:
+        print _("Release version specified in command arguments or in setup.py " \
+                "is not a valid number.")
+        sys.exit(1)
 
 launchpad = None
 project = None
@@ -70,6 +76,8 @@ if (launchpadaccess.lp_server == "staging"):
     ppa_name = 'staging'
 else:
     ppa_name = 'ppa'
+ppa_url = launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name + "/+archive/" + ppa_name
+
 if packaging.check_for_ppa(launchpad, lp_team_or_user) != 0:
     print _("ppa:%s:%s does not exist. Please create one on launchpad before releasing") % (lp_team_or_user.name, ppa_name)
     webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name)
@@ -142,7 +150,7 @@ else:
     if return_code != 0:
         sys.exit(return_code)
 
-print _("%s %s released and building on Launchpad.") % (project_name, release_version)
+print _("%s %s released and building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, release_version, ppa_url)
 
 # now, we can bump version for next release
 next_release_version = float(release_version) + 0.1
