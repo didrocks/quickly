@@ -13,8 +13,8 @@ from quickly import configurationhandler
 # retreive useful information
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
-
 project_name = configurationhandler.project_config['project']
+
 try:
     release_version = quicklyutils.get_setup_value('version')
 except quicklyutils.cant_deal_with_setup_value:
@@ -30,9 +30,9 @@ if packaging.updatepackaging() != 0:
 # creating local binary package
 return_code = subprocess.call(["debuild", "-tc"])
 if return_code == 0:
-    print _("Ubuntu package have been successfully created in ../%s_%s_all.deb") % (project_name, release_version)
+    print _("Ubuntu package has been successfully created in ../%s_%s_all.deb") % (project_name, release_version)
 else:
-    print _("An error has occurred")
+    print _("An error has occurred during package building")
 
 sys.exit(return_code)
 

@@ -8,8 +8,8 @@ import webbrowser
 # default to looking up lpi integration related to the current dir
 pathname = os.path.dirname(sys.argv[0])
 
-from quickly import launchpadaccess
-from internal import quicklyutils
+from quickly import launchpadaccess, configurationhandler
+from internal import quicklyutils, packaging
 
 import gettext
 from gettext import gettext as _
@@ -46,6 +46,11 @@ except ValueError:
 launchpad = None
 project = None
 
+# warning: project_name can be different from project.name (one local, one on launchpad)
+if not configurationhandler.project_config:
+    configurationhandler.loadConfig()
+project_name = configurationhandler.project_config['project']
+
 # connect to LP
 launchpad = launchpadaccess.initialize_lpi()
 
@@ -71,12 +76,9 @@ subprocess.call(["bzr", "add"])
 return_code = subprocess.call(["bzr", "commit", '-m', commit_msg])
 if return_code != 0:
     print _("ERROR: quickly can't release as it can't commit. Are you sure you made any changes?")
-    sys.exit(1)
+    sys.exit(return_code)
 subprocess.call(["bzr", "tag", release_version]) # tag revision
 
-# now, we can bump version for next release
-next_release_version = float(release_version) + 0.1
-quicklyutils.set_setup_value('version', next_release_version)
 
 # TODO: handle bzr rm
 
@@ -97,30 +99,40 @@ branch_location = []
 if not ("parent branch" in bzr_info) or ((".staging." in bzr_info) and not bzr_staging) or (not (".staging." in bzr_info) and bzr_staging):
 
     branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
-    return_code = subprocess.call(["bzr", "push", "--remember", "".join(branch_location)])
+    return_code = subprocess.call(["bzr", "push", "--remember", "--overwrite", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
-        sys.exit(1)
+        sys.exit(return_code)
     
     # make first pull too
     return_code = subprocess.call(["bzr", "pull", "--remember", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release correctly: can't pull from launchpad.")
-        sys.exit(1)
+        sys.exit(return_code)
     
 else:
 
     return_code = subprocess.call(["bzr", "pull"])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't pull from launchpad.")
-        sys.exit(1)
+        sys.exit(return_code)
         
     subprocess.call(["bzr", "push"])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
-        sys.exit(1)
+        sys.exit(return_code)
 
-print _("%s released!") % release_version
+    # upload to launchpad
+    print _("pushing in launchpad")
+    return_code = packaging.push_to_ppa(launchpad.me.name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
+    if return_code != 0:
+        sys.exit(return_code)
+
+print _("%s %s released and building on Launchpad.") % (project_name, release_version)
+
+# now, we can bump version for next release
+next_release_version = float(release_version) + 0.1
+quicklyutils.set_setup_value('version', next_release_version)
 
 # as launchpad-open doesn't support staging server, put an url
 if bzr_staging:
