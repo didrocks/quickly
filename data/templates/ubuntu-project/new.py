@@ -71,13 +71,13 @@ quicklyutils.file_from_template(template_python_dir, "Preferencescamel_case_name
 quicklyutils.file_from_template(abs_path, "internal/setup.py", ".", substitutions)
 quicklyutils.file_from_template(template_python_dir, "__init__.py", target_python_dir)
 
-# create the media directory, and copy the media
-template_media_dir = abs_path + "media/"
-target_media_dir = "media"
-shutil.copytree(template_media_dir,target_media_dir)
+# create the data directory, and copy them
+template_data_dir = abs_path + "data/"
+target_data_dir = "data"
+shutil.copytree(template_data_dir,target_data_dir)
 
 # copy the desktop file
-quicklyutils.file_from_template(abs_path ,"internal/project_name.desktop",".", substitutions)
+quicklyutils.file_from_template(abs_path ,"internal/project_name.desktop.in",".", substitutions)
 
 # copy the executable file, set the mode to executable
 quicklyutils.file_from_template(abs_path ,"internal/project_name","bin", substitutions)
