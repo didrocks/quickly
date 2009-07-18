@@ -46,14 +46,21 @@ def get_setup_value(key):
     : return found value"""
     
     result = None
+    in_setup = False
     try:
         fsetup = file('setup.py', 'r')
         for line in fsetup: 
-            fields = line.split('=') # Separate variable from value
-            if key in fields[0]:
-                result = fields[1].partition(',')[0].strip()
-                result = result[1:-1]
-                break
+            if in_setup:
+                fields = line.split('=') # Separate variable from value
+                if key in fields[0]:
+                    result = fields[1].partition(',')[0].strip()
+                    result = result[1:-1]
+                    break
+            if "setup(" in line:
+                in_setup = True
+            # if end of the function, finished
+            if in_setup and ')' in line:
+                in_setup = False
         fsetup.close()
     except (OSError, IOError), e:
         print _("ERROR: Can't load setup.py file")
@@ -73,23 +80,24 @@ def set_setup_value(key, value):
     """
 
     has_changed_something = False
-    setup_found = False
+    in_setup = False
     try:
         fsetup = file('setup.py', 'r')
         fdest = file(fsetup.name + '.swp', 'w')
         for line in fsetup:
-            fields = line.split('=') # Separate variable from value
-            if key in fields[0]:
-                # add new value, uncommenting it if present
-                line = "%s='%s',\n" % (fields[0].replace('#',''), value)
-                has_changed_something = True
+            if in_setup:
+                fields = line.split('=') # Separate variable from value
+                if key in fields[0]:
+                    # add new value, uncommenting it if present
+                    line = "%s='%s',\n" % (fields[0].replace('#',''), value)
+                    has_changed_something = True
 
             if "setup(" in line:
-                setup_found = True
-            # add it if the value was not present and ")" found from "setup(" function
-            if not has_changed_something and setup_found and ")" in line:
+                in_setup = True
+            # add it if the value was not present and reach end of setup() function
+            if not has_changed_something and in_setup and ")" in line:
                 fdest.write("    %s='%s',\n" % (key, value))
-                has_changed_something = True # to avoid to be troubled by another following )
+                in_setup = False
             fdest.write(line)
         
         fdest.flush
@@ -101,3 +109,4 @@ def set_setup_value(key, value):
         sys.exit(1)
 
     return 0
+
