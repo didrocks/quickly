@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=sentence_name
+Comment=camel_case_name application
+Categories=GNOME;
+Exec=project_name
+#Icon=project_name
+Terminal=false
+Type=Application
