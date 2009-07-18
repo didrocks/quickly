@@ -1,39 +1,21 @@
 Source: quickly
-Maintainer: Quickly Developer Team <no-email-yet@invalid>
-Section: devel
-Priority: optional
-Standards-Version: 3.8.1
-Build-Depends: debhelper (>= 7)
-Build-Depends-Indep: python-support
-XS-Python-Version: >= 2.5
-Homepage: https://launchpad.net/quickly
+Section: python
+Priority: extra
+Build-Depends: cdbs (>= 0.4.43),
+ debhelper (>= 6),
+ python-central (>= 0.6.11),
+ python-distutils-extra (>= 2.3)
+Maintainer: Quickly Developer Team <quickly@lists.launchpad.net>
+Standards-Version: 3.8.2
+XS-Python-Version: current
 
 Package: quickly
 Architecture: all
+XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
-         ${python:Depends}
-Recommends: quickly-ubuntu-templates | quickly-templates,
-            python-launchpadlib,
-            bzr
+ ${python:Depends}
 Description: build new Ubuntu apps quickly
  Quickly enables for prospective programmer a way to build easily new
  apps for Ubuntu based on templates and other systems for helping them
  write their code in a guided manner. This also includes packaging and
  deploying code.
-
-Package: quickly-ubuntu-templates
-Architecture: all
-Provides: quickly-templates
-Depends: ${misc:Depends},
-         ${python:Depends},
-         python-gtk2,
-         glade,
-         python-couchdb,
-         python-launchpadlib,
-         bzr
-Description: templates for Quickly Ubuntu projects
- Quickly enables for prospective programmer a way to build easily new
- apps for Ubuntu.
- .
- This package provides templates to create new Ubuntu projects.
-

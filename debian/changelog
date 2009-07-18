@@ -1,5 +1,5 @@
-quickly (0.0-0ubuntu1~dooz1) karmic; urgency=low
+quickly (0.1) karmic; urgency=low
 
   * Initial release.
 
- -- Loic Minier <lool@dooz.org>  Thu, 28 May 2009 13:30:02 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Sat, 18 Jul 2009 14:11:39 +0200

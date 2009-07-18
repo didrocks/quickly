@@ -1,39 +1,16 @@
-This package was debianized by Loïc Minier <lool@dooz.org> on
-Thu, 28 May 2009 13:36:21 +0200.
+Format-Specification: http://wiki.debian.org/Proposals/CopyrightFormat
+Upstream-Name: quickly
+Upstream-Maintainer: Quickly Developer Team <quickly@lists.launchpad.net>
+Upstream-Source: https://launchpad.net/quickly
 
-It was downloaded from <https://launchpad.net/quickly>
-
-Upstream Author(s):
-
-   Rick Spencer <rick.spencer@canonical.com>
-   Didier Roche <didrocks@ubuntu.com>
-   Ken VanDine <ken.vandine@canonical.com>
-
-Copyright:
-    Copyright (C) 2009 Canonical Ltd.
-    Copyright (C) 2009 Rick Spencer <rick.spencer@canonical.com>
-    Copyright (C) 2009 Didier Roche <didrocks@ubuntu.com>
-    Copyright (C) 2009 Ken VanDine <ken.vandine@canonical.com>
-
-License:
-
-    This package is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 3 of the License, or (at your option) any later version.
-
-    This package is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this package; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
-
-On Debian systems, the complete text of the GNU Lesser General
-Public License can be found in `/usr/share/common-licenses/LGPL-3'.
-
-The Debian packaging is under the same license as the Quickly project and is
-    Copyright (C) 2009 Loïc Minier <lool@dooz.org>
-
+Files: *
+Copyright: (C) 2009 Canonical Ltd.fds
+Copyright: (C) 2009 Didier Roche
+Copyright: (C) 2009 Ken VanDine
+Copyright: (C) 2009 Loïc Minier
+Copyright: (C) 2009 Martin Albisetti   	 
+Copyright: (C) 2009 Rick Spencer
+Copyright: (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+License: GPL v3
+ The full text of the GPL is distributed in
+ /usr/share/common-licenses/GPL-3 on Debian systems.
