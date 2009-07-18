@@ -26,9 +26,10 @@ def updatepackaging():
     # that means debian/ under unknown
     bzr_instance = subprocess.Popen(["bzr", "status"], stdout=subprocess.PIPE)
     bzr_status = bzr_instance.stdout.read()
-    if re.match(".*unknown:\\n.*debian/\\n.*", bzr_status):
+    if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
         dpkg_return_code = subprocess.call(["bzr", "add"])
-        dpkg_return_code = dpkg_return_code and subprocess.call(["bzr", "commit", "-m 'Creating ubuntu package'"])
-    
+        if dpkg_return_code == 0:
+            dpkg_return_code = subprocess.call(["bzr", "commit", "-m 'Creating ubuntu package'"])
+
     return(dpkg_return_code)
 
