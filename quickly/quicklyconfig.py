@@ -6,6 +6,6 @@
 __version__ = 0.1
 
 # where quickly will head for templates (if not related to ../<quickly module path>, nor in ~/.quickly-data)
-__template_sys_directory__ = '/usr/share/quickly'
+__template_sys_directory__ = '/usr/share/quickly/templates'
 
 

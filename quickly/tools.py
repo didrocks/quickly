@@ -6,6 +6,8 @@ import sys
 import gettext
 from gettext import gettext as _
 
+import quicklyconfig
+
 def quickly_name(name):
     """Enforce quickly name to be ascii only and lowercase
     
@@ -33,16 +35,16 @@ def get_template_directories():
 
     # default to looking up templates in the current dir
     template_directories = []
-    if os.path.exists(os.path.expanduser('~/.quickly-data/templates/')):
-        template_directories.append(os.path.expanduser('~/.quickly-data/templates/'))
+    if os.path.exists(os.path.expanduser('~/.quickly-data/templates')):
+        template_directories.append(os.path.expanduser('~/.quickly-data/templates'))
     # for trunk usage
     pathname = os.path.dirname(sys.argv[0])
-    abs_template_path = os.path.abspath(pathname + '../templates')
+    abs_template_path = os.path.abspath(pathname + '/../data/templates/')
     if os.path.exists(abs_template_path):
         template_directories.append(abs_template_path)
     # for installed usage
     pathname = os.path.dirname(__file__)
-    abs_template_path = os.path.abspath(pathname + '/../templates')
+    abs_template_path = os.path.abspath(quicklyconfig.__template_sys_directory__)
     if os.path.exists(abs_template_path):
         template_directories.append(abs_template_path)
     if not template_directories:
