@@ -3,7 +3,7 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-requires project_name_window 1.0 -->
   <!-- interface-naming-policy project-wide -->
-  <!-- interface-local-resource-path /home/rick/quickly/templates/ubuntu-project/data/media -->
+  <!-- interface-local-resource-path ../data/media -->
   <object class="camel_case_nameWindow" id="project_name_window">
     <property name="width_request">600</property>
     <property name="height_request">500</property>
