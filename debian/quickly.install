@@ -1,6 +1,5 @@
-etc/
-usr/share/bin
-usr/share/locale/
-usr/share/pyshared/
-usr/share/doc/
-usr/share/pyshared-data/
+debian/tmp/etc/
+debian/tmp/usr/bin/
+debian/tmp/usr/lib/
+debian/tmp/usr/share/doc/
+debian/tmp/usr/share/locale/
