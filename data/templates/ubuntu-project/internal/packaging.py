@@ -1,8 +1,8 @@
-
 import re
 import subprocess
 import sys
 
+from quickly import launchpadaccess
 
 import gettext
 from gettext import gettext as _
@@ -48,11 +48,38 @@ def push_to_ppa(ppa_user, changes_file):
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
 
+    if launchpadaccess.lp_server == "staging":
+        ppa_targeted = "ppa:%s/%s" % (ppa_user, "staging")
+    else:
+        ppa_targeted = "ppa:%s/%s" % (ppa_user, "ppa")
+
     # now, pushing it to launchpad personal ppa (or team later)
-    return_code = subprocess.call(["dput", "ppa:%s/ppa" % ppa_user, changes_file])
+    return_code = subprocess.call(["dput", ppa_targeted, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")
         return(return_code)
     
+    return(0)
+
+
+def check_for_ppa(launchpad, lp_team_or_user):
+    """ check if ppa exist """
+
+    # check that the owner really has an ppa:
+    #TODO: change this if we finally release to a team ppa
+    if launchpadaccess.lp_server == "staging":
+        ppa_name_dest = 'staging'
+    else:
+        ppa_name_dest = 'ppafdsfs'
+
+    ppa_found = False
+    for ppa in lp_team_or_user.ppas:
+        if ppa.name == ppa_name_dest:
+            ppa_found = True
+            break
+
+    if not ppa_found:
+        return(1)
+
     return(0)
 

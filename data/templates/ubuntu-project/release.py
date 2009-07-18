@@ -61,6 +61,20 @@ quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_addres
 # get the project now and save the url into setup.py
 project = launchpadaccess.get_project(launchpad)
 quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + project.name)
+
+
+# check that the owner really has an ppa:
+#TODO: change this if we finally release to a team ppa
+lp_team_or_user = launchpad.me
+if (launchpadaccess.lp_server == "staging"):
+    ppa_name = 'staging'
+else:
+    ppa_name = 'ppa'
+if packaging.check_for_ppa(launchpad, lp_team_or_user) != 0:
+    print _("ppa:%s:%s does not exist. Please create one on launchpad before releasing") % (lp_team_or_user.name, ppa_name)
+    webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name)
+    sys.exit(1)
+
     
 # check if already released with this name
 if release_version: # TODO: remove test when release detected
@@ -69,7 +83,7 @@ if release_version: # TODO: remove test when release detected
     if release_version in bzr_tags:
         print _("ERROR: quickly can't release: %s seems to be already released. Choose another name.") % release_version
         sys.exit(1)
-        
+
     
 # add files, commit and push !
 subprocess.call(["bzr", "add"])
@@ -123,8 +137,8 @@ else:
         sys.exit(return_code)
 
     # upload to launchpad
-    print _("pushing in launchpad")
-    return_code = packaging.push_to_ppa(launchpad.me.name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
+    print _("pushing to launchpad")
+    return_code = packaging.push_to_ppa(lp_team_or_user.name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
     if return_code != 0:
         sys.exit(return_code)
 
@@ -135,7 +149,7 @@ next_release_version = float(release_version) + 0.1
 quicklyutils.set_setup_value('version', next_release_version)
 
 # as launchpad-open doesn't support staging server, put an url
-if bzr_staging:
+if launchpadaccess.lp_server == "staging":
     webbrowser.open(launchpadaccess.LAUNCHPAD_CODE_STAGING_URL + '/~' + launchpad.me.name + '/' + project.name + '/quickly_trunk')
 else:
     subprocess.call(["bzr", "launchpad-open"])
