@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-18 13:43+0200\n"
+"POT-Creation-Date: 2009-07-18 15:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -189,23 +189,23 @@ msgstr ""
 msgid "quickly saved"
 msgstr ""
 
-#: ../quickly/tools.py:18
+#: ../quickly/tools.py:20
 msgid ""
 "\n"
 "ERROR: unpermitted character in name.\n"
 "Letters and underscore (\"_\") only."
 msgstr ""
 
-#: ../quickly/tools.py:49
+#: ../quickly/tools.py:51
 msgid "No template directory found. Aborting"
 msgstr ""
 
-#: ../quickly/tools.py:68
+#: ../quickly/tools.py:70
 #, python-format
 msgid "ERROR: Template '%s' not found."
 msgstr ""
 
-#: ../quickly/tools.py:69 ../bin/quickly.py:156 ../bin/quickly.py:228
+#: ../quickly/tools.py:71 ../bin/quickly.py:156 ../bin/quickly.py:228
 #: ../bin/quickly.py:251 ../bin/quickly.py:280 ../bin/quickly.py:301
 #: ../bin/quickly.py:312 ../bin/quickly.py:320
 msgid "Aborting"

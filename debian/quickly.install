@@ -1,5 +1,5 @@
 etc/
-usr/bin
+usr/share/bin
 usr/share/locale/
 usr/share/pyshared/
 usr/share/doc/
