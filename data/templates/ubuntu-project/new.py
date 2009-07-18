@@ -76,13 +76,6 @@ template_media_dir = abs_path + "media/"
 target_media_dir = "media"
 shutil.copytree(template_media_dir,target_media_dir)
 
-#copy over the help
-template_help_dir = abs_path + "help"
-target_help_dir = "help"
-
-
-shutil.copytree(template_help_dir,target_help_dir)
-
 #def file_from_template(template_dir, template_file, target_dir, substitutions, rename = True):
 #copy the executable file, set the mode to executable
 quicklyutils.file_from_template(abs_path ,"internal/project_name","bin", substitutions)
