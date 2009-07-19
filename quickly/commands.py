@@ -28,10 +28,18 @@ from gettext import gettext as _
 def pre_new(template, project_dir, command_args):
     """Create the project directory before new command call"""
 
-    project_name = command_args[0]
+    path_and_project = command_args[0].split('/')
+    project_name = path_and_project[-1]
+    
+    # if a path is present, create it
+    if len(path_and_project) > 1:
+        path = str(os.path.sep).join(path_and_project[0:-1])
+        if not os.path.exists(path):
+            os.makedirs(path)
+        os.chdir(path)
     
     # check that project name follow quickly rules and reformat it.
-    quickly_project_name = tools.quickly_name(command_args[0])
+    quickly_project_name = tools.quickly_name(project_name)
 
     #bail if the name if taken
     if os.path.exists(project_name):

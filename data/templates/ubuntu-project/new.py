@@ -30,16 +30,22 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
+# get origin path
+
+pathname = os.path.dirname(__file__)
+abs_path = os.path.abspath(pathname) + "/"
+
 # get the name of the project
 if len(sys.argv)< 2:
     print _("""
 ERROR: project name not defined. Usage is project_name""")
     sys.exit(1)
 
-pathname = os.path.dirname(sys.argv[0])
-abs_path = os.path.abspath(pathname) + "/"
+path_and_project = sys.argv[1].split('/')
+project_name = path_and_project[-1]
 
-project_name = quickly.tools.quickly_name(sys.argv[1])
+# check that project name follow quickly rules and reformat it.
+project_name = quickly.tools.quickly_name(project_name)
 
 # create additional directories
 ui_dir = "ui"
@@ -111,7 +117,7 @@ subprocess.call(["./bin/" + project_name])
 # put project name in setup.py
 quicklyutils.set_setup_value('name', project_name)
 
-print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly help' for quickly tutorial and reference") % project_name
+print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly help' for quickly tutorial and reference") % os.getcwd()
 
 sys.exit(0)
 
