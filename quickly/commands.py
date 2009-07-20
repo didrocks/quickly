@@ -25,8 +25,8 @@ from quickly import tools
 import gettext
 from gettext import gettext as _
 
-def pre_new(template, project_dir, command_args):
-    """Create the project directory before new command call"""
+def pre_create(template, project_dir, command_args):
+    """Create the project directory before create command call"""
 
     path_and_project = command_args[0].split('/')
     project_name = path_and_project[-1]
@@ -84,10 +84,10 @@ def getstarted(template, project_dir, command_args):
     Welcome to quickly!
 -------------------------------
 
-You can create a project in executing 'quickly new <template_name> <your project>'.
+You can create a project in executing 'quickly create <template_name> <your project>'.
 
 Example:
-$ quickly new ubuntu-project my_awesome_project
+$ quickly create ubuntu-project my_awesome_project
 
 Have Fun!''')
     return 0

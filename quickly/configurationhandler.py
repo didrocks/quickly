@@ -59,7 +59,7 @@ def loadConfig(global_config=None):
 def saveConfig(global_config=None, config_file_path=None):
     """ save the configuration file from config dictionnary in project or global quuickly file
 
-    config_file_path is optional (needed by the new command, for instance).
+    config_file_path is optional (needed by the create command, for instance).
     getcwd() is taken by default.    
     
     keep commentaries and layout from original file """

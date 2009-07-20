@@ -49,7 +49,7 @@ HOW TO GET STARTED
 ------------------
 
 1) Create a Ubuntu Project and run the tutorial:
-$ quickly new ubuntu-project foo
+$ quickly create ubuntu-project foo
 $ cd foo
 $ quickly help
 

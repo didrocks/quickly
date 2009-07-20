@@ -64,7 +64,7 @@ gettext.textdomain('quickly')
 args = sys.argv
 
 if len(args) == 1:
-    # TODO: try to guess new release version in setup.py
+
     try:
         release_version = quicklyutils.get_setup_value('version')
     except quicklyutils.cant_deal_with_setup_value:

@@ -34,7 +34,7 @@ if os.path.exists(quickly_root_directory + '/quickly') and quickly_root_director
 import quickly
 from quickly import commands, configurationhandler, tools, quicklyconfig
 
-command_followed_by_template = ('new', 'quickly')
+command_followed_by_template = ('create', 'quickly')
 
 def usage():
     print _("""Usage:
@@ -49,12 +49,12 @@ Options:
     -h, --help                 Show help information
 
 Commands:
-    new <template> <project-name> (template is mandatory for this command)
-    quickly <template_origin> <template_dest> to create a new derived template
+    create <template> <project-name> (template is mandatory for this command)
+    quickly <template_origin> <template_dest> to create a create derived template
     getstarted to get some starting hints
 
 Examples:
-    quickly new ubuntu-project foobar
+    quickly create ubuntu-project foobar
     quickly push 'awesome new comment system'
     quickly -t cool-template push 'awesome new comment system'""")
 
@@ -114,7 +114,7 @@ def get_commands():
                         available_completion.append(os.path.basename(template))
 
         elif len(opt_command) > 1:
-            # if no template, check the new command for templates proposal or -t completion
+            # if no template, check the create command for templates proposal or -t completion
             # (-1 is space or template begining)
             if (opt_command[len(opt_command) - 2] in command_followed_by_template and not opt_template):
                 for template_dir in tools.get_template_directories():
@@ -137,7 +137,7 @@ def get_commands():
             not_real_commands = ['quicklyconfig', 'configurationhandler', 'gettext', 'os', 'shutil', 'tools']
             commands_in_module = [ command for command in dir(commands) if not command.startswith('_') and not command.startswith('pre_') \
                                                           and not command.startswith('post_') and not command in not_real_commands]
-            commands_in_module.append('new')
+            commands_in_module.append('create')
             available_completion.extend(commands_in_module)
 
     print " ".join(available_completion)
@@ -245,8 +245,8 @@ def main():
         usage()
         return 1
 
-    # new command can't be launched in an existing project (don't create mess for the user)
-    if 'new' in opt_command:
+    # create command can't be launched in an existing project (don't create mess for the user)
+    if 'create' in opt_command:
         try:
             project_path = tools.get_root_project_path()
         except tools.project_path_not_found:
@@ -259,7 +259,7 @@ def main():
     # get the template if needed
     if need_template:
         # if processing a "out_off_project_tree_command", template argument
-        # and project name must be there (with -t, --template or just following the command): new, quickly
+        # and project name must be there (with -t, --template or just following the command): create, quickly
         if out_off_project_tree_command:
             if not opt_has_template:
                 if len(opt_command) < 3 or opt_command[1].startswith('-'):

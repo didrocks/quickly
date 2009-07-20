@@ -93,7 +93,7 @@ def get_template_directory(template):
 def get_root_project_path(config_file_path=None):
     """Try to guess where the .quickly config file is.
 
-    config_file_path is optional (needed by the new command, for instance).
+    config_file_path is optional (needed by the create command, for instance).
     getcwd() is taken by default.
     If nothing found, try to find it up to 6 parent directory
 
