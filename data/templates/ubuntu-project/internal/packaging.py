@@ -19,6 +19,7 @@ import re
 import subprocess
 import sys
 
+
 from quickly import launchpadaccess
 
 import gettext
