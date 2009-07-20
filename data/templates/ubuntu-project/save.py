@@ -38,11 +38,11 @@ commit_msg = " ".join(sys.argv[1:])
 if commit_msg == "":
    commit_msg = _('quickly saved')
 
-print commit_msg
-
 #save away
 subprocess.call(["bzr", "add"])
 return_code = subprocess.call(["bzr", "commit", "-m" + commit_msg])
+if return_code == 3:
+    print _("It seems that you have no change to record.")
 
 sys.exit(return_code)
 

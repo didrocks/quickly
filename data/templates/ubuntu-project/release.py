@@ -76,10 +76,14 @@ elif len(args) == 2:
     # add .0 to release if nothing specified (avoid for mess in search in bzr tags)
     if "." not in release_version:
         release_version + '.0'
-    commit_msg = _('quickly released: %s' % release_version)
+    commit_msg = _('quickly released: %s' % release_version)    
+    # write release version to setup.py if user specify it (needed for package build)
+    quicklyutils.set_setup_value('version', release_version)
 elif len(args) > 2:
     release_version = args[1]
     commit_msg = " ".join(args[2:])
+    # write release version to setup.py if user specify it (needed for package build)
+    quicklyutils.set_setup_value('version', release_version)
 
 try:
     float(release_version)
@@ -143,8 +147,8 @@ if release_version: # TODO: remove test when release detected
 # add files, commit and push !
 subprocess.call(["bzr", "add"])
 return_code = subprocess.call(["bzr", "commit", '-m', commit_msg])
-if return_code != 0:
-    print _("ERROR: quickly can't release as it can't commit. Are you sure you made any changes?")
+if return_code != 0 and return_code != 3:
+    print _("ERROR: quickly can't release as it can't commit with bzr")
     sys.exit(return_code)
 subprocess.call(["bzr", "tag", release_version]) # tag revision
 
@@ -191,14 +195,14 @@ else:
         print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(return_code)
 
-    # upload to launchpad
-    print _("pushing to launchpad")
-    return_code = packaging.push_to_ppa(lp_team_or_user.name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
-    if return_code != 0:
-        sys.exit(return_code)
+
+# upload to launchpad
+print _("pushing to launchpad")
+return_code = packaging.push_to_ppa(lp_team_or_user.name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
+if return_code != 0:
+    sys.exit(return_code)
 
 print _("%s %s released and building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, release_version, ppa_url)
-
 # now, we can bump version for next release
 next_release_version = float(release_version) + 0.1
 quicklyutils.set_setup_value('version', next_release_version)
