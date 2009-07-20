@@ -35,7 +35,8 @@ def pre_new(template, project_dir, command_args):
     if len(path_and_project) > 1:
         path = str(os.path.sep).join(path_and_project[0:-1])
         if not os.path.exists(path):
-            os.makedirs(path)
+            print _("%s does not exist") % path
+            return 1
         os.chdir(path)
     
     # check that project name follow quickly rules and reformat it.
