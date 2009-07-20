@@ -58,7 +58,7 @@ if packaging.updatepackaging() != 0:
 
 
 # creating local binary package
-return_code = subprocess.call(["debuild", "-tc"])
+return_code = subprocess.call(["debuild", "-tc", "-I.bzr"])
 if return_code == 0:
     print _("Ubuntu package has been successfully created in ../%s_%s_all.deb") % (project_name, release_version)
 else:
