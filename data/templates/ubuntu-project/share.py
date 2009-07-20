@@ -20,10 +20,14 @@ $quickly share
 
 Updates your PPA with the the latest saved project changes.
 
-Before using quickly share, you should:
-1. Create a launchpad account
-2. Add a PPA to your launchpad account
-3. Use $quickly save to save changes
+Before running quickly release, you should: create your account
+on http://launchpad.net.
+You also have to add a PPA to your launchpad account.
+
+Name, email and version setup.py will be automatically changed.
+(version will be <current_release~publicX> where X will be incremented
+at each quickly share execution)
+You can modify the description and long description if you wish.
 
 """
 import sys

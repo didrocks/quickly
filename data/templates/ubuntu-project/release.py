@@ -21,11 +21,30 @@ $quickly release
 Posts a release of your project to a PPA on launchpad so that
 users can install the application on their system. 
 
-Before running quickly release, you should:
-1. Create a project page for your project on http://launchpad.net
-2. Edit setup.py and *.desktop.in where * is the name of your project
-3. Run $quickly package and test your package to make sure it
-installs as expected.
+You can also execute:
+$quickly release <release_number> of you don't want to use current
+release_number. The release_number must be a number.
+
+$quickly release <release_number> notes about changes
+where "notes about changes" is optional text describing what changes
+were made since the last save
+
+
+Before running quickly release, you should: create your account
+and a project page on http://launchpad.net.
+You also have to add a PPA to your launchpad account.
+
+Name, email and version setup.py will be automatically changed.
+(version will be <current_release> and bzr will commit and tagged.
+Once the release is done,  <current_release> will be incremented
+by 0.1 to be ready for next release.
+If you previously used quickly shared <current_release>~publicX
+will be dropped to release <current_release> version
+(<current_release>~publicX   <   <current_release>)
+You can modify the description and long description if you wish.
+
+You can run $quickly package and test your package to make sure it
+installs as expected. (This is not mandatory)
 
 """
 import os

@@ -16,16 +16,17 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 Usage:
-$quickly new ubuntu-project name
+$quickly new ubuntu-project path/to/project_name
 
-where "name" is one or more words seperated by an underscore.
+where "project_name" is one or more words separated by an underscore and
+path/to can be any existing path.
 
 This will create and run a new project, including Python code, 
 Glade files, and packaging files to make the project work. After
 creating the project, get started by:
 
 1. Changing your working directory to the new project:
-$cd name
+$cd path/to/project_name
 
 2. Edit the UI with Glade:
 $quickly glade
