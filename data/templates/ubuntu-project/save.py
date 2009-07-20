@@ -14,7 +14,18 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Usage:
+$quickly save notes about changes
+where "notes about changes" is optional text describing what changes
+were made since the last save.
 
+This command commits all changes since the last save to bzr. Note that 
+it does not push changes to any back up location. If you need revert
+or otherwise use the revision control, us bzr directly:
+$bzr help
+
+"""
 import sys
 import subprocess
 

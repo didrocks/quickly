@@ -14,7 +14,20 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Usage:
+$quickly release
 
+Posts a release of your project to a PPA on launchpad so that
+users can install the application on their system. 
+
+Before running quickly release, you should:
+1. Create a project page for your project on http://launchpad.net
+2. Edit setup.py and *.desktop.in where * is the name of your project
+3. Run $quickly package and test your package to make sure it
+installs as expected.
+
+"""
 import os
 import sys
 import subprocess

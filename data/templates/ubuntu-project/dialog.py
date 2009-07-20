@@ -15,22 +15,55 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Usage:
+$quickly dialog dialog_name
+where dialog_name is one or more words seperated with underscore
+
+This will create:
+1. A subclass of gtk.Dialog called DialogNameDialog in the module DialogNameDialog.py
+2. A glade file called DialogNameDialog.ui in the ui directory
+3. A catalog file called dialog_name_dialog.xml also in the ui directory
+
+To edit the UI for the dialog, run:
+$quickly glade
+
+To edit the behavior, run:
+$quickly edit
+
+To use the dialog you have to invoke it from another python file:
+1. Import the dialog
+import DialogNameDialog
+
+2. Create an instance of the dialog
+dialog = DialogNameDialog.NewDialogNameDialog()
+
+3. Run the dialog and hide the dialog
+result = dialog.run()
+dialog.hide()
+
+"""
 import os
 import sys
 import internal.quicklyutils as quicklyutils
+from quickly import configurationhandler
+import quickly.tools
 
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)
 
-project_path = os.path.abspath(os.curdir)
-project_name = os.path.basename(project_path)
+dialog_name = quickly.tools.quickly_name(sys.argv[1])
 
-dialog_name = quicklyutils.quickly_name(sys.argv[1])
+path_and_project = sys.argv[0].split('/')
+
+if not configurationhandler.project_config:
+    configurationhandler.loadConfig()
+project_name = configurationhandler.project_config['project']
 
 template_ui_dir = abs_path + "/ui/"
 template_python_dir = abs_path + "/python/"
 target_ui_dir = "ui"
-target_python_dir = "python"
+target_python_dir = project_name
 
 dialog_sentence_name, dialog_camel_case_name = quicklyutils.conventional_names(dialog_name)
 project_sentence_name, project_camel_case_name = quicklyutils.conventional_names(project_name)

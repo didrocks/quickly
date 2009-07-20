@@ -14,7 +14,18 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Usage:
+$quickly share
 
+Updates your PPA with the the latest saved project changes.
+
+Before using quickly share, you should:
+1. Create a launchpad account
+2. Add a PPA to your launchpad account
+3. Use $quickly save to save changes
+
+"""
 import sys
 import subprocess
 import webbrowser

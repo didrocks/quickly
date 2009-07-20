@@ -14,6 +14,15 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Usage:
+$quickly edit
+
+A convenience command to open all of your python files in your project 
+directory in your default editor, ready for editing.
+
+"""
+
 
 import subprocess
 import os

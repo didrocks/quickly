@@ -14,6 +14,18 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Usage:
+$quickly glade
+
+Opens Glade UI editor so that you can edit the UI for dialogs
+and windows in your project. Note that you *must* open Glade
+in this manner for quickly to work. If you try to open Glade
+directly, and the open the UI files, Glade will throw errors
+and won't open the files.
+
+"""
+
 
 import os
 import subprocess

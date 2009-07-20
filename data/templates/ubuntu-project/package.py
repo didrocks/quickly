@@ -14,6 +14,19 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Usage:
+$quickly package
+
+Creates a debian file (deb) from your project. Before running
+the package command you should:
+
+1. Edit the *.desktop.in file, where * is the name of 
+your project.
+2. Edit the setup.py file to include your email, name, and
+version number for the project.
+
+"""
 
 import sys
 import subprocess
