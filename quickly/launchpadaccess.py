@@ -33,8 +33,8 @@ except ImportError:
     suggestion = _("Check whether python-launchpadlib is installed")
 
 
-import bzrbinding
-import configurationhandler
+from quickly import bzrbinding
+from quickly import configurationhandler
 
 import gettext
 from gettext import gettext as _

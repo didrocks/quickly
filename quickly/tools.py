@@ -22,7 +22,7 @@ import sys
 import gettext
 from gettext import gettext as _
 
-import quicklyconfig
+from quickly import quicklyconfig
 
 def quickly_name(name):
     """Enforce quickly name to be ascii only and lowercase

@@ -41,7 +41,7 @@ import os
 import shutil
 import subprocess
 
-import quickly.tools
+from quickly import tools
 from internal import quicklyutils
 
 import gettext
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     project_name = path_and_project[-1]
 
     # check that project name follow quickly rules and reformat it.
-    project_name = quickly.tools.quickly_name(project_name)
+    project_name = tools.quickly_name(project_name)
 
     # create additional directories
     ui_dir = "ui"
