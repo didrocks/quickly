@@ -78,24 +78,34 @@ for root, dirs, files in os.walk('./'):
                 new_file.close()
 
         if name == project_name:
+            bin_file = os.path.join(root, name)
+
             #read into a string, and delete the shbang
             temp_str = string_from_file(root, name)
             temp_str.replace ("#!/usr/bin/python","")
+            if has_license(temp_str):
+                print "Skipping %s. It appears to already be licensed" %bin_file
 
-            #write the newe file
-            bin_file = os.path.join(root, name)
-            new_file = open(bin_file, 'w')
-            shbang = "#!/usr/bin/python\n"
-            print "adding license to %s" %bin_file
-            new_file.write(shbang + py_lic + temp_str)
+            else:
+                #write the newe file
+                new_file = open(bin_file, 'w')
+                shbang = "#!/usr/bin/python\n\n"
+                print "adding license to %s" %bin_file
+                new_file.write(shbang + py_lic + temp_str)
+                new_file.flush()
+                new_file.close()
 
+        if name.endswith('.ui') or name.endswith('.xml'):
+            ui_file = os.path.join(root, name)
+            temp_str = string_from_file(root, name)
+            if has_license(temp_str):
+                print "Skipping %s. It appears to already be licensed" %ui_file
 
-        if name.endswith('.ui'):
-            pass
+            else:
+                new_file = open(ui_file, 'w')
+                print "adding license to %s" %ui_file
+                #new_file.write(xml_lic + temp_str)
+                #new_file.flush()
+                #new_file.close()
+                #glade files don't load if it does not begin with an element
 
-#check it appears that the file has a license
-#for python files
-#for each line, put a #, then append to the top of the file
-
-#for xml files, put them in a comment
-#<!-- This is a comment --> 
