@@ -16,6 +16,7 @@ else:
 sys.path.insert(0, os.path.dirname(fullPath))
 
 from project_name import Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog
+from project_name.project_nameconfig import getdatapath
 
 class camel_case_nameWindow(gtk.Window):
     __gtype_name__ = "camel_case_nameWindow"
@@ -82,11 +83,8 @@ def Newcamel_case_nameWindow():
     """
 
     #look for the ui file that describes the ui
-    if os.path.exists(os.path.join('ui', 'camel_case_nameWindow.ui')):
-        ui_filename = os.path.join('ui', 'camel_case_nameWindow.ui')
-    elif os.path.exists(os.path.join('/usr/share/project_name/', 'camel_case_nameWindow.ui')):
-        ui_filename = os.path.join('/usr/share/project_name/', 'camel_case_nameWindow.ui')
-    else:
+    ui_filename = os.path.join(getdatapath(), 'ui', 'camel_case_nameWindow.ui')
+    if not os.path.exists(ui_filename):
         ui_filename = None
 
     builder = gtk.Builder()

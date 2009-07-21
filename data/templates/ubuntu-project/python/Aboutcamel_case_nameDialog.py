@@ -2,6 +2,8 @@ import sys
 import os
 import gtk
 
+from project_name.project_nameconfig import getdatapath
+
 class Aboutcamel_case_nameDialog(gtk.AboutDialog):
     __gtype_name__ = "Aboutcamel_case_nameDialog"
 
@@ -37,11 +39,8 @@ def NewAboutcamel_case_nameDialog():
     """
 
     #look for the ui file that describes the ui
-    if os.path.exists(os.path.join('ui', 'Aboutcamel_case_nameDialog.ui')):
-        ui_filename = os.path.join('ui', 'Aboutcamel_case_nameDialog.ui')
-    elif os.path.exists(os.path.join('/usr/share/project_name/', 'Aboutcamel_case_nameDialog.ui')):
-        ui_filename = os.path.join('/usr/share/project_name/', 'Aboutcamel_case_nameDialog.ui')
-    else:
+    ui_filename = os.path.join(getdatapath(), 'ui', 'Aboutcamel_case_nameDialog.ui')
+    if not os.path.exists(ui_filename):
         ui_filename = None
 
     builder = gtk.Builder()

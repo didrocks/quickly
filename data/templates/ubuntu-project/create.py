@@ -69,10 +69,10 @@ project_name = path_and_project[-1]
 project_name = tools.quickly_name(project_name)
 
 # create additional directories
-ui_dir = "ui"
-print _("Creating project directory %s") % ui_dir
-os.mkdir(ui_dir)
-print _("Directory %s created\n") % ui_dir
+data_dir = "data"
+print _("Creating project directory %s") % data_dir
+os.mkdir(data_dir)
+print _("Directory %s created\n") % data_dir
 
 python_dir = project_name
 print _("Creating project directory %s") % python_dir
@@ -87,8 +87,9 @@ print _("Directory %s created\n") % bin_dir
 sentence_name, camel_case_name = quicklyutils.conventional_names(project_name)
 
 # copy files
-template_ui_dir = abs_path + "ui/"
-target_ui_dir = "ui"
+template_ui_dir = abs_path + "data/ui/"
+target_ui_dir = "data/ui"
+os.mkdir(target_ui_dir)
 
 substitutions = (("project_name",project_name),
             ("camel_case_name",camel_case_name),
@@ -108,15 +109,16 @@ template_python_dir = abs_path + "python/"
 target_python_dir = project_name
 quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "Preferencescamel_case_nameDialog.py", target_python_dir, substitutions)
+quicklyutils.file_from_template(template_python_dir, "project_nameconfig.py", target_python_dir, substitutions)
 
 # copy the files needed for packaging
 quicklyutils.file_from_template(abs_path, "internal/setup.py", ".", substitutions)
 quicklyutils.file_from_template(template_python_dir, "__init__.py", target_python_dir)
 
-# create the data directory, and copy them
-template_data_dir = abs_path + "data/"
-target_data_dir = "data"
-shutil.copytree(template_data_dir,target_data_dir)
+# create the media directory, and copy them
+template_media_dir = abs_path + "data/media"
+target_media_dir = "data/media"
+shutil.copytree(template_media_dir,target_media_dir)
 
 # copy the desktop file
 quicklyutils.file_from_template(abs_path ,"internal/project_name.desktop.in",".", substitutions)
@@ -133,7 +135,7 @@ subprocess.call(["bzr", "commit", "-m", "Initial project creation with Quickly!"
 
 # run the new application
 print _("Launching your newly created project!")
-subprocess.call(["./bin/" + project_name])
+subprocess.call(['./' + project_name], cwd='bin/')
 
 # put project name in setup.py
 quicklyutils.set_setup_value('name', project_name)

@@ -48,14 +48,12 @@ def update_data_path(prefix, oldvalue=None):
                 # update to prefix, store oldvalue
                 if not oldvalue:
                     oldvalue = fields[1]
-                    line = "%s = '%s'\n" % ('__quickly_data_directory__', prefix)
-                    print "on modifie ici: %s" % line
+                    line = "%s = '%s'\n" % (fields[0], prefix)
                 else: # restore oldvalue
-                    line = "%s = %s" % ('__quickly_data_directory__', oldvalue)
-                    print "on modifie une deuxième fois: %s" % line
+                    line = "%s = %s" % (fields[0], oldvalue)
             # update version if we forget it
             elif fields[0] == '__version__':
-                line = "%s = %s\n" % ('__version__', VERSION)
+                line = "%s = %s\n" % (fields[0], VERSION)
             fout.write(line)
 
         fout.flush()
@@ -74,7 +72,7 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
             print "WARNING: You don't use a standard --prefix installation, take care that you eventually " \
             "need to update quickly/quicklyconfig.py file to adjust __quickly_data_directory__. You can " \
             "ignore this warning if you are packaging and uses --prefix."
-        previous_value = update_data_path(self.prefix)
+        previous_value = update_data_path(self.prefix + '/share/quickly/')
         DistUtilsExtra.auto.install_auto.run(self)
         update_data_path(self.prefix, previous_value)
 

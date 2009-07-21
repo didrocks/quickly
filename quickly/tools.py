@@ -51,8 +51,13 @@ def get_quickly_data_path():
     is specified at installation time.
     """
 
-    pathname = os.path.dirname(__file__)
-    abs_data_path = os.path.abspath(pathname + '/' + quicklyconfig.__quickly_data_directory__)
+    # get pathname absolute or relative
+    if quicklyconfig.__quickly_data_directory__.startswith('/'):
+        pathname = quicklyconfig.__quickly_data_directory__
+    else:
+        pathname = os.path.dirname(__file__) + '/' + quicklyconfig.__quickly_data_directory__
+    abs_data_path = os.path.abspath(pathname)
+
     if os.path.exists(abs_data_path):
         return abs_data_path
     else:

@@ -4,6 +4,8 @@ import gtk
 from couchdb.client import Server
 from couchdb.schema import Document
 
+from project_name.project_nameconfig import getdatapath
+
 class Preferencescamel_case_nameDialog(gtk.Dialog):
     __gtype_name__ = "Preferencescamel_case_nameDialog"
     prefernces = {}
@@ -102,13 +104,9 @@ def NewPreferencescamel_case_nameDialog():
     creating a Preferencescamel_case_nameDialog instance directly.
     """
 
-    ui_file = 'Preferencescamel_case_nameDialog.ui'
     #look for the ui file that describes the ui
-    if os.path.exists(os.path.join('ui', ui_file)):
-        ui_filename = os.path.join('ui', ui_file)
-    elif os.path.exists(os.path.join('/usr/share/project_name/', ui_file)):
-        ui_filename = os.path.join('/usr/share/project_name/', ui_file)
-    else:
+    ui_filename = os.path.join(getdatapath(), 'ui', 'Preferencescamel_case_nameDialog.ui')
+    if not os.path.exists(ui_filename):
         ui_filename = None
 
     builder = gtk.Builder()
