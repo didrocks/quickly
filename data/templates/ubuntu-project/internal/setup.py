@@ -32,7 +32,7 @@ DistUtilsExtra.auto.setup(
     #author='Your Name',
     #author_email='email@ubuntu.com',
     #description='UI for managing …',
-    #long_description='Here a longer description'
+    #long_description='Here a longer description',
     #url='https://launchpad.net/project_name',
     )
 
