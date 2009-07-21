@@ -35,7 +35,7 @@ import shutil
 from quickly import configurationhandler
 
 #check to ensure if it's been edited
-license_path = "data/license"
+license_path = "LICENSE"
 license_string = open(license_path, 'r').read()
 error = False
 if license_string.find("Copyright 2009 Your Name") > -1:

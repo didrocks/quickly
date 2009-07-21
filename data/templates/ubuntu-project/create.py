@@ -127,6 +127,9 @@ quicklyutils.file_from_template(abs_path ,"internal/project_name.desktop.in","."
 quicklyutils.file_from_template(abs_path ,"internal/project_name","bin", substitutions)
 os.chmod("bin/" + project_name, 0755)
 
+# copy the licence file
+quicklyutils.file_from_template(abs_path ,"internal/LICENSE",".", substitutions)
+
 # add it to revision control
 print _("Creating bzr repository and commiting")
 subprocess.call(["bzr", "init"])
