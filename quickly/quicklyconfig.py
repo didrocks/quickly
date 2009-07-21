@@ -22,7 +22,8 @@
 # quickly version used for project format compatibility
 __version__ = 0.1
 
-# where quickly will head for templates (if not related to ../<quickly module path>, nor in ~/.quickly-data)
-__template_sys_directory__ = '/usr/share/quickly/templates'
+# where quickly will head for quickly data (for instance, templates)
+# by default, this is ../data, relative to trunk layout
+__quickly_data_directory__ = '../data/'
 
 

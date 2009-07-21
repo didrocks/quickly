@@ -40,7 +40,7 @@ gettext.textdomain('quickly')
 from internal import packaging, quicklyutils
 from quickly import configurationhandler
 
-# retreive useful information
+# retrieve useful information
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 project_name = configurationhandler.project_config['project']
