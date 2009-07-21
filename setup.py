@@ -21,20 +21,66 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+# UPDATE VERSION WHEN NEEDED (it updates all versions needed to be updated)
+VERSION = 0.1
+
+import os
+import sys
+
 try:
     import DistUtilsExtra.auto
 except ImportError:
-    import sys
     print >> sys.stderr, 'To build Apport you need https://launchpad.net/python-distutils-extra'
     sys.exit(1)
 
 #assert DistUtilsExtra.auto.__version__ >= '2.7', 'needs DistUtilsExtra.auto >= 2.7'
 
-print "datarootdir: " + DistUtilsExtra.auto.distutils.command.install.get_config_vars()["datarootdir"]
-print "prefix: " + DistUtilsExtra.auto.distutils.command.install.get_config_vars()["prefix"]
+def update_data_path(prefix, oldvalue=None):
+
+    try:
+        fin = file('quickly/quicklyconfig.py', 'r')
+        fout = file(fin.name + '.swp', 'w')
+
+        for line in fin:            
+            fields = line.split(' = ') # Separate variable from value
+            if fields[0] == '__quickly_data_directory__':
+                # update to prefix, store oldvalue
+                if not oldvalue:
+                    oldvalue = fields[1]
+                    line = "%s = '%s'\n" % ('__quickly_data_directory__', prefix)
+                    print "on modifie ici: %s" % line
+                else: # restore oldvalue
+                    line = "%s = %s" % ('__quickly_data_directory__', oldvalue)
+                    print "on modifie une deuxième fois: %s" % line
+            # update version if we forget it
+            elif fields[0] == '__version__':
+                line = "%s = %s\n" % ('__version__', VERSION)
+            fout.write(line)
+
+        fout.flush()
+        fout.close()
+        fin.close()
+        os.rename(fout.name, fin.name)
+    except (OSError, IOError), e:
+        print ("ERROR: Can't find quickly/quicklyconfig.py")
+        sys.exit(1)
+    return oldvalue
+
+
+class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
+    def run(self):
+        if self.root or self.home:
+            print "WARNING: You don't use a standard --prefix installation, take care that you eventually " \
+            "need to update quickly/quicklyconfig.py file to adjust __quickly_data_directory__. You can " \
+            "ignore this warning if you are packaging and uses --prefix."
+        previous_value = update_data_path(self.prefix)
+        DistUtilsExtra.auto.install_auto.run(self)
+        update_data_path(self.prefix, previous_value)
+
 
 DistUtilsExtra.auto.setup(name='quickly',
-      version='0.1',
+      version="'%s'" % VERSION,
       description='build new Ubuntu apps quickly',
       long_description='Quickly enables for prospective programmer a way to build easily new ' \
                   'apps for Ubuntu based on templates and other systems for helping them ' \
@@ -44,5 +90,6 @@ DistUtilsExtra.auto.setup(name='quickly',
       license="GPL v3",
       author='Quickly Developer Team',
       author_email='quickly@lists.launchpad.net',
+      cmdclass={'install': InstallAndUpdateDataDirectory}
       )
 
