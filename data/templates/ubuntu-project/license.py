@@ -1,3 +1,34 @@
+# -*- coding: utf-8 -*-
+#Copyright 2009 Canonical Ltd.
+#
+# This file is part of Quickly ubuntu-project-template
+#
+#This program is free software: you can redistribute it and/or modify it 
+#under the terms of the GNU General Public License version 3, as published 
+#by the Free Software Foundation.
+
+#This program is distributed in the hope that it will be useful, but 
+#WITHOUT ANY WARRANTY; without even the implied warranties of 
+#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+#PURPOSE.  See the GNU General Public License for more details.
+
+#You should have received a copy of the GNU General Public License along 
+#with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Usage:
+$quickly license
+
+Adds license to project files. Before using this command, you should:
+
+1. run $quickly save in case something goes wrong
+2. Edit the file data/license to include your copyright info
+3. Edit the file data/license to include your authorship
+
+Note that if you make a mistake you will need to manually delete the
+license from each file before re-running the command.
+
+"""
+
 import sys
 import os
 import shutil
@@ -77,7 +108,7 @@ for root, dirs, files in os.walk('./'):
                 new_file.flush()
                 new_file.close()
 
-        if name == project_name:
+        elif name == project_name:
             bin_file = os.path.join(root, name)
 
             #read into a string, and delete the shbang
@@ -95,7 +126,7 @@ for root, dirs, files in os.walk('./'):
                 new_file.flush()
                 new_file.close()
 
-        if name.endswith('.ui') or name.endswith('.xml'):
+        elif name.endswith('.ui') or name.endswith('.xml'):
             ui_file = os.path.join(root, name)
             temp_str = string_from_file(root, name)
             if has_license(temp_str):
@@ -108,4 +139,8 @@ for root, dirs, files in os.walk('./'):
                 #new_file.flush()
                 #new_file.close()
                 #glade files don't load if it does not begin with an element
+
+        else:
+            unkown_file = os.path.join(root, name)
+            print "no template to license %s" %unkown_file
 
