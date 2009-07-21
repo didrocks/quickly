@@ -67,18 +67,21 @@ def show_version():
   Python standard library: /usr/lib/python2.6
   
   Quickly used library: %s
+  Quickly data path: %s
   Quickly detected template directories:
           %s
 
 Copyright 2009 Canonical Ltd.
-               Didier Roche
+  #Author 2009 Rick Spencer
+  #Author 2009 Didier Roche
 https://launchpad.net/quickly
 
 quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and
 you may use, modify and redistribute it under the terms of the GNU
 General Public License version 3 or later.""") % (
     quicklyconfig.__version__, sys.executable, ".".join([str(x) for x in sys.version_info[0:3]]),
-    os.path.dirname(quickly.__file__), "\n          ".join(tools.get_template_directories()))
+    os.path.dirname(quickly.__file__), tools.get_quickly_data_path(),
+    "\n          ".join(tools.get_template_directories()))
     sys.exit(0)
 
 def get_commands():

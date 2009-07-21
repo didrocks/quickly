@@ -43,8 +43,23 @@ Letters and underscore ("_") only.""")
 class project_path_not_found(Exception):
     pass
 
+def get_quickly_data_path():
+    """Retrieve quickly data path
+
+    This path is by default <quickly_lib_path>/../data/ in trunk
+    and /usr/share/quickly in an installed version but this path
+    is specified at installation time.
+    """
+
+    pathname = os.path.dirname(__file__)
+    abs_data_path = os.path.abspath(pathname + '/' + quicklyconfig.__quickly_data_directory__)
+    if os.path.exists(abs_data_path):
+        return abs_data_path
+    else:
+        raise project_path_not_found
+
 def get_template_directories():
-    """Retreive all directories where quickly templates are
+    """Retrieve all directories where quickly templates are
 
     :return a list of directories
     """
@@ -53,19 +68,15 @@ def get_template_directories():
     template_directories = []
     if os.path.exists(os.path.expanduser('~/.quickly-data/templates')):
         template_directories.append(os.path.expanduser('~/.quickly-data/templates'))
-    # for trunk usage
-    pathname = os.path.dirname(sys.argv[0])
-    abs_template_path = os.path.abspath(pathname + '/../data/templates')
+
+    # retrieve from trunk or installed version
+    abs_template_path = get_quickly_data_path() + '/templates/'
     if os.path.exists(abs_template_path):
         template_directories.append(abs_template_path)
-    # for installed usage
-    pathname = os.path.dirname(__file__)
-    abs_template_path = os.path.abspath(quicklyconfig.__template_sys_directory__)
-    if os.path.exists(abs_template_path):
-        template_directories.append(abs_template_path)
+
     if not template_directories:
         print _("No template directory found. Aborting")
-        exit(1)
+        sys.exit(1)
 
     return template_directories
 

@@ -23,8 +23,8 @@ from gettext import gettext as _
 
 from quickly import tools
 
-global_config = {} # retreive from /etc/quickly
-project_config = {} # retreived from project/.quickly
+global_config = {} # retrieve from /etc/quickly
+project_config = {} # retrieved from project/.quickly
 
 def loadConfig(global_config=None):
     """ load configuration from /etc/quickly or .quickly file"""

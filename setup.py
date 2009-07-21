@@ -28,8 +28,10 @@ except ImportError:
     print >> sys.stderr, 'To build Apport you need https://launchpad.net/python-distutils-extra'
     sys.exit(1)
 
-assert DistUtilsExtra.auto.__version__ >= '2.7', 'needs DistUtilsExtra.auto >= 2.7'
+#assert DistUtilsExtra.auto.__version__ >= '2.7', 'needs DistUtilsExtra.auto >= 2.7'
 
+print "datarootdir: " + DistUtilsExtra.auto.distutils.command.install.get_config_vars()["datarootdir"]
+print "prefix: " + DistUtilsExtra.auto.distutils.command.install.get_config_vars()["prefix"]
 
 DistUtilsExtra.auto.setup(name='quickly',
       version='0.1',
