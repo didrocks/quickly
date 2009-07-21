@@ -35,10 +35,10 @@ $quickly create ubuntu-project super_text
 <IMG SRC="./images/application2.png" ALT="The menus are populated and set up." />
 
 <H2>Running the Application</H2>
-<P>Close the application by closing the window or using the Quit command. Since the empty application isn't installed into Ubuntu yet, you can't start the application from the application menu yet. To start the applicaton, use the terminal to first cd into the new subdirectory, and then issue the command to start the program.</P>
+<P>Close the application by closing the window or using the Quit command. Since the empty application isn't installed into Ubuntu yet, you can't start the application from the application menu yet. To start the applicaton, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.</P>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
 $cd super_text
-super_text$./super_text
+super_text$quickly run
 </TEXTAREA></DIV>
 <IMG SRC="./images/terminal3.png" ALT="run the empty application from the terminal" />
 
@@ -113,6 +113,8 @@ super_text$ quickly edit
 <P>This will open the default Ubuntu text editor "Gedit" with any python files in the python directory.</P>
 <IMG SRC="./images/gedit1.png" ALT="python files ready to edit" />
 
+<P>Notice that the main python file is just called "super_text". That's because this file serves a dual purpose. It is both the file for the SuperTextWindow class, and the first file that gets run when super_text is run. In other words, super_text is the file that starts up Super Text the app, and it's the file that defines SuperTextWindow, the class. Other dialogs and windows only define the classes, so they just get named as normal python files, with a ".py" extension".
+
 <P>SuperTextWindow.ui is now expecting to find a function SuperTextWindow.save_file(), so we simply add one to the SuperTextWindow class:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
     def save_file(self, widget, data=None):
@@ -121,10 +123,10 @@ super_text$ quickly edit
 <P>This will print the word "save" to the terminal when run. The method signature is the standard signature expected in a signal handler. If you are new to python, be sure to copy the indentations exactly, as the indentation level is very important in python.</P>
 <P>Save the file, and run it again:</P>
 <DIV class="termnial"><TEXTAREA rows = "2" cols="80">
-super_text$ ./bin/super_text
+super_text$ quickly run
 </TEXTAREA></DIV>
 <P>Choose "File->Save" from the menu, and you'll see the word "save" printing out interminal. That's all there is to hookig up the functions!</P>
-<IMG SRC="./images/application1.png" ALT="'save' gets printed to the terminal" />
+<IMG SRC="./images/application3_5.png" ALT="'save' gets printed to the terminal" />
 
 <H3>Implementing Save</H3>
 <P>Now we'll write a little code in the signal handler to actually save the text. Because we want it to be easy for users to do things like syncronize their Super Text documents between computers, back it up, etc... we'll use couchdb as our backend. Note that if you are not interested in learning about how to save to and read from couchdb, you can just snipe the code.
@@ -302,7 +304,7 @@ The "record_type" field is not really required, but among other things, it makes
 <P>To make them work, add these functions to the SuperTextWindow class, and save. Then go back and connect the functions to the activate signals for the Open and New menu items.</P>
 
 <DIV class="ref_link">
-<A HREF="./code/SuperTextWindow_complete.py">Complete SuperTextWindow.py file</A>
+<A HREF="./code/SuperTextWindow_complete.py">Complete super_text file</A>
 </DIV>
 
 <H1>Saving Your Work</H1>
