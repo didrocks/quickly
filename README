@@ -1,76 +1,87 @@
 QUICKLY
 =======
 
-Quickly is a set of templates for writing applications on Linux. Out of all
-the wonderful richness and variety of programming for Linux, Quickly make some
-very opinionated choices about what tools to use, and how to combine them.
-The criteria for these choices was to make it easy and fun to write and
-release Linux applications, even if it's your first time trying, but also
-in a way that delivers the full power and flexibility of the platform.
-One benefit of these choices, is that it's also easier to write tools that
-make it even easier and more fun. Quickly is also a set of commands which
-make developing easier.
-Currently there is only one template, for Ubuntu Projects.
+Quickly is a container for sets of application templates and related commands.
+Together, a set of commands and a template taken together are called a
+"quickly template". Currently there is a single quickly template called the
+"ubuntu-project template". As it can be infered, it is for creating Ubuntu
+applications. :)
 
-However, it is easy to create your own templates for other kinds of projects.
-So if you are a fan of a specific programming languate, you can create a
-foo-project template.
-Or if you want to help people making plugins for your killer app, you can
-make a killer-app-plugin template, etc...
+However, Quickly is designed so that quickly templates are easy to write. So,
+if you are a fan of language, you can create a foo-project template. Or if
+you want to help people making plugins for your killer app, you can make a
+killer-app-plugin template. You can even create a template for managing
+corporate documents, creating your awesome LaTeX helper… The sky is the limit!
+
+
+Given the richness and variety of the Linux platform, programming on Linux
+should be easy and fun. However, it's not easy and fun because it is too hard
+to learn. It is too hard to learn because there are too many choices. Quickly
+strives to make programming easy and fun by bringing opinionated choices about
+how to write different kinds of programs to developers.
+
+GTD is easier with GTQD (Get Things Quickly Done)!
+
 
 
 INSTALLING
 ----------
 
-1) You'll need the following dependencies:
-   couchdb, python-couchdb, python-launchpadlib, glade and bzr
+How to Install:
+1. Add quickly's and pitti's ppa to your system:
+- https://launchpad.net/~quickly/+archive/ppa
+- https://launchpad.net/~pitti/+archive/ppa
 
-If you use Ubuntu, run:
-$ sudo apt-get install couchdb python-couchdb python-launchpadlib glade bzr
 
-2) Get the latest version of quickly:
-$ bzr branch lp:quickly
+2. Install quickly
+$ apt-get install quickly
+This will install quickly-ubuntu-template as well
 
-3) Install quickly on you system:
-$ cd quickly
-$ sudo make install
 
-4) Check that Couch is running, go to:
-
-     http://localhost:5984/_utils/
-
+3. Check that Couch is running:
+http://localhost:5984/_utils/
 You may need to start couchdb:
 $ sudo couchdb
 
+
 You are now ready to start programming with quickly.
+
 
 
 HOW TO GET STARTED
 ------------------
 
-1) Create a Ubuntu Project and run the tutorial:
+You are now ready to start programming with quickly.
+
+How to Get Started:
+0. Having some basic information (optional)
+$ quickly getstarted
+
+
+1. create a Ubuntu Project and run the tutorial:
 $ quickly create ubuntu-project foo
 $ cd foo
 $ quickly help
 
-You can also try:
+
+2. You can also try:
 $ quickly edit
 $ quickly glade
+$ quickly run
+Use bash completion to get every available commands
 
 
-PLAYING WITH PACKAGE AND RELEASE
---------------------------------
+3. How to play with package and release:
 
-If you are running Ubuntu Karmic 9.10:
-$ sudo apt-get install python-distutils-extra
+optional, but recommended to build first your package locally:
+$ quickly package
 
-if you are running Jaunty 9.04 (or earlier), get it from the PPA:
+BE WARNED: the two following commands will connect to Launchpad.
+You need at least having a Launchpad account and an opened ppa.
+You need also for quickly release a project where you can bind your
+work with.
+$ quickly release or $ quickly share
 
-    https://launchpad.net/~pitti/+archive/ppa
-
-Then try:
-$ sudo quickly package (not implemented yet)
-$ sudo quickly release
 
 
 GETTING HELP

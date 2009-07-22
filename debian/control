@@ -15,30 +15,30 @@ Architecture: all
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
  ${python:Depends}
-Recommends: quickly-ubuntu-templates | quickly-templates,
+Recommends: quickly-ubuntu-template | quickly-template,
             python-launchpadlib,
-            bzr,
-            python-couchdb,
-            couchdb
-Description: build new Ubuntu apps quickly
- Quickly enables for prospective programmer a way to build easily new
- apps for Ubuntu based on templates and other systems for helping them
- write their code in a guided manner. This also includes packaging and
- deploying code.
+            bzr
+Description: build new apps quickly
+ Quickly enables for prospective programmers a way to build easily new
+ apps or contents based on templates and other systems for helping them
+ write their code in a guided manner.
 
-Package: quickly-ubuntu-templates
+Package: quickly-ubuntu-template
 Architecture: all
-Provides: quickly-templates
+Provides: quickly-template
 Depends: ${misc:Depends},
          ${python:Depends},
          python-gtk2,
          glade,
          python-couchdb,
+         couchdb,
          python-launchpadlib,
          dput,
          bzr
-Description: templates for Quickly Ubuntu projects
- Quickly enables for prospective programmer a way to build easily new
- apps for Ubuntu.
+Description: quickly Ubuntu projects template
+ Quickly enables for prospective programmers a way to build easily new
+ apps or contents.
  .
- This package provides templates to create new Ubuntu projects.
+ This package provides templates to create easily new projects for
+ Ubuntu. This also includes packaging, proper licencing and deploying
+ code.
