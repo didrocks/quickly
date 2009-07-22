@@ -1,7 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-
-
-###################### DO NOT TOUCH THIS (GO TO THE SECOND PART) ######################
+###################### DO NOT TOUCH THIS (HEAD TO THE SECOND PART) ######################
 
 try:
     import DistUtilsExtra.auto
