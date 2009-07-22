@@ -34,7 +34,7 @@ except ImportError:
     print >> sys.stderr, 'To build Apport you need https://launchpad.net/python-distutils-extra'
     sys.exit(1)
 
-#assert DistUtilsExtra.auto.__version__ >= '2.7', 'needs DistUtilsExtra.auto >= 2.7'
+assert DistUtilsExtra.auto.__version__ >= '2.8', 'needs DistUtilsExtra.auto >= 2.8'
 
 def update_data_path(prefix, oldvalue=None):
 
