@@ -1,10 +1,7 @@
-Format-Specification: http://wiki.debian.org/Proposals/CopyrightFormat
-Upstream-Name: quickly
-Upstream-Maintainer: Quickly Developer Team <quickly@lists.launchpad.net>
-Upstream-Source: https://launchpad.net/quickly
+Quickly: quickly project handler
 
 Files: *
-Copyright: (C) 2009 Canonical Ltd.fds
+Copyright (C) 2009 Canonical Ltd.fds
 # Author 2009 Rick Spencer
 # Author 2009 Didier Roche
 # Author 2009 Ken VanDine
