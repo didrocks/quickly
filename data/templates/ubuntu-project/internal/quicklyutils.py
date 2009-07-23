@@ -118,7 +118,6 @@ def set_setup_value(key, value):
                 in_setup = False
             fdest.write(line)
         
-        fdest.flush
         fdest.close()
         fsetup.close()
         os.rename(fdest.name, fsetup.name)

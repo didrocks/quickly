@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+### BEGIN LICENSE
 # This file is in the public domain
+### END LICENSE
 
 # THIS IS camel_case_name CONFIGURATION FILE
 # YOU CAN PUT THERE SOME GLOBAL VALUE

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+### BEGIN LICENSE
 # This file is in the public domain
+### END LICENSE
 
 ###################### DO NOT TOUCH THIS (HEAD TO THE SECOND PART) ######################
 

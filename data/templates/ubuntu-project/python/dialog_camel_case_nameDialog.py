@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+### BEGIN LICENSE
 # This file is in the public domain
+### END LICENSE
 
 import sys
 import os
