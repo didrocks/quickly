@@ -112,7 +112,7 @@ quicklyutils.file_from_template(template_python_dir, "Preferencescamel_case_name
 quicklyutils.file_from_template(template_python_dir, "project_nameconfig.py", target_python_dir, substitutions)
 
 # copy the files needed for packaging
-quicklyutils.file_from_template(abs_path, "internal/setup.py", ".", substitutions)
+quicklyutils.file_from_template(abs_path, "project_root/setup.py", ".", substitutions)
 quicklyutils.file_from_template(template_python_dir, "__init__.py", target_python_dir)
 
 # create the media directory, and copy them
@@ -121,14 +121,14 @@ target_media_dir = "data/media"
 shutil.copytree(template_media_dir,target_media_dir)
 
 # copy the desktop file
-quicklyutils.file_from_template(abs_path ,"internal/project_name.desktop.in",".", substitutions)
+quicklyutils.file_from_template(abs_path ,"project_root/project_name.desktop.in",".", substitutions)
 
 # copy the executable file, set the mode to executable
-quicklyutils.file_from_template(abs_path ,"internal/project_name","bin", substitutions)
+quicklyutils.file_from_template(abs_path ,"bin/project_name","bin", substitutions)
 os.chmod("bin/" + project_name, 0755)
 
 # copy the licence file
-quicklyutils.file_from_template(abs_path ,"internal/LICENSE",".", substitutions)
+quicklyutils.file_from_template(abs_path ,"project_root/LICENSE",".", substitutions)
 
 # add it to revision control
 print _("Creating bzr repository and commiting")

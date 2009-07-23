@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# This file is in the public domain
+
 import sys
 import os
 import gtk
