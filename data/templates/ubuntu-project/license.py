@@ -116,7 +116,12 @@ def copy_license_to_files():
 
                     ftarget_file_name.close()
                     ftarget_file_name_out.close()
-                    os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
+
+                    if skip_until_end_found: # that means we didn't find the END_LICENCE_TAG, don't copy the file
+                        print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_LICENCE_TAG, ftarget_file_name.name)
+                        os.remove(ftarget_file_name_out.name)
+                    else:
+                        os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
 
                 except (OSError, IOError), e:
                     print _("%s file was not found") % fcopyright_name
@@ -188,10 +193,15 @@ def licensing(license=None, author=None):
             if not skip_until_end_found:
                 fcopyright_out.write(line)
 
-
         fcopyright_out.close()
         fcopyright.close()
-        os.rename(fcopyright_out.name, fcopyright.name)
+
+        if skip_until_end_found: # that means we didn't find the END_LICENCE_TAG, don't copy the file
+             print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_COPYRIGHT_TAG, fcopyright.name)
+             os.remove(fcopyright_out.name)
+             sys.exit(1)
+        else:
+             os.rename(fcopyright_out.name, fcopyright.name)
 
     except (OSError, IOError), e:
         print _("%s file was not found") % fcopyright_name
