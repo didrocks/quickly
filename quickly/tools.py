@@ -19,6 +19,7 @@
 import os
 import string
 import sys
+import stat
 
 import gettext
 from gettext import gettext as _
@@ -131,3 +132,10 @@ def get_root_project_path(config_file_path=None):
             return quickly_file_path
     raise project_path_not_found()
 
+def apply_file_rights(src_file_name, dest_file_name):
+    """Keep file rights from src to dest"""
+    
+    st = os.stat(src_file_name)
+    mode = stat.S_IMODE(st.st_mode)
+    os.chmod(dest_file_name, mode)
+    

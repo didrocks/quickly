@@ -49,7 +49,7 @@ import re
 import shutil
 import sys
 
-from quickly import configurationhandler
+from quickly import configurationhandler, tools
 
 
 import gettext
@@ -121,6 +121,7 @@ def copy_license_to_files():
                         print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_LICENCE_TAG, ftarget_file_name.name)
                         os.remove(ftarget_file_name_out.name)
                     else:
+                        tools.apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
                         os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
 
                 except (OSError, IOError), e:
@@ -197,11 +198,12 @@ def licensing(license=None, author=None):
         fcopyright.close()
 
         if skip_until_end_found: # that means we didn't find the END_LICENCE_TAG, don't copy the file
-             print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_COPYRIGHT_TAG, fcopyright.name)
-             os.remove(fcopyright_out.name)
-             sys.exit(1)
+            print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_COPYRIGHT_TAG, fcopyright.name)
+            os.remove(fcopyright_out.name)
+            sys.exit(1)
         else:
-             os.rename(fcopyright_out.name, fcopyright.name)
+            tools.apply_file_rights(fcopyright.name, fcopyright_out.name)
+            os.rename(fcopyright_out.name, fcopyright.name)
 
     except (OSError, IOError), e:
         print _("%s file was not found") % fcopyright_name
