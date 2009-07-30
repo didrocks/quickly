@@ -31,9 +31,11 @@ and won't open the files.
 import os
 import subprocess
 
+cmd = "GLADE_CATALOG_PATH=./data/ui glade-3 data/ui/*.ui"
+
 #run glade with env variables pointing to catalogue xml files
 if os.getenv('QUICKLY') is not None and "verbose" in os.getenv('QUICKLY').lower():
-    subprocess.Popen("GLADE_CATALOG_PATH=./ui glade-3 ui/*.ui", shell=True)
+    subprocess.Popen(cmd, shell=True)
 else:
     nullfile=file("/dev/null") 
-    subprocess.Popen("GLADE_CATALOG_PATH=./data/ui glade-3 data/ui/*.ui", shell=True, stderr=nullfile)
+    subprocess.Popen(cmd, shell=True, stderr=nullfile)
