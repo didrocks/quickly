@@ -1,5 +1,3 @@
-# script ubuntu-project/internal/project_name is not executable because
+# script ubuntu-project/bin/project_name is not executable because
 # it is revamped when creating a ubuntu-project based project.
-quickly-ubuntu-template: script-not-executable ./usr/share/quickly/templates/ubuntu-project/internal/project_name
-# LICENSE file for created project, not for quikly itself
-quickly-ubuntu-template: extra-license-file usr/share/quickly/templates/ubuntu-project/internal/LICENSE
+quickly-ubuntu-template: script-not-executable ./usr/share/quickly/templates/ubuntu-project/bin/project_name

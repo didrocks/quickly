@@ -1,10 +1,4 @@
-quickly (0.1~karmic2) karmic; urgency=low
-
-  * Add file rights management (bin/project_name must be executable)
-
- -- Didier Roche <didrocks@ubuntu.com>  Fri, 24 Jul 2009 20:28:48 +0200
-
-quickly (0.1~karmic1) karmic; urgency=low
+quickly (0.1) karmic; urgency=low
 
   * Initial release.
 
