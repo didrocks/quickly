@@ -100,7 +100,7 @@ def copy_license_to_files():
                 try:
                     target_file_name = os.path.join(root, name)
                     ftarget_file_name = file(target_file_name, 'r')
-                    ftarget_file_name_out = file(ftarget_file_name.name + '.swp', 'w')
+                    ftarget_file_name_out = file(ftarget_file_name.name + '.new', 'w')
                     for line in ftarget_file_name:
                         # seek if we have to add or Replace a License
                         if BEGIN_LICENCE_TAG in line:
@@ -162,7 +162,7 @@ def licensing(license=None, author=None):
     skip_until_end_found = False
     try:
         fcopyright = file(fcopyright_name, 'r')
-        fcopyright_out = file(fcopyright.name + '.swp', 'w')
+        fcopyright_out = file(fcopyright.name + '.new', 'w')
         for line in fcopyright:
 
             # add autorship if needed

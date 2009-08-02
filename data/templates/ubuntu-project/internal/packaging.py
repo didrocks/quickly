@@ -44,7 +44,10 @@ def updatepackaging():
     # check if first python-mkdebian (debian/ creation) to commit it
     # that means debian/ under unknown
     bzr_instance = subprocess.Popen(["bzr", "status"], stdout=subprocess.PIPE)
-    bzr_status = bzr_instance.stdout.read()
+    bzr_status, err = bzr_instance.communicate()
+    if bzr_instance.returncode != 0:
+        return(bzr_instance.returncode)
+    
     if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
         return_code = subprocess.call(["bzr", "add"])
         if return_code == 0:

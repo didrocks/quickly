@@ -36,7 +36,7 @@ def update_data_path(prefix, oldvalue=None):
 
     try:
         fin = file('quickly/quicklyconfig.py', 'r')
-        fout = file(fin.name + '.swp', 'w')
+        fout = file(fin.name + '.new', 'w')
 
         for line in fin:            
             fields = line.split(' = ') # Separate variable from value

@@ -26,12 +26,16 @@ LAUNCHPAD_STAGING_URL = "https://staging.launchpad.net"
 LAUNCHPAD_CODE_STAGING_URL = "https://code.staging.launchpad.net"
 
 
+def die(message):
+    print >> sys.stderr, _("Fatal: ") + message
+    sys.exit(1)
+
 try:
     from launchpadlib.launchpad import Launchpad, EDGE_SERVICE_ROOT, STAGING_SERVICE_ROOT
     from launchpadlib.errors import HTTPError
     from launchpadlib.credentials import Credentials
 except ImportError:
-    suggestion = _("Check whether python-launchpadlib is installed")
+    die(_("Check whether python-launchpadlib is installed"))
 
 
 from quickly import bzrbinding
@@ -55,12 +59,6 @@ else:
 
 
 
-
-def die(message):
-    print >> sys.stderr, _("Fatal: ") + message
-    sys.exit(1)
-
-
 def initialize_lpi():
     ''' Initialize launchpad binding, asking for crendential
 
@@ -70,14 +68,14 @@ def initialize_lpi():
     launchpad = None
 
     # setup right cache, credential and server
-    lp_cache_dir = os.path.expanduser('~/.quickly-data/cache/')
-    if not os.path.isdir(lp_cache_dir):
-        os.makedirs(lp_cache_dir)
-
-    lp_cred_dir = os.path.expanduser("~/.quickly-data/lp_credentials/")
+    lp_cred_dir = os.path.expanduser("~/.cache/lp_credentials/")
     if not os.path.isdir(lp_cred_dir):
         os.makedirs(lp_cred_dir)
         os.chmod(lp_cred_dir, 0700)
+
+    lp_cache_dir = os.path.expanduser('~/.cache/lp_credentials/lp-cache/')
+    if not os.path.isdir(lp_cache_dir):
+        os.makedirs(lp_cache_dir)
 
     # check which server to address
     if lp_server == "staging":
@@ -105,11 +103,12 @@ def initialize_lpi():
 
         # try to setup bzr
         me = launchpad.me
-        bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email, me.name)        
+        (return_code, suggestion) = bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email, me.name)
 
-    if launchpad is None:
+    if launchpad is None or return_code != 0:
         if suggestion is None:
              suggestion = _("Unknown reason")
+    	os.remove(lp_cred)
         die(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
     print _("Launchpad connexion is ok")
 

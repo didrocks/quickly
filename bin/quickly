@@ -25,9 +25,8 @@ import gettext
 from gettext import gettext as _
 
 # add quickly root directory (especially for trunk execution)
-pathname = os.path.dirname(sys.argv[0])
-quickly_root_directory = pathname + '/..'
-quickly_root_directory =  os.path.abspath(quickly_root_directory)
+quickly_root_directory = os.path.dirname(sys.argv[0])
+quickly_root_directory = os.path.abspath(quickly_root_directory + '/..')
 if os.path.exists(quickly_root_directory + '/quickly') and quickly_root_directory not in sys.path:
     sys.path.insert(0, quickly_root_directory)
     os.putenv('PYTHONPATH', quickly_root_directory) # for subprocesses
@@ -65,7 +64,7 @@ def show_version():
     
     print _("""Quickly %s
   Python interpreter: %s %s
-  Python standard library: /usr/lib/python2.6
+  Python standard library: %s
   
   Quickly used library: %s
   Quickly data path: %s
@@ -81,7 +80,7 @@ quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and
 you may use, modify and redistribute it under the terms of the GNU
 General Public License version 3 or later.""") % (
     quicklyconfig.__version__, sys.executable, ".".join([str(x) for x in sys.version_info[0:3]]),
-    os.path.dirname(quickly.__file__), tools.get_quickly_data_path(),
+    os.path.dirname(os.__file__), os.path.dirname(quickly.__file__), tools.get_quickly_data_path(),
     "\n          ".join(tools.get_template_directories()))
     sys.exit(0)
 
@@ -151,14 +150,14 @@ def get_commands():
 def check_this_command(command_name, template_path, opt_template):
     """check if the command exist in a template
 
-            For instance, for a command like foo, the inside template foo.py script
-            file is preferred to built-in foo() function.
-            There can be pre_foo() and post_foo() built-in functions.
+    For instance, for a command like foo, the inside template foo.py script
+    file is preferred to built-in foo() function.
+    There can be pre_foo() and post_foo() built-in functions.
 
-            :command_name
-            :template_path
+    :command_name
+    :template_path
 
-            return list of commands ready to be launched
+    return list of commands ready to be launched
     """
 
     commands_available = {}
@@ -200,7 +199,7 @@ def process_command_line(argv):
 
     if len(argv) == 0:
         usage()
-        return 0
+        sys.exit(1)
 
     while i < len(argv):
         arg = argv[i]

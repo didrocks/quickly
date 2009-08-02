@@ -82,7 +82,7 @@ def saveConfig(global_config=None, config_file_path=None):
         config = project_config
     
     try:
-        filedest = file(quickly_file_path + '.swp', 'w')
+        filedest = file(quickly_file_path + '.new', 'w')
         try:
             fileconfig = file(quickly_file_path, 'rb')
             remaingconfigtosave = config.copy()

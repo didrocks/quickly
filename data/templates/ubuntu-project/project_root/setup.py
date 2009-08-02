@@ -21,7 +21,7 @@ def update_data_path(prefix, oldvalue=None):
 
     try:
         fin = file('project_name/project_nameconfig.py', 'r')
-        fout = file(fin.name + '.swp', 'w')
+        fout = file(fin.name + '.new', 'w')
 
         for line in fin:            
             fields = line.split(' = ') # Separate variable from value
@@ -48,7 +48,7 @@ def update_desktop_file(datadir):
 
     try:
         fin = file('project_name.desktop.in', 'r')
-        fout = file(fin.name + '.swp', 'w')
+        fout = file(fin.name + '.new', 'w')
 
         for line in fin:            
             if 'Icon=' in line:

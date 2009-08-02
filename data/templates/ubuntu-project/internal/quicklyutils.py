@@ -101,7 +101,7 @@ def set_setup_value(key, value):
     in_setup = False
     try:
         fsetup = file('setup.py', 'r')
-        fdest = file(fsetup.name + '.swp', 'w')
+        fdest = file(fsetup.name + '.new', 'w')
         for line in fsetup:
             if in_setup:
                 fields = line.split('=') # Separate variable from value

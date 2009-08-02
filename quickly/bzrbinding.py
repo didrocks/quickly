@@ -26,26 +26,32 @@ def bzr_set_login(display_name, preferred_email_adress, launchpad_name=None):
         if already setup, it will not overwrite existing data
     '''
 
-    #try:
+    try:
 
-    # retreive the current bzr login
-    bzr_instance = subprocess.Popen(["bzr", "whoami"], stdout=subprocess.PIPE)
-    bzr_user = bzr_instance.stdout.read()
+		# retreive the current bzr login
+        bzr_instance = subprocess.Popen(["bzr", "whoami"], stdout=subprocess.PIPE)
+        bzr_user, err = bzr_instance.communicate()
+        if bzr_instance.returncode != 0:
+	        return (1, err)
 
-    # if no bzr whoami set, the default contain the @hostname string
-    if '@' + socket.gethostname() in bzr_user:
-        identifier = display_name + ' <' + preferred_email_adress + '>'
-        subprocess.call(["bzr", "whoami", identifier])
+        # if no bzr whoami set, the default contain the @hostname string
+        if '@' + socket.gethostname() in bzr_user:
+            identifier = display_name + ' <' + preferred_email_adress + '>'
+            subprocess.call(["bzr", "whoami", identifier])
 
-    # if no bzr launchpad-login set, set it now !
-    if launchpad_name:
-        bzr_instance = subprocess.Popen(["bzr", "launchpad-login"], stdout=subprocess.PIPE)
-        bzr_id = bzr_instance.stdout.read()
-        
-        if "No Launchpad user ID configured" in bzr_id:
-            subprocess.call(["bzr", "launchpad-login", launchpad_name])
+        # if no bzr launchpad-login set, set it now !
+        if launchpad_name:
+            bzr_instance = subprocess.Popen(["bzr", "launchpad-login"], stdout=subprocess.PIPE)
+            bzr_id, err = bzr_instance.communicate()
+            if bzr_instance.returncode != 0:
+		        return (1, err)
+            
+            if "No Launchpad user ID configured" in bzr_id:
+                subprocess.call(["bzr", "launchpad-login", launchpad_name])
 
+
+    except OSError:
+        return (1, _("Bzr not properly installed"))
     
-    # except TRY WITHOUT bzr installed
+    return (0, "")
 
-    

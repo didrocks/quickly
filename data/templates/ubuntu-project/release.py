@@ -137,12 +137,14 @@ if packaging.check_for_ppa(launchpad, lp_team_or_user) != 0:
 
     
 # check if already released with this name
-if release_version: # TODO: remove test when release detected
-    bzr_instance = subprocess.Popen(["bzr", "tags"], stdout=subprocess.PIPE)
-    bzr_tags = bzr_instance.stdout.read()
-    if release_version in bzr_tags:
-        print _("ERROR: quickly can't release: %s seems to be already released. Choose another name.") % release_version
-        sys.exit(1)
+bzr_instance = subprocess.Popen(["bzr", "tags"], stdout=subprocess.PIPE)
+bzr_tags, err = bzr_instance.communicate()
+if bzr_instance.returncode !=0:
+    print(err)
+    sys.exit(1)
+if release_version in bzr_tags:
+    print _("ERROR: quickly can't release: %s seems to be already released. Choose another name.") % release_version
+    sys.exit(1)
 
     
 # add files, commit and push !
@@ -158,7 +160,11 @@ subprocess.call(["bzr", "tag", release_version]) # tag revision
 
 # check if pull branch is set
 bzr_instance = subprocess.Popen(["bzr", "info"], stdout=subprocess.PIPE)
-bzr_info = bzr_instance.stdout.read()
+bzr_info, err = bzr_instance.communicate()
+if bzr_instance.returncode !=0:
+    print(err)
+    sys.exit(1)
+
 
 # TODO: see if we want a strategy to set main branch in the project
 

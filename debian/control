@@ -19,7 +19,7 @@ Recommends: quickly-ubuntu-template | quickly-template,
             python-launchpadlib,
             bzr
 Description: build new apps quickly
- Quickly enables for prospective programmers a way to build easily new
+ Quickly enables for prospective programmers a way to easily build new
  apps or contents based on templates and other systems for helping them
  write their code in a guided manner.
 
@@ -34,11 +34,12 @@ Depends: ${misc:Depends},
          couchdb,
          python-launchpadlib,
          dput,
-         bzr
+         bzr,
+         python-distutils-extra (>= 2.8)
 Description: quickly Ubuntu projects template
- Quickly enables for prospective programmers a way to build easily new
+ Quickly enables for prospective programmers a way to easily build new
  apps or contents.
  .
  This package provides templates to create easily new projects for
- Ubuntu. This also includes packaging, proper licencing and deploying
- code.
+ Ubuntu using glade, pygtk and couchdb. This also includes packaging,
+ proper licencing and deploying code.

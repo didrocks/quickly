@@ -73,8 +73,8 @@ def get_template_directories():
 
     # default to looking up templates in the current dir
     template_directories = []
-    if os.path.exists(os.path.expanduser('~/.quickly-data/templates')):
-        template_directories.append(os.path.expanduser('~/.quickly-data/templates'))
+    if os.path.exists(os.path.expanduser('~/.quickly-templates')):
+        template_directories.append(os.path.expanduser('~/.quickly-templates'))
 
     # retrieve from trunk or installed version
     abs_template_path = get_quickly_data_path() + '/templates/'
@@ -123,13 +123,12 @@ def get_root_project_path(config_file_path=None):
     else:
         current_path = config_file_path
 
-    for related_directory in ('./', './', '../', '../../',
-                              '../../../', '../../../../',
-                              '../../../../../', '../../../../../../'):
-        quickly_file_path = os.path.abspath(current_path + '/' + related_directory)
-        quickly_file = quickly_file_path + "/.quickly"
+    # test os.path.split(current_path)[1] != "" because os.path.abspath("/../") is making abspath module stuck
+    while os.path.split(current_path)[1] != "":
+        quickly_file = current_path + "/.quickly"
         if os.path.isfile(quickly_file):
-            return quickly_file_path
+            return current_path
+        current_path = os.path.abspath(current_path + "/..")
     raise project_path_not_found()
 
 def apply_file_rights(src_file_name, dest_file_name):
