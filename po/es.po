@@ -1,16 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Spanish translation for quickly
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the quickly package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: quickly VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: quickly\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-07-24 18:12+0200\n"
-"PO-Revision-Date: 2009-08-03 12:44+0000\n"
-"Last-Translator: Pierre Slamich <pierre.slamich@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-07-31 19:30+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:34
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Vérification de l'installation de python-launchpadlib"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:60
 msgid "Fatal: "
-msgstr "Erreur fatale: "
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:86
 msgid ""
@@ -32,7 +32,7 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:93
 msgid "Get Launchpad Settings"
-msgstr "Récupération de la configuration Launchpad"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:100
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
@@ -40,16 +40,16 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:112
 msgid "Unknown reason"
-msgstr "Raison inconnue"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:113
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "La configuration de Launchpad de quickly a échoué; %s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:114
 msgid "Launchpad connexion is ok"
-msgstr "Connexion à Launchpad réussie"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
@@ -58,7 +58,7 @@ msgstr ""
 #: ../quickly/launchpadaccess.py:140
 #, python-format
 msgid "Project name: %s"
-msgstr "Nom du projet: %s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:141
 #, python-format
@@ -67,7 +67,7 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:148
 msgid "No project found"
-msgstr "Aucun projet n'a été trouvé"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:150
 msgid "Choose your project number"
@@ -219,13 +219,13 @@ msgstr ""
 #: ../quickly/tools.py:103
 #, python-format
 msgid "ERROR: Template '%s' not found."
-msgstr "ERREUR: Modèle '%s' introuvable"
+msgstr ""
 
 #: ../quickly/tools.py:104 ../bin/quickly.py:176 ../bin/quickly.py:248
 #: ../bin/quickly.py:271 ../bin/quickly.py:300 ../bin/quickly.py:321
 #: ../bin/quickly.py:332 ../bin/quickly.py:340
 msgid "Aborting"
-msgstr "Abandon"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/run.py:51
 #, python-format
@@ -279,19 +279,19 @@ msgstr ""
 #: ../data/templates/ubuntu-project/create.py:84 ../quickly/commands.py:52
 #, python-format
 msgid "Creating project directory %s"
-msgstr "Création du répertoire du projet %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/create.py:76
 #: ../data/templates/ubuntu-project/create.py:81
 #: ../data/templates/ubuntu-project/create.py:86 ../quickly/commands.py:54
 #, python-format
 msgid "Directory %s created\n"
-msgstr "Répertoire %s créé\n"
+msgstr ""
 
 #. add it to revision control
 #: ../data/templates/ubuntu-project/create.py:135
 msgid "Creating bzr repository and commiting"
-msgstr "Création du dépôt bzr et commit"
+msgstr ""
 
 #. run the new application
 #: ../data/templates/ubuntu-project/create.py:141
@@ -469,11 +469,11 @@ msgstr ""
 #: ../bin/quickly.py:175
 #, python-format
 msgid "ERROR: command '%s' in '%s' not found."
-msgstr "ERREUR: commande '%s' introuvable dans '%s'."
+msgstr ""
 
 #: ../bin/quickly.py:247
 msgid "ERROR: No command found"
-msgstr "ERREUR: Aucune commande trouvée"
+msgstr ""
 
 #. no error, so we are in a project path, not good!
 #: ../bin/quickly.py:259
@@ -505,17 +505,17 @@ msgstr ""
 #: ../bin/quickly.py:320
 #, python-format
 msgid "ERROR: pre_%s command failed"
-msgstr "ERREUR: la commande pre_%s a échoué"
+msgstr ""
 
 #: ../bin/quickly.py:331
 #, python-format
 msgid "ERROR: %s command failed"
-msgstr "ERREUR: la commande %s a échoué"
+msgstr ""
 
 #: ../bin/quickly.py:339
 #, python-format
 msgid "ERROR: post_%s command failed"
-msgstr "ERREUR: la commande post_%s a échoué"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:1
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:1
@@ -526,48 +526,3 @@ msgstr ""
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:2
 msgid "gtk-ok"
 msgstr ""
-
-#~ msgid ""
-#~ "quickly [-t <template> | --template <template>] <command [...]>\n"
-#~ "\n"
-#~ "Commands:\n"
-#~ "  new <template> <project-name>\n"
-#~ "      (template is mandatory for this command)\n"
-#~ "  push <describe your changes>\n"
-#~ "\n"
-#~ "Examples:  quickly new ubuntu-project foobar\n"
-#~ "           quickly push 'awesome new comment system'\n"
-#~ "           quickly -t cool-template push 'awesome new comment system'"
-#~ msgstr ""
-#~ "quickly [-t <modèle> | --template <modèle>] <commande [...]>\n"
-#~ "\n"
-#~ "Commandes:\n"
-#~ "  new <modèle> <nom-du-projet>\n"
-#~ "      (modèle est requis pour cette commande)\n"
-#~ "  push <décrivez vos modifications>\n"
-#~ "\n"
-#~ "Examples:  quickly new ubuntu-project foobar\n"
-#~ "           quickly push 'super nouveau système de commentaires'\n"
-#~ "           quickly -t super-modèle push 'super nouveau système de "
-#~ "commentaires'"
-
-#~ msgid "in progress"
-#~ msgstr "en cours"
-
-#~ msgid "Initial Launchpad creation"
-#~ msgstr "Création de la configuration de Launchpad"
-
-#~ msgid "E-mail of your Launchpad account:"
-#~ msgstr "Adresse e-mail de votre compte Launchpad"
-
-#~ msgid "Your Launchpad password:"
-#~ msgstr "Votre mot de passe Launchpad:"
-
-#~ msgid "Copying media files to %s"
-#~ msgstr "Copie des fichiers médias vers %s"
-
-#~ msgid "Media files copied to %s\n"
-#~ msgstr "Fichiers média copiés vers %s\n"
-
-#~ msgid "Finishing"
-#~ msgstr "Création terminée"
