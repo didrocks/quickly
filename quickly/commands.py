@@ -64,8 +64,8 @@ def pre_create(template, project_dir, command_args):
 def quickly(template, project_dir, command_args):
     """Create a new quickly template from an existing one"""
 
-    destination_path = os.path.expanduser("~/.quickly-templates/")
-    # create ~/.quickly-templates/ if needed
+    destination_path = os.path.expanduser("~/quickly-templates/")
+    # create ~/quickly-templates/ if needed
     if not os.path.exists(destination_path):
         os.makedirs(destination_path)
 
