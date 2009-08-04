@@ -28,6 +28,9 @@ Architecture: all
 Provides: quickly-template
 Depends: ${misc:Depends},
          ${python:Depends},
+         cdbs (>= 0.4.43),
+         debhelper (>= 6),
+         devscripts,
          python-gtk2,
          glade,
          python-couchdb,
