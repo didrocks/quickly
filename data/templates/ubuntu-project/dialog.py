@@ -62,9 +62,9 @@ if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 project_name = configurationhandler.project_config['project']
 
-template_ui_dir = abs_path + "/ui/"
+template_ui_dir = abs_path + "/data/ui/"
 template_python_dir = abs_path + "/python/"
-target_ui_dir = "ui"
+target_ui_dir = "data/ui"
 target_python_dir = project_name
 
 dialog_sentence_name, dialog_camel_case_name = quicklyutils.conventional_names(dialog_name)
