@@ -129,45 +129,34 @@ super_text$ quickly run
 <IMG SRC="./images/application3_5.png" ALT="'save' gets printed to the terminal" />
 
 <H3>Implementing Save</H3>
-<P>Now we'll write a little code in the signal handler to actually save the text. Because we want it to be easy for users to do things like syncronize their Super Text documents between computers, back it up, etc... we'll use couchdb as our backend. Note that if you are not interested in learning about how to save to and read from couchdb, you can just snipe the code.
+<P>Now we'll write a little code in the signal handler to actually save the text. Because we want it to be easy for users to do things like syncronize their Super Text documents between computers, back it up, etc... we'll use couchdb as our backend, and we'll use desktopcouch for our api. Note that if you are not interested in learning about how to save to and read from couchdb, you can just snipe the code.
 
-First, you may need to install couchdb and python-couchdb. The fastest way to do this is from ther terminal:</P>
+Mostly likely you already have everything you need installed when you installed quickly. But, you may need to install couchdb, desktopcouch, and the desktopcouch records api. The fastest way to do this is from the terminal:</P>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
-$ sudo apt-get install couchdb python-couchdb
+$ sudo apt-get install python-desktopcouch-records
 </TEXTAREA></DIV>
 
-<P>After couchdb and python-couchdb is installed, you can write the code. The code will do the following:</P>
+<P>This will install the api, and everything you need for the api to run. After desktopcouch  is installed, you can write the code. The code will do the following:</P>
 <OL>
-<LI>Import the stuff you'll need from python-couchdb.</LI>
-<LI>Specify the database location.</LI>
+<LI>Import the stuff you'll need from desktopcouch.</LI>
 <LI>Get a reference to the couchdb database to save into.</LI>
 <LI>Get the title of the document and the text from the user interface.</LI>
 <LI>Check if there is already a document with the same title, and if so overwrite it.</LI>
 <LI>If there is not a document already, create one.</LI>
 </OL>
 
-<H4>Import the stuff you'll need from python-couchdb.</H4>
+<H4>Import the stuff you'll need from python-desktopcouch-records.</H4>
 <P>Add these import statements along with the other imports to the top of SuperTextWindow.py:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
-from couchdb.client import Server
-from couchdb.schema import Document
+from desktopcouch.records.server import CouchDatabase
+from desktopcouch.records.record import Record
 </TEXTAREA></DIV>
 
 
-<H4>Specify the database location</H4>
-<P>We'll just hard code a reference to the database on the user's computer. If we want to point to a couchdb instance somewhere else later, it will be easy to change. We also want to name the datbase something reasonably unique, we'll use "super_text". Since we want these lines to run every time the Super Text window is created, put these at the end of the finish_initializing function:</P>
-<DIV class="code"><TEXTAREA rows="2" cols="80">
-        self.server = Server('http://127.0.0.1:5984/')
-        self.db_name = "super_text"
-</TEXTAREA></DIV>
-<H4>Get a reference to the database</H4>
-<P>Now in our save_file function, we want to get a reference to the database. However, if this is the first time that the application is run, the database may not have been created yet. Fortunately, it's an easy matter to check for the database, and if it's not there to create it.</P>
-<DIV class="code"><TEXTAREA rows="5" cols="80">
-        #get a handle the database, or create one if needed
-        if self.db_name in self.server:
-            db = self.server[self.db_name]
-        else:
-            db = self.server.create(self.db_name)
+<H4>Get a Reference to the Database</H4>
+<P>Desktopcouch will set up a database for us, or create a new one if it's needed. We'll use "super_text" for the anme of the database. Since we want these lines to run every time the Super Text window is created, put these at the end of the finish_initializing function:</P>
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+        self.database = CouchDatabase("super_text", create=True)
 </TEXTAREA></DIV>
 
 <H4>Here's the code to pull the title out of the title entry:</H4>
@@ -188,48 +177,51 @@ from couchdb.schema import Document
 </TEXTAREA></DIV>
 
 <H4>Saving a document to Couchdb</H4>
-<P>A document in couch is essentially a python dictionary. So we can save the document to couch like this:</P>
+<P>A record in couch is essentially a python dictionary with some extra key/value pairs to make the database work. So we can save the document to couch like this:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
             rt = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
-            db.create({"record_type": rt,"title":title, "text":text}) #create a new doc
+            new_rec = Record({"record_type": rt,"title":title, "text":text})
+            self.database.put(record)
 </TEXTAREA></DIV>
-The "record_type" field is not really required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.
+The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.
 
 <H4>Check for a pre-existing note with the same title</H4>
-<P>Before we just write the new document though, we have to take note of the fact that couch will allow you to create as many documents as you want with the same title. We probably don't want this, so we we'll have to write a little code to check if there is already a document in couch with the same title, and if there is, update that document rather than create a new one.<P>
+<P>Before we just write the new document though, we have to take note of the fact that couch will allow you to create as many documents as you want with the same title. We probably don't want this, so we we'll have to write a little code to check if there is already a document in couch with the same title, and if there is, update that document rather than create a new one.</P>
+<P>In CouchDB, the way you do queries like this is to create a "view" which is essentially a filtering function that you store in the CouchDB. Then you can reuse that view. There is a convenince function called "get_records", but this won't work well for us because it will get all records of a specified record type, while we just want ones of the specified record type that also have a certain title.</P>
 
-<P>To do this:</P>
+<P>To create and use a view:</P>
 <OL>
+<LI>Make up a good name for the view that won't collide with other views.</LI>
+<LI>Check to make sure the view is not already there. This will be the case when you re-run the code.</LI>
 <LI>Write a filtering function in javascript.</LI>
-<LI>Query the database with this function.</LI>
+<LI>Use the view to get records.</LI>
 <LI>Get the id for the first returned document</LI>
-<LI>Use that id to get a reference to the docuemnt.</LI>
+<LI>Use that id to get a reference to the document.</LI>
 <LI>Change the text in the document.</LI>
 <LI>Overwrite the document in the database with the one you just created.</LI>
 </OL>
 
 <P>This all may sound very weird, but in code, it's not quite so complicated:</P>
 <DIV class="code"><TEXTAREA rows="9" cols="80">
-        #check if there is a doucment with the same title already in the database
-        code = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
-        results = db.query(code)
+        view_name = "super_text_titles"
+        if not self.database.view_exists(view_name):
+            #the view is not there, so create the view
+            view_map_js = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
+            self.database.add_view(view_name, view_map_js, None, None)
+
+        #use the view to find records
+        results = self.database.execute_view(view_name)
         
-        if len(results) > 0: #there is doc with that title
-            document_id = results.rows[0].key
-            doc = db[document_id]
-            doc["text"] = text
-            db[doc.id] = doc #overwrite the text for the doc
+        if len(results.rows) > 0: #there is doc with that title
+            record_id = results.rows[0].key
+            self.database.update_fields(record_id,{"text":text})
+
+
 </TEXTAREA></DIV>
 
 <H4>So the whole function should look like this:</H4>
 <DIV class="code"><TEXTAREA rows="20" cols="80">
     def save_file(self, widget, data=None):
-        #get a handle the database, or create one if needed
-        if self.db_name in self.server:
-            db = self.server[self.db_name]
-        else:
-            db = self.server.create(self.db_name)
-
         #get the title for the note
         title = self.builder.get_object("entry1").get_text()
 
@@ -240,21 +232,28 @@ The "record_type" field is not really required, but among other things, it makes
         text = buff.get_text(start_iter,end_iter)
 
         #check if there is a doucment with the same title already in the database
-        filter = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
-        results = db.query(filter)
+        #check if the view is already there
+        view_name = "super_text_titles"
+        if not self.database.view_exists(view_name):
+            #the view is not there, so create the view
+            view_map_js = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
+            self.database.add_view(view_name, view_map_js, None, None)
+
+        #use the view to find records
+        results = self.database.execute_view(view_name)
         
-        if len(results) > 0: #there is doc with that title
-            document_id = results.rows[0].key
-            doc = db[document_id]
-            doc["text"] = text
-            db[doc.id] = doc #overwrite the text for the doc
+        if len(results.rows) > 0: #there is doc with that title
+            record_id = results.rows[0].key
+            self.database.update_fields(record_id,{"text":text})
 
         else: 
             rt = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
-            db.create({"record_type":rt,"title":title, "text":text}) #create a new doc
+            new_rec = Record({"record_type":rt,"title":title, "text":text})
+            self.database.put_record(new_rec)
 </TEXTAREA></DIV>
 
 <P>Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</P>
+TODO: FIND THE RIGHT URL FOR SHOING HOW TO GET HERE
 <DIV><A HREF="http://localhost:5984/_utils/">http://localhost:5984/_utils/</A></DIV>
 <IMG SRC="./images/couch1.png" ALT="open couchdb in a browser" />
 
@@ -264,29 +263,25 @@ The "record_type" field is not really required, but among other things, it makes
 <H4>Implementing Open is essentially the reverse of Save:</H4>
 <P>Follow these steps:</P>
 <OL>
-<LI>Check if the database has been created, or if this is a first run.</LI>
 <LI>Get the title the user is looking for from the text entry</LI>
-<LI>Query the database, and pull out the text matching the title, if any</LI>
+<LI>Use the view to find a record with the title.</LI>
+<LI>Pull out the text matching the title, if any</LI>
 <LI>Set the text view to display the new text</LI>
 </OL>
 <P>So the open_file function looks like so:</P>
 <DIV class="code"><TEXTAREA rows="20" cols="80">
     def open_file(self, widget, data=None):
-        #get a handle to the database, or return if there isn't one yest
-        if self.db_name in self.server:
-            db = self.server[self.db_name]
-        else:
-            return
-
         #get the name of the document to open
         title = self.builder.get_object("entry1").get_text()
         text = ""
 
         #get the text for the document from the database
-        filter = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc.text); } }""" %title
-        results = db.query(filter)
-        if len(results) > 0:
-            text = results.rows[0].value
+        #if it's in there
+        view_name = "super_text_titles"
+        if self.database.view_exists(view_name):
+            results = self.database.execute_view(view_name)
+            if len(results.rows) > 0:
+               text = results.rows[0].value["text"]
         
         #set the UI to display the string
         buff = self.builder.get_object("textview1").get_buffer()
