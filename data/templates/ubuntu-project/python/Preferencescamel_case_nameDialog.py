@@ -6,8 +6,8 @@
 import sys
 import os
 import gtk
-from couchdb.client import Server
-from couchdb.schema import Document
+from desktopcouch.records.server import CouchDatabase
+from desktopcouch.records.record import Record
 
 from project_name.project_nameconfig import getdatapath
 
@@ -38,8 +38,8 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         self.builder.connect_signals(self)
 
         #set up couchdb and the preference info
-        self.__server = Server('http://127.0.0.1:5984/')
         self.__db_name = "project_name"
+        self.__database = CouchDatabase(self.__db_name, create=True)
         self.__preferences = None
         self.__key = None
 
@@ -55,36 +55,29 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         """
 
         if self.__preferences == None: #the dialog is initializing
-            #TODO: add prefernces to the self.__preferences dict
-            self.__preferences = {"record_type":self.__record_type}
-
-            if self.__db_name in self.__server: #check for preferences already stored
-                db = self.__server[self.__db_name]
-                filt = "function(doc) { if(doc.record_type == '%s') {emit(doc._id, doc); }}" %self.__record_type
-                results = db.query(filt)
-
-                if len(results) > 0: #there are preferences saved
-                    self.__preferences = results.rows[0].value
-                    self.__key = results.rows[0].key
-                else: #there are no preferences saved
-                    db.create(self.__preferences)
-
-            else:#this is the first run, create db and preferences
-                db = self.__server.create(self.__db_name) 
-                db.create(self.__preferences)
-
+            self.__load_preferences()
+            
+        #if there were no saved preference, this 
         return self.__preferences
 
-
+    def __load_preferences(self):
+        #TODO: add prefernces to the self.__preferences dict
+        #default preferences that will be overwritten if some are saved
+        self.__preferences = {"record_type":self.__record_type,
+                                "sample_pref":"boo"}
+        
+        results = self.__database.get_records(record_type=self.__record_type, create_view=True)
+       
+        if len(results.rows) == 0:
+            #no preferences have ever been saved
+            #save them before returning
+            self.__key = self.__database.put_record(Record(self.__preferences))
+        else:
+            self.__preferences = results.rows[0].value
+            self.__key = results.rows[0].keyy
+        
     def __save_preferences(self):
-        db = self.__server[self.__db_name]
-        filt = """function(doc) {if(doc.record_type == '%s') { emit(doc._id, doc); }}""" %self.__record_type
-        results = db.query(filt)
-        document_id = results.rows[0].key
-        doc = db[document_id]
-        for k, v in self.__preferences.items():
-            doc[k] = v
-        db[document_id] = doc
+        self.__database.update_fields(self.__key, self.__preferences)
 
     def ok(self, widget, data=None):
         """ok - The user has elected to save the changes.
