@@ -178,44 +178,39 @@ from desktopcouch.records.record import Record
 
 <H4>Saving a document to Couchdb</H4>
 <P>A record in couch is essentially a python dictionary with some extra key/value pairs to make the database work. So we can save the document to couch like this:</P>
-<DIV class="code"><TEXTAREA rows="1" cols="80">
-            rt = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
-            new_rec = Record({"record_type": rt,"title":title, "text":text})
+<DIV class="code"><TEXTAREA rows="4" cols="80">
+            record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+            new_rec = Record({"record_type": record_type,
+                                "title":title, "text":text})
             self.database.put(record)
 </TEXTAREA></DIV>
 The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.
 
 <H4>Check for a pre-existing note with the same title</H4>
 <P>Before we just write the new document though, we have to take note of the fact that couch will allow you to create as many documents as you want with the same title. We probably don't want this, so we we'll have to write a little code to check if there is already a document in couch with the same title, and if there is, update that document rather than create a new one.</P>
-<P>In CouchDB, the way you do queries like this is to create a "view" which is essentially a filtering function that you store in the CouchDB. Then you can reuse that view. There is a convenince function called "get_records", but this won't work well for us because it will get all records of a specified record type, while we just want ones of the specified record type that also have a certain title.</P>
+<P>In CouchDB, you don't do a lot of data processing in the database like you would with a relational database. To be most efficient, we could use the desktopcouch API to create a view in CouchDB, but it's probably simplest just to do the necessary processing on the client for now. To do this, we'll use a desktopcouch function to retrieve all of the records of a specified record type.</P>
 
-<P>To create and use a view:</P>
+<P>To find and update documents with a matching title we will:</P>
 <OL>
-<LI>Make up a good name for the view that won't collide with other views.</LI>
-<LI>Check to make sure the view is not already there. This will be the case when you re-run the code.</LI>
-<LI>Write a filtering function in javascript.</LI>
-<LI>Use the view to get records.</LI>
-<LI>Get the id for the first returned document</LI>
-<LI>Use that id to get a reference to the document.</LI>
-<LI>Change the text in the document.</LI>
-<LI>Overwrite the document in the database with the one you just created.</LI>
+<LI>Retrieve all of the documents with the CouchDatabase.get_records function.</LI>
+<LI>Check each of the returned records for a matching title.</LI>
+<LI>If there is a match, update the record using the CouchDatabase.update_fields function and return.</LI>
 </OL>
 
 <P>This all may sound very weird, but in code, it's not quite so complicated:</P>
 <DIV class="code"><TEXTAREA rows="9" cols="80">
-        view_name = "super_text_titles"
-        if not self.database.view_exists(view_name):
-            #the view is not there, so create the view
-            view_map_js = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
-            self.database.add_view(view_name, view_map_js, None, None)
+        #get all the records
+        record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+        results = self.database.get_records(record_type = record_type, 
+                                            create_view = True)
 
-        #use the view to find records
-        results = self.database.execute_view(view_name)
-        
-        if len(results.rows) > 0: #there is doc with that title
-            record_id = results.rows[0].key
-            self.database.update_fields(record_id,{"text":text})
-
+        #update a record that has the same title
+        for result in results:
+            document = result.value
+            if document["title"] == title:
+                key = result.key
+                self.database.update_fields(key, {"text":text})
+                return
 
 </TEXTAREA></DIV>
 
@@ -231,30 +226,28 @@ The "record_type" field is not strictly required, but among other things, it mak
         end_iter = buff.get_end_iter()
         text = buff.get_text(start_iter,end_iter)
 
-        #check if there is a doucment with the same title already in the database
-        #check if the view is already there
-        view_name = "super_text_titles"
-        if not self.database.view_exists(view_name):
-            #the view is not there, so create the view
-            view_map_js = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
-            self.database.add_view(view_name, view_map_js, None, None)
+        #get all the records
+        record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+        results = self.database.get_records(record_type = record_type, 
+                                            create_view = True)
 
-        #use the view to find records
-        results = self.database.execute_view(view_name)
+        #update a record that has the same title
+        for result in results:
+            document = result.value
+            if document["title"] == title:
+                key = result.key
+                self.database.update_fields(key, {"text":text})
+                return
         
-        if len(results.rows) > 0: #there is doc with that title
-            record_id = results.rows[0].key
-            self.database.update_fields(record_id,{"text":text})
+        #if no records had the title, create it  
+        new_rec = Record({"record_type":record_type ,
+                            "title":title, "text":text})
+        self.database.put_record(new_rec)
 
-        else: 
-            rt = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
-            new_rec = Record({"record_type":rt,"title":title, "text":text})
-            self.database.put_record(new_rec)
 </TEXTAREA></DIV>
 
 <P>Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</P>
-TODO: FIND THE RIGHT URL FOR SHOING HOW TO GET HERE
-<DIV><A HREF="http://localhost:5984/_utils/">http://localhost:5984/_utils/</A></DIV>
+<DIV><A HREF="file:///home/rick/.local/share/desktop-couch/couchdb.html">file:///home/rick/.local/share/desktop-couch/couchdb.html</A></DIV>
 <IMG SRC="./images/couch1.png" ALT="open couchdb in a browser" />
 
 <H3>Implementing Open and New</H3>
@@ -263,11 +256,11 @@ TODO: FIND THE RIGHT URL FOR SHOING HOW TO GET HERE
 <H4>Implementing Open is essentially the reverse of Save:</H4>
 <P>Follow these steps:</P>
 <OL>
-<LI>Get the title the user is looking for from the text entry</LI>
-<LI>Use the view to find a record with the title.</LI>
-<LI>Pull out the text matching the title, if any</LI>
-<LI>Set the text view to display the new text</LI>
+<LI>Retrieve all of the documents with the CouchDatabase.get_records function.</LI>
+<LI>Check each of the returned records for a matching title.</LI>
+<LI>If there is a match, pull out the text and display it in the text view.</LI>
 </OL>
+
 <P>So the open_file function looks like so:</P>
 <DIV class="code"><TEXTAREA rows="20" cols="80">
     def open_file(self, widget, data=None):
@@ -275,13 +268,16 @@ TODO: FIND THE RIGHT URL FOR SHOING HOW TO GET HERE
         title = self.builder.get_object("entry1").get_text()
         text = ""
 
-        #get the text for the document from the database
-        #if it's in there
-        view_name = "super_text_titles"
-        if self.database.view_exists(view_name):
-            results = self.database.execute_view(view_name)
-            if len(results.rows) > 0:
-               text = results.rows[0].value["text"]
+        #get all the records
+        record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+        results = self.database.get_records(record_type = record_type, 
+                                            create_view = True)
+
+        #get the text if there is a matching title
+        for result in results:
+            docuemnt = result.value
+            if document["title"] == title:
+                text = record["text"]
         
         #set the UI to display the string
         buff = self.builder.get_object("textview1").get_buffer()
