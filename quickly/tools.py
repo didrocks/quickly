@@ -24,7 +24,10 @@ import stat
 import gettext
 from gettext import gettext as _
 
-from quickly import quicklyconfig
+import quicklyconfig
+import commands
+
+__project_path = None
 
 def quickly_name(name):
     """Enforce quickly name to be ascii only and lowercase
@@ -40,7 +43,6 @@ ERROR: unpermitted character in name.
 Letters and underscore ("_") only.""")
             sys.exit(1)
     return name
-
 
 class project_path_not_found(Exception):
     pass
@@ -118,18 +120,33 @@ def get_root_project_path(config_file_path=None):
     :return project_path. Raise a project_path_not_found elsewhere.
     """
 
+    global __project_path
+    if __project_path is not None:
+        return __project_path
+
     if config_file_path is None:
         current_path = os.getcwd()
     else:
         current_path = config_file_path
 
     # test os.path.split(current_path)[1] != "" because os.path.abspath("/../") is making abspath module stuck
-    while os.path.split(current_path)[1] != "":
+    while os.path.dirname(current_path) != current_path:
         quickly_file = current_path + "/.quickly"
         if os.path.isfile(quickly_file):
+            __project_path = current_path
             return current_path
         current_path = os.path.abspath(current_path + "/..")
     raise project_path_not_found()
+
+def check_template_exists(template):
+    """Exit if template doesn't exist"""
+    
+    try:
+        commands.get_all_commands()[template]
+    except KeyError:
+        print _("ERROR: Template %s does not exist.") % (template)
+        print _("Arborting.")
+        sys.exit(1)
 
 def apply_file_rights(src_file_name, dest_file_name):
     """Keep file rights from src to dest"""

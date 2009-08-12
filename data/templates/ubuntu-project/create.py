@@ -58,10 +58,12 @@ abs_path = os.path.abspath(pathname) + "/"
 
 
 # get the name of the project
-if len(sys.argv)< 2:
+if len(sys.argv) < 2:
     print _("""
 ERROR: project name not defined. Usage is project_name""")
     sys.exit(1)
+
+os.chdir(sys.argv[1])
 
 path_and_project = sys.argv[1].split('/')
 project_name = path_and_project[-1]
