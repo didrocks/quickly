@@ -130,7 +130,7 @@ def get_root_project_path(config_file_path=None):
         current_path = config_file_path
 
     # test os.path.split(current_path)[1] != "" because os.path.abspath("/../") is making abspath module stuck
-    while os.path.split(current_path)[1] != "":
+    while os.path.dirname(current_path) != current_path:
         quickly_file = current_path + "/.quickly"
         if os.path.isfile(quickly_file):
             __project_path = current_path

@@ -126,6 +126,8 @@ def get_commands():
     # get available templates after option if needed
     if sys.argv[-2] in ("-t", "--template"):
         available_completion.extend(commands.get_all_templates())
+        print " ".join(available_completion)
+        return(0)        
     
     # treat commands and try to get the template from the project directory if we are in a project (if not already provided by the -t option)
     (opt_command, opt_template) = process_command_line(sys.argv[3:])

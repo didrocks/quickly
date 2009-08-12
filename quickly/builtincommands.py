@@ -19,9 +19,9 @@
 import os
 import shutil
 
-from quickly import configurationhandler
-from quickly import quicklyconfig
-from quickly import tools
+import configurationhandler
+import quicklyconfig
+import tools
 
 import gettext
 from gettext import gettext as _
