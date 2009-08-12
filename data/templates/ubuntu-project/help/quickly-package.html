@@ -17,10 +17,48 @@ p
 </HEAD>
 <BODY>
 <H1>Introduction to Part 3</H1>
-<P>This section will show you how to set up a launchpad account, and create a project. Then, how to use that project to deliver your application to users, and to easily keep it up to date.</P>
+<P>In parts 1 and 2, we showed how to create a simple Ubuntu application using Quickly. This section will cover how to package an application so that it is easy for you to share, and easy for other people to install.</P>
+<H1>License your Project</H1>
+<P>It's important to license your code so users and other programmers know their rights in terms of redistributing or modifying it. To quickly grant a GPL license to your  code, simply:</P>
+<OL>
+<LI>Specify your name and email address in the Copyright file.</LI>
+<LI>Run the "license" command.</LI>
+</OL>
+<H2>Specify your name and email</H2>
+<P>When Quickly created your Ubuntu project, it added a file named Copyright in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. Be sure not to modify other lines as it will interfere with the next step. For exmaple, I would change the entire file to look like this:</P>
+<DIV class="code"><TEXTAREA rows="3" cols="80">
+# Copyright 2009 Rick Spencer rick.spencer@canonical.com
+### BEGIN AUTOMATIC LICENSE GENERATION
+### END AUTOMATIC LICENSE GENERATION
+</TEXTAREA></DIV>
+<H2>Run the "License" Command</H2>
+<P>By default, Quickly will use a GPL 3 license for your project. To use this license, use this command:</P>
+<DIV class="terminal"><TEXTAREA rows="1" cols="80">
+$quickly license
+</TEXTAREA></DIV>
+This will add the GPL 3 license to all of your code files that you've added to your project using Quickly. 
 
-<H1>Add an Icon</H1>
+<P>Keep in mind a couple of things:<P>
+<UL>
+<LI>This is a one way trip. Once you license the project, changes to the license must be done manually.</LI>
+<LI>If you prefer a GPL 2 license, you can specify that when you issue the license command:
+<DIV class="terminal"><TEXTAREA rows="1" cols="80">
+$quickly license GPL-2
+</TEXTAREA></DIV>
+</LI>
+<LI>Quickly doesn't care what license you use, but only knows about GPL 2 and GPL 3. If you don't prefer GPL 2 or GPL 3 licenses, you can simply add whatever you license you like by replacing:
+<DIV class="code"><TEXTAREA rows="3" cols="80">
+### BEGIN LICENSE
+# This file is in the public domain
+### END LICENSE
+</TEXTAREA></DIV>
+with your license of choice in all your files.
+</LI>
+<LI>If you've added code files or other files to your project manually, you will need to add the license to those files manually as well.</LI>
+</UL>
+
 <H1>Specify Application Settings</H1>
+
 <H1>Create a Debian Archive</H1>
 <H1>Install for the Archive</H1>
 
