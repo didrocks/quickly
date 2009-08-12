@@ -58,9 +58,9 @@ $quickly glade
 <LI>Check the response before proceeding</LI>
 </OL>
 <H2>Importing the SaveDialog</H2>
-Simply add the SaveDialog to your import statements at the top of the file:
+Add the SaveDialog to the list of imported modules at the top of the, so it looks like this:
 <DIV class="code"><TEXTAREA rows="1" cols="80">
-import SaveDialog
+from super_text import AboutSuperTextDialog, PreferencesSuperTextDialog, SaveDialog
 </TEXTAREA></DIV>
 
 <H2>Create an instance of the dialog and run it</H2>
@@ -87,9 +87,9 @@ d
 
 <P>Since we're now getting the title from the dialog instead of the text entry, we should delete the line of the code that sents it from entry1. So except for the addition of the dialog code, the save_file function looks pretty much the same as it did in part 1:</P>
 
-<DIV class="code"><TEXTAREA rows="35" cols="80">
+<DIV class="code"><TEXTAREA rows="32" cols="80">
     def save_file(self, widget, data=None):
-        #get the title from the user
+        #get the titel from the user
         saver = SaveDialog.NewSaveDialog()
         result = saver.run()
         title = saver.get_title_text()
@@ -97,13 +97,6 @@ d
         saver.destroy()
         if result != gtk.RESPONSE_OK:
             return
- 
-        #get a handle the database, or create one if needed 
-        if self.db_name in self.server:
-            db = self.server[self.db_name]
-        else:
-            db = self.server.create(self.db_name)
-
 
         #get the text to save
         buff = self.builder.get_object("textview1").get_buffer()
@@ -111,30 +104,32 @@ d
         end_iter = buff.get_end_iter()
         text = buff.get_text(start_iter,end_iter)
 
-        #check if there is a doucment with the same title already in the database
-        filter = """function(doc) { if (doc.title == '%s') { emit(doc._id, doc); } }""" %title
-        results = db.query(filter)
-        
-        if len(results) > 0: #there is doc with that title
-            document_id = results.rows[0].key
-            doc = db[document_id]
-            doc["text"] = text
-            db[doc.id] = doc #overwrite the text for the doc
+        #get all the records
+        record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+        results = self.database.get_records(record_type = record_type, 
+                                            create_view = True)
 
-        else: 
-            rt = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
-            db.create({"record_type":"super_text_doc","title":title, "text":text}) #create a new doc:
+        #update a record that has the same title
+        for result in results:
+            record = result.value
+            if record["title"] == title:
+                key = result.key
+                self.database.update_fields(key, {"text":text})
+                return
+        
+        #if no records had the title, create it  
+        new_rec = Record({"record_type":record_type ,
+                            "title":title, "text":text})
+        self.database.put_record(new_rec)
 </TEXTAREA></DIV>
 
 Now when we choose save, we get the SaveDialog instead:
 <IMG SRC="./images/application5.png" ALT="save file dialog works much better" />
 
-
-
-
 <H1>Creating a Dialog with a TreeView</H1>
-We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. This will introduce one of the most powerful widgets in the pygtk library, the TreeView. We will be using the TreeView to display the titles of the documents stored in couchdb, but also to store the id's for those documents, so that they can be opened and inserted into the UI.
-
+<P>
+We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. We'll use a widget called CouchWidget, which is included in the desktopcouch api for this.
+</P>
 <H2>Create the Open Dialog</H2>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
 $quickly dialog open
@@ -144,168 +139,77 @@ $quickly dialog open
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
 $quickly glade
 </TEXTAREA></DIV>
-Start by adding an HBox and label in the sammer manner as in the Save Dialog above.
-
-
-<H2>Create the TreeView</H2>
-<P>When the dialog loads, we will read all of the documents from couch db, and display the titles in the open dialog using a TreeView. However, to use a TreeView involves coordinating the following components:</P>
-<UL>
-<OL>A gtk.TreeView that is the top level container</OL>
-<OL>A model to hold the data for the TreeView, in this case a gtk.ListStore</OL>
-<OL>A set of columns to display in the TreeView, in this case, only one column is needed</OL>
-<OL>A CellRendered to tell the column what to display from the store</OL>
-</UL>
-
-<P>These are a lot of pieces to get working together, but the TreeView is a very powerful UI element, and we'll only be touching the surface in this Tutorial. Fortunately, we can use Glade to set most of this up.</P>
-
-<H3>Creating the TreeView and ListStore</H3>
-<P>Start by clicking on the TreeView widget in the Control and Display section, and then clicking in the empty space of the HBox. You will be prompting with the "Create a Treeview" dialog to add a Model:</P>
-<IMG SRC="./images/glade20.png" ALT="prompt to define treeview model" />
-<P>Click the builder button ([...]), to bring up the Model chooser. The list is empty, since there are no TreeView models in the project yet.<P> 
-<IMG SRC="./images/glade21.png" ALT="prompt to pick a treeview model" />
-<P>Click the "New" button and a ListStore will be added to the project and will populated in the Create a Treeview dialog. Hit Ok.</P> 
-
-<H3>Set up the ListStore</H3>
-<P>liststore1 is a model that was added to the Objects section of the inspector. You may need to scroll the inspector window to see it. A liststore is the simplest model for a treeview, as it is a grid of data that is designed so that a TreeView can present that data in a grid as well. However, you get to choose what data in liststore1 you want to display in the grid, you don't have to display it all. We'll take advantage of that by creating two columns of data in the list store. The first column will be for the titles, which we will display, and the second will be for the actual text, which we won't display, but that we will return to the SuperTextWindow to display.</P>
-<P>To set up the columns, select listore1 in the inspector. Switch to the General tab of the properties window so we can add the columns.</P>
-<IMG SRC="./images/glade22.png" ALT="liststore1 ready to have columns added" />
-<P>Both columns will be strings. For Glade, this translates to a "gchararry". Click where it says "define new column", and choose gchararray from the list. Then hit enter. This will create a default title for the column. Call this column "title".</P>
-<IMG SRC="./images/glade23.png" ALT="liststore1 with title column defined" />
-<P>Repeat this process to create the "text" column.
-
-<P>There is no data in liststore1 yet. We'll add it from couchdb in code after we are done setting up the TreeView in glade.</P>
-
-<H3>Create a Column in the TreeView</H3>
-<P>We've created two columns in liststore1. But these columns are just in the model. They store data, they don't display it. The TreeView needs a column for displaying the title of each document so that the user can pick one. To get started, select treeview1 in the inspector, then click "Edit" in the toolbar above. This will bring up the Tree View Editor window.</P>
-<IMG SRC="./images/glade25.png" ALT="Tree View Editor" />
-<P>Click the hierarchy tab, where you can edit children of the treeview.</P>
-<IMG SRC="./images/glade26.png" ALT="Tree View Editor Hierarchy Tab" />
-Click the "Add" button. This will add a Column to the Treeview. In the right hand side, scroll down if needed to set the title to "Title".
-<IMG SRC="./images/glade27.png" ALT="new column in treeview called title" />
-
-<H3>Create a CellRender in the Column</H3>
-<P>Now the treeview has a column, but the column doesn't know what to display or how. We need to give it a cell rendered to display the text from the 0th column of liststore1. Right click on column, and choose "Add Child Text Item".</P> 
-<IMG SRC="./images/glade28.png" ALT="cellrendered added" />
-<P>To tell the cell rendered to display the titles stored in liststore1, look at the Text property, and notice that it is unset. Click on the dropdown that says "unset", and choose the column called "title". This tells the cellrender to tell the column that it is in to display the titles in liststore1.</P>
-<IMG SRC="./images/glade29.png" ALT="cellrendered is set up" />
-<P>Close the editor and save, becuase now it's time to write some code.</P>
-
-<H3>Populating the TreeView with Titles</H3>
-<P>Now that the UI is ready, we need to write some code to make it work. Populating the TreeView with the titles requires the following steps:</P>
-<OL>
-<LI>Create a function that loads titles</LI>
-<LI>Getting a list of titles and text from couchdb</LI>
-<LI>Getting a reference to the ListStore that holds the data for the TreeView</LI>
-<LI>Adding each title and document set to the list store</LI>
-</OL>
-
-<H4>Import CouchDB</H4>
-<P>As per usual, add the import functions.</P>
-<DIV class="code"><TEXTAREA rows="2" cols="80">
-from couchdb.client import Server
-from couchdb.schema import Document
-</TEXTAREA></DEV>
-
-
-
-<H4>Create the load_titles function</H4>
-<P>The function is going to be called by SuperTextWindow, which will pass in a reference to a couchdb database to use. So the function signature should be like this:</P>
-<DIV class="code"><TEXTAREA rows="1" cols="80">
-    def load_titles(self, db):
-</TEXTAREA></DIV>
-
-<H4>Get a list of titles and text</H4>
-<P>Next we ask couchdb for all of the titles and text that it has in the database. We tweak the javascript filter function to return title and text for each row before getting the results:</P>
-<DIV class="code"><TEXTAREA rows="3" cols="80">
-        #get all the titles and text
-        filter = """function(doc) { if( doc.record_type == 'super_text_doc') {emit(doc._id, [doc.title, doc.text]); }}"""
-        results = db.query(filter)
-</TEXTAREA></DIV>
-
-<H4>Get a reference to the ListStore and add the titles and text to it</H4>
-<P>Once we have the results, we can iterate through them and add them to liststore1. Our filter function asked for the title to be returned in the 0th position of the value array, and the text in the 1th position.</P>
-<DIV class="code"><TEXTAREA rows="6" cols="80">
-        #put the results into the list store for the treeview
-        store = self.builder.get_object("liststore1")        
-        for r in results:
-            title = r.value[0]
-            text = r.value[1]
-            store.append([title,text])
-</TEXTAREA></DIV>
-
-<P>The whole load_title function looks like this:</P>
-<DIV class="code"><TEXTAREA rows="11" cols="80">
-    def load_titles(self, db):
-        #get all the titles and text
-        filter = """function(doc) { if( doc.record_type == 'super_text_doc') {emit(doc._id, [doc.title, doc.text]); }}"""
-        results = db.query(filter)
-
-        #put the results into the list store for the treeview
-        store = self.builder.get_object("liststore1")        
-        for r in results:
-            title = r.value[0]
-            text = r.value[1]
-            store.append([title,text])
-</TEXTAREA></DIV>
+<P>Start by adding an HBox and label in the sammer manner as in the Save Dialog above. Leave an empty space in the HBox. We will use code to put the CouchWidget there.</P>
+<IMG SRC="./images/glade20.png" ALT="save space for the CouchWidget" />
 
 <H3>Create the get_selection function</H3>
-<P>The dialog still needs a bit more code to work. It needs to return the user's selectin, if there is one. To do this, we need to ask the TreeView what is selected. This involes:</P>
+<P>The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchWidget what is selected. This is easy using the widgets selected_record_ids function. But the CouchWidget supports multiple selection, so we'll do the following:</P>
 <OL>
-<LI>Getting a reference to the selected rows in the TreeView, including a reference to a model that represents the data in the selected row</LI>
-<LI>Return nothing if nothing was selected</LI>
-<LI>Get a reference to the first (and only) selected row</LI>
-<LI>Use that reference to pull the text and title out of the selected row, and return them.</LI>
+<LI>Use a decorator to define the function as a property accessor.</LI>
+<LI>Get all the selected record ids.</LI>
+<LI>If none are selected, return None.</LI>
+<LI>Pick the first one and return it.</LI>
 </OL>
-<P>This sounds more complicated than it probably is. So here's the code:</P>
-<DIV class="code"><TEXTAREA rows="11" cols="80">
-    def get_selection(self):
-        #get the model and selected rows for the treeivew
-        model, rows = self.builder.get_object("treeview1").get_selection().get_selected_rows()
+<P>So the function to add to OpenDialog looks like this:</P>
+    @property
+    def selected_record_id(self):
+        ids = self.couchwidget.selected_record_ids
+        if len(ids) < 1:
+            return None
+        else:
+            return ids[0]
 
-        if len(rows) < 1: #just return nothing if nothing is selected
-            return (None, None)
-
-        else: #pull titles and text out of the selected row and return
-            iter = model.get_iter(rows[0])
-            title = model.get_value(iter,0)
-            text = model.get_value(iter,1)
-            return (title, text)
-</TEXTAREA></DIV>
-
-<H1>Calling the Open Dialog</H1>
-<P>Now we want to use the Open Dialog in the SuperTextWindow open_file function. To call the OpenDialog, we need to follow these steps:</P>
+<H1>Using the Open Dialog</H1>
+<P>Now we want to use the Open Dialog in the SuperTextWindow open_file function. To use it,we'll follow these steps:</P>
 <OL>
 <LI>Import OpenDialog in SuperTextWindow</LI>
 <LI>In the open_file function, create an instance of OpenDialog</LI>
-<LI>Tell the dialog to get the list of titles</LI>
 <LI>Run the Dialog</LI>
-<LI>Get the titel and text</LI>
+<LI>Get the id for the selected title.</LI>
 <LI>Destroy the dialog</LI>
 <LI>Check the response before proceeding</LI>
+<LI>Use the id to get the record from CouchDB</LI>
+<LI>Update the UI</LI>
 </OL>
 
 <H2>Import OpenDialog</H2>
 <P>Just like the SaveDialog, add the import line to the list of imports:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
-import OpenDialog
+from super_text import AboutSuperTextDialog, PreferencesSuperTextDialog, SaveDialog, OpenDialog
 </TEXTAREA></DIV>
 
 <H2>Create an instance of the dialog and run it</H2>
 l<P>So now we're ready to call the dialog from the SuperTextWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
         opener = OpenDialog.NewOpenDialog()
-        opener.load_titles(db)
         result = opener.run()
 </TEXTAREA></DIV>
 
-<H2>Retrieve the Title and Text</H2>
+<H2>Get the id for the selected title</H2>
+TODO: Change this ...
 <P>Now use the get_selection function to retrieve the title and text from the dialog. Don't forget to check the response type before going on.</P>
 <DIV class="code"><TEXTAREA rows="5" cols="80">
-        title,  text = opener.get_selection()
+        id = opener.selected_record_id()
         opener.destroy()
 
         if result != gtk.RESPONSE_OK or text == None:
             return
+</TEXTAREA></DIV>
+
+<H2>Get the ID for the selected title</H2>
+<P>This merely involves using the property that we created for th OpenDialog:</P>
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+        rec_id = opener.selected_record_id
+</TEXTAREA></DIV>
+
+<H2>Use the id to get the record from CouchDB</H2>
+<P>If nothing was selected, we'll just return. Otherwise, we'll retrieve the record from CouchDB and pull out the text for the document:</P>
+<DIV class="code"><TEXTAREA rows="5" cols="80">
+        #get the record from CouchDB and extract the text
+        if rec_id = None:
+            return
+        record = self.database.get_record(rec_id)
+        text = record["text"]
 </TEXTAREA></DIV>
 
 <H2>Update the UI</H2>
@@ -316,24 +220,26 @@ l<P>So now we're ready to call the dialog from the SuperTextWindow's open_file f
         buff.set_text(text)
 </TEXTAREA></DIV>
 <P>That's all there is to it. So the whole open_file function looks like this:</P>
-<DIV class="code"><TEXTAREA rows="20f" cols="80">
+<DIV class="code"><TEXTAREA rows="21" cols="80">
     def open_file(self, widget, data=None):
-        #get a handle to the database, or return if there isn't one yest
-        if self.db_name in self.server:
-            db = self.server[self.db_name]
-        else:
-            return
-
+        #run the open dialog
         opener = OpenDialog.NewOpenDialog()
-        opener.load_titles(db)
         result = opener.run()
-                
-        title,  text = opener.get_selection()
-        opener.destroy()
 
-        if result != gtk.RESPONSE_OK or text == None:
+        #get the record id from the dialog
+        rec_id = opener.selected_record_id
+
+        #close the dialog, and check whether to proceed
+        opener.destroy()
+        if result != gtk.RESPONSE_OK:
             return
-        
+
+        #get the record from CouchDB and extract the text
+        if rec_id = None:
+            return
+        record = self.database.get_record(rec_id)
+        text = record["text"]
+
         #set the UI to display the string
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text(text)
