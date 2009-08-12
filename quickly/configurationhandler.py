@@ -27,7 +27,7 @@ from quickly import tools
 global_config = {} # retrieve from /etc/quickly
 project_config = {} # retrieved from project/.quickly
 
-def loadConfig(global_config=None):
+def loadConfig(can_stop=True, global_config=None):
     """ load configuration from /etc/quickly or .quickly file"""
 
     if global_config:
@@ -39,8 +39,11 @@ def loadConfig(global_config=None):
             quickly_file_path = tools.get_root_project_path()  + '/.quickly'
             config = project_config
         except tools.project_path_not_found:
-            print _("ERROR: Can't load configuration in current path or its parent ones.")
-            sys.exit(1)
+            if can_stop:
+                print _("ERROR: Can't load configuration in current path or its parent ones.")
+                sys.exit(1)
+            else:
+                return(1)
         
         
     try:
@@ -55,6 +58,7 @@ def loadConfig(global_config=None):
     except (OSError, IOError), e:
         print _("ERROR: Can't load configuration in %s: %s" % (quickly_file_path, e))
         sys.exit(1)
+    return(0)
 
 
 def saveConfig(global_config=None, config_file_path=None):

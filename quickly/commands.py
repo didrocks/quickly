@@ -17,97 +17,222 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import shutil
+import subprocess
+import sys
 
-from quickly import configurationhandler
-from quickly import quicklyconfig
-from quickly import tools
+import builtincommands
+import tools
 
 import gettext
 from gettext import gettext as _
 
-def pre_create(template, project_dir, command_args):
-    """Create the project directory before create command call"""
 
-    path_and_project = command_args[0].split('/')
-    project_name = path_and_project[-1]
+LAUNCHED_INSIDE_PROJECT = "inside"
+LAUNCHED_OUTSIDE_PROJECT = "outside"
+LAUNCHED_IN_OR_OUTSIDE_PROJECT = "in_or_outside"
+
+
+gettext.textdomain('quickly')
+
+# double depths tabular : template (or "builtin"), name
+__commands = {}
+
+
+def get_all_commands():
+    """Load all commands
     
-    # if a path is present, create it
-    if len(path_and_project) > 1:
-        path = str(os.path.sep).join(path_and_project[0:-1])
-        if not os.path.exists(path):
-            print _("%s does not exist") % path
-            return 1
-        os.chdir(path)
+    First, load template command and then builtins one. Push right parameters depending
+    if hooks are available, or if the command execution is special
+    You can note that create command is automatically overloaded atm"""
+
+    if len(__commands) > 0:
+        return __commands
+
+    for template_dir in tools.get_template_directories():
+        for template in os.listdir(template_dir):
+            __commands[template] = {}
+            template_path = os.path.join(template_dir, template)
+            for command_name in os.listdir(template_path):
+                file_path = os.path.join(template_path, command_name)
+                command_name = ".".join(command_name.split('.')[0:-1])
+                if os.path.isfile(file_path) and os.access(file_path, os.X_OK): # add the command to the list if is executable
+                    hooks = {'pre': None, 'post':None}
+                    for event in ('pre', 'post'):
+                        if hasattr(builtincommands, event + '_' + command_name):
+                            hooks[event] = getattr(builtincommands, event + '_' + command_name)
+
+                    # TODO: if some commands doesn't need to be launched inside a project, this is the place
+                    # to perform some checks on them (and decide how templates can give their input)
+                    # same for followed_by_template
+                    conditional_launch = LAUNCHED_INSIDE_PROJECT # default for all commands
+                    followed_by_template = False
+                    # special case for create command: must be launched outside a project, even if part of templates and template creator
+                    # didn't specified it
+                    if command_name == "create":
+                        conditional_launch = LAUNCHED_OUTSIDE_PROJECT
+                        followed_by_template = True
+                    __commands[template][command_name] = Command(file_path, template, conditional_launch, followed_by_template, hooks['pre'], hooks['post'])
+     
+    # add builtin commands (avoiding gettext and hooks)
+    __commands['builtins'] = {}
+    for elem in dir(builtincommands):
+        command = getattr(builtincommands, elem)
+        if callable(command) and not command.__name__.startswith(('pre_', 'post_', 'gettext')):
+            # here, special case for some commands
+            conditional_launch = LAUNCHED_IN_OR_OUTSIDE_PROJECT
+            followed_by_template = False      
+            if command in builtincommands.launched_outside_project:
+                conditional_launch = LAUNCHED_OUTSIDE_PROJECT
+            elif command in builtincommands.launched_inside_project :               
+                conditional_launch = LAUNCHED_IN_OUTSIDE_PROJECT
+            if command in builtincommands.followed_by_template:
+                followed_by_template = True
+        
+            hooks = {'pre': None, 'post':None}
+            for event in ('pre', 'post'):
+                if hasattr(builtincommands, event + '_' + command_name):
+                    hooks[event] = getattr(builtincommands, event + '_' + command_name)               
+
+            __commands['builtins'][command.__name__] = Command(command, None, conditional_launch, followed_by_template, hooks['pre'], hooks['post'])
+                
+    return __commands
     
-    # check that project name follow quickly rules and reformat it.
-    quickly_project_name = tools.quickly_name(project_name)
 
-    #bail if the name if taken
-    if os.path.exists(project_name):
-        print _("There is already a file or directory named %s") % project_name
-        return 1
+def get_command_by_criteria(**criterias):
+    """Get a list of all commands corresponding to criterias
+    
+    Criterias correponds to Command object properties"""
 
-    #create directory and template file
-    print _("Creating project directory %s" % project_name)
-    os.mkdir(project_name)
-    print _("Directory %s created\n" % project_name)
+    # all criterias are None by default, which means, don't care about the value
+    matched_commands = []
+    all_commands = get_all_commands()
 
-    # creating quickly file
-    configurationhandler.project_config['format'] = quicklyconfig.__version__
-    configurationhandler.project_config['project'] = quickly_project_name
-    configurationhandler.project_config['template'] = template
-    configurationhandler.saveConfig(config_file_path=project_name)
-
-    return 0
-
-def quickly(template, project_dir, command_args):
-    """Create a new quickly template from an existing one"""
-
-    destination_path = os.path.expanduser("~/quickly-templates/")
-    # create ~/quickly-templates/ if needed
-    if not os.path.exists(destination_path):
-        os.makedirs(destination_path)
-
-    template_destination_path = destination_path + command_args[0]
-    if os.path.exists(template_destination_path):
-        print _("%s already exists." % template_destination_path)
-        return 1
-
-    if not os.path.exists(template_destination_path):
-        print _("Copy %s to create new %s template") % (template, template_destination_path)
-
-    shutil.copytree(tools.get_template_directory(template), template_destination_path)
-    return 0
-
-def getstarted(template, project_dir, command_args):
-    print _('''-------------------------------
-    Welcome to quickly!
--------------------------------
-
-You can create a project in executing 'quickly create <template_name> <your project>'.
+    for template_available in all_commands:
+        if criterias.has_key('template') and criterias['template'] != template_available:
+            continue # to speed up the search
+        for candidate_command_name in all_commands[template_available]:
+            candidate_command = all_commands[template_available][candidate_command_name]
+            command_ok = True
+            # check all criterias (template has already been checked)
+            for elem in criterias:
+                if elem is not 'template' and getattr(candidate_command, elem) != criterias[elem]:
+                    command_ok = False
+                    continue # no need to check other criterias
+            if command_ok:
+                matched_commands.append(candidate_command)    
+    
+    return matched_commands
 
 
-Example with ubuntu-project template:
-1. create a Ubuntu Project and run the tutorial:
-$ quickly create ubuntu-project foo
-$ cd foo
-$ quickly help
+def get_all_templates():
+    """Get a list of all templates"""
+    
+    return [template for template in get_all_commands().keys() if template != "builtins"]
 
-2. You can also try:
-$ quickly edit
-$ quickly glade
-$ quickly run
-Use bash completion to get every available commands
 
-3. How to play with package and release:
+class Command:
 
-optional, but recommended to build first your package locally:
-$ quickly package
+    def _die(self, function_name, return_code):
+            print _("ERROR: %s command failed") % function_name
+            print _("Aborting")
+            sys.exit(return_code)
 
-BE WARNED: the two following commands will connect to Launchpad. You need at least having a Launchpad account and an opened ppa.
-You need also for quickly release a project where you can bind your work with.
-$ quickly release or $ quickly share
+    def __init__(self, command, template=None, inside_project=LAUNCHED_INSIDE_PROJECT, followed_by_template=False, prehook=None, posthook=None):
 
-Have Fun!''')
-    return 0
+        self.command = command
+        self.template = template
+        self.prehook = prehook
+        self.posthook = posthook
+        self.inside_project = inside_project
+        self.followed_by_template = followed_by_template
+        
+        if callable(command):
+            self.name = command.__name__
+        else:
+            self.name = ".".join(os.path.basename(command).split('.')[0:-1])
+
+    def shell_completion(self, template_in_cli, args):
+        """Smart completion of a command
+  
+        This command try to see if the command is followed by a template and present template
+        if it's the case. Otherwise, it calls the corresponding command argument"""
+
+        if len(args) == 0 and not template_in_cli and self.followed_by_template:
+            return(self.template)
+        
+        #else:
+        # TODO: give to the command the opportunity of giving some shell-completion features
+
+
+    def is_right_context(self, dest_path, verbose=True):
+        """Check if we are in the right context for launching the command"""
+        
+        # verbose à false pour l'introspection des commandes dispos
+        
+        # check if dest_path corresponds to a project path
+        if self.inside_project == LAUNCHED_INSIDE_PROJECT:
+            try:
+                project_path = tools.get_root_project_path(dest_path)
+            except tools.project_path_not_found:
+                if verbose:
+                    print _("ERROR: Can't find project in %s.\nEnsure you launch this command from a quickly project directory.") % dest_path
+                    print _("Aborting")
+                return False
+        elif self.inside_project == LAUNCHED_OUTSIDE_PROJECT:
+            try:
+                project_path = tools.get_root_project_path(dest_path)
+                if verbose:
+                    print _("ERROR: %s is a project. You can't launch %s command within a project. " \
+                            "Please choose another path." % (project_path, self.command))
+                    print _("Aborting")
+                return False
+            except tools.project_path_not_found:
+                pass
+            
+        return True
+
+
+    def launch(self, current_dir, command_args, template=None):
+        """Launch command and hooks for it
+        
+        This command will perform the right action (insider function or script execution) after having
+        checked the context"""
+    
+        # template is current template (it will be useful for builtin commands)
+
+        # if template not specified, take the one for the command
+        # the template argument is useful when builtin commands which behavior take into account the template namee
+        if template is None:
+            template = self.template # (which can be None if it's a builtin command launched outside a project)
+
+        if not self.is_right_context(current_dir): # check in verbose mode
+            return(1)
+
+        # get root project dir
+        try:
+            project_path = tools.get_root_project_path(current_dir)
+        except tools.project_path_not_found:       
+            # launch in current project
+            project_path = current_dir
+
+        if self.prehook:
+            return_code = self.prehook(template, project_path, command_args)
+            if return_code != 0:
+                self._die(self.prehook.__name__, return_code)
+        
+        if callable(self.command): # Internal function
+            return_code = self.command(template, project_path, command_args)
+        else: # External command
+            return_code = subprocess.call(["python", self.command] + command_args, cwd=project_path)
+        if return_code != 0:
+            self._die(self.name,return_code)
+
+        if self.posthook:
+            return_code = self.posthook(template, project_path, command_args)
+            if return_code != 0:
+                self._die(self.posthook.__name__, return_code)
+        
+        return(0)
+
+
+
