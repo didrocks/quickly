@@ -129,13 +129,13 @@ def get_root_project_path(config_file_path=None):
     else:
         current_path = config_file_path
 
-    # test os.path.split(current_path)[1] != "" because os.path.abspath("/../") is making abspath module stuck
+    # check for .quickly file until root is found
     while os.path.dirname(current_path) != current_path:
         quickly_file = current_path + "/.quickly"
         if os.path.isfile(quickly_file):
             __project_path = current_path
             return current_path
-        current_path = os.path.abspath(current_path + "/..")
+        current_path = os.path.abspath(os.path.dirname(current_path))
     raise project_path_not_found()
 
 def check_template_exists(template):
