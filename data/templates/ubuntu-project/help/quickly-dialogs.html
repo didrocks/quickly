@@ -124,9 +124,9 @@ d
 </TEXTAREA></DIV>
 
 Now when we choose save, we get the SaveDialog instead:
-<IMG SRC="./images/application5.png" ALT="save file dialog works much better" />
+<IMG SRC="./images/application4_5.png" ALT="save file dialog works much better" />
 
-<H1>Creating a Dialog with a TreeView</H1>
+<H1>Creating a Dialog with a CouchWidget</H1>
 <P>
 We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. We'll use a widget called CouchWidget, which is included in the desktopcouch api for this.
 </P>
@@ -142,6 +142,34 @@ $quickly glade
 <P>Start by adding an HBox and label in the sammer manner as in the Save Dialog above. Leave an empty space in the HBox. We will use code to put the CouchWidget there.</P>
 <IMG SRC="./images/glade20.png" ALT="save space for the CouchWidget" />
 
+<H2>Coding the Open Dialog</H2>
+<H3>Creating and Adding a CouchWidget</H3>
+<P>It just takes a little bit of code to add a CouchWidget to the  dialog. We need to:</P>
+<OL>
+<LI>Import the CouchWidget class.</LI>
+<LI>Create a CouchWidget pointing at the super_text database, and the desired record type.</LI>
+<LI>Add the CouchWidget to the dialog.</LI>
+</OL>
+<H4>Import the CouchWidget class</H4>
+<P>CouchWidget is part of the desktopcouch records api, so we import it like this:</P>
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+from desktopcouch.records.couchwidget import CouchWidget
+</TEXTAREA></DIV>
+<H4>Create the CouchWidget</H4>
+<P>A CouchWidget needs to know three things, the name of the database, the name of the record type to, and the name of the "headings" to use. Headings is a list of fields that the widget will display, and will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
+<DIV class="code"><TEXTAREA rows="4" cols="80">
+        self.couchwidget = CouchWidget()
+        self.couchwidget.database = "super_text"
+        self.couchwidget.headings = ["title"]        
+        self.couchwidget.record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+</TEXTAREA></DIV>
+<H4>Add the CouchWidget to the Dialog</H4>
+<P>When we added the HBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchWidget into the HBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
+<DIV class="code"><TEXTAREA rows="2" cols="80">
+        self.couchwidget.show()
+        self.builder.get_object("vbox1").pack_end(self.couchwidget)
+</TEXTAREA></DIV>
+
 <H3>Create the get_selection function</H3>
 <P>The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchWidget what is selected. This is easy using the widgets selected_record_ids function. But the CouchWidget supports multiple selection, so we'll do the following:</P>
 <OL>
@@ -151,6 +179,7 @@ $quickly glade
 <LI>Pick the first one and return it.</LI>
 </OL>
 <P>So the function to add to OpenDialog looks like this:</P>
+<DIV class="code"><TEXTAREA rows="7" cols="80">
     @property
     def selected_record_id(self):
         ids = self.couchwidget.selected_record_ids
@@ -158,7 +187,7 @@ $quickly glade
             return None
         else:
             return ids[0]
-
+</TEXTAREA></DIV>
 <H1>Using the Open Dialog</H1>
 <P>Now we want to use the Open Dialog in the SuperTextWindow open_file function. To use it,we'll follow these steps:</P>
 <OL>
@@ -179,7 +208,7 @@ from super_text import AboutSuperTextDialog, PreferencesSuperTextDialog, SaveDia
 </TEXTAREA></DIV>
 
 <H2>Create an instance of the dialog and run it</H2>
-l<P>So now we're ready to call the dialog from the SuperTextWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</P>
+<P>So now we're ready to call the dialog from the SuperTextWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
         opener = OpenDialog.NewOpenDialog()
         result = opener.run()
@@ -206,7 +235,7 @@ TODO: Change this ...
 <P>If nothing was selected, we'll just return. Otherwise, we'll retrieve the record from CouchDB and pull out the text for the document:</P>
 <DIV class="code"><TEXTAREA rows="5" cols="80">
         #get the record from CouchDB and extract the text
-        if rec_id = None:
+        if rec_id == None:
             return
         record = self.database.get_record(rec_id)
         text = record["text"]
@@ -235,7 +264,7 @@ TODO: Change this ...
             return
 
         #get the record from CouchDB and extract the text
-        if rec_id = None:
+        if rec_id == None:
             return
         record = self.database.get_record(rec_id)
         text = record["text"]
@@ -244,6 +273,10 @@ TODO: Change this ...
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text(text)
 </TEXTAREA></DIV>
+<P>Now users get a nice open dialog:</P>
+<IMG SRC="./images/application5.png" ALT="open dialog works much better" />
+
+
 <H1>Finsihing the Application</H1>
 <P>Now opening a saved document is much more intuitive.</P>
 <IMG SRC="./images/application6.png" ALT="open file dialog works much better" />
