@@ -56,10 +56,105 @@ with your license of choice in all your files.
 </LI>
 <LI>If you've added code files or other files to your project manually, you will need to add the license to those files manually as well.</LI>
 </UL>
-
 <H1>Specify Application Settings</H1>
+<P>
+You should personalize your applicaton a little before creating the archive. This is very easy to do, as all of the files that you need have already been created, and only need a few lines changed to make them your own. To do this you should:
+</P>
+<OL>
+<LI>Personalize the Applicaation Icon</LI>
+<LI>Edit the Desktop File</LI>
+<LI>Edit the setup.py File</LI>
+</OL>
+<H2>Personalize your Application Icon</H2>
+<P>
+Ubuntu Desktop applications use SVG files for icons that show up in places like title bars, switchers, etc... SVG files are great because they are vector graphics, so they look good at any size. They are also great because they can be edited with an amazing free and open source editor called inkscape. Inscape doesn't installed by default with Ubuntu, but it is in the universe repository, so you can easily install it like this:
+</P>
+<DIV class="terminal"><TEXTAREA rows="1" cols="80">
+$sudo apt-get install inkscape
+</TEXTAREA></DIV>
+<P>If you've used other tools to edit vector graphics before, Inkscape will be quite intuitive. Otherwize, you might want to <A HREF="http://inkscape.org/doc/index.php?lang=en">read up on it</A> a bit. 
+</P>
+<P>
+If you don't personalize the icon, it's ok, your app will just have the default icon.
+</P>
+<H2>Edit the Desktop File</H2>
+<P>
+By defualt, Quickly Ubuntu-Project applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make Super Text show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "super_text.desktop.in" was automatically created in the super_text project directory. To change Super Text from a Utility to an Office application, edit super_text.desktop.in and change this:
+</P>
+<DIV class="code"><TEXTAREA rows="8" cols="80">
+[Desktop Entry]
+Name=Super Text
+Comment=SuperText application
+Categories=GNOME;Utility;
+Exec=super_text
+Icon=super_text
+Terminal=false
+Type=Application
+</TEXTAREA></DIV>
 
-<H1>Create a Debian Archive</H1>
-<H1>Install for the Archive</H1>
+<P>
+to this:
+</P>
+<DIV class="code"><TEXTAREA rows="8" cols="80">
+[Desktop Entry]
+Name=Super Text
+Comment=SuperText application
+Categories=GNOME;Office;
+Exec=super_text
+Icon=super_text
+Terminal=false
+Type=Application
+</TEXTAREA></DIV>
+<P>
+There are lots more categories that you can use, all defined by the FreeDesktop spec. You can see the complete list in the <A HREF="http://standards.freedesktop.org/menu-spec/latest/apa.html">menu spec</A>.
+</P>
+<H2>Edit Setup.py</H2>
+<P>
+Finally, you should include some informatoin in the setup.py file to tell your users a little about yourself. The setup.py file was created for you, just like the desktop file. Most of of the setup.py file shouldn't be modified, as it is just boiler plate that makes your application work properly after it has been installed. However, there is a section at the bottom of the setup.py file that you should edit to describe yourself and the application.
+</P>
+<P>
+So I would change this section:
+</P>
+<DIV class="code"><TEXTAREA rows="8" cols="80">
+DistUtilsExtra.auto.setup(
+    name='super_text',
+    version='0.1',
+    license='GPL v3',
+    #author='Your Name',
+    #author_email='email@ubuntu.com',
+    #description='UI for managing …',
+    #long_description='Here a longer description',
+    #url='https://launchpad.net/super_text',
+    cmdclass={'install': InstallAndUpdateDataDirectory}
+    )
+</TEXTAREA></DIV>
+<P>
+To look like this:
+</P>
+<DIV class="code"><TEXTAREA rows="8" cols="80">
+DistUtilsExtra.auto.setup(
+    name='super_text',
+    version='0.1',
+    license='GPL v3',
+    author='Rick Spencer',
+    author_email='rick.spencer@canonical.com',
+    description='Note taking application',
+    long_description='Note taking application that uses CouchDB as the backend to support easy replication across users and computers.',
+    #url='https://launchpad.net/super_text',
+    cmdclass={'install': InstallAndUpdateDataDirectory}
+    )
+<P>
+Notice that Super Text doesn't have a web page yet, so I just left that line commented out. Also, if you enhance the application and want to repackage it, you should make sure to increment version so that it will properly update itself for your users who have installed the first version.
+</P>
+
+</TEXTAREA></DIV>
+<H1>Create and Test the Debian Archive</H1>
+<P>
+After personalizing the project, we are now ready to create the package. This is easily done by issueing the package command:
+</P>
+<DIV class="terminal"><TEXTAREA rows="1" cols="80">
+$quickly package
+</TEXTAREA></DIV>
+<P>This command will take a little while to discover dependencies and create all the required archives, etc... It will also report some errors as we haven't created a PGP key, for instance. None the less, when it is done, the package will be created. Using the file browser, you can see the created package next to the project directory:</P>
 
 </BODY>
