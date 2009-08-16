@@ -22,7 +22,7 @@ import sys
 import gettext
 from gettext import gettext as _
 
-from quickly import tools
+import tools
 
 global_config = {} # retrieve from /etc/quickly
 project_config = {} # retrieved from project/.quickly

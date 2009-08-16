@@ -52,25 +52,52 @@ def get_all_commands():
         for template in os.listdir(template_dir):
             __commands[template] = {}
             template_path = os.path.join(template_dir, template)
+
+            # load special attributes declared for every command
+            launch_inside_project_command_list = []
+            launch_outside_project_command_list = []
+            launch_in_or_outside_project_command_list = []
+            followed_by_template_command_list = []            
+            try:
+                files_command_parameters = file(os.path.join(template_path, "commandsconfig"), 'rb')
+                for line in files_command_parameters: 
+                    fields = line.split('#')[0] # Suppress commentary after the value in configuration file and in full line
+                    fields = fields.split('=') # Separate variable from value
+                    # normally, we have two fields in "fields"
+                    if len(fields) == 2:
+                        targeted_property = fields[0].strip()
+                        command_list = [command.strip() for command in fields[1].split(',')]
+                        if targeted_property == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT':
+                            launch_outside_project_command_list = command_list
+                        elif targeted_property == 'COMMANDS_LAUNCHED_IN_OR_OUTSIDE_PROJECT':
+                            launch_in_or_outside_project_command_list = command_list
+                        elif targeted_property == 'COMMANDS_FOLLOWED_BY_TEMPLATE':
+                                followed_by_template_command_list = command_list
+            except (OSError, IOError):
+                pass
+
             for command_name in os.listdir(template_path):
                 file_path = os.path.join(template_path, command_name)
                 command_name = ".".join(command_name.split('.')[0:-1])
+
                 if os.path.isfile(file_path) and os.access(file_path, os.X_OK): # add the command to the list if is executable
                     hooks = {'pre': None, 'post':None}
                     for event in ('pre', 'post'):
                         if hasattr(builtincommands, event + '_' + command_name):
                             hooks[event] = getattr(builtincommands, event + '_' + command_name)
-
-                    # TODO: if some commands doesn't need to be launched inside a project, this is the place
-                    # to perform some checks on them (and decide how templates can give their input)
-                    # same for followed_by_template
-                    conditional_launch = LAUNCHED_INSIDE_PROJECT # default for all commands
+                        
+                    # default for all commands
+                    conditional_launch = LAUNCHED_INSIDE_PROJECT
                     followed_by_template = False
-                    # special case for create command: must be launched outside a project, even if part of templates and template creator
-                    # didn't specified it
-                    if command_name == "create":
+                    
+                    # define special options for command
+                    if command_name in launch_outside_project_command_list:
                         conditional_launch = LAUNCHED_OUTSIDE_PROJECT
+                    elif command_name in launch_in_or_outside_project_command_list:
+                        conditional_launch = LAUNCHED_IN_OR_OUTSIDE_PROJECT
+                    if command_name in followed_by_template_command_list:
                         followed_by_template = True
+                    
                     __commands[template][command_name] = Command(file_path, template, conditional_launch, followed_by_template, hooks['pre'], hooks['post'])
      
     # add builtin commands (avoiding gettext and hooks)
