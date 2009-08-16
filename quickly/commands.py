@@ -27,11 +27,6 @@ import gettext
 from gettext import gettext as _
 
 
-LAUNCHED_INSIDE_PROJECT = "inside"
-LAUNCHED_OUTSIDE_PROJECT = "outside"
-LAUNCHED_IN_OR_OUTSIDE_PROJECT = "in_or_outside"
-
-
 gettext.textdomain('quickly')
 
 # double depths tabular : template (or "builtin"), name
@@ -67,11 +62,11 @@ def get_all_commands():
                     if len(fields) == 2:
                         targeted_property = fields[0].strip()
                         command_list = [command.strip() for command in fields[1].split(';')]
+                        if targeted_property == 'COMMANDS_LAUNCHED_INSIDE_PROJECT':
+                            launch_inside_project_command_list = command_list
                         if targeted_property == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT':
                             launch_outside_project_command_list = command_list
-                        elif targeted_property == 'COMMANDS_LAUNCHED_IN_OR_OUTSIDE_PROJECT':
-                            launch_in_or_outside_project_command_list = command_list
-                        elif targeted_property == 'COMMANDS_FOLLOWED_BY_TEMPLATE':
+                        if targeted_property == 'COMMANDS_FOLLOWED_BY_TEMPLATE':
                                 followed_by_template_command_list = command_list
             except (OSError, IOError):
                 pass
@@ -85,20 +80,22 @@ def get_all_commands():
                     for event in ('pre', 'post'):
                         if hasattr(builtincommands, event + '_' + command_name):
                             hooks[event] = getattr(builtincommands, event + '_' + command_name)
-                        
-                    # default for all commands
-                    conditional_launch = LAUNCHED_INSIDE_PROJECT
-                    followed_by_template = False
                     
-                    # define special options for command
+                    # define special options for command    
+                    launch_inside_project = False
+                    launch_outside_project = False
+                    followed_by_template = False
+                    if command_name in launch_inside_project_command_list:
+                        launch_inside_project = True
                     if command_name in launch_outside_project_command_list:
-                        conditional_launch = LAUNCHED_OUTSIDE_PROJECT
-                    elif command_name in launch_in_or_outside_project_command_list:
-                        conditional_launch = LAUNCHED_IN_OR_OUTSIDE_PROJECT
+                        launch_outside_project = True
                     if command_name in followed_by_template_command_list:
                         followed_by_template = True
+                    # default for commands: if not inside nor outside, and it's a template command, make it launch inside a project only
+                    if not launch_inside_project and not launch_outside_project:
+                        launch_inside_project = True
                     
-                    __commands[template][command_name] = Command(file_path, template, conditional_launch, followed_by_template, hooks['pre'], hooks['post'])
+                    __commands[template][command_name] = Command(file_path, template, launch_inside_project, launch_outside_project, followed_by_template, hooks['pre'], hooks['post'])
      
     # add builtin commands (avoiding gettext and hooks)
     __commands['builtins'] = {}
@@ -106,21 +103,28 @@ def get_all_commands():
         command = getattr(builtincommands, elem)
         if callable(command) and not command.__name__.startswith(('pre_', 'post_', 'gettext')):
             # here, special case for some commands
-            conditional_launch = LAUNCHED_IN_OR_OUTSIDE_PROJECT
-            followed_by_template = False      
-            if command in builtincommands.launched_outside_project:
-                conditional_launch = LAUNCHED_OUTSIDE_PROJECT
-            elif command in builtincommands.launched_inside_project :               
-                conditional_launch = LAUNCHED_IN_OUTSIDE_PROJECT
+            launch_inside_project = False
+            launch_outside_project = False
+            followed_by_template = False
+
+            if command in builtincommands.launched_inside_project:
+                launch_inside_project = True
+            if command in builtincommands.launched_outside_project :               
+                launch_outside_project = True
             if command in builtincommands.followed_by_template:
                 followed_by_template = True
+
+            # default for commands: if not inside nor outside, and it's a builtin command, make it launch wherever
+            if not launch_inside_project and not launch_outside_project:
+                launch_inside_project = True
+                launch_outside_project = True
         
             hooks = {'pre': None, 'post':None}
             for event in ('pre', 'post'):
                 if hasattr(builtincommands, event + '_' + command_name):
                     hooks[event] = getattr(builtincommands, event + '_' + command_name)               
 
-            __commands['builtins'][command.__name__] = Command(command, None, conditional_launch, followed_by_template, hooks['pre'], hooks['post'])
+            __commands['builtins'][command.__name__] = Command(command, None, launch_inside_project, launch_outside_project, followed_by_template, hooks['pre'], hooks['post'])
                 
     return __commands
     
@@ -164,13 +168,14 @@ class Command:
             print _("Aborting")
             sys.exit(return_code)
 
-    def __init__(self, command, template=None, inside_project=LAUNCHED_INSIDE_PROJECT, followed_by_template=False, prehook=None, posthook=None):
+    def __init__(self, command, template=None, inside_project=True, outside_project=False, followed_by_template=False, prehook=None, posthook=None):
 
         self.command = command
         self.template = template
         self.prehook = prehook
         self.posthook = posthook
         self.inside_project = inside_project
+        self.outside_project = outside_project
         self.followed_by_template = followed_by_template
         
         if callable(command):
@@ -196,8 +201,8 @@ class Command:
         
         # verbose à false pour l'introspection des commandes dispos
         
-        # check if dest_path corresponds to a project path
-        if self.inside_project == LAUNCHED_INSIDE_PROJECT:
+        # check if dest_path check outside or inside only project :)
+        if self.inside_project and not self.outside_project:
             try:
                 project_path = tools.get_root_project_path(dest_path)
             except tools.project_path_not_found:
@@ -205,7 +210,7 @@ class Command:
                     print _("ERROR: Can't find project in %s.\nEnsure you launch this command from a quickly project directory.") % dest_path
                     print _("Aborting")
                 return False
-        elif self.inside_project == LAUNCHED_OUTSIDE_PROJECT:
+        if self.outside_project and not self.inside_project:
             try:
                 project_path = tools.get_root_project_path(dest_path)
                 if verbose:

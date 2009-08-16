@@ -1,5 +1,7 @@
-# default is launched inside project and not followed by template
-# put here other parameters
+# define parameters for commands, putting them in a list seperated
+# by ';'
+# if nothing specified, default is to launch command inside a project
+# only and not be followed by a template
+COMMANDS_LAUNCHED_INSIDE_PROJECT =
 COMMANDS_LAUNCHED_OUTSIDE_PROJECT = create
-COMMANDS_LAUNCHED_IN_OR_OUTSIDE_PROJECT =
 COMMANDS_FOLLOWED_BY_TEMPLATE = create 

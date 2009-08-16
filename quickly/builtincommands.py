@@ -125,8 +125,8 @@ Have Fun!''')
 
 
 
-# here, special builtin commands properties
-launched_outside_project = []
+# here, special builtin commands properties (if nothing specified, commands can be launched inside and outside projects)
 launched_inside_project = []
+launched_outside_project = []
 followed_by_template = [quickly]
 
