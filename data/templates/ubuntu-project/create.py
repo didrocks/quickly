@@ -15,27 +15,6 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Usage:
-$quickly create ubuntu-project path/to/project_name
-
-where "project_name" is one or more words separated by an underscore and
-path/to can be any existing path.
-
-This will create and run a new project, including Python code, 
-Glade files, and packaging files to make the project work. After
-creating the project, get started by:
-
-1. Changing your working directory to the new project:
-$cd path/to/project_name
-
-2. Edit the UI with Glade:
-$quickly glade
-
-3. Edit the Python code:
-$quickly edit
-
-"""
 
 import sys
 import os
@@ -51,6 +30,34 @@ from gettext import gettext as _
 
 # set domain text
 gettext.textdomain('quickly')
+
+
+
+def help():
+    print _("""Usage:
+$ quickly create ubuntu-project path/to/project_name
+
+where "project_name" is one or more words separated by an underscore and
+path/to can be any existing path.
+
+This will create and run a new project, including Python code, 
+Glade files, and packaging files to make the project work. After
+creating the project, get started by:
+
+1. Changing your working directory to the new project:
+$ cd path/to/project_name
+
+2. Edit the UI with Glade:
+$ quickly glade
+
+3. Edit the Python code:
+$ quickly edit
+""")
+
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+
 
 # get origin path
 pathname = os.path.dirname(__file__)

@@ -95,7 +95,7 @@ def get_all_commands():
                     if not launch_inside_project and not launch_outside_project:
                         launch_inside_project = True
                     
-                    __commands[template][command_name] = Command(file_path, template, launch_inside_project, launch_outside_project, followed_by_template, hooks['pre'], hooks['post'])
+                    __commands[template][command_name] = Command(file_path, template, launch_inside_project, launch_outside_project, followed_by_template, False, hooks['pre'], hooks['post'])
      
     # add builtin commands (avoiding gettext and hooks)
     __commands['builtins'] = {}
@@ -106,13 +106,16 @@ def get_all_commands():
             launch_inside_project = False
             launch_outside_project = False
             followed_by_template = False
+            followed_by_command = False
 
-            if command in builtincommands.launched_inside_project:
+            if command.__name__ in builtincommands.launched_inside_project:
                 launch_inside_project = True
-            if command in builtincommands.launched_outside_project :               
+            if command.__name__ in builtincommands.launched_outside_project :               
                 launch_outside_project = True
-            if command in builtincommands.followed_by_template:
+            if command.__name__ in builtincommands.followed_by_template:
                 followed_by_template = True
+            if command.__name__ in builtincommands.followed_by_command:
+                followed_by_command = True
 
             # default for commands: if not inside nor outside, and it's a builtin command, make it launch wherever
             if not launch_inside_project and not launch_outside_project:
@@ -124,7 +127,7 @@ def get_all_commands():
                 if hasattr(builtincommands, event + '_' + command_name):
                     hooks[event] = getattr(builtincommands, event + '_' + command_name)               
 
-            __commands['builtins'][command.__name__] = Command(command, None, launch_inside_project, launch_outside_project, followed_by_template, hooks['pre'], hooks['post'])
+            __commands['builtins'][command.__name__] = Command(command, None, launch_inside_project, launch_outside_project, followed_by_template, followed_by_command, hooks['pre'], hooks['post'])
                 
     return __commands
     
@@ -168,7 +171,7 @@ class Command:
             print _("Aborting")
             sys.exit(return_code)
 
-    def __init__(self, command, template=None, inside_project=True, outside_project=False, followed_by_template=False, prehook=None, posthook=None):
+    def __init__(self, command, template=None, inside_project=True, outside_project=False, followed_by_template=False, followed_by_command=False, prehook=None, posthook=None):
 
         self.command = command
         self.template = template
@@ -177,6 +180,7 @@ class Command:
         self.inside_project = inside_project
         self.outside_project = outside_project
         self.followed_by_template = followed_by_template
+        self.followed_by_command = followed_by_command
         
         if callable(command):
             self.name = command.__name__
@@ -188,12 +192,42 @@ class Command:
   
         This command try to see if the command is followed by a template and present template
         if it's the case. Otherwise, it calls the corresponding command argument"""
-
-        if len(args) == 0 and not template_in_cli and self.followed_by_template:
-            return(self.template)
         
-        #else:
-        # TODO: give to the command the opportunity of giving some shell-completion features
+        completion = []
+
+        if len(args) == 1:
+            if not template_in_cli:
+                if self.followed_by_template: # template completion
+                    if not self.template: # builtins command case
+                        completion.extend(get_all_templates())
+                    else: # complete with current template (which != from template_in_cli: ex create command (multiple templates))
+                        completion.extend([self.template])
+            else: # there is a template, add template commands
+                if self.followed_by_command: # template command completion
+                    completion.extend([command.name for command in get_command_by_criteria(template=template_in_cli)])
+            if self.followed_by_command: # builtin command completion
+                completion.extend([command.name for command in get_command_by_criteria(template="builtins")])
+
+        elif len(args) == 2:
+            if not template_in_cli and self.followed_by_template:
+                template_in_cli = args[0]
+                if self.followed_by_command: # template command completion
+                    completion.extend([command.name for command in get_command_by_criteria(template=template_in_cli)])
+
+        # give to the command the opportunity of giving some shell-completion features        
+        #if len(completion) == 0:
+        #    if callable(self.command): # Internal function : we must ask for a shell_completion command
+        #        completion.extend(self.command(template_in_cli, "", args, True))
+        #    else: # External command : we must ask for shell_completion command
+        #        instance = subprocess.Popen(["python", self.command] + "shell-completion" + args, stdout=subprocess.PIPE)
+        #        command_return_completion, err = instance.communicate()
+        #        if instance.returncode != 0:
+        #            print err
+        #            sys.exit(1)
+                    
+        #        completion.extend(command_return_completion.split(','))
+
+        return(" ".join(completion))
 
 
     def is_right_context(self, dest_path, verbose=True):
@@ -224,7 +258,7 @@ class Command:
         return True
 
 
-    def launch(self, current_dir, command_args, template=None):
+    def launch(self, current_dir, command_args, launchhook_and_checkcontext=True, template=None):
         """Launch command and hooks for it
         
         This command will perform the right action (insider function or script execution) after having
@@ -237,7 +271,7 @@ class Command:
         if template is None:
             template = self.template # (which can be None if it's a builtin command launched outside a project)
 
-        if not self.is_right_context(current_dir): # check in verbose mode
+        if launchhook_and_checkcontext and not self.is_right_context(current_dir): # check in verbose mode
             return(1)
 
         # get root project dir
@@ -247,7 +281,7 @@ class Command:
             # launch in current project
             project_path = current_dir
 
-        if self.prehook:
+        if launchhook_and_checkcontext and self.prehook:
             return_code = self.prehook(template, project_path, command_args)
             if return_code != 0:
                 self._die(self.prehook.__name__, return_code)
@@ -259,7 +293,7 @@ class Command:
         if return_code != 0:
             self._die(self.name,return_code)
 
-        if self.posthook:
+        if launchhook_and_checkcontext and self.posthook:
             return_code = self.posthook(template, project_path, command_args)
             if return_code != 0:
                 self._die(self.posthook.__name__, return_code)
