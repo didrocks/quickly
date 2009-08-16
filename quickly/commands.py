@@ -66,7 +66,7 @@ def get_all_commands():
                     # normally, we have two fields in "fields"
                     if len(fields) == 2:
                         targeted_property = fields[0].strip()
-                        command_list = [command.strip() for command in fields[1].split(',')]
+                        command_list = [command.strip() for command in fields[1].split(';')]
                         if targeted_property == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT':
                             launch_outside_project_command_list = command_list
                         elif targeted_property == 'COMMANDS_LAUNCHED_IN_OR_OUTSIDE_PROJECT':
