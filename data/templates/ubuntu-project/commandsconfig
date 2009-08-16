@@ -2,6 +2,6 @@
 # by ';'
 # if nothing specified, default is to launch command inside a project
 # only and not be followed by a template
-COMMANDS_LAUNCHED_INSIDE_PROJECT =
-COMMANDS_LAUNCHED_OUTSIDE_PROJECT = create
+COMMANDS_LAUNCHED_INSIDE_PROJECT = tutorial
+COMMANDS_LAUNCHED_OUTSIDE_PROJECT = create; tutorial
 COMMANDS_FOLLOWED_BY_TEMPLATE = create 

@@ -18,9 +18,9 @@
 
 """
 Usage:
-$quickly help
+$ quickly tutorial
 
-Opens a web browser with the help index.
+Opens a web browser with the tutorial for ubuntu-project template.
 
 """
 

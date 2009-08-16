@@ -146,7 +146,7 @@ subprocess.call(['./' + project_name], cwd='bin/')
 # put project name in setup.py
 quicklyutils.set_setup_value('name', project_name)
 
-print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly help' for quickly tutorial and reference") % os.getcwd()
+print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly tutorial' for quickly tutorial and reference") % os.getcwd()
 
 sys.exit(0)
 
