@@ -20,6 +20,7 @@ import os
 import shutil
 
 import configurationhandler
+import commands as commands_module
 import quicklyconfig
 import tools
 
@@ -68,6 +69,52 @@ def pre_create(template, project_dir, command_args):
 
     return 0
 
+def commands(template, project_dir, command_args):
+    """List all commands ordered by templates"""
+
+    all_commands = commands_module.get_all_commands()
+    for template_available in all_commands:
+        # copie all commands to a list (as sort() is an inplace function)
+        command_for_this_template = list(all_commands[template_available].keys())
+        command_for_this_template.sort()
+        for command_name in command_for_this_template:
+            command = all_commands[template_available][command_name]
+            print "[%s]\t%s" % (template_available, command_name)
+            
+    return(0)
+    
+def getstarted(template, project_dir, command_args):
+    print _('''-------------------------------
+    Welcome to quickly!
+-------------------------------
+
+You can create a project in executing 'quickly create <template_name> <your project>'.
+
+
+Example with ubuntu-project template:
+1. create a Ubuntu Project and run the tutorial:
+$ quickly create ubuntu-project foo
+$ cd foo
+$ quickly tutorial
+
+2. You can also try:
+$ quickly edit
+$ quickly glade
+$ quickly run
+Use bash completion to get every available commands
+
+3. How to play with package and release:
+
+optional, but recommended to build first your package locally:
+$ quickly package
+
+BE WARNED: the two following commands will connect to Launchpad. You need at least having a Launchpad account and an opened ppa.
+You need also for quickly release a project where you can bind your work with.
+$ quickly release or $ quickly share
+
+Have Fun!''')
+    return 0
+
 def quickly(template, project_dir, command_args):
     """Create a new quickly template from an existing one"""
 
@@ -89,38 +136,6 @@ def quickly(template, project_dir, command_args):
         print _("Copy %s to create new %s template") % (template, template_destination_path)
 
     shutil.copytree(tools.get_template_directory(template), template_destination_path)
-    return 0
-
-def getstarted(template, project_dir, command_args):
-    print _('''-------------------------------
-    Welcome to quickly!
--------------------------------
-
-You can create a project in executing 'quickly create <template_name> <your project>'.
-
-
-Example with ubuntu-project template:
-1. create a Ubuntu Project and run the tutorial:
-$ quickly create ubuntu-project foo
-$ cd foo
-$ quickly help
-
-2. You can also try:
-$ quickly edit
-$ quickly glade
-$ quickly run
-Use bash completion to get every available commands
-
-3. How to play with package and release:
-
-optional, but recommended to build first your package locally:
-$ quickly package
-
-BE WARNED: the two following commands will connect to Launchpad. You need at least having a Launchpad account and an opened ppa.
-You need also for quickly release a project where you can bind your work with.
-$ quickly release or $ quickly share
-
-Have Fun!''')
     return 0
 
 

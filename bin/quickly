@@ -192,14 +192,15 @@ def main():
         try:
             command = commands.get_command_by_criteria(name=command_name, template='builtins')[0]
             # if it's a builtin command which has to be followed by a template, check that everything is correct
-            try:
-                opt_template = opt_command[1]
-                opt_command.remove(opt_command[1])
-                tools.check_template_exists(opt_template)
-            except IndexError:
-                print _("ERROR: %s command must be followed by a template and no template was found on the command line." % command_name)
-                print _("Candidates template are: %s") % ", ".join(commands.get_all_templates())
-                return(1)
+            if command.followed_by_template:
+                try:
+                    opt_template = opt_command[1]
+                    opt_command.remove(opt_command[1])
+                    tools.check_template_exists(opt_template)
+                except IndexError:
+                    print _("ERROR: %s command must be followed by a template and no template was found on the command line." % command_name)
+                    print _("Candidates template are: %s") % ", ".join(commands.get_all_templates())
+                    return(1)
         except IndexError:        
             # so, check for a template command followed by template
             try:
