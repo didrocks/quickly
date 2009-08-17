@@ -17,8 +17,20 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-Usage:
+import os
+import sys
+import internal.quicklyutils as quicklyutils
+from quickly import configurationhandler
+import quickly.tools
+
+import gettext
+from gettext import gettext as _
+# set domain text
+gettext.textdomain('quickly')
+
+
+def help():
+    print _("""Usage:
 $quickly dialog dialog_name
 where dialog_name is one or more words seperated with underscore
 
@@ -43,13 +55,18 @@ dialog = DialogNameDialog.NewDialogNameDialog()
 3. Run the dialog and hide the dialog
 result = dialog.run()
 dialog.hide()
+""")
 
-"""
-import os
-import sys
-import internal.quicklyutils as quicklyutils
-from quickly import configurationhandler
-import quickly.tools
+def shell_completion():
+    pass
+
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
+
 
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)

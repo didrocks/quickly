@@ -15,8 +15,25 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Usage:
+
+import sys
+import subprocess
+
+import gettext
+from gettext import gettext as _
+gettext.textdomain('quickly')
+
+from internal import packaging, quicklyutils
+from quickly import configurationhandler
+
+import gettext
+from gettext import gettext as _
+# set domain text
+gettext.textdomain('quickly')
+
+
+def help():
+    print _("""Usage:
 $quickly package
 
 Creates a debian file (deb) from your project. Before running
@@ -28,18 +45,18 @@ or quickly change-lp-project you may miss the name, email in
 setup.py. You can edit them if you don't want to use any of these
 commands afterwards. Those changes are not a mandatory at all for
 testing purpose.
+""")
 
-"""
+def shell_completion():
+    pass
 
-import sys
-import subprocess
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
 
-import gettext
-from gettext import gettext as _
-gettext.textdomain('quickly')
-
-from internal import packaging, quicklyutils
-from quickly import configurationhandler
 
 # retrieve useful information
 if not configurationhandler.project_config:

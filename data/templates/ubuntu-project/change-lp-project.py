@@ -23,6 +23,30 @@ import sys
 from quickly import launchpadaccess
 from internal import quicklyutils
 
+import gettext
+from gettext import gettext as _
+# set domain text
+gettext.textdomain('quickly')
+
+
+def help():
+    print _("""Usage:
+$ quickly change-lp-project
+
+Enable to set or change the launchpad project binded with the current
+ubuntu project.
+""")
+
+def shell_completion():
+    pass
+
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
+
 launchpad = launchpadaccess.initialize_lpi()
 
 # set the project

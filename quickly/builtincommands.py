@@ -72,6 +72,9 @@ def pre_create(template, project_dir, command_args):
 def commands(template, project_dir, command_args, shell_completion=False):
     """List all commands ordered by templates"""
 
+    # We have nothing for this
+    if shell_completion:
+        return("")
 
     all_commands = commands_module.get_all_commands()
     for template_available in all_commands:
@@ -86,6 +89,10 @@ def commands(template, project_dir, command_args, shell_completion=False):
     
 def getstarted(template, project_dir, command_args, shell_completion=False):
     """ Give some getstarted advice"""
+
+    # We have nothing for this
+    if shell_completion:
+        return("")
 
     print _('''-------------------------------
     Welcome to quickly!
@@ -120,6 +127,10 @@ Have Fun!''')
 
 def help(template, project_dir, command_args, shell_completion=False):
     """Get help from commands"""
+
+    # We have nothing for this
+    if shell_completion:
+        return("")
     
     if len(command_args) > 0:
         command_name = command_args[0]
@@ -149,12 +160,16 @@ def help(template, project_dir, command_args, shell_completion=False):
             else:
                 print _("ERROR: No %s command found in %s template.") % (command_name, template)
             return(1)
-    command.launch(os.getcwd(), ["help"], False, template)
-    return(0)
+        
+    return(command.help(project_dir, command_args))
 
 
 def quickly(template, project_dir, command_args, shell_completion=False):
     """Create a new quickly template from an existing one"""
+
+    # We have nothing for this
+    if shell_completion:
+        return("")
 
     if len(command_args) < 1:
         print _("ERROR: Quickly command must be followed by a template and a template destination path")

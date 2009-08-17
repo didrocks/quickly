@@ -26,8 +26,6 @@ from internal import quicklyutils
 
 import gettext
 from gettext import gettext as _
-
-
 # set domain text
 gettext.textdomain('quickly')
 
@@ -54,10 +52,15 @@ $ quickly glade
 $ quickly edit
 """)
 
+def shell_completion():
+    pass
+
 if sys.argv[1] == "help":
     help()
     sys.exit(0)
-
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
 
 # get origin path
 pathname = os.path.dirname(__file__)

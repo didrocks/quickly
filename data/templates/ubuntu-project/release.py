@@ -15,8 +15,22 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Usage:
+
+import os
+import sys
+import subprocess
+import webbrowser
+
+
+from quickly import launchpadaccess, configurationhandler
+from internal import quicklyutils, packaging
+
+import gettext
+from gettext import gettext as _
+gettext.textdomain('quickly')
+
+def help():
+    print _("""Usage:
 $quickly release
 
 Posts a release of your project to a PPA on launchpad so that
@@ -46,21 +60,17 @@ You can modify the description and long description if you wish.
 
 You can run $quickly package and test your package to make sure it
 installs as expected. (This is not mandatory)
+""")
 
-"""
-import os
-import sys
-import subprocess
-import webbrowser
+def shell_completion():
+    pass
 
-
-from quickly import launchpadaccess, configurationhandler
-from internal import quicklyutils, packaging
-
-import gettext
-from gettext import gettext as _
-gettext.textdomain('quickly')
-
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
 
 args = sys.argv
 

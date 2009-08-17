@@ -16,17 +16,30 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-Usage:
-$ quickly tutorial
-
-Opens a web browser with the tutorial for ubuntu-project template.
-
-"""
-
 import os
 import sys
 import webbrowser
+
+import gettext
+from gettext import gettext as _
+gettext.textdomain('quickly')
+
+def help():
+    print _("""Usage:
+$ quickly tutorial
+
+Opens a web browser with the tutorial for ubuntu-project template.
+""")
+
+def shell_completion():
+    pass
+
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
 
 webbrowser.open(os.path.dirname(__file__) + "/help/index.html")
 

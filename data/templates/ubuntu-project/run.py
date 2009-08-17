@@ -15,14 +15,8 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Usage:
-$quickly run
 
-Runs your application. This is the best way to try test it out
-while you are developing it. It starts up the main project window.
 
-"""
 import os
 import stat
 import sys
@@ -33,6 +27,24 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 from quickly import configurationhandler
+
+def help():
+    print _("""Usage:
+$quickly run
+
+Runs your application. This is the best way to try test it out
+while you are developing it. It starts up the main project window.
+""")
+
+def shell_completion():
+    pass
+
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
 
 # if config not already loaded
 if not configurationhandler.project_config:

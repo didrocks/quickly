@@ -15,8 +15,29 @@
 #
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Usage:
+
+import os
+import re
+import shutil
+import sys
+
+from quickly import configurationhandler, tools
+
+
+import gettext
+from gettext import gettext as _
+# set domain text
+gettext.textdomain('quickly')
+
+
+BEGIN_COPYRIGHT_TAG = '### BEGIN AUTOMATIC LICENSE GENERATION'
+END_COPYRIGHT_TAG = '### END AUTOMATIC LICENSE GENERATION'
+BEGIN_LICENCE_TAG = '### BEGIN LICENSE'
+END_LICENCE_TAG = '### END LICENSE'
+
+
+def help():
+    print _("""Usage:
 $quickly license <Your_Licence>
 
 Adds license to project files. Before using this command, you should:
@@ -42,26 +63,18 @@ Finally, this will copy the Copyright at the head of every files.
 Note that if you don't run quickly licence before calling quickly release or quickly
 share, this one will execute it for you and guess the copyright holder from your
 launchpad account if you didn't update it.
-"""
+""")
 
-import os
-import re
-import shutil
-import sys
+def shell_completion():
+    pass
 
-from quickly import configurationhandler, tools
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
 
-
-import gettext
-from gettext import gettext as _
-
-# set domain text
-gettext.textdomain('quickly')
-
-BEGIN_COPYRIGHT_TAG = '### BEGIN AUTOMATIC LICENSE GENERATION'
-END_COPYRIGHT_TAG = '### END AUTOMATIC LICENSE GENERATION'
-BEGIN_LICENCE_TAG = '### BEGIN LICENSE'
-END_LICENCE_TAG = '### END LICENSE'
 
 def get_supported_licenses():
     """Get supported licenses"""

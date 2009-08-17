@@ -15,20 +15,37 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Usage:
-$quickly edit
-
-A convenience command to open all of your python files in your project 
-directory in your default editor, ready for editing.
-
-"""
 
 
 import subprocess
 import os
 
 from quickly import configurationhandler
+
+import gettext
+from gettext import gettext as _
+# set domain text
+gettext.textdomain('quickly')
+
+
+def help():
+    print _("""Usage:
+$quickly edit
+
+A convenience command to open all of your python files in your project 
+directory in your default editor, ready for editing.
+""")
+
+def shell_completion():
+    pass
+
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
+
 
 filelist = ""
 for root, dirs, files in os.walk('./'):

@@ -211,24 +211,34 @@ class Command:
         elif len(args) == 2:
             if not template_in_cli and self.followed_by_template:
                 template_in_cli = args[0]
-                if self.followed_by_command: # template command completion
+                if self.followed_by_command: # template command completion and builtins command
                     completion.extend([command.name for command in get_command_by_criteria(template=template_in_cli)])
+                    completion.extend([command.name for command in get_command_by_criteria(template="builtins")])
 
         # give to the command the opportunity of giving some shell-completion features        
-        #if len(completion) == 0:
-        #    if callable(self.command): # Internal function : we must ask for a shell_completion command
-        #        completion.extend(self.command(template_in_cli, "", args, True))
-        #    else: # External command : we must ask for shell_completion command
-        #        instance = subprocess.Popen(["python", self.command] + "shell-completion" + args, stdout=subprocess.PIPE)
-        #        command_return_completion, err = instance.communicate()
-        #        if instance.returncode != 0:
-        #            print err
-        #            sys.exit(1)
-                    
-        #        completion.extend(command_return_completion.split(','))
+        if template_in_cli == self.template and len(completion) == 0:
+            if callable(self.command): # Internal function
+                completion.extend(self.command(template_in_cli, "", args, True))
+            else: # External command
+                instance = subprocess.Popen(["python", self.command, "shell-completion"] + args, stdout=subprocess.PIPE)
+                command_return_completion, err = instance.communicate()
+                if instance.returncode != 0:
+                    print err
+                    sys.exit(1)                    
+                completion.extend(command_return_completion.split(','))
 
         return(" ".join(completion))
 
+    def help(self, dest_path,command_args):
+        """Print help of the current command"""
+
+        return_code = 0        
+        if callable(self.command): # intern function, return __doc__
+            print (self.command.__doc__)
+        else: # launch command with "help" parameter
+            return_code = subprocess.call(["python", self.command, "help"] + command_args, cwd=dest_path)
+
+        return(return_code)
 
     def is_right_context(self, dest_path, verbose=True):
         """Check if we are in the right context for launching the command"""
@@ -258,7 +268,7 @@ class Command:
         return True
 
 
-    def launch(self, current_dir, command_args, launchhook_and_checkcontext=True, template=None):
+    def launch(self, current_dir, command_args, template=None):
         """Launch command and hooks for it
         
         This command will perform the right action (insider function or script execution) after having
@@ -271,7 +281,7 @@ class Command:
         if template is None:
             template = self.template # (which can be None if it's a builtin command launched outside a project)
 
-        if launchhook_and_checkcontext and not self.is_right_context(current_dir): # check in verbose mode
+        if not self.is_right_context(current_dir): # check in verbose mode
             return(1)
 
         # get root project dir
@@ -281,7 +291,7 @@ class Command:
             # launch in current project
             project_path = current_dir
 
-        if launchhook_and_checkcontext and self.prehook:
+        if self.prehook:
             return_code = self.prehook(template, project_path, command_args)
             if return_code != 0:
                 self._die(self.prehook.__name__, return_code)
@@ -293,7 +303,7 @@ class Command:
         if return_code != 0:
             self._die(self.name,return_code)
 
-        if launchhook_and_checkcontext and self.posthook:
+        if self.posthook:
             return_code = self.posthook(template, project_path, command_args)
             if return_code != 0:
                 self._die(self.posthook.__name__, return_code)

@@ -15,8 +15,17 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Usage:
+
+
+import sys
+import subprocess
+
+import gettext
+from gettext import gettext as _
+gettext.textdomain('quickly')
+
+def help():
+    print _("""Usage:
 $quickly save notes about changes
 where "notes about changes" is optional text describing what changes
 were made since the last save.
@@ -25,14 +34,17 @@ This command commits all changes since the last save to bzr. Note that
 it does not push changes to any back up location. If you need revert
 or otherwise use the revision control, us bzr directly:
 $bzr help
+""")
 
-"""
-import sys
-import subprocess
+def shell_completion():
+    pass
 
-import gettext
-from gettext import gettext as _
-gettext.textdomain('quickly')
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
 
 #set either a default message or the specified message
 commit_msg = " ".join(sys.argv[1:])

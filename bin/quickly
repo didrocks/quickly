@@ -224,7 +224,7 @@ def main():
                 print _("Arborting.")
                 return(1)
 
-    return(command.launch(os.getcwd(), opt_command[1:], True, opt_template))
+    return(command.launch(os.getcwd(), opt_command[1:], opt_template))
 
 
 if __name__ == '__main__':

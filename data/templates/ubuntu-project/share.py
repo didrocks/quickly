@@ -15,8 +15,21 @@
 
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Usage:
+
+import sys
+import subprocess
+import webbrowser
+
+
+from quickly import launchpadaccess, configurationhandler
+from internal import quicklyutils, packaging
+
+import gettext
+from gettext import gettext as _
+gettext.textdomain('quickly')
+
+def help():
+    print _("""Usage:
 $quickly share
 
 Updates your PPA with the the latest saved project changes.
@@ -29,19 +42,17 @@ Name, email and version setup.py will be automatically changed.
 (version will be <current_release~publicX> where X will be incremented
 at each quickly share execution)
 You can modify the description and long description if you wish.
+""")
 
-"""
-import sys
-import subprocess
-import webbrowser
+def shell_completion():
+    pass
 
-
-from quickly import launchpadaccess, configurationhandler
-from internal import quicklyutils, packaging
-
-import gettext
-from gettext import gettext as _
-gettext.textdomain('quickly')
+if sys.argv[1] == "help":
+    help()
+    sys.exit(0)
+elif sys.argv[1] == "shell-completion":
+    shell_completion()
+    sys.exit(0)
 
 launchpad = None
 # warning: project_name can be different from project.name (one local, one on launchpad)
