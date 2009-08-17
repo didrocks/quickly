@@ -47,17 +47,7 @@ setup.py. You can edit them if you don't want to use any of these
 commands afterwards. Those changes are not a mandatory at all for
 testing purpose.
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
-
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 # retrieve useful information
 if not configurationhandler.project_config:

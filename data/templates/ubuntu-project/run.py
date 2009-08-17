@@ -28,6 +28,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 from quickly import configurationhandler
+from internal import quicklyutils
 
 def help():
     print _("""Usage:
@@ -36,16 +37,7 @@ $quickly run
 Runs your application. This is the best way to try test it out
 while you are developing it. It starts up the main project window.
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 # if config not already loaded
 if not configurationhandler.project_config:

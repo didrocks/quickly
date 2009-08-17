@@ -37,16 +37,7 @@ $ quickly change-lp-project
 Enable to set or change the launchpad project binded with the current
 ubuntu project.
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 launchpad = launchpadaccess.initialize_lpi()
 

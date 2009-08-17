@@ -23,7 +23,7 @@ import shutil
 import sys
 
 from quickly import configurationhandler, tools
-
+from internal import quicklyutils
 
 import gettext
 from gettext import gettext as _
@@ -65,17 +65,7 @@ Note that if you don't run quickly licence before calling quickly release or qui
 share, this one will execute it for you and guess the copyright holder from your
 launchpad account if you didn't update it.
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
-
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 def get_supported_licenses():
     """Get supported licenses"""

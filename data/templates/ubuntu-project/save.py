@@ -25,6 +25,8 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
+from internal import quicklyutils
+
 def help():
     print _("""Usage:
 $quickly save notes about changes
@@ -36,16 +38,7 @@ it does not push changes to any back up location. If you need revert
 or otherwise use the revision control, us bzr directly:
 $bzr help
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 #set either a default message or the specified message
 commit_msg = " ".join(sys.argv[1:])

@@ -25,22 +25,15 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
+from internal import quicklyutils
+
 def help():
     print _("""Usage:
 $ quickly tutorial
 
 Opens a web browser with the tutorial for ubuntu-project template.
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 webbrowser.open(os.path.dirname(__file__) + "/help/index.html")
 

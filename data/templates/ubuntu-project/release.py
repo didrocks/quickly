@@ -62,16 +62,7 @@ You can modify the description and long description if you wish.
 You can run $quickly package and test your package to make sure it
 installs as expected. (This is not mandatory)
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 args = sys.argv
 

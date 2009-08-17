@@ -44,16 +44,7 @@ Name, email and version setup.py will be automatically changed.
 at each quickly share execution)
 You can modify the description and long description if you wish.
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 launchpad = None
 # warning: project_name can be different from project.name (one local, one on launchpad)

@@ -57,17 +57,7 @@ dialog = DialogNameDialog.NewDialogNameDialog()
 result = dialog.run()
 dialog.hide()
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
-
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)

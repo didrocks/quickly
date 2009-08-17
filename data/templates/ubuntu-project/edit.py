@@ -23,6 +23,7 @@ import os
 import sys
 
 from quickly import configurationhandler
+from internal import quicklyutils
 
 import gettext
 from gettext import gettext as _
@@ -37,17 +38,7 @@ $quickly edit
 A convenience command to open all of your python files in your project 
 directory in your default editor, ready for editing.
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
-
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 filelist = ""
 for root, dirs, files in os.walk('./'):

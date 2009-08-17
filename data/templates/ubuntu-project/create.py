@@ -52,16 +52,7 @@ $ quickly glade
 3. Edit the Python code:
 $ quickly edit
 """)
-
-def shell_completion():
-    pass
-
-if len(sys.argv) > 1 and sys.argv[1] == "help":
-    help()
-    sys.exit(0)
-elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
-    shell_completion()
-    sys.exit(0)
+quicklyutils.handle_additional_parameters(sys.argv, help)
 
 # get origin path
 pathname = os.path.dirname(__file__)
@@ -153,9 +144,6 @@ subprocess.call(["bzr", "commit", "-m", "Initial project creation with Quickly!"
 # run the new application
 print _("Launching your newly created project!")
 subprocess.call(['./' + project_name], cwd='bin/')
-
-# put project name in setup.py
-quicklyutils.set_setup_value('name', project_name)
 
 print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly tutorial' for quickly tutorial and reference") % os.getcwd()
 
