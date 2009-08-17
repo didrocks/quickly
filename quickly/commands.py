@@ -220,7 +220,7 @@ class Command:
             if callable(self.command): # Internal function
                 completion.extend(self.command(template_in_cli, "", args, True))
             else: # External command
-                instance = subprocess.Popen(["python", self.command, "shell-completion"] + args, stdout=subprocess.PIPE)
+                instance = subprocess.Popen([self.command, "shell-completion"] + args, stdout=subprocess.PIPE)
                 command_return_completion, err = instance.communicate()
                 if instance.returncode != 0:
                     print err
@@ -236,7 +236,7 @@ class Command:
         if callable(self.command): # intern function, return __doc__
             print (self.command.__doc__)
         else: # launch command with "help" parameter
-            return_code = subprocess.call(["python", self.command, "help"] + command_args, cwd=dest_path)
+            return_code = subprocess.call([self.command, "help"] + command_args, cwd=dest_path)
 
         return(return_code)
 
@@ -299,7 +299,7 @@ class Command:
         if callable(self.command): # Internal function
             return_code = self.command(template, project_path, command_args)
         else: # External command
-            return_code = subprocess.call(["python", self.command] + command_args, cwd=project_path)
+            return_code = subprocess.call([self.command] + command_args, cwd=project_path)
         if return_code != 0:
             self._die(self.name,return_code)
 

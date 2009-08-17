@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Copyright 2009 Canonical Ltd.
 # Author 2009 Didier Roche
@@ -47,10 +48,10 @@ You can modify the description and long description if you wish.
 def shell_completion():
     pass
 
-if sys.argv[1] == "help":
+if len(sys.argv) > 1 and sys.argv[1] == "help":
     help()
     sys.exit(0)
-elif sys.argv[1] == "shell-completion":
+elif len(sys.argv) > 1 and sys.argv[1] == "shell-completion":
     shell_completion()
     sys.exit(0)
 
