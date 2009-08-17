@@ -21,28 +21,28 @@ else:
     fullPath = os.getcwd()
 sys.path.insert(0, os.path.dirname(fullPath))
 
-from super_text import AboutSuperTextDialog, PreferencesSuperTextDialog
-from super_text.super_textconfig import getdatapath
+from jotty import AboutJottyDialog, PreferencesJottyDialog
+from jotty.jottyconfig import getdatapath
 
-class SuperTextWindow(gtk.Window):
-    __gtype_name__ = "SuperTextWindow"
+class JottyWindow(gtk.Window):
+    __gtype_name__ = "JottyWindow"
 
     def __init__(self):
         """__init__ - This function is typically not called directly.
-        Creation a SuperTextWindow requires redeading the associated ui
+        Creation a JottyWindow requires redeading the associated ui
         file and parsing the ui definition extrenally,
-        and then calling SuperTextWindow.finish_initializing().
+        and then calling JottyWindow.finish_initializing().
 
-        Use the convenience function NewSuperTextWindow to create
-        SuperTextWindow object.
+        Use the convenience function NewJottyWindow to create
+        JottyWindow object.
 
         """
         pass
 
     def finish_initializing(self, builder):
         """finish_initalizing should be called after parsing the ui definition
-        and creating a SuperTextWindow object with it in order to finish
-        initializing the start of the new SuperTextWindow instance.
+        and creating a JottyWindow object with it in order to finish
+        initializing the start of the new JottyWindow instance.
 
         """
         #get a reference to the builder and set up the signals
@@ -50,22 +50,22 @@ class SuperTextWindow(gtk.Window):
         self.builder.connect_signals(self)
 
         #uncomment the following code to read in preferences at start up
-        #dlg = SuperTextPreferencesDialog.NewSuperTextPreferencesDialog()
+        #dlg = JottyPreferencesDialog.NewJottyPreferencesDialog()
         #self.preferences = dlg.get_preferences()
 
         #code for other initialization actions should be added here
-        self.database = CouchDatabase("super_text", create=True)
+        self.database = CouchDatabase("jotty", create=True)
 
     def about(self, widget, data=None):
         """about - display the about box for what_the_heck """
-        about = AboutSuperTextDialog.NewAboutSuperTextDialog()
+        about = AboutJottyDialog.NewAboutJottyDialog()
         response = about.run()
         about.hide()
         about.destroy
 
     def preferences(self, widget, data=None):
-        """preferences - display the preferences window for super_text """
-        prefs = PreferencesSuperTextDialog.NewPreferencesSuperTextDialog()
+        """preferences - display the preferences window for jotty """
+        prefs = PreferencesJottyDialog.NewPreferencesJottyDialog()
         response = prefs.run()
         if response == gtk.RESPONSE_OK:
             #make any updates based on changed preferences here
@@ -74,11 +74,11 @@ class SuperTextWindow(gtk.Window):
         prefs.destroy
 
     def quit(self, widget, data=None):
-        """quit - signal handler for closing the SuperTextWindow"""
+        """quit - signal handler for closing the JottyWindow"""
         self.destroy()
 
     def on_destroy(self, widget, data=None):
-        """on_destroy - called when the SuperTextWindow is close. """
+        """on_destroy - called when the JottyWindow is close. """
         #clean up code for saving application state should be added here
 
         gtk.main_quit()
@@ -94,7 +94,7 @@ class SuperTextWindow(gtk.Window):
         text = buff.get_text(start_iter,end_iter)
 
         #get all the records
-        record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
         results = self.database.get_records(record_type = record_type, 
                                             create_view = True)
 
@@ -111,14 +111,13 @@ class SuperTextWindow(gtk.Window):
                             "title":title, "text":text})
         self.database.put_record(new_rec)
 
-
     def open_file(self, widget, data=None):
         #get the name of the document to open
         title = self.builder.get_object("entry1").get_text()
         text = ""
 
         #get all the records
-        record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
         results = self.database.get_records(record_type = record_type, 
                                             create_view = True)
 
@@ -132,30 +131,32 @@ class SuperTextWindow(gtk.Window):
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text(text)
 
+
     def new_file(self, widget, data=None):
         self.builder.get_object("entry1").set_text("Note Title")
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text("")
 
-def NewSuperTextWindow():
-    """NewSuperTextWindow - returns a fully instantiated
-    SuperTextWindow object. Use this function rather than
-    creating a SuperTextWindow directly.
+
+def NewJottyWindow():
+    """NewJottyWindow - returns a fully instantiated
+    JottyWindow object. Use this function rather than
+    creating a JottyWindow directly.
     """
 
     #look for the ui file that describes the ui
-    ui_filename = os.path.join(getdatapath(), 'ui', 'SuperTextWindow.ui')
+    ui_filename = os.path.join(getdatapath(), 'ui', 'JottyWindow.ui')
     if not os.path.exists(ui_filename):
         ui_filename = None
 
     builder = gtk.Builder()
     builder.add_from_file(ui_filename)
-    window = builder.get_object("super_text_window")
+    window = builder.get_object("jotty_window")
     window.finish_initializing(builder)
     return window
 
 if __name__ == "__main__":
-    window = NewSuperTextWindow()
+    window = NewJottyWindow()
     window.show()
     gtk.main()
 
