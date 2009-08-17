@@ -230,7 +230,7 @@ def main():
 if __name__ == '__main__':
 
     # process the command line to send the right instructions
-    if 'shell-completion' in sys.argv:
+    if sys.argv[1] == 'shell-completion':
         exit(get_commands())
     else:
         exit(main())
