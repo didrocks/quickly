@@ -23,7 +23,7 @@ p
 
 <H1>Creating a Quickly Dialog</H1>
 <H2>Creating the Empty Dialog</H2>
-<P>It's simple to add an empty, but working dialog to your project. Simply specify the name of the new dialog, and it will be added automatically. Assuming that you are in the super_text project directory:</P>
+<P>It's simple to add an empty, but working dialog to your project. Simply specify the name of the new dialog, and it will be added automatically. Assuming that you are in the jotty project directory:</P>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
 $quickly dialog save
 </TEXTAREA></DIV>
@@ -35,32 +35,32 @@ $quickly glade
 </TEXTAREA></DIV>
 <P>Then use the project menu to switch to newly created SaveDialog.ui file.</P>
 <IMG SRC="./images/glade17.png" ALT="save dialog ready to edit" />
-<P>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for SuperTextWindow in part 1. Set the padding and expand properties as well.</P>
+<P>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for JottyWindow in part 1. Set the padding and expand properties as well.</P>
 <IMG SRC="./images/glade18.png" ALT="save dialog all edited" />
 <H2>Code the Dialog</H2>
-<P>This dialog needs very little additional code to work. Essentially, you just need a way to retrieve the string specified by the user. We'll add a qiuck accessor method for this:</P>
+<P>You can use the "quickly edit" command to open the SaveDialoy.py file. This dialog needs very little additional code to work. Essentially, you just need a way to retrieve the string specified by the user. We'll add a qiuck accessor method for this:</P>
 <DIV class="code"><TEXTAREA rows="2" cols="80">
-    def get_title_text(self):
+    @property
+    def title_text(self):
         return self.builder.get_object("entry1").get_text()
 </TEXTAREA></DIV>
 <P>We don't need to write any code for the Ok and Cancel buttons, as they were automatically hooked up by quickly when it created the dialog.</P>
-<P>Before we go on to invoking the dialog, delete HBox from SuperTextWindow that holds the text entry and label, as we won't be needing those.</P>
+<P>Before we go on to invoking the dialog, delete HBox from JottyWindow that holds the text entry and label, as we won't be needing those.</P>
 <IMG SRC="./images/glade19.png" ALT="text entry now deleted" />
 
 <H1>Calling the Save Dialog</H1>
-<P>To use the dialog in SuperTextWindow, we need to follow these steps:</P>
+<P>To use the dialog in JottyWindow, we need to follow these steps:</P>
 <OL>
-<LI>Import SaveDialog in SuperTextWindow</LI>
+<LI>Import SaveDialog in JottyWindow</LI>
 <LI>In the save_file function, create an instance of SaveDialog</LI>
 <LI>Run the Dialog</LI>
 <LI>Get the String</LI>
 <LI>Destroy the dialog</LI>
-<LI>Check the response before proceeding</LI>
 </OL>
 <H2>Importing the SaveDialog</H2>
 Add the SaveDialog to the list of imported modules at the top of the, so it looks like this:
 <DIV class="code"><TEXTAREA rows="1" cols="80">
-from super_text import AboutSuperTextDialog, PreferencesSuperTextDialog, SaveDialog
+from jotty import AboutJottyDialog, PreferencesJottyDialog, SaveDialog
 </TEXTAREA></DIV>
 
 <H2>Create an instance of the dialog and run it</H2>
@@ -74,7 +74,7 @@ d
 <P>To make the dialog appear, simply use the run() method. However, we want to check the result, so we'll need to store that in a variable. After it runs, we want to collect the string from the user, like this:</P>
 <DIV class="code"><TEXTAREA rows="2" cols="80">
         result = saver.run()
-        title = saver.get_title_text()
+        title = saver.title_text
 </TEXTAREA></DIV>
 
 <H2>Clean up the dialog</H2>
@@ -92,7 +92,7 @@ d
         #get the titel from the user
         saver = SaveDialog.NewSaveDialog()
         result = saver.run()
-        title = saver.get_title_text()
+        title = saver.title_text
 
         saver.destroy()
         if result != gtk.RESPONSE_OK:
@@ -105,7 +105,7 @@ d
         text = buff.get_text(start_iter,end_iter)
 
         #get all the records
-        record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
         results = self.database.get_records(record_type = record_type, 
                                             create_view = True)
 
@@ -133,7 +133,7 @@ We'll use a similar approach in the Open dialog that we did with Save. However, 
 <H2>Create the Open Dialog</H2>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
 $quickly dialog open
-</TEXTAREA></DIV>
+</TEXTAREA></DIV>su
 <H2>Editing the New Dialog</H2>
 <P>Start out by closing, and then reopening glade again:</P>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
@@ -147,7 +147,7 @@ $quickly glade
 <P>It just takes a little bit of code to add a CouchWidget to the  dialog. We need to:</P>
 <OL>
 <LI>Import the CouchWidget class.</LI>
-<LI>Create a CouchWidget pointing at the super_text database, and the desired record type.</LI>
+<LI>Create a CouchWidget pointing at the jotty database, and the desired record type.</LI>
 <LI>Add the CouchWidget to the dialog.</LI>
 </OL>
 <H4>Import the CouchWidget class</H4>
@@ -159,9 +159,9 @@ from desktopcouch.records.couchwidget import CouchWidget
 <P>A CouchWidget needs to know three things, the name of the database, the name of the record type to, and the name of the "headings" to use. Headings is a list of fields that the widget will display, and will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
 <DIV class="code"><TEXTAREA rows="4" cols="80">
         self.couchwidget = CouchWidget()
-        self.couchwidget.database = "super_text"
+        self.couchwidget.database = "jotty"
         self.couchwidget.headings = ["title"]        
-        self.couchwidget.record_type = "http://wiki.ubuntu.com/Quickly/SuperTextDoc"
+        self.couchwidget.record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
 </TEXTAREA></DIV>
 <H4>Add the CouchWidget to the Dialog</H4>
 <P>When we added the HBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchWidget into the HBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
@@ -189,9 +189,9 @@ from desktopcouch.records.couchwidget import CouchWidget
             return ids[0]
 </TEXTAREA></DIV>
 <H1>Using the Open Dialog</H1>
-<P>Now we want to use the Open Dialog in the SuperTextWindow open_file function. To use it,we'll follow these steps:</P>
+<P>Now we want to use the Open Dialog in the JottyWindow open_file function. To use it,we'll follow these steps:</P>
 <OL>
-<LI>Import OpenDialog in SuperTextWindow</LI>
+<LI>Import OpenDialog in JottyWindow</LI>
 <LI>In the open_file function, create an instance of OpenDialog</LI>
 <LI>Run the Dialog</LI>
 <LI>Get the id for the selected title.</LI>
@@ -204,21 +204,20 @@ from desktopcouch.records.couchwidget import CouchWidget
 <H2>Import OpenDialog</H2>
 <P>Just like the SaveDialog, add the import line to the list of imports:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
-from super_text import AboutSuperTextDialog, PreferencesSuperTextDialog, SaveDialog, OpenDialog
+from jotty import AboutJottyDialog, PreferencesJottyDialog, SaveDialog, OpenDialog
 </TEXTAREA></DIV>
 
 <H2>Create an instance of the dialog and run it</H2>
-<P>So now we're ready to call the dialog from the SuperTextWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</P>
+<P>So now we're ready to call the dialog from the JottyWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
         opener = OpenDialog.NewOpenDialog()
         result = opener.run()
 </TEXTAREA></DIV>
 
 <H2>Get the id for the selected title</H2>
-TODO: Change this ...
 <P>Now use the get_selection function to retrieve the title and text from the dialog. Don't forget to check the response type before going on.</P>
 <DIV class="code"><TEXTAREA rows="5" cols="80">
-        id = opener.selected_record_id()
+        id = opener.selected_record_id
         opener.destroy()
 
         if result != gtk.RESPONSE_OK or text == None:
@@ -282,7 +281,7 @@ TODO: Change this ...
 <IMG SRC="./images/application6.png" ALT="open file dialog works much better" />
 <P>However, the application is not complete. There are a few things left for you to do:</P>
 <UL>
-<LI>Set the title of the SuperTextWindow to display the note title. Try self.set_text(title).</LI>
+<LI>Set the title of the JottyWindow to display the note title. Try self.set_text(title).</LI>
 <LI>The Save command works more like "Save As". The application probably shouldn't pop up a SaveDialog every time you want to save. If it's already been saved, you probably just want to save it, but use a SaveDialog when the user choose Save As, or is saving a document for the first time.</LI>
 <LI>The OpenDialog should probably return when the user double clicks on an item in the list. Try connecting to the "select-cursor-row" signal on the TreeView, and calling self.response(gtk.RESPONSE_OK) in the handler.</LI>
 <LI>Perhaps the Ok button in the OpenDialog should be disabled if nothing is selected. Try setting the "sensitivity" in Glade, and the set_sensitive function for the Ok button.</LI>
