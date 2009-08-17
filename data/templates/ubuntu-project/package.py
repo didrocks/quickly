@@ -24,14 +24,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
-from internal import packaging, quicklyutils
-from quickly import configurationhandler
-
-import gettext
-from gettext import gettext as _
-# set domain text
-gettext.textdomain('quickly')
-
+from internal import quicklyutils
 
 def help():
     print _("""Usage:
@@ -48,6 +41,9 @@ commands afterwards. Those changes are not a mandatory at all for
 testing purpose.
 """)
 quicklyutils.handle_additional_parameters(sys.argv, help)
+
+from internal import packaging
+from quickly import configurationhandler
 
 # retrieve useful information
 if not configurationhandler.project_config:

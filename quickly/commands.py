@@ -276,7 +276,7 @@ class Command:
         # template is current template (it will be useful for builtin commands)
 
         # if template not specified, take the one for the command
-        # the template argument is useful when builtin commands which behavior take into account the template namee
+        # the template argument is useful when builtin commands which behavior take into account the template name
         if template is None:
             template = self.template # (which can be None if it's a builtin command launched outside a project)
 

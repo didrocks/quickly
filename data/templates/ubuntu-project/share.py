@@ -21,9 +21,7 @@ import sys
 import subprocess
 import webbrowser
 
-
-from quickly import launchpadaccess, configurationhandler
-from internal import quicklyutils, packaging
+from internal import quicklyutils
 
 import gettext
 from gettext import gettext as _
@@ -45,6 +43,9 @@ at each quickly share execution)
 You can modify the description and long description if you wish.
 """)
 quicklyutils.handle_additional_parameters(sys.argv, help)
+
+from quickly import launchpadaccess, configurationhandler
+from internal import quicklyutils, packaging
 
 launchpad = None
 # warning: project_name can be different from project.name (one local, one on launchpad)

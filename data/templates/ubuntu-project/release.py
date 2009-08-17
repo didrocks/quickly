@@ -22,9 +22,7 @@ import sys
 import subprocess
 import webbrowser
 
-
-from quickly import launchpadaccess, configurationhandler
-from internal import quicklyutils, packaging
+from internal import quicklyutils
 
 import gettext
 from gettext import gettext as _
@@ -63,6 +61,9 @@ You can run $quickly package and test your package to make sure it
 installs as expected. (This is not mandatory)
 """)
 quicklyutils.handle_additional_parameters(sys.argv, help)
+
+from quickly import launchpadaccess, configurationhandler
+from internal import packaging
 
 args = sys.argv
 

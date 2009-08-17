@@ -20,8 +20,6 @@
 import os
 import sys
 
-# connect to LP
-from quickly import launchpadaccess
 from internal import quicklyutils
 
 import gettext
@@ -38,6 +36,10 @@ Enable to set or change the launchpad project binded with the current
 ubuntu project.
 """)
 quicklyutils.handle_additional_parameters(sys.argv, help)
+
+
+# connect to LP
+from quickly import launchpadaccess
 
 launchpad = launchpadaccess.initialize_lpi()
 
