@@ -19,6 +19,7 @@
 
 import os
 import subprocess
+import sys
 
 import gettext
 from gettext import gettext as _

@@ -20,6 +20,7 @@
 
 import subprocess
 import os
+import sys
 
 from quickly import configurationhandler
 
