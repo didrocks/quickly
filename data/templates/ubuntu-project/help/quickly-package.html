@@ -79,15 +79,15 @@ If you don't personalize the icon, it's ok, your app will just have the default 
 </P>
 <H2>Edit the Desktop File</H2>
 <P>
-By defualt, Quickly Ubuntu-Project applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make Super Text show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "super_text.desktop.in" was automatically created in the super_text project directory. To change Super Text from a Utility to an Office application, edit super_text.desktop.in and change this:
+By defualt, Quickly Ubuntu-Project applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make JOtty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "jottydesktop.in" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:
 </P>
 <DIV class="code"><TEXTAREA rows="8" cols="80">
 [Desktop Entry]
-Name=Super Text
-Comment=SuperText application
+Name=Jotty
+Comment=Jotty application
 Categories=GNOME;Utility;
-Exec=super_text
-Icon=super_text
+Exec=jotty
+Icon=jotty
 Terminal=false
 Type=Application
 </TEXTAREA></DIV>
@@ -97,11 +97,11 @@ to this:
 </P>
 <DIV class="code"><TEXTAREA rows="8" cols="80">
 [Desktop Entry]
-Name=Super Text
-Comment=SuperText application
+Name=Jotty
+Comment=Jotty application
 Categories=GNOME;Office;
-Exec=super_text
-Icon=super_text
+Exec=jotty
+Icon=jotty
 Terminal=false
 Type=Application
 </TEXTAREA></DIV>
@@ -117,14 +117,14 @@ So I would change this section:
 </P>
 <DIV class="code"><TEXTAREA rows="8" cols="80">
 DistUtilsExtra.auto.setup(
-    name='super_text',
+    name='jotty',
     version='0.1',
     license='GPL v3',
     #author='Your Name',
     #author_email='email@ubuntu.com',
     #description='UI for managing …',
     #long_description='Here a longer description',
-    #url='https://launchpad.net/super_text',
+    #url='https://launchpad.net/jotty',
     cmdclass={'install': InstallAndUpdateDataDirectory}
     )
 </TEXTAREA></DIV>
@@ -133,18 +133,20 @@ To look like this:
 </P>
 <DIV class="code"><TEXTAREA rows="8" cols="80">
 DistUtilsExtra.auto.setup(
-    name='super_text',
+    name='jotty',
     version='0.1',
     license='GPL v3',
     author='Rick Spencer',
     author_email='rick.spencer@canonical.com',
     description='Note taking application',
     long_description='Note taking application that uses CouchDB as the backend to support easy replication across users and computers.',
-    #url='https://launchpad.net/super_text',
+    #url='https://launchpad.net/jotty',
     cmdclass={'install': InstallAndUpdateDataDirectory}
     )
+</TEXTAREA></DIV>
+
 <P>
-Notice that Super Text doesn't have a web page yet, so I just left that line commented out. Also, if you enhance the application and want to repackage it, you should make sure to increment version so that it will properly update itself for your users who have installed the first version.
+Notice that Jotty doesn't have a web page yet, so I just left that line commented out. Also, if you enhance the application and want to repackage it, you should make sure to increment version so that it will properly update itself for your users who have installed the first version.
 </P>
 
 </TEXTAREA></DIV>
@@ -156,5 +158,11 @@ After personalizing the project, we are now ready to create the package. This is
 $quickly package
 </TEXTAREA></DIV>
 <P>This command will take a little while to discover dependencies and create all the required archives, etc... It will also report some errors as we haven't created a PGP key, for instance. None the less, when it is done, the package will be created. Using the file browser, you can see the created package next to the project directory:</P>
-
+<IMG SRC="./images/package1.png" ALT="package command creates .deb archive" />
+<P>Right now, the specific file we are interested in is "jotty_0.1_all.deb". To test it out, double click on it, to open it in Ubuntu's graphical installer program:</P>
+<IMG SRC="./images/package2.png" ALT="deb opened in gdebi" />
+<P>Click "Install Package" to see how it  installs onto your desktop. After chugging for a bit, you'll see that it is installed in the Applications->Office menu. If you customized your icon, you'll see that the menu uses your custom icon as well.</p>
+<IMG SRC="./images/package3.png" ALT="jotty installed" />
+<H1>Now that you have a package</H1>
+<P>Now that you've packaged your application, you can share the .deb file. However, if your users install their application this way, and you update the appliation, your users will have to find this out and resinstall. This hassle can be avoided in Ubuntu by using Personal Package Archives (or PPAs). Distrubuting your applications in this manner is covered in section 4.</P>
 </BODY>
