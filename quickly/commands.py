@@ -73,7 +73,9 @@ def get_all_commands():
 
             for command_name in os.listdir(template_path):
                 file_path = os.path.join(template_path, command_name)
-                command_name = ".".join(command_name.split('.')[0:-1])
+                # if there is a ., remove extension
+                if "." in command_name:
+                    command_name = ".".join(command_name.split('.')[0:-1])
 
                 if os.path.isfile(file_path) and os.access(file_path, os.X_OK): # add the command to the list if is executable
                     hooks = {'pre': None, 'post':None}
@@ -95,26 +97,28 @@ def get_all_commands():
                     if not launch_inside_project and not launch_outside_project:
                         launch_inside_project = True
                     
-                    __commands[template][command_name] = Command(file_path, template, launch_inside_project, launch_outside_project, followed_by_template, False, hooks['pre'], hooks['post'])
+                    __commands[template][command_name] = Command(command_name, file_path, template, launch_inside_project, launch_outside_project, followed_by_template, False, hooks['pre'], hooks['post'])
+
      
     # add builtin commands (avoiding gettext and hooks)
     __commands['builtins'] = {}
     for elem in dir(builtincommands):
         command = getattr(builtincommands, elem)
         if callable(command) and not command.__name__.startswith(('pre_', 'post_', 'gettext')):
+            command_name = command.__name__
             # here, special case for some commands
             launch_inside_project = False
             launch_outside_project = False
             followed_by_template = False
             followed_by_command = False
 
-            if command.__name__ in builtincommands.launched_inside_project:
+            if command_name in builtincommands.launched_inside_project:
                 launch_inside_project = True
-            if command.__name__ in builtincommands.launched_outside_project :               
+            if command_name in builtincommands.launched_outside_project :               
                 launch_outside_project = True
-            if command.__name__ in builtincommands.followed_by_template:
+            if command_name in builtincommands.followed_by_template:
                 followed_by_template = True
-            if command.__name__ in builtincommands.followed_by_command:
+            if command_name in builtincommands.followed_by_command:
                 followed_by_command = True
 
             # default for commands: if not inside nor outside, and it's a builtin command, make it launch wherever
@@ -127,7 +131,7 @@ def get_all_commands():
                 if hasattr(builtincommands, event + '_' + command_name):
                     hooks[event] = getattr(builtincommands, event + '_' + command_name)               
 
-            __commands['builtins'][command.__name__] = Command(command, None, launch_inside_project, launch_outside_project, followed_by_template, followed_by_command, hooks['pre'], hooks['post'])
+            __commands['builtins'][command_name] = Command(command_name, command, None, launch_inside_project, launch_outside_project, followed_by_template, followed_by_command, hooks['pre'], hooks['post'])
                 
     return __commands
     
@@ -171,8 +175,7 @@ class Command:
             print _("Aborting")
             sys.exit(return_code)
 
-    def __init__(self, command, template=None, inside_project=True, outside_project=False, followed_by_template=False, followed_by_command=False, prehook=None, posthook=None):
-
+    def __init__(self, command_name, command, template=None, inside_project=True, outside_project=False, followed_by_template=False, followed_by_command=False, prehook=None, posthook=None):
         self.command = command
         self.template = template
         self.prehook = prehook
@@ -181,11 +184,7 @@ class Command:
         self.outside_project = outside_project
         self.followed_by_template = followed_by_template
         self.followed_by_command = followed_by_command
-        
-        if callable(command):
-            self.name = command.__name__
-        else:
-            self.name = ".".join(os.path.basename(command).split('.')[0:-1])
+        self.name = command_name
 
     def shell_completion(self, template_in_cli, args):
         """Smart completion of a command
