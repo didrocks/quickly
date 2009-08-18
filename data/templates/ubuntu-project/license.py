@@ -176,7 +176,7 @@ def licensing(license=None):
                 try:
                     author = quicklyutils.get_setup_value('author')
                     author_email = quicklyutils.get_setup_value('author_email')
-                    line = "# Copyright %s %s <%s>\n" % (datetime.datetime.now().year, author, author_email)
+                    line = "# Copyright (C) %s %s <%s>\n" % (datetime.datetime.now().year, author, author_email)
                 except quicklyutils.cant_deal_with_setup_value:
                     print _('Copyright is not attributed. ' \
                             'Edit the Copyright file to include your name for the copyright in ' \
