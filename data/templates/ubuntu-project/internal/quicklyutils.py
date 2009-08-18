@@ -95,11 +95,11 @@ def handle_additional_parameters(args, help=None, shell_completion=None):
             help()
         else:
             print _("No help for this command")
+        sys.exit(0)
     elif len(args) > 1 and args[1] == "shell-completion":
         if shell_completion:
             shell_completion()
-
-    sys.exit(0)
+        sys.exit(0)
 
 
 def set_setup_value(key, value):

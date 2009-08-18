@@ -65,18 +65,17 @@ Note that if you don't run quickly licence before calling quickly release or qui
 share, this one will execute it for you and guess the copyright holder from your
 launchpad account if you didn't update it.
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
 
 def get_supported_licenses():
     """Get supported licenses"""
 
-    available_licenses = [None]
+    available_licenses = []
     
     for license_file in os.listdir(os.path.dirname(__file__) + "/available_licenses"):
         result = re.split("header_(.*)", license_file)
         if len(result) == 3:
             available_licenses.append(result[1])
-    
+ 
     return available_licenses
     
 
@@ -227,9 +226,17 @@ def licensing(license=None, author=None):
     return(copy_license_to_files())
 
 
+def shell_completion():
+    """Propose available license as the third parameter"""
+    
+    # if then license argument given, returns available licenses
+    if len(sys.argv) == 3:
+        print " ".join(get_supported_licenses())
+
 
 if __name__ == "__main__":
 
+    quicklyutils.handle_additional_parameters(sys.argv, help, shell_completion)
     license = None
     if len(sys.argv) > 2:
         print _("This command only take one optional argument: License")
