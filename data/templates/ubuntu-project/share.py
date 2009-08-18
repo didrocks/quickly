@@ -22,6 +22,7 @@ import subprocess
 import webbrowser
 
 from internal import quicklyutils
+import license
 
 import gettext
 from gettext import gettext as _
@@ -60,6 +61,8 @@ launchpad = launchpadaccess.initialize_lpi()
 quicklyutils.set_setup_value('author', launchpad.me.display_name)
 quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)    
 
+# license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
+license.licensing()
     
 # check that the owner really has an ppa:
 #TODO: change this if we finally release to a team ppa

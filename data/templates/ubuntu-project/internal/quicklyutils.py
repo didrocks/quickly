@@ -69,7 +69,7 @@ def get_setup_value(key):
         for line in fsetup: 
             if in_setup:
                 fields = line.split('=') # Separate variable from value
-                if key in fields[0]:
+                if key in fields[0] and not '#' in fields[0]: # if key found and not commented
                     result = fields[1].partition(',')[0].strip()
                     result = result[1:-1]
                     break

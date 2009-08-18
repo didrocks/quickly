@@ -66,6 +66,7 @@ def initialize_lpi():
     '''
 
     launchpad = None
+    return_code = 0
 
     # setup right cache, credential and server
     lp_cred_dir = os.path.expanduser("~/.cache/lp_credentials/")

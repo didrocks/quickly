@@ -17,6 +17,7 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 import os
 import re
 import shutil
@@ -43,12 +44,13 @@ $quickly license <Your_Licence>
 
 Adds license to project files. Before using this command, you should:
 
-1. run $ quickly save in case something goes wrong
-2. Edit the file Copyright to include your authorship.
-3. If you want to put your own quickly unsupported Licence, remove and replace the tags
+1. Edit the file Copyright to include your authorship (this step is automatically done
+   if you directly launch "$ quickly release" or "$ quickly share" before changing license)
+   In this case, license is GPL-3 by default.
+2. If you want to put your own quickly unsupported Licence, remove and replace the tags
    ### BEGIN AUTOMATIC LICENCE GENERATION and ### END AUTOMATIC LICENCE GENERATION
    in it by your own licence.
-4. Executes either $ quickly license or $ quickly licence <License>
+3. Executes either $ quickly license or $ quickly licence <License>
    where <License> can be either:
    - GPL-3 (default)
    - GPL-2
@@ -132,7 +134,7 @@ def copy_license_to_files():
                     return(1)
 
 
-def licensing(license=None, author=None):
+def licensing(license=None):
     """Add license or update it to the project files
 
     Default is GPL-3"""
@@ -169,11 +171,13 @@ def licensing(license=None, author=None):
         for line in fcopyright:
 
             # add autorship if needed
-            if "# Copyright 2009 <Your Name> <Your E-mail>" in line:
-                # if we have an author (retrieved from launchpad)
-                if author:
-                    line = "# Copyright 2009 %s" % author
-                else:
+            if "<Your Name> <Your E-mail>" in line:
+                # if we have an author in setup.py, put it there
+                try:
+                    author = quicklyutils.get_setup_value('author')
+                    author_email = quicklyutils.get_setup_value('author_email')
+                    line = "# Copyright %s %s <%s>\n" % (datetime.datetime.now().year, author, author_email)
+                except quicklyutils.cant_deal_with_setup_value:
                     print _('Copyright is not attributed. ' \
                             'Edit the Copyright file to include your name for the copyright in ' \
                             'place of <Your Name> <Your E-mail> or use quickly share/quickly release')
@@ -222,6 +226,9 @@ def licensing(license=None, author=None):
         else:
             if os.path.isfile("LICENSE"):
                 os.remove("LICENSE")
+                            
+        # write license to setup.py
+        quicklyutils.set_setup_value('license', license)
 
     return(copy_license_to_files())
 

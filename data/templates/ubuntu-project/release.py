@@ -23,6 +23,7 @@ import subprocess
 import webbrowser
 
 from internal import quicklyutils
+import license
 
 import gettext
 from gettext import gettext as _
@@ -118,6 +119,9 @@ launchpad = launchpadaccess.initialize_lpi()
 # changed upstream author and email
 quicklyutils.set_setup_value('author', launchpad.me.display_name)
 quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
+
+# license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
+license.licensing()
 
 # get the project now and save the url into setup.py
 project = launchpadaccess.get_project(launchpad)
