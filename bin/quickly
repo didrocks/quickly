@@ -80,12 +80,12 @@ def process_command_line(argv):
                 oldenv = ""
                 if os.environ.has_key('QUICKLY'):
                     oldenv = os.environ['QUICKLY']
-                os.environ['QUICKLY'] = "staging " + oldenv
+                os.environ['QUICKLY'] = "staging:" + oldenv
             elif arg == '--verbose':
                 oldenv = ""
                 if os.environ.has_key('QUICKLY'):
                     oldenv = os.environ['QUICKLY']
-                os.environ['QUICKLY'] = "verbose " + oldenv
+                os.environ['QUICKLY'] = "verbose:" + oldenv
             elif arg == '--version':
                 version.show_version()
                 sys.exit(0)
