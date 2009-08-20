@@ -1,3 +1,9 @@
+quickly (0.2~RC) karmic; urgency=low
+
+  * quickly 0.2 RC
+
+ -- Didier Roche <didrocks@ubuntu.com>  Thu, 20 Aug 2009 15:59:08 +0200
+
 quickly (0.1) karmic; urgency=low
 
   * Initial release.
