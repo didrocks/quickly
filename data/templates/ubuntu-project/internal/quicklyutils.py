@@ -30,8 +30,9 @@ class cant_deal_with_setup_value(Exception):
     pass
 
 def conventional_names(name):
-    sentence_name = name.replace("_"," ")
-    sentence_name = string.capwords(sentence_name)
+    #sentence_name = name.replace("_"," ")
+    #sentence_name = string.capwords(sentence_name)
+    sentence_name = string.capwords(name)
     camel_case_name = sentence_name.replace(" ","")
     return sentence_name, camel_case_name
 

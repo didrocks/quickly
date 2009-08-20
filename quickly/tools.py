@@ -35,12 +35,13 @@ def quickly_name(name):
     return formated name"""
     name = name.lower()
     permitted_characters = string.ascii_lowercase
-    permitted_characters += "_"
+    permitted_characters += string.digits
+    #permitted_characters += "_"
     for c in name:
         if c not in permitted_characters:
             print _("""
 ERROR: unpermitted character in name.
-Letters and underscore ("_") only.""")
+Letters and digits only.""")
             sys.exit(1)
     return name
 
