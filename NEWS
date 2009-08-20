@@ -21,4 +21,4 @@ Most noticeable features/fixes are:
   - quickly can now handle better command filtering. Use it! (LP: #412905)
   - quickly needs a manpage (LP: #406212)
   - quickly needs using launchpad translation (LP: #406906)
-
+  - updated translations (ca, es)
