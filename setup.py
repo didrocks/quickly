@@ -76,7 +76,7 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 DistUtilsExtra.auto.setup(name='quickly',
       version="'%s'" % VERSION,
       description='build new Ubuntu apps quickly',
-      long_description='Quickly enables for prospective programmer a way to build easily new ' \
+      long_description='Quickly enables for prospective programmer a way to easily build new ' \
                   'apps for Ubuntu based on templates and other systems for helping them ' \
                   'write their code in a guided manner. This also includes packaging and ' \
                   'deploying code.',
