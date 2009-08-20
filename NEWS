@@ -1,0 +1,24 @@
+  quickly 0.2 "desktopcouchified" 
+-------------------------------------
+
+This release contains added highly desirable features to 0.1 version
+but not essential one.
+Of course, some bug fixes came to the party.
+
+Most noticeable features/fixes are:
+  - ubuntu-project should depend on cdbs and debhelper (LP: #408884)
+  - Preferences should use client records API (LP: #402241)
+  - Tutorial should use CouchWidget (LP: #402244)
+  - quickly license should infer contact and name info from setup.py
+    (LP: #402664)
+  - quickly needs a command to list all commandsa (LP: #412900)
+  - "quickly help [command]" is needed (LP: #412902)
+  - ubuntu-projects can be created with unpackagable names (LP: #414218)
+  - quickly package doesn't have to sign packages (LP: #408992)
+  - quickly needs a proper command class (LP: #411126)
+  - shell-completion must call the script with a shell-completion parameter
+    (LP: #412903)
+  - quickly can now handle better command filtering. Use it! (LP: #412905)
+  - quickly needs a manpage (LP: #406212)
+  - quickly needs using launchpad translation (LP: #406906)
+
