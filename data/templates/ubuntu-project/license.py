@@ -157,7 +157,7 @@ def licensing(license=None):
     # or personal one and don't want to update it
 
     # check that provided licensed is supported
-    if not license in get_supported_licenses():
+    if not license is None and license not in get_supported_licenses():
         print _("This license seems to be unsupported by quickly. If you think it really should, " \
                 "please open a bug in quickly bugtracker")
         return(1)
