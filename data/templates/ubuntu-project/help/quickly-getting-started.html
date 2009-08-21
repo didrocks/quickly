@@ -117,6 +117,11 @@ jotty$ quickly edit
         print "save"
 </TEXTAREA></DIV>
 <P>This will print the word "save" to the terminal when run. The method signature is the standard signature expected in a signal handler. If you are new to python, be sure to copy the indentations exactly, as the indentation level is very important in python.</P>
+<H3>Set Up Tabs Correctly!</H3>
+<P>Note a major gotcha here. In python spaces and tabs are totally different, but they look just the same in an editor. So being indented one tab stop is not the same as being indented four spaces, even though they might look the same.</P>
+<P>The upshot is that you should take a moment to set up your Gedit (or whatever editor you are using) to use spaces for tabs. Python standards call for using four spaces for each indentation level, so in Gedit, select Preferences from the Edit menu, and choose the Editor tab. Then set Tab width to 4, and turn on "Insert spaces instead of tabs". Your preferences should look like this:</P>
+<IMG SRC="./images/gedit2.png" ALT="python files ready to edit" />
+
 <P>Save the file, and run it again:</P>
 <DIV class="termnial"><TEXTAREA rows = "2" cols="80">
 jotty$ quickly run
