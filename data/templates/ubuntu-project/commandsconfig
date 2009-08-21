@@ -4,4 +4,4 @@
 # only and not be followed by a template
 COMMANDS_LAUNCHED_INSIDE_PROJECT = tutorial
 COMMANDS_LAUNCHED_OUTSIDE_PROJECT = create; tutorial
-COMMANDS_FOLLOWED_BY_TEMPLATE = create 
+COMMANDS_FOLLOWED_BY_TEMPLATE = create; tutorial 
