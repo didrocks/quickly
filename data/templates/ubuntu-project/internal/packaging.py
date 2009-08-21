@@ -65,7 +65,7 @@ def push_to_ppa(ppa_user, changes_file):
         return(return_code)
     
     # creating local binary package
-    return_code = subprocess.call(["debuild", "-S", "-I.bzr"])
+    return_code = subprocess.call(["dpkg-buildpackage", "-S", "-I.bzr"])
     if return_code != 0:
         print _("ERROR: an error occurred during source package creation")
         return(return_code)

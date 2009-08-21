@@ -26,5 +26,6 @@ Most noticeable features/fixes are:
   - quickly needs a manpage (LP: #406212)
   - ubuntu-project uses spaces instead tabs, which conflicts with gedit
     default settings (LP: #416527)
+  - removed devscripts deps to use only dpkg-dev
   - quickly needs using launchpad translation (LP: #406906)
   - updated translations (ca, es)
