@@ -94,7 +94,7 @@ try:
     float(release_version)
 except ValueError:
     # two cases:
-    # a "quickly share" has already be done, and so, we just remove all the ~privateX stuff
+    # a "quickly share" has already be done, and so, we just remove all the ~publilcX stuff
     splitted_release_version = release_version.split("~public")
     if len(splitted_release_version) > 1:
         release_version = splitted_release_version[0]
@@ -154,7 +154,8 @@ if release_version in bzr_tags:
     sys.exit(1)
 
     
-# add files, commit and push !
+# add files, setup release version, commit and push !
+quicklyutils.set_setup_value('version', release_version)
 subprocess.call(["bzr", "add"])
 return_code = subprocess.call(["bzr", "commit", '-m', commit_msg])
 if return_code != 0 and return_code != 3:
