@@ -11,7 +11,11 @@ Most noticeable features/fixes are:
   - Tutorial should use CouchWidget (LP: #402244)
   - quickly license should infer contact and name info from setup.py
     (LP: #402664)
-  - quickly needs a command to list all commandsa (LP: #412900)
+  - quickly needs a command to list all commands (LP: #412900)
+  - quickly can now handle special command very easily, reading from
+    some configuration file which can be launched outside or inside a
+    project, which have to be followed by a template…
+    All of this also update automatically shell-completion behavior
   - "quickly help [command]" is needed (LP: #412902)
   - ubuntu-projects can be created with unpackagable names (LP: #414218)
   - quickly package doesn't have to sign packages (LP: #408992)
@@ -20,5 +24,7 @@ Most noticeable features/fixes are:
     (LP: #412903)
   - quickly can now handle better command filtering. Use it! (LP: #412905)
   - quickly needs a manpage (LP: #406212)
+  - ubuntu-project uses spaces instead tabs, which conflicts with gedit
+    default settings (LP: #416527)
   - quickly needs using launchpad translation (LP: #406906)
   - updated translations (ca, es)
