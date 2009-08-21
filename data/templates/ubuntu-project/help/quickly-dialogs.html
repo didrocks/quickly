@@ -158,8 +158,7 @@ from desktopcouch.records.couchwidget import CouchWidget
 <H4>Create the CouchWidget</H4>
 <P>A CouchWidget needs to know three things, the name of the database, the name of the record type to, and the name of the "headings" to use. Headings is a list of fields that the widget will display, and will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
 <DIV class="code"><TEXTAREA rows="4" cols="80">
-        self.couchwidget = CouchWidget()
-        self.couchwidget.database = "jotty"
+        self.couchwidget = CouchWidget("jotty")
         self.couchwidget.headings = ["title"]        
         self.couchwidget.record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
 </TEXTAREA></DIV>
