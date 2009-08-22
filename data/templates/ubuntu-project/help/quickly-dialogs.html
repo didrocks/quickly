@@ -126,9 +126,9 @@ d
 Now when we choose save, we get the SaveDialog instead:
 <IMG SRC="./images/application4_5.png" ALT="save file dialog works much better" />
 
-<H1>Creating a Dialog with a CouchWidget</H1>
+<H1>Creating a Dialog with a CouchGrid</H1>
 <P>
-We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. We'll use a widget called CouchWidget, which is included in the desktopcouch api for this.
+We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. We'll use a widget called CouchGrid, which is included in the desktopcouch api for this.
 </P>
 <H2>Create the Open Dialog</H2>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
@@ -139,38 +139,38 @@ $quickly dialog open
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
 $quickly glade
 </TEXTAREA></DIV>
-<P>Start by adding an HBox and label in the sammer manner as in the Save Dialog above. Leave an empty space in the HBox. We will use code to put the CouchWidget there.</P>
-<IMG SRC="./images/glade20.png" ALT="save space for the CouchWidget" />
+<P>Start by adding an HBox and label in the sammer manner as in the Save Dialog above. Leave an empty space in the HBox. We will use code to put the CouchGrid there.</P>
+<IMG SRC="./images/glade20.png" ALT="save space for the CouchGrid" />
 
 <H2>Coding the Open Dialog</H2>
-<H3>Creating and Adding a CouchWidget</H3>
-<P>It just takes a little bit of code to add a CouchWidget to the  dialog. We need to:</P>
+<H3>Creating and Adding a CouchGrid</H3>
+<P>It just takes a little bit of code to add a CouchGrid to the  dialog. We need to:</P>
 <OL>
-<LI>Import the CouchWidget class.</LI>
-<LI>Create a CouchWidget pointing at the jotty database, and the desired record type.</LI>
-<LI>Add the CouchWidget to the dialog.</LI>
+<LI>Import the CouchGrid class.</LI>
+<LI>Create a CouchGrid pointing at the jotty database, and the desired record type.</LI>
+<LI>Add the CouchGrid to the dialog.</LI>
 </OL>
-<H4>Import the CouchWidget class</H4>
-<P>CouchWidget is part of the desktopcouch records api, so we import it like this:</P>
+<H4>Import the CouchGrid class</H4>
+<P>CouchGrid is part of the desktopcouch records api, so we import it like this:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
-from desktopcouch.records.couchwidget import CouchWidget
+from desktopcouch.records.couchgrid import CouchGrid
 </TEXTAREA></DIV>
-<H4>Create the CouchWidget</H4>
-<P>A CouchWidget needs to know three things, the name of the database, the name of the record type to, and the name of the "headings" to use. Headings is a list of fields that the widget will display, and will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
+<H4>Create the CouchGrid</H4>
+<P>A CouchGrid needs to know three things, the name of the database, the name of the record type to, and the name of the keys to use. "keys" is a list of fields that the widget will display, and will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
 <DIV class="code"><TEXTAREA rows="4" cols="80">
-        self.couchwidget = CouchWidget("jotty")
-        self.couchwidget.headings = ["title"]        
-        self.couchwidget.record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
+        self.couchgrid = CouchGrid("jotty")
+        self.couchgrid.keys = ["title"]        
+        self.couchgrid.record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
 </TEXTAREA></DIV>
-<H4>Add the CouchWidget to the Dialog</H4>
-<P>When we added the HBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchWidget into the HBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
+<H4>Add the CouchGrid to the Dialog</H4>
+<P>When we added the HBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchGrid into the HBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
 <DIV class="code"><TEXTAREA rows="2" cols="80">
-        self.couchwidget.show()
-        self.builder.get_object("vbox1").pack_end(self.couchwidget)
+        self.couchgrid.show()
+        self.builder.get_object("vbox1").pack_end(self.couchgrid)
 </TEXTAREA></DIV>
 
 <H3>Create the get_selection function</H3>
-<P>The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchWidget what is selected. This is easy using the widgets selected_record_ids function. But the CouchWidget supports multiple selection, so we'll do the following:</P>
+<P>The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchGrid what is selected. This is easy using the widgets selected_record_ids function. But the CouchGrid supports multiple selection, so we'll do the following:</P>
 <OL>
 <LI>Use a decorator to define the function as a property accessor.</LI>
 <LI>Get all the selected record ids.</LI>
@@ -181,7 +181,7 @@ from desktopcouch.records.couchwidget import CouchWidget
 <DIV class="code"><TEXTAREA rows="7" cols="80">
     @property
     def selected_record_id(self):
-        ids = self.couchwidget.selected_record_ids
+        ids = self.couchgrid.selected_record_ids
         if len(ids) < 1:
             return None
         else:
