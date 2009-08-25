@@ -27,5 +27,7 @@ Most noticeable features/fixes are:
   - ubuntu-project uses spaces instead tabs, which conflicts with gedit
     default settings (LP: #416527)
   - removed devscripts deps to use only dpkg-dev
+  - Having no EMAIL environment variable set makes quickly release fail fixed
+    (LP: #418369)
   - quickly needs using launchpad translation (LP: #406906)
   - updated translations (ca, es)
