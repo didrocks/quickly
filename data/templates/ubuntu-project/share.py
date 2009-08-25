@@ -111,6 +111,9 @@ else:
     version = release_version + '~public1'
 quicklyutils.set_setup_value('version', version)
 
+# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
+if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
+    os.putenv("DEBEMAIL", launchpad.me.preferred_email_address.email)
 # upload to launchpad
 print _("pushing to launchpad")
 return_code = packaging.push_to_ppa(lp_user.name, "../%s_%s_source.changes" % (project_name, version)) != 0
