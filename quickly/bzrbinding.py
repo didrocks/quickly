@@ -28,11 +28,11 @@ def bzr_set_login(display_name, preferred_email_adress, launchpad_name=None):
 
     try:
 
-		# retreive the current bzr login
+        # retreive the current bzr login
         bzr_instance = subprocess.Popen(["bzr", "whoami"], stdout=subprocess.PIPE)
         bzr_user, err = bzr_instance.communicate()
         if bzr_instance.returncode != 0:
-	        return (1, err)
+            return (1, err)
 
         # if no bzr whoami set, the default contain the @hostname string
         if '@' + socket.gethostname() in bzr_user:
@@ -43,12 +43,10 @@ def bzr_set_login(display_name, preferred_email_adress, launchpad_name=None):
         if launchpad_name:
             bzr_instance = subprocess.Popen(["bzr", "launchpad-login"], stdout=subprocess.PIPE)
             bzr_id, err = bzr_instance.communicate()
-            if bzr_instance.returncode != 0:
-		        return (1, err)
-            
-            if "No Launchpad user ID configured" in bzr_id:
+            if bzr_instance.returncode == 1: # no user configured
                 subprocess.call(["bzr", "launchpad-login", launchpad_name])
-
+            elif bzr_instance.returncode != 0: # other errors
+                return (1, err)
 
     except OSError:
         return (1, _("Bzr not properly installed"))

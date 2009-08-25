@@ -155,6 +155,7 @@ if release_version in bzr_tags:
 
     
 # add files, setup release version, commit and push !
+#TODO: check or fix if we don't have an ssh key (don't tag otherwise to be able to release again)
 quicklyutils.set_setup_value('version', release_version)
 subprocess.call(["bzr", "add"])
 return_code = subprocess.call(["bzr", "commit", '-m', commit_msg])
