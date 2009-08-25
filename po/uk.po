@@ -1,4 +1,4 @@
-# Catalan translation for quickly
+# Ukrainian translation for quickly
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-07-24 18:12+0200\n"
-"PO-Revision-Date: 2009-07-31 08:40+0000\n"
-"Last-Translator: David Planella <Unknown>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"PO-Revision-Date: 2009-08-24 23:10+0000\n"
+"Last-Translator: Kostyushkin Sergiy <Unknown>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,68 +19,70 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:34
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Comprova si la biblioteca python-launchpadlib estüa instal·lada"
+msgstr "Перевірка чи встановлений python-launchpadlib"
 
 #: ../quickly/launchpadaccess.py:60
 msgid "Fatal: "
-msgstr "Error fatal: "
+msgstr "Fatal: "
 
 #: ../quickly/launchpadaccess.py:86
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
+"Увага: Ви використовуєте постановки і не Launchpad реальний виробничий сервер"
 
 #: ../quickly/launchpadaccess.py:93
 msgid "Get Launchpad Settings"
-msgstr ""
+msgstr "Отримати настройки Launchpad"
 
 #: ../quickly/launchpadaccess.py:100
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
 msgstr ""
+"Початкові біндінги Launchpad. Ви повинні вибрати \"змінити що-небудь\""
 
 #: ../quickly/launchpadaccess.py:112
 msgid "Unknown reason"
-msgstr "Motiu desconegut"
+msgstr "Невідома причина"
 
 #: ../quickly/launchpadaccess.py:113
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "No s'ha pogut configurar el Launchpad per al Quickly ; %s"
+msgstr "Не можу настроїти Launchpad для quickly ; %s"
 
 #: ../quickly/launchpadaccess.py:114
 msgid "Launchpad connexion is ok"
-msgstr "La connexió al Launchpad és correcta"
+msgstr "Звязок з Launchpad встановлено"
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
-msgstr ""
+msgstr "Не можу дістати проект з launchpad, перервано."
 
 #: ../quickly/launchpadaccess.py:140
 #, python-format
 msgid "Project name: %s"
-msgstr "Nom del projecte: %s"
+msgstr "Імя, проекту: %s"
 
 #: ../quickly/launchpadaccess.py:141
 #, python-format
 msgid "Launchpad url: %s/%s"
-msgstr ""
+msgstr "Launchpad url: %s/%s"
 
 #: ../quickly/launchpadaccess.py:148
 msgid "No project found"
-msgstr ""
+msgstr "Проект не знайдено."
 
 #: ../quickly/launchpadaccess.py:150
 msgid "Choose your project number"
-msgstr ""
+msgstr "Оберіть номер вашого проекту."
 
 #: ../quickly/launchpadaccess.py:160
 msgid "No right number given, aborting."
-msgstr ""
+msgstr "Обрано невірний номер, перервано."
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:84
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:125
 msgid "ERROR: Can't load setup.py file"
-msgstr ""
+msgstr "ПОМИЛКА: Не можу завантажити файл setup.py"
 
 #: ../data/templates/ubuntu-project/release.py:72
 #: ../data/templates/ubuntu-project/share.py:78
@@ -88,27 +90,31 @@ msgid ""
 "Release version not found in setup.py and no version specified in command "
 "line."
 msgstr ""
+"Реліз версії не знайдено у setup.py і незазначено у командному рядку."
 
 #: ../data/templates/ubuntu-project/release.py:74
 msgid "quickly released"
-msgstr ""
+msgstr "quickly випущений"
 
 #: ../data/templates/ubuntu-project/release.py:80
 #, python-format
 msgid "quickly released: %s"
-msgstr ""
+msgstr "quickly випущений: %s"
 
 #: ../data/templates/ubuntu-project/release.py:100
 msgid ""
 "Release version specified in command arguments or in setup.py is not a valid "
 "number."
 msgstr ""
+"Номер релізу зазначений у командному рядку або в setup.py не є допустимим "
+"числом."
 
 #: ../data/templates/ubuntu-project/release.py:134
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
+"ppa:%s:%s не існує. Будь ласка, створіть один на launchpad перед випуском"
 
 #: ../data/templates/ubuntu-project/release.py:144
 #, python-format
