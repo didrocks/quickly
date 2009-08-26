@@ -1,14 +1,33 @@
-quickly (0.2~RC2) karmic; urgency=low
+quickly (0.2) karmic; urgency=low
 
-  * quickly 0.2 RC2
+  * New upstream release. Most noticeable features/fixes are:
+    - ubuntu-project should depend on cdbs and debhelper (LP: #408884)
+    - Preferences should use client records API (LP: #402241)
+    - Tutorial should use CouchWidget (LP: #402244)
+    - quickly license should infer contact and name info from setup.py
+      (LP: #402664)
+    - quickly needs a command to list all commands (LP: #412900)
+    - quickly can now handle special command very easily, reading from
+      some configuration file which can be launched outside or inside a
+      project, which have to be followed by a template…
+      All of this also update automatically shell-completion behavior
+    - "quickly help [command]" is needed (LP: #412902)
+    - ubuntu-projects can be created with unpackagable names (LP: #414218)
+    - quickly package doesn't have to sign packages (LP: #408992)
+    - quickly needs a proper command class (LP: #411126)
+    - shell-completion must call the script with a shell-completion parameter
+      (LP: #412903)
+    - quickly can now handle better command filtering. Use it! (LP: #412905)
+    - quickly needs a manpage (LP: #406212)
+    - ubuntu-project uses spaces instead tabs, which conflicts with gedit
+      default settings (LP: #416527)
+    - removed devscripts deps to use only dpkg-dev
+    - Having no EMAIL environment variable set makes quickly release fail fixed
+      (LP: #418369)
+    - quickly needs using launchpad translation (LP: #406906)
+    - updated translations (ca, es)
 
- -- Didier Roche <didrocks@ubuntu.com>  Fri, 21 Aug 2009 23:35:22 +0200
-
-quickly (0.2~RC) karmic; urgency=low
-
-  * quickly 0.2 RC
-
- -- Didier Roche <didrocks@ubuntu.com>  Thu, 20 Aug 2009 15:59:08 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Thu, 27 Aug 2009 00:04:48 +0200
 
 quickly (0.1) karmic; urgency=low
 
