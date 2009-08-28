@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-24 18:12+0200\n"
-"PO-Revision-Date: 2009-08-03 12:44+0000\n"
-"Last-Translator: Pierre Slamich <pierre.slamich@gmail.com>\n"
+"PO-Revision-Date: 2009-08-27 14:45+0000\n"
+"Last-Translator: Didier Roche <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-08-27 09:45+0000\n"
+"X-Launchpad-Export-Date: 2009-08-28 09:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:34
@@ -23,12 +23,14 @@ msgstr "Vérification de l'installation de python-launchpadlib"
 
 #: ../quickly/launchpadaccess.py:60
 msgid "Fatal: "
-msgstr "Erreur fatale: "
+msgstr "Erreur fatale : "
 
 #: ../quickly/launchpadaccess.py:86
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
+"ATTENTION : Vous utilisez staging et pas le serveur de production de "
+"Launchpad"
 
 #: ../quickly/launchpadaccess.py:93
 msgid "Get Launchpad Settings"
@@ -37,15 +39,17 @@ msgstr "Récupération de la configuration Launchpad"
 #: ../quickly/launchpadaccess.py:100
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
 msgstr ""
+"Initialisation de la configuration de Launchpad. Vous devez choisir \"Change "
+"Anything\""
 
 #: ../quickly/launchpadaccess.py:112
 msgid "Unknown reason"
-msgstr "Raison inconnue"
+msgstr "Cause inconnue"
 
 #: ../quickly/launchpadaccess.py:113
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "La configuration de Launchpad de quickly a échoué; %s"
+msgstr "La configuration de Launchpad pour quickly a échoué; %s"
 
 #: ../quickly/launchpadaccess.py:114
 msgid "Launchpad connexion is ok"
@@ -53,17 +57,17 @@ msgstr "Connexion à Launchpad réussie"
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
-msgstr ""
+msgstr "Pas de projet sur Launchpad défini, annulation."
 
 #: ../quickly/launchpadaccess.py:140
 #, python-format
 msgid "Project name: %s"
-msgstr "Nom du projet: %s"
+msgstr "Nom du projet : %s"
 
 #: ../quickly/launchpadaccess.py:141
 #, python-format
 msgid "Launchpad url: %s/%s"
-msgstr ""
+msgstr "URL sur Launchpad : %s/%s"
 
 #: ../quickly/launchpadaccess.py:148
 msgid "No project found"
@@ -71,16 +75,16 @@ msgstr "Aucun projet n'a été trouvé"
 
 #: ../quickly/launchpadaccess.py:150
 msgid "Choose your project number"
-msgstr ""
+msgstr "Choisissez un numéro de projet"
 
 #: ../quickly/launchpadaccess.py:160
 msgid "No right number given, aborting."
-msgstr ""
+msgstr "Pas de numéro valide indiqué, annulation."
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:84
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:125
 msgid "ERROR: Can't load setup.py file"
-msgstr ""
+msgstr "ERREUR : Impossible de charger le fichier setup.py"
 
 #: ../data/templates/ubuntu-project/release.py:72
 #: ../data/templates/ubuntu-project/share.py:78
@@ -88,27 +92,33 @@ msgid ""
 "Release version not found in setup.py and no version specified in command "
 "line."
 msgstr ""
+"Numéro de version non trouvé dans setup.py, et aucune version n'a été "
+"spécifiée sur la ligne de commande."
 
 #: ../data/templates/ubuntu-project/release.py:74
 msgid "quickly released"
-msgstr ""
+msgstr "Publié par quickly"
 
 #: ../data/templates/ubuntu-project/release.py:80
 #, python-format
 msgid "quickly released: %s"
-msgstr ""
+msgstr "Publié par quickly : %s"
 
 #: ../data/templates/ubuntu-project/release.py:100
 msgid ""
 "Release version specified in command arguments or in setup.py is not a valid "
 "number."
 msgstr ""
+"Le numéro de version spécifié comme argument de la ligne de commande ou dans "
+"le fichier setup.py n'est pas un nombre valide."
 
 #: ../data/templates/ubuntu-project/release.py:134
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
+"ppa:%s:%s n'existe pas. Veuillez créer un PPA sur Launchpad avant de "
+"distribuer le programme"
 
 #: ../data/templates/ubuntu-project/release.py:144
 #, python-format
@@ -116,29 +126,39 @@ msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
 msgstr ""
+"ERREUR : quickly ne peut pas publier: %s semble déjà l'être. Veuillez "
+"choisir un autre nom."
 
 #: ../data/templates/ubuntu-project/release.py:152
 msgid "ERROR: quickly can't release as it can't commit with bzr"
 msgstr ""
+"ERREUR : quickly ne peut publier car il ne peut sauvegarder la révision par "
+"bzr"
 
 #: ../data/templates/ubuntu-project/release.py:178
 #: ../data/templates/ubuntu-project/release.py:196
 msgid "ERROR: quickly can't release: can't push to launchpad."
 msgstr ""
+"ERREUR : quickly ne peut publier : il ne peut envoyer les modifications sur "
+"Launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:184
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
 msgstr ""
+"ERREUR : quickly ne peut publier correctement : il ne peut rafraichir les "
+"données depuis Launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:191
 msgid "ERROR: quickly can't release: can't pull from launchpad."
 msgstr ""
+"ERREUR : quickly ne peut publier : il ne peut synchroniser les modifications "
+"depuis Launchpad."
 
 #. upload to launchpad
 #: ../data/templates/ubuntu-project/release.py:201
 #: ../data/templates/ubuntu-project/share.py:108
 msgid "pushing to launchpad"
-msgstr ""
+msgstr "envoi sur Launchpad"
 
 #: ../data/templates/ubuntu-project/release.py:206
 #, python-format
@@ -146,32 +166,34 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s publié et en train d'être construit sur Launchpad. Attendez environ "
+"une demi-heure et vérifiez sur %s."
 
 #: ../data/templates/ubuntu-project/package.py:52
 msgid "Release version not found in setup.py."
-msgstr ""
+msgstr "Version publiée non trouvée dans setup.py"
 
 #: ../data/templates/ubuntu-project/package.py:57
 #: ../data/templates/ubuntu-project/internal/packaging.py:61
 msgid "ERROR: can't create or update ubuntu package"
-msgstr ""
+msgstr "ERREUR : Impossible de créer ou de mettre à jour le paquet Ubuntu"
 
 #: ../data/templates/ubuntu-project/package.py:64
 #, python-format
 msgid "Ubuntu package has been successfully created in ../%s_%s_all.deb"
-msgstr ""
+msgstr "Le paquet Ubuntu a été crée avec succès en tant que ../%s_%s_all.deb"
 
 #: ../data/templates/ubuntu-project/package.py:66
 msgid "An error has occurred during package building"
-msgstr ""
+msgstr "Une erreur est survenue pendant la création du paquet"
 
 #: ../data/templates/ubuntu-project/save.py:40
 msgid "quickly saved"
-msgstr ""
+msgstr "Sauvegardé par quickly"
 
 #: ../data/templates/ubuntu-project/save.py:46
 msgid "It seems that you have no change to record."
-msgstr ""
+msgstr "Il semble que vous n'ayez pas de changement à enregistrer"
 
 #: ../data/templates/ubuntu-project/license.py:92
 #: ../data/templates/ubuntu-project/license.py:127
@@ -179,7 +201,7 @@ msgstr ""
 #: ../data/templates/ubuntu-project/license.py:207
 #, python-format
 msgid "%s file was not found"
-msgstr ""
+msgstr "Impossible de trouver le fichier %s"
 
 #. that means we didn't find the END_LICENCE_TAG, don't copy the file
 #: ../data/templates/ubuntu-project/license.py:121
@@ -187,12 +209,17 @@ msgstr ""
 #, python-format
 msgid "WARNING: %s was not found in the file %s. No licence replacement"
 msgstr ""
+"ATTENTION : %s n'a pas été trouvé dans le fichier %s. Pas de modification de "
+"licence"
 
 #: ../data/templates/ubuntu-project/license.py:155
 msgid ""
 "This license seems to be unsupported by quickly. If you think it really "
 "should, please open a bug in quickly bugtracker"
 msgstr ""
+"Cette license semble ne pas être supportée par quickly. Si vous pensez "
+"qu'elle devrait néanmoins l'être, veuillez s'il vous plaît ouvrir un ticket "
+"dans le gestionnaire de bugs de quickly"
 
 #: ../data/templates/ubuntu-project/license.py:173
 msgid ""
@@ -200,10 +227,13 @@ msgid ""
 "for the copyright in place of <Your Name> <Your E-mail> or use quickly "
 "share/quickly release"
 msgstr ""
+"Le droit de copie (\"Copyright\") n'est pas attribué. Modifiez le fichier "
+"Copyright pour y inclure votre nom à la place de <Your Name> <Your Email>, "
+"ou lancez quickly share / quickly release"
 
 #: ../data/templates/ubuntu-project/license.py:229
 msgid "This command only take one optional argument: License"
-msgstr ""
+msgstr "Cette commande n'accepte qu'un seul argument optionel : Licence"
 
 #: ../quickly/tools.py:37
 msgid ""
@@ -211,30 +241,33 @@ msgid ""
 "ERROR: unpermitted character in name.\n"
 "Letters and underscore (\"_\") only."
 msgstr ""
+"\n"
+"ERREUR : caractère non-permis dans le nom.\n"
+"Lettre et underscore (\"_\") uniquement."
 
 #: ../quickly/tools.py:84
 msgid "No template directory found. Aborting"
-msgstr ""
+msgstr "Aucun répertoire de modèles trouvés. Annulation"
 
 #: ../quickly/tools.py:103
 #, python-format
 msgid "ERROR: Template '%s' not found."
-msgstr "ERREUR: Modèle '%s' introuvable"
+msgstr "ERREUR : Modèle '%s' introuvable"
 
 #: ../quickly/tools.py:104 ../bin/quickly.py:176 ../bin/quickly.py:248
 #: ../bin/quickly.py:271 ../bin/quickly.py:300 ../bin/quickly.py:321
 #: ../bin/quickly.py:332 ../bin/quickly.py:340
 msgid "Aborting"
-msgstr "Abandon"
+msgstr "Annulation"
 
 #: ../data/templates/ubuntu-project/run.py:51
 #, python-format
 msgid "Can't execute %s"
-msgstr ""
+msgstr "Ne peut pas exécuter %s"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Status Area"
-msgstr ""
+msgstr "Zone d'État"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:2
 msgid ""
@@ -246,32 +279,42 @@ msgid ""
 "To change the behavior and edit the python code, run 'quickly edit', which "
 "will bring up a text editor."
 msgstr ""
+"Votre application a été créé !\n"
+"\n"
+"Pour commencer à modifier l'interface, exécutez 'quickly glade', qui ouvrira "
+"Glade pour vous permettre de modifier la fenêtre par défaut et les autres "
+"dialogues.\n"
+"\n"
+"Pour changer le comportement et modifier le code python, exécutez  'quickly "
+"edit' , qui fera apparaître un éditeur de texte."
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
-msgstr ""
+msgstr "Éditio_n"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
-msgstr ""
+msgstr "_Fichier"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr ""
+msgstr "Aid_e"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr ""
+msgstr "_Affichage"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
-msgstr ""
+msgstr "sentence_name"
 
 #: ../data/templates/ubuntu-project/create.py:62
 msgid ""
 "\n"
 "ERROR: project name not defined. Usage is project_name"
 msgstr ""
+"\n"
+"ERREUR : nom de projet non défini. Celui-ci doit être passé en argument."
 
 #. create directory and template file
 #: ../data/templates/ubuntu-project/create.py:74
@@ -296,7 +339,7 @@ msgstr "Création du dépôt bzr et commit"
 #. run the new application
 #: ../data/templates/ubuntu-project/create.py:141
 msgid "Launching your newly created project!"
-msgstr ""
+msgstr "Lancement de votre projet nouvellement créé"
 
 #: ../data/templates/ubuntu-project/create.py:147
 #, python-format
@@ -304,6 +347,9 @@ msgid ""
 "Congrats, your new project is setup! cd %s/ to start hacking. Then '$ "
 "quickly help' for quickly tutorial and reference"
 msgstr ""
+"Félicitations, votre nouveau projet est créé ! Vous pouvez lancer 'cd %s' et "
+"démarrer. Ensuite, exécutez \"$ quickly tutorial\" pour obtenir un tutoriel "
+"d'utilisation du modèle ubuntu-project"
 
 #: ../quickly/configurationhandler.py:42
 msgid "ERROR: Can't load configuration in current path or its parent ones."
@@ -352,7 +398,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:41
 msgid "An error has occurred"
-msgstr ""
+msgstr "Une erreur a eu lieu"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:67
 msgid "ERROR: an error occurred during source package creation"
@@ -365,7 +411,7 @@ msgstr ""
 #: ../quickly/commands.py:39
 #, python-format
 msgid "%s does not exist"
-msgstr ""
+msgstr "%s n'existe pas"
 
 #: ../quickly/commands.py:48
 #, python-format
@@ -375,7 +421,7 @@ msgstr ""
 #: ../quickly/commands.py:74
 #, python-format
 msgid "%s already exists."
-msgstr ""
+msgstr "%s existe déjà."
 
 #: ../quickly/commands.py:78
 #, python-format
@@ -520,12 +566,12 @@ msgstr "ERREUR: la commande post_%s a échoué"
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:1
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:1
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:2
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:2
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #~ msgid ""
 #~ "quickly [-t <template> | --template <template>] <command [...]>\n"
