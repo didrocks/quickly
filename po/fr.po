@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-24 18:12+0200\n"
-"PO-Revision-Date: 2009-08-27 14:45+0000\n"
+"PO-Revision-Date: 2009-08-28 13:16+0000\n"
 "Last-Translator: Didier Roche <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-08-28 09:49+0000\n"
+"X-Launchpad-Export-Date: 2009-08-29 09:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:34
@@ -49,7 +49,7 @@ msgstr "Cause inconnue"
 #: ../quickly/launchpadaccess.py:113
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "La configuration de Launchpad pour quickly a échoué; %s"
+msgstr "La configuration de Launchpad pour quickly a échoué ; %s"
 
 #: ../quickly/launchpadaccess.py:114
 msgid "Launchpad connexion is ok"
