@@ -229,6 +229,9 @@ def main():
 
 if __name__ == '__main__':
 
+    if len(sys.argv) == 1:
+        usage()
+        sys.exit(1)
     # process the command line to send the right instructions
     if sys.argv[1] == 'shell-completion':
         exit(get_commands())
