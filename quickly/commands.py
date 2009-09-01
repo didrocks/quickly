@@ -52,7 +52,7 @@ def get_all_commands():
             launch_inside_project_command_list = []
             launch_outside_project_command_list = []
             launch_in_or_outside_project_command_list = []
-            followed_by_template_command_list = []            
+            command_followed_by_command_list = []
             try:
                 files_command_parameters = file(os.path.join(template_path, "commandsconfig"), 'rb')
                 for line in files_command_parameters: 
@@ -62,12 +62,15 @@ def get_all_commands():
                     if len(fields) == 2:
                         targeted_property = fields[0].strip()
                         command_list = [command.strip() for command in fields[1].split(';')]
-                        if targeted_property == 'COMMANDS_LAUNCHED_INSIDE_PROJECT':
+                        if targeted_property == 'COMMANDS_LAUNCHED_IN_OR_OUTSIDE_PROJECT':
                             launch_inside_project_command_list = command_list
-                        if targeted_property == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT':
+                            launch_in_or_outside_project_command_list = command_list
+                        if targeted_property == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT_ONLY':
                             launch_outside_project_command_list = command_list
-                        if targeted_property == 'COMMANDS_FOLLOWED_BY_TEMPLATE':
-                                followed_by_template_command_list = command_list
+                        if targeted_property == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT_ONLY':
+                            launch_outside_project_command_list = command_list
+                        if targeted_property == 'COMMANDS_FOLLOWED_BY_COMMAND':
+                            command_followed_by_command_list = command_list
             except (OSError, IOError):
                 pass
 
@@ -87,17 +90,19 @@ def get_all_commands():
                     launch_inside_project = False
                     launch_outside_project = False
                     followed_by_template = False
+                    followed_by_command = False
                     if command_name in launch_inside_project_command_list:
                         launch_inside_project = True
                     if command_name in launch_outside_project_command_list:
                         launch_outside_project = True
-                    if command_name in followed_by_template_command_list:
                         followed_by_template = True
+                    if command_name in builtincommands.followed_by_command:
+                        followed_by_command = True
                     # default for commands: if not inside nor outside, and it's a template command, make it launch inside a project only
                     if not launch_inside_project and not launch_outside_project:
                         launch_inside_project = True
                     
-                    __commands[template][command_name] = Command(command_name, file_path, template, launch_inside_project, launch_outside_project, followed_by_template, False, hooks['pre'], hooks['post'])
+                    __commands[template][command_name] = Command(command_name, file_path, template, launch_inside_project, launch_outside_project, followed_by_template, followed_by_command, hooks['pre'], hooks['post'])
 
      
     # add builtin commands (avoiding gettext and hooks)
@@ -112,16 +117,16 @@ def get_all_commands():
             followed_by_template = False
             followed_by_command = False
 
-            if command_name in builtincommands.launched_inside_project:
+            if command_name in builtincommands.launched_inside_project_only:
                 launch_inside_project = True
-            if command_name in builtincommands.launched_outside_project :               
+            if command_name in builtincommands.launched_outside_project_only:
                 launch_outside_project = True
             if command_name in builtincommands.followed_by_template:
                 followed_by_template = True
             if command_name in builtincommands.followed_by_command:
                 followed_by_command = True
 
-            # default for commands: if not inside nor outside, and it's a builtin command, make it launch wherever
+            # default for commands: if not inside nor outside only, and it's a builtin command, make it launch wherever
             if not launch_inside_project and not launch_outside_project:
                 launch_inside_project = True
                 launch_outside_project = True

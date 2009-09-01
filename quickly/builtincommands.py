@@ -194,8 +194,8 @@ def quickly(template, project_dir, command_args, shell_completion=False):
 
 
 # here, special builtin commands properties (if nothing specified, commands can be launched inside and outside projects)
-launched_inside_project = []
-launched_outside_project = []
+launched_inside_project_only = []
+launched_outside_project_only = []
 followed_by_template = ['help', 'quickly']
 followed_by_command = ['help']
 
