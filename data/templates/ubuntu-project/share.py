@@ -96,7 +96,7 @@ except ValueError:
         try:
             minor_version = float(splitted_release_version[1])
         except ValueError:
-            print _("Minor release version specified after ~public in setup.py is not a valid number: %s") % splitted_release_version[1]
+            print _("Minor release version specified before ~public in setup.py is not a valid number: %s") % splitted_release_version[1]
             sys.exit(1)
         version = splitted_release_version[0] + '~public' + str(int(minor_version + 1))
 
