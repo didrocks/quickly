@@ -74,7 +74,7 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
             self.__key = self.__database.put_record(Record(self.__preferences))
         else:
             self.__preferences = results.rows[0].value
-            self.__key = results.rows[0].keyy
+            self.__key = results.rows[0].key
         
     def __save_preferences(self):
         self.__database.update_fields(self.__key, self.__preferences)
