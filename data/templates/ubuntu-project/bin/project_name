@@ -68,7 +68,6 @@ class camel_case_nameWindow(gtk.Window):
             #make any updates based on changed preferences here
             pass
         prefs.hide()
-        prefs.destroy
 
     def quit(self, widget, data=None):
         """quit - signal handler for closing the camel_case_nameWindow"""
