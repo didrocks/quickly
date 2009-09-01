@@ -145,7 +145,7 @@ subprocess.call(["bzr", "commit", "-m", "Initial project creation with Quickly!"
 print _("Launching your newly created project!")
 subprocess.call(['./' + project_name], cwd='bin/')
 
-print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly tutorial' for quickly tutorial and reference") % os.getcwd()
+print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly tutorial' for quickly ubuntu-template tutorial and reference") % os.getcwd()
 
 sys.exit(0)
 

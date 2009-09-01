@@ -63,8 +63,7 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
     def __load_preferences(self):
         #TODO: add prefernces to the self.__preferences dict
         #default preferences that will be overwritten if some are saved
-        self.__preferences = {"record_type":self.__record_type,
-                                "sample_pref":"boo"}
+        self.__preferences = {"record_type":self.__record_type}
         
         results = self.__database.get_records(record_type=self.__record_type, create_view=True)
        
@@ -74,7 +73,7 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
             self.__key = self.__database.put_record(Record(self.__preferences))
         else:
             self.__preferences = results.rows[0].value
-            self.__key = results.rows[0].keyy
+            self.__key = results.rows[0].value["_id"]
         
     def __save_preferences(self):
         self.__database.update_fields(self.__key, self.__preferences)
