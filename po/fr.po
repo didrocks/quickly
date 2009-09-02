@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-24 18:12+0200\n"
-"PO-Revision-Date: 2009-08-28 13:16+0000\n"
+"PO-Revision-Date: 2009-09-01 20:43+0000\n"
 "Last-Translator: Didier Roche <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-01 09:39+0000\n"
+"X-Launchpad-Export-Date: 2009-09-02 09:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:34
@@ -358,22 +358,24 @@ msgstr ""
 #: ../quickly/configurationhandler.py:56
 #, python-format
 msgid "ERROR: Can't load configuration in %s: %s"
-msgstr ""
+msgstr "ERREUR: Impossible de charger la configuration dans %s: %s"
 
 #: ../quickly/configurationhandler.py:81
 msgid "WARNING: No .quickly file found. Initiate a new one"
-msgstr ""
+msgstr "AVERTISSEMENT: Aucun fichier .quickly trouvé. Création d'un nouveau."
 
 #: ../quickly/configurationhandler.py:112
 #, python-format
 msgid "ERROR: Can't save configuration in %s"
-msgstr ""
+msgstr "ERREUR: Impossible d'enregistrer la configuration dans %s"
 
 #: ../data/templates/ubuntu-project/share.py:70
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before sharing"
 msgstr ""
+"ppa:%s:%s n'existe pas. Merci d'en créer un sur launchpad avant d'exécuter "
+"quickly share."
 
 #: ../data/templates/ubuntu-project/share.py:92
 #, python-format
@@ -381,16 +383,21 @@ msgid ""
 "Minor release version specified after ~public in setup.py is not a valid "
 "number: %s"
 msgstr ""
+"Le numéro de version mineur spécifié avant ~public dans setup.py n'est pas "
+"un nombre valide: %s"
 
 #: ../data/templates/ubuntu-project/share.py:98
 msgid "Release version specified in setup.py is not a valid number."
 msgstr ""
+"Le numéro de version spécifié dans setup.py n'est pas un nombre valide."
 
 #: ../data/templates/ubuntu-project/share.py:114
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
+"%s %s est en cours de construction sur Launchpad. Attendez une demi heure et "
+"allez à %s."
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:39
 msgid "Ubuntu packaging created in debian/"
@@ -402,11 +409,12 @@ msgstr "Une erreur a eu lieu"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:67
 msgid "ERROR: an error occurred during source package creation"
-msgstr ""
+msgstr "ERREUR: une erreur est survenue lors de la création du paquet source"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:78
 msgid "ERROR: an error occurred during source upload to launchpad"
 msgstr ""
+"ERREUR: une erreur est survenue pendant l'envoi des sources sur launchpad"
 
 #: ../quickly/commands.py:39
 #, python-format
@@ -416,7 +424,7 @@ msgstr "%s n'existe pas"
 #: ../quickly/commands.py:48
 #, python-format
 msgid "There is already a file or directory named %s"
-msgstr ""
+msgstr "Il exsite déjà un fichier ou répertoire nommé %s"
 
 #: ../quickly/commands.py:74
 #, python-format
@@ -426,7 +434,7 @@ msgstr "%s existe déjà."
 #: ../quickly/commands.py:78
 #, python-format
 msgid "Copy %s to create new %s template"
-msgstr ""
+msgstr "Copiez %s pour créer un nouveau modèle %s"
 
 #: ../quickly/commands.py:84
 msgid ""
@@ -463,6 +471,39 @@ msgid ""
 "\n"
 "Have Fun!"
 msgstr ""
+"--------------------------------------\n"
+"    Bienvenue dans  quickly!\n"
+"--------------------------------------\n"
+"\n"
+"Vous pouvez créer un projet en exécutant 'quickly create <template_name> "
+"<your project>'.\n"
+"\n"
+"\n"
+"Exemple avec le modèle ubuntu-project:\n"
+"1. Créez un projet Ubuntu et exécutez le tutoriel:\n"
+"$ quickly create ubuntu-project foo\n"
+"$ cd foo\n"
+"$ quickly tutorial\n"
+"\n"
+"2. Vous pouvez aussi essayer:\n"
+"$ quickly edit\n"
+"$ quickly glade\n"
+"$ quickly run\n"
+"Utilisez l'auto-complétion (touche TAB) pour obtenir la liste des commandes "
+"disponibles.\n"
+"\n"
+"3. Comment jouer avec le paquetage et la publication:\n"
+"\n"
+"optionnel, mais recommandé pour construire d'abord le paquet en local:\n"
+"$ quickly package\n"
+"\n"
+"ATTENTION: les deux commandes suivantes vont vous connecter sur Launchpad. "
+"Vous avez besoin d'un compte Launchpad et d'un ppa ouvert.\n"
+"Pour quickly release ,vous avez également besoin d'un projet où vous pouvez "
+"envoyer votre travail.\n"
+"$ quickly release ou $ quickly share\n"
+"\n"
+"Amusez vous bien !"
 
 #: ../bin/quickly.py:41
 msgid ""
@@ -511,6 +552,23 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Interpréteur Python: %s %s\n"
+"  Bibliothèque standard Python: /usr/lib/python2.6\n"
+"  \n"
+"  Bibliothèque Quickly utilisée: %s\n"
+"  Répertoire des données de Quickly: %s\n"
+"  Répertoires des modèles de Quickly:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Canonical Ltd.\n"
+"  #Author 2009 Rick Spencer\n"
+"  #Author 2009 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly est livré SANS AUCUNE GARANTIE, quickly est un logiciel libre et "
+"vous pouvez l'utiliser, le modifier et le redistribuer sous les termes de la "
+"GNU General Public License, version 3 ou plus récente."
 
 #: ../bin/quickly.py:175
 #, python-format
@@ -528,11 +586,14 @@ msgid ""
 "ERROR: %s is already a project. You can't create a project within another "
 "project. Please choose another path."
 msgstr ""
+"ERREUR: %s est déjà un projet. Vous ne pouvez pas créer un projet à "
+"l'intérieur d'un autre. Merci de sélectionner un autre chemin."
 
 #: ../bin/quickly.py:270
 #, python-format
 msgid "ERROR: %s command must be followed by a template and destination name"
 msgstr ""
+"ERROR: la commande %s doit être suivie d'un modèle et d'un nom de cible"
 
 #: ../bin/quickly.py:289
 #, python-format
@@ -540,6 +601,9 @@ msgid ""
 "ERROR: Can't find project in %s.\n"
 "Ensure you launch this command from a quickly project directory."
 msgstr ""
+"ERREUR: Impossible de trouver un projet dans %s.\n"
+"Assurez-vous que vous lancez cette commande depuis un dossier de projet "
+"quickly."
 
 #: ../bin/quickly.py:298
 msgid ""

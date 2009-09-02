@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-07-24 18:12+0200\n"
-"PO-Revision-Date: 2009-09-01 00:10+0000\n"
+"PO-Revision-Date: 2009-09-01 12:36+0000\n"
 "Last-Translator: Francisco Diéguez <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-01 09:39+0000\n"
+"X-Launchpad-Export-Date: 2009-09-02 09:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:34
@@ -29,6 +29,8 @@ msgstr "Fatal: "
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
+"AVISO: vostede está empregando staging e non o servidor de producción real "
+"en Launchpad"
 
 #: ../quickly/launchpadaccess.py:93
 msgid "Get Launchpad Settings"
@@ -238,27 +240,27 @@ msgstr ""
 
 #: ../quickly/tools.py:84
 msgid "No template directory found. Aborting"
-msgstr ""
+msgstr "Non se atopou o cartafol de modelos. Abortando"
 
 #: ../quickly/tools.py:103
 #, python-format
 msgid "ERROR: Template '%s' not found."
-msgstr ""
+msgstr "ERRO: Non se atopou o modelo '%s'"
 
 #: ../quickly/tools.py:104 ../bin/quickly.py:176 ../bin/quickly.py:248
 #: ../bin/quickly.py:271 ../bin/quickly.py:300 ../bin/quickly.py:321
 #: ../bin/quickly.py:332 ../bin/quickly.py:340
 msgid "Aborting"
-msgstr ""
+msgstr "Abortando"
 
 #: ../data/templates/ubuntu-project/run.py:51
 #, python-format
 msgid "Can't execute %s"
-msgstr ""
+msgstr "Non se pode executar %s"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Status Area"
-msgstr ""
+msgstr "Área de estado"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:2
 msgid ""
@@ -270,32 +272,41 @@ msgid ""
 "To change the behavior and edit the python code, run 'quickly edit', which "
 "will bring up a text editor."
 msgstr ""
+"O seu aplicativo foi creado!\n"
+"\n"
+"Para cambiar esta interface de usuario execute 'quickly glade', o que abrirá "
+"Glade para que poida editar as xanelas e diálogos predefinidos.\n"
+"\n"
+"Para cambiar o comportamento e editar o código python, execute 'quickly "
+"edit', o cal lanzará un editor de texto."
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
-msgstr ""
+msgstr "_Editar"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
-msgstr ""
+msgstr "_Ficheiro"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr ""
+msgstr "_Axuda"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr ""
+msgstr "_Ver"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
-msgstr ""
+msgstr "nome_sentenza"
 
 #: ../data/templates/ubuntu-project/create.py:62
 msgid ""
 "\n"
 "ERROR: project name not defined. Usage is project_name"
 msgstr ""
+"\n"
+"ERRO: non se definiu o nome do proxecto. O uso correcto é nome_proxecto"
 
 #. create directory and template file
 #: ../data/templates/ubuntu-project/create.py:74
@@ -303,24 +314,24 @@ msgstr ""
 #: ../data/templates/ubuntu-project/create.py:84 ../quickly/commands.py:52
 #, python-format
 msgid "Creating project directory %s"
-msgstr ""
+msgstr "Creando o cartafol do proxecto %s"
 
 #: ../data/templates/ubuntu-project/create.py:76
 #: ../data/templates/ubuntu-project/create.py:81
 #: ../data/templates/ubuntu-project/create.py:86 ../quickly/commands.py:54
 #, python-format
 msgid "Directory %s created\n"
-msgstr ""
+msgstr "O cartafol %s foi creado\n"
 
 #. add it to revision control
 #: ../data/templates/ubuntu-project/create.py:135
 msgid "Creating bzr repository and commiting"
-msgstr ""
+msgstr "Creando o repositorio bzr e remitindo"
 
 #. run the new application
 #: ../data/templates/ubuntu-project/create.py:141
 msgid "Launching your newly created project!"
-msgstr ""
+msgstr "Lanzando o seu proxecto recén creado!"
 
 #: ../data/templates/ubuntu-project/create.py:147
 #, python-format
@@ -328,30 +339,35 @@ msgid ""
 "Congrats, your new project is setup! cd %s/ to start hacking. Then '$ "
 "quickly help' for quickly tutorial and reference"
 msgstr ""
+"Noraboa, o seu proxecto novo está configurado! Execute un cd %s/ para "
+"comezar o hackeo. Logo execute '$ quickly help' para ter un titorial de "
+"quickly e material de referenza"
 
 #: ../quickly/configurationhandler.py:42
 msgid "ERROR: Can't load configuration in current path or its parent ones."
 msgstr ""
+"ERRO: Non foi posíel cargar a configuración no camiño actual ou nos seus "
+"pais."
 
 #: ../quickly/configurationhandler.py:56
 #, python-format
 msgid "ERROR: Can't load configuration in %s: %s"
-msgstr ""
+msgstr "ERRO: Non se puido cargar a configuración en %s: %s"
 
 #: ../quickly/configurationhandler.py:81
 msgid "WARNING: No .quickly file found. Initiate a new one"
-msgstr ""
+msgstr "AVISO: Non se atopou o ficheiro .quickly. Inicializando un novo."
 
 #: ../quickly/configurationhandler.py:112
 #, python-format
 msgid "ERROR: Can't save configuration in %s"
-msgstr ""
+msgstr "ERRO: Non se puido gardar a configuración en %s"
 
 #: ../data/templates/ubuntu-project/share.py:70
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before sharing"
-msgstr ""
+msgstr "O ppa:%s:%s non existe. Cree un novo en launchpad antes de compartig"
 
 #: ../data/templates/ubuntu-project/share.py:92
 #, python-format
@@ -359,52 +375,57 @@ msgid ""
 "Minor release version specified after ~public in setup.py is not a valid "
 "number: %s"
 msgstr ""
+"A versión menor de liberación especificada despois de ~public no ficheiro "
+"setup.py non é un número válido: %s"
 
 #: ../data/templates/ubuntu-project/share.py:98
 msgid "Release version specified in setup.py is not a valid number."
 msgstr ""
+"A versión de liberación especificada en setup.py non é un número válido."
 
 #: ../data/templates/ubuntu-project/share.py:114
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
+"%s %s está sendo construido en Launchpad. Agarde media hora e poderá ollalo "
+"en %s."
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:39
 msgid "Ubuntu packaging created in debian/"
-msgstr ""
+msgstr "Empaquetado de ubuntu creado en debian/"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:41
 msgid "An error has occurred"
-msgstr ""
+msgstr "Ocorreu un erro"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:67
 msgid "ERROR: an error occurred during source package creation"
-msgstr ""
+msgstr "ERRO: ocorreu un erro durante a creación do paquete de fontes"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:78
 msgid "ERROR: an error occurred during source upload to launchpad"
-msgstr ""
+msgstr "ERRO: ocorreu un erro mentres se subia a fonte a Launchpad"
 
 #: ../quickly/commands.py:39
 #, python-format
 msgid "%s does not exist"
-msgstr ""
+msgstr "%s non existe"
 
 #: ../quickly/commands.py:48
 #, python-format
 msgid "There is already a file or directory named %s"
-msgstr ""
+msgstr "Xa hai un ficheiro ou cartafol co nome %s"
 
 #: ../quickly/commands.py:74
 #, python-format
 msgid "%s already exists."
-msgstr ""
+msgstr "%s xa existe."
 
 #: ../quickly/commands.py:78
 #, python-format
 msgid "Copy %s to create new %s template"
-msgstr ""
+msgstr "Copie %s para crear un novo modelo %s"
 
 #: ../quickly/commands.py:84
 msgid ""
@@ -441,6 +462,37 @@ msgid ""
 "\n"
 "Have Fun!"
 msgstr ""
+"-------------------------------\n"
+"    Benvido a quickly!\n"
+"-------------------------------\n"
+"\n"
+"Vostede pode crear un proxecto executando 'quickly create <nome_proxecto> <o "
+"seu proxecto>'.\n"
+"\n"
+"\n"
+"Un exemplo co modelo ubuntu-project:\n"
+"1. Crear un Proxecto de Ubuntu e executar o titorial:\n"
+"$ quickly create ubuntu-project foo\n"
+"$ cd foo\n"
+"$ quickly help\n"
+"\n"
+"2. Vostede tamén pode executar:\n"
+"$ quickly edit\n"
+"$ quickly glade\n"
+"$ quickly run\n"
+"Empregue o completado de bash para obter todos os comandos dispoñibeis.\n"
+"3. Como xogar co paquete e liberalo:\n"
+"\n"
+"optional, but recommended to build first your package locally:\n"
+"$ quickly package\n"
+"\n"
+"ATENCIÓN: os seguintes comandos conectaranse a Launchpad. Vostede precisa "
+"ter polo menos unha conta de Launchpad e un ppa aberto.\n"
+"Vostede tamén  precisa indicarlle a quickly a ruta onde liberar un proxecto "
+"e traballar con él.\n"
+"$ quickly release ou $ quickly share\n"
+"\n"
+"Bó traballo!"
 
 #: ../bin/quickly.py:41
 msgid ""
@@ -467,6 +519,26 @@ msgid ""
 "    quickly push 'awesome new comment system'\n"
 "    quickly -t cool-template push 'awesome new comment system'"
 msgstr ""
+"Uso:\n"
+"    quickly [OPCIÓNS] orde ...\n"
+"\n"
+"Opcións:\n"
+"    -t, --template <modelo> modelo a empregar se difire do predefinido\n"
+"                               proxecto un\n"
+"                               un empregado para crear o proxecto)\n"
+"    --staging Servidor de staging en Launchpad de destino\n"
+"    --verbose Modo de saída detallada\n"
+"    -h, --help Mostrar información de axuda\n"
+"\n"
+"Ordes:\n"
+"    create <modelo> <nome-proxecto> (o modelo é obrigatorio para esta orde)\n"
+"    quickly <modelo_orixe> <modelo_dest> para creare un modelo derivado\n"
+"    Comece a empregalo para obter suxerencias de inicio\n"
+"\n"
+"Exemplos:\n"
+"    quickly create ubuntu-project foobar\n"
+"    quickly push 'un novo comentario do sistema incríbel'\n"
+"    quickly -t modelo-chulo push 'un novo comentario do sistema incríbel'"
 
 #: ../bin/quickly.py:66
 #, python-format
@@ -489,15 +561,32 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Intérprete de Python: %s %s\n"
+"  Biblioteca estándar de Python: /usr/lib/python2.6\n"
+"  \n"
+"  Biblioteca empregada por Quickly: %s\n"
+"  Ruta aos datos de Quickly: %s\n"
+"  Cartafoles de modelos detectados por Quickly:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Canonical Ltd.\n"
+"  #Author 2009 Rick Spencer\n"
+"  #Author 2009 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly  comes with ABSOLUTELY NO WARRANTY. quickly is free software, and\n"
+"you may use, modify and redistribute it under the terms of the GNU\n"
+"General Public License version 3 or later."
 
 #: ../bin/quickly.py:175
 #, python-format
 msgid "ERROR: command '%s' in '%s' not found."
-msgstr ""
+msgstr "ERRO: a orde '%s' en '%s' non se atopou."
 
 #: ../bin/quickly.py:247
 msgid "ERROR: No command found"
-msgstr ""
+msgstr "ERRO: Non se atopou a orde."
 
 #. no error, so we are in a project path, not good!
 #: ../bin/quickly.py:259
@@ -506,11 +595,13 @@ msgid ""
 "ERROR: %s is already a project. You can't create a project within another "
 "project. Please choose another path."
 msgstr ""
+"ERRO: %s xa é un proxecto. Vostede non pode crear un proxecto dentro de "
+"outro. Escolla outro camiño."
 
 #: ../bin/quickly.py:270
 #, python-format
 msgid "ERROR: %s command must be followed by a template and destination name"
-msgstr ""
+msgstr "ERRO: á orde %s debe seguirlle un modelo e o nome de destino"
 
 #: ../bin/quickly.py:289
 #, python-format
@@ -518,6 +609,9 @@ msgid ""
 "ERROR: Can't find project in %s.\n"
 "Ensure you launch this command from a quickly project directory."
 msgstr ""
+"ERRO: Non se pode atopar o proxecto en %s.\n"
+"Asegúrese que quere executar esta orde dende o cartafol do proxecto de "
+"quickly."
 
 #: ../bin/quickly.py:298
 msgid ""
@@ -525,28 +619,31 @@ msgid ""
 "don't want to create a new project or that your are in your directory "
 "project."
 msgstr ""
+"ERRO: Non se proporcionou ningún modelo e non se atopou ningún na árbore "
+"actual. Asegúrese que non quere crear un novo proxecto e que está no "
+"cartafol do seu proxecto."
 
 #: ../bin/quickly.py:320
 #, python-format
 msgid "ERROR: pre_%s command failed"
-msgstr ""
+msgstr "ERRO: a orde pre_%s fallou"
 
 #: ../bin/quickly.py:331
 #, python-format
 msgid "ERROR: %s command failed"
-msgstr ""
+msgstr "ERRO: a orde %s fallou"
 
 #: ../bin/quickly.py:339
 #, python-format
 msgid "ERROR: post_%s command failed"
-msgstr ""
+msgstr "ERRO: a orde post_%s  fallou"
 
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:1
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:1
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:2
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:2
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
