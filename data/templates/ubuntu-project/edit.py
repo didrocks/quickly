@@ -22,8 +22,7 @@ import subprocess
 import os
 import sys
 
-from quickly import configurationhandler
-from internal import quicklyutils
+from quickly import configurationhandler, templatetools
 
 import gettext
 from gettext import gettext as _
@@ -38,7 +37,7 @@ $quickly edit
 A convenience command to open all of your python files in your project 
 directory in your default editor, ready for editing.
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 filelist = ""
 for root, dirs, files in os.walk('./'):

@@ -25,7 +25,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
-from internal import quicklyutils
+from quickly import templatetools
 
 def help():
     print _("""Usage:
@@ -38,7 +38,7 @@ it does not push changes to any back up location. If you need revert
 or otherwise use the revision control, us bzr directly:
 $bzr help
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 #set either a default message or the specified message
 commit_msg = " ".join(sys.argv[1:])

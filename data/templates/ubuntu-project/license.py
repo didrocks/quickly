@@ -23,7 +23,7 @@ import re
 import shutil
 import sys
 
-from quickly import configurationhandler, tools
+from quickly import configurationhandler, templatetools
 from internal import quicklyutils
 
 import gettext
@@ -126,7 +126,7 @@ def copy_license_to_files():
                         print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_LICENCE_TAG, ftarget_file_name.name)
                         os.remove(ftarget_file_name_out.name)
                     else:
-                        tools.apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
+                        templatetools.apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
                         os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
 
                 except (OSError, IOError), e:
@@ -209,7 +209,7 @@ def licensing(license=None):
             os.remove(fcopyright_out.name)
             sys.exit(1)
         else:
-            tools.apply_file_rights(fcopyright.name, fcopyright_out.name)
+            templatetools.apply_file_rights(fcopyright.name, fcopyright_out.name)
             os.rename(fcopyright_out.name, fcopyright.name)
 
     except (OSError, IOError), e:
@@ -243,7 +243,7 @@ def shell_completion():
 
 if __name__ == "__main__":
 
-    quicklyutils.handle_additional_parameters(sys.argv, help, shell_completion)
+    templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
     license = None
     if len(sys.argv) > 2:
         print _("This command only take one optional argument: License")

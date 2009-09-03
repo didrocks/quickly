@@ -23,6 +23,7 @@ import configurationhandler
 import commands as commands_module
 import quicklyconfig
 import tools
+import templatetools
 
 import gettext
 from gettext import gettext as _
@@ -47,7 +48,7 @@ def pre_create(template, project_dir, command_args):
         os.chdir(path)
     
     # check that project name follow quickly rules and reformat it.
-    quickly_project_name = tools.quickly_name(project_name)
+    quickly_project_name = templatetools.quickly_name(project_name)
 
     #bail if the name if taken
     if os.path.exists(project_name):

@@ -25,6 +25,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 from internal import quicklyutils
+from quickly import templatetools
 
 def help():
     print _("""Usage:
@@ -40,7 +41,7 @@ setup.py. You can edit them if you don't want to use any of these
 commands afterwards. Those changes are not a mandatory at all for
 testing purpose.
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 from internal import packaging
 from quickly import configurationhandler

@@ -21,6 +21,7 @@ import os
 import sys
 
 from internal import quicklyutils
+from quickly import templatetools
 
 import gettext
 from gettext import gettext as _
@@ -35,7 +36,7 @@ $ quickly change-lp-project
 Enable to set or change the launchpad project binded with the current
 ubuntu project.
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 
 # connect to LP

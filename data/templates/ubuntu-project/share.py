@@ -21,7 +21,7 @@ import sys
 import subprocess
 import webbrowser
 
-from internal import quicklyutils
+from quickly import templatetools
 import license
 
 import gettext
@@ -43,7 +43,7 @@ Name, email and version setup.py will be automatically changed.
 at each quickly share execution)
 You can modify the description and long description if you wish.
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 from quickly import launchpadaccess, configurationhandler
 from internal import quicklyutils, packaging

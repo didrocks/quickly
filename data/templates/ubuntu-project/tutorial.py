@@ -25,7 +25,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
-from internal import quicklyutils
+from quickly import templatetools
 
 def help():
     print _("""Usage:
@@ -33,7 +33,7 @@ $ quickly tutorial
 
 Opens a web browser with the tutorial for ubuntu-project template.
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 webbrowser.open(os.path.dirname(__file__) + "/help/index.html")
 
