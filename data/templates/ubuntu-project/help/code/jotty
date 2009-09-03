@@ -60,8 +60,7 @@ class JottyWindow(gtk.Window):
         """about - display the about box for what_the_heck """
         about = AboutJottyDialog.NewAboutJottyDialog()
         response = about.run()
-        about.hide()
-        about.destroy
+        about.destroy()
 
     def preferences(self, widget, data=None):
         """preferences - display the preferences window for jotty """
@@ -70,8 +69,7 @@ class JottyWindow(gtk.Window):
         if response == gtk.RESPONSE_OK:
             #make any updates based on changed preferences here
             pass
-        prefs.hide()
-        prefs.destroy
+        prefs.destroy()
 
     def quit(self, widget, data=None):
         """quit - signal handler for closing the JottyWindow"""
