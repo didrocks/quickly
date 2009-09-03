@@ -48,7 +48,7 @@ class camel_case_nameWindow(gtk.Window):
         self.builder.connect_signals(self)
 
         #uncomment the following code to read in preferences at start up
-        #dlg = camel_case_namePreferencesDialog.Newcamel_case_namePreferencesDialog()
+        #dlg = Preferencescamel_case_nameDialog.NewPreferencescamel_case_nameDialog()
         #self.preferences = dlg.get_preferences()
 
         #code for other initialization actions should be added here
