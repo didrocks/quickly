@@ -57,8 +57,7 @@ class camel_case_nameWindow(gtk.Window):
         """about - display the about box for what_the_heck """
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
         response = about.run()
-        about.hide()
-        about.destroy
+        about.destroy()
 
     def preferences(self, widget, data=None):
         """preferences - display the preferences window for project_name """
@@ -67,7 +66,7 @@ class camel_case_nameWindow(gtk.Window):
         if response == gtk.RESPONSE_OK:
             #make any updates based on changed preferences here
             pass
-        prefs.hide()
+        prefs.destroy()
 
     def quit(self, widget, data=None):
         """quit - signal handler for closing the camel_case_nameWindow"""
