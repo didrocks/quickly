@@ -43,7 +43,7 @@ templatetools.handle_additional_parameters(sys.argv, help)
 cmd = "GLADE_CATALOG_PATH=./data/ui glade-3 data/ui/*.ui"
 
 #run glade with env variables pointing to catalogue xml files
-if os.getenv('QUICKLY') is not None and "verbose" in os.getenv('QUICKLY').lower():
+if templatetools.in_verbose_mode():
     subprocess.Popen(cmd, shell=True)
 else:
     nullfile=file("/dev/null") 
