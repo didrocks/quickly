@@ -22,7 +22,7 @@ import os
 import shutil
 import subprocess
 
-from quickly import tools
+from quickly import templatetools
 from internal import quicklyutils
 
 import gettext
@@ -52,7 +52,7 @@ $ quickly glade
 3. Edit the Python code:
 $ quickly edit
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 # get origin path
 pathname = os.path.dirname(__file__)
@@ -71,7 +71,7 @@ path_and_project = sys.argv[1].split('/')
 project_name = path_and_project[-1]
 
 # check that project name follow quickly rules and reformat it.
-project_name = tools.quickly_name(project_name)
+project_name = templatetools.quickly_name(project_name)
 
 # create additional directories
 data_dir = "data"

@@ -26,7 +26,7 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
-from internal import quicklyutils
+from quickly import templatetools
 
 def help():
     print _("""Usage:
@@ -38,12 +38,12 @@ in this manner for quickly to work. If you try to open Glade
 directly, and the open the UI files, Glade will throw errors
 and won't open the files.
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 cmd = "GLADE_CATALOG_PATH=./data/ui glade-3 data/ui/*.ui"
 
 #run glade with env variables pointing to catalogue xml files
-if os.getenv('QUICKLY') is not None and "verbose" in os.getenv('QUICKLY').lower():
+if templatetools.in_verbose_mode():
     subprocess.Popen(cmd, shell=True)
 else:
     nullfile=file("/dev/null") 

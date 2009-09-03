@@ -21,8 +21,7 @@
 import os
 import sys
 import internal.quicklyutils as quicklyutils
-from quickly import configurationhandler
-import quickly.tools
+from quickly import configurationhandler, templatetools
 
 import gettext
 from gettext import gettext as _
@@ -57,12 +56,12 @@ dialog = DialogNameDialog.NewDialogNameDialog()
 result = dialog.run()
 dialog.hide()
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)
 
-dialog_name = quickly.tools.quickly_name(sys.argv[1])
+dialog_name = templatetools.quickly_name(sys.argv[1])
 
 path_and_project = sys.argv[0].split('/')
 

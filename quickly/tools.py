@@ -17,7 +17,6 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import string
 import sys
 import stat
 
@@ -28,22 +27,6 @@ import quicklyconfig
 import commands
 
 __project_path = None
-
-def quickly_name(name):
-    """Enforce quickly name to be ascii only and lowercase
-    
-    return formated name"""
-    name = name.lower()
-    permitted_characters = string.ascii_lowercase
-    permitted_characters += string.digits
-    #permitted_characters += "_"
-    for c in name:
-        if c not in permitted_characters:
-            print _("""
-ERROR: unpermitted character in name.
-Letters and digits only.""")
-            sys.exit(1)
-    return name
 
 class project_path_not_found(Exception):
     pass
@@ -149,10 +132,3 @@ def check_template_exists(template):
         print _("Arborting.")
         sys.exit(1)
 
-def apply_file_rights(src_file_name, dest_file_name):
-    """Keep file rights from src to dest"""
-    
-    st = os.stat(src_file_name)
-    mode = stat.S_IMODE(st.st_mode)
-    os.chmod(dest_file_name, mode)
-    

@@ -88,21 +88,6 @@ def get_setup_value(key):
         raise cant_deal_with_setup_value()
     return result
 
-def handle_additional_parameters(args, help=None, shell_completion=None):
-    """Enable handling additional parameter like help of shell_completion"""
-    
-    if len(args) > 1 and args[1] == "help":
-        if help:
-            help()
-        else:
-            print _("No help for this command")
-        sys.exit(0)
-    elif len(args) > 1 and args[1] == "shell-completion":
-        if shell_completion:
-            shell_completion()
-        sys.exit(0)
-
-
 def set_setup_value(key, value):
     """ set value from setup.py file
     

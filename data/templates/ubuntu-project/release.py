@@ -23,6 +23,7 @@ import subprocess
 import webbrowser
 
 from internal import quicklyutils
+from quickly import templatetools
 import license
 
 import gettext
@@ -61,7 +62,7 @@ You can modify the description and long description if you wish.
 You can run $quickly package and test your package to make sure it
 installs as expected. (This is not mandatory)
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 from quickly import launchpadaccess, configurationhandler
 from internal import packaging

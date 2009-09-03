@@ -27,8 +27,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
-from quickly import configurationhandler
-from internal import quicklyutils
+from quickly import configurationhandler, templatetools
 
 def help():
     print _("""Usage:
@@ -37,7 +36,7 @@ $quickly run
 Runs your application. This is the best way to try test it out
 while you are developing it. It starts up the main project window.
 """)
-quicklyutils.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help)
 
 # if config not already loaded
 if not configurationhandler.project_config:
