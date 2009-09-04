@@ -142,12 +142,14 @@ def licensing(license=None):
 
     # if file was never licensed, choose GPL-3
     fcopyright_name = "Copyright"
+    fauthors_name = "AUTHORS"
 
     if license is None:
         try:
+            # check if file already licensed
             fcopyright = file(fcopyright_name, 'r').read()
             if fcopyright.find(BEGIN_COPYRIGHT_TAG + '\n' + END_COPYRIGHT_TAG) != -1:
-                license = "GPL-3"   
+                license = "GPL-3"  
 
         except (OSError, IOError), e:
             print _("%s file was not found") % fcopyright_name
@@ -163,11 +165,12 @@ def licensing(license=None):
         return(1)
 
 
-    # check and update (if needed, cf before) the Copyright file
+    # check and update (if needed, cf before) Copyright and AUTHORS file
     skip_until_end_found = False
     try:
         fcopyright = file(fcopyright_name, 'r')
         fcopyright_out = file(fcopyright.name + '.new', 'w')
+        fauthors_out = file(fauthors_name + '.new', 'w')        
         for line in fcopyright:
 
             # add autorship if needed
@@ -183,8 +186,12 @@ def licensing(license=None):
                             'place of <Your Name> <Your E-mail> or use quickly share/quickly release')
                     return 1
 
+            # update AUTHORS file
+            if 'copyright' in line.lower():
+                fauthors_out.write(line)
+
             # if we want to update/create the license
-            if license:
+            if license:                
                 # seek if we have to add or Replace a License
                 if BEGIN_COPYRIGHT_TAG in line:
                     fcopyright_out.write(line) # write this line, otherwise will be skipped
@@ -203,6 +210,7 @@ def licensing(license=None):
 
         fcopyright_out.close()
         fcopyright.close()
+        fauthors_out.close()
 
         if skip_until_end_found: # that means we didn't find the END_LICENCE_TAG, don't copy the file
             print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_COPYRIGHT_TAG, fcopyright.name)
@@ -211,6 +219,8 @@ def licensing(license=None):
         else:
             templatetools.apply_file_rights(fcopyright.name, fcopyright_out.name)
             os.rename(fcopyright_out.name, fcopyright.name)
+        # finish updating copyright file
+        os.rename(fauthors_out.name, fauthors_name)
 
     except (OSError, IOError), e:
         print _("%s file was not found") % fcopyright_name
