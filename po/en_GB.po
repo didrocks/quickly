@@ -1,4 +1,4 @@
-# Catalan translation for quickly
+# English (United Kingdom) translation for quickly
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-07-24 18:12+0200\n"
-"PO-Revision-Date: 2009-08-27 10:09+0000\n"
-"Last-Translator: Didier Roche <Unknown>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"PO-Revision-Date: 2009-09-01 05:47+0000\n"
+"Last-Translator: rugby471 <Unknown>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,68 +19,69 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:34
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Comprova si la biblioteca python-launchpadlib estüa instal·lada"
+msgstr "Check whether python-launchpadlib is installed"
 
 #: ../quickly/launchpadaccess.py:60
 msgid "Fatal: "
-msgstr "Error fatal: "
+msgstr "Fatal: "
 
 #: ../quickly/launchpadaccess.py:86
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
+"WARNING: you are using staging and not launchpad real production server"
 
 #: ../quickly/launchpadaccess.py:93
 msgid "Get Launchpad Settings"
-msgstr ""
+msgstr "Get Launchpad Settings"
 
 #: ../quickly/launchpadaccess.py:100
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
-msgstr ""
+msgstr "Initial Launchpad binding. You must choose \"Change Anything\""
 
 #: ../quickly/launchpadaccess.py:112
 msgid "Unknown reason"
-msgstr "Motiu desconegut"
+msgstr "Unknown reason"
 
 #: ../quickly/launchpadaccess.py:113
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "No s'ha pogut configurar el Launchpad per al Quickly ; %s"
+msgstr "Couldn't set-up Launchpad for quickly ; %s"
 
 #: ../quickly/launchpadaccess.py:114
 msgid "Launchpad connexion is ok"
-msgstr "La connexió al Launchpad és correcta"
+msgstr "Launchpad connection is ok"
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
-msgstr ""
+msgstr "No launchpad project give, aborting."
 
 #: ../quickly/launchpadaccess.py:140
 #, python-format
 msgid "Project name: %s"
-msgstr "Nom del projecte: %s"
+msgstr "Project name: %s"
 
 #: ../quickly/launchpadaccess.py:141
 #, python-format
 msgid "Launchpad url: %s/%s"
-msgstr ""
+msgstr "Launchpad url: %s/%s"
 
 #: ../quickly/launchpadaccess.py:148
 msgid "No project found"
-msgstr ""
+msgstr "No project found"
 
 #: ../quickly/launchpadaccess.py:150
 msgid "Choose your project number"
-msgstr ""
+msgstr "Choose your project number"
 
 #: ../quickly/launchpadaccess.py:160
 msgid "No right number given, aborting."
-msgstr ""
+msgstr "Correct number not given, aborting."
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:84
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:125
 msgid "ERROR: Can't load setup.py file"
-msgstr ""
+msgstr "ERROR: Can't load setup.py file"
 
 #: ../data/templates/ubuntu-project/release.py:72
 #: ../data/templates/ubuntu-project/share.py:78
@@ -88,27 +89,32 @@ msgid ""
 "Release version not found in setup.py and no version specified in command "
 "line."
 msgstr ""
+"Release version not found in setup.py and no version specified in command "
+"line."
 
 #: ../data/templates/ubuntu-project/release.py:74
 msgid "quickly released"
-msgstr ""
+msgstr "quickly released"
 
 #: ../data/templates/ubuntu-project/release.py:80
 #, python-format
 msgid "quickly released: %s"
-msgstr ""
+msgstr "quickly released: %s"
 
 #: ../data/templates/ubuntu-project/release.py:100
 msgid ""
 "Release version specified in command arguments or in setup.py is not a valid "
 "number."
 msgstr ""
+"Release version specified in command arguments or in setup.py is not a valid "
+"number."
 
 #: ../data/templates/ubuntu-project/release.py:134
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
+"ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 
 #: ../data/templates/ubuntu-project/release.py:144
 #, python-format
@@ -116,29 +122,31 @@ msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
 msgstr ""
+"ERROR: quickly can't release: %s seems to be already released. Choose "
+"another name."
 
 #: ../data/templates/ubuntu-project/release.py:152
 msgid "ERROR: quickly can't release as it can't commit with bzr"
-msgstr ""
+msgstr "ERROR: quickly can't release as it can't commit with bzr"
 
 #: ../data/templates/ubuntu-project/release.py:178
 #: ../data/templates/ubuntu-project/release.py:196
 msgid "ERROR: quickly can't release: can't push to launchpad."
-msgstr ""
+msgstr "ERROR: quickly can't release: can't push to launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:184
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
-msgstr ""
+msgstr "ERROR: quickly can't release correctly: can't pull from launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:191
 msgid "ERROR: quickly can't release: can't pull from launchpad."
-msgstr ""
+msgstr "ERROR: quickly can't release: can't pull from launchpad."
 
 #. upload to launchpad
 #: ../data/templates/ubuntu-project/release.py:201
 #: ../data/templates/ubuntu-project/share.py:108
 msgid "pushing to launchpad"
-msgstr ""
+msgstr "pushing to launchpad"
 
 #: ../data/templates/ubuntu-project/release.py:206
 #, python-format
@@ -146,32 +154,34 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s released and building on Launchpad. Wait for half an hour and have "
+"look at %s."
 
 #: ../data/templates/ubuntu-project/package.py:52
 msgid "Release version not found in setup.py."
-msgstr ""
+msgstr "Release version not found in setup.py."
 
 #: ../data/templates/ubuntu-project/package.py:57
 #: ../data/templates/ubuntu-project/internal/packaging.py:61
 msgid "ERROR: can't create or update ubuntu package"
-msgstr ""
+msgstr "ERROR: can't create or update ubuntu package"
 
 #: ../data/templates/ubuntu-project/package.py:64
 #, python-format
 msgid "Ubuntu package has been successfully created in ../%s_%s_all.deb"
-msgstr ""
+msgstr "Ubuntu package has been successfully created in ../%s_%s_all.deb"
 
 #: ../data/templates/ubuntu-project/package.py:66
 msgid "An error has occurred during package building"
-msgstr ""
+msgstr "An error has occurred during package building"
 
 #: ../data/templates/ubuntu-project/save.py:40
 msgid "quickly saved"
-msgstr ""
+msgstr "quickly saved"
 
 #: ../data/templates/ubuntu-project/save.py:46
 msgid "It seems that you have no change to record."
-msgstr ""
+msgstr "It seems that you have no changes to record."
 
 #: ../data/templates/ubuntu-project/license.py:92
 #: ../data/templates/ubuntu-project/license.py:127
@@ -179,20 +189,22 @@ msgstr ""
 #: ../data/templates/ubuntu-project/license.py:207
 #, python-format
 msgid "%s file was not found"
-msgstr ""
+msgstr "%s file was not found"
 
 #. that means we didn't find the END_LICENCE_TAG, don't copy the file
 #: ../data/templates/ubuntu-project/license.py:121
 #: ../data/templates/ubuntu-project/license.py:200
 #, python-format
 msgid "WARNING: %s was not found in the file %s. No licence replacement"
-msgstr ""
+msgstr "WARNING: %s was not found in the file %s. No licence replacement"
 
 #: ../data/templates/ubuntu-project/license.py:155
 msgid ""
 "This license seems to be unsupported by quickly. If you think it really "
 "should, please open a bug in quickly bugtracker"
 msgstr ""
+"Quickly doesn't seem to support his license. If you think it really should, "
+"please open a bug in quickly's bugtracker"
 
 #: ../data/templates/ubuntu-project/license.py:173
 msgid ""
@@ -200,10 +212,13 @@ msgid ""
 "for the copyright in place of <Your Name> <Your E-mail> or use quickly "
 "share/quickly release"
 msgstr ""
+"Copyright is not attributed. Edit the Copyright file to include your name "
+"for the copyright in place of <Your Name> <Your E-mail> or use quickly "
+"share/quickly release"
 
 #: ../data/templates/ubuntu-project/license.py:229
 msgid "This command only take one optional argument: License"
-msgstr ""
+msgstr "This command only takes one optional argument: License"
 
 #: ../quickly/tools.py:37
 msgid ""
@@ -211,30 +226,33 @@ msgid ""
 "ERROR: unpermitted character in name.\n"
 "Letters and underscore (\"_\") only."
 msgstr ""
+"\n"
+"ERROR: invalid character in name.\n"
+"Alpha-numeric characters and underscores (\"_\") only."
 
 #: ../quickly/tools.py:84
 msgid "No template directory found. Aborting"
-msgstr ""
+msgstr "No template directory found. Aborting"
 
 #: ../quickly/tools.py:103
 #, python-format
 msgid "ERROR: Template '%s' not found."
-msgstr ""
+msgstr "ERROR: Template '%s' not found."
 
 #: ../quickly/tools.py:104 ../bin/quickly.py:176 ../bin/quickly.py:248
 #: ../bin/quickly.py:271 ../bin/quickly.py:300 ../bin/quickly.py:321
 #: ../bin/quickly.py:332 ../bin/quickly.py:340
 msgid "Aborting"
-msgstr ""
+msgstr "Aborting"
 
 #: ../data/templates/ubuntu-project/run.py:51
 #, python-format
 msgid "Can't execute %s"
-msgstr ""
+msgstr "Can't execute %s"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Status Area"
-msgstr ""
+msgstr "Status Area"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:2
 msgid ""
@@ -246,32 +264,41 @@ msgid ""
 "To change the behavior and edit the python code, run 'quickly edit', which "
 "will bring up a text editor."
 msgstr ""
+"Your application has been created!\n"
+"\n"
+"To start changing the user interface, run 'quickly glade', which will open "
+"Glade so you can edit the default windows and dialogs.\n"
+"\n"
+"To change the behavior and edit the python code, run 'quickly edit', which "
+"will bring up a text editor."
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
-msgstr ""
+msgstr "_Edit"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
-msgstr ""
+msgstr "_File"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr ""
+msgstr "_Help"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr ""
+msgstr "_View"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
-msgstr ""
+msgstr "sentence_name"
 
 #: ../data/templates/ubuntu-project/create.py:62
 msgid ""
 "\n"
 "ERROR: project name not defined. Usage is project_name"
 msgstr ""
+"\n"
+"ERROR: project name not defined. Usage is project_name"
 
 #. create directory and template file
 #: ../data/templates/ubuntu-project/create.py:74
@@ -279,24 +306,24 @@ msgstr ""
 #: ../data/templates/ubuntu-project/create.py:84 ../quickly/commands.py:52
 #, python-format
 msgid "Creating project directory %s"
-msgstr ""
+msgstr "Creating project directory %s"
 
 #: ../data/templates/ubuntu-project/create.py:76
 #: ../data/templates/ubuntu-project/create.py:81
 #: ../data/templates/ubuntu-project/create.py:86 ../quickly/commands.py:54
 #, python-format
 msgid "Directory %s created\n"
-msgstr ""
+msgstr "Directory %s created\n"
 
 #. add it to revision control
 #: ../data/templates/ubuntu-project/create.py:135
 msgid "Creating bzr repository and commiting"
-msgstr ""
+msgstr "Creating bzr repository and commiting"
 
 #. run the new application
 #: ../data/templates/ubuntu-project/create.py:141
 msgid "Launching your newly created project!"
-msgstr ""
+msgstr "Launching your newly created project!"
 
 #: ../data/templates/ubuntu-project/create.py:147
 #, python-format
@@ -304,30 +331,33 @@ msgid ""
 "Congrats, your new project is setup! cd %s/ to start hacking. Then '$ "
 "quickly help' for quickly tutorial and reference"
 msgstr ""
+"Congrats, your new project has been set-up! cd %s/ to start hacking. Then "
+"run '$ quickly help' for quickly tutorials and references"
 
 #: ../quickly/configurationhandler.py:42
 msgid "ERROR: Can't load configuration in current path or its parent ones."
-msgstr ""
+msgstr "ERROR: Can't load configuration in current path or parent path."
 
 #: ../quickly/configurationhandler.py:56
 #, python-format
 msgid "ERROR: Can't load configuration in %s: %s"
-msgstr ""
+msgstr "ERROR: Can't load configuration in %s: %s"
 
 #: ../quickly/configurationhandler.py:81
 msgid "WARNING: No .quickly file found. Initiate a new one"
-msgstr ""
+msgstr "WARNING: No .quickly file found. Initiate a new one"
 
 #: ../quickly/configurationhandler.py:112
 #, python-format
 msgid "ERROR: Can't save configuration in %s"
-msgstr ""
+msgstr "ERROR: Can't save configuration in %s"
 
 #: ../data/templates/ubuntu-project/share.py:70
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before sharing"
 msgstr ""
+"ppa:%s:%s does not exist. Please create one on launchpad before sharing"
 
 #: ../data/templates/ubuntu-project/share.py:92
 #, python-format
@@ -335,52 +365,55 @@ msgid ""
 "Minor release version specified after ~public in setup.py is not a valid "
 "number: %s"
 msgstr ""
+"Minor release version specified after ~public in setup.py is not a valid "
+"number: %s"
 
 #: ../data/templates/ubuntu-project/share.py:98
 msgid "Release version specified in setup.py is not a valid number."
-msgstr ""
+msgstr "Release version specified in setup.py is not a valid number."
 
 #: ../data/templates/ubuntu-project/share.py:114
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
+"%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:39
 msgid "Ubuntu packaging created in debian/"
-msgstr ""
+msgstr "Ubuntu packaging created in debian/"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:41
 msgid "An error has occurred"
-msgstr ""
+msgstr "An error has occurred"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:67
 msgid "ERROR: an error occurred during source package creation"
-msgstr ""
+msgstr "ERROR: an error occurred during source package creation"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:78
 msgid "ERROR: an error occurred during source upload to launchpad"
-msgstr ""
+msgstr "ERROR: an error occurred during source upload to launchpad"
 
 #: ../quickly/commands.py:39
 #, python-format
 msgid "%s does not exist"
-msgstr ""
+msgstr "%s does not exist"
 
 #: ../quickly/commands.py:48
 #, python-format
 msgid "There is already a file or directory named %s"
-msgstr ""
+msgstr "There is already a file or directory named %s"
 
 #: ../quickly/commands.py:74
 #, python-format
 msgid "%s already exists."
-msgstr ""
+msgstr "%s already exists."
 
 #: ../quickly/commands.py:78
 #, python-format
 msgid "Copy %s to create new %s template"
-msgstr ""
+msgstr "Copy %s to create new %s template"
 
 #: ../quickly/commands.py:84
 msgid ""
@@ -417,6 +450,38 @@ msgid ""
 "\n"
 "Have Fun!"
 msgstr ""
+"-------------------------------\n"
+"    Welcome to quickly!\n"
+"-------------------------------\n"
+"\n"
+"You can create a project by executing 'quickly create <template_name> <your "
+"project>'.\n"
+"\n"
+"\n"
+"Example with ubuntu-project template:\n"
+"1. create a Ubuntu Project and run the tutorial:\n"
+"$ quickly create ubuntu-project foo\n"
+"$ cd foo\n"
+"$ quickly help\n"
+"\n"
+"2. You can also try:\n"
+"$ quickly edit\n"
+"$ quickly glade\n"
+"$ quickly run\n"
+"Use bash completion to get available commands\n"
+"\n"
+"3. How to play with package and release:\n"
+"\n"
+"optional, but recommended to build first your package locally:\n"
+"$ quickly package\n"
+"\n"
+"BE WARNED: the two following commands will connect to Launchpad. You need yo "
+"have a Launchpad account and a PPA already created.\n"
+"For quickly release, you need a project on Launchpad to which you can bind "
+"your work.\n"
+"$ quickly release or $ quickly share\n"
+"\n"
+"Have Fun!"
 
 #: ../bin/quickly.py:41
 msgid ""
@@ -443,6 +508,28 @@ msgid ""
 "    quickly push 'awesome new comment system'\n"
 "    quickly -t cool-template push 'awesome new comment system'"
 msgstr ""
+"Usage:\n"
+"    quickly [OPTIONS] command ...\n"
+"\n"
+"Options:\n"
+"    -t, --template <template>  Template to use if it differs from default\n"
+"                               project template\n"
+"                               (one used to create the project)\n"
+"    --staging                  Target launchpad staging server\n"
+"    --verbose                  Verbose mode\n"
+"    -h, --help                 Show help information\n"
+"\n"
+"Commands:\n"
+"    create <template> <project-name> (template is mandatory for this "
+"command)\n"
+"    quickly <template_origin> <template_dest> to create a create derived "
+"template\n"
+"    getstarted to get some starting hints\n"
+"\n"
+"Examples:\n"
+"    quickly create ubuntu-project foobar\n"
+"    quickly push 'awesome new comment system'\n"
+"    quickly -t cool-template push 'awesome new comment system'"
 
 #: ../bin/quickly.py:66
 #, python-format
@@ -465,15 +552,32 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Python interpreter: %s %s\n"
+"  Python standard library: /usr/lib/python2.6\n"
+"  \n"
+"  Quickly used library: %s\n"
+"  Quickly data path: %s\n"
+"  Quickly detected template directories:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Canonical Ltd.\n"
+"  #Author 2009 Rick Spencer\n"
+"  #Author 2009 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and\n"
+"you may use, modify and redistribute it under the terms of the GNU\n"
+"General Public License version 3 or later."
 
 #: ../bin/quickly.py:175
 #, python-format
 msgid "ERROR: command '%s' in '%s' not found."
-msgstr ""
+msgstr "ERROR: command '%s' in '%s' not found."
 
 #: ../bin/quickly.py:247
 msgid "ERROR: No command found"
-msgstr ""
+msgstr "ERROR: No command found"
 
 #. no error, so we are in a project path, not good!
 #: ../bin/quickly.py:259
@@ -482,11 +586,14 @@ msgid ""
 "ERROR: %s is already a project. You can't create a project within another "
 "project. Please choose another path."
 msgstr ""
+"ERROR: %s is already a project. You can't create a project within another "
+"project. Please choose another path."
 
 #: ../bin/quickly.py:270
 #, python-format
 msgid "ERROR: %s command must be followed by a template and destination name"
 msgstr ""
+"ERROR: %s command must be followed by a template and destination name"
 
 #: ../bin/quickly.py:289
 #, python-format
@@ -494,6 +601,8 @@ msgid ""
 "ERROR: Can't find project in %s.\n"
 "Ensure you launch this command from a quickly project directory."
 msgstr ""
+"ERROR: Can't find project in %s.\n"
+"Ensure you launch this command from within a quickly project directory."
 
 #: ../bin/quickly.py:298
 msgid ""
@@ -501,28 +610,30 @@ msgid ""
 "don't want to create a new project or that your are in your directory "
 "project."
 msgstr ""
+"ERROR: No template provided and none found in the current tree. Please "
+"ensure you are in your project's directory. (Or create a new project)."
 
 #: ../bin/quickly.py:320
 #, python-format
 msgid "ERROR: pre_%s command failed"
-msgstr ""
+msgstr "ERROR: pre_%s command failed"
 
 #: ../bin/quickly.py:331
 #, python-format
 msgid "ERROR: %s command failed"
-msgstr ""
+msgstr "ERROR: %s command failed"
 
 #: ../bin/quickly.py:339
 #, python-format
 msgid "ERROR: post_%s command failed"
-msgstr ""
+msgstr "ERROR: post_%s command failed"
 
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:1
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:1
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:2
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:2
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
