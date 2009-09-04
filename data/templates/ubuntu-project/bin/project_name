@@ -96,6 +96,17 @@ def Newcamel_case_nameWindow():
     return window
 
 if __name__ == "__main__":
+    #support for command line options
+    import logging, optparse
+    parser = optparse.OptionParser(version="%prog %ver")
+    parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="Show debug messages")
+    (options, args) = parser.parse_args()
+
+    #set the logging level to show debug messages
+    if options.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+        logging.debug('logging enabled')
+
     window = Newcamel_case_nameWindow()
     window.show()
     gtk.main()
