@@ -17,6 +17,7 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import sys
 import subprocess
 import webbrowser
@@ -56,6 +57,10 @@ project_name = configurationhandler.project_config['project']
 
 # connect to LP
 launchpad = launchpadaccess.initialize_lpi()
+
+# check if a gpg key is available
+if not quicklyutils.check_gpg_secret_key():
+    sys.exit(1)
 
 # changed upstream author and email
 quicklyutils.set_setup_value('author', launchpad.me.display_name)

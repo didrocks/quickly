@@ -19,6 +19,7 @@
 import os
 import string 
 import sys
+import subprocess
 
 import gettext
 from gettext import gettext as _
@@ -127,3 +128,18 @@ def set_setup_value(key, value):
 
     return 0
 
+def check_gpg_secret_key():
+    """Check that a gpg secret key is present on the system"""
+    
+    gpg_instance = subprocess.Popen(['gpg', '--list-secret-keys', '--with-colon'], stdout=subprocess.PIPE)
+    
+    result, err = gpg_instance.communicate()
+    
+    if gpg_instance.returncode != 0:
+        print(err)
+        return(False)
+    if 'sec' in result.strip().split(':'):
+        return(True)
+    print _("No gpg key set. Take a look at quickly tutorial to learn how to setup one")
+    return(False)
+    
