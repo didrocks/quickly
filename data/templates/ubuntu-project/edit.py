@@ -32,10 +32,14 @@ gettext.textdomain('quickly')
 
 def help():
     print _("""Usage:
-$quickly edit
+$ quickly edit
 
 A convenience command to open all of your python files in your project 
 directory in your default editor, ready for editing.
+
+If you put yourself EDITOR or SELECTED_EDITOR environment variable, this latter
+will be used. Also, if you configured sensible-editor, this one will be
+choosed.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
@@ -54,7 +58,11 @@ filelist += 'bin/' + configurationhandler.project_config['project']
 
 editor = "gedit"
 default_editor = os.environ.get("EDITOR")
-if default_editor != None:
- editor = default_editor
+if not default_editor:
+    default_editor = os.environ.get("SELECTED_EDITOR")
+if not default_editor and os.path.exists('~/.selected_editor'):
+    editor = 'sensible-editor'
+else
+    editor = default_editor
 
 subprocess.Popen("%s %s" % (editor, filelist), shell=True)
