@@ -1,3 +1,45 @@
+quickly (0.2.1) karmic; urgency=low
+
+  * New release:
+   This is mostely a fix release, but we still have few must-have
+   minor features so that people can easily begin to develop templates
+   + Quickly Core:
+    - Reshape variables in commandsconfig template file (LP: #421858)
+    - Reshape command attributes for builtin commands
+    - quickly without parameter now prints help
+    - move some functions from ubuntu-project template to templatetools
+      Quickly module to make them available to all templates
+      (handle_additional_parameters, quickly_name, apply_file_rights,
+      in_verbose_mode)
+    - add missing quotes around new version number format [Ken VanDine]
+   + ubuntu-project template:
+    - quickly release and share should not start if there are no pgp keys
+      available (LP: #419407)
+    - Typo in preferences code for ubuntu-project template (LP: #421642)
+    - preferences code stores record type rather than _id (LP: #421644)
+    - Adapt new commandsconfig format
+    - quickly edit fails if EDITOR=vim (support now interactive command)
+      (LP: #418351)
+    - quickly edit supports now sensible-editor choice
+    - created application does not suport standard command line options
+      (LP: #418355)
+    - Quickly licence should create an AUTHORS file (LP: #424489)
+    - ubuntu-project main python file code has stray, strange line of code
+      (LP: #421653)
+    - Typo in error message of $ quickly tutorial (LP: #422212), patch from
+      [Niall Jackson] (LP: #422212)
+    - Typo in the index page of the tutorial of ubuntu-project template
+      [Niall Jackson] (LP: #422209)
+    - Destroy the dialogs outright instead of merely hideing them since we
+      always create new ones when the event is fired [John C Barstow]
+    - ubuntu-project main python module commented code uses wrong naming
+      convention for preferences dialog (LP: #421648)
+    - Some output messages correction
+   + common:
+    - updated translations
+
+ -- Didier Roche <didrocks@ubuntu.com>  Fri, 04 Sep 2009 20:33:20 +0200
+
 quickly (0.2) karmic; urgency=low
 
   * New upstream release. Most noticeable features/fixes are:

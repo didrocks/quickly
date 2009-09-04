@@ -2,7 +2,7 @@
 -------------------------------------
 
 This is mostely a fix release, but we still have few must-have
-features
+minor features so that people can easily begin develop templates
 
 Here are the changes:
 
@@ -41,7 +41,7 @@ Here are the changes:
    - Some output messages correction
 
    common:
-   - updated translation
+   - updated translations
 
 -------------------------------------
   quickly 0.2 "desktopcouchified" 
