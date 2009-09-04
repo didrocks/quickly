@@ -181,7 +181,7 @@ def main():
                 command = commands.get_command_by_criteria(name=command_name, template='builtins')[0]
             except IndexError: 
                 print _("ERROR: No %s command found in template %s.") % (command_name, opt_template)
-                print _("Arborting.")
+                print _("Aborting.")
                 return(1)
             
     # from this line, if we don't have a template, only builtins commands and template command followed_by_template are candidates
@@ -221,7 +221,7 @@ def main():
                     else:
                         # there is really not such command, in any template
                         print _("ERROR: No %s command found.") % command_name
-                print _("Arborting.")
+                print _("Aborting.")
                 return(1)
 
     return(command.launch(os.getcwd(), opt_command[1:], opt_template))
