@@ -18,7 +18,6 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import subprocess
 import os
 import sys
 
@@ -62,7 +61,9 @@ if not default_editor:
     default_editor = os.environ.get("SELECTED_EDITOR")
 if not default_editor and os.path.exists('~/.selected_editor'):
     editor = 'sensible-editor'
-else
+elif default_editor:
     editor = default_editor
 
-subprocess.Popen("%s %s" % (editor, filelist), shell=True)
+print "%s %s" % (editor, filelist)
+
+os.system("%s %s" % (editor, filelist))
