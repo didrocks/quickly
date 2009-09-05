@@ -42,16 +42,19 @@ def quickly_name(name):
     """Enforce quickly name to be ascii only and lowercase
 
     return formated name"""
+    forbidden_name = ['bin', 'data']
     name = name.lower()
     permitted_characters = string.ascii_lowercase
     permitted_characters += string.digits
     #permitted_characters += "_"
     for c in name:
         if c not in permitted_characters:
-            print _("""
-ERROR: unpermitted character in name.
+            print _(""" ERROR: unpermitted character in name.
 Letters and digits only.""")
             sys.exit(1)
+    if name in forbidden_name:
+        print _('ERROR: %s is not permitted as a quickly project name')
+        sys.exit(1)
     return name
 
 def apply_file_rights(src_file_name, dest_file_name):
