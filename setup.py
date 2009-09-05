@@ -19,7 +19,7 @@
 
 
 # UPDATE VERSION WHEN NEEDED (it updates all versions needed to be updated)
-VERSION = '0.2.1'
+VERSION = '0.2.2'
 
 import os
 import sys
@@ -49,7 +49,7 @@ def update_data_path(prefix, oldvalue=None):
                     line = "%s = %s" % (fields[0], oldvalue)
             # update version if we forget it
             elif fields[0] == '__version__':
-                line = "%s = %s\n" % (fields[0], VERSION)
+                line = "%s = '%s'\n" % (fields[0], VERSION)
             fout.write(line)
 
         fout.flush()
