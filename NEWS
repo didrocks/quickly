@@ -1,3 +1,11 @@
+  quickly 0.2.2
+-------------------------------------
+
+  Quickly Core:
+  - Fix wrong release handling when not a number (bug: #424581)
+  - Forbide bin and data as a project name (bug: #424635)
+
+-------------------------------------
   quickly 0.2.1
 -------------------------------------
 
