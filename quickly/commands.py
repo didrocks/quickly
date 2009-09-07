@@ -51,7 +51,6 @@ def get_all_commands():
             # load special attributes declared for every command
             launch_inside_project_command_list = []
             launch_outside_project_command_list = []
-            launch_in_or_outside_project_command_list = []
             command_followed_by_command_list = []
             try:
                 files_command_parameters = file(os.path.join(template_path, "commandsconfig"), 'rb')
@@ -63,14 +62,12 @@ def get_all_commands():
                         targeted_property = fields[0].strip()
                         command_list = [command.strip() for command in fields[1].split(';')]
                         if targeted_property == 'COMMANDS_LAUNCHED_IN_OR_OUTSIDE_PROJECT':
-                            launch_inside_project_command_list = command_list
-                            launch_in_or_outside_project_command_list = command_list
+                            launch_inside_project_command_list.extend(command_list)
+                            launch_outside_project_command_list.extend(command_list)
                         if targeted_property == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT_ONLY':
-                            launch_outside_project_command_list = command_list
-                        if targeted_property == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT_ONLY':
-                            launch_outside_project_command_list = command_list
+                            launch_outside_project_command_list.extend(command_list)
                         if targeted_property == 'COMMANDS_FOLLOWED_BY_COMMAND':
-                            command_followed_by_command_list = command_list
+                            command_followed_by_command_list.extend(command_list)
             except (OSError, IOError):
                 pass
 
