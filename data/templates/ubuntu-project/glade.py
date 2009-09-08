@@ -17,7 +17,7 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
+import glob
 import subprocess
 import sys
 
@@ -26,7 +26,7 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
-from quickly import templatetools
+from quickly import configurationhandler, templatetools
 
 def help():
     print _("""Usage:
@@ -40,7 +40,17 @@ and won't open the files.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
-cmd = "GLADE_CATALOG_PATH=./data/ui glade-3 data/ui/*.ui"
+if not configurationhandler.project_config:
+    configurationhandler.loadConfig()
+mainfile = "data/ui/" + configurationhandler.project_config['project'] + "Windows.ui"
+files = []
+for ui_file in glob.glob("data/ui/*.ui"):
+    if ui_file != mainfile:
+        files.insert(0, ui_file)
+    else:
+        files.append(ui_file)
+
+cmd = "GLADE_CATALOG_PATH=./data/ui glade-3 " + " ".join(files)
 
 #run glade with env variables pointing to catalogue xml files
 if templatetools.in_verbose_mode():
