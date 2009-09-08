@@ -64,6 +64,8 @@ if not default_editor and os.path.exists('~/.selected_editor'):
 elif default_editor:
     editor = default_editor
 
-print "%s %s" % (editor, filelist)
+# if editor is still gedit, launch it in background
+if editor == "gedit":
+    filelist += " &"
 
 os.system("%s %s" % (editor, filelist))
