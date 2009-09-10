@@ -116,9 +116,10 @@ else:
     version = release_version + '~public1'
 quicklyutils.set_setup_value('version', version)
 
-# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
+# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog).
+#TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
 if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", launchpad.me.preferred_email_address.email)
+    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name, launchpad.me.preferred_email_address.email))
 # upload to launchpad
 print _("pushing to launchpad")
 return_code = packaging.push_to_ppa(lp_user.name, "../%s_%s_source.changes" % (project_name, version)) != 0

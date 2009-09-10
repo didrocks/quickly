@@ -143,8 +143,9 @@ else:
 ppa_url = launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name + "/+archive/" + ppa_name
 
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
+#TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
 if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", launchpad.me.preferred_email_address.email)
+    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name, launchpad.me.preferred_email_address.email))
 if packaging.check_for_ppa(launchpad, lp_team_or_user) != 0:
     print _("ppa:%s:%s does not exist. Please create one on launchpad before releasing") % (lp_team_or_user.name, ppa_name)
     webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name)
