@@ -139,6 +139,8 @@ def check_gpg_secret_key():
         print(err)
         return(False)
     if 'sec' in result.strip().split(':'):
+        #TODO: check there that DEBEMAIL (or failback to lp email adress email) gpg key exists and put
+        # the name <adress> in DEBEMAIL if doesn't exists.
         return(True)
     print _("No gpg key set. Take a look at quickly tutorial to learn how to setup one")
     return(False)
