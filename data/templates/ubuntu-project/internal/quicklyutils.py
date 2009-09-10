@@ -128,8 +128,8 @@ def set_setup_value(key, value):
 
     return 0
 
-def check_gpg_secret_key():
-    """Check that a gpg secret key is present on the system"""
+def check_gpg_secret_key(launchpad):
+    """Check that the gpg secret key corresponding to the right email is present on the system"""
     
     gpg_instance = subprocess.Popen(['gpg', '--list-secret-keys', '--with-colon'], stdout=subprocess.PIPE)
     
@@ -138,10 +138,21 @@ def check_gpg_secret_key():
     if gpg_instance.returncode != 0:
         print(err)
         return(False)
-    if 'sec' in result.strip().split(':'):
+    splitted_gpg_list = result.strip().split(':')
+    # prendre la partie mail de DEBEMAIL, puis EMAIL
+    # Sinon, prendre mail LP
+
+    # regarder s'il se trouve dans gpg, puis reprendre
+    # nom gpg -> DEBEMAIL
+
+    #launchpadlib: avoir la clef gpg qui est settée?
+
+    if 'sec' in splitted_gpg_list:
         #TODO: check there that DEBEMAIL (or failback to lp email adress email) gpg key exists and put
         # the name <adress> in DEBEMAIL if doesn't exists.
         return(True)
+
+
     print _("No gpg key set. Take a look at quickly tutorial to learn how to setup one")
     return(False)
     
