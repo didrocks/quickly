@@ -30,7 +30,7 @@ except ImportError:
     print >> sys.stderr, 'To build quickly you need https://launchpad.net/python-distutils-extra'
     sys.exit(1)
 
-assert DistUtilsExtra.auto.__version__ >= '2.8', 'needs DistUtilsExtra.auto >= 2.8'
+assert DistUtilsExtra.auto.__version__ >= '2.10', 'needs DistUtilsExtra.auto >= 2.10'
 
 def update_data_path(prefix, oldvalue=None):
 
