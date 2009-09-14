@@ -128,7 +128,7 @@ def set_setup_value(key, value):
 
     return 0
 
-def check_gpg_secret_key(launchpad):
+def check_gpg_secret_key():
     """Check that the gpg secret key corresponding to the right email is present on the system"""
     
     gpg_instance = subprocess.Popen(['gpg', '--list-secret-keys', '--with-colon'], stdout=subprocess.PIPE)
