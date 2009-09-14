@@ -2,16 +2,18 @@ quickly (0.2.3) karmic; urgency=low
 
   * New release:
    + Quickly Core:
-     - Fix tutorial command not shown outside a project
-       (previously overwriten because of = instead of extend())
-     - Bump requirement on distutilsextra to 2.10 to use desktopcouch bug
-       fixing
+    - Fix tutorial command not shown outside a project
+      (previously overwriten because of = instead of extend())
+    - Bump requirement on distutilsextra to 2.10 to use desktopcouch bug
+      fixing
    + ubuntu-project Template:
-     - Launch gedit in background, keep default for others (LP: #425305)
-     - Focus is on the main window file when executing quickly glade
-     - Add Launchpad display name to DEBEMAIL
+    - Launch gedit in background, keep default for others (LP: #425305)
+    - Focus is on the main window file when executing quickly glade
+    - Add Launchpad display name to DEBEMAIL
+   + common:
+    - updated translations
 
- -- Didier Roche <didrocks@ubuntu.com>  Mon, 14 Sep 2009 17:49:57 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Mon, 14 Sep 2009 17:54:39 +0200
 
 quickly (0.2.2) karmic; urgency=low
 

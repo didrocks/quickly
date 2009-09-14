@@ -12,6 +12,9 @@ Quickly 0.2.3
   - Focus is on the main window file when executing quickly glade
   - Add Launchpad display name to DEBEMAIL
 
+  common:
+  - updated translations
+
   quickly 0.2.2
 -------------------------------------
 
