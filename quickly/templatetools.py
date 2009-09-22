@@ -20,6 +20,7 @@ import os
 import stat
 import string
 import sys
+import re
 
 import gettext
 from gettext import gettext as _
@@ -39,19 +40,21 @@ def handle_additional_parameters(args, help=None, shell_completion=None):
         sys.exit(0)
 
 def quickly_name(name):
-    """Enforce quickly name to be ascii only and lowercase
+    """Enforce quickly name to be ascii and digit only and lowercase
 
     return formated name"""
     forbidden_name = ['bin', 'data']
-    name = name.lower()
-    permitted_characters = string.ascii_lowercase
-    permitted_characters += string.digits
-    #permitted_characters += "_"
-    for c in name:
-        if c not in permitted_characters:
-            print _(""" ERROR: unpermitted character in name.
+    name = name.strip().lower()
+    
+    # Some characters that you might like to have in a name, but are not
+    # allowed, include '_' and '-'. The underscore is not allowed because
+    # it indicates the separation between a Debian package name and its
+    # version. The '-' is not allowed in Python module names.
+    if not re.match("[a-z0-9]+$", name):
+        print _("""ERROR: unpermitted character in name.
 Letters and digits only.""")
-            sys.exit(1)
+        sys.exit(1)
+
     if name in forbidden_name:
         print _('ERROR: %s is not permitted as a quickly project name')
         sys.exit(1)
