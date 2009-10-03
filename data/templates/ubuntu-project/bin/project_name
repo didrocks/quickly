@@ -54,7 +54,7 @@ class camel_case_nameWindow(gtk.Window):
         #code for other initialization actions should be added here
 
     def about(self, widget, data=None):
-        """about - display the about box for what_the_heck """
+        """about - display the about box for project_name """
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
         response = about.run()
         about.destroy()

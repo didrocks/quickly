@@ -155,7 +155,7 @@ from desktopcouch.records.record import Record
 </TEXTAREA></DIV>
 
 <H4>Get a Reference to the Database</H4>
-<P>Desktopcouch will set up a database for us, or create a new one if it's needed. We'll use "jotty" for the anme of the database. Since we want this line to run every time the Jotty Window is created, put it at the end of the finish_initializing function:</P>
+<P>Desktopcouch will set up a database for us, or create a new one if it's needed. We'll use "jotty" for the name of the database. Since we want this line to run every time the Jotty Window is created, put it at the end of the finish_initializing function:</P>
 <DIV class="code"><TEXTAREA rows="1" cols="80">
         self.database = CouchDatabase("jotty", create=True)
 </TEXTAREA></DIV>
