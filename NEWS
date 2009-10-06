@@ -1,5 +1,18 @@
+Quickly 0.2.4
+-------------------------------------
+
+  Quickly Core:
+  - add comment regarding why certain characters are not allowed
+    and remove any whitespace around project name (Mike Pontillo)
+  - Fixed a bad project name variable in a function comment and a typo in
+    the tutorial (Sense Hofstede)
+
+  ubuntu-project Template:
+  - Fix share unicode issue when localized (LP: #444070)
+
+-------------------------------------
 Quickly 0.2.3
-------------------------------------
+-------------------------------------
 
   Quickly Core:
   - Fix tutorial command not shown outside a project
@@ -15,6 +28,7 @@ Quickly 0.2.3
   common:
   - updated translations
 
+-------------------------------------
   quickly 0.2.2
 -------------------------------------
 
