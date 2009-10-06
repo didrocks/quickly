@@ -31,7 +31,7 @@ gettext.textdomain('quickly')
 
 def help():
     print _("""Usage:
-$quickly dialog dialog_name
+$ quickly dialog dialog_name
 where dialog_name is one or more words seperated with underscore
 
 This will create:
@@ -40,10 +40,10 @@ This will create:
 3. A catalog file called dialog_name_dialog.xml also in the ui directory
 
 To edit the UI for the dialog, run:
-$quickly glade
+$ quickly glade
 
 To edit the behavior, run:
-$quickly edit
+$ quickly edit
 
 To use the dialog you have to invoke it from another python file:
 1. Import the dialog
@@ -60,6 +60,10 @@ templatetools.handle_additional_parameters(sys.argv, help)
 
 pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)
+
+if len(sys.argv) != 2:
+    print _("Dialog command needs to be followed by new dialog name.")
+    sys.exit(1)
 
 dialog_name = templatetools.quickly_name(sys.argv[1])
 

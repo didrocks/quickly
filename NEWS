@@ -9,6 +9,7 @@ Quickly 0.2.4
 
   ubuntu-project Template:
   - Fix share unicode issue when localized (LP: #444070)
+  - quickly dialog needs input validation (LP: #442446)
 
 -------------------------------------
 Quickly 0.2.3
