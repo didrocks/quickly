@@ -127,7 +127,7 @@ if return_code != 0:
     sys.exit(return_code)
 
 
-print _("%s %s is building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, version, ppa_url)
+print _("%s %s is building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, version, ppa_url.encode('UTF-8'))
 
 sys.exit(0)
 
