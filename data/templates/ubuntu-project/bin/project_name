@@ -107,6 +107,7 @@ if __name__ == "__main__":
         logging.basicConfig(level=logging.DEBUG)
         logging.debug('logging enabled')
 
+    #run the application
     window = Newcamel_case_nameWindow()
     window.show()
     gtk.main()

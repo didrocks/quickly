@@ -186,7 +186,7 @@ from desktopcouch.records.record import Record
                                 "title":title, "text":text})
             self.database.put(record)
 </TEXTAREA></DIV>
-The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.
+<P>The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.</P>
 
 <H4>Check for a pre-existing note with the same title</H4>
 <P>Before we just write the new document though, we have to take note of the fact that couch will allow you to create as many documents as you want with the same title. We probably don't want this, so we we'll have to write a little code to check if there is already a document in couch with the same title, and if there is, update that document rather than create a new one.</P>
@@ -249,7 +249,7 @@ The "record_type" field is not strictly required, but among other things, it mak
 </TEXTAREA></DIV>
 
 <P>Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</P>
-<DIV><A HREF="file:///home/rick/.local/share/desktop-couch/couchdb.html">file:///home/rick/.local/share/desktop-couch/couchdb.html</A></DIV>
+<DIV><A HREF="file:///home/your_user_name>/.local/share/desktop-couch/couchdb.html">file:///home/rick/.local/share/desktop-couch/couchdb.html</A></DIV>
 <IMG SRC="./images/couch1.png" ALT="open couchdb in a browser" />
 
 <H3>Implementing Open and New</H3>

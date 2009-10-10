@@ -27,7 +27,7 @@ p
 <H2>Specify your name and email</H2>
 <P>When Quickly created your Ubuntu project, it added a file named Copyright in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. Be sure not to modify other lines as it will interfere with the next step. For exmaple, I would change the entire file to look like this:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
-# Copyright 2009 Rick Spencer rick.spencer@canonical.com
+# Copyright (C) 2009 Rick Spencer rick.spencer@canonical.com
 ### BEGIN AUTOMATIC LICENSE GENERATION
 ### END AUTOMATIC LICENSE GENERATION
 </TEXTAREA></DIV>
@@ -67,19 +67,18 @@ You should personalize your applicaton a little before creating the archive. Thi
 </OL>
 <H2>Personalize your Application Icon</H2>
 <P>
-Ubuntu Desktop applications use SVG files for icons that show up in places like title bars, switchers, etc... SVG files are great because they are vector graphics, so they look good at any size. They are also great because they can be edited with an amazing free and open source editor called inkscape. Inscape doesn't installed by default with Ubuntu, but it is in the universe repository, so you can easily install it like this:
-</P>
+When users install your application, Ubuntu will display an icon next to it in the menus. You can create your own icon or edit the file called "icon.png" in the media directory (jotty/data/media). Ubuntu comes with a great image editing program called "Gimp." So you can go:</P>
 <DIV class="terminal"><TEXTAREA rows="1" cols="80">
-$sudo apt-get install inkscape
+$gimp data/media/icon.png
 </TEXTAREA></DIV>
-<P>If you've used other tools to edit vector graphics before, Inkscape will be quite intuitive. Otherwize, you might want to <A HREF="http://inkscape.org/doc/index.php?lang=en">read up on it</A> a bit. 
+<IMG SRC="./images/package0.png" ALT="customized jotty icon" />
 </P>
 <P>
-If you don't personalize the icon, it's ok, your app will just have the default icon.
+If you don't personalize the icon, it's ok, your app will just have the default icon, such as in the image below.
 </P>
 <H2>Edit the Desktop File</H2>
 <P>
-By defualt, Quickly Ubuntu-Project applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make JOtty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "jottydesktop.in" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:
+By defualt, Quickly Ubuntu-Project applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make Jotty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "jottydesktop.in" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:
 </P>
 <DIV class="code"><TEXTAREA rows="8" cols="80">
 [Desktop Entry]

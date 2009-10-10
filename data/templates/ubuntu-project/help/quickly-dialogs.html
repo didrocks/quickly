@@ -70,7 +70,6 @@ from jotty import AboutJottyDialog, PreferencesJottyDialog, SaveDialog
 <DIV class="code"><TEXTAREA rows="1" cols="80">
         saver = SaveDialog.NewSaveDialog()
 </TEXTAREA></DIV>
-d
 <P>To make the dialog appear, simply use the run() method. However, we want to check the result, so we'll need to store that in a variable. After it runs, we want to collect the string from the user, like this:</P>
 <DIV class="code"><TEXTAREA rows="2" cols="80">
         result = saver.run()
@@ -133,7 +132,7 @@ We'll use a similar approach in the Open dialog that we did with Save. However, 
 <H2>Create the Open Dialog</H2>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
 $quickly dialog open
-</TEXTAREA></DIV>su
+</TEXTAREA></DIV>
 <H2>Editing the New Dialog</H2>
 <P>Start out by closing, and then reopening glade again:</P>
 <DIV class="termnial"><TEXTAREA rows = "1" cols="80">
@@ -156,11 +155,12 @@ $quickly glade
 from desktopcouch.records.couchgrid import CouchGrid
 </TEXTAREA></DIV>
 <H4>Create the CouchGrid</H4>
-<P>A CouchGrid needs to know three things, the name of the database, the name of the record type to, and the name of the keys to use. "keys" is a list of fields that the widget will display, and will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
+<P>A CouchGrid needs to know three things, the name of the database, the name of the record type to, and the name of the keys to use. "keys" is a list of fields that the widget will display, and by default will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
 <DIV class="code"><TEXTAREA rows="4" cols="80">
-        self.couchgrid = CouchGrid("jotty")
-        self.couchgrid.keys = ["title"]        
-        self.couchgrid.record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
+        database = "jotty"
+        keys = ["title"]
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
+        self.couchgrid = CouchGrid(database, record_type=record_type,keys=keys)
 </TEXTAREA></DIV>
 <H4>Add the CouchGrid to the Dialog</H4>
 <P>When we added the HBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchGrid into the HBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
