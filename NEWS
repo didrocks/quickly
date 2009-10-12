@@ -21,6 +21,9 @@ Quickly 0.2.4
   - Focus is on the main window file when executing quickly glad (fix
     regression when project name has some capital letters)
 
+  common:
+  - update translations
+
 -------------------------------------
 Quickly 0.2.3
 -------------------------------------
