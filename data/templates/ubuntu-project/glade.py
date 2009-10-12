@@ -42,10 +42,10 @@ templatetools.handle_additional_parameters(sys.argv, help)
 
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
-mainfile = "data/ui/" + configurationhandler.project_config['project'] + "Windows.ui"
+mainfile = "data/ui/" + configurationhandler.project_config['project'].lower() + "window.ui"
 files = []
 for ui_file in glob.glob("data/ui/*.ui"):
-    if ui_file != mainfile:
+    if ui_file.lower() != mainfile:
         files.insert(0, ui_file)
     else:
         files.append(ui_file)
