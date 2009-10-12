@@ -17,7 +17,7 @@ Quickly 0.2.4
     to rick's personal folder, removed stray, 'd' and 'su' on the second page
     of the dialog, changed couchgrid initialization should follow new way of
     doing it, change copyright file in tutorial to us '(C)', change packaging
-    tutorial from svg to png
+    tutorial from svg to png (LP: #439111)
   - Focus is on the main window file when executing quickly glad (fix
     regression when project name has some capital letters)
 

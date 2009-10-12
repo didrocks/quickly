@@ -1,3 +1,29 @@
+quickly (0.2.4) karmic; urgency=low
+
+  * New release:
+   + Quickly Core:
+     - add comment regarding why certain characters are not allowed
+       and remove any whitespace around project name (Mike Pontillo)
+     - Fixed a bad project name variable in a function comment and a typo in
+       the tutorial (Sense Hofstede)
+     - Enable quickly running without an existing data path (LP: #447089)
+     - Some refactoring on error handling with incorrect template path
+   + ubuntu-project Template:
+     - Fix share unicode issue when localized (LP: #444070)
+     - quickly dialog needs input validation (LP: #442446)
+     - Fix wrong link in tutorial (LP: #446310) (Johannes Mockenhaupt)
+     - Added <p></p> paragraph where missing, adjust link to no point directly
+       to rick's personal folder, removed stray, 'd' and 'su' on the second
+       page of the dialog, changed couchgrid initialization should follow
+       new way of doing it, change copyright file in tutorial to us '(C)',
+       change packaging tutorial from svg to png (LP: #439111)
+     - Focus is on the main window file when executing quickly glad (fix
+       regression when project name has some capital letters)
+   + common:
+     - update translations
+
+ -- Didier Roche <didrocks@ubuntu.com>  Mon, 12 Oct 2009 19:48:17 +0200
+
 quickly (0.2.3) karmic; urgency=low
 
   * New release:
