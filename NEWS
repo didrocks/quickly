@@ -13,6 +13,12 @@ Quickly 0.2.4
   - Fix share unicode issue when localized (LP: #444070)
   - quickly dialog needs input validation (LP: #442446)
   - Fix wrong link in tutorial (LP: #446310) (Johannes Mockenhaupt)
+  - Added <p></p> paragraph where missing, adjust link to no point directly
+   to rick's personal folder, removed stray, 'd' and 'su' on the second page
+   of the dialog, changed couchgrid initialization should follow new way of
+   doing it, change copyright file in tutorial to us '(C)', change packaging
+   tutorial from svg to png
+  
 
 -------------------------------------
 Quickly 0.2.3
