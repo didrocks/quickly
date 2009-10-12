@@ -189,7 +189,13 @@ def quickly(template, project_dir, command_args, shell_completion=False):
     if not os.path.exists(template_destination_path):
         print _("Copy %s to create new %s template") % (template, template_destination_path)
 
-    shutil.copytree(tools.get_template_directory(template), template_destination_path)
+    try:
+        template_source_path = tools.get_template_directory(template)
+    except (tools.no_template_path_not_found, e):
+        print(e)
+        return 1
+
+    shutil.copytree(template_source_path, template_destination_path)
     return 0
 
 

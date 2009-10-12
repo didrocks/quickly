@@ -28,7 +28,15 @@ gettext.textdomain('quickly')
 
 def show_version():
     """ print version information """
-    
+
+    try:
+        quickly_data_path = tools.get_quickly_data_path()
+    except tools.project_path_not_found:
+        quickly_data_path = _("No quickly data path found.")    
+    try:
+        template_directories = "\n          ".join(tools.get_template_directories())
+    except tools.no_template_path_not_found:
+        template_directories = _("No template found.")
     
     print _("""Quickly %s
   Python interpreter: %s %s
@@ -48,7 +56,7 @@ quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and
 you may use, modify and redistribute it under the terms of the GNU
 General Public License version 3 or later.""") % (
     quicklyconfig.__version__, sys.executable, ".".join([str(x) for x in sys.version_info[0:3]]),
-    os.path.dirname(os.__file__), os.path.dirname(__file__), tools.get_quickly_data_path(),
-    "\n          ".join(tools.get_template_directories()))
+    os.path.dirname(os.__file__), os.path.dirname(__file__), quickly_data_path,
+    template_directories)
     sys.exit(0)
 

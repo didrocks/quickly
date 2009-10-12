@@ -170,7 +170,8 @@ def main():
 
     # check that the command exists in current template
     if opt_template:
-        tools.check_template_exists(opt_template)
+        if not tools.check_template_exists(opt_template):
+            return(1)
 
         # with this search, we are sure that only one command: (name,template) is unique
         try:
@@ -196,7 +197,8 @@ def main():
                     if not (command.followed_by_command and len(opt_command) == 2):
                         opt_template = opt_command[1]
                         opt_command.remove(opt_command[1])
-                        tools.check_template_exists(opt_template)
+                        if not tools.check_template_exists(opt_template):
+                            return(1)
                 except IndexError:
                     print _("ERROR: %s command must be followed by a template and no template was found on the command line." % command_name)
                     print _("Candidates template are: %s") % ", ".join(commands.get_all_templates())

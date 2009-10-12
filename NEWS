@@ -6,6 +6,8 @@ Quickly 0.2.4
     and remove any whitespace around project name (Mike Pontillo)
   - Fixed a bad project name variable in a function comment and a typo in
     the tutorial (Sense Hofstede)
+  - Enable quickly running without an existing data path (LP: #447089)
+  - Some refactoring on error handling with incorrect template path
 
   ubuntu-project Template:
   - Fix share unicode issue when localized (LP: #444070)

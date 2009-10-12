@@ -31,6 +31,9 @@ __project_path = None
 class project_path_not_found(Exception):
     pass
 
+class no_template_path_not_found(Exception):
+    pass
+
 def get_quickly_data_path():
     """Retrieve quickly data path
 
@@ -63,13 +66,15 @@ def get_template_directories():
         template_directories.append(os.path.expanduser('~/quickly-templates'))
 
     # retrieve from trunk or installed version
-    abs_template_path = get_quickly_data_path() + '/templates/'
-    if os.path.exists(abs_template_path):
-        template_directories.append(abs_template_path)
+    try:
+        abs_template_path = get_quickly_data_path() + '/templates/'
+        if os.path.exists(abs_template_path):
+            template_directories.append(abs_template_path)
+    except project_path_not_found:
+        pass # just let template_directories be empty
 
     if not template_directories:
-        print _("No template directory found. Aborting")
-        sys.exit(1)
+        raise no_template_path_not_found(_("No template directory found. Aborting"))
 
     return template_directories
 
@@ -124,11 +129,12 @@ def get_root_project_path(config_file_path=None):
 
 def check_template_exists(template):
     """Exit if template doesn't exist"""
-    
-    try:
+   
+    try: 
         commands.get_all_commands()[template]
     except KeyError:
         print _("ERROR: Template %s does not exist.") % (template)
         print _("Arborting.")
-        sys.exit(1)
+        return False
+    return True
 

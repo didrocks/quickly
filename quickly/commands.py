@@ -43,7 +43,11 @@ def get_all_commands():
     if len(__commands) > 0:
         return __commands
 
-    for template_dir in tools.get_template_directories():
+    try:
+        template_directories = tools.get_template_directories()
+    except tools.no_template_path_not_found:
+        template_directories = []
+    for template_dir in template_directories:
         for template in os.listdir(template_dir):
             __commands[template] = {}
             template_path = os.path.join(template_dir, template)
