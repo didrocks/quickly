@@ -96,8 +96,9 @@ jotty$ quickly glade
 
 <P>Then choose the "Signals" tab of the properties window.</P>
 <IMG SRC="./images/glade15.png" ALT="signals tab in glade" />
-<P>In pygtk, menu items are "activated" when a user chooses the item from the menu.  Since we want a function to run when the user chooses Save, we want to specify a function to respond to the activate signal from the menu item. We'll call the function "save_file". Simply type the function name into the box for the activate signal. Make sure to save the glade file.</P>
+<P>In pygtk, menu items are "activated" when a user chooses the item from the menu.  Since we want a function to run when the user chooses Save, we want to specify a function to respond to the activate signal from the menu item. We'll call the function "save_file". Simply type the function name into the box for the activate signal.Make sure to save the glade file.</P>
 <IMG SRC="./images/glade16.png" ALT="activate signal set to 'save_file'" />
+<P>Note that you will need to setup the "open_file" signal and the "new_file" signal as well when you get to those functions later.</P>
 
 <H2>Edit the Code in Gedit</H2>
 <H3>Set Up Tabs Correctly</H3>
@@ -210,7 +211,7 @@ from desktopcouch.records.record import Record
         for result in results:
             document = result.value
             if document["title"] == title:
-                key = result.key
+                key = document["_id"]
                 self.database.update_fields(key, {"text":text})
                 return
 
@@ -251,6 +252,7 @@ from desktopcouch.records.record import Record
 <P>Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</P>
 <DIV><A HREF="file:///home/your_user_name>/.local/share/desktop-couch/couchdb.html">file:///home/rick/.local/share/desktop-couch/couchdb.html</A></DIV>
 <IMG SRC="./images/couch1.png" ALT="open couchdb in a browser" />
+<P>If you are redirected to a page that doesn't work, you probably just need to clear your browser cache and try again.</P>
 
 <H3>Implementing Open and New</H3>
 <P>To open a saved document, the user will type the title of the document that they want to open in the text entry, and choose "Open" from the main menu. If there is no matching document there, it will just clear out the text view, ready for input. This is probably not too intuitive, so we'll add a dialog box for prompting the user for the title, but that's for later in the tutorial. For now, we'll just use the same text entry field.</P>
@@ -258,6 +260,7 @@ from desktopcouch.records.record import Record
 <H4>Implementing Open is essentially the reverse of Save:</H4>
 <P>Follow these steps:</P>
 <OL>
+<LI>Add the open_file signal to the menu item in Glade.</LI>
 <LI>Retrieve all of the documents with the CouchDatabase.get_records function.</LI>
 <LI>Check each of the returned records for a matching title.</LI>
 <LI>If there is a match, pull out the text and display it in the text view.</LI>
@@ -286,7 +289,8 @@ from desktopcouch.records.record import Record
         buff.set_text(text)
 </TEXTAREA></DIV>
 
-<H4>To implement New, we'll just clear out the text, like this:</H4>
+<H4>Implement New</H4>
+<P>First, add the new_file signal to the menu item in Glade, then add this code to clear out the text:</P>
 <DIV class="code"><TEXTAREA rows="4" cols="80">
     def new_file(self, widget, data=None):
         self.builder.get_object("entry1").set_text("Note Title")
