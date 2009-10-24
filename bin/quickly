@@ -93,9 +93,7 @@ def process_command_line(argv):
                 usage()
                 sys.exit(1)
             else:
-                print _("ERROR: Unknown option: %s") % arg
-                usage()
-                sys.exit(1)                            
+                opt_command.append(arg) # temporary solution, see commit.
         else:
             opt_command.append(arg)
         i += 1

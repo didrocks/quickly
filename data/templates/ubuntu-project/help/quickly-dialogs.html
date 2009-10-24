@@ -214,20 +214,16 @@ from jotty import AboutJottyDialog, PreferencesJottyDialog, SaveDialog, OpenDial
 </TEXTAREA></DIV>
 
 <H2>Get the id for the selected title</H2>
-<P>Now use the get_selection function to retrieve the title and text from the dialog. Don't forget to check the response type before going on.</P>
+<P>Now use the property that we created to retrieve the title and text from the dialog. Don't forget to check the response type before going on.</P>
 <DIV class="code"><TEXTAREA rows="5" cols="80">
-        id = opener.selected_record_id
-        opener.destroy()
+        rec_id = opener.selected_record_id
 
-        if result != gtk.RESPONSE_OK or text == None:
+        #close the dialog, and check whether to proceed
+        opener.destroy()
+        if result != gtk.RESPONSE_OK:
             return
 </TEXTAREA></DIV>
 
-<H2>Get the ID for the selected title</H2>
-<P>This merely involves using the property that we created for th OpenDialog:</P>
-<DIV class="code"><TEXTAREA rows="1" cols="80">
-        rec_id = opener.selected_record_id
-</TEXTAREA></DIV>
 
 <H2>Use the id to get the record from CouchDB</H2>
 <P>If nothing was selected, we'll just return. Otherwise, we'll retrieve the record from CouchDB and pull out the text for the document:</P>
