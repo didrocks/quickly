@@ -1,3 +1,14 @@
+quickly (0.2.5) karmic; urgency=low
+
+  * New release:
+   + Quickly Core:
+     - deactivate option validity checking so that templates can have their
+       own options. Discuss at UDS how to shape a better solution
+   +  ubuntu-project Template:
+     - Fixed some some errors and oversites in the tutorial
+
+ -- Didier Roche <didrocks@ubuntu.com>  Sat, 24 Oct 2009 16:15:12 +0200
+
 quickly (0.2.4) karmic; urgency=low
 
   * New release:
