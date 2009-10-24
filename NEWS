@@ -1,6 +1,9 @@
 Quickly 0.2.5
 -------------------------------------
 
+  Quickly Core:
+  - deactivate option validity checking so that templates can have their
+    own options. Discuss at UDS how to make a better solution
   ubuntu-project Template:
   - Fixed some some errors and oversites in the tutorial
 

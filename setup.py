@@ -19,7 +19,7 @@
 
 
 # UPDATE VERSION WHEN NEEDED (it updates all versions needed to be updated)
-VERSION = '0.2.4'
+VERSION = '0.2.5'
 
 import os
 import sys
