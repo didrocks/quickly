@@ -46,22 +46,31 @@ This will add the GPL 3 license to all of your code files that you've added to y
 $quickly license GPL-2
 </TEXTAREA></DIV>
 </LI>
-<LI>Quickly doesn't care what license you use, but only knows about GPL 2 and GPL 3. If you don't prefer GPL 2 or GPL 3 licenses, you can simply add whatever you license you like by replacing:
+<LI>Quickly doesn't care what license you use, but only knows natively what files and headers to include for BSD, GPL-2, GPL-3, LGPL-2 and LGPL-3. If you prefer another license, you can simply add whatever you license you like by adding your own license in the Copyright file:
 <DIV class="code"><TEXTAREA rows="3" cols="80">
+### BEGIN AUTOMATIC LICENSE GENERATION
+# My personal license here
+### END AUTOMATIC LICENSE GENERATION
+</TEXTAREA></DIV>
+and then run:
+<DIV class="code"><TEXTAREA rows="1" cols="80">
+quickly license
+</TEXTAREA></DIV>
+to license every files.
+</LI>
+<LI>If you've added code files or other files to your project manually, you will need to add the license to those files manually or add those tags at the beginning of the file:
+<DIV class="code"><TEXTAREA rows="2" cols="80">
 ### BEGIN LICENSE
-# This file is in the public domain
 ### END LICENSE
 </TEXTAREA></DIV>
-with your license of choice in all your files.
 </LI>
-<LI>If you've added code files or other files to your project manually, you will need to add the license to those files manually as well.</LI>
 </UL>
 <H1>Specify Application Settings</H1>
 <P>
-You should personalize your applicaton a little before creating the archive. This is very easy to do, as all of the files that you need have already been created, and only need a few lines changed to make them your own. To do this you should:
+You should personalize your application a little before creating the archive. This is very easy to do, as all of the files that you need have already been created, and only need a few lines changed to make them your own. To do this you should:
 </P>
 <OL>
-<LI>Personalize the Applicaation Icon</LI>
+<LI>Personalize the Application Icon</LI>
 <LI>Edit the Desktop File</LI>
 <LI>Edit the setup.py File</LI>
 </OL>
@@ -78,7 +87,7 @@ If you don't personalize the icon, it's ok, your app will just have the default 
 </P>
 <H2>Edit the Desktop File</H2>
 <P>
-By defualt, Quickly Ubuntu-Project applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make Jotty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "jottydesktop.in" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:
+By default, Quickly Ubuntu-Project applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make Jotty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "jottydesktop.in" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:
 </P>
 <DIV class="code"><TEXTAREA rows="8" cols="80">
 [Desktop Entry]
@@ -143,15 +152,15 @@ DistUtilsExtra.auto.setup(
     cmdclass={'install': InstallAndUpdateDataDirectory}
     )
 </TEXTAREA></DIV>
-
+<P>Note that the license has already been set up for you. author and author_email are updated each time you connect to Launchpad (with quickly release or quickly share) with your Launchpad real name and preferred email adress.</P>
 <P>
-Notice that Jotty doesn't have a web page yet, so I just left that line commented out. Also, if you enhance the application and want to repackage it, you should make sure to increment version so that it will properly update itself for your users who have installed the first version.
+Notice that Jotty doesn't have a web page yet, so I just left that line commented out. Also, you don't have to increment version number as quickly share and quickly release commands will make it for you..
 </P>
 
 </TEXTAREA></DIV>
 <H1>Create and Test the Debian Archive</H1>
 <P>
-After personalizing the project, we are now ready to create the package. This is easily done by issueing the package command:
+After personalizing the project, we are now ready to create the package. This is easily done by issuing the package command:
 </P>
 <DIV class="terminal"><TEXTAREA rows="1" cols="80">
 $quickly package
@@ -163,5 +172,5 @@ $quickly package
 <P>Click "Install Package" to see how it  installs onto your desktop. After chugging for a bit, you'll see that it is installed in the Applications->Office menu. If you customized your icon, you'll see that the menu uses your custom icon as well.</p>
 <IMG SRC="./images/package3.png" ALT="jotty installed" />
 <H1>Now that you have a package</H1>
-<P>Now that you've packaged your application, you can share the .deb file. However, if your users install their application this way, and you update the appliation, your users will have to find this out and resinstall. This hassle can be avoided in Ubuntu by using Personal Package Archives (or PPAs). Distrubuting your applications in this manner is covered in section 4.</P>
+<P>Now that you've packaged your application, you can share the .deb file. However, if your users install their application this way, and you update the application, your users will have to find this out and resinstall. This hassle can be avoided in Ubuntu by using Personal Package Archives (or PPAs). Distrubuting your applications in this manner is covered in section 4 (not yet available).</P>
 </BODY>
