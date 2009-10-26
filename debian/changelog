@@ -1,3 +1,14 @@
+quickly (0.2.6) karmic; urgency=low
+
+  * New release:
+   + ubuntu-project Template:
+     - Fix desktop.in file not installed due to new python-distutils-extra
+     policy (LP: #460355)
+   + common:
+     - Remove outdated information in README
+
+ -- Didier Roche <didrocks@ubuntu.com>  Mon, 26 Oct 2009 16:40:13 +0100
+
 quickly (0.2.5) karmic; urgency=low
 
   * New release:
