@@ -5,6 +5,9 @@ Quickly 0.2.6
   - Fix desktop.in file not installed due to new python-distutils-extra
     policy (LP: #460355)
 
+  common:
+  - Remove outdated information in README
+
 Quickly 0.2.5
 -------------------------------------
 

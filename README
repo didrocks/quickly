@@ -24,30 +24,6 @@ GTD is easier with GTQD (Get Things Quickly Done)!
 
 
 
-INSTALLING
-----------
-
-How to Install:
-1. Add quickly's and pitti's ppa to your system:
-- https://launchpad.net/~quickly/+archive/ppa
-- https://launchpad.net/~pitti/+archive/ppa
-
-
-2. Install quickly
-$ apt-get install quickly
-This will install quickly-ubuntu-template as well
-
-
-3. Check that Couch is running:
-http://localhost:5984/_utils/
-You may need to start couchdb:
-$ sudo couchdb
-
-
-You are now ready to start programming with quickly.
-
-
-
 HOW TO GET STARTED
 ------------------
 
