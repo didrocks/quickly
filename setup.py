@@ -21,6 +21,7 @@
 # UPDATE VERSION WHEN NEEDED (it updates all versions needed to be updated)
 VERSION = '0.2.5'
 
+import glob
 import os
 import sys
 
@@ -84,6 +85,6 @@ DistUtilsExtra.auto.setup(name='quickly',
       license="GPL v3",
       author='Quickly Developer Team',
       author_email='quickly@lists.launchpad.net',
-      cmdclass={'install': InstallAndUpdateDataDirectory}
-      )
+      data_files=[('share/quickly/templates/ubuntu-project/project_root', glob.glob('data/templates/ubuntu-project/project_root/project_name.desktop.in'))],
+      cmdclass={'install': InstallAndUpdateDataDirectory})
 

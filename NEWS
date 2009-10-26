@@ -1,3 +1,10 @@
+Quickly 0.2.6
+-------------------------------------
+
+  ubuntu-project Template:
+  - Fix desktop.in file not installed due to new python-distutils-extra
+    policy (LP: #460355)
+
 Quickly 0.2.5
 -------------------------------------
 
