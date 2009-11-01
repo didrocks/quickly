@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-12 19:47+0200\n"
+"POT-Creation-Date: 2009-10-25 16:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,44 +105,39 @@ msgid ""
 "    quickly -t cool-template push 'awesome new comment system'"
 msgstr ""
 
-#: ../bin/quickly.py:96
-#, python-format
-msgid "ERROR: Unknown option: %s"
-msgstr ""
-
-#: ../bin/quickly.py:104
+#: ../bin/quickly.py:102
 msgid "ERROR: No command provided in command line"
 msgstr ""
 
-#: ../bin/quickly.py:184
+#: ../bin/quickly.py:182
 #, python-format
 msgid "ERROR: No %s command found in template %s."
 msgstr ""
 
-#: ../bin/quickly.py:185 ../bin/quickly.py:226
+#: ../bin/quickly.py:183 ../bin/quickly.py:224
 msgid "Aborting."
 msgstr ""
 
-#: ../bin/quickly.py:203 ../bin/quickly.py:216
+#: ../bin/quickly.py:201 ../bin/quickly.py:214
 #, python-format
 msgid ""
 "ERROR: %s command must be followed by a template and no template was found "
 "on the command line."
 msgstr ""
 
-#: ../bin/quickly.py:204 ../bin/quickly.py:217 ../bin/quickly.py:222
+#: ../bin/quickly.py:202 ../bin/quickly.py:215 ../bin/quickly.py:220
 #: ../quickly/builtincommands.py:158
 #, python-format
 msgid "Candidates template are: %s"
 msgstr ""
 
-#: ../bin/quickly.py:221
+#: ../bin/quickly.py:219
 #, python-format
 msgid "No template were found on the command line for command %s."
 msgstr ""
 
 #. there is really not such command, in any template
-#: ../bin/quickly.py:225 ../quickly/builtincommands.py:160
+#: ../bin/quickly.py:223 ../quickly/builtincommands.py:160
 #, python-format
 msgid "ERROR: No %s command found."
 msgstr ""
