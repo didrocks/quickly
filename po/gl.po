@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-10-14 10:17+0000\n"
-"Last-Translator: Francisco Diéguez <Unknown>\n"
+"PO-Revision-Date: 2009-11-01 13:20+0000\n"
+"Last-Translator: Manuel Xosé Lemos <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-10-15 06:53+0000\n"
+"X-Launchpad-Export-Date: 2009-11-02 08:29+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -57,7 +57,7 @@ msgstr "A conexión con Launchpad está correcta"
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
-msgstr "Non se proporcionou un proxecto de launchpad, abortando."
+msgstr "Non se proporcionou un proxecto de launchpad, cancelando."
 
 #: ../quickly/launchpadaccess.py:140
 #, python-format
@@ -75,11 +75,11 @@ msgstr "Non se atopou o proxecto"
 
 #: ../quickly/launchpadaccess.py:150
 msgid "Choose your project number"
-msgstr "Seleccione o número do proxecto"
+msgstr "Elixa o número do proxecto"
 
 #: ../quickly/launchpadaccess.py:160
 msgid "No right number given, aborting."
-msgstr "Non se proporcionou un número correcto, abortando."
+msgstr "Non se proporcionou un número correcto, cancelando."
 
 #: ../quickly/bzrbinding.py:52
 msgid "Bzr not properly installed"
@@ -147,7 +147,7 @@ msgstr ""
 
 #: ../bin/quickly.py:185 ../bin/quickly.py:226
 msgid "Aborting."
-msgstr ""
+msgstr "Cancelando."
 
 #: ../bin/quickly.py:203 ../bin/quickly.py:216
 #, python-format
@@ -365,7 +365,7 @@ msgstr "Versión de liberación non atopada en setup.py."
 #: ../data/templates/ubuntu-project/package.py:62
 #: ../data/templates/ubuntu-project/internal/packaging.py:64
 msgid "ERROR: can't create or update ubuntu package"
-msgstr "ERRO: non se pode crear ou actualizar o paquete de ubuntu"
+msgstr "ERRO: non se pode crear ou actualizar o paquete de Ubuntu"
 
 #: ../data/templates/ubuntu-project/package.py:69
 #, python-format
@@ -374,7 +374,7 @@ msgstr "O paquete de Ubuntu foi creado correctamente en ../%s_%s_all.deb"
 
 #: ../data/templates/ubuntu-project/package.py:71
 msgid "An error has occurred during package building"
-msgstr "Atopouse un erro mentresse construía o paquete"
+msgstr "Atopouse un erro mentres se construía o paquete"
 
 #: ../data/templates/ubuntu-project/save.py:31
 msgid ""
@@ -477,7 +477,7 @@ msgstr "Este comando só obtén un argumento opcional: A Licenza"
 
 #: ../quickly/tools.py:77
 msgid "No template directory found. Aborting"
-msgstr "Non se atopou o cartafol de modelos. Abortando"
+msgstr "Non se atopou o cartafol de modelos. Cancelando"
 
 #: ../quickly/tools.py:95
 #, python-format
@@ -487,7 +487,7 @@ msgstr "ERRO: Non se atopou o modelo '%s'"
 #: ../quickly/tools.py:96 ../quickly/commands.py:181
 #: ../quickly/commands.py:260 ../quickly/commands.py:268
 msgid "Aborting"
-msgstr "Abortando"
+msgstr "Cancelando"
 
 #: ../quickly/tools.py:136
 #, python-format
@@ -496,7 +496,7 @@ msgstr ""
 
 #: ../quickly/tools.py:137
 msgid "Arborting."
-msgstr ""
+msgstr "Cancelando."
 
 #: ../data/templates/ubuntu-project/run.py:33
 msgid ""
@@ -659,7 +659,7 @@ msgstr ""
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before sharing"
-msgstr "O ppa:%s:%s non existe. Cree un novo en launchpad antes de compartig"
+msgstr "O ppa:%s:%s non existe. Cree un novo en launchpad antes de compartir"
 
 #: ../data/templates/ubuntu-project/share.py:104
 #, python-format
@@ -717,7 +717,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:39
 msgid "Ubuntu packaging created in debian/"
-msgstr "Empaquetado de ubuntu creado en debian/"
+msgstr "Empaquetado de Ubuntu creado en debian/"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:41
 msgid "An error has occurred"
