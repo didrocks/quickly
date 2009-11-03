@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-11-01 09:32+0000\n"
+"PO-Revision-Date: 2009-11-03 04:05+0000\n"
 "Last-Translator: WARCON <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-02 08:29+0000\n"
+"X-Launchpad-Export-Date: 2009-11-03 08:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -32,7 +32,7 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:92
 msgid "Get Launchpad Settings"
-msgstr ""
+msgstr "Получить настройки Launchpad"
 
 #: ../quickly/launchpadaccess.py:99
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
@@ -63,7 +63,7 @@ msgstr "Имя проекта: %s"
 #: ../quickly/launchpadaccess.py:141
 #, python-format
 msgid "Launchpad url: %s/%s"
-msgstr ""
+msgstr "Launchpad url: %s/%s"
 
 #: ../quickly/launchpadaccess.py:148
 msgid "No project found"
@@ -199,6 +199,7 @@ msgid ""
 "Release version not found in setup.py and no version specified in command "
 "line."
 msgstr ""
+"Версия выпуска не найдена в setup.py и версия не указана в командной строке."
 
 #: ../data/templates/ubuntu-project/release.py:79
 msgid "quickly released"
@@ -207,7 +208,7 @@ msgstr ""
 #: ../data/templates/ubuntu-project/release.py:85
 #, python-format
 msgid "quickly released: %s"
-msgstr ""
+msgstr "quickly выпстил: %s."
 
 #: ../data/templates/ubuntu-project/release.py:105
 msgid ""
@@ -257,6 +258,8 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s released and building on Launchpad. Wait for half an hour and have "
+"look at %s."
 
 #: ../quickly/version.py:35
 msgid "No quickly data path found."
