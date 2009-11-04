@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-11-03 04:05+0000\n"
-"Last-Translator: WARCON <Unknown>\n"
+"PO-Revision-Date: 2009-11-03 12:12+0000\n"
+"Last-Translator: segooon <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-03 08:37+0000\n"
+"X-Launchpad-Export-Date: 2009-11-04 08:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -131,17 +131,19 @@ msgid ""
 "ERROR: %s command must be followed by a template and no template was found "
 "on the command line."
 msgstr ""
+"ОШИБКА: %s - эта команда должна следовать за именем шаблона, и шаблон не "
+"найден в строке команды."
 
 #: ../bin/quickly.py:204 ../bin/quickly.py:217 ../bin/quickly.py:222
 #: ../quickly/builtincommands.py:158
 #, python-format
 msgid "Candidates template are: %s"
-msgstr ""
+msgstr "Возможные шаблоны: %s"
 
 #: ../bin/quickly.py:221
 #, python-format
 msgid "No template were found on the command line for command %s."
-msgstr ""
+msgstr "В командной строке не найден шаблон для команды %s."
 
 #. there is really not such command, in any template
 #: ../bin/quickly.py:225 ../quickly/builtincommands.py:160
@@ -158,6 +160,7 @@ msgstr "ОШИБКА: Невозможно загрузить файл setup.py"
 msgid ""
 "No gpg key set. Take a look at quickly tutorial to learn how to setup one"
 msgstr ""
+"Не выбран ключ gpg. Обратитесь к руководству quickly за подробностями."
 
 #: ../data/templates/ubuntu-project/release.py:34
 msgid ""
@@ -215,12 +218,16 @@ msgid ""
 "Release version specified in command arguments or in setup.py is not a valid "
 "number."
 msgstr ""
+"Версия релиза, указанная в аргументе команды или в setup.py, не является "
+"верной."
 
 #: ../data/templates/ubuntu-project/release.py:150
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
+"ppa:%s:%s не существует. Пожалуйста, создайте его на launchpad перед "
+"созданием релиза"
 
 #: ../data/templates/ubuntu-project/release.py:162
 #, python-format
@@ -237,6 +244,7 @@ msgstr ""
 #: ../data/templates/ubuntu-project/release.py:220
 msgid "ERROR: quickly can't release: can't push to launchpad."
 msgstr ""
+"ОШИБКА: quickly не может создать релиз: ошибка загрузки данных на launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:208
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
@@ -304,7 +312,7 @@ msgstr ""
 #: ../quickly/templatetools.py:59
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr ""
+msgstr "ОШИБКА: %s - недопустимое имя для проекта quickly."
 
 #: ../data/templates/ubuntu-project/package.py:31
 msgid ""
@@ -408,14 +416,14 @@ msgstr ""
 #: ../data/templates/ubuntu-project/license.py:226
 #, python-format
 msgid "%s file was not found"
-msgstr ""
+msgstr "файл %s не найден."
 
 #. that means we didn't find the END_LICENCE_TAG, don't copy the file
 #: ../data/templates/ubuntu-project/license.py:126
 #: ../data/templates/ubuntu-project/license.py:216
 #, python-format
 msgid "WARNING: %s was not found in the file %s. No licence replacement"
-msgstr ""
+msgstr "ПРЕДУПРЕЖДЕНИЕ: %s не была найдена в файле %s. Лицензия не заменена."
 
 #: ../data/templates/ubuntu-project/license.py:163
 msgid ""
@@ -441,7 +449,7 @@ msgstr ""
 #: ../quickly/tools.py:95
 #, python-format
 msgid "ERROR: Template '%s' not found."
-msgstr ""
+msgstr "ОШИБКА: Шаблон '%s' не найден."
 
 #: ../quickly/tools.py:96 ../quickly/commands.py:181
 #: ../quickly/commands.py:260 ../quickly/commands.py:268
@@ -451,7 +459,7 @@ msgstr ""
 #: ../quickly/tools.py:136
 #, python-format
 msgid "ERROR: Template %s does not exist."
-msgstr ""
+msgstr "ОШИБКА: Шаблон '%s' не существует."
 
 #: ../quickly/tools.py:137
 msgid "Arborting."
@@ -496,11 +504,11 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr ""
+msgstr "_Справка"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr ""
+msgstr "_Вид"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
@@ -541,7 +549,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:59
 #, python-format
 msgid "Creating project directory %s"
-msgstr ""
+msgstr "Создаётся директория проекта %s"
 
 #: ../data/templates/ubuntu-project/create.py:80
 #: ../data/templates/ubuntu-project/create.py:85
