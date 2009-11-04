@@ -122,7 +122,7 @@ if not quicklyutils.check_gpg_secret_key():
     sys.exit(1)
 
 # changed upstream author and email
-quicklyutils.set_setup_value('author', launchpad.me.display_name)
+quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
 quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
 
 # license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
@@ -145,7 +145,7 @@ ppa_url = launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name + "/+archi
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
 #TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
 if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name, launchpad.me.preferred_email_address.email))
+    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
 if packaging.check_for_ppa(launchpad, lp_team_or_user) != 0:
     print _("ppa:%s:%s does not exist. Please create one on launchpad before releasing") % (lp_team_or_user.name, ppa_name)
     webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name)
