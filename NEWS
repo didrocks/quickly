@@ -3,7 +3,8 @@ Quickly 0.4
 
   ubuntu-project Template:
   - Change MIT header by full license
-
+  - Fixes an error when launchpad display name contains unicode character
+    (Petar Vasić)
 
 Quickly 0.2.6
 -------------------------------------
