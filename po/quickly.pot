@@ -340,7 +340,7 @@ msgid ""
 "\n"
 "This command commits all changes since the last save to bzr. Note that \n"
 "it does not push changes to any back up location. If you need revert\n"
-"or otherwise use the revision control, us bzr directly:\n"
+"or otherwise use the revision control, use bzr directly:\n"
 "$bzr help\n"
 msgstr ""
 
