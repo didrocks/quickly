@@ -3,6 +3,7 @@ Quickly 0.4
 
   ubuntu-project Template:
   - Change BSD header by full license
+  - Add MIT license
   - Fixes an error when launchpad display name contains unicode character
     (Petar Vasić)
   - Fix typo in quickly help save (Petar Vasić)
