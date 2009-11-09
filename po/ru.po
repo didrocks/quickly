@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-11-03 12:12+0000\n"
-"Last-Translator: segooon <Unknown>\n"
+"PO-Revision-Date: 2009-11-08 09:05+0000\n"
+"Last-Translator: Sergey Sedov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-04 08:34+0000\n"
+"X-Launchpad-Export-Date: 2009-11-09 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
 msgid "Fatal: "
-msgstr ""
+msgstr "Фатальная ошибка: "
 
 #: ../quickly/launchpadaccess.py:38
 msgid "Check whether python-launchpadlib is installed"
