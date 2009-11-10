@@ -173,7 +173,7 @@ except packaging.not_ppa_owner, e:
 try:
     ppa_name = packaging.find_ppa(launchpad, ppa_user, ppa_name) # ppa_name can be ppa name or ppa display name. Find the right one if exists
 except packaging.ppa_not_found, e:
-    print(_("%s does not exist. Please create one on launchpad. %s has the following ppas available:") % (e, ppa_user.name))
+    print(_("%s does not exist. Please create it on launchpad if you want to upload to it. %s has the following ppas available:") % (e, ppa_user.name))
     for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):
         print "%s - %s" % (ppa_name, ppa_display_name)
     sys.exit(1)
