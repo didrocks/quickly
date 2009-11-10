@@ -76,10 +76,11 @@ if (launchpadaccess.lp_server == "staging"):
     ppa_name = 'staging'
 else:
     ppa_name = 'ppa'
-ppa_url = launchpadaccess.LAUNCHPAD_URL + '/~' + lp_user.name + "/+archive/" + ppa_name
+full_ppa_name = '~%s/%s' % (lp_user.name, ppa_name)
+ppa_url = '%s/~%s/+archive/%s' % (launchpadaccess.LAUNCHPAD_URL, lp_user.name, ppa_name)
 
-if packaging.check_for_ppa(launchpad, lp_user) != 0:
-    print _("ppa:%s:%s does not exist. Please create one on launchpad before sharing") % (lp_user.name, ppa_name)
+if packaging.check_for_ppa(launchpad, lp_user, ppa_name) != 0:
+    print _("ppa:%s does not exist. Please create one on launchpad before sharing") % full_ppa_name
     webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/~' + lp_user.name)
     sys.exit(1)
 
@@ -122,7 +123,7 @@ if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
     os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name, launchpad.me.preferred_email_address.email))
 # upload to launchpad
 print _("pushing to launchpad")
-return_code = packaging.push_to_ppa(lp_user.name, "../%s_%s_source.changes" % (project_name, version)) != 0
+return_code = packaging.push_to_ppa(full_ppa_name, "../%s_%s_source.changes" % (project_name, version)) != 0
 if return_code != 0:
     sys.exit(return_code)
 

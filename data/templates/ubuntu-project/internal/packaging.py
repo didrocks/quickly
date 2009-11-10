@@ -55,47 +55,46 @@ def updatepackaging():
 
     return(return_code)
 
-def push_to_ppa(ppa_user, changes_file):
+def compute_chosen_ppa(lp_team_or_user, ppa_name=None)
+    '''Look for right ppa parameters where to push the package'''
+
+    if not ppa_name:
+        if (launchpadaccess.lp_server == "staging"):
+            ppa_name = 'staging'
+        else: # default ppa
+            ppa_name = 'ppa'
+    ppa_url = '%s/~%s/+archive/%s' % (launchpadaccess.LAUNCHPAD_URL, lp_team_or_user.name, ppa_name)
+    ppa_fullname = '~%s/%s' % (lp_team_or_user.name, ppa_name)
+    return (ppa_name, ppa_fullname, ppa_url)
+
+def push_to_ppa(ppa_fullname, changes_file):
     """ Push some code to a ppa """
     
+    dput_target = "ppa:%s" % ppa_fullname
     # creation/update debian packaging
     return_code = updatepackaging()
     if return_code != 0:
         print _("ERROR: can't create or update ubuntu package")
         return(return_code)
-    
     # creating local binary package
     return_code = subprocess.call(["dpkg-buildpackage", "-S", "-I.bzr"])
     if return_code != 0:
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
-
-    if launchpadaccess.lp_server == "staging":
-        ppa_targeted = "ppa:%s/%s" % (ppa_user, "staging")
-    else:
-        ppa_targeted = "ppa:%s/%s" % (ppa_user, "ppa")
-
     # now, pushing it to launchpad personal ppa (or team later)
-    return_code = subprocess.call(["dput", ppa_targeted, changes_file])
+    return_code = subprocess.call(["dput", dput_target, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")
         return(return_code)
-    
     return(0)
 
-
-def check_for_ppa(launchpad, lp_team_or_user):
-    """ check if ppa exist """
+def check_for_ppa(launchpad, lp_team_or_user, ppa_name):
+    """ check wether ppa exists """
 
     # check that the owner really has an ppa:
-    if launchpadaccess.lp_server == "staging":
-        ppa_name_dest = 'staging'
-    else:
-        ppa_name_dest = 'ppa'
-
     ppa_found = False
     for ppa in lp_team_or_user.ppas:
-        if ppa.name == ppa_name_dest:
+        if ppa.name == ppa_name:
             ppa_found = True
             break
 

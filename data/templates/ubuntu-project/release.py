@@ -136,16 +136,13 @@ quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + projec
 # check that the owner really has an ppa:
 #TODO: change this if we finally release to a team ppa
 lp_team_or_user = launchpad.me
-if (launchpadaccess.lp_server == "staging"):
-    ppa_name = 'staging'
-else:
-    ppa_name = 'ppa'
-ppa_url = launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name + "/+archive/" + ppa_name
 
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
 #TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
 if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
     os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name, launchpad.me.preferred_email_address.email))
+
+(ppa_name, full_ppa_name, ppa_url) = compute_chosen_ppa(lp_team_or_user, ppa_name)
 if packaging.check_for_ppa(launchpad, lp_team_or_user) != 0:
     print _("ppa:%s:%s does not exist. Please create one on launchpad before releasing") % (lp_team_or_user.name, ppa_name)
     webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/~' + lp_team_or_user.name)
