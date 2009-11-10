@@ -4,8 +4,10 @@ Quickly 0.4
   Quickly core:
   - check now that --template has one argument
   ubuntu-project Template:
-  - Enabling upload to team or user ppa, as well as any ppa. .quickly file
-    can be used as well (LP: #470192)
+  - Enabling upload to team or user ppa, as well as any ppa.
+    Use --ppa ppaname or --ppa team/ppaname
+    .quickly file can be used as well with ppa = ppaname or
+    ppa = team/ppaname (LP: #470192)
   - Change BSD header by full license
   - Add MIT license
   - Fixes an error when launchpad display name contains unicode character
