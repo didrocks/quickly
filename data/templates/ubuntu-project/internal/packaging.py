@@ -75,7 +75,7 @@ def get_ppa_parameters(launchpad, full_ppa_name):
                 ppa_user = launchpad.me
             else:
                 # check if we are a member of this team
-                team = [mem.team for mem in launchpad.me.memberships_details if mem.status == "Approved" and mem.team.name == ppa_user_name]
+                team = [mem.team for mem in launchpad.me.memberships_details if mem.status in ("Approved", "Administrator") and mem.team.name == ppa_user_name]
                 if team:
                     ppa_user = team[0]
                 else:
