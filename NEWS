@@ -3,6 +3,7 @@ Quickly 0.4
 
   ubuntu-project Template:
   - Change MIT header by full license
+  - Enabling upload to team or user ppa, as well as any ppa (LP: #470192)
 
 
 Quickly 0.2.6
