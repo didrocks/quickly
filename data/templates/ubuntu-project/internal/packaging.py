@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 
-from quickly import launchpadaccess
+from quickly import launchpadaccess, configurationhandler
 
 import gettext
 from gettext import gettext as _
@@ -62,35 +62,47 @@ def updatepackaging():
 
     return(return_code)
 
+def get_ppa_parameters(launchpad, full_ppa_name):
+    ''' Check if we can catch good parameters for specified ppa in form user/ppa or ppa '''
+
+    if '/' in full_ppa_name:
+        ppa_user_name = full_ppa_name.split('/')[0]
+        ppa_name = full_ppa_name.split('/')[1]
+        # check that we are in the team/or that we are the user
+        try:
+            lp_ppa_user = launchpad.people[ppa_user_name]
+            if lp_ppa_user.name == launchpad.me.name:
+                ppa_user = launchpad.me
+            else:
+                # check if we are a member of this team
+                team = [mem.team for mem in launchpad.me.memberships_details if mem.status == "Approved" and mem.team.name == ppa_user_name]
+                if team:
+                    ppa_user = team[0]
+                else:
+                    raise not_ppa_owner(ppa_user_name)
+        except KeyError:
+            raise user_team_not_found(ppa_user_name)
+    else:
+        ppa_user = launchpad.me
+        ppa_name = full_ppa_name
+    return(ppa_user, ppa_name)
+
 def compute_chosen_ppa(launchpad, ppa_name=None):
     '''Look for right ppa parameters where to push the package'''
 
     if not ppa_name:
-        ppa_user = launchpad.me
-        if (launchpadaccess.lp_server == "staging"):
-            ppa_name = 'staging'
-        else: # default ppa
-            ppa_name = 'ppa'
-    else:
-        if '/' in ppa_name:
-            ppa_user_name = ppa_name.split('/')[0]
-            ppa_name = ppa_name.split('/')[1]
-            # check that we are in the team/or that we are the user
-            try:
-                lp_ppa_user = launchpad.people[ppa_user_name]
-                if lp_ppa_user.name == launchpad.me.name:
-                    ppa_user = launchpad.me
-                else:
-                    # check if we are a member of this team
-                    team = [mem.team for mem in launchpad.me.memberships_details if mem.status == "Approved" and mem.team.name == ppa_user_name]
-                    if team:
-                        ppa_user = team[0]
-                    else:
-                        raise not_ppa_owner(ppa_user_name)
-            except KeyError:
-                raise user_team_not_found(ppa_user_name)
-        else:
+        if not configurationhandler.project_config:
+            configurationhandler.loadConfig()
+        try:
+            (ppa_user, ppa_name) = get_ppa_parameters(launchpad, configurationhandler.project_config['ppa'])
+        except KeyError:
             ppa_user = launchpad.me
+            if (launchpadaccess.lp_server == "staging"):
+                ppa_name = 'staging'
+            else: # default ppa
+                ppa_name = 'ppa'
+    else:
+        (ppa_user, ppa_name) = get_ppa_parameters(launchpad, ppa_name)
     ppa_url = '%s/~%s/+archive/%s' % (launchpadaccess.LAUNCHPAD_URL, ppa_user.name, ppa_name)
     dput_ppa_name = 'ppa:%s/%s' % (ppa_user.name, ppa_name)
     return (ppa_user, ppa_name, dput_ppa_name, ppa_url.encode('UTF-8'))
@@ -114,7 +126,6 @@ def push_to_ppa(dput_ppa_name, changes_file):
         print _("ERROR: an error occurred during source upload to launchpad")
         return(return_code)
     return(0)
-
 
 def get_all_ppas(launchpad, lp_team_or_user):
     """ get all from a team or users
