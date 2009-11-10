@@ -1,6 +1,8 @@
 Quickly 0.4
 ------------------------------------
 
+  Quickly core:
+  - check now that --template has one argument
   ubuntu-project Template:
   - Change BSD header by full license
   - Add MIT license

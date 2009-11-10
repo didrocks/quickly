@@ -74,8 +74,12 @@ def process_command_line(argv):
 
         if arg.startswith('-'):
             if arg == '--template' or arg == '-t':
-                opt_template = argv[i + 1]
-                i += 1
+                if i + 1 < len(argv):
+                    opt_template = argv[i + 1]
+                    i += 1
+                else:
+                    print _("ERROR: %s needs one argument: %s" % ('--template', '<template name>')
+                    sys.exit(1)
             elif arg == '--staging':
                 oldenv = ""
                 if os.environ.has_key('QUICKLY'):
