@@ -90,7 +90,7 @@ if not quicklyutils.check_gpg_secret_key():
     sys.exit(1)
 
 # changed upstream author and email
-quicklyutils.set_setup_value('author', launchpad.me.display_name)
+quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
 quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)    
 
 # license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
@@ -150,7 +150,7 @@ quicklyutils.set_setup_value('version', version)
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog).
 #TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
 if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name, launchpad.me.preferred_email_address.email))
+    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
 # upload to launchpad
 print _("pushing to launchpad")
 return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, version)) != 0

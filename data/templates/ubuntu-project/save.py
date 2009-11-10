@@ -35,7 +35,7 @@ were made since the last save.
 
 This command commits all changes since the last save to bzr. Note that 
 it does not push changes to any back up location. If you need revert
-or otherwise use the revision control, us bzr directly:
+or otherwise use the revision control, use bzr directly:
 $bzr help
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
