@@ -43,6 +43,11 @@ Name, email and version setup.py will be automatically changed.
 (version will be <current_release~publicX> where X will be incremented
 at each quickly share execution)
 You can modify the description and long description if you wish.
+
+--ppa <your ppa> (name or display name) to specify to which ppa you want
+to share
+--ppa team/<ppa> (name or display name) to specify to which ppa team you
+want to share
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 

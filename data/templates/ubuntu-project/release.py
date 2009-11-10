@@ -45,6 +45,10 @@ $quickly release <release_number> notes about changes
 where "notes about changes" is optional text describing what changes
 were made since the last save
 
+--ppa <your ppa> (name or display name) to specify to which ppa you want
+to share
+--ppa team/<ppa> (name or display name) to specify to which ppa team you
+want to share
 
 Before running quickly release, you should: create your account
 and a project page on http://launchpad.net.
