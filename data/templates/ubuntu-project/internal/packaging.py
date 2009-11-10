@@ -29,6 +29,13 @@ from gettext import gettext as _
 #set domain text
 gettext.textdomain('quickly')
 
+class ppa_not_found(Exception):
+    pass
+class not_ppa_owner(Exception):
+    pass
+class user_team_not_found(Exception):
+    pass
+
 def updatepackaging():
     """create or update a package using python-mkdebian.
     
@@ -55,22 +62,42 @@ def updatepackaging():
 
     return(return_code)
 
-def compute_chosen_ppa(lp_team_or_user, ppa_name=None)
+def compute_chosen_ppa(launchpad, ppa_name=None):
     '''Look for right ppa parameters where to push the package'''
 
     if not ppa_name:
+        ppa_user = launchpad.me
         if (launchpadaccess.lp_server == "staging"):
             ppa_name = 'staging'
         else: # default ppa
             ppa_name = 'ppa'
-    ppa_url = '%s/~%s/+archive/%s' % (launchpadaccess.LAUNCHPAD_URL, lp_team_or_user.name, ppa_name)
-    ppa_fullname = '~%s/%s' % (lp_team_or_user.name, ppa_name)
-    return (ppa_name, ppa_fullname, ppa_url)
+    else:
+        if '/' in ppa_name:
+            ppa_user_name = ppa_name.split('/')[0]
+            ppa_name = ppa_name.split('/')[1]
+            # check that we are in the team/or that we are the user
+            try:
+                lp_ppa_user = launchpad.people[ppa_user_name]
+                if lp_ppa_user.name == launchpad.me.name:
+                    ppa_user = launchpad.me
+                else:
+                    # check if we are a member of this team
+                    team = [mem.team for mem in launchpad.me.memberships_details if mem.status == "Approved" and mem.team.name == ppa_user_name]
+                    if team:
+                        ppa_user = team[0]
+                    else:
+                        raise not_ppa_owner(ppa_user_name)
+            except KeyError:
+                raise user_team_not_found(ppa_user_name)
+        else:
+            ppa_user = launchpad.me
+    ppa_url = '%s/~%s/+archive/%s' % (launchpadaccess.LAUNCHPAD_URL, ppa_user.name, ppa_name)
+    dput_ppa_name = 'ppa:%s/%s' % (ppa_user.name, ppa_name)
+    return (ppa_user, ppa_name, dput_ppa_name, ppa_url.encode('UTF-8'))
 
-def push_to_ppa(ppa_fullname, changes_file):
+def push_to_ppa(dput_ppa_name, changes_file):
     """ Push some code to a ppa """
     
-    dput_target = "ppa:%s" % ppa_fullname
     # creation/update debian packaging
     return_code = updatepackaging()
     if return_code != 0:
@@ -82,24 +109,33 @@ def push_to_ppa(ppa_fullname, changes_file):
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
     # now, pushing it to launchpad personal ppa (or team later)
-    return_code = subprocess.call(["dput", dput_target, changes_file])
+    return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")
         return(return_code)
     return(0)
 
-def check_for_ppa(launchpad, lp_team_or_user, ppa_name):
-    """ check wether ppa exists """
 
-    # check that the owner really has an ppa:
-    ppa_found = False
+def get_all_ppas(launchpad, lp_team_or_user):
+    """ get all from a team or users
+
+    Return list of tuples (ppa_name, ppa_display_name)"""
+    
+    ppa_list = []
     for ppa in lp_team_or_user.ppas:
-        if ppa.name == ppa_name:
+        ppa_list.append((ppa.name, ppa.displayname))
+    return ppa_list
+
+def find_ppa(launchpad, lp_team_or_user, ppa_name):
+    """ check wether ppa exists using its name or display name """
+
+    # check that the owner really has this ppa:
+    ppa_found = False
+    for current_ppa_name, current_ppa_displayname in get_all_ppas(launchpad, lp_team_or_user):
+        if current_ppa_name == ppa_name or current_ppa_displayname == ppa_name:
             ppa_found = True
             break
-
     if not ppa_found:
-        return(1)
-
-    return(0)
+        raise ppa_not_found('ppa:%s:%s' % (lp_team_or_user.name, ppa_name.encode('UTF-8')))
+    return(current_ppa_name)
 

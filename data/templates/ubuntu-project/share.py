@@ -50,6 +50,28 @@ from quickly import launchpadaccess, configurationhandler
 from internal import quicklyutils, packaging
 
 launchpad = None
+ppa_name = None
+i = 0
+args = []
+argv = sys.argv
+
+while i < len(argv):
+    arg = argv[i]
+    if arg.startswith('-'):
+        if arg == '--ppa':
+            if i + 1 < len(argv):
+                ppa_name = argv[i + 1]
+                i += 1
+            else:
+                print _("ERROR: --ppa needs one argument: <ppa name>")
+                sys.exit(1)
+        else:
+            print _("Unknown option: %s"  % arg)
+            sys.exit(1)
+    else:
+        args.append(arg)
+    i += 1
+
 # warning: project_name can be different from project.name (one local, one on launchpad)
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
@@ -69,19 +91,21 @@ quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_addres
 # license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
 license.licensing()
     
-# check that the owner really has an ppa:
-#TODO: change this if we finally release to a team ppa
-lp_user = launchpad.me
-if (launchpadaccess.lp_server == "staging"):
-    ppa_name = 'staging'
-else:
-    ppa_name = 'ppa'
-full_ppa_name = '~%s/%s' % (lp_user.name, ppa_name)
-ppa_url = '%s/~%s/+archive/%s' % (launchpadaccess.LAUNCHPAD_URL, lp_user.name, ppa_name)
+# choose right ppa parameter (users, etc.) ppa or staging if ppa_name is None
+try:
+    (ppa_user, ppa_name, dput_ppa_name, ppa_url) = packaging.compute_chosen_ppa(launchpad, ppa_name)
+except packaging.user_team_not_found, e:
+    print(_("User or Team %s not found on Launchpad") % e)
+    sys.exit(1)
+except packaging.not_ppa_owner, e:
+    print(_("You have to be a member of %s team to upload to its ppas") % e)
+    sys.exit(1)
 
-if packaging.check_for_ppa(launchpad, lp_user, ppa_name) != 0:
-    print _("ppa:%s does not exist. Please create one on launchpad before sharing") % full_ppa_name
-    webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/~' + lp_user.name)
+try:
+    ppa_name = packaging.find_ppa(launchpad, ppa_user, ppa_name) # ppa_name can be ppa name or ppa display name. Find the right one if exists
+except packaging.ppa_not_found, e:
+    print(_("%s does not exist. Please create one on launchpad.") % e)
+    webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/~' + ppa_user.name)
     sys.exit(1)
 
 # check version
@@ -123,12 +147,12 @@ if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
     os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name, launchpad.me.preferred_email_address.email))
 # upload to launchpad
 print _("pushing to launchpad")
-return_code = packaging.push_to_ppa(full_ppa_name, "../%s_%s_source.changes" % (project_name, version)) != 0
+return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, version)) != 0
 if return_code != 0:
     sys.exit(return_code)
 
 
-print _("%s %s is building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, version, ppa_url.encode('UTF-8'))
+print _("%s %s is building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, version, ppa_url)
 
 sys.exit(0)
 
