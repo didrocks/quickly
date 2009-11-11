@@ -78,7 +78,7 @@ def process_command_line(argv):
                     opt_template = argv[i + 1]
                     i += 1
                 else:
-                    print _("ERROR: %s needs one argument: %s" % ('--template', '<template name>')
+                    print _("ERROR: %s needs one argument: %s" % ('--template', '<template name>'))
                     sys.exit(1)
             elif arg == '--staging':
                 oldenv = ""
