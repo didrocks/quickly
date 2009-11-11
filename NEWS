@@ -15,6 +15,8 @@ Quickly 0.4
   - Fix typo in quickly help save (Petar Vasić)
   - Adds logo.png as logo property in about dialog (LP: #478389)
     (Petar Vasić)
+  common:
+  - add an apport hook to get installed templates (LP: #411127)
 
 Quickly 0.2.6
 -------------------------------------
