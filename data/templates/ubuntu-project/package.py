@@ -24,8 +24,9 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
-from internal import quicklyutils
-from quickly import templatetools
+from internal import quicklyutils, packaging
+from quickly import templatetools, configurationhandler
+
 
 def help():
     print _("""Usage:
@@ -43,8 +44,6 @@ testing purpose.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
-from internal import packaging
-from quickly import configurationhandler
 
 # retrieve useful information
 if not configurationhandler.project_config:

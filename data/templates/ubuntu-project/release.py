@@ -22,8 +22,8 @@ import sys
 import subprocess
 import webbrowser
 
-from internal import quicklyutils
-from quickly import templatetools
+from internal import quicklyutils, packaging
+from quickly import templatetools, launchpadaccess, configurationhandler
 import license
 
 import gettext
@@ -68,8 +68,6 @@ installs as expected. (This is not mandatory)
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
-from quickly import launchpadaccess, configurationhandler
-from internal import packaging
 
 launchpad = None
 project = None

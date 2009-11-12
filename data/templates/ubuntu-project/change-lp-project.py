@@ -21,7 +21,7 @@ import os
 import sys
 
 from internal import quicklyutils
-from quickly import templatetools
+from quickly import templatetools, launchpadaccess
 
 import gettext
 from gettext import gettext as _
@@ -40,8 +40,6 @@ templatetools.handle_additional_parameters(sys.argv, help)
 
 
 # connect to LP
-from quickly import launchpadaccess
-
 launchpad = launchpadaccess.initialize_lpi()
 
 # set the project

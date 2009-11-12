@@ -61,13 +61,14 @@ want to share
 """)
 def shell_completion(argv):
     ''' Complete --args '''
-
+    i = 0
     while i < len(argv):
         arg = argv[i]
         if arg.startswith('-'):
             if arg == '--ppa':
                 if i + 1 < len(argv):
-                    pass                
+                    packaging.shell_complete_ppa(argv[i + 1])                
+        i += 1
 
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 
