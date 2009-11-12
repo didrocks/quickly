@@ -8,6 +8,7 @@ Quickly 0.4
     Use --ppa ppaname or --ppa team/ppaname
     .quickly file can be used as well with ppa = ppaname or
     ppa = team/ppaname (LP: #470192)
+    ppa completion is also available
   - Change BSD header by full license
   - Add MIT license
   - Fixes an error when launchpad display name contains unicode character
@@ -17,6 +18,7 @@ Quickly 0.4
     (Petar Vasić)
   common:
   - add an apport hook to get installed templates (LP: #411127)
+  - enable option completion for templates
 
 Quickly 0.2.6
 -------------------------------------
