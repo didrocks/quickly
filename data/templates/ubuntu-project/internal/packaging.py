@@ -62,6 +62,17 @@ def updatepackaging():
 
     return(return_code)
 
+def shell_complete_ppa(ppa_to_complete):
+    ''' Complete from available ppas '''
+    
+    # connect to LP and get ppa to complete
+    launchpad = launchpadaccess.initialize_lpi()
+    (ppa_user, ppa_name) = get_ppa_parameters(ppa_to_complete)
+
+    
+    
+    
+
 def get_ppa_parameters(launchpad, full_ppa_name):
     ''' Check if we can catch good parameters for specified ppa in form user/ppa or ppa '''
 

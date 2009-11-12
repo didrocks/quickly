@@ -243,11 +243,11 @@ def licensing(license=None):
     return(copy_license_to_files())
 
 
-def shell_completion():
+def shell_completion(argv):
     """Propose available license as the third parameter"""
     
     # if then license argument given, returns available licenses
-    if len(sys.argv) == 3:
+    if len(argv) == 1:
         print " ".join(get_supported_licenses())
 
 

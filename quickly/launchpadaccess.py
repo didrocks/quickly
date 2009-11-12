@@ -45,10 +45,6 @@ import gettext
 from gettext import gettext as _
 
 
-# if config not already loaded
-if not configurationhandler.project_config:
-    configurationhandler.loadConfig()
-
 # check if there is no global variable specifying staging
 if os.getenv('QUICKLY') is not None and "staging" in os.getenv('QUICKLY').lower():
     launchpad_url = LAUNCHPAD_STAGING_URL
@@ -64,6 +60,10 @@ def initialize_lpi():
 
             :return the launchpad object
     '''
+
+    # if config not already loaded
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
 
     launchpad = None
     return_code = 0
@@ -122,6 +122,10 @@ def link_project(launchpad, question):
     
         :return project object'''
 
+    # if config not already loaded
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+
     choice = "0"
     while choice == "0":    
         
@@ -169,7 +173,11 @@ def get_project(launchpad):
     
         :return project object
     '''
-        
+ 
+    # if config not already loaded
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+       
     # try to get project
     try:
         lp_id = configurationhandler.project_config['lp_id']

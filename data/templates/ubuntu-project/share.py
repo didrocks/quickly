@@ -29,6 +29,16 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
+from quickly import launchpadaccess, configurationhandler
+from internal import quicklyutils, packaging
+
+launchpad = None
+ppa_name = None
+i = 0
+args = []
+argv = sys.argv
+
+
 def help():
     print _("""Usage:
 $quickly share
@@ -49,16 +59,18 @@ to share
 --ppa team/<ppa> (name or display name) to specify to which ppa team you
 want to share
 """)
-templatetools.handle_additional_parameters(sys.argv, help)
+def shell_completion(argv):
+    ''' Complete --args '''
 
-from quickly import launchpadaccess, configurationhandler
-from internal import quicklyutils, packaging
+    while i < len(argv):
+        arg = argv[i]
+        if arg.startswith('-'):
+            if arg == '--ppa':
+                if i + 1 < len(argv):
+                    pass                
 
-launchpad = None
-ppa_name = None
-i = 0
-args = []
-argv = sys.argv
+templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
+
 
 while i < len(argv):
     arg = argv[i]

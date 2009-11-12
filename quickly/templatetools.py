@@ -36,7 +36,7 @@ def handle_additional_parameters(args, help=None, shell_completion=None):
         sys.exit(0)
     elif len(args) > 1 and args[1] == "shell-completion":
         if shell_completion:
-            shell_completion()
+            shell_completion(args[2:])
         sys.exit(0)
 
 def quickly_name(name):
