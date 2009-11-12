@@ -123,7 +123,6 @@ def get_commands():
         options = ("-h", "--help", "-t", "--template", "--staging", "--verbose", "--version")
         available_completion = [option for option in options if option.startswith(sys.argv[-1])]
         print " ".join(available_completion)
-        return(0)
 
     # get available templates after option if needed
     if sys.argv[-2] in ("-t", "--template"):

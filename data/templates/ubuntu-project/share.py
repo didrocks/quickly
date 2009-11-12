@@ -61,14 +61,14 @@ want to share
 """)
 def shell_completion(argv):
     ''' Complete --args '''
-    i = 0
-    while i < len(argv):
-        arg = argv[i]
-        if arg.startswith('-'):
-            if arg == '--ppa':
-                if i + 1 < len(argv):
-                    packaging.shell_complete_ppa(argv[i + 1])                
-        i += 1
+    # option completion
+    if sys.argv[-1].startswith("-"):
+        options = ("--ppa",)
+        available_completion = [option for option in options if option.startswith(sys.argv[-1])]
+        print " ".join(available_completion)
+    else:
+        if len(argv) > 1 and sys.argv[-2] == '--ppa': # if last argument, this one is to compete
+            packaging.shell_complete_ppa(argv[i + 1])
 
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 

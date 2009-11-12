@@ -66,12 +66,27 @@ def shell_complete_ppa(ppa_to_complete):
     ''' Complete from available ppas '''
     
     # connect to LP and get ppa to complete
-    launchpad = launchpadaccess.initialize_lpi()
-    (ppa_user, ppa_name) = get_ppa_parameters(ppa_to_complete)
-
-    
-    
-    
+    launchpad = launchpadaccess.initialize_lpi(False)
+    available_ppas = []
+    if launchpad is not None:
+        try:
+            (ppa_user, ppa_name) = get_ppa_parameters(launchpad, ppa_to_complete)
+        except user_team_not_found:
+            pass
+        else:
+            for current_ppa_name, current_ppa_displayname in get_all_ppas(launchpad, ppa_user):
+                # print user/ppa form
+                available_ppas.append("%s/%s" % (ppa_user.name, current_ppa_name))
+                # if it's the user, print in addition just "ppa_name" syntax
+                if ppa_user.name == launchpad.me.name:
+                    available_ppas.append(current_ppa_name)
+                # if we don't have provided a team, show all teams were we are member off
+                if not '/' in ppa_to_complete:
+                    team = [mem.team for mem in launchpad.me.memberships_details if mem.status in ("Approved", "Administrator")]
+                    for elem in team:
+                        available_ppas.append(elem.name + '/')
+        print " ".join(available_ppas)
+        return available_ppas
 
 def get_ppa_parameters(launchpad, full_ppa_name):
     ''' Check if we can catch good parameters for specified ppa in form user/ppa or ppa '''

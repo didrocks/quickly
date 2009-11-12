@@ -55,10 +55,11 @@ else:
 
 
 
-def initialize_lpi():
+def initialize_lpi(interactive = True):
     ''' Initialize launchpad binding, asking for crendential
 
-            :return the launchpad object
+        interactive is True by default if we want to ask the user to setup LP
+        :return the launchpad object
     '''
 
     # if config not already loaded
@@ -89,29 +90,32 @@ def initialize_lpi():
 
     # load stored LP credentials
     try:
-        print _("Get Launchpad Settings")
+        if interactive:
+            print _("Get Launchpad Settings")
         lp_cred_file = open(lp_cred, 'r')
         credentials = Credentials()
         credentials.load(lp_cred_file)
         lp_cred_file.close()
         launchpad = Launchpad(credentials, SERVICE_ROOT, lp_cache_dir)
     except IOError:
-        print _('Initial Launchpad binding. You must choose "Change Anything"')
-        launchpad = Launchpad.get_token_and_login('quickly', SERVICE_ROOT, lp_cache_dir)
-        lp_cred_file = open(lp_cred, 'w')
-        launchpad.credentials.save(lp_cred_file)
-        lp_cred_file.close()
+        if interactive:
+            print _('Initial Launchpad binding. You must choose "Change Anything"')
+            launchpad = Launchpad.get_token_and_login('quickly', SERVICE_ROOT, lp_cache_dir)
+            lp_cred_file = open(lp_cred, 'w')
+            launchpad.credentials.save(lp_cred_file)
+            lp_cred_file.close()
 
-        # try to setup bzr
-        me = launchpad.me
-        (return_code, suggestion) = bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email, me.name)
+            # try to setup bzr
+            me = launchpad.me
+            (return_code, suggestion) = bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email, me.name)
 
-    if launchpad is None or return_code != 0:
-        if suggestion is None:
-             suggestion = _("Unknown reason")
-    	os.remove(lp_cred)
-        die(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
-    print _("Launchpad connexion is ok")
+    if interactive:
+        if launchpad is None or return_code != 0:
+            if suggestion is None:
+                 suggestion = _("Unknown reason")
+            os.remove(lp_cred)
+            die(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
+        print _("Launchpad connexion is ok")
 
     return launchpad
 
