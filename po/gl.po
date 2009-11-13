@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-11-01 13:20+0000\n"
-"Last-Translator: Manuel Xosé Lemos <Unknown>\n"
+"PO-Revision-Date: 2009-11-12 13:44+0000\n"
+"Last-Translator: Francisco Diéguez <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-02 08:29+0000\n"
+"X-Launchpad-Export-Date: 2009-11-13 11:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -138,12 +138,12 @@ msgstr "ERRO: Opción descoñecida: %s"
 
 #: ../bin/quickly.py:104
 msgid "ERROR: No command provided in command line"
-msgstr ""
+msgstr "ERRO: Non proporcionou ningunha orde na liña de ordes"
 
 #: ../bin/quickly.py:184
 #, python-format
 msgid "ERROR: No %s command found in template %s."
-msgstr ""
+msgstr "ERRO: Non se atopou a orde %s no modelo %s"
 
 #: ../bin/quickly.py:185 ../bin/quickly.py:226
 msgid "Aborting."
@@ -155,23 +155,25 @@ msgid ""
 "ERROR: %s command must be followed by a template and no template was found "
 "on the command line."
 msgstr ""
+"ERRO: A orde %s debe ser continuada por un modelo e non se atopou ningún "
+"modelo na liña de ordes."
 
 #: ../bin/quickly.py:204 ../bin/quickly.py:217 ../bin/quickly.py:222
 #: ../quickly/builtincommands.py:158
 #, python-format
 msgid "Candidates template are: %s"
-msgstr ""
+msgstr "Os candidatos de modelos son: %s"
 
 #: ../bin/quickly.py:221
 #, python-format
 msgid "No template were found on the command line for command %s."
-msgstr ""
+msgstr "Non se atopou ningún modelo na liña de ordes para a orde %s"
 
 #. there is really not such command, in any template
 #: ../bin/quickly.py:225 ../quickly/builtincommands.py:160
 #, python-format
 msgid "ERROR: No %s command found."
-msgstr ""
+msgstr "ERRO: Non se atopou a orde %s"
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:85
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:126
@@ -182,6 +184,8 @@ msgstr "ERRO: Non foi posíbel cargar o ficheiro setup.py"
 msgid ""
 "No gpg key set. Take a look at quickly tutorial to learn how to setup one"
 msgstr ""
+"Non está estabelecida ningunha chave gpg. Olle o titorial rápido para "
+"aprender como configurar unha"
 
 #: ../data/templates/ubuntu-project/release.py:34
 msgid ""
@@ -298,11 +302,11 @@ msgstr ""
 
 #: ../quickly/version.py:35
 msgid "No quickly data path found."
-msgstr ""
+msgstr "Non se atopou ningún camiño de datos de quickly"
 
 #: ../quickly/version.py:39
 msgid "No template found."
-msgstr ""
+msgstr "Non se atopou ningún modelo."
 
 #: ../quickly/version.py:41
 #, python-format
@@ -325,21 +329,40 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Intérprete de Python: %s %s\n"
+"  Biblioteca estándar de Python: %s\n"
+"  \n"
+"  Biblioteca empregada por Quickly: %s\n"
+"  Camiño de datos de Quickly: %s\n"
+"  Directorios de modelos de Quickly detectados:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Canonical Ltd.\n"
+"  #Autor 2009 Rick Spencer\n"
+"  #Autor 2009 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly non ten APORTA ningúnh GARANTÍA. quickly é softwrae libre, e\n"
+"podes empregalo, modificalo e redistribuilo baixo os termos da Licenza\n"
+"Pública Xeral de GNU versión 3 e superior."
 
 #: ../quickly/templatetools.py:35
 msgid "No help for this command"
-msgstr ""
+msgstr "Non hai axuda para esta orde"
 
 #: ../quickly/templatetools.py:54
 msgid ""
 "ERROR: unpermitted character in name.\n"
 "Letters and digits only."
 msgstr ""
+"ERRO: caracter non permitido no nome.\n"
+"Só se permiten letras e díxitos."
 
 #: ../quickly/templatetools.py:59
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr ""
+msgstr "ERRO: Non se permite %s como un nome de proxecto de quickly"
 
 #: ../data/templates/ubuntu-project/package.py:31
 msgid ""
@@ -492,7 +515,7 @@ msgstr "Cancelando"
 #: ../quickly/tools.py:136
 #, python-format
 msgid "ERROR: Template %s does not exist."
-msgstr ""
+msgstr "ERRO: O modelo %s non existe."
 
 #: ../quickly/tools.py:137
 msgid "Arborting."
@@ -506,6 +529,11 @@ msgid ""
 "Runs your application. This is the best way to try test it out\n"
 "while you are developing it. It starts up the main project window.\n"
 msgstr ""
+"Uso:\n"
+"$quickly run\n"
+"\n"
+"Executa o seu aplicativo. Esta é a mellor forma de problao mentres o \n"
+"está a desenvolver.  Isto arrinca a xanela principal do proxecto.\n"
 
 #: ../data/templates/ubuntu-project/run.py:55
 #, python-format
@@ -617,6 +645,9 @@ msgid ""
 "Congrats, your new project is setup! cd %s/ to start hacking. Then '$ "
 "quickly tutorial' for quickly ubuntu-template tutorial and reference"
 msgstr ""
+"Noraboa, o seu novo proxecto está configurado! Execute cd %s/ para comezar a "
+"hackear. Logo execute '$ quickly tutorial' para ver o titorial do template-"
+"ubuntu e as referencias."
 
 #: ../quickly/configurationhandler.py:43
 msgid "ERROR: Can't load configuration in current path or its parent ones."
@@ -632,6 +663,7 @@ msgstr "ERRO: Non se puido cargar a configuración en %s: %s"
 #: ../quickly/configurationhandler.py:85
 msgid "WARNING: No .quickly file found. Initiating a new one."
 msgstr ""
+"AVISO: Non se atopou ningún ficheiro .quickly. iniciliazando un novo."
 
 #: ../quickly/configurationhandler.py:116
 #, python-format
@@ -667,6 +699,8 @@ msgid ""
 "Minor release version specified before ~public in setup.py is not a valid "
 "number: %s"
 msgstr ""
+"A versión de lanzamento menor especificada antes de ~public en setup.py non "
+"é un número de versión válido: %s"
 
 #: ../data/templates/ubuntu-project/share.py:110
 msgid "Release version specified in setup.py is not a valid number."
@@ -700,6 +734,10 @@ msgid ""
 "\n"
 "Opens a web browser with the tutorial for ubuntu-project template.\n"
 msgstr ""
+"Uso:\n"
+"$ quickly tutorial\n"
+"\n"
+"Abre un navegador web co titorial para o modelo ubuntu-project.\n"
 
 #: ../data/templates/ubuntu-project/edit.py:33
 msgid ""
@@ -752,6 +790,8 @@ msgid ""
 "ERROR: %s is a project. You can't launch %s command within a project. Please "
 "choose another path."
 msgstr ""
+"ERROR: %s é un proxecto. Vostede non pode lanzar a orde %s nun proxecto. "
+"Seleccione outra ruta."
 
 #: ../data/templates/ubuntu-project/dialog.py:33
 msgid ""
@@ -785,12 +825,12 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/dialog.py:65
 msgid "Dialog command needs to be followed by new dialog name."
-msgstr ""
+msgstr "A orde de diálogo necesita ser seguida por un nome de diálogo novo."
 
 #: ../quickly/builtincommands.py:36
 msgid ""
 "ERROR: Create command must be followed by a template and a project path"
-msgstr ""
+msgstr "ERRO: A orde create debe seguirse dun modelo e un camiño ao proxecto"
 
 #: ../quickly/builtincommands.py:46
 #, python-format
@@ -837,10 +877,41 @@ msgid ""
 "\n"
 "Have Fun!"
 msgstr ""
+"-------------------------------\n"
+"        Benvido a quickly!\n"
+"-------------------------------\n"
+"\n"
+"Vostede pode crear un proxecto executando  'quickly create <nome_modelo> "
+"<seu proxecto>'.\n"
+"\n"
+"\n"
+"Un exemplo co modelo ubuntu-project:\n"
+"1. Crear un Proxecto de Ubuntu e executar o titorial:\n"
+"$ quickly create ubuntu-project foo\n"
+"$ cd foo\n"
+"$ quickly tutorial\n"
+"\n"
+"2. Tamén pode probar:\n"
+"$ quickly edit\n"
+"$ quickly glade\n"
+"$ quickly run\n"
+"Empregue o completado de bash completion para saber as ordes dispoñíbes\n"
+"\n"
+"3. Como lidiar co paquete e o lanzamento:\n"
+"\n"
+"de forma opcional, but recommended to build first your package locally:\n"
+"$ quickly package\n"
+"\n"
+"TEN EN CONTA: as dúas seguintes ordes conectarán con Launchpad polo que "
+"necesitará polo menos ter unha conta de Launchad e un ppa aberto.\n"
+"Tamén necesita un proxecto co que ligar con quickly\n"
+"$ quickly release or $ quickly share\n"
+"\n"
+"Divírtase!"
 
 #: ../quickly/builtincommands.py:139
 msgid "ERROR: No command provided to help command"
-msgstr ""
+msgstr "ERRO: Non proporcionou ningunha orde á orde help"
 
 #: ../quickly/builtincommands.py:157
 #, python-format
@@ -888,6 +959,12 @@ msgid ""
 "Enable to set or change the launchpad project binded with the current\n"
 "ubuntu project.\n"
 msgstr ""
+"Uso:\n"
+"$ quickly change-lp-project\n"
+"\n"
+"Permite estabelecer ou cambiar o proxecto de launchpad ligado co actual "
+"proxecto\n"
+"de ubuntu.\n"
 
 #~ msgid ""
 #~ "\n"
