@@ -95,12 +95,15 @@ def saveConfig(global_config=None, config_file_path=None):
                 fieldsafter = line.split('#')[1:]
                 fields = fields.split('=') # Separate variable from value
                 # normally, we have two fields in "fields" and it should be used by config tabular
-                if len(fields) == 2 and fields[0].strip() in remaingconfigtosave:
-                    line = fields[0].strip() + " = " + str(remaingconfigtosave.pop(fields[0].strip()))
-                    if len(fieldsafter) > 0:
-                        line = line + " #" + "#".join(fieldsafter) # fieldsafter already contains \n
-                    else:
-                        line = line + "\n"
+                if len(fields) == 2:
+                    if fields[0].strip() in remaingconfigtosave:
+                        line = fields[0].strip() + " = " + str(remaingconfigtosave.pop(fields[0].strip()))
+                        if len(fieldsafter) > 0:
+                            line = line + " #" + "#".join(fieldsafter) # fieldsafter already contains \n
+                        else:
+                            line = line + "\n"
+                    else: # old config value, no more on the dictionary. So, remove it:
+                        line = ""
                 filedest.write(line) # commentaries or empty lines, anything other things which is not useful will be printed unchanged
             # write remaining data if some (new data not in the old config file).
             filedest.write("".join(elem + " = " + str(remaingconfigtosave[elem]) + '\n' for elem in remaingconfigtosave)) #\n here for last element (and not be added, when no iteration to do)
