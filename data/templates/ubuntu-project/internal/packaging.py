@@ -73,7 +73,7 @@ def shell_complete_ppa(ppa_to_complete):
     # connect to LP and get ppa to complete
     try:
         launchpad = launchpadaccess.initialize_lpi(False)
-    except launchpad_connexion_error, e:
+    except launchpadaccess.launchpad_connexion_error, e:
         print(e)
         sys.exit(1)
     available_ppas = []

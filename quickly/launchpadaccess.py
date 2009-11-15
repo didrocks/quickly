@@ -36,7 +36,8 @@ try:
     from launchpadlib.errors import HTTPError
     from launchpadlib.credentials import Credentials
 except ImportError:
-    raise launchpad_connexion_error(_("Check whether python-launchpadlib is installed"))
+    print(_("Check whether python-launchpadlib is installed"))
+    sys.exit(1)
 
 
 from quickly import bzrbinding

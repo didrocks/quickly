@@ -22,10 +22,9 @@ import sys
 
 from internal import quicklyutils
 from quickly import templatetools
-
 try:
     from quickly import launchpadaccess
-except launchpad_connexion_error, e:
+except launchpadaccess.launchpad_connexion_error, e:
     print(e)
     sys.exit(1)
 
@@ -61,4 +60,4 @@ except launchpadaccess.launchpad_project_error, e:
     sys.exit(1)
 # get the project now and save the url into setup.py
 quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + project.name)
-
+ 
