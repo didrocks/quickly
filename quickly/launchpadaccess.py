@@ -126,7 +126,7 @@ def initialize_lpi(interactive = True):
     return launchpad
 
 
-def link_project(launchpad, question):
+def link_project(launchpad, question, lp_project_name=None):
     ''' Link to launchpad project, erasing previous one if already set
     
     
@@ -139,38 +139,47 @@ def link_project(launchpad, question):
     choice = "0"
     while choice == "0":    
         
-        lp_id = raw_input("%s, leave blank to abort.\nLaunchpad project name: " % question)
-        if lp_id == "":
-            raise project_error(_("No launchpad project given, aborting."))
-            
-        prospective_projects = launchpad.projects.search(text=lp_id)
-        project_number = 1
-        project_names = []
-        for project in prospective_projects:
-            print (_('''---------------- [%s] ----------------
+        if not lp_project_name:
+            lp_id = raw_input("%s, leave blank to abort.\nLaunchpad project name: " % question)
+            if lp_id == "":
+                raise project_error(_("No launchpad project given, aborting."))
+                
+            prospective_projects = launchpad.projects.search(text=lp_id)
+            project_number = 1
+            project_names = []
+            for project in prospective_projects:
+                print (_('''---------------- [%s] ----------------
    %s
 --------------------------------------
 Project name: %s
 Launchpad url: %s/%s
 %s
 ''') % (project_number, project.title, project.display_name, launchpad_url, project.name, project.summary))
-            project_names.append(project.name)
-            project_number += 1            
+                project_names.append(project.name)
+                project_number += 1            
 
-        if not list(prospective_projects):
-            message = _("No project found")
-        else:
-            message = _("Choose your project number")
-        choice = raw_input("%s, leave blank to abort, 0 for another search.\nYour choice: " % message)
+            if not list(prospective_projects):
+                message = _("No project found")
+            else:
+                message = _("Choose your project number")
+            choice = raw_input("%s, leave blank to abort, 0 for another search.\nYour choice: " % message)
 
-    try:
-        choice = int(choice)
-        if choice in range(1, project_number):
-            project = launchpad.projects[project_names[choice - 1]]
-        else:
-            raise ValueError
-    except ValueError:
-        raise project_error(_("No right number given, aborting."))
+        try:
+            choice = int(choice)
+            if choice in range(1, project_number):
+                project = launchpad.projects[project_names[choice - 1]]
+            else:
+                raise ValueError
+        except ValueError:
+            raise project_error(_("No right number given, aborting."))
+
+    # we got a project name, check that it exists
+    else:
+        try:
+            project = launchpad.projects[lp_project_name]
+         except ValueError:
+            raise project_error(_("No project with %s exists on Launchpad. You can try to find it interactively without providing a project name.") % lp_project_name)       
+
     configurationhandler.project_config['lp_id'] = project.name
     configurationhandler.saveConfig()
     

@@ -63,10 +63,13 @@ except launchpadaccess.launchpad_connexion_error, e:
     print(e)
     sys.exit(1)
 
-# set the project
+# set the project, skipping the interactive phase if project_name is provided
 if argv[1] == "lp-project":
+    project_name = None
+    if len(argv > 2):
+        project_name = argv[2]
     try:
-        project = launchpadaccess.link_project(launchpad, "Change your launchpad project")
+        project = launchpadaccess.link_project(launchpad, "Change your launchpad project:", project_name)
     except launchpadaccess.launchpad_project_error, e:
         print(e)
         sys.exit(1)
