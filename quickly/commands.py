@@ -45,7 +45,7 @@ def get_all_commands():
 
     try:
         template_directories = tools.get_template_directories()
-    except tools.no_template_path_not_found:
+    except tools.template_path_not_found:
         template_directories = []
     for template_dir in template_directories:
         for template in os.listdir(template_dir):

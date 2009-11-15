@@ -34,7 +34,7 @@ def add_info(report):
         template_directories = tools.get_template_directories()
         for template_dir in template_directories:       
             templates.extend([os.path.join(template_dir, template_name) for template_name in os.listdir(template_dir)])
-    except tools.no_template_path_not_found:
+    except tools.template_path_not_found:
         template_directories = "No template found."
     report['QuicklyDataPath'] = quickly_data_path
     report['QuicklyTemplatesDirectories'] = "\n".join(template_directories)

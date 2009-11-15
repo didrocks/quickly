@@ -26,6 +26,11 @@ LAUNCHPAD_STAGING_URL = "https://staging.launchpad.net"
 LAUNCHPAD_CODE_STAGING_URL = "https://code.staging.launchpad.net"
 
 
+class launchpad_connexion_error(Exception):
+    pass
+class launchpad_project_error(Exception):
+    pass
+
 def die(message):
     print >> sys.stderr, _("Fatal: ") + message
     sys.exit(1)
@@ -135,8 +140,7 @@ def link_project(launchpad, question):
         
         lp_id = raw_input("%s, leave blank to abort.\nLaunchpad project name: " % question)
         if lp_id == "":
-            print _("No launchpad project give, aborting.")
-            exit(1)
+            raise project_error(_("No launchpad project given, aborting."))
             
         prospective_projects = launchpad.projects.search(text=lp_id)
         project_number = 1
@@ -165,8 +169,7 @@ def link_project(launchpad, question):
         else:
             raise ValueError
     except ValueError:
-        print _("No right number given, aborting.")
-        exit(1)
+        raise project_error(_("No right number given, aborting."))
     configurationhandler.project_config['lp_id'] = project.name
     configurationhandler.saveConfig()
     
@@ -188,7 +191,7 @@ def get_project(launchpad):
         project = launchpad.projects[lp_id]
        
     # else, bind the project to LP
-    except KeyError:        
+    except KeyError:
         project = link_project(launchpad, "No Launchpad project set")
         
     return project

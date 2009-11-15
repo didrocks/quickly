@@ -31,7 +31,9 @@ __project_path = None
 class project_path_not_found(Exception):
     pass
 
-class no_template_path_not_found(Exception):
+class template_path_not_found(Exception):
+    pass
+class template_not_found(Exception):
     pass
 
 def get_quickly_data_path():
@@ -74,7 +76,7 @@ def get_template_directories():
         pass # just let template_directories be empty
 
     if not template_directories:
-        raise no_template_path_not_found(_("No template directory found. Aborting"))
+        raise template_path_not_found(_("No template directory found. Aborting"))
 
     return template_directories
 
@@ -92,9 +94,7 @@ def get_template_directory(template):
 
     # if still false, no template found in template_directories
     if not template_found:
-        print _("ERROR: Template '%s' not found.") % template
-        print _("Aborting")
-        exit(1)
+        raise template_not_found(_("ERROR: Template '%s' not found. Aborting")) % template
 
     return template_path
 

@@ -150,7 +150,11 @@ quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_addres
 license.licensing()
 
 # get the project now and save the url into setup.py
-project = launchpadaccess.get_project(launchpad)
+try:
+    project = launchpadaccess.get_project(launchpad)
+except launchpadaccess.launchpad_project_error, e:
+    print(e)
+    sys.exit(1)
 quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + project.name)
 
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)

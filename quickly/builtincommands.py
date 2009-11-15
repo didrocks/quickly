@@ -191,7 +191,10 @@ def quickly(template, project_dir, command_args, shell_completion=False):
 
     try:
         template_source_path = tools.get_template_directory(template)
-    except (tools.no_template_path_not_found, e):
+    except (tools.template_path_not_found, e):
+        print(e)
+        return 1
+    except (tools.template_not_found, e):
         print(e)
         return 1
 

@@ -95,7 +95,7 @@ def process_command_line(argv):
                 sys.exit(0)
             elif arg == '--help' or arg == '-h':
                 usage()
-                sys.exit(1)
+                sys.exit(0)
             else:
                 opt_command.append(arg) # temporary solution, see commit.
         else:

@@ -43,11 +43,11 @@ templatetools.handle_additional_parameters(sys.argv, help)
 launchpad = launchpadaccess.initialize_lpi()
 
 # set the project
-launchpadaccess.link_project(launchpad, "Change your launchpad project")
-quicklyutils.set_setup_value('author', launchpad.me.display_name)
-quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
-
+try:
+    project = launchpadaccess.link_project(launchpad, "Change your launchpad project")
+except launchpadaccess.launchpad_project_error, e:
+    print(e)
+    sys.exit(1)
 # get the project now and save the url into setup.py
-project = launchpadaccess.get_project(launchpad)
 quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + project.name)
 
