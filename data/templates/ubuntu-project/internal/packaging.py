@@ -73,9 +73,8 @@ def shell_complete_ppa(ppa_to_complete):
     # connect to LP and get ppa to complete
     try:
         launchpad = launchpadaccess.initialize_lpi(False)
-    except launchpadaccess.launchpad_connexion_error, e:
-        print(e)
-        sys.exit(1)
+    except launchpadaccess.launchpad_connexion_error:
+        sys.exit(0)
     available_ppas = []
     if launchpad is not None:
         try:
@@ -94,7 +93,6 @@ def shell_complete_ppa(ppa_to_complete):
                     team = [mem.team for mem in launchpad.me.memberships_details if mem.status in ("Approved", "Administrator")]
                     for elem in team:
                         available_ppas.append(elem.name + '/')
-        print " ".join(available_ppas)
         return available_ppas
 
 def get_ppa_parameters(launchpad, full_ppa_name):
@@ -122,7 +120,7 @@ def get_ppa_parameters(launchpad, full_ppa_name):
         ppa_name = full_ppa_name
     return(ppa_user, ppa_name)
 
-def compute_chosen_ppa(launchpad, ppa_name=None):
+def choose_ppa(launchpad, ppa_name=None):
     '''Look for right ppa parameters where to push the package'''
 
     if not ppa_name:
@@ -172,8 +170,10 @@ def get_all_ppas(launchpad, lp_team_or_user):
         ppa_list.append((ppa.name, ppa.displayname))
     return ppa_list
 
-def find_ppa(launchpad, lp_team_or_user, ppa_name):
-    """ check wether ppa exists using its name or display name """
+def check_and_return_ppaname(launchpad, lp_team_or_user, ppa_name):
+    """ check whether ppa exists using its name or display name for the lp team or user
+
+    return formated ppaname (not display name)"""
 
     # check that the owner really has this ppa:
     ppa_found = False

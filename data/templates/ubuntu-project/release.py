@@ -26,6 +26,8 @@ from internal import quicklyutils, packaging
 from quickly import templatetools, configurationhandler
 import license
 
+import logging
+
 try:
     from quickly import launchpadaccess
 except launchpadaccess.launchpad_connexion_error, e:
@@ -35,6 +37,8 @@ except launchpadaccess.launchpad_connexion_error, e:
 import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
+
+options = ("--ppa",)
 
 def help():
     print _("""Usage:
@@ -72,7 +76,15 @@ You can modify the description and long description if you wish.
 You can run $quickly package and test your package to make sure it
 installs as expected. (This is not mandatory)
 """)
-templatetools.handle_additional_parameters(sys.argv, help)
+def shell_completion(argv):
+    ''' Complete --args '''
+    # option completion
+    if argv[-1].startswith("-"):        
+        print " ".join([option for option in options if option.startswith(sys.argv[-1])])
+    elif len(argv) > 1 and argv[-2] == '--ppa': # if argument following --ppa, complete by ppa
+        print " ".join(packaging.shell_complete_ppa(argv[-1]))
+
+templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 
 
 launchpad = None
@@ -174,7 +186,7 @@ if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
 
 # choose right ppa parameter (users, etc.) ppa or staging if ppa_name is None
 try:
-    (ppa_user, ppa_name, dput_ppa_name, ppa_url) = packaging.compute_chosen_ppa(launchpad, ppa_name)
+    (ppa_user, ppa_name, dput_ppa_name, ppa_url) = packaging.choose_ppa(launchpad, ppa_name)
 except packaging.user_team_not_found, e:
     print(_("User or Team %s not found on Launchpad") % e)
     sys.exit(1)
@@ -183,7 +195,7 @@ except packaging.not_ppa_owner, e:
     sys.exit(1)
 
 try:
-    ppa_name = packaging.find_ppa(launchpad, ppa_user, ppa_name) # ppa_name can be ppa name or ppa display name. Find the right one if exists
+    ppa_name = packaging.check_and_return_ppaname(launchpad, ppa_user, ppa_name) # ppa_name can be ppa name or ppa display name. Find the right one if exists
 except packaging.ppa_not_found, e:
     print(_("%s does not exist. Please create it on launchpad if you want to upload to it. %s has the following ppas available:") % (e, ppa_user.name))
     for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):

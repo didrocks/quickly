@@ -69,13 +69,12 @@ want to share
 def shell_completion(argv):
     ''' Complete --args '''
     # option completion
-    if sys.argv[-1].startswith("-"):
+    if argv[-1].startswith("-"):
         options = ("--ppa",)
         available_completion = [option for option in options if option.startswith(sys.argv[-1])]
         print " ".join(available_completion)
-    else:
-        if len(argv) > 1 and sys.argv[-2] == '--ppa': # if last argument, this one is to compete
-            packaging.shell_complete_ppa(argv[i + 1])
+    elif len(argv) > 1 and argv[-2] == '--ppa': # if argument following --ppa, complete by ppa
+        print " ".join(packaging.shell_complete_ppa(argv[-1]))
 
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 
@@ -122,7 +121,7 @@ license.licensing()
     
 # choose right ppa parameter (users, etc.) ppa or staging if ppa_name is None
 try:
-    (ppa_user, ppa_name, dput_ppa_name, ppa_url) = packaging.compute_chosen_ppa(launchpad, ppa_name)
+    (ppa_user, ppa_name, dput_ppa_name, ppa_url) = packaging.choose_ppa(launchpad, ppa_name)
 except packaging.user_team_not_found, e:
     print(_("User or Team %s not found on Launchpad") % e)
     sys.exit(1)
@@ -131,7 +130,7 @@ except packaging.not_ppa_owner, e:
     sys.exit(1)
 
 try:
-    ppa_name = packaging.find_ppa(launchpad, ppa_user, ppa_name) # ppa_name can be ppa name or ppa display name. Find the right one if exists
+    ppa_name = packaging.check_and_return_ppaname(launchpad, ppa_user, ppa_name) # ppa_name can be ppa name or ppa display name. Find the right one if exists
 except packaging.ppa_not_found, e:
     print(_("%s does not exist. Please create it on launchpad if you want to upload to it. %s has the following ppas available:") % (e, ppa_user.name))
     for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):

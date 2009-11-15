@@ -35,6 +35,7 @@ try:
     from launchpadlib.launchpad import Launchpad, EDGE_SERVICE_ROOT, STAGING_SERVICE_ROOT
     from launchpadlib.errors import HTTPError
     from launchpadlib.credentials import Credentials
+    import httplib2
 except ImportError:
     print(_("Check whether python-launchpadlib is installed"))
     sys.exit(1)
@@ -98,7 +99,10 @@ def initialize_lpi(interactive = True):
         credentials = Credentials()
         credentials.load(lp_cred_file)
         lp_cred_file.close()
-        launchpad = Launchpad(credentials, SERVICE_ROOT, lp_cache_dir)
+        try:
+            launchpad = Launchpad(credentials, SERVICE_ROOT, lp_cache_dir)
+        except httplib2.ServerNotFoundError, e:
+            raise launchpad_connexion_error(e)
     except IOError:
         if interactive:
             print _('Initial Launchpad binding. You must choose "Change Anything"')
