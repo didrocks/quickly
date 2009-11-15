@@ -48,7 +48,11 @@ def pre_create(template, project_dir, command_args):
         os.chdir(path)
     
     # check that project name follow quickly rules and reformat it.
-    quickly_project_name = templatetools.quickly_name(project_name)
+    try:
+        quickly_project_name = templatetools.quickly_name(project_name)
+    except launchpadaccess.launchpad_connexion_error, e:
+        print(e)
+        sys.exit(1)
 
     #bail if the name if taken
     if os.path.exists(project_name):

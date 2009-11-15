@@ -71,7 +71,11 @@ path_and_project = sys.argv[1].split('/')
 project_name = path_and_project[-1]
 
 # check that project name follow quickly rules and reformat it.
-project_name = templatetools.quickly_name(project_name)
+try:
+    project_name = templatetools.quickly_name(project_name)
+except templatetools.bad_project_name, e:
+    print(e)
+    sys.exit(1)
 
 # create additional directories
 data_dir = "data"

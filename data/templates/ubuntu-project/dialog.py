@@ -65,7 +65,11 @@ if len(sys.argv) != 2:
     print _("Dialog command needs to be followed by new dialog name.")
     sys.exit(1)
 
-dialog_name = templatetools.quickly_name(sys.argv[1])
+try:
+    dialog_name = templatetools.quickly_name(sys.argv[1])
+except templatetools.bad_project_name, e:
+    print(e)
+    sys.exit(1)
 
 path_and_project = sys.argv[0].split('/')
 

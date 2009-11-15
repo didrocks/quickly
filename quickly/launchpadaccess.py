@@ -31,10 +31,6 @@ class launchpad_connexion_error(Exception):
 class launchpad_project_error(Exception):
     pass
 
-def die(message):
-    print >> sys.stderr, _("Fatal: ") + message
-    sys.exit(1)
-
 try:
     from launchpadlib.launchpad import Launchpad, EDGE_SERVICE_ROOT, STAGING_SERVICE_ROOT
     from launchpadlib.errors import HTTPError

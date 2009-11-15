@@ -25,6 +25,9 @@ import re
 import gettext
 from gettext import gettext as _
 
+class bad_project_name(Exception):
+    pass
+
 def handle_additional_parameters(args, help=None, shell_completion=None):
     """Enable handling additional parameter like help of shell_completion"""
 
@@ -51,13 +54,11 @@ def quickly_name(name):
     # it indicates the separation between a Debian package name and its
     # version. The '-' is not allowed in Python module names.
     if not re.match("[a-z0-9]+$", name):
-        print _("""ERROR: unpermitted character in name.
-Letters and digits only.""")
-        sys.exit(1)
+        raise bad_project_name(_("""ERROR: unpermitted character in name.
+Letters and digits only."""))
 
     if name in forbidden_name:
-        print _('ERROR: %s is not permitted as a quickly project name')
-        sys.exit(1)
+        raise bad_project_name(_('ERROR: %s is not permitted as a quickly project name'))
     return name
 
 def apply_file_rights(src_file_name, dest_file_name):

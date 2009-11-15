@@ -24,7 +24,7 @@ import sys
 from quickly import configurationhandler
 try:
     from quickly import launchpadaccess
-except launchpad_connexion_error, e:
+except launchpadaccess.launchpad_connexion_error, e:
     print(e)
     sys.exit(1)
 

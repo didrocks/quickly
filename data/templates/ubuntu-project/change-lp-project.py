@@ -49,7 +49,7 @@ templatetools.handle_additional_parameters(sys.argv, help)
 # connect to LP
 try:
     launchpad = launchpadaccess.initialize_lpi()
-except launchpad_connexion_error, e:
+except launchpadaccess.launchpad_connexion_error, e:
     print(e)
     sys.exit(1)
 

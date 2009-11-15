@@ -128,7 +128,7 @@ def get_root_project_path(config_file_path=None):
     raise project_path_not_found()
 
 def check_template_exists(template):
-    """Exit if template doesn't exist"""
+    """Check if template exists"""
    
     try: 
         commands.get_all_commands()[template]
