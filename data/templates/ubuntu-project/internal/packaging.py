@@ -21,7 +21,12 @@ import subprocess
 import sys
 
 
-from quickly import launchpadaccess, configurationhandler
+from quickly import configurationhandler
+try:
+    from quickly import launchpadaccess
+except launchpad_connexion_error, e:
+    print(e)
+    sys.exit(1)
 
 import gettext
 from gettext import gettext as _
@@ -66,7 +71,11 @@ def shell_complete_ppa(ppa_to_complete):
     ''' Complete from available ppas '''
     
     # connect to LP and get ppa to complete
-    launchpad = launchpadaccess.initialize_lpi(False)
+    try:
+        launchpad = launchpadaccess.initialize_lpi(False)
+    except launchpad_connexion_error, e:
+        print(e)
+        sys.exit(1)
     available_ppas = []
     if launchpad is not None:
         try:

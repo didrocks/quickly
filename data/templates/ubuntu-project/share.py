@@ -29,8 +29,15 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
-from quickly import launchpadaccess, configurationhandler
+from quickly import configurationhandler
 from internal import quicklyutils, packaging
+
+try:
+    from quickly import launchpadaccess
+except launchpad_connexion_error, e:
+    print(e)
+    sys.exit(1)
+
 
 launchpad = None
 ppa_name = None
@@ -96,7 +103,11 @@ if not configurationhandler.project_config:
 project_name = configurationhandler.project_config['project']
 
 # connect to LP
-launchpad = launchpadaccess.initialize_lpi()
+try:
+    launchpad = launchpadaccess.initialize_lpi()
+except launchpad_connexion_error, e:
+    print(e)
+    sys.exit(1)
 
 # check if a gpg key is available
 if not quicklyutils.check_gpg_secret_key():

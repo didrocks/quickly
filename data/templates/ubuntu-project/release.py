@@ -23,8 +23,14 @@ import subprocess
 import webbrowser
 
 from internal import quicklyutils, packaging
-from quickly import templatetools, launchpadaccess, configurationhandler
+from quickly import templatetools, configurationhandler
 import license
+
+try:
+    from quickly import launchpadaccess
+except launchpad_connexion_error, e:
+    print(e)
+    sys.exit(1)
 
 import gettext
 from gettext import gettext as _
@@ -136,7 +142,11 @@ if not configurationhandler.project_config:
 project_name = configurationhandler.project_config['project']
 
 # connect to LP
-launchpad = launchpadaccess.initialize_lpi()
+try:
+    launchpad = launchpadaccess.initialize_lpi()
+except launchpad_connexion_error, e:
+    print(e)
+    sys.exit(1)
 
 # check if a gpg key is available
 if not quicklyutils.check_gpg_secret_key():

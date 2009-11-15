@@ -40,7 +40,7 @@ try:
     from launchpadlib.errors import HTTPError
     from launchpadlib.credentials import Credentials
 except ImportError:
-    die(_("Check whether python-launchpadlib is installed"))
+    raise launchpad_connexion_error(_("Check whether python-launchpadlib is installed"))
 
 
 from quickly import bzrbinding
@@ -119,7 +119,7 @@ def initialize_lpi(interactive = True):
             if suggestion is None:
                  suggestion = _("Unknown reason")
             os.remove(lp_cred)
-            die(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
+            raise launchpad_connexion_error(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
         print _("Launchpad connexion is ok")
 
     return launchpad
