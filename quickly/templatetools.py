@@ -25,6 +25,9 @@ import re
 import gettext
 from gettext import gettext as _
 
+import configurationhandler
+import quicklyconfig
+
 class bad_project_name(Exception):
     pass
 
@@ -74,4 +77,46 @@ def in_verbose_mode():
     if os.getenv('QUICKLY') is not None and "verbose" in os.getenv('QUICKLY').lower():
         return True
     return False
+
+def get_project_template_versions(template_path):
+    """Return project and template version"""
+
+    # take template version. If nothing found, take current Quickly version as reference
+    template_version = quicklyconfig.__version__
+    file_command_parameters = file(os.path.join(template_path, 'commandsconfig'), 'rb')
+    for line in file_command_parameters: 
+        fields = line.split('#')[0] # Suppress commentary after the value in configuration file and in full line
+        fields = fields.split('=') # Separate variable from value
+        # normally, we have two fields in "fields"
+        if len(fields) == 2:
+            targeted_property = fields[0].strip()
+            value = fields[1].strip()
+            if targeted_property == 'TEMPLATE_VERSION':
+                template_version = value
+                break
+    
+    # get current project version for this template. Default is no migration (ie take current version)
+    configurationhandler.loadConfig()
+    template_name = os.path.basename(template_path)
+    # if this project corresponding natively to this template
+    if configurationhandler.project_config['template'] == template_name:
+        try:
+            project_version = configurationhandler.project_config['version']
+        except KeyError: # it was called format in quickly 0.2.x
+            project_version = configurationhandler.project_config['format']
+            configurationhandler.project_config['version'] = project_version
+            del configurationhandler.project_config['format']
+            configurationhandler.saveConfig()
+    else:
+        try:
+            project_version = configurationhandler.project_config['version_%s' % template_name]
+        except KeyError: # initialize with the current template version (first time that another template command is spawn)
+            project_version = template_version
+            configurationhandler.project_config['version_%s' % template_name] = project_version
+            configurationhandler.saveConfig()
+    # exit if the versions are identical (less computation effort)
+    if project_version == template_version:
+        sys.exit(0)
+
+    return (project_version, template_version)
 

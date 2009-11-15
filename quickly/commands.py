@@ -131,7 +131,7 @@ def get_all_commands():
             if not launch_inside_project and not launch_outside_project:
                 launch_inside_project = True
                 launch_outside_project = True
-        
+
             hooks = {'pre': None, 'post':None}
             for event in ('pre', 'post'):
                 if hasattr(builtincommands, event + '_' + command_name):
@@ -295,6 +295,13 @@ class Command:
         except tools.project_path_not_found:       
             # launch in current project
             project_path = current_dir
+
+        # transition if needed
+        if self.inside_project and self.name != "upgrade":
+            try:
+                get_all_commands()[self.template]['upgrade'].launch(current_dir, [], template)
+            except KeyError: # if KeyError, no upgrade command.
+                pass
 
         if self.prehook:
             return_code = self.prehook(template, project_path, command_args)
