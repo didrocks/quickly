@@ -23,6 +23,7 @@ Quickly 0.4
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
+  - handle now version upgrade, launching script for templates
 
 Quickly 0.2.6
 -------------------------------------
