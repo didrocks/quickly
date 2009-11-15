@@ -146,15 +146,15 @@ def link_project(launchpad, question):
         project_number = 1
         project_names = []
         for project in prospective_projects:
-            print ("---------------- [%s] ----------------") % project_number
-            print "  " + project.title
-            print ("--------------------------------------")
-            print _("Project name: %s") % project.display_name
-            print _("Launchpad url: %s/%s") % (launchpad_url, project.name)
+            print (_('''---------------- [%s] ----------------
+   %s
+--------------------------------------
+Project name: %s
+Launchpad url: %s/%s
+%s
+''') % (project_number, project.title, project.display_name, launchpad_url, project.name, project.summary))
             project_names.append(project.name)
-            print project.summary
             project_number += 1            
-        print
 
         if not list(prospective_projects):
             message = _("No project found")

@@ -158,7 +158,7 @@ except launchpadaccess.launchpad_project_error, e:
 quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + project.name)
 
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
-#TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
+#TODO: check that the gpg key contains it (or match preferred_email_adress to available gpg keys and take the name)
 if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
     os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
 
