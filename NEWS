@@ -16,6 +16,10 @@ Quickly 0.4
   - Fix typo in quickly help save (Petar Vasić)
   - Adds logo.png as logo property in about dialog (LP: #478389)
     (Petar Vasić)
+  - Remove lp-project-change command and add configure command.
+    configure lp-project [project_name] to set/reset lp project binded to
+    your Quickly project
+    ppa <ppa name> to set a default ppa with your project
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
