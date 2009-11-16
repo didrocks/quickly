@@ -25,7 +25,7 @@ LAUNCHPAD_URL = "https://launchpad.net"
 LAUNCHPAD_STAGING_URL = "https://staging.launchpad.net"
 LAUNCHPAD_CODE_STAGING_URL = "https://code.staging.launchpad.net"
 
-
+# TODO: see how to export this error on import launchpadaccess (in init.py ?)
 class launchpad_connexion_error(Exception):
     pass
 class launchpad_project_error(Exception):
@@ -177,7 +177,7 @@ Launchpad url: %s/%s
     else:
         try:
             project = launchpad.projects[lp_project_name]
-         except ValueError:
+        except ValueError:
             raise project_error(_("No project with %s exists on Launchpad. You can try to find it interactively without providing a project name.") % lp_project_name)       
 
     configurationhandler.project_config['lp_id'] = project.name

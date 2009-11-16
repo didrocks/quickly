@@ -31,13 +31,7 @@ gettext.textdomain('quickly')
 
 from quickly import configurationhandler
 from internal import quicklyutils, packaging
-
-try:
-    from quickly import launchpadaccess
-except launchpadaccess.launchpad_connexion_error, e:
-    print(e)
-    sys.exit(1)
-
+from quickly import launchpadaccess
 
 launchpad = None
 ppa_name = None

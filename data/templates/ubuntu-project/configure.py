@@ -22,11 +22,7 @@ import sys
 
 from internal import quicklyutils, packaging
 from quickly import configurationhandler, templatetools
-try:
-    from quickly import launchpadaccess
-except launchpadaccess.launchpad_connexion_error, e:
-    print(e)
-    sys.exit(1)
+from quickly import launchpadaccess
 
 
 import gettext

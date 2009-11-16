@@ -28,11 +28,7 @@ import license
 
 import logging
 
-try:
-    from quickly import launchpadaccess
-except launchpadaccess.launchpad_connexion_error, e:
-    print(e)
-    sys.exit(1)
+from quickly import launchpadaccess
 
 import gettext
 from gettext import gettext as _
