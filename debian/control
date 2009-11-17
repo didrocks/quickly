@@ -36,6 +36,7 @@ Depends: ${misc:Depends},
          python-desktopcouch-records (>= 0.3),
          python-launchpadlib,
          dput,
+         gedit | editor,
          bzr,
          python-distutils-extra (>= 2.10)
 Description: quickly Ubuntu projects template
