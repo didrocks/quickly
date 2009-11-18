@@ -59,7 +59,7 @@ editor = "gedit"
 default_editor = os.environ.get("EDITOR")
 if not default_editor:
     default_editor = os.environ.get("SELECTED_EDITOR")
-if not default_editor and os.path.exists('~/.selected_editor'):
+if not default_editor and os.path.exists(os.path.expanduser('~/.selected_editor')):
     editor = 'sensible-editor'
 elif default_editor:
     editor = default_editor

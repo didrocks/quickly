@@ -20,6 +20,7 @@ Quickly 0.4
     configure lp-project [project_name] to set/reset lp project binded to
     your Quickly project
     ppa <ppa name> to set a default ppa with your project
+  - Fix ~/.selected-editor being ignored (LP: #484730)
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
