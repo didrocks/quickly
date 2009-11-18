@@ -4,16 +4,16 @@
 #
 # This file is part of Quickly
 #
-#This program is free software: you can redistribute it and/or modify it 
-#under the terms of the GNU General Public License version 3, as published 
+#This program is free software: you can redistribute it and/or modify it
+#under the terms of the GNU General Public License version 3, as published
 #by the Free Software Foundation.
 
-#This program is distributed in the hope that it will be useful, but 
-#WITHOUT ANY WARRANTY; without even the implied warranties of 
-#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+#This program is distributed in the hope that it will be useful, but
+#WITHOUT ANY WARRANTY; without even the implied warranties of
+#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
 #PURPOSE.  See the GNU General Public License for more details.
 
-#You should have received a copy of the GNU General Public License along 
+#You should have received a copy of the GNU General Public License along
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
@@ -35,7 +35,7 @@ __commands = {}
 
 def get_all_commands():
     """Load all commands
-    
+
     First, load template command and then builtins one. Push right parameters depending
     if hooks are available, or if the command execution is special
     You can note that create command is automatically overloaded atm"""
@@ -58,7 +58,7 @@ def get_all_commands():
             command_followed_by_command_list = []
             try:
                 files_command_parameters = file(os.path.join(template_path, "commandsconfig"), 'rb')
-                for line in files_command_parameters: 
+                for line in files_command_parameters:
                     fields = line.split('#')[0] # Suppress commentary after the value in configuration file and in full line
                     fields = fields.split('=') # Separate variable from value
                     # normally, we have two fields in "fields"
@@ -86,8 +86,8 @@ def get_all_commands():
                     for event in ('pre', 'post'):
                         if hasattr(builtincommands, event + '_' + command_name):
                             hooks[event] = getattr(builtincommands, event + '_' + command_name)
-                    
-                    # define special options for command    
+
+                    # define special options for command
                     launch_inside_project = False
                     launch_outside_project = False
                     followed_by_template = False
@@ -102,10 +102,10 @@ def get_all_commands():
                     # default for commands: if not inside nor outside, and it's a template command, make it launch inside a project only
                     if not launch_inside_project and not launch_outside_project:
                         launch_inside_project = True
-                    
+
                     __commands[template][command_name] = Command(command_name, file_path, template, launch_inside_project, launch_outside_project, followed_by_template, followed_by_command, hooks['pre'], hooks['post'])
 
-     
+
     # add builtin commands (avoiding gettext and hooks)
     __commands['builtins'] = {}
     for elem in dir(builtincommands):
@@ -135,16 +135,16 @@ def get_all_commands():
             hooks = {'pre': None, 'post':None}
             for event in ('pre', 'post'):
                 if hasattr(builtincommands, event + '_' + command_name):
-                    hooks[event] = getattr(builtincommands, event + '_' + command_name)               
+                    hooks[event] = getattr(builtincommands, event + '_' + command_name)
 
             __commands['builtins'][command_name] = Command(command_name, command, None, launch_inside_project, launch_outside_project, followed_by_template, followed_by_command, hooks['pre'], hooks['post'])
-                
+
     return __commands
-    
+
 
 def get_command_by_criteria(**criterias):
     """Get a list of all commands corresponding to criterias
-    
+
     Criterias correponds to Command object properties"""
 
     # all criterias are None by default, which means, don't care about the value
@@ -163,14 +163,14 @@ def get_command_by_criteria(**criterias):
                     command_ok = False
                     continue # no need to check other criterias
             if command_ok:
-                matched_commands.append(candidate_command)    
-    
+                matched_commands.append(candidate_command)
+
     return matched_commands
 
 
 def get_all_templates():
     """Get a list of all templates"""
-    
+
     return [template for template in get_all_commands().keys() if template != "builtins"]
 
 
@@ -194,10 +194,10 @@ class Command:
 
     def shell_completion(self, template_in_cli, args):
         """Smart completion of a command
-  
+
         This command try to see if the command is followed by a template and present template
         if it's the case. Otherwise, it calls the corresponding command argument"""
-        
+
         completion = []
 
         if len(args) == 1:
@@ -220,7 +220,7 @@ class Command:
                     completion.extend([command.name for command in get_command_by_criteria(template=template_in_cli)])
                     completion.extend([command.name for command in get_command_by_criteria(template="builtins")])
 
-        # give to the command the opportunity of giving some shell-completion features        
+        # give to the command the opportunity of giving some shell-completion features
         if template_in_cli == self.template and len(completion) == 0:
             if callable(self.command): # Internal function
                 completion.extend(self.command(template_in_cli, "", args, True))
@@ -229,7 +229,7 @@ class Command:
                 command_return_completion, err = instance.communicate()
                 if instance.returncode != 0:
                     print err
-                    sys.exit(1)                    
+                    sys.exit(1)
                 completion.extend(command_return_completion.split(','))
 
         return(" ".join(completion))
@@ -237,7 +237,7 @@ class Command:
     def help(self, dest_path,command_args):
         """Print help of the current command"""
 
-        return_code = 0        
+        return_code = 0
         if callable(self.command): # intern function, return __doc__
             print (self.command.__doc__)
         else: # launch command with "help" parameter
@@ -247,9 +247,9 @@ class Command:
 
     def is_right_context(self, dest_path, verbose=True):
         """Check if we are in the right context for launching the command"""
-        
+
         # verbose à false pour l'introspection des commandes dispos
-        
+
         # check if dest_path check outside or inside only project :)
         if self.inside_project and not self.outside_project:
             try:
@@ -269,16 +269,16 @@ class Command:
                 return False
             except tools.project_path_not_found:
                 pass
-            
+
         return True
 
 
     def launch(self, current_dir, command_args, template=None):
         """Launch command and hooks for it
-        
+
         This command will perform the right action (insider function or script execution) after having
         checked the context"""
-    
+
         # template is current template (it will be useful for builtin commands)
 
         # if template not specified, take the one for the command
@@ -292,7 +292,7 @@ class Command:
         # get root project dir
         try:
             project_path = tools.get_root_project_path(current_dir)
-        except tools.project_path_not_found:       
+        except tools.project_path_not_found:
             # launch in current project
             project_path = current_dir
 
@@ -307,7 +307,7 @@ class Command:
             return_code = self.prehook(template, project_path, command_args)
             if return_code != 0:
                 self._die(self.prehook.__name__, return_code)
-        
+
         if callable(self.command): # Internal function
             return_code = self.command(template, project_path, command_args)
         else: # External command
@@ -319,8 +319,5 @@ class Command:
             return_code = self.posthook(template, project_path, command_args)
             if return_code != 0:
                 self._die(self.posthook.__name__, return_code)
-        
+
         return(0)
-
-
-
