@@ -232,7 +232,7 @@ class Command:
                     sys.exit(1)
                 completion.extend(command_return_completion.split(','))
 
-        return(" ".join(completion))
+        return " ".join(completion)
 
     def help(self, dest_path,command_args):
         """Print help of the current command"""
@@ -243,7 +243,7 @@ class Command:
         else: # launch command with "help" parameter
             return_code = subprocess.call([self.command, "help"] + command_args, cwd=dest_path)
 
-        return(return_code)
+        return return_code
 
     def is_right_context(self, dest_path, verbose=True):
         """Check if we are in the right context for launching the command"""
@@ -287,7 +287,7 @@ class Command:
             template = self.template # (which can be None if it's a builtin command launched outside a project)
 
         if not self.is_right_context(current_dir): # check in verbose mode
-            return(1)
+            return 1
 
         # get root project dir
         try:
@@ -320,4 +320,4 @@ class Command:
             if return_code != 0:
                 self._die(self.posthook.__name__, return_code)
 
-        return(0)
+        return 0
