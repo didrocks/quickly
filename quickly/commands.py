@@ -175,6 +175,8 @@ def get_all_commands():
     return __commands
 
 
+# XXX: This really ought to be get_commands_by_criteria to be correct grammar,
+# if it can return multiple commands. -- jml, 2009-11-18
 def get_command_by_criteria(**criterias):
     """Get a list of all commands corresponding to criterias
 
