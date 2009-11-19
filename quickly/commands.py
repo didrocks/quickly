@@ -29,8 +29,9 @@ from gettext import gettext as _
 
 gettext.textdomain('quickly')
 
-# XXX: What does this comment mean? -- jml, 2009-11-18
-# double depths tabular : template (or "builtin"), name
+# A dictionary with keys either 'builtins' or the names of templates. Values
+# are another dictionary mapping command names to their command objects. This
+# is used as a cache of all commands that we've found in templates.
 __commands = {}
 
 
@@ -98,11 +99,10 @@ def get_all_commands():
                 # XXX: It's generally a bad idea to check if you can read to a
                 # file. Instead, you should just read it. The file might
                 # become unreadable between here and when you actually read
-                # it.
+                # it. -- jml, 2009-11-18
                 if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
                     hooks = {'pre': None, 'post': None}
                     for event in ('pre', 'post'):
-                        # XXX: hasattr is evil. Use getattr.
                         event_hook = getattr(
                             builtincommands, event + '_' + command_name, None)
                         if event_hook is not None:
@@ -175,9 +175,7 @@ def get_all_commands():
     return __commands
 
 
-# XXX: This really ought to be get_commands_by_criteria to be correct grammar,
-# if it can return multiple commands. -- jml, 2009-11-18
-def get_command_by_criteria(**criterias):
+def get_commands_by_criteria(**criterias):
     """Get a list of all commands corresponding to criterias
 
     Criterias correponds to Command object properties.
@@ -216,7 +214,7 @@ def get_command_names_by_criteria(**criteria):
 
     'criteria' correponds to Command object properties.
     """
-    return (command.name for command in get_command_by_criteria(**criteria))
+    return (command.name for command in get_commands_by_criteria(**criteria))
 
 
 def get_all_templates():
@@ -318,10 +316,11 @@ class Command:
         return return_code
 
     def is_right_context(self, dest_path, verbose=True):
-        """Check if we are in the right context for launching the command"""
+        """Check if we are in the right context for launching the command.
 
-        # verbose à false pour l'introspection des commandes dispos
-
+        If you are using this to introspect available commands, then set
+        verbose to False.
+        """
         # check if dest_path check outside or inside only project :)
         if self.inside_project and not self.outside_project:
             try:
@@ -338,9 +337,6 @@ class Command:
             try:
                 project_path = tools.get_root_project_path(dest_path)
                 if verbose:
-                    # XXX: I don't know about i18n, but shouldn't the
-                    # project_path and command be substituted _after_ the
-                    # gettext? -- jml, 2009-11-18
                     print _(
                         "ERROR: %s is a project. You can't launch %s command "
                         "within a project. Please choose another path."
