@@ -141,14 +141,14 @@ def get_commands():
     if len(opt_command) == 1:
         # list available command in template if suit context
         if opt_template:
-            available_completion.extend([command.name for command in commands.get_command_by_criteria(template=opt_template) if command.is_right_context(os.getcwd(), verbose=False)])
+            available_completion.extend([command.name for command in commands.get_commands_by_criteria(template=opt_template) if command.is_right_context(os.getcwd(), verbose=False)])
         # add builtins command and commands that are followed by template
-        available_completion.extend([command.name for command in commands.get_command_by_criteria(template="builtins") if command.is_right_context(os.getcwd(), verbose=False)])
-        available_completion.extend([command.name for command in commands.get_command_by_criteria(followed_by_template=True) if command.is_right_context(os.getcwd(), verbose=False)])      
+        available_completion.extend([command.name for command in commands.get_commands_by_criteria(template="builtins") if command.is_right_context(os.getcwd(), verbose=False)])
+        available_completion.extend([command.name for command in commands.get_commands_by_criteria(followed_by_template=True) if command.is_right_context(os.getcwd(), verbose=False)])      
         
     else:
         # ask for the command what she needs (it automatically handle the case of command followed by template and command followed by command)
-        available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in commands.get_command_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
+        available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in commands.get_commands_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
         
     print " ".join(elem for elem in available_completion if elem is not None)
     return(0)
@@ -176,11 +176,11 @@ def main():
 
         # with this search, we are sure that only one command: (name,template) is unique
         try:
-            command = commands.get_command_by_criteria(name=command_name, template=opt_template)[0]
+            command = commands.get_commands_by_criteria(name=command_name, template=opt_template)[0]
         except IndexError:
             # if not found, try for builtins command
             try:
-                command = commands.get_command_by_criteria(name=command_name, template='builtins')[0]
+                command = commands.get_commands_by_criteria(name=command_name, template='builtins')[0]
             except IndexError: 
                 print _("ERROR: No %s command found in template %s.") % (command_name, opt_template)
                 print _("Aborting.")
@@ -190,7 +190,7 @@ def main():
     else:
         # check for a builtin command (again, one solution only)
         try:
-            command = commands.get_command_by_criteria(name=command_name, template='builtins')[0]    
+            command = commands.get_commands_by_criteria(name=command_name, template='builtins')[0]    
             # if it's a builtin command which has to be followed by a template, check that everything is correct
             if command.followed_by_template:
                 try:
@@ -207,17 +207,17 @@ def main():
         except IndexError:        
             # so, check for a template command followed by template
             try:
-                command = commands.get_command_by_criteria(name=command_name, template=opt_command[1], followed_by_template=True)[0]
+                command = commands.get_commands_by_criteria(name=command_name, template=opt_command[1], followed_by_template=True)[0]
                 opt_template = opt_command[1]
                 opt_command.remove(opt_command[1])
             except IndexError:
                 # to help the user, we can search if this command_name corresponds to a command in a template
-                list_possible_commands = commands.get_command_by_criteria(name=command_name, followed_by_template=True)
+                list_possible_commands = commands.get_commands_by_criteria(name=command_name, followed_by_template=True)
                 if list_possible_commands:
                    print _("ERROR: %s command must be followed by a template and no template was found on the command line." % command_name)
                    print _("Candidates template are: %s") % ", ".join([command.template for command in list_possible_commands])
                 else:
-                    list_possible_commands = commands.get_command_by_criteria(name=command_name, followed_by_template=False)
+                    list_possible_commands = commands.get_commands_by_criteria(name=command_name, followed_by_template=False)
                     if list_possible_commands:
                        print _("No template were found on the command line for command %s." % command_name)
                        print _("Candidates template are: %s") % ", ".join([command.template for command in list_possible_commands])                        

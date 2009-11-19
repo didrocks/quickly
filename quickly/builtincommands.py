@@ -146,17 +146,17 @@ def help(template, project_dir, command_args, shell_completion=False):
     if template is None:
         template = "builtins"
     try:
-        command = commands_module.get_command_by_criteria(name=command_name, template=template)[0]
+        command = commands_module.get_commands_by_criteria(name=command_name, template=template)[0]
     except IndexError:
         # check if a builtin commands corresponds
         template = "builtins"
         try:
-            command = commands_module.get_command_by_criteria(name=command_name, template=template)[0]
+            command = commands_module.get_commands_by_criteria(name=command_name, template=template)[0]
         except IndexError:       
             # there is really not such command
             if template == "builtins":
                 # to help the user, we can search if this command_name corresponds to a command in a template
-                list_possible_commands = commands_module.get_command_by_criteria(name=command_name, followed_by_template=True)
+                list_possible_commands = commands_module.get_commands_by_criteria(name=command_name, followed_by_template=True)
                 if list_possible_commands:
                    print _("ERROR: help command must be followed by a template name for getting help from templates commands like %s." % command_name)
                    print _("Candidates template are: %s") % ", ".join([command.template for command in list_possible_commands])
