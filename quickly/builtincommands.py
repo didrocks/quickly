@@ -65,7 +65,7 @@ def pre_create(command_template, project_template, project_dir, command_args):
     print _("Directory %s created\n" % project_name)
 
     # creating quickly file
-    configurationhandler.project_config['format'] = quicklyconfig.__version__
+    configurationhandler.project_config['version'] = quicklyconfig.__version__
     configurationhandler.project_config['project'] = quickly_project_name
     configurationhandler.project_config['template'] = command_template
     configurationhandler.saveConfig(config_file_path=project_name)
