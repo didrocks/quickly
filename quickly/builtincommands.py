@@ -29,7 +29,7 @@ import gettext
 from gettext import gettext as _
 
 
-def pre_create(template, project_dir, command_args):
+def pre_create(command_template, project_template, project_dir, command_args):
     """Create the project directory before create command call"""
 
     if len(command_args) < 1:
@@ -67,14 +67,14 @@ def pre_create(template, project_dir, command_args):
     # creating quickly file
     configurationhandler.project_config['format'] = quicklyconfig.__version__
     configurationhandler.project_config['project'] = quickly_project_name
-    configurationhandler.project_config['template'] = template
+    configurationhandler.project_config['template'] = command_template
     configurationhandler.saveConfig(config_file_path=project_name)
     
     os.chdir(project_name)
 
     return 0
 
-def commands(template, project_dir, command_args, shell_completion=False):
+def commands(project_template, project_dir, command_args, shell_completion=False):
     """List all commands ordered by templates"""
 
     # We have nothing for this
@@ -92,7 +92,7 @@ def commands(template, project_dir, command_args, shell_completion=False):
             
     return(0)
     
-def getstarted(template, project_dir, command_args, shell_completion=False):
+def getstarted(project_template, project_dir, command_args, shell_completion=False):
     """ Give some getstarted advice"""
 
     # We have nothing for this
@@ -130,7 +130,7 @@ $ quickly release or $ quickly share
 Have Fun!''')
     return 0
 
-def help(template, project_dir, command_args, shell_completion=False):
+def help(project_template, project_dir, command_args, shell_completion=False):
     """Get help from commands"""
 
     # We have nothing for this
@@ -143,10 +143,11 @@ def help(template, project_dir, command_args, shell_completion=False):
         print _("ERROR: No command provided to help command")
         return(1)
 
+    template = project_template
     if template is None:
         template = "builtins"
     try:
-        command = commands_module.get_commands_by_criteria(name=command_name, template=template)[0]
+        command = commands_module.get_commands_by_criteria(name=command_name, template=project_template)[0]
     except IndexError:
         # check if a builtin commands corresponds
         template = "builtins"
@@ -169,7 +170,7 @@ def help(template, project_dir, command_args, shell_completion=False):
     return(command.help(project_dir, command_args))
 
 
-def quickly(template, project_dir, command_args, shell_completion=False):
+def quickly(project_template, project_dir, command_args, shell_completion=False):
     """Create a new quickly template from an existing one"""
 
     # We have nothing for this
@@ -191,14 +192,14 @@ def quickly(template, project_dir, command_args, shell_completion=False):
         return 1
 
     if not os.path.exists(template_destination_path):
-        print _("Copy %s to create new %s template") % (template, template_destination_path)
+        print _("Copy %s to create new %s template") % (project_template, template_destination_path)
 
     try:
-        template_source_path = tools.get_template_directory(template)
-    except (tools.template_path_not_found, e):
+        template_source_path = tools.get_template_directory(project_template)
+    except tools.template_path_not_found, e:
         print(e)
         return 1
-    except (tools.template_not_found, e):
+    except tools.template_not_found, e:
         print(e)
         return 1
 

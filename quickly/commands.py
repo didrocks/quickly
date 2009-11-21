@@ -348,26 +348,17 @@ class Command:
 
         return True
 
-    def launch(self, current_dir, command_args, template=None):
+    def launch(self, current_dir, command_args, project_template=None):
         """Launch command and hooks for it
 
         This command will perform the right action (insider function or script
         execution) after having checked the context.
         """
 
-        # template is current template (it will be useful for builtin
-        # commands)
-
-        # if template not specified, take the one for the command the template
-        # argument is useful when builtin commands which behavior take into
-        # account the template name
-        if template is None:
-            # (which can be None if it's a builtin command launched outside a
-            # project)
-            template = self.template
-
         if not self.is_right_context(current_dir): # check in verbose mode
             return 1
+
+
 
         # get root project dir
         try:
@@ -380,17 +371,17 @@ class Command:
         if self.inside_project and self.name != "upgrade":
             try:
                 get_all_commands()[self.template]['upgrade'].launch(
-                    current_dir, [], template)
+                    current_dir, [], project_template)
             except KeyError: # if KeyError, no upgrade command.
                 pass
 
         if self.prehook:
-            return_code = self.prehook(template, project_path, command_args)
+            return_code = self.prehook(self.template, project_template, project_path, command_args)
             if return_code != 0:
                 self._die(self.prehook.__name__, return_code)
 
         if callable(self.command): # Internal function
-            return_code = self.command(template, project_path, command_args)
+            return_code = self.command(project_template, project_path, command_args)
         else: # External command
             return_code = subprocess.call(
                 [self.command] + command_args, cwd=project_path)
@@ -398,7 +389,7 @@ class Command:
             self._die(self.name, return_code)
 
         if self.posthook:
-            return_code = self.posthook(template, project_path, command_args)
+            return_code = self.posthook(project_template, project_path, command_args)
             if return_code != 0:
                 self._die(self.posthook.__name__, return_code)
 
