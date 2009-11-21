@@ -29,7 +29,10 @@ gettext.textdomain('quickly')
 
 # get project version and template version
 (project_version, template_version) = templatetools.get_project_template_versions(os.path.dirname(__file__))
+print project_version
+print template_version
 if project_version < 0.3:
-    pass # transition to 0.3
+    print ",".join(sys.argv)
+pass # transition to 0.3
 
 

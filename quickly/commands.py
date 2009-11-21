@@ -371,11 +371,12 @@ class Command:
             # launch in current project
             project_path = current_dir
 
-        # transition if needed
+        # transition if needed (call upgrade from native template)
         if self.inside_project and self.name != "upgrade":
             try:
-                get_all_commands()[self.template]['upgrade'].launch(
-                    current_dir, [], project_template)
+                print "upgrade from %s" % self.template
+                #get_all_commands()[self.template]['upgrade'].launch(
+                #    current_dir, [], project_template)
             except KeyError: # if KeyError, no upgrade command.
                 pass
 
