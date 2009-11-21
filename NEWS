@@ -21,6 +21,8 @@ Quickly 0.4
     your Quickly project
     ppa <ppa name> to set a default ppa with your project
   - Fix ~/.selected-editor being ignored (LP: #484730)
+  - Fix wrong shell completion when in a template (it wrongly proposed
+    all commands followed by templates)
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
