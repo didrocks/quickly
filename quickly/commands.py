@@ -367,16 +367,18 @@ class Command:
         # get root project dir
         try:
             project_path = tools.get_root_project_path(current_dir)
+            inside_project = True
         except tools.project_path_not_found:
             # launch in current project
             project_path = current_dir
+            inside_project = False
 
-        # transition if needed (call upgrade from native template)
-        if self.inside_project and self.name != "upgrade":
+        # transition if we are inside a project
+        # (call upgrade from native template)
+        if inside_project and self.name != "upgrade":
             try:
-                print "upgrade from %s" % self.template
-                #get_all_commands()[self.template]['upgrade'].launch(
-                #    current_dir, [], project_template)
+                get_all_commands()[self.template]['upgrade'].launch(
+                    current_dir, [], project_template)
             except KeyError: # if KeyError, no upgrade command.
                 pass
 
