@@ -139,12 +139,12 @@ def get_commands():
             pass
     # if no command yet, check for available command
     if len(opt_command) == 1:
-        # list available command in template suiting context
+        # list available command in template suiting context (even command "followed by template" native of that template)
         if opt_template: 
             available_completion.extend([command.name for command in commands.get_commands_by_criteria(template=opt_template) if command.is_right_context(os.getcwd(), verbose=False)])
         # add builtin commands
         available_completion.extend([command.name for command in commands.get_commands_by_criteria(template="builtins") if command.is_right_context(os.getcwd(), verbose=False)])
-        # add commands followed by a template if we don't already have a template provided
+        # add commands followed by a template if we don't already have a template provided (native command followed by template has already been handled before)
         if not opt_template:
             available_completion.extend([command.name for command in commands.get_commands_by_criteria(followed_by_template=True) if command.is_right_context(os.getcwd(), verbose=False)])      
         
