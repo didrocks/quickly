@@ -236,6 +236,10 @@ class Command:
                  followed_by_template=False, followed_by_command=False,
                  prehook=None, posthook=None):
         self.command = command
+        # self.template is the native template where the command is from
+        # if this command is imported into another template, the object
+        # is still the same, only the access byx
+        # get_all_commands()[importing_template]["command_name"]
         self.template = template
         self.prehook = prehook
         self.posthook = posthook
