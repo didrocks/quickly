@@ -103,11 +103,10 @@ def getstarted(project_template, project_dir, command_args, shell_completion=Fal
     Welcome to quickly!
 -------------------------------
 
-You can create a project in executing 'quickly create <template_name> <your project>'.
-
+You can create a project by executing 'quickly create <template_name> <your project>'.
 
 Example with ubuntu-project template:
-1. create a Ubuntu Project and run the tutorial:
+1. create an Ubuntu Project and run the tutorial:
 $ quickly create ubuntu-project foo
 $ cd foo
 $ quickly tutorial
@@ -116,15 +115,14 @@ $ quickly tutorial
 $ quickly edit
 $ quickly glade
 $ quickly run
-Use bash completion to get every available commands
+Use bash completion to get every available command
 
-3. How to play with package and release:
+3. How to play with a package and release it:
 
-optional, but recommended to build first your package locally:
+Optional (but recommended): build your package locally:
 $ quickly package
 
-BE WARNED: the two following commands will connect to Launchpad. You need at least having a Launchpad account and an opened ppa.
-You need also for quickly release a project where you can bind your work with.
+BE WARNED: the two following commands will connect to Launchpad. Make sure that you have a Launchpad account and a PPA! You can find out more about setting up a Launchpad account and Launchpad features at https://launchpad.net/
 $ quickly release or $ quickly share
 
 Have Fun!''')

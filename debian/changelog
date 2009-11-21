@@ -6,8 +6,9 @@ quickly (0.2.6) karmic; urgency=low
      policy (LP: #460355)
    + common:
      - Remove outdated information in README
+     - change getstarted wording (LP: #486180) - Grant
 
- -- Didier Roche <didrocks@ubuntu.com>  Mon, 26 Oct 2009 16:40:13 +0100
+ -- Didier Roche <didrocks@ubuntu.com>  Sat, 21 Nov 2009 12:55:26 -0600
 
 quickly (0.2.5) karmic; urgency=low
 
