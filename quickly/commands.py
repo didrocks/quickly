@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 import builtincommands
-import tools
+import templatetools, tools
 
 import gettext
 from gettext import gettext as _
@@ -376,11 +376,14 @@ class Command:
         # transition if we are inside a project
         # (call upgrade from native template)
         if inside_project and self.name != "upgrade":
-            try:
-                get_all_commands()[self.template]['upgrade'].launch(
-                    current_dir, [], project_template)
-            except KeyError: # if KeyError, no upgrade command.
-                pass
+            (project_version, template_version) = templatetools.get_project_and_template_versions(self.template)
+            if project_version < template_version:
+                try:
+                    return_code = get_all_commands()[self.template]['upgrade'].launch( current_dir, [project_version, template_version], project_template)
+                    # TODO: update the version if successful
+                    print return_code
+                except KeyError: # if KeyError, no upgrade command for this template
+                    pass
 
         if self.prehook:
             return_code = self.prehook(self.template, project_template, project_path, command_args)

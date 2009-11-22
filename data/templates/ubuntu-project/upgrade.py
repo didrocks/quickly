@@ -27,12 +27,17 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
-# get project version and template version
-(project_version, template_version) = templatetools.get_project_template_versions(os.path.dirname(__file__))
-print project_version
-print template_version
-if project_version < 0.3:
-    print ",".join(sys.argv)
-pass # transition to 0.3
+# get project version and template version if no argument given
+if len(sys.argv) < 3:
+    (project_version, template_version) = templatetools.get_project_and_template_versions("ubuntu-project")
+else:
+    project_version = sys.argv[1]
+    template_version = sys.argv[2]
+#print project_version
+#print template_version
 
+# transition to 0.3
+#if project_version < 0.3:
+# do_stuff
 
+sys.exit(0)

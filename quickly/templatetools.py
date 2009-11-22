@@ -25,7 +25,7 @@ import re
 import gettext
 from gettext import gettext as _
 
-import configurationhandler
+import configurationhandler, tools
 import quicklyconfig
 
 class bad_project_name(Exception):
@@ -78,11 +78,12 @@ def in_verbose_mode():
         return True
     return False
 
-def get_project_template_versions(template_path):
+def get_project_and_template_versions(template_name):
     """Return project and template version"""
 
-    # take template version. If nothing found, take current Quickly version as reference
+    # take template version. Default is current Quickly version
     template_version = quicklyconfig.__version__
+    template_path = tools.get_template_directory(template_name)
     file_command_parameters = file(os.path.join(template_path, 'commandsconfig'), 'rb')
     for line in file_command_parameters: 
         fields = line.split('#')[0] # Suppress commentary after the value in configuration file and in full line
@@ -97,7 +98,6 @@ def get_project_template_versions(template_path):
     
     # get current project version for this template. Default is no migration (ie take current version)
     configurationhandler.loadConfig()
-    template_name = os.path.basename(template_path)
     # if this project corresponding natively to this template
     if configurationhandler.project_config['template'] == template_name:
         try:
