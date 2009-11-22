@@ -39,5 +39,5 @@ else:
 # transition to 0.3
 #if project_version < 0.3:
 # do_stuff
-
+print("updated")
 sys.exit(0)

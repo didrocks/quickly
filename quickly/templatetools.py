@@ -110,13 +110,18 @@ def get_project_and_template_versions(template_name):
     else:
         try:
             project_version = configurationhandler.project_config['version_%s' % template_name]
-        except KeyError: # initialize with the current template version (first time that another template command is spawn)
-            project_version = template_version
-            configurationhandler.project_config['version_%s' % template_name] = project_version
-            configurationhandler.saveConfig()
-    # exit if the versions are identical (less computation effort)
-    if project_version == template_version:
-        sys.exit(0)
+        except KeyError: # initialize with an empty project version to force first upgrade
+            project_version = ''
 
     return (project_version, template_version)
+
+def update_version_in_project_file(new_version, template_name):
+    ''' Update version in .quickly file'''
+
+    configurationhandler.loadConfig()
+    if configurationhandler.project_config['template'] == template_name:
+        configurationhandler.project_config['version'] = new_version
+    else:
+        configurationhandler.project_config['version_%s' % template_name] = new_version
+    configurationhandler.saveConfig()
 
