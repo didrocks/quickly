@@ -42,6 +42,11 @@ templatetools.handle_additional_parameters(sys.argv, help)
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 
+# check if we can execute a graphical project
+if not templatetools.is_X_display():
+    print _("Can't access to X server, so can't run gtk application")
+    sys.exit(1)
+
 project_bin = 'bin/' + configurationhandler.project_config['project']
 command_line = [project_bin]
 command_line.extend(sys.argv[1:])

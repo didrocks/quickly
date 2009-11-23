@@ -145,9 +145,10 @@ subprocess.call(["bzr", "init"])
 subprocess.call(["bzr", "add"])
 subprocess.call(["bzr", "commit", "-m", "Initial project creation with Quickly!"])
 
-# run the new application
-print _("Launching your newly created project!")
-subprocess.call(['./' + project_name], cwd='bin/')
+# run the new application if X display
+if templatetools.is_X_display():
+    print _("Launching your newly created project!")
+    subprocess.call(['./' + project_name], cwd='bin/')
 
 print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly tutorial' for quickly ubuntu-template tutorial and reference") % os.getcwd()
 

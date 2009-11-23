@@ -116,7 +116,7 @@ def get_project_and_template_versions(template_name):
     return (project_version, template_version)
 
 def update_version_in_project_file(new_version, template_name):
-    ''' Update version in .quickly file'''
+    """Update version in .quickly file"""
 
     configurationhandler.loadConfig()
     if configurationhandler.project_config['template'] == template_name:
@@ -124,4 +124,11 @@ def update_version_in_project_file(new_version, template_name):
     else:
         configurationhandler.project_config['version_%s' % template_name] = new_version
     configurationhandler.saveConfig()
+
+def is_X_display():
+    """Check if we have a display available"""
+    if os.getenv("DISPLAY"):
+        return True
+    else:
+        return False
 
