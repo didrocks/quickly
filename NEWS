@@ -3,6 +3,9 @@ Quickly 0.4
 
   Quickly core:
   - check now that --template has one argument
+  - -- enables to give options to templates (unknown options and arguments
+    are still given to templates but -- specify explicity what to give to
+    templates commands like -h, --version...)
   ubuntu-project Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname

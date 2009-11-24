@@ -96,8 +96,12 @@ def process_command_line(argv):
             elif arg == '--help' or arg == '-h':
                 usage()
                 sys.exit(0)
+            elif arg == '--':
+                # turn off option detection, give everything to templates (even -f, --version)
+                opt_command.extend(argv[i:])
+                break
             else:
-                opt_command.append(arg) # temporary solution, see commit.
+                opt_command.append(arg)
         else:
             opt_command.append(arg)
         i += 1
