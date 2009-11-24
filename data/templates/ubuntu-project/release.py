@@ -51,9 +51,9 @@ $quickly release <release_number> notes about changes
 where "notes about changes" is optional text describing what changes
 were made since the last save
 
---ppa <your ppa> (name or display name) to specify to which ppa you want
+--ppa your_ppa (name or display name) to specify to which ppa you want
 to share
---ppa team/<ppa> (name or display name) to specify to which ppa team you
+--ppa team/ppa (name or display name) to specify to which ppa team you
 want to share
 
 Before running quickly release, you should: create your account
@@ -98,11 +98,12 @@ while i < len(argv):
                 ppa_name = argv[i + 1]
                 i += 1
             else:
-                print _("ERROR: --ppa needs one argument: <ppa name>")
-                sys.exit(1)
+                print _("--ppa needs one argument: <ppa_name> or <team/ppa_name>")
+                sys.exit(4)
         else:
             print _("Unknown option: %s"  % arg)
-            sys.exit(1)
+            print _("General usage is: quickly release [release_version] [comments]")
+            sys.exit(4)
     else:
         args.append(arg)
     i += 1

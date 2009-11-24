@@ -256,8 +256,8 @@ if __name__ == "__main__":
     templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
     license = None
     if len(sys.argv) > 2:
-        print _("This command only take one optional argument: License")
-        sys.exit(1)
+        print _("This command only take one optional argument: License\nUsage is: quickly license <license>")
+        sys.exit(4)
     if len(sys.argv) == 2:
         license = sys.argv[1]
 

@@ -46,7 +46,7 @@ $quickly share
 
 Updates your PPA with the the latest saved project changes.
 
-Before running quickly release, you should: create your account
+Before running quickly share, you should: create your account
 on http://launchpad.net.
 You also have to add a PPA to your launchpad account.
 
@@ -55,9 +55,9 @@ Name, email and version setup.py will be automatically changed.
 at each quickly share execution)
 You can modify the description and long description if you wish.
 
---ppa <your ppa> (name or display name) to specify to which ppa you want
+--ppa your_ppa (name or display name) to specify to which ppa you want
 to share
---ppa team/<ppa> (name or display name) to specify to which ppa team you
+--ppa team/ppa (name or display name) to specify to which ppa team you
 want to share
 """)
 def shell_completion(argv):
@@ -81,11 +81,12 @@ while i < len(argv):
                 ppa_name = argv[i + 1]
                 i += 1
             else:
-                print _("ERROR: --ppa needs one argument: <ppa name>")
-                sys.exit(1)
+                print _("--ppa needs one argument: <ppa_name> or <team/ppa_name>")
+                sys.exit(4)
         else:
             print _("Unknown option: %s"  % arg)
-            sys.exit(1)
+            print _("General usage is: quickly release [release_version] [comments]")
+            sys.exit(4)
     else:
         args.append(arg)
     i += 1

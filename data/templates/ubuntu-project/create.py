@@ -61,9 +61,8 @@ abs_path = os.path.abspath(pathname) + "/"
 
 # get the name of the project
 if len(sys.argv) < 2:
-    print _("""
-ERROR: project name not defined. Usage is project_name""")
-    sys.exit(1)
+    print _("""Project name not defined.\nUsage isi: quickly create ubuntu-project project_name""")
+    sys.exit(4)
 
 os.chdir(sys.argv[1])
 

@@ -61,8 +61,8 @@ pathname = os.path.dirname(sys.argv[0])
 abs_path = os.path.abspath(pathname)
 
 if len(sys.argv) != 2:
-    print _("Dialog command needs to be followed by new dialog name.")
-    sys.exit(1)
+    print _("Dialog command needs to be followed by new dialog name.\nUsage is: quickly dialog dialog_name")
+    sys.exit(4)
 
 try:
     dialog_name = templatetools.quickly_name(sys.argv[1])

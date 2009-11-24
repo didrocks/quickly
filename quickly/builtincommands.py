@@ -138,8 +138,8 @@ def help(project_template, project_dir, command_args, shell_completion=False):
     if len(command_args) > 0:
         command_name = command_args[0]
     else:
-        print _("ERROR: No command provided to help command")
-        return(1)
+        print _("No command provided to help command.\nUsage is: quickly help [template] <command>")
+        return(4)
 
     template = project_template
     if template is None:
@@ -157,8 +157,9 @@ def help(project_template, project_dir, command_args, shell_completion=False):
                 # to help the user, we can search if this command_name corresponds to a command in a template
                 list_possible_commands = commands_module.get_commands_by_criteria(name=command_name, followed_by_template=True)
                 if list_possible_commands:
-                   print _("ERROR: help command must be followed by a template name for getting help from templates commands like %s." % command_name)
+                   print _("help command must be followed by a template name for getting help from templates commands like %s.\nUsage is: quickly help [template] <command>" % command_name)
                    print _("Candidates template are: %s") % ", ".join([command.template for command in list_possible_commands])
+                   return(4)
                 else:
                     print _("ERROR: No %s command found.") % command_name
             else:
@@ -176,8 +177,8 @@ def quickly(project_template, project_dir, command_args, shell_completion=False)
         return("")
 
     if len(command_args) < 1:
-        print _("ERROR: Quickly command must be followed by a template and a template destination path")
-        return(1)
+        print _("Quickly command must be followed by a template and a template destination path\nUsage is: quickly quickly [origin_template] destination_template")
+        return(4)
 
     destination_path = os.path.expanduser("~/quickly-templates/")
     # create ~/quickly-templates/ if needed
