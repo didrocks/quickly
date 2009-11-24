@@ -33,6 +33,8 @@ Quickly 0.4
   - change getstarted wording (LP: #486180) - Grant
   - Quickly ship now "version" tag instead of "format" tag
   - add some templatetools to check X display
+  - if a commands exit with 4, do not show "ERROR:" (case of wrong command
+    usage, for instance)
 
 Quickly 0.2.6
 -------------------------------------

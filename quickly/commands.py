@@ -227,9 +227,11 @@ def get_all_templates():
 class Command:
 
     def _die(self, function_name, return_code):
+       '''Quit immediately and print error if return_code != 4'''
+       if return_code != 4:
             print _("ERROR: %s command failed") % function_name
             print _("Aborting")
-            sys.exit(return_code)
+       sys.exit(return_code)
 
     def __init__(self, command_name, command, template=None,
                  inside_project=True, outside_project=False,

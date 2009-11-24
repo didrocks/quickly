@@ -33,8 +33,8 @@ def pre_create(command_template, project_template, project_dir, command_args):
     """Create the project directory before create command call"""
 
     if len(command_args) < 1:
-        print _("ERROR: Create command must be followed by a template and a project path")
-        return(1)
+        print _("Create command must be followed by a template and a project path.\nUsage: quickly create <template> <project_name>")
+        return(4)
         
     path_and_project = command_args[0].split('/')
     project_name = path_and_project[-1]
