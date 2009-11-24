@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-11-22 15:26+0000\n"
-"Last-Translator: Heling Yao <Unknown>\n"
+"PO-Revision-Date: 2009-11-23 13:14+0000\n"
+"Last-Translator: 冯超 <rainofchaos@gmail.com>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-23 04:52+0000\n"
+"X-Launchpad-Export-Date: 2009-11-24 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -202,7 +202,7 @@ msgstr "setup.py 中没有找到发布版本(release version)并且命令行中�
 
 #: ../data/templates/ubuntu-project/release.py:79
 msgid "quickly released"
-msgstr "quickly 已发布："
+msgstr "quickly 已发布"
 
 #: ../data/templates/ubuntu-project/release.py:85
 #, python-format
@@ -264,7 +264,7 @@ msgstr ""
 
 #: ../quickly/version.py:39
 msgid "No template found."
-msgstr ""
+msgstr "未找到模板。"
 
 #: ../quickly/version.py:41
 #, python-format
@@ -290,18 +290,20 @@ msgstr ""
 
 #: ../quickly/templatetools.py:35
 msgid "No help for this command"
-msgstr ""
+msgstr "此命令没有帮助"
 
 #: ../quickly/templatetools.py:54
 msgid ""
 "ERROR: unpermitted character in name.\n"
 "Letters and digits only."
 msgstr ""
+"错误：名称中包含禁用字符。\n"
+"只接受字母和数字"
 
 #: ../quickly/templatetools.py:59
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr ""
+msgstr "错误：%s  不是合法的 Quickly 工程名称"
 
 #: ../data/templates/ubuntu-project/package.py:31
 msgid ""
@@ -322,21 +324,21 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:57
 msgid "Release version not found in setup.py."
-msgstr ""
+msgstr "setup.py 中未找到发布版本"
 
 #: ../data/templates/ubuntu-project/package.py:62
 #: ../data/templates/ubuntu-project/internal/packaging.py:64
 msgid "ERROR: can't create or update ubuntu package"
-msgstr ""
+msgstr "错误：无法创建或更新 Ubuntu 软件包"
 
 #: ../data/templates/ubuntu-project/package.py:69
 #, python-format
 msgid "Ubuntu package has been successfully created in ../%s_%s_all.deb"
-msgstr ""
+msgstr "Ubuntu 已经成功创建到 ../%s_%s_all.deb"
 
 #: ../data/templates/ubuntu-project/package.py:71
 msgid "An error has occurred during package building"
-msgstr ""
+msgstr "编译软件包时发生错误"
 
 #: ../data/templates/ubuntu-project/save.py:31
 msgid ""
@@ -353,11 +355,11 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:46
 msgid "quickly saved"
-msgstr ""
+msgstr "quickly 已经保存"
 
 #: ../data/templates/ubuntu-project/save.py:52
 msgid "It seems that you have no change to record."
-msgstr ""
+msgstr "看上去未做任何修改。"
 
 #: ../data/templates/ubuntu-project/license.py:42
 msgid ""
@@ -443,7 +445,7 @@ msgstr ""
 #: ../quickly/tools.py:96 ../quickly/commands.py:181
 #: ../quickly/commands.py:260 ../quickly/commands.py:268
 msgid "Aborting"
-msgstr ""
+msgstr "中止"
 
 #: ../quickly/tools.py:136
 #, python-format
@@ -485,19 +487,19 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
-msgstr ""
+msgstr "编辑(_E)"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
-msgstr ""
+msgstr "文件(_F)"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr ""
+msgstr "帮助(_H)"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr ""
+msgstr "查看(_V)"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
