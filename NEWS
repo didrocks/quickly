@@ -28,6 +28,8 @@ Quickly 0.4
     all commands followed by templates)
   - Check if we have a X display available before running "run" or launching
     GUI in "create" command.
+  - add -- support in quickly run to pass options like --help, --version so
+    that Quickly core don't take them.
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
