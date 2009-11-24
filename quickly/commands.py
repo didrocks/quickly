@@ -375,9 +375,9 @@ class Command:
             project_path = current_dir
             inside_project = False
 
-        # transition if we are inside a project
+        # transition if we are inside a project and template is not None (builtins)
         # (call upgrade from native template)
-        if inside_project and self.name != "upgrade":
+        if inside_project and self.name != "upgrade" and self.template:
             (project_version, template_version) = templatetools.get_project_and_template_versions(self.template)
             print project_version
             print template_version
