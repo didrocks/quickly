@@ -6,6 +6,8 @@ Quickly 0.4
   - -- enables to give options to templates (unknown options and arguments
     are still given to templates but -- specify explicity what to give to
     templates commands like -h, --version...)
+  - check and enable recreation of the credential if user deletes it on
+    Launchpad
   ubuntu-project Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname

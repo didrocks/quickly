@@ -95,6 +95,7 @@ def initialize_lpi(interactive = True):
     try:
         if interactive:
             print _("Get Launchpad Settings")
+        lp_cred_file = None
         lp_cred_file = open(lp_cred, 'r')
         credentials = Credentials()
         credentials.load(lp_cred_file)
@@ -103,9 +104,14 @@ def initialize_lpi(interactive = True):
             launchpad = Launchpad(credentials, SERVICE_ROOT, lp_cache_dir)
         except httplib2.ServerNotFoundError, e:
             raise launchpad_connexion_error(e)
-    except IOError:
+    except (IOError, HTTPError):
         if interactive:
-            print _('Initial Launchpad binding. You must choose "Change Anything"')
+            # case where autorization on Launchpad was removed
+            if lp_cred_file:
+                os.remove(lp_cred_file.name)
+                print _('Previous Launchpad values seems to have been removed. You must choose again "Change Anything"')
+            else:
+                print _('Initial Launchpad binding. You must choose "Change Anything"')
             launchpad = Launchpad.get_token_and_login('quickly', SERVICE_ROOT, lp_cache_dir)
             lp_cred_file = open(lp_cred, 'w')
             launchpad.credentials.save(lp_cred_file)
