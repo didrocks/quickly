@@ -32,6 +32,7 @@ Quickly 0.4
     GUI in "create" command.
   - add -- support in quickly run to pass options like --help, --version so
     that Quickly core don't take them.
+  - enable preferences save call being called multiple times (Philip Peitsch)
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
