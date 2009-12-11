@@ -1,4 +1,4 @@
-# Spanish translation for quickly
+# Telugu translation for quickly
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-12-11 02:00+0000\n"
-"Last-Translator: Leandro Gómez <leogg@ubuntu.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2009-12-11 01:29+0000\n"
+"Last-Translator: వీవెన్ (Veeven) <Unknown>\n"
+"Language-Team: Telugu <te@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,22 +19,20 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:30
 msgid "Fatal: "
-msgstr "Error fatal: "
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:38
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Comprobar si python-launchpadlib está instalado"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:85
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
-"AVISO: está usando un servidor de pruebas y no el servidor de producción "
-"real de launchpad"
 
 #: ../quickly/launchpadaccess.py:92
 msgid "Get Launchpad Settings"
-msgstr "Obtener preferencias de Launchpad"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:99
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
@@ -42,38 +40,38 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:111
 msgid "Unknown reason"
-msgstr "Motivo desconocido"
+msgstr "తెలియని కారణం"
 
 #: ../quickly/launchpadaccess.py:113
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "No se pudo configurar Launchpad para quickly ; %s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:114
 msgid "Launchpad connexion is ok"
-msgstr "La conexión con Launchpad es correcta"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
-msgstr "No ha indicado algún proyecto de launchpad, abortando."
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:140
 #, python-format
 msgid "Project name: %s"
-msgstr "Nombre del proyecto: %s"
+msgstr "ప్రాజెక్టు పేరు: %s"
 
 #: ../quickly/launchpadaccess.py:141
 #, python-format
 msgid "Launchpad url: %s/%s"
-msgstr "Dirección de Launchpad: %s/%s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:148
 msgid "No project found"
-msgstr "Proyecto no encontrado"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:150
 msgid "Choose your project number"
-msgstr "Elija su número de proyecto"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:160
 msgid "No right number given, aborting."
@@ -112,7 +110,7 @@ msgstr ""
 #: ../bin/quickly.py:96
 #, python-format
 msgid "ERROR: Unknown option: %s"
-msgstr "ERROR: opción desconocida: %s"
+msgstr ""
 
 #: ../bin/quickly.py:104
 msgid "ERROR: No command provided in command line"
@@ -144,7 +142,6 @@ msgstr ""
 #, python-format
 msgid "No template were found on the command line for command %s."
 msgstr ""
-"No se ha encontrado plantilla en la línea de comandos para el comando %s."
 
 #. there is really not such command, in any template
 #: ../bin/quickly.py:225 ../quickly/builtincommands.py:160
@@ -155,7 +152,7 @@ msgstr ""
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:85
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:126
 msgid "ERROR: Can't load setup.py file"
-msgstr "ERROR: Imposible cargar setup.py"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:156
 msgid ""
@@ -205,12 +202,12 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:79
 msgid "quickly released"
-msgstr "quickly liberado"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:85
 #, python-format
 msgid "quickly released: %s"
-msgstr "quickly liberado: %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:105
 msgid ""
@@ -223,8 +220,6 @@ msgstr ""
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
-"ppa:%s:%s no existe. Por favor, cree uno en launchpad antes de liberar "
-"versión"
 
 #: ../data/templates/ubuntu-project/release.py:162
 #, python-format
@@ -254,7 +249,7 @@ msgstr ""
 #: ../data/templates/ubuntu-project/release.py:225
 #: ../data/templates/ubuntu-project/share.py:124
 msgid "pushing to launchpad"
-msgstr "subiendo cambios a launchpad"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:230
 #, python-format
@@ -265,11 +260,11 @@ msgstr ""
 
 #: ../quickly/version.py:35
 msgid "No quickly data path found."
-msgstr "No se ha encontrado la ruta de datos de quickly."
+msgstr ""
 
 #: ../quickly/version.py:39
 msgid "No template found."
-msgstr "No se ha encontrado la plantilla."
+msgstr ""
 
 #: ../quickly/version.py:41
 #, python-format
@@ -295,7 +290,7 @@ msgstr ""
 
 #: ../quickly/templatetools.py:35
 msgid "No help for this command"
-msgstr "No hay ayuda para este comando"
+msgstr ""
 
 #: ../quickly/templatetools.py:54
 msgid ""
@@ -327,21 +322,21 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:57
 msgid "Release version not found in setup.py."
-msgstr "Versión publicada no encontrada en setup.py."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:62
 #: ../data/templates/ubuntu-project/internal/packaging.py:64
 msgid "ERROR: can't create or update ubuntu package"
-msgstr "ERROR: no se puede crear o actualizar paquete ubuntu"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:69
 #, python-format
 msgid "Ubuntu package has been successfully created in ../%s_%s_all.deb"
-msgstr "Paquete Ubuntu creado satisfactoriamente en ../%s_%s_all.deb"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:71
 msgid "An error has occurred during package building"
-msgstr "Ha ocurrido un error durante la construcción del paquete"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:31
 msgid ""
@@ -362,7 +357,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:52
 msgid "It seems that you have no change to record."
-msgstr "Parece que no tiene ningún cambio por guardar."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/license.py:42
 msgid ""
@@ -410,7 +405,7 @@ msgstr ""
 #: ../data/templates/ubuntu-project/license.py:226
 #, python-format
 msgid "%s file was not found"
-msgstr "%s no encontrado"
+msgstr ""
 
 #. that means we didn't find the END_LICENCE_TAG, don't copy the file
 #: ../data/templates/ubuntu-project/license.py:126
