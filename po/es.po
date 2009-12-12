@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-12-11 02:00+0000\n"
+"PO-Revision-Date: 2009-12-11 18:57+0000\n"
 "Last-Translator: Leandro Gómez <leogg@ubuntu.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-11 04:37+0000\n"
+"X-Launchpad-Export-Date: 2009-12-12 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -262,6 +262,7 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s publicada y compilada en Launchpad. Espere media hora y revise %s."
 
 #: ../quickly/version.py:35
 msgid "No quickly data path found."
@@ -292,6 +293,25 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Intérprete de Python: %s %s\n"
+"  Biblioteca estándar de Python: %s\n"
+"  \n"
+"  Biblioteca usada en Quickly: %s\n"
+"  Ruta de datos de Quickly: %s\n"
+"  Directorios de plantilla detectados en Quickly:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Canonical Ltd.\n"
+"  #Author 2009 Rick Spencer\n"
+"  #Author 2009 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly no tiene ABSOLUTAMENTE NINGUNA GARANTíA. quickly es software libre, "
+"y\n"
+"puede usarlo, modificarlo y redistribuirlo bajo los términos de la licencia "
+"GNU\n"
+"General Public License en su versión 3 o posterior."
 
 #: ../quickly/templatetools.py:35
 msgid "No help for this command"
@@ -302,11 +322,13 @@ msgid ""
 "ERROR: unpermitted character in name.\n"
 "Letters and digits only."
 msgstr ""
+"ERROR: carácter no permitido en nombre.\n"
+"Sólo letras y dígitos."
 
 #: ../quickly/templatetools.py:59
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr ""
+msgstr "ERROR: %s no se permite como nombre de un proyecto quickly"
 
 #: ../data/templates/ubuntu-project/package.py:31
 msgid ""
@@ -358,7 +380,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:46
 msgid "quickly saved"
-msgstr ""
+msgstr "quickly guardado"
 
 #: ../data/templates/ubuntu-project/save.py:52
 msgid "It seems that you have no change to record."
@@ -434,7 +456,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/license.py:259
 msgid "This command only take one optional argument: License"
-msgstr ""
+msgstr "Esta orden sólo admite un parámetro opcional: Licencia"
 
 #: ../quickly/tools.py:77
 msgid "No template directory found. Aborting"
@@ -453,11 +475,11 @@ msgstr ""
 #: ../quickly/tools.py:136
 #, python-format
 msgid "ERROR: Template %s does not exist."
-msgstr ""
+msgstr "ERROR: la plantilla %s no existe."
 
 #: ../quickly/tools.py:137
 msgid "Arborting."
-msgstr ""
+msgstr "Abortando."
 
 #: ../data/templates/ubuntu-project/run.py:33
 msgid ""
@@ -471,11 +493,11 @@ msgstr ""
 #: ../data/templates/ubuntu-project/run.py:55
 #, python-format
 msgid "Can't execute %s"
-msgstr ""
+msgstr "Imposible ejecutar %s"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Status Area"
-msgstr ""
+msgstr "Área de estado"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:2
 msgid ""
@@ -490,7 +512,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
-msgstr ""
+msgstr "_Editar"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
@@ -502,7 +524,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr ""
+msgstr "_Ver"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
@@ -535,6 +557,8 @@ msgid ""
 "\n"
 "ERROR: project name not defined. Usage is project_name"
 msgstr ""
+"\n"
+"ERROR: no se ha definido un nombre de proyecto. Se usa project_name"
 
 #. create directory and template file
 #: ../data/templates/ubuntu-project/create.py:78
@@ -543,7 +567,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:59
 #, python-format
 msgid "Creating project directory %s"
-msgstr ""
+msgstr "Creando directorio de proyecto %s"
 
 #: ../data/templates/ubuntu-project/create.py:80
 #: ../data/templates/ubuntu-project/create.py:85
@@ -551,12 +575,12 @@ msgstr ""
 #: ../quickly/builtincommands.py:61
 #, python-format
 msgid "Directory %s created\n"
-msgstr ""
+msgstr "Directorio %s creado\n"
 
 #. add it to revision control
 #: ../data/templates/ubuntu-project/create.py:139
 msgid "Creating bzr repository and commiting"
-msgstr ""
+msgstr "Creando repositorio de bzr y subiendo los cambios"
 
 #. run the new application
 #: ../data/templates/ubuntu-project/create.py:145
