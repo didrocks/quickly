@@ -27,7 +27,6 @@ from gettext import gettext as _
 # add quickly root directory (especially for trunk execution)
 quickly_root_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
 quickly_root_directory = os.path.abspath(quickly_root_directory + '/..')
-print quickly_root_directory
 if os.path.exists(quickly_root_directory + '/quickly') and quickly_root_directory not in sys.path:
     sys.path.insert(0, quickly_root_directory)
     os.putenv('PYTHONPATH', quickly_root_directory) # for subprocesses
