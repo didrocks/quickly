@@ -10,7 +10,7 @@ import gtk
 
 # Check if we are working in the source tree or from the installed 
 # package and mangle the python path accordingly
-if os.path.dirname(sys.argv[0]) != ".":
+if os.path.dirname(os.path.realpath(sys.argv[0])) != ".":
     if sys.argv[0][0] == "/":
         fullPath = os.path.dirname(sys.argv[0])
     else:

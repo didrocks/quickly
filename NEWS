@@ -8,6 +8,8 @@ Quickly 0.4
     templates commands like -h, --version...)
   - check and enable recreation of the credential if user deletes it on
     Launchpad
+  - Use realpath so that we can symlink to the binary in trunk.
+    (Jonathan Lange)
   ubuntu-project Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname
@@ -33,6 +35,7 @@ Quickly 0.4
   - add -- support in quickly run to pass options like --help, --version so
     that Quickly core don't take them.
   - enable preferences save call being called multiple times (Philip Peitsch)
+  - Use realpath so that we can symlink to the binary in trunk.
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
