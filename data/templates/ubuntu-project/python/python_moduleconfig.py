@@ -10,7 +10,7 @@
 
 # where your project will head for your data (for instance, images and ui files)
 # by default, this is ../data, relative your trunk layout
-__project_name_data_directory__ = '../data/'
+__python_module_data_directory__ = '../data/'
 
 
 import os
@@ -27,10 +27,10 @@ def getdatapath():
     """
 
     # get pathname absolute or relative
-    if __project_name_data_directory__.startswith('/'):
-        pathname = __project_name_data_directory__
+    if __python_module_data_directory__.startswith('/'):
+        pathname = __python_module_data_directory__
     else:
-        pathname = os.path.dirname(__file__) + '/' + __project_name_data_directory__
+        pathname = os.path.dirname(__file__) + '/' + __python_module_data_directory__
 
     abs_data_path = os.path.abspath(pathname)
     if os.path.exists(abs_data_path):
