@@ -31,6 +31,12 @@ __project_path = None
 class project_path_not_found(Exception):
     pass
 
+class data_path_not_found(Exception):
+    def __init__(self, path):
+        self.path = path
+    def __str__(self):
+        return repr(self.path)
+
 class template_path_not_found(Exception):
     pass
 class template_not_found(Exception):
@@ -54,7 +60,7 @@ def get_quickly_data_path():
     if os.path.exists(abs_data_path):
         return abs_data_path
     else:
-        raise project_path_not_found
+        raise data_path_not_found(abs_data_path)
 
 def get_template_directories():
     """Retrieve all directories where quickly templates are
@@ -63,6 +69,7 @@ def get_template_directories():
     """
 
     # default to looking up templates in the current dir
+    invalid_data_path = None
     template_directories = []
     if os.path.exists(os.path.expanduser('~/quickly-templates')):
         template_directories.append(os.path.expanduser('~/quickly-templates'))
@@ -72,11 +79,15 @@ def get_template_directories():
         abs_template_path = get_quickly_data_path() + '/templates/'
         if os.path.exists(abs_template_path):
             template_directories.append(abs_template_path)
-    except project_path_not_found:
-        pass # just let template_directories be empty
+    except data_path_not_found, e:
+        #TODO: add here some kind of warning log about data path
+        invalid_data_path = e
 
     if not template_directories:
-        raise template_path_not_found(_("No template directory found. Aborting"))
+        error_message = None
+        if invalid_data_path:
+            error_message = _("%s is an invalid data path.\n") % invalid_data_path
+        raise template_path_not_found(error_message + _("No template directory found. Aborting"))
 
     return template_directories
 

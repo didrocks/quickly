@@ -31,8 +31,8 @@ def show_version():
 
     try:
         quickly_data_path = tools.get_quickly_data_path()
-    except tools.project_path_not_found:
-        quickly_data_path = _("No quickly data path found.")    
+    except tools.data_path_not_found, invalid_data_path:
+        quickly_data_path = (_("No quickly data path found in %s.") % invalid_data_path)
     try:
         template_directories = "\n          ".join(tools.get_template_directories())
     except tools.template_path_not_found:

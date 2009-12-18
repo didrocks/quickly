@@ -10,6 +10,8 @@ Quickly 0.4
     Launchpad
   - Use realpath so that we can symlink to the binary in trunk.
     (Jonathan Lange)
+  - project_path_not_found is raised when data_path_not_found should be
+    (originated from Philip Peitsch's patch). (LP: #497688)
   ubuntu-project Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname
