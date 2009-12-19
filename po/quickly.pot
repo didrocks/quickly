@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-19 09:43+1100\n"
+"POT-Creation-Date: 2009-12-19 21:13+1100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,11 +207,11 @@ msgstr ""
 msgid "Creating bzr repository and commiting"
 msgstr ""
 
-#: ../data/templates/ubuntu-project/create.py:152
+#: ../data/templates/ubuntu-project/create.py:151
 msgid "Launching your newly created project!"
 msgstr ""
 
-#: ../data/templates/ubuntu-project/create.py:155
+#: ../data/templates/ubuntu-project/create.py:154
 #, python-format
 msgid ""
 "Congrats, your new project is setup! cd %s/ to start hacking. Then '$ "
@@ -382,7 +382,8 @@ msgid ""
 msgstr ""
 
 #: ../quickly/version.py:35
-msgid "No quickly data path found."
+#, python-format
+msgid "No quickly data path found in %s."
 msgstr ""
 
 #: ../quickly/version.py:39
@@ -556,21 +557,26 @@ msgid ""
 "Usage is: quickly license <license>"
 msgstr ""
 
-#: ../quickly/tools.py:79
+#: ../quickly/tools.py:89
+#, python-format
+msgid "%s is an invalid data path.\n"
+msgstr ""
+
+#: ../quickly/tools.py:90
 msgid "No template directory found. Aborting"
 msgstr ""
 
-#: ../quickly/tools.py:97
+#: ../quickly/tools.py:108
 #, python-format
 msgid "ERROR: Template '%s' not found. Aborting"
 msgstr ""
 
-#: ../quickly/tools.py:136
+#: ../quickly/tools.py:147
 #, python-format
 msgid "ERROR: Template %s does not exist."
 msgstr ""
 
-#: ../quickly/tools.py:137
+#: ../quickly/tools.py:148
 msgid "Arborting."
 msgstr ""
 
