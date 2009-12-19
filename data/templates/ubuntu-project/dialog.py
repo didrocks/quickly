@@ -79,13 +79,14 @@ project_name = configurationhandler.project_config['project']
 template_ui_dir = abs_path + "/data/ui/"
 template_python_dir = abs_path + "/python/"
 target_ui_dir = "data/ui"
-target_python_dir = project_name
+python_module = templatetools.python_module_name(project_name)
+target_python_dir = templatetools.python_module_name(project_name)
 
 dialog_sentence_name, dialog_camel_case_name = quicklyutils.conventional_names(dialog_name)
 project_sentence_name, project_camel_case_name = quicklyutils.conventional_names(project_name)
 
-
 substitutions = (("project_name",project_name),
+            ("python_module",python_module),
             ("dialog_name",dialog_name),
             ("dialog_camel_case_name",dialog_camel_case_name),
             ("project_camel_case_name",project_camel_case_name),

@@ -53,16 +53,20 @@ def quickly_name(name):
     name = name.strip().lower()
     
     # Some characters that you might like to have in a name, but are not
-    # allowed, include '_' and '-'. The underscore is not allowed because
+    # allowed, such as '_'. The underscore is not allowed because
     # it indicates the separation between a Debian package name and its
-    # version. The '-' is not allowed in Python module names.
-    if not re.match("[a-z0-9]+$", name):
+    # version.
+    if not re.match("[a-z0-9-]+$", name):
         raise bad_project_name(_("""ERROR: unpermitted character in name.
-Letters and digits only."""))
+Letters, dashes (-) and digits only."""))
 
     if name in forbidden_name:
         raise bad_project_name(_('ERROR: %s is not permitted as a quickly project name'))
     return name
+
+def python_module_name(name):
+    """ Remove all dashes (-) from the name to make it suitable for use as a python module name"""
+    return name.replace("-", "")
 
 def apply_file_rights(src_file_name, dest_file_name):
     """Keep file rights from src to dest"""

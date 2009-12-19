@@ -15,12 +15,13 @@ except ImportError:
 
 assert DistUtilsExtra.auto.__version__ >= '2.10', 'needs DistUtilsExtra.auto >= 2.10'
 import os
+import sys
 
 
 def update_data_path(prefix, oldvalue=None):
 
     try:
-        fin = file('project_name/project_nameconfig.py', 'r')
+        fin = file('python_module/python_moduleconfig.py', 'r')
         fout = file(fin.name + '.new', 'w')
 
         for line in fin:            
@@ -39,7 +40,7 @@ def update_data_path(prefix, oldvalue=None):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find project_name/project_nameconfig.py")
+        print ("ERROR: Can't find python_module/python_moduleconfig.py")
         sys.exit(1)
     return oldvalue
 

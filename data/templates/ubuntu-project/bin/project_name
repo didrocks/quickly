@@ -10,7 +10,8 @@ import gtk
 
 # Check if we are working in the source tree or from the installed 
 # package and mangle the python path accordingly
-if os.path.dirname(os.path.realpath(sys.argv[0])) != ".":
+# WARNING: this was changed in trunk but does not appear in the Ubuntu 0.2.6 packages
+if os.path.dirname(sys.argv[0]) != ".":
     if sys.argv[0][0] == "/":
         fullPath = os.path.dirname(sys.argv[0])
     else:
@@ -19,8 +20,8 @@ else:
     fullPath = os.getcwd()
 sys.path.insert(0, os.path.dirname(fullPath))
 
-from project_name import Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog
-from project_name.project_nameconfig import getdatapath
+from python_module import Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog
+from python_module.python_moduleconfig import getdatapath
 
 class camel_case_nameWindow(gtk.Window):
     __gtype_name__ = "camel_case_nameWindow"
