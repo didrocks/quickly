@@ -8,16 +8,13 @@ import sys
 import os
 import gtk
 
-# Check if we are working in the source tree or from the installed 
-# package and mangle the python path accordingly
-if os.path.dirname(os.path.realpath(sys.argv[0])) != ".":
-    if sys.argv[0][0] == "/":
-        fullPath = os.path.dirname(sys.argv[0])
-    else:
-        fullPath = os.getcwd() + "/" + os.path.dirname(sys.argv[0])
-else:
-    fullPath = os.getcwd()
-sys.path.insert(0, os.path.dirname(fullPath))
+# add project root directory (enable symlink, and trunk execution)
+project_bin_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
+project_root_directory_name = os.path.dirname(project_bin_directory)
+project_root_directory = os.path.abspath(project_root_directory_name)
+if os.path.exists(os.path.join(project_root_directory, 'project_name')) and project_root_directory not in sys.path:
+    sys.path.insert(0, project_root_directory)
+    os.putenv('PYTHONPATH', project_root_directory) # for subprocesses
 
 from project_name import Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog
 from project_name.project_nameconfig import getdatapath
