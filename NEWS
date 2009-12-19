@@ -48,6 +48,7 @@ Quickly 0.4
   - add some templatetools to check X display
   - if a commands exit with 4, do not show "ERROR:" (case of wrong command
     usage, for instance)
+  - Rewrote importing module in both bin/quickly and ubuntu-project binary
 
 Quickly 0.2.6
 -------------------------------------
