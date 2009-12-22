@@ -38,6 +38,7 @@ Quickly 0.4
     that Quickly core don't take them.
   - enable preferences save call being called multiple times (Philip Peitsch)
   - Use realpath so that we can symlink to the binary in trunk.
+  - Fixed some errors in the tutorial (Brian) (LP: #499356)
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
