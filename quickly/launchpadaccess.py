@@ -142,10 +142,10 @@ def link_project(launchpad, question, lp_project_name=None):
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
 
-    choice = "0"
-    while choice == "0":    
-        
-        if not lp_project_name:
+    if not lp_project_name:
+        choice = "0"
+        while choice == "0":
+
             lp_id = raw_input("%s, leave blank to abort.\nLaunchpad project name: " % question)
             if lp_id == "":
                 raise project_error(_("No launchpad project given, aborting."))
