@@ -80,7 +80,7 @@ template_ui_dir = abs_path + "/data/ui/"
 template_python_dir = abs_path + "/python/"
 target_ui_dir = "data/ui"
 python_name = templatetools.python_name(project_name)
-target_python_dir = templatetools.python_name(project_name)
+target_python_dir = python_name
 
 dialog_sentence_name, dialog_camel_case_name = quicklyutils.conventional_names(dialog_name)
 project_sentence_name, project_camel_case_name = quicklyutils.conventional_names(project_name)
