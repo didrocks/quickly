@@ -15,6 +15,7 @@ except ImportError:
 
 assert DistUtilsExtra.auto.__version__ >= '2.10', 'needs DistUtilsExtra.auto >= 2.10'
 import os
+import sys
 
 
 def update_data_path(prefix, oldvalue=None):
