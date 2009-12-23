@@ -142,13 +142,13 @@ def link_project(launchpad, question, lp_project_name=None):
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
 
-    choice = "0"
-    while choice == "0":    
-        
-        if not lp_project_name:
+    if not lp_project_name:
+        choice = "0"
+        while choice == "0":
+
             lp_id = raw_input("%s, leave blank to abort.\nLaunchpad project name: " % question)
             if lp_id == "":
-                raise project_error(_("No launchpad project given, aborting."))
+                raise launchpad_project_error(_("No launchpad project given, aborting."))
                 
             prospective_projects = launchpad.projects.search(text=lp_id)
             project_number = 1
@@ -177,14 +177,14 @@ Launchpad url: %s/%s
             else:
                 raise ValueError
         except ValueError:
-            raise project_error(_("No right number given, aborting."))
+            raise launchpad_project_error(_("No right number given, aborting."))
 
     # we got a project name, check that it exists
     else:
         try:
             project = launchpad.projects[lp_project_name]
-        except ValueError:
-            raise project_error(_("No project with %s exists on Launchpad. You can try to find it interactively without providing a project name.") % lp_project_name)       
+        except KeyError:
+            raise launchpad_project_error(_("Can't find %s project on Launchpad. You can try to find it interactively without providing a project name.") % lp_project_name)       
 
     configurationhandler.project_config['lp_id'] = project.name
     configurationhandler.saveConfig()

@@ -185,7 +185,7 @@ from desktopcouch.records.record import Record
             record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
             new_rec = Record({"record_type": record_type,
                                 "title":title, "text":text})
-            self.database.put(record)
+            self.database.put(new_rec)
 </TEXTAREA></DIV>
 <P>The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.</P>
 
