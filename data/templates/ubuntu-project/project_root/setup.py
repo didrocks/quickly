@@ -25,7 +25,7 @@ def update_data_path(prefix, oldvalue=None):
 
         for line in fin:            
             fields = line.split(' = ') # Separate variable from value
-            if fields[0] == '__project_name_data_directory__':
+            if fields[0] == '__python_name_data_directory__':
                 # update to prefix, store oldvalue
                 if not oldvalue:
                     oldvalue = fields[1]
