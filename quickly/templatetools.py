@@ -64,9 +64,9 @@ Letters, dashes (-) and digits only."""))
         raise bad_project_name(_('ERROR: %s is not permitted as a quickly project name'))
     return name
 
-def python_module_name(name):
-    """ Remove all dashes (-) from the name to make it suitable for use as a python module name"""
-    return name.replace("-", "")
+def python_name(name):
+    """ Replace all dashes (-) with underscores (_) in the name to make it suitable for use as a python module name"""
+    return name.replace("-", "_")
 
 def apply_file_rights(src_file_name, dest_file_name):
     """Keep file rights from src to dest"""

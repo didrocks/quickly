@@ -82,8 +82,8 @@ print _("Creating project directory %s") % data_dir
 os.mkdir(data_dir)
 print _("Directory %s created\n") % data_dir
 
-python_module = templatetools.python_module_name(project_name)
-python_dir = python_module
+python_name = templatetools.python_name(project_name)
+python_dir = python_name
 print _("Creating project directory %s") % python_dir
 os.mkdir(python_dir)
 print _("Directory %s created\n") % python_dir
@@ -102,7 +102,7 @@ os.mkdir(target_ui_dir)
 
 substitutions = (("project_name",project_name),
             ("camel_case_name",camel_case_name),
-            ("python_module",python_module),
+            ("python_name",python_name),
             ("sentence_name",sentence_name),)
 
 
@@ -116,10 +116,10 @@ quicklyutils.file_from_template(template_ui_dir, "preferences_project_name_dialo
 
 # create the python directory and files
 template_python_dir = abs_path + "python/"
-target_python_dir = python_module
+target_python_dir = python_name
 quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "Preferencescamel_case_nameDialog.py", target_python_dir, substitutions)
-quicklyutils.file_from_template(template_python_dir, "python_moduleconfig.py", target_python_dir, substitutions)
+quicklyutils.file_from_template(template_python_dir, "python_nameconfig.py", target_python_dir, substitutions)
 
 # copy the files needed for packaging
 quicklyutils.file_from_template(abs_path, "project_root/setup.py", ".", substitutions)

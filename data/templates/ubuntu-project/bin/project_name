@@ -12,12 +12,12 @@ import gtk
 project_bin_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
 project_root_directory_name = os.path.dirname(project_bin_directory)
 project_root_directory = os.path.abspath(project_root_directory_name)
-if os.path.exists(os.path.join(project_root_directory, 'python_module')) and project_root_directory not in sys.path:
+if os.path.exists(os.path.join(project_root_directory, 'python_name')) and project_root_directory not in sys.path:
     sys.path.insert(0, project_root_directory)
     os.putenv('PYTHONPATH', project_root_directory) # for subprocesses
 
-from python_module import Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog
-from python_module.python_moduleconfig import getdatapath
+from python_name import Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog
+from python_name.python_nameconfig import getdatapath
 
 class camel_case_nameWindow(gtk.Window):
     __gtype_name__ = "camel_case_nameWindow"
