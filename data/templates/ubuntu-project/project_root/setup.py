@@ -20,7 +20,7 @@ import os
 def update_data_path(prefix, oldvalue=None):
 
     try:
-        fin = file('python_module/python_moduleconfig.py', 'r')
+        fin = file('python_name/python_nameconfig.py', 'r')
         fout = file(fin.name + '.new', 'w')
 
         for line in fin:            
@@ -39,7 +39,7 @@ def update_data_path(prefix, oldvalue=None):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find python_module/python_moduleconfig.py")
+        print ("ERROR: Can't find python_name/python_nameconfig.py")
         sys.exit(1)
     return oldvalue
 
