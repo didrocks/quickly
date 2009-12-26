@@ -42,7 +42,7 @@ templatetools.handle_additional_parameters(sys.argv, help)
 
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
-mainfile = "data/ui/" + configurationhandler.project_config['project'].lower() + "window.ui"
+mainfile = "data/ui/" + templatetools.get_camel_case_name(configurationhandler.project_config['project']).lower() + "window.ui"
 files = []
 for ui_file in glob.glob("data/ui/*.ui"):
     if ui_file.lower() != mainfile:
