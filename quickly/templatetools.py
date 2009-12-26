@@ -70,7 +70,7 @@ def python_name(name):
 
 def get_camel_case_name(name):
     """Replace all dashes (-) and spaces in the name to make it CamelCase"""
-    return name.replace("-","").replace(" ", "")
+    return get_sentence_name(name).replace(" ", "")
 
 def get_sentence_name(name):
     """Replace all dashes (-) with spaces and capitalize all words"""
