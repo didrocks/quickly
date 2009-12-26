@@ -6,16 +6,15 @@
 
 ###################### DO NOT TOUCH THIS (HEAD TO THE SECOND PART) ######################
 
+import os
+import sys
+
 try:
     import DistUtilsExtra.auto
 except ImportError:
-    import sys
     print >> sys.stderr, 'To build project_name you need https://launchpad.net/python-distutils-extra'
     sys.exit(1)
-
 assert DistUtilsExtra.auto.__version__ >= '2.10', 'needs DistUtilsExtra.auto >= 2.10'
-import os
-
 
 def update_data_path(prefix, oldvalue=None):
 
