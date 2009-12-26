@@ -46,11 +46,11 @@ def handle_additional_parameters(args, help=None, shell_completion=None):
         sys.exit(0)
 
 def quickly_name(name):
-    """Enforce quickly name to be ascii and digit only and lowercase
+    """Enforce quickly name to be ascii, dashed and digit only in lowercase
 
     return formated name"""
     forbidden_name = ['bin', 'data']
-    name = name.strip().lower()
+    name = name.strip().replace(" ", "-").lower()
     
     # Some characters that you might like to have in a name, but are not
     # allowed, such as '_'. The underscore is not allowed because
@@ -58,7 +58,7 @@ def quickly_name(name):
     # version.
     if not re.match("[a-z0-9-]+$", name):
         raise bad_project_name(_("""ERROR: unpermitted character in name.
-Letters, dashes (-) and digits only."""))
+Letters, spaces, dashes (-) and digits only."""))
 
     if name in forbidden_name:
         raise bad_project_name(_('ERROR: %s is not permitted as a quickly project name'))
