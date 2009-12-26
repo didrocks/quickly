@@ -50,6 +50,7 @@ Quickly 0.4
   - if a commands exit with 4, do not show "ERROR:" (case of wrong command
     usage, for instance)
   - Rewrote importing module in both bin/quickly and ubuntu-project binary
+  - Add get_camel_case_name() and get_sentence_name() to templatetools
 
 Quickly 0.2.6
 -------------------------------------
