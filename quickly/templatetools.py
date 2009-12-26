@@ -65,8 +65,16 @@ Letters, dashes (-) and digits only."""))
     return name
 
 def python_name(name):
-    """ Replace all dashes (-) with underscores (_) in the name to make it suitable for use as a python module name"""
+    """Replace all dashes (-) with underscores (_) in the name to make it suitable for use as a python module name"""
     return name.replace("-", "_")
+
+def get_camel_case_name(name):
+    """Replace all dashes (-) and spaces in the name to make it CamelCase"""
+    return name.replace("-","").replace(" ", "")
+
+def get_sentence_name(name):
+    """Replace all dashes (-) with spaces and capitalize all words"""
+    return string.capwords(name.replace("-"," "))
 
 def apply_file_rights(src_file_name, dest_file_name):
     """Keep file rights from src to dest"""

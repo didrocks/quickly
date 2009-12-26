@@ -17,7 +17,6 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import string 
 import sys
 import subprocess
 
@@ -26,16 +25,14 @@ from gettext import gettext as _
 #set domain text
 gettext.textdomain('quickly')
 
+from quickly import templatetools
 
 class cant_deal_with_setup_value(Exception):
     pass
 
 def conventional_names(name):
-    #sentence_name = name.replace("_"," ")
-    #sentence_name = string.capwords(sentence_name)
-    sentence_name = name.replace("-"," ")
-    sentence_name = string.capwords(sentence_name)
-    camel_case_name = sentence_name.replace(" ","")
+    sentence_name = templatetools.get_sentence_name(name)
+    camel_case_name = templatetools.get_camel_case_name(name)
     return sentence_name, camel_case_name
 
 def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
