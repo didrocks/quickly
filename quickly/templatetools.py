@@ -46,23 +46,35 @@ def handle_additional_parameters(args, help=None, shell_completion=None):
         sys.exit(0)
 
 def quickly_name(name):
-    """Enforce quickly name to be ascii and digit only and lowercase
+    """Enforce quickly name to be ascii, dashed and digit only in lowercase
 
     return formated name"""
     forbidden_name = ['bin', 'data']
-    name = name.strip().lower()
+    name = name.strip().replace(" ", "-").lower()
     
     # Some characters that you might like to have in a name, but are not
-    # allowed, include '_' and '-'. The underscore is not allowed because
+    # allowed, such as '_'. The underscore is not allowed because
     # it indicates the separation between a Debian package name and its
-    # version. The '-' is not allowed in Python module names.
-    if not re.match("[a-z0-9]+$", name):
+    # version.
+    if not re.match("[a-z0-9-]+$", name):
         raise bad_project_name(_("""ERROR: unpermitted character in name.
-Letters and digits only."""))
+Letters, spaces, dashes (-) and digits only."""))
 
     if name in forbidden_name:
         raise bad_project_name(_('ERROR: %s is not permitted as a quickly project name'))
     return name
+
+def python_name(name):
+    """Replace all dashes (-) with underscores (_) in the name to make it suitable for use as a python module name"""
+    return name.replace("-", "_")
+
+def get_camel_case_name(name):
+    """Replace all dashes (-) and spaces in the name to make it CamelCase"""
+    return get_sentence_name(name).replace(" ", "")
+
+def get_sentence_name(name):
+    """Replace all dashes (-) with spaces and capitalize all words"""
+    return string.capwords(name.replace("-"," "))
 
 def apply_file_rights(src_file_name, dest_file_name):
     """Keep file rights from src to dest"""

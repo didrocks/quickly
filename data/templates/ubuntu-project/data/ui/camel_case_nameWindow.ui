@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
-  <!-- interface-requires project_name_window 1.0 -->
+  <!-- interface-requires python_name_window 1.0 -->
   <!-- interface-naming-policy project-wide -->
   <!-- interface-local-resource-path ../media -->
-  <object class="camel_case_nameWindow" id="project_name_window">
+  <object class="camel_case_nameWindow" id="python_name_window">
     <property name="width_request">600</property>
     <property name="height_request">500</property>
     <property name="title" translatable="yes">sentence_name</property>

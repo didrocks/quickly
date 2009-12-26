@@ -49,28 +49,29 @@ def pre_create(command_template, project_template, project_dir, command_args):
     
     # check that project name follow quickly rules and reformat it.
     try:
-        quickly_project_name = templatetools.quickly_name(project_name)
+        dir_name = project_name    # preserve directory name
+        project_name = templatetools.quickly_name(project_name)
     except templatetools.bad_project_name, e:
         print(e)
         sys.exit(1)
 
     #bail if the name if taken
     if os.path.exists(project_name):
-        print _("There is already a file or directory named %s") % project_name
+        print _("There is already a file or directory named %s") % dir_name
         return(1)
 
     #create directory and template file
-    print _("Creating project directory %s" % project_name)
-    os.mkdir(project_name)
-    print _("Directory %s created\n" % project_name)
+    print _("Creating project directory %s" % dir_name)
+    os.mkdir(dir_name)
+    print _("Directory %s created\n" % dir_name)
 
     # creating quickly file
     configurationhandler.project_config['version'] = quicklyconfig.__version__
-    configurationhandler.project_config['project'] = quickly_project_name
+    configurationhandler.project_config['project'] = project_name
     configurationhandler.project_config['template'] = command_template
-    configurationhandler.saveConfig(config_file_path=project_name)
+    configurationhandler.saveConfig(config_file_path=dir_name)
     
-    os.chdir(project_name)
+    os.chdir(dir_name)
 
     return 0
 

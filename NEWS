@@ -51,6 +51,10 @@ Quickly 0.4
   - if a commands exit with 4, do not show "ERROR:" (case of wrong command
     usage, for instance)
   - Rewrote importing module in both bin/quickly and ubuntu-project binary
+  - Add get_camel_case_name() and get_sentence_name() to templatetools
+  - Refactor some code in pre_create hook()
+  - Now dashes and spaces support in project name! Dealing with python and
+    packaging issues for you. (LP: #493130)
 
 Quickly 0.2.6
 -------------------------------------

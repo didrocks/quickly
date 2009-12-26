@@ -9,7 +9,7 @@ import gtk
 from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 
-from project_name.project_nameconfig import getdatapath
+from python_name.python_nameconfig import getdatapath
 
 class Preferencescamel_case_nameDialog(gtk.Dialog):
     __gtype_name__ = "Preferencescamel_case_nameDialog"
@@ -109,7 +109,7 @@ def NewPreferencescamel_case_nameDialog():
 
     builder = gtk.Builder()
     builder.add_from_file(ui_filename)
-    dialog = builder.get_object("preferences_project_name_dialog")
+    dialog = builder.get_object("preferences_python_name_dialog")
     dialog.finish_initializing(builder)
     return dialog
 

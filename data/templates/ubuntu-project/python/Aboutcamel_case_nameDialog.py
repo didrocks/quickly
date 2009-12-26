@@ -7,7 +7,7 @@ import sys
 import os
 import gtk
 
-from project_name.project_nameconfig import getdatapath
+from python_name.python_nameconfig import getdatapath
 
 class Aboutcamel_case_nameDialog(gtk.AboutDialog):
     __gtype_name__ = "Aboutcamel_case_nameDialog"
@@ -50,7 +50,7 @@ def NewAboutcamel_case_nameDialog():
 
     builder = gtk.Builder()
     builder.add_from_file(ui_filename)    
-    dialog = builder.get_object("about_project_name_dialog")
+    dialog = builder.get_object("about_python_name_dialog")
     dialog.finish_initializing(builder)
     return dialog
 

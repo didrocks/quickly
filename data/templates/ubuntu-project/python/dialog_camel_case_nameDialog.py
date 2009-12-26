@@ -7,7 +7,7 @@ import sys
 import os
 import gtk
 
-from project_name.project_nameconfig import getdatapath
+from python_name.python_nameconfig import getdatapath
 
 class dialog_camel_case_nameDialog(gtk.Dialog):
     __gtype_name__ = "dialog_camel_case_nameDialog"

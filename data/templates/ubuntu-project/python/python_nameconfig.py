@@ -10,7 +10,7 @@
 
 # where your project will head for your data (for instance, images and ui files)
 # by default, this is ../data, relative your trunk layout
-__project_name_data_directory__ = '../data/'
+__python_name_data_directory__ = '../data/'
 
 
 import os
@@ -21,16 +21,16 @@ class project_path_not_found(Exception):
 def getdatapath():
     """Retrieve project_name data path
 
-    This path is by default <project_name_lib_path>/../data/ in trunk
+    This path is by default <python_name_lib_path>/../data/ in trunk
     and /usr/share/project_name in an installed version but this path
     is specified at installation time.
     """
 
     # get pathname absolute or relative
-    if __project_name_data_directory__.startswith('/'):
-        pathname = __project_name_data_directory__
+    if __python_name_data_directory__.startswith('/'):
+        pathname = __python_name_data_directory__
     else:
-        pathname = os.path.dirname(__file__) + '/' + __project_name_data_directory__
+        pathname = os.path.dirname(__file__) + '/' + __python_name_data_directory__
 
     abs_data_path = os.path.abspath(pathname)
     if os.path.exists(abs_data_path):
