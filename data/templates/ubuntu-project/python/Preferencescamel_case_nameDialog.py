@@ -109,7 +109,7 @@ def NewPreferencescamel_case_nameDialog():
 
     builder = gtk.Builder()
     builder.add_from_file(ui_filename)
-    dialog = builder.get_object("preferences_project_name_dialog")
+    dialog = builder.get_object("preferences_python_name_dialog")
     dialog.finish_initializing(builder)
     return dialog
 

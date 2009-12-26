@@ -108,11 +108,11 @@ substitutions = (("project_name",project_name),
 
 # create the files for glade to use
 quicklyutils.file_from_template(template_ui_dir, "camel_case_nameWindow.ui", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "project_name_window.xml", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "python_name_window.xml", target_ui_dir, substitutions)
 quicklyutils.file_from_template(template_ui_dir, "Aboutcamel_case_nameDialog.ui", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "about_project_name_dialog.xml", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "about_python_name_dialog.xml", target_ui_dir, substitutions)
 quicklyutils.file_from_template(template_ui_dir, "Preferencescamel_case_nameDialog.ui", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "preferences_project_name_dialog.xml", target_ui_dir, substitutions)
+quicklyutils.file_from_template(template_ui_dir, "preferences_python_name_dialog.xml", target_ui_dir, substitutions)
 
 # create the python directory and files
 template_python_dir = abs_path + "python/"

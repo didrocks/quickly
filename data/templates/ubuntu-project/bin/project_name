@@ -88,7 +88,7 @@ def Newcamel_case_nameWindow():
 
     builder = gtk.Builder()
     builder.add_from_file(ui_filename)
-    window = builder.get_object("project_name_window")
+    window = builder.get_object("python_name_window")
     window.finish_initializing(builder)
     return window
 

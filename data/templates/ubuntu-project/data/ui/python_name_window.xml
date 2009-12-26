@@ -1,4 +1,4 @@
-<glade-catalog name="project_name_window" domain="glade-3" 
+<glade-catalog name="python_name_window" domain="glade-3" 
                depends="gtk+" version="1.0">
   <glade-widget-classes>
     <glade-widget-class title="sentence_name Window" name="camel_case_nameWindow" 

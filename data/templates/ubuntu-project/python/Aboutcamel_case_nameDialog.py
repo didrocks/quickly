@@ -50,7 +50,7 @@ def NewAboutcamel_case_nameDialog():
 
     builder = gtk.Builder()
     builder.add_from_file(ui_filename)    
-    dialog = builder.get_object("about_project_name_dialog")
+    dialog = builder.get_object("about_python_name_dialog")
     dialog.finish_initializing(builder)
     return dialog
 

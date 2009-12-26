@@ -21,7 +21,7 @@ class project_path_not_found(Exception):
 def getdatapath():
     """Retrieve project_name data path
 
-    This path is by default <project_name_lib_path>/../data/ in trunk
+    This path is by default <python_name_lib_path>/../data/ in trunk
     and /usr/share/project_name in an installed version but this path
     is specified at installation time.
     """
