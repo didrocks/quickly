@@ -1,7 +1,7 @@
 quickly (0.2.6) karmic; urgency=low
 
   * New release:
-   + ubuntu-project Template:
+   + ubuntu-application Template:
      - Fix desktop.in file not installed due to new python-distutils-extra
      policy (LP: #460355)
    + common:
@@ -16,7 +16,7 @@ quickly (0.2.5) karmic; urgency=low
    + Quickly Core:
      - deactivate option validity checking so that templates can have their
        own options. Discuss at UDS how to shape a better solution
-   +  ubuntu-project Template:
+   +  ubuntu-application Template:
      - Fixed some some errors and oversites in the tutorial
 
  -- Didier Roche <didrocks@ubuntu.com>  Sat, 24 Oct 2009 16:15:12 +0200
@@ -31,7 +31,7 @@ quickly (0.2.4) karmic; urgency=low
        the tutorial (Sense Hofstede)
      - Enable quickly running without an existing data path (LP: #447089)
      - Some refactoring on error handling with incorrect template path
-   + ubuntu-project Template:
+   + ubuntu-application Template:
      - Fix share unicode issue when localized (LP: #444070)
      - quickly dialog needs input validation (LP: #442446)
      - Fix wrong link in tutorial (LP: #446310) (Johannes Mockenhaupt)
@@ -55,7 +55,7 @@ quickly (0.2.3) karmic; urgency=low
       (previously overwriten because of = instead of extend())
     - Bump requirement on distutilsextra to 2.10 to use desktopcouch bug
       fixing
-   + ubuntu-project Template:
+   + ubuntu-application Template:
     - Launch gedit in background, keep default for others (LP: #425305)
     - Focus is on the main window file when executing quickly glade
     - Add Launchpad display name to DEBEMAIL
@@ -82,15 +82,15 @@ quickly (0.2.1) karmic; urgency=low
     - Reshape variables in commandsconfig template file (LP: #421858)
     - Reshape command attributes for builtin commands
     - quickly without parameter now prints help
-    - move some functions from ubuntu-project template to templatetools
+    - move some functions from ubuntu-application template to templatetools
       Quickly module to make them available to all templates
       (handle_additional_parameters, quickly_name, apply_file_rights,
       in_verbose_mode)
     - add missing quotes around new version number format [Ken VanDine]
-   + ubuntu-project template:
+   + ubuntu-application template:
     - quickly release and share should not start if there are no pgp keys
       available (LP: #419407)
-    - Typo in preferences code for ubuntu-project template (LP: #421642)
+    - Typo in preferences code for ubuntu-application template (LP: #421642)
     - preferences code stores record type rather than _id (LP: #421644)
     - Adapt new commandsconfig format
     - quickly edit fails if EDITOR=vim (support now interactive command)
@@ -99,15 +99,15 @@ quickly (0.2.1) karmic; urgency=low
     - created application does not suport standard command line options
       (LP: #418355)
     - Quickly licence should create an AUTHORS file (LP: #424489)
-    - ubuntu-project main python file code has stray, strange line of code
+    - ubuntu-application main python file code has stray, strange line of code
       (LP: #421653)
     - Typo in error message of $ quickly tutorial (LP: #422212), patch from
       [Niall Jackson] (LP: #422212)
-    - Typo in the index page of the tutorial of ubuntu-project template
+    - Typo in the index page of the tutorial of ubuntu-application template
       [Niall Jackson] (LP: #422209)
     - Destroy the dialogs outright instead of merely hideing them since we
       always create new ones when the event is fired [John C Barstow]
-    - ubuntu-project main python module commented code uses wrong naming
+    - ubuntu-application main python module commented code uses wrong naming
       convention for preferences dialog (LP: #421648)
     - Some output messages correction
    + common:
@@ -118,7 +118,7 @@ quickly (0.2.1) karmic; urgency=low
 quickly (0.2) karmic; urgency=low
 
   * New upstream release. Most noticeable features/fixes are:
-    - ubuntu-project should depend on cdbs and debhelper (LP: #408884)
+    - ubuntu-application should depend on cdbs and debhelper (LP: #408884)
     - Preferences should use client records API (LP: #402241)
     - Tutorial should use CouchWidget (LP: #402244)
     - quickly license should infer contact and name info from setup.py
@@ -129,14 +129,14 @@ quickly (0.2) karmic; urgency=low
       project, which have to be followed by a template…
       All of this also update automatically shell-completion behavior
     - "quickly help [command]" is needed (LP: #412902)
-    - ubuntu-projects can be created with unpackagable names (LP: #414218)
+    - ubuntu-applications can be created with unpackagable names (LP: #414218)
     - quickly package doesn't have to sign packages (LP: #408992)
     - quickly needs a proper command class (LP: #411126)
     - shell-completion must call the script with a shell-completion parameter
       (LP: #412903)
     - quickly can now handle better command filtering. Use it! (LP: #412905)
     - quickly needs a manpage (LP: #406212)
-    - ubuntu-project uses spaces instead tabs, which conflicts with gedit
+    - ubuntu-application uses spaces instead tabs, which conflicts with gedit
       default settings (LP: #416527)
     - removed devscripts deps to use only dpkg-dev
     - Having no EMAIL environment variable set makes quickly release fail fixed

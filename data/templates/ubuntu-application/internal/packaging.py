@@ -2,7 +2,7 @@
 # Copyright 2009 Canonical Ltd.
 # Author 2009 Didier Roche
 #
-# This file is part of Quickly ubuntu-project-template
+# This file is part of Quickly ubuntu-application template
 #
 #This program is free software: you can redistribute it and/or modify it 
 #under the terms of the GNU General Public License version 3, as published 

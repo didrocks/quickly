@@ -3,7 +3,7 @@
 # Copyright 2009 Canonical Ltd.
 # Author 2009 Didier Roche
 #
-# This file is part of Quickly ubuntu-project-template
+# This file is part of Quickly ubuntu-application template
 #
 #This program is free software: you can redistribute it and/or modify it 
 #under the terms of the GNU General Public License version 3, as published 
@@ -17,51 +17,44 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-import os
-import stat
-import sys
+import glob
 import subprocess
+import sys
 
 import gettext
 from gettext import gettext as _
+# set domain text
 gettext.textdomain('quickly')
 
 from quickly import configurationhandler, templatetools
 
 def help():
     print _("""Usage:
-$quickly run
+$quickly glade
 
-Runs your application. This is the best way to try test it out
-while you are developing it. It starts up the main project window.
-
-$ quickly run -- values -<whathever>
-to pass "-whatever" and "values" to the executed program. Without that
-if you use for instance --help, it would be Quickly help and not your
-program one.
+Opens Glade UI editor so that you can edit the UI for dialogs
+and windows in your project. Note that you *must* open Glade
+in this manner for quickly to work. If you try to open Glade
+directly, and the open the UI files, Glade will throw errors
+and won't open the files.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
-# if config not already loaded
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
+mainfile = "data/ui/" + templatetools.get_camel_case_name(configurationhandler.project_config['project']).lower() + "window.ui"
+files = []
+for ui_file in glob.glob("data/ui/*.ui"):
+    if ui_file.lower() != mainfile:
+        files.insert(0, ui_file)
+    else:
+        files.append(ui_file)
 
-# check if we can execute a graphical project
-if not templatetools.is_X_display():
-    print _("Can't access to X server, so can't run gtk application")
-    sys.exit(1)
+cmd = "GLADE_CATALOG_PATH=./data/ui glade-3 " + " ".join(files)
 
-project_bin = 'bin/' + configurationhandler.project_config['project']
-command_line = [project_bin]
-command_line.extend([arg for arg in sys.argv[1:] if arg != "--"])
-
-# run with args if bin/project exist
-st = os.stat(project_bin)
-mode = st[stat.ST_MODE]
-if mode & stat.S_IEXEC:
-    subprocess.call(command_line)
+#run glade with env variables pointing to catalogue xml files
+if templatetools.in_verbose_mode():
+    subprocess.Popen(cmd, shell=True)
 else:
-    print _("Can't execute %s") % project_bin
-    sys.exit(1)
-
+    nullfile=file("/dev/null") 
+    subprocess.Popen(cmd, shell=True, stderr=nullfile)

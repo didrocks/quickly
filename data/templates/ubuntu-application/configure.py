@@ -3,7 +3,7 @@
 # Copyright 2009 Canonical Ltd.
 # Author 2009 Didier Roche
 #
-# This file is part of Quickly ubuntu-project-template
+# This file is part of Quickly ubuntu-application template
 #
 #This program is free software: you can redistribute it and/or modify it 
 #under the terms of the GNU General Public License version 3, as published 
@@ -38,7 +38,7 @@ def help():
 $ quickly configure [%s] <args>
 
 Enable to set or change some parameters of the project, like to which
-launchpad project should be binded with the current ubuntu project, what
+launchpad project should be binded with the current ubuntu application, what
 ppa should we use by default to share your package…
 """) % ("|".join(available_options))
 def shell_completion(argv):

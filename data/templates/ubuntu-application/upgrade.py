@@ -3,7 +3,7 @@
 # Copyright 2009 Canonical Ltd.
 # Author 2009 Didier Roche
 #
-# This file is part of Quickly ubuntu-project-template
+# This file is part of Quickly ubuntu-application template
 #
 #This program is free software: you can redistribute it and/or modify it 
 #under the terms of the GNU General Public License version 3, as published 
@@ -19,23 +19,25 @@
 
 import os
 import sys
-import webbrowser
-
-import gettext
-from gettext import gettext as _
-gettext.textdomain('quickly')
 
 from quickly import templatetools
 
-def help():
-    print _("""Usage:
-$ quickly tutorial
+import gettext
+from gettext import gettext as _
+# set domain text
+gettext.textdomain('quickly')
 
-Opens a web browser with the tutorial for ubuntu-project template.
-""")
-templatetools.handle_additional_parameters(sys.argv, help)
+# get project version and template version if no argument given
+if len(sys.argv) < 3:
+    (project_version, template_version) = templatetools.get_project_and_template_versions("ubuntu-application")
+else:
+    project_version = sys.argv[1]
+    template_version = sys.argv[2]
+#print project_version
+#print template_version
 
-webbrowser.open(os.path.dirname(__file__) + "/help/index.html")
-
+# transition to 0.3
+#if project_version < 0.3:
+# do_stuff
+print("updated")
 sys.exit(0)
-

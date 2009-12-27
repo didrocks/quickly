@@ -12,7 +12,7 @@ Quickly 0.4
     (Jonathan Lange)
   - project_path_not_found is raised when data_path_not_found should be
     (originated from Philip Peitsch's patch). (LP: #497688)
-  ubuntu-project Template:
+  ubuntu-application Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname
     .quickly file can be used as well with ppa = ppaname or
@@ -40,6 +40,7 @@ Quickly 0.4
   - Use realpath so that we can symlink to the binary in trunk.
   - Fixed some errors in the tutorial (Brian) (LP: #499356)
   - Fix missing import sys in setup.py (Philip Peitsch) (LP: #499712)
+  - rename ubuntu-project to ubuntu-application
   common:
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
