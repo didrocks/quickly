@@ -106,9 +106,9 @@ def getstarted(project_template, project_dir, command_args, shell_completion=Fal
 
 You can create a project by executing 'quickly create <template_name> <your project>'.
 
-Example with ubuntu-project template:
-1. create an Ubuntu Project and run the tutorial:
-$ quickly create ubuntu-project foo
+Example with ubuntu-application template:
+1. create an ubuntu application and run the tutorial:
+$ quickly create ubuntu-application foo
 $ cd foo
 $ quickly tutorial
 

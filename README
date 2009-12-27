@@ -4,7 +4,7 @@ QUICKLY
 Quickly is a container for sets of application templates and related commands.
 Together, a set of commands and a template taken together are called a
 "quickly template". Currently there is a single quickly template called the
-"ubuntu-project template". As it can be infered, it is for creating Ubuntu
+"ubuntu-application template". As it can be infered, it is for creating Ubuntu
 applications. :)
 
 However, Quickly is designed so that quickly templates are easy to write. So,
@@ -34,8 +34,8 @@ How to Get Started:
 $ quickly getstarted
 
 
-1. create a Ubuntu Project and run the tutorial:
-$ quickly create ubuntu-project foo
+1. create a ubuntu application and run the tutorial:
+$ quickly create ubuntu-application foo
 $ cd foo
 $ quickly help
 

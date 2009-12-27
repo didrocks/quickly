@@ -85,6 +85,6 @@ DistUtilsExtra.auto.setup(name='quickly',
       license="GPL v3",
       author='Quickly Developer Team',
       author_email='quickly@lists.launchpad.net',
-      data_files=[('share/quickly/templates/ubuntu-project/project_root', glob.glob('data/templates/ubuntu-project/project_root/project_name.desktop.in'))],
+      data_files=[('share/quickly/templates/ubuntu-application/project_root', glob.glob('data/templates/ubuntu-application/project_root/project_name.desktop.in'))],
       cmdclass={'install': InstallAndUpdateDataDirectory})
 

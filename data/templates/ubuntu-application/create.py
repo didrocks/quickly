@@ -3,7 +3,7 @@
 # Copyright 2009 Canonical Ltd.
 # Author 2009 Didier Roche
 #
-# This file is part of Quickly ubuntu-project-template
+# This file is part of Quickly ubuntu-application template
 #
 #This program is free software: you can redistribute it and/or modify it 
 #under the terms of the GNU General Public License version 3, as published 
@@ -34,7 +34,7 @@ gettext.textdomain('quickly')
 
 def help():
     print _("""Usage:
-$ quickly create ubuntu-project path/to/project_name
+$ quickly create ubuntu-application path/to/project_name
 
 where "project_name" is one or more words separated by an underscore and
 path/to can be any existing path.
@@ -61,7 +61,7 @@ abs_path = os.path.abspath(pathname) + "/"
 
 # get the name of the project
 if len(sys.argv) < 2:
-    print _("""Project name not defined.\nUsage isi: quickly create ubuntu-project project_name""")
+    print _("""Project name not defined.\nUsage isi: quickly create ubuntu-application project_name""")
     sys.exit(4)
 
 os.chdir(sys.argv[1])

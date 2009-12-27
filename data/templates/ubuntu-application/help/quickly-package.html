@@ -18,14 +18,14 @@ p
 <BODY>
 <H1>Introduction to Part 3</H1>
 <P>In parts 1 and 2, we showed how to create a simple Ubuntu application using Quickly. This section will cover how to package an application so that it is easy for you to share, and easy for other people to install.</P>
-<H1>License your Project</H1>
+<H1>License your Application</H1>
 <P>It's important to license your code so users and other programmers know their rights in terms of redistributing or modifying it. To quickly grant a GPL license to your  code, simply:</P>
 <OL>
 <LI>Specify your name and email address in the Copyright file.</LI>
 <LI>Run the "license" command.</LI>
 </OL>
 <H2>Specify your name and email</H2>
-<P>When Quickly created your Ubuntu project, it added a file named Copyright in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. Be sure not to modify other lines as it will interfere with the next step. For example, I would change the entire file to look like this:</P>
+<P>When Quickly created your ubuntu application, it added a file named Copyright in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. Be sure not to modify other lines as it will interfere with the next step. For example, I would change the entire file to look like this:</P>
 <DIV class="code"><TEXTAREA rows="3" cols="80">
 # Copyright (C) 2009 Rick Spencer rick.spencer@canonical.com
 ### BEGIN AUTOMATIC LICENSE GENERATION
@@ -87,7 +87,7 @@ If you don't personalize the icon, it's ok, your app will just have the default 
 </P>
 <H2>Edit the Desktop File</H2>
 <P>
-By default, Quickly Ubuntu-Project applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make Jotty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "jottydesktop.in" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:
+By default, Quickly Ubuntu applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make Jotty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "jottydesktop.in" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:
 </P>
 <DIV class="code"><TEXTAREA rows="8" cols="80">
 [Desktop Entry]

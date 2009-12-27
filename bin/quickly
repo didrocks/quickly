@@ -55,7 +55,7 @@ Commands:
     getstarted to get some starting hints
 
 Examples:
-    quickly create ubuntu-project foobar
+    quickly create ubuntu-application foobar
     quickly push 'awesome new comment system'
     quickly -t cool-template push 'awesome new comment system'""")
 
