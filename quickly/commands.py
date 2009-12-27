@@ -112,11 +112,8 @@ def get_all_commands():
                 if "." in command_name:
                     command_name = ".".join(command_name.split('.')[0:-1])
 
-                # add the command to the list if is executable
-                # XXX: It's generally a bad idea to check if you can read to a
-                # file. Instead, you should just read it. The file might
-                # become unreadable between here and when you actually read
-                # it. -- jml, 2009-11-18
+                # add the command to the list if is executable (commands are
+                # only formed of executable files)
                 if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
                     hooks = {'pre': None, 'post': None}
                     for event in ('pre', 'post'):
@@ -149,6 +146,18 @@ def get_all_commands():
                         followed_by_template, followed_by_command,
                         hooks['pre'], hooks['post'])
 
+    # now try to import command for existing templates
+    for importing_template in import_commands:
+        for imported_template in import_commands[importing_template]:
+            for command_name in import_commands[importing_template][imported_template]:
+                # let's override by locally defined command
+                if command_name not in __commands[importing_template]:
+                    try:
+                         __commands[importing_template][command_name] = \
+                         __commands[imported_template][command_name]
+                    except KeyError:
+                         # command/template doesn't exist: ignore
+                         pass
 
     # add builtin commands (avoiding gettext and hooks)
     __commands['builtins'] = {}
