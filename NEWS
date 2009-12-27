@@ -12,6 +12,9 @@ Quickly 0.4
     (Jonathan Lange)
   - project_path_not_found is raised when data_path_not_found should be
     (originated from Philip Peitsch's patch). (LP: #497688)
+  - importing command in one template from another template is now possible
+    support as well "all" keyname to import all commands from a template
+    into another one (take care of overridden commands too) (LP: #452306)
   ubuntu-application Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname
