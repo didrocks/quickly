@@ -17,6 +17,7 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import subprocess
 import sys
 
@@ -50,15 +51,20 @@ def get_all_commands():
         template_directories = tools.get_template_directories()
     except tools.template_path_not_found:
         template_directories = []
+    import_commands = {}
+
     for template_dir in template_directories:
         for template in os.listdir(template_dir):
             __commands[template] = {}
+            import_commands[template] = {}
             template_path = os.path.join(template_dir, template)
 
             # load special attributes declared for every command
             launch_inside_project_command_list = []
             launch_outside_project_command_list = []
             command_followed_by_command_list = []
+            current_template_import = None
+
             try:
                 files_command_parameters = file(
                     os.path.join(template_path, "commandsconfig"), 'rb')
@@ -67,7 +73,7 @@ def get_all_commands():
                     # file and in full line.
                     fields = line.split('#')[0]
                     fields = fields.split('=') # Separate variable from value
-                    # normally, we have two fields in "fields"
+                    # command definitions or import have two fields
                     if len(fields) == 2:
                         targeted_property = fields[0].strip()
                         command_list = [
@@ -83,9 +89,20 @@ def get_all_commands():
                             == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT_ONLY'):
                             launch_outside_project_command_list.extend(
                                 command_list)
-                        if targeted_property == 'COMMANDS_FOLLOWED_BY_COMMAND':
+                        if (targeted_property
+                            == 'COMMANDS_FOLLOWED_BY_COMMAND'):
                             command_followed_by_command_list.extend(
                                 command_list)
+                        if (targeted_property
+                            == 'IMPORT') and current_template_import:
+                            import_commands[template][current_template_import] \
+                                           = command_list
+                    else:
+                        # try to fetch import command results
+                        reg_result = re.search('\[(.*)\]', fields[0].strip())
+                        if reg_result:
+                            current_template_import = reg_result.group(1)
+                        
             except (OSError, IOError):
                 pass
 
