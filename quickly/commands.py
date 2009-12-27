@@ -17,6 +17,7 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import subprocess
 import sys
 
@@ -34,6 +35,21 @@ gettext.textdomain('quickly')
 # is used as a cache of all commands that we've found in templates.
 __commands = {}
 
+def try_to_import_command(commands, importing_template, imported_template,
+                          command_name):
+    """Import command in one template from another template
+
+    Ignore unknown command or template"""
+
+    # let's override by locally defined command
+    if command_name not in commands[importing_template]:
+         try:
+             commands[importing_template][command_name] = \
+             commands[imported_template][command_name]
+         except KeyError:
+             # command/template doesn't exist: ignore
+             pass
+    return commands
 
 def get_all_commands():
     """Load all commands
@@ -43,6 +59,7 @@ def get_all_commands():
     You can note that create command is automatically overloaded atm.
     """
 
+    global __commands
     if len(__commands) > 0:
         return __commands
 
@@ -50,15 +67,20 @@ def get_all_commands():
         template_directories = tools.get_template_directories()
     except tools.template_path_not_found:
         template_directories = []
+    import_commands = {}
+
     for template_dir in template_directories:
         for template in os.listdir(template_dir):
             __commands[template] = {}
+            import_commands[template] = {}
             template_path = os.path.join(template_dir, template)
 
             # load special attributes declared for every command
             launch_inside_project_command_list = []
             launch_outside_project_command_list = []
             command_followed_by_command_list = []
+            current_template_import = None
+
             try:
                 files_command_parameters = file(
                     os.path.join(template_path, "commandsconfig"), 'rb')
@@ -67,7 +89,7 @@ def get_all_commands():
                     # file and in full line.
                     fields = line.split('#')[0]
                     fields = fields.split('=') # Separate variable from value
-                    # normally, we have two fields in "fields"
+                    # command definitions or import have two fields
                     if len(fields) == 2:
                         targeted_property = fields[0].strip()
                         command_list = [
@@ -83,9 +105,20 @@ def get_all_commands():
                             == 'COMMANDS_LAUNCHED_OUTSIDE_PROJECT_ONLY'):
                             launch_outside_project_command_list.extend(
                                 command_list)
-                        if targeted_property == 'COMMANDS_FOLLOWED_BY_COMMAND':
+                        if (targeted_property
+                            == 'COMMANDS_FOLLOWED_BY_COMMAND'):
                             command_followed_by_command_list.extend(
                                 command_list)
+                        if (targeted_property
+                            == 'IMPORT') and current_template_import:
+                            import_commands[template][current_template_import] \
+                                           = command_list
+                    else:
+                        # try to fetch import command results
+                        reg_result = re.search('\[(.*)\]', fields[0].strip())
+                        if reg_result:
+                            current_template_import = reg_result.group(1)
+                        
             except (OSError, IOError):
                 pass
 
@@ -95,11 +128,8 @@ def get_all_commands():
                 if "." in command_name:
                     command_name = ".".join(command_name.split('.')[0:-1])
 
-                # add the command to the list if is executable
-                # XXX: It's generally a bad idea to check if you can read to a
-                # file. Instead, you should just read it. The file might
-                # become unreadable between here and when you actually read
-                # it. -- jml, 2009-11-18
+                # add the command to the list if is executable (commands are
+                # only formed of executable files)
                 if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
                     hooks = {'pre': None, 'post': None}
                     for event in ('pre', 'post'):
@@ -132,6 +162,25 @@ def get_all_commands():
                         followed_by_template, followed_by_command,
                         hooks['pre'], hooks['post'])
 
+    # now try to import command for existing templates
+    for importing_template in import_commands:
+        for imported_template in import_commands[importing_template]:
+            for command_name in import_commands[importing_template][imported_template]:
+                # if instruction to import all commands, get them first
+                if command_name == 'all':
+                    try:
+                        for command_name in __commands[imported_template]:
+                            __commands = try_to_import_command(__commands,
+                                         importing_template, imported_template,
+                                         command_name)
+                    except KeyError:
+                        # template doesn't exist: ignore
+                        pass
+                    break # no need to cycle anymore (all commands imported)
+                else:
+                    __commands = try_to_import_command(__commands,
+                                 importing_template, imported_template,
+                                 command_name)
 
     # add builtin commands (avoiding gettext and hooks)
     __commands['builtins'] = {}
