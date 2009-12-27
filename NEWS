@@ -15,6 +15,20 @@ Quickly 0.4
   - importing command in one template from another template is now possible
     support as well "all" keyname to import all commands from a template
     into another one (take care of overridden commands too) (LP: #452306)
+  - add an apport hook to get installed templates (LP: #411127)
+  - enable option completion for templates
+  - handle now version upgrade, launching script for templates and handling
+    versionning on them
+  - change getstarted wording (LP: #486180) - Grant
+  - Quickly ship now "version" tag instead of "format" tag
+  - add some templatetools to check X display
+  - if a commands exit with 4, do not show "ERROR:" (case of wrong command
+    usage, for instance)
+  - Rewrote importing module in both bin/quickly and ubuntu-project binary
+  - Add get_camel_case_name() and get_sentence_name() to templatetools
+  - Refactor some code in pre_create hook()
+  - Now dashes and spaces support in project name! Dealing with python and
+    packaging issues for you. (LP: #493130)
   ubuntu-application Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname
@@ -44,21 +58,6 @@ Quickly 0.4
   - Fixed some errors in the tutorial (Brian) (LP: #499356)
   - Fix missing import sys in setup.py (Philip Peitsch) (LP: #499712)
   - rename ubuntu-project to ubuntu-application
-  common:
-  - add an apport hook to get installed templates (LP: #411127)
-  - enable option completion for templates
-  - handle now version upgrade, launching script for templates and handling
-    versionning on them
-  - change getstarted wording (LP: #486180) - Grant
-  - Quickly ship now "version" tag instead of "format" tag
-  - add some templatetools to check X display
-  - if a commands exit with 4, do not show "ERROR:" (case of wrong command
-    usage, for instance)
-  - Rewrote importing module in both bin/quickly and ubuntu-project binary
-  - Add get_camel_case_name() and get_sentence_name() to templatetools
-  - Refactor some code in pre_create hook()
-  - Now dashes and spaces support in project name! Dealing with python and
-    packaging issues for you. (LP: #493130)
 
 Quickly 0.2.6
 -------------------------------------
