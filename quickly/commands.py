@@ -35,6 +35,21 @@ gettext.textdomain('quickly')
 # is used as a cache of all commands that we've found in templates.
 __commands = {}
 
+def try_to_import_command(commands, importing_template, imported_template,
+                          command_name):
+    """Import command in one template from another template
+
+    Ignore unknown command or template"""
+
+    # let's override by locally defined command
+    if command_name not in commands[importing_template]:
+         try:
+             commands[importing_template][command_name] = \
+             commands[imported_template][command_name]
+         except KeyError:
+             # command/template doesn't exist: ignore
+             pass
+    return commands
 
 def get_all_commands():
     """Load all commands
@@ -44,6 +59,7 @@ def get_all_commands():
     You can note that create command is automatically overloaded atm.
     """
 
+    global __commands
     if len(__commands) > 0:
         return __commands
 
@@ -150,14 +166,21 @@ def get_all_commands():
     for importing_template in import_commands:
         for imported_template in import_commands[importing_template]:
             for command_name in import_commands[importing_template][imported_template]:
-                # let's override by locally defined command
-                if command_name not in __commands[importing_template]:
+                # if instruction to import all commands, get them first
+                if command_name == 'all':
                     try:
-                         __commands[importing_template][command_name] = \
-                         __commands[imported_template][command_name]
+                        for command_name in __commands[imported_template]:
+                            __commands = try_to_import_command(__commands,
+                                         importing_template, imported_template,
+                                         command_name)
                     except KeyError:
-                         # command/template doesn't exist: ignore
-                         pass
+                        # template doesn't exist: ignore
+                        pass
+                    break # no need to cycle anymore (all commands imported)
+                else:
+                    __commands = try_to_import_command(__commands,
+                                 importing_template, imported_template,
+                                 command_name)
 
     # add builtin commands (avoiding gettext and hooks)
     __commands['builtins'] = {}
