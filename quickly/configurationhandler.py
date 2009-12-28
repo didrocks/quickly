@@ -115,9 +115,9 @@ def saveConfig(global_config=None, config_file_path=None):
         finally:
             filedest.close()
             os.rename(filedest.name, quickly_file_path)
-    except AttributeError, e:
-        print _("ERROR: Can't save configuration in %s" % quickly_file_path)
-        return 1
+    except IOError, e:
+        sys.stderr.write(_("ERROR: Can't save configuration in %s" % quickly_file_path))
+        return(1)
     return 0
     
 
