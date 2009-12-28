@@ -226,16 +226,24 @@ def licensing(license=None):
         print _("%s file was not found") % fcopyright_name
         return(1)
     
-    # copy system license file to LICENSE    
+    # copy system license file to COPYING   
     # if not licence variable, that means it has already be copied
     if license is not None:
         src_license_file = "/usr/share/common-licenses/" + license
         if os.path.isfile(src_license_file):
-            shutil.copy("/usr/share/common-licenses/" + license, "LICENSE")
-        # license has been changed, remove LICENSE file if exists
+            shutil.copy("/usr/share/common-licenses/" + license, "COPYING")
+        # license has been changed, remove COPYING file if exists
         else:
-            if os.path.isfile("LICENSE"):
-                os.remove("LICENSE")
+            try:
+                os.remove("COPYING")
+            except OSError, e:
+                if e.errno == 2: # unexisting file
+                    pass
+                else:
+                    print _("Can't remove COPYING file")
+                    return(1)
+
+                pass
                             
         # write license to setup.py
         quicklyutils.set_setup_value('license', license)
