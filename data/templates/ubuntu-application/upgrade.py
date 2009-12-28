@@ -18,6 +18,7 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import subprocess
 import sys
 
 from quickly import templatetools
@@ -33,11 +34,20 @@ if len(sys.argv) < 3:
 else:
     project_version = sys.argv[1]
     template_version = sys.argv[2]
-#print project_version
-#print template_version
 
-# transition to 0.3
-#if project_version < 0.3:
-# do_stuff
-print("updated")
+##### 0.4 part
+# transition to 0.3.1: new licensing format
+
+if project_version < '0.3.1':
+    # don't handle error in upgrade (maybe the file doesn't exist)
+    bzr_instance = subprocess.Popen(["bzr", "mv", "LICENSE", "COPYING"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # if file not versionned, try traditional move, if error
+    if bzr_instance.returncode == 3:
+        try:
+            os.rename('LICENSE', 'COPYING')
+        except IEError, e:
+            if e.errno == 13:
+                sys.stderr(_("Can't rename LICENSE file, check your file permission"))
+                sys.exit(1)
+
 sys.exit(0)
