@@ -5,13 +5,13 @@
 
 # THIS IS camel_case_name CONFIGURATION FILE
 # YOU CAN PUT THERE SOME GLOBAL VALUE
-# Do not touch until you know what you're doing.
+# Do not touch unless you know what you're doing.
 # you're warned :)
 
 # where your project will head for your data (for instance, images and ui files)
 # by default, this is ../data, relative your trunk layout
 __python_name_data_directory__ = '../data/'
-
+__license__ = ''
 
 import os
 

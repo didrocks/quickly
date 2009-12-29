@@ -189,8 +189,8 @@ def licensing(license=None):
         config_file = '%s/%sconfig.py' % (python_name, python_name)
         for line in file(config_file, 'r'):
             fields = line.split(' = ') # Separate variable from value
+            print ", ".join(fields)
             if fields[0] == '__license__' and fields[1] != "'%s'" % license:
-                print 'update license'
                 fin = file(config_file, 'r')
                 fout = file(fin.name + '.new', 'w')
                 for line_input in fin:            
@@ -202,16 +202,16 @@ def licensing(license=None):
                 fout.close()
                 fin.close()
                 os.rename(fout.name, fin.name)
-            if license in supported_licenses_list:
-                src_license_file = "/usr/share/common-licenses/" + license
-                if os.path.isfile(src_license_file):
-                    shutil.copy("/usr/share/common-licenses/" + license, flicense_name)
-            try:
-                license = quicklyutils.set_setup_value('license', license)
-            except quicklyutils.cant_deal_with_setup_value:
-                print(_("Can't update license in setup.py file\n"))
-                return(1)
-            break
+                if license in supported_licenses_list:
+                    src_license_file = "/usr/share/common-licenses/" + license
+                    if os.path.isfile(src_license_file):
+                        shutil.copy("/usr/share/common-licenses/" + license, flicense_name)
+                break
+        try:
+            quicklyutils.set_setup_value('license', license)
+        except quicklyutils.cant_deal_with_setup_value:
+            print(_("Can't update license in setup.py file\n"))
+            return(1)
     except (OSError, IOError), e:
         print _("%s/%sconfig.py file not found.") % (python_name, python_name)
         return(1)
