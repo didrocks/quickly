@@ -137,8 +137,8 @@ quicklyutils.file_from_template(abs_path ,"project_root/project_name.desktop.in"
 quicklyutils.file_from_template(abs_path ,"bin/project_name","bin", substitutions)
 os.chmod("bin/" + project_name, 0755)
 
-# copy the licence file
-quicklyutils.file_from_template(abs_path ,"project_root/Copyright",".", substitutions)
+# copy the author file
+quicklyutils.file_from_template(abs_path ,"project_root/AUTHORS",".", substitutions)
 
 # add it to revision control
 print _("Creating bzr repository and commiting")

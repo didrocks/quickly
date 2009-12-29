@@ -143,7 +143,9 @@ def licensing(license=None):
         try:
             license = quicklyutils.get_setup_value('license')
         except quicklyutils.cant_deal_with_setup_value:
-            license = 'GPL-3'
+            pass
+    if license is None or license == '':
+        license = 'GPL-3'
 
     # get Copyright holders in AUTHORS file
     license_content = ""
