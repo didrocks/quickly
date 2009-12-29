@@ -49,5 +49,26 @@ if project_version < '0.3.1':
             if e.errno == 13:
                 sys.stderr.write(_("Can't rename LICENSE file, check your file permission\n"))
                 sys.exit(1)
+    # transition Copyright -> AUTHORS
+    if os.path.isfile('AUTHORS'):
+        source_file = 'AUTHORS'
+    else
+        source_file = 'Copyright'
+    try:
+        fauthor_out = file('AUTHORS.new', 'w')
+        for line in file(source_file):
+            if '### BEGIN AUTOMATIC LICENSE GENERATION' in line:
+                break
+            if line.startswith('#'):
+                line = line[1:].lstrip()
+            fauthor_out.write(line)
+        fauthor_out.flush()
+        fauthor_out.close()
+        os.rename('AUTHORS.new', 'AUTHORS')
+        os.remove('Copyright')
+    except (OSError, IOError), e:
+        pass
+
+
 
 sys.exit(0)
