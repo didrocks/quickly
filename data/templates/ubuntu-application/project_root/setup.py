@@ -82,7 +82,7 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 DistUtilsExtra.auto.setup(
     name='project_name',
     version='0.1',
-    #license='GPL v3',
+    #license='GPL-3',
     #author='Your Name',
     #author_email='email@ubuntu.com',
     #description='UI for managing …',

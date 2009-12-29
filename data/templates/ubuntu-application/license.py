@@ -18,6 +18,7 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+import filecmp
 import os
 import re
 import shutil
@@ -32,8 +33,6 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 
-BEGIN_COPYRIGHT_TAG = '### BEGIN AUTOMATIC LICENSE GENERATION'
-END_COPYRIGHT_TAG = '### END AUTOMATIC LICENSE GENERATION'
 BEGIN_LICENCE_TAG = '### BEGIN LICENSE'
 END_LICENCE_TAG = '### END LICENSE'
 
@@ -44,13 +43,12 @@ $quickly license <Your_Licence>
 
 Adds license to project files. Before using this command, you should:
 
-1. Edit the file Copyright to include your authorship (this step is automatically done
+1. Edit the file AUTHORS to include your authorship (this step is automatically done
    if you directly launch "$ quickly release" or "$ quickly share" before changing license)
    In this case, license is GPL-3 by default.
-2. If you want to put your own quickly unsupported Licence, remove and replace the tags
-   ### BEGIN AUTOMATIC LICENCE GENERATION and ### END AUTOMATIC LICENCE GENERATION
-   in it by your own licence.
-3. Executes either $ quickly license or $ quickly licence <License>
+2. If you want to put your own quickly unsupported Licence, add a COPYING file containing
+   your own licence.
+3. Executes either $ quickly license or $ quickly license <License>
    where <License> can be either:
    - GPL-3 (default)
    - GPL-2
@@ -81,21 +79,13 @@ def get_supported_licenses():
     return available_licenses
     
 
-def copy_license_to_files():
-    """Copy generated Copyright file to every .py files"""
+def copy_license_to_files(license_content):
+    """Copy license header to every .py files"""
 
     # get the project name
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
     project_name = configurationhandler.project_config['project']
-
-    # put full license into a string, stripping metatags
-    fcopyright_name = "Copyright"
-    try:
-        license = file(fcopyright_name, 'r').read().replace(BEGIN_COPYRIGHT_TAG + '\n', '').replace(END_COPYRIGHT_TAG + '\n', '')
-    except (OSError, IOError), e:
-        print _("%s file was not found") % fcopyright_name
-        sys.exit(1)
 
     # open each python file and main bin file
     for root, dirs, files in os.walk('./'):
@@ -111,7 +101,7 @@ def copy_license_to_files():
                         if BEGIN_LICENCE_TAG in line:
                             ftarget_file_name_out.write(line) # write this line, otherwise will be skipped
                             skip_until_end_found = True
-                            ftarget_file_name_out.write(license)
+                            ftarget_file_name_out.write(license_content)
 
                         if END_LICENCE_TAG in line:
                             skip_until_end_found = False
@@ -140,107 +130,100 @@ def licensing(license=None):
     Default is GPL-3"""
 
 
-    # if file was never licensed, choose GPL-3
-    fcopyright_name = "Copyright"
     fauthors_name = "AUTHORS"
+    flicense_name = "COPYING"
 
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    project_name = configurationhandler.project_config['project']
+    python_name = templatetools.python_name(project_name)
+
+    # check if we have a license tag in setup.py otherwise, default to GPL-3
     if license is None:
         try:
-            # check if file already licensed
-            fcopyright = file(fcopyright_name, 'r').read()
-            if fcopyright.find(BEGIN_COPYRIGHT_TAG + '\n' + END_COPYRIGHT_TAG) != -1:
-                license = "GPL-3"  
+            license = quicklyutils.get_setup_value('license')
+        except quicklyutils.cant_deal_with_setup_value:
+            pass
+    if license is None or license == '':
+        license = 'GPL-3'
 
-        except (OSError, IOError), e:
-            print _("%s file was not found") % fcopyright_name
-            sys.exit(1)
-
-    # if license is still None, that means that user uses a either a generated license
-    # or personal one and don't want to update it
-
-    # check that provided licensed is supported
-    if not license is None and license not in get_supported_licenses():
-        print _("This license seems to be unsupported by quickly. If you think it really should, " \
-                "please open a bug in quickly bugtracker")
-        return(1)
-
-
-    # check and update (if needed, cf before) Copyright and AUTHORS file
-    skip_until_end_found = False
+    # get Copyright holders in AUTHORS file
+    license_content = ""
     try:
-        fcopyright = file(fcopyright_name, 'r')
-        fcopyright_out = file(fcopyright.name + '.new', 'w')
-        fauthors_out = file(fauthors_name + '.new', 'w')        
-        for line in fcopyright:
-
-            # add autorship if needed
+        for line in file(fauthors_name, 'r'):
             if "<Your Name> <Your E-mail>" in line:
-                # if we have an author in setup.py, put it there
+                # if we have an author in setup.py, grab it
                 try:
                     author = quicklyutils.get_setup_value('author')
                     author_email = quicklyutils.get_setup_value('author_email')
-                    line = "# Copyright (C) %s %s <%s>\n" % (datetime.datetime.now().year, author, author_email)
+                    line = "Copyright (C) %s %s <%s>\n" % (datetime.datetime.now().year, author, author_email)
+                    # update AUTHORS file
+                    fout = file('%s.new' % fauthors_name, 'w')
+                    fout.write(line)
+                    fout.flush()
+                    fout.close()
+                    os.rename(fout.name, fauthors_name)
                 except quicklyutils.cant_deal_with_setup_value:
                     print _('Copyright is not attributed. ' \
-                            'Edit the Copyright file to include your name for the copyright in ' \
-                            'place of <Your Name> <Your E-mail> or use quickly share/quickly release')
-                    return 1
-
-            # update AUTHORS file
-            if 'copyright' in line.lower():
-                fauthors_out.write(line)
-
-            # if we want to update/create the license
-            if license:                
-                # seek if we have to add or Replace a License
-                if BEGIN_COPYRIGHT_TAG in line:
-                    fcopyright_out.write(line) # write this line, otherwise will be skipped
-                    skip_until_end_found = True
-                    
-                    # get license file to read and write in Copyright
-                    flicense = open(os.path.dirname(__file__) + "/available_licenses/header_" + license, 'r')
-                    fcopyright_out.write(flicense.read())
-                    flicense.close
-
-                if END_COPYRIGHT_TAG in line:
-                    skip_until_end_found = False
-
-            if not skip_until_end_found:
-                fcopyright_out.write(line)
-
-        fcopyright_out.close()
-        fcopyright.close()
-        fauthors_out.close()
-
-        if skip_until_end_found: # that means we didn't find the END_LICENCE_TAG, don't copy the file
-            print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_COPYRIGHT_TAG, fcopyright.name)
-            os.remove(fcopyright_out.name)
-            sys.exit(1)
-        else:
-            templatetools.apply_file_rights(fcopyright.name, fcopyright_out.name)
-            os.rename(fcopyright_out.name, fcopyright.name)
-        # finish updating copyright file
-        os.rename(fauthors_out.name, fauthors_name)
-
+                            'Edit the AUTHORS file to include your name for the copyright replacing ' \
+                            '<Your Name> <Your E-mail>. Update it in setup.py or use quickly share/quickly release' \
+                            'to fill it automatically')
+                    return(1)
+            license_content += "# %s" % line
     except (OSError, IOError), e:
-        print _("%s file was not found") % fcopyright_name
+        print _("%s file was not found") % fauthors_name
         return(1)
-    
-    # copy system license file to LICENSE    
-    # if not licence variable, that means it has already be copied
-    if license is not None:
-        src_license_file = "/usr/share/common-licenses/" + license
-        if os.path.isfile(src_license_file):
-            shutil.copy("/usr/share/common-licenses/" + license, "LICENSE")
-        # license has been changed, remove LICENSE file if exists
-        else:
-            if os.path.isfile("LICENSE"):
-                os.remove("LICENSE")
-                            
-        # write license to setup.py
-        quicklyutils.set_setup_value('license', license)
 
-    return(copy_license_to_files())
+    # add header to license_content
+    # check that COPYING file is provided if using a personal license
+    supported_licenses_list = get_supported_licenses()
+    if license in supported_licenses_list:
+        header_file_path = os.path.dirname(__file__) + "/available_licenses/header_" + license
+    else:
+        header_file_path = flicense_name
+    try:
+        for line in file(header_file_path, 'r'):
+            license_content += "# %s" % line
+    except (OSError, IOError), e:
+        if header_file_path == flicense_name:
+            print _("%s file was not found. It is compulsory for user defined license") % flicense_name
+        else:
+            print _("Header of %s license not found. Quickly installation corrupted?") % header_file_path
+        return(1)
+
+
+    # update license in config.py, setup.py and refresh COPYING if needed
+    try:
+        config_file = '%s/%sconfig.py' % (python_name, python_name)
+        for line in file(config_file, 'r'):
+            fields = line.split(' = ') # Separate variable from value
+            if fields[0] == '__license__' and fields[1].strip() != "'%s'" % license:
+                fin = file(config_file, 'r')
+                fout = file(fin.name + '.new', 'w')
+                for line_input in fin:            
+                    fields = line_input.split(' = ') # Separate variable from value
+                    if fields[0] == '__license__':
+                        line_input = "%s = '%s'\n" % (fields[0], license)
+                    fout.write(line_input)
+                fout.flush()
+                fout.close()
+                fin.close()
+                os.rename(fout.name, fin.name)
+                if license in supported_licenses_list:
+                    src_license_file = "/usr/share/common-licenses/" + license
+                    if os.path.isfile(src_license_file):
+                        shutil.copy("/usr/share/common-licenses/" + license, flicense_name)
+                break
+        try:
+            quicklyutils.set_setup_value('license', license)
+        except quicklyutils.cant_deal_with_setup_value:
+            print(_("Can't update license in setup.py file\n"))
+            return(1)
+    except (OSError, IOError), e:
+        print _("%s/%sconfig.py file not found.") % (python_name, python_name)
+        return(1)
+
+    return(copy_license_to_files(license_content))
 
 
 def shell_completion(argv):

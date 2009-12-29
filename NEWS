@@ -58,6 +58,10 @@ Quickly 0.4
   - Fixed some errors in the tutorial (Brian) (LP: #499356)
   - Fix missing import sys in setup.py (Philip Peitsch) (LP: #499712)
   - rename ubuntu-project to ubuntu-application
+  - enhance quickly license (no more Copyright file, only one AUTHORS file)
+    personal license needs COPYING file now (and the header will be copied in
+    every files). No more # needed in those files too. Some other little
+    refactoring too (LP: #469330)
 
 Quickly 0.2.6
 -------------------------------------
