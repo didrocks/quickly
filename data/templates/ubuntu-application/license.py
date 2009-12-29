@@ -173,15 +173,23 @@ def licensing(license=None):
     except (OSError, IOError), e:
         print _("%s file was not found") % fauthors_name
         return(1)
- 
+
+    # add header to license_content
     # check that COPYING file is provided if using a personal license
     supported_licenses_list = get_supported_licenses()
-    if license not in supported_licenses_list:
-        try:
-            license_content += file(flicense_name, 'r').read()
-        except (OSError, IOError), e:
+    if license in supported_licenses_list:
+        header_file_path = os.path.dirname(__file__) + "/available_licenses/header_" + license
+    else:
+        header_file_path = flicense_name
+    try:
+        for line in file(header_file_path, 'r'):
+            license_content += "# %s" % line
+    except (OSError, IOError), e:
+        if header_file_path == flicense_name:
             print _("%s file was not found. It is compulsory for user defined license") % flicense_name
-            return(1)
+        else:
+            print _("Header of %s license not found. Quickly installation corrupted?") % header_file_path
+        return(1)
 
 
     # update license in config.py, setup.py and refresh COPYING if needed
@@ -189,8 +197,7 @@ def licensing(license=None):
         config_file = '%s/%sconfig.py' % (python_name, python_name)
         for line in file(config_file, 'r'):
             fields = line.split(' = ') # Separate variable from value
-            print ", ".join(fields)
-            if fields[0] == '__license__' and fields[1] != "'%s'" % license:
+            if fields[0] == '__license__' and fields[1].strip() != "'%s'" % license:
                 fin = file(config_file, 'r')
                 fout = file(fin.name + '.new', 'w')
                 for line_input in fin:            
@@ -215,14 +222,6 @@ def licensing(license=None):
     except (OSError, IOError), e:
         print _("%s/%sconfig.py file not found.") % (python_name, python_name)
         return(1)
-
-    # finally, add header to license_content
-    if license in supported_licenses_list:
-        header_file_path = os.path.dirname(__file__) + "/available_licenses/header_" + license
-    else:
-        header_file_path = flicense_name
-    for line in file(header_file_path, 'r'):
-        license_content += "# %s" % line
 
     return(copy_license_to_files(license_content))
 
