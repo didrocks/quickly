@@ -21,7 +21,8 @@ import os
 import subprocess
 import sys
 
-from quickly import templatetools
+from internal import quicklyutils
+from quickly import configurationhandler, templatetools
 
 import gettext
 from gettext import gettext as _
@@ -35,9 +36,14 @@ else:
     project_version = sys.argv[1]
     template_version = sys.argv[2]
 
-##### 0.4 part
-# transition to 0.3.1: new licensing format
+if not configurationhandler.project_config:
+    configurationhandler.loadConfig()
+project_name = configurationhandler.project_config['project']
+python_name = templatetools.python_name(project_name)
 
+
+##### 0.4 update
+# transition to 0.3.1: new licensing format
 if project_version < '0.3.1':
     # don't handle error in upgrade (maybe the file doesn't exist)
     bzr_instance = subprocess.Popen(["bzr", "mv", "LICENSE", "COPYING"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -52,7 +58,7 @@ if project_version < '0.3.1':
     # transition Copyright -> AUTHORS
     if os.path.isfile('AUTHORS'):
         source_file = 'AUTHORS'
-    else
+    else:
         source_file = 'Copyright'
     try:
         fauthor_out = file('AUTHORS.new', 'w')
@@ -68,7 +74,27 @@ if project_version < '0.3.1':
         os.remove('Copyright')
     except (OSError, IOError), e:
         pass
-
+    # update config file to add __license__
+    try:
+        license = quicklyutils.get_setup_value('license')
+    except quicklyutils.cant_deal_with_setup_value:
+        license = ''
+    try:
+        config_file = '%s/%sconfig.py' % (python_name, python_name)
+        fin = file(config_file, 'r')
+        fout = file(fin.name + '.new', 'w')
+        for line in fin:
+            fields = line.split(' = ') # Separate variable from value
+            if fields[0] == '__%s_data_directory__' % python_name:
+                fout.write(line)
+                line = "__license__ = '%s'\n" % license
+            fout.write(line)
+        fout.flush()
+        fout.close()
+        fin.close()
+        os.rename(fout.name, fin.name)
+    except (OSError, IOError), e:
+        pass
 
 
 sys.exit(0)
