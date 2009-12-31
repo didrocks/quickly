@@ -8,17 +8,35 @@
 # Do not touch unless you know what you're doing.
 # you're warned :)
 
-# where your project will head for your data (for instance, images and ui files)
-# by default, this is ../data, relative your trunk layout
+__all__ = [
+    'project_path_not_found',
+    'get_data_file',
+    'get_data_path',
+    ]
+
+# Where your project will look for your data (for instance, images and ui
+# files). By default, this is ../data, relative your trunk layout
 __python_name_data_directory__ = '../data/'
 __license__ = ''
 
 import os
 
-class project_path_not_found(Exception):
-    pass
 
-def getdatapath():
+class project_path_not_found(Exception):
+    """Raised when we can't find the project directory."""
+
+
+def get_data_file(*path_segments):
+    """Get the full path to a data file.
+
+    Returns the path to a file underneath the data directory (as defined by
+    `get_data_path`). Equivalent to os.path.join(get_data_path(),
+    *path_segments).
+    """
+    return os.path.join(get_data_path(), *path_segments)
+
+
+def get_data_path():
     """Retrieve project_name data path
 
     This path is by default <python_name_lib_path>/../data/ in trunk
@@ -26,15 +44,12 @@ def getdatapath():
     is specified at installation time.
     """
 
-    # get pathname absolute or relative
-    if __python_name_data_directory__.startswith('/'):
-        pathname = __python_name_data_directory__
-    else:
-        pathname = os.path.dirname(__file__) + '/' + __python_name_data_directory__
+    # Get pathname absolute or relative.
+    path = os.path.join(
+        os.path.dirname(__file__), __python_name_data_directory__)
 
-    abs_data_path = os.path.abspath(pathname)
-    if os.path.exists(abs_data_path):
-        return abs_data_path
-    else:
+    abs_data_path = os.path.abspath(path)
+    if not os.path.exists(abs_data_path):
         raise project_path_not_found
 
+    return abs_data_path

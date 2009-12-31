@@ -120,6 +120,7 @@ target_python_dir = python_name
 quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "Preferencescamel_case_nameDialog.py", target_python_dir, substitutions)
 quicklyutils.file_from_template(template_python_dir, "python_nameconfig.py", target_python_dir, substitutions)
+quicklyutils.file_from_template(template_python_dir, 'helpers.py', target_python_dir, substitutions)
 
 # copy the files needed for packaging
 quicklyutils.file_from_template(abs_path, "project_root/setup.py", ".", substitutions)

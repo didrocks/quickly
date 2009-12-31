@@ -8,104 +8,102 @@ import sys
 import os
 import gtk
 
-# add project root directory (enable symlink, and trunk execution)
-project_bin_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
-project_root_directory_name = os.path.dirname(project_bin_directory)
-project_root_directory = os.path.abspath(project_root_directory_name)
-if os.path.exists(os.path.join(project_root_directory, 'python_name')) and project_root_directory not in sys.path:
-    sys.path.insert(0, project_root_directory)
-    os.putenv('PYTHONPATH', project_root_directory) # for subprocesses
+# Add project root directory (enable symlink, and trunk execution).
+PROJECT_ROOT_DIRECTORY = os.path.abspath(
+    os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
 
-from python_name import Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog
-from python_name.python_nameconfig import getdatapath
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
+    and PROJECT_ROOT_DIRECTORY not in sys.path):
+    sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
+    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
+
+from python_name import (
+    Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
+from python_name.helpers import make_window
+
 
 class camel_case_nameWindow(gtk.Window):
     __gtype_name__ = "camel_case_nameWindow"
 
     def __init__(self):
-        """__init__ - This function is typically not called directly.
-        Creation a camel_case_nameWindow requires redeading the associated ui
-        file and parsing the ui definition extrenally,
-        and then calling camel_case_nameWindow.finish_initializing().
+        """Construct a camel_case_nameWindow.
+
+        This function is typically not called directly. Creation a
+        camel_case_nameWindow requires rereading the associated ui file and
+        parsing the ui definition externally, and then calling
+        camel_case_nameWindow.finish_initializing().
 
         Use the convenience function Newcamel_case_nameWindow to create
         camel_case_nameWindow object.
-
         """
         pass
 
     def finish_initializing(self, builder):
-        """finish_initalizing should be called after parsing the ui definition
+        """Called after we've finished initializing.
+
+        finish_initalizing should be called after parsing the UI definition
         and creating a camel_case_nameWindow object with it in order to finish
         initializing the start of the new camel_case_nameWindow instance.
-
         """
-        #get a reference to the builder and set up the signals
+        # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.builder.connect_signals(self)
 
-        #uncomment the following code to read in preferences at start up
+        # Uncomment the following code to read in preferences at start up.
         #dlg = Preferencescamel_case_nameDialog.NewPreferencescamel_case_nameDialog()
         #self.preferences = dlg.get_preferences()
 
-        #code for other initialization actions should be added here
+        # Code for other initialization actions should be added here.
 
     def about(self, widget, data=None):
-        """about - display the about box for project_name """
+        """Display the about box for project_name."""
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
         response = about.run()
         about.destroy()
 
     def preferences(self, widget, data=None):
-        """preferences - display the preferences window for project_name """
+        """Display the preferences window for project_name."""
         prefs = Preferencescamel_case_nameDialog.NewPreferencescamel_case_nameDialog()
         response = prefs.run()
         if response == gtk.RESPONSE_OK:
-            #make any updates based on changed preferences here
+            # Make any updates based on changed preferences here.
             pass
         prefs.destroy()
 
     def quit(self, widget, data=None):
-        """quit - signal handler for closing the camel_case_nameWindow"""
+        """Signal handler for closing the camel_case_nameWindow."""
         self.destroy()
 
     def on_destroy(self, widget, data=None):
-        """on_destroy - called when the camel_case_nameWindow is close. """
-        #clean up code for saving application state should be added here
-
+        """Called when the camel_case_nameWindow is closed."""
+        # Clean up code for saving application state should be added here.
         gtk.main_quit()
+
 
 def Newcamel_case_nameWindow():
     """Newcamel_case_nameWindow - returns a fully instantiated
     camel_case_nameWindow object. Use this function rather than
     creating a camel_case_nameWindow directly.
     """
+    return make_window('camel_case_nameWindow', "python_name_window")
 
-    #look for the ui file that describes the ui
-    ui_filename = os.path.join(getdatapath(), 'ui', 'camel_case_nameWindow.ui')
-    if not os.path.exists(ui_filename):
-        ui_filename = None
-
-    builder = gtk.Builder()
-    builder.add_from_file(ui_filename)
-    window = builder.get_object("python_name_window")
-    window.finish_initializing(builder)
-    return window
 
 if __name__ == "__main__":
-    #support for command line options
-    import logging, optparse
+    # Support for command line options.
+    import logging
+    import optparse
     parser = optparse.OptionParser(version="%prog %ver")
-    parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="Show debug messages")
+    parser.add_option(
+        "-v", "--verbose", action="store_true", dest="verbose",
+        help="Show debug messages")
     (options, args) = parser.parse_args()
 
-    #set the logging level to show debug messages
+    # Set the logging level to show debug messages.
     if options.verbose:
         logging.basicConfig(level=logging.DEBUG)
         logging.debug('logging enabled')
 
-    #run the application
+    # Run the application.
     window = Newcamel_case_nameWindow()
     window.show()
     gtk.main()
-
