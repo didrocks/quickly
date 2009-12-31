@@ -3,11 +3,11 @@
 # This file is in the public domain
 ### END LICENSE
 
-import sys
 import os
 import gtk
 
 from python_name.python_nameconfig import getdatapath
+
 
 class dialog_camel_case_nameDialog(gtk.Dialog):
     __gtype_name__ = "dialog_camel_case_nameDialog"
@@ -15,12 +15,12 @@ class dialog_camel_case_nameDialog(gtk.Dialog):
     def __init__(self):
         """__init__ - This function is typically not called directly.
         Creation of a dialog_camel_case_nameDialog requires redeading the associated ui
-        file and parsing the ui definition extrenally, 
+        file and parsing the ui definition extrenally,
         and then calling dialog_camel_case_nameDialog.finish_initializing().
-    
-        Use the convenience function Newdialog_camel_case_nameDialog to create 
+
+        Use the convenience function Newdialog_camel_case_nameDialog to create
         a dialog_camel_case_nameDialog object.
-    
+
         """
         pass
 
@@ -28,7 +28,7 @@ class dialog_camel_case_nameDialog(gtk.Dialog):
         """finish_initalizing should be called after parsing the ui definition
         and creating a dialog_camel_case_nameDialog object with it in order to finish
         initializing the start of the new dialog_camel_case_nameDialog instance.
-    
+
         """
         #get a reference to the builder and set up the signals
         self.builder = builder
@@ -46,14 +46,14 @@ class dialog_camel_case_nameDialog(gtk.Dialog):
         """cancel - The user has elected cancel changes.
         Called before the dialog returns gtk.RESPONSE_CANCEL for run()
 
-        """         
+        """
         pass
 
 def Newdialog_camel_case_nameDialog():
     """Newdialog_camel_case_nameDialog - returns a fully instantiated
     dialog-camel_case_nameDialog object. Use this function rather than
     creating dialog_camel_case_nameDialog instance directly.
-    
+
     """
 
     #look for the ui file that describes the ui
@@ -62,7 +62,7 @@ def Newdialog_camel_case_nameDialog():
         ui_filename = None
 
     builder = gtk.Builder()
-    builder.add_from_file(ui_filename)    
+    builder.add_from_file(ui_filename)
     dialog = builder.get_object("dialog_name_dialog")
     dialog.finish_initializing(builder)
     return dialog
@@ -71,4 +71,3 @@ if __name__ == "__main__":
     dialog = Newdialog_camel_case_nameDialog()
     dialog.show()
     gtk.main()
-
