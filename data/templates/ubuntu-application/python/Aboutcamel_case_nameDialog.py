@@ -17,7 +17,7 @@ class Aboutcamel_case_nameDialog(gtk.AboutDialog):
 
         This function is typically not called directly. Creation of an
         Aboutcamel_case_nameDialog requires redeading the associated UI file
-        and parsing the ui definition externally, and then calling
+        and parsing the UI definition externally, and then calling
         Aboutcamel_case_nameDialog.finish_initializing().
 
         Use the convenience function NewAboutcamel_case_nameDialog to create
