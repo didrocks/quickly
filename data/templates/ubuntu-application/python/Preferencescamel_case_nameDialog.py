@@ -56,9 +56,9 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         # TODO: code for other initialization actions should be added here
 
     def get_preferences(self):
-        """get_preferences  -returns a dictionary object that contain
-        preferences for project_name. Creates a couchdb record if
-        necessary.
+        """Return a dict of preferences for project_name.
+
+        Creates a couchdb record if necessary.
         """
         if self.__preferences == None:
             # The dialog is initializing.
@@ -87,29 +87,30 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         self.__database.update_fields(self.__key, self.__preferences)
 
     def ok(self, widget, data=None):
-        """ok - The user has elected to save the changes.
+        """The user has elected to save the changes.
+
         Called before the dialog returns gtk.RESONSE_OK from run().
         """
 
-        #make any updates to self.__preferences here
+        # Make any updates to self.__preferences here. e.g.
         #self.__preferences["preference1"] = "value2"
         self.__save_preferences()
 
     def cancel(self, widget, data=None):
-        """cancel - The user has elected cancel changes.
+        """The user has elected cancel changes.
+
         Called before the dialog returns gtk.RESPONSE_CANCEL for run()
         """
-
-        #restore any changes to self.__preferences here
+        # Restore any changes to self.__preferences here.
         pass
 
 
 def NewPreferencescamel_case_nameDialog():
-    """NewPreferencescamel_case_nameDialog - returns a fully instantiated
-    Preferencescamel_case_nameDialog object. Use this function rather than
-    creating a Preferencescamel_case_nameDialog instance directly.
-    """
+    """Returns a fully instantiated Preferencescamel_case_nameDialog object.
 
+    Use this function rather than creating a Preferencescamel_case_nameDialog
+    instance directly.
+    """
     # Look for the UI file that describes the user interface.
     ui_filename = os.path.join(
         getdatapath(), 'ui', 'Preferencescamel_case_nameDialog.ui')
