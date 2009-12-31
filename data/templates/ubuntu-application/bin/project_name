@@ -90,7 +90,8 @@ def Newcamel_case_nameWindow():
 
 if __name__ == "__main__":
     # Support for command line options.
-    import logging, optparse
+    import logging
+    import optparse
     parser = optparse.OptionParser(version="%prog %ver")
     parser.add_option(
         "-v", "--verbose", action="store_true", dest="verbose",
