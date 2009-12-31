@@ -12,7 +12,7 @@ __all__ = [
 import os
 import gtk
 
-from python_name.python_nameconfig import get_data_path
+from python_name.python_nameconfig import get_data_file
 
 
 def make_window(builder_file_name, window_name):
@@ -23,8 +23,7 @@ def make_window(builder_file_name, window_name):
     :param window_name: The name of the window or dialog in the builder file.
     """
     # Look for the ui file that describes the user interface.
-    ui_filename = os.path.join(
-        get_data_path(), 'ui', '%s.ui' % (builder_file_name,))
+    ui_filename = get_data_file('ui', '%s.ui' % (builder_file_name,))
     if not os.path.exists(ui_filename):
         ui_filename = None
 

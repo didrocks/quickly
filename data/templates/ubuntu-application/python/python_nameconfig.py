@@ -10,6 +10,7 @@
 
 __all__ = [
     'project_path_not_found',
+    'get_data_file',
     'get_data_path',
     ]
 
@@ -23,6 +24,16 @@ import os
 
 class project_path_not_found(Exception):
     """Raised when we can't find the project directory."""
+
+
+def get_data_file(*path_segments):
+    """Get the full path to a data file.
+
+    Returns the path to a file underneath the data directory (as defined by
+    `get_data_path`). Equivalent to os.path.join(get_data_path(),
+    *path_segments).
+    """
+    return os.path.join(get_data_path(), *path_segments)
 
 
 def get_data_path():
