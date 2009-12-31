@@ -8,15 +8,17 @@
 # Do not touch unless you know what you're doing.
 # you're warned :)
 
-# where your project will head for your data (for instance, images and ui files)
-# by default, this is ../data, relative your trunk layout
+# Where your project will look for your data (for instance, images and ui
+# files). By default, this is ../data, relative your trunk layout
 __python_name_data_directory__ = '../data/'
 __license__ = ''
 
 import os
 
+
 class project_path_not_found(Exception):
     pass
+
 
 def getdatapath():
     """Retrieve project_name data path
@@ -30,11 +32,11 @@ def getdatapath():
     if __python_name_data_directory__.startswith('/'):
         pathname = __python_name_data_directory__
     else:
-        pathname = os.path.dirname(__file__) + '/' + __python_name_data_directory__
+        pathname = (
+            os.path.dirname(__file__) + '/' + __python_name_data_directory__)
 
     abs_data_path = os.path.abspath(pathname)
     if os.path.exists(abs_data_path):
         return abs_data_path
     else:
         raise project_path_not_found
-
