@@ -6,7 +6,7 @@
 """Helpers for an Ubuntu application."""
 
 __all__ = [
-    'make_dialog',
+    'make_window',
     ]
 
 import os
@@ -15,12 +15,12 @@ import gtk
 from python_name.python_nameconfig import getdatapath
 
 
-def make_dialog(builder_file_name, name_of_dialog):
-    """Return a fully-instantiated dialog.
+def make_window(builder_file_name, window_name):
+    """Return a fully-instantiated window or dialog.
 
     :param builder_file_name: The name of the builder file, without extension.
         Assumed to be in the 'ui' directory under the data path.
-    :param name_of_dialog: The name of the dialog in the builder file.
+    :param window_name: The name of the window or dialog in the builder file.
     """
     # Look for the ui file that describes the user interface.
     ui_filename = os.path.join(
@@ -30,6 +30,6 @@ def make_dialog(builder_file_name, name_of_dialog):
 
     builder = gtk.Builder()
     builder.add_from_file(ui_filename)
-    dialog = builder.get_object(name_of_dialog)
+    dialog = builder.get_object(window_name)
     dialog.finish_initializing(builder)
     return dialog

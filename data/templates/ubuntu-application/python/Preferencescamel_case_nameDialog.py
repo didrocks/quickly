@@ -7,7 +7,7 @@ from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 import gtk
 
-from python_name.helpers import make_dialog
+from python_name.helpers import make_window
 
 
 class Preferencescamel_case_nameDialog(gtk.Dialog):
@@ -109,7 +109,7 @@ def NewPreferencescamel_case_nameDialog():
     Use this function rather than creating a Preferencescamel_case_nameDialog
     instance directly.
     """
-    return make_dialog(
+    return make_window(
         'Preferencescamel_case_nameDialog',
         "preferences_python_name_dialog")
 

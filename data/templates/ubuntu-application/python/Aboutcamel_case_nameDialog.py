@@ -5,7 +5,7 @@
 
 import gtk
 
-from python_name.helpers import make_dialog
+from python_name.helpers import make_window
 
 
 class Aboutcamel_case_nameDialog(gtk.AboutDialog):
@@ -32,7 +32,7 @@ class Aboutcamel_case_nameDialog(gtk.AboutDialog):
         finish initializing the start of the new Aboutcamel_case_nameDialog
         instance.
         """
-        #get a reference to the builder and set up the signals
+        # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.builder.connect_signals(self)
 
@@ -45,7 +45,7 @@ def NewAboutcamel_case_nameDialog():
     Use this function rather than creating a Aboutcamel_case_nameDialog
     instance directly.
     """
-    return make_dialog(
+    return make_window(
         'Aboutcamel_case_nameDialog', "about_python_name_dialog")
 
 

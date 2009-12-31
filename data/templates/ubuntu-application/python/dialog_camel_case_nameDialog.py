@@ -5,7 +5,7 @@
 
 import gtk
 
-from python_name.helpers import make_dialog
+from python_name.helpers import make_window
 
 
 class dialog_camel_case_nameDialog(gtk.Dialog):
@@ -57,7 +57,7 @@ def Newdialog_camel_case_nameDialog():
     Use this function rather than creating dialog_camel_case_nameDialog
     instance directly.
     """
-    return make_dialog(
+    return make_window(
         'dialog_camel_case_nameDialog', "dialog_name_dialog")
 
 
