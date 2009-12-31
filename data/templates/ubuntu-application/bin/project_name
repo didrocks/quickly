@@ -8,15 +8,14 @@ import sys
 import os
 import gtk
 
-# add project root directory (enable symlink, and trunk execution)
-project_bin_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
-project_root_directory_name = os.path.dirname(project_bin_directory)
-project_root_directory = os.path.abspath(project_root_directory_name)
+# Add project root directory (enable symlink, and trunk execution).
+PROJECT_ROOT_DIRECTORY = os.path.abspath(
+    os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
 
-if (os.path.exists(os.path.join(project_root_directory, 'python_name'))
-    and project_root_directory not in sys.path):
-    sys.path.insert(0, project_root_directory)
-    os.putenv('PYTHONPATH', project_root_directory) # for subprocesses
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
+    and PROJECT_ROOT_DIRECTORY not in sys.path):
+    sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
+    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
@@ -88,7 +87,8 @@ def Newcamel_case_nameWindow():
     """
 
     #look for the ui file that describes the ui
-    ui_filename = os.path.join(getdatapath(), 'ui', 'camel_case_nameWindow.ui')
+    ui_filename = os.path.join(
+        getdatapath(), 'ui', 'camel_case_nameWindow.ui')
     if not os.path.exists(ui_filename):
         ui_filename = None
 
