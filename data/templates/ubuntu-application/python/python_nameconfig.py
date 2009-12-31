@@ -29,14 +29,11 @@ def getdatapath():
     """
 
     # get pathname absolute or relative
-    if __python_name_data_directory__.startswith('/'):
-        pathname = __python_name_data_directory__
-    else:
-        pathname = (
-            os.path.dirname(__file__) + '/' + __python_name_data_directory__)
+    path = os.path.join(
+        os.path.dirname(__file__), __python_name_data_directory__)
 
-    abs_data_path = os.path.abspath(pathname)
-    if os.path.exists(abs_data_path):
-        return abs_data_path
-    else:
+    abs_data_path = os.path.abspath(path)
+    if not os.path.exists(abs_data_path):
         raise project_path_not_found
+
+    return abs_data_path
