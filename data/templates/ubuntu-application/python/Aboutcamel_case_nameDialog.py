@@ -3,10 +3,9 @@
 # This file is in the public domain
 ### END LICENSE
 
-import os
 import gtk
 
-from python_name.python_nameconfig import getdatapath
+from python_name.helpers import make_dialog
 
 
 class Aboutcamel_case_nameDialog(gtk.AboutDialog):
@@ -46,17 +45,8 @@ def NewAboutcamel_case_nameDialog():
     Use this function rather than creating a Aboutcamel_case_nameDialog
     instance directly.
     """
-    # Look for the UI file that describes the user interface.
-    ui_filename = os.path.join(
-        getdatapath(), 'ui', 'Aboutcamel_case_nameDialog.ui')
-    if not os.path.exists(ui_filename):
-        ui_filename = None
-
-    builder = gtk.Builder()
-    builder.add_from_file(ui_filename)
-    dialog = builder.get_object("about_python_name_dialog")
-    dialog.finish_initializing(builder)
-    return dialog
+    return make_dialog(
+        'Aboutcamel_case_nameDialog', "about_python_name_dialog")
 
 
 if __name__ == "__main__":

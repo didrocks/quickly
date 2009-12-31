@@ -3,13 +3,11 @@
 # This file is in the public domain
 ### END LICENSE
 
-import os
-
 from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 import gtk
 
-from python_name.python_nameconfig import getdatapath
+from python_name.helpers import make_dialog
 
 
 class Preferencescamel_case_nameDialog(gtk.Dialog):
@@ -111,17 +109,9 @@ def NewPreferencescamel_case_nameDialog():
     Use this function rather than creating a Preferencescamel_case_nameDialog
     instance directly.
     """
-    # Look for the UI file that describes the user interface.
-    ui_filename = os.path.join(
-        getdatapath(), 'ui', 'Preferencescamel_case_nameDialog.ui')
-    if not os.path.exists(ui_filename):
-        ui_filename = None
-
-    builder = gtk.Builder()
-    builder.add_from_file(ui_filename)
-    dialog = builder.get_object("preferences_python_name_dialog")
-    dialog.finish_initializing(builder)
-    return dialog
+    return make_dialog(
+        'Preferencescamel_case_nameDialog',
+        "preferences_python_name_dialog")
 
 
 if __name__ == "__main__":
