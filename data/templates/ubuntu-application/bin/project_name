@@ -19,7 +19,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
 
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
-from python_name.python_nameconfig import getdatapath
+from python_name.helpers import make_window
 
 
 class camel_case_nameWindow(gtk.Window):
@@ -85,18 +85,7 @@ def Newcamel_case_nameWindow():
     camel_case_nameWindow object. Use this function rather than
     creating a camel_case_nameWindow directly.
     """
-
-    #look for the ui file that describes the ui
-    ui_filename = os.path.join(
-        getdatapath(), 'ui', 'camel_case_nameWindow.ui')
-    if not os.path.exists(ui_filename):
-        ui_filename = None
-
-    builder = gtk.Builder()
-    builder.add_from_file(ui_filename)
-    window = builder.get_object("python_name_window")
-    window.finish_initializing(builder)
-    return window
+    return make_window('camel_case_nameWindow', "python_name_window")
 
 
 if __name__ == "__main__":
