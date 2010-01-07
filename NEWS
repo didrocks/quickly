@@ -62,6 +62,13 @@ Quickly 0.4
     personal license needs COPYING file now (and the header will be copied in
     every files). No more # needed in those files too. Some other little
     refactoring too (LP: #469330)
+  - change versionning support in ubuntu application: (LP: #476814)
+   + quickly share just adds -publicX to current version where X is bumped
+     at each "quicky share" execution
+   + quickly release remove -publicX (if any) and release with current YY.MM.
+     If there is already a release with that version, it will be YY.MM.1, 
+     then YY.MM.2
+
 
 Quickly 0.2.6
 -------------------------------------

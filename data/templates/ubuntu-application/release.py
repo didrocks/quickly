@@ -5,16 +5,16 @@
 #
 # This file is part of Quickly ubuntu-application template
 #
-#This program is free software: you can redistribute it and/or modify it 
-#under the terms of the GNU General Public License version 3, as published 
+#This program is free software: you can redistribute it and/or modify it
+#under the terms of the GNU General Public License version 3, as published
 #by the Free Software Foundation.
 
-#This program is distributed in the hope that it will be useful, but 
-#WITHOUT ANY WARRANTY; without even the implied warranties of 
-#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+#This program is distributed in the hope that it will be useful, but
+#WITHOUT ANY WARRANTY; without even the implied warranties of
+#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
 #PURPOSE.  See the GNU General Public License for more details.
 
-#You should have received a copy of the GNU General Public License along 
+#You should have received a copy of the GNU General Public License along
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
@@ -41,7 +41,7 @@ def help():
 $quickly release
 
 Posts a release of your project to a PPA on launchpad so that
-users can install the application on their system. 
+users can install the application on their system.
 
 You can also execute:
 $quickly release <release_number> of you don't want to use current
@@ -75,7 +75,7 @@ installs as expected. (This is not mandatory)
 def shell_completion(argv):
     ''' Complete --args '''
     # option completion
-    if argv[-1].startswith("-"):        
+    if argv[-1].startswith("-"):
         print " ".join([option for option in options if option.startswith(sys.argv[-1])])
     elif len(argv) > 1 and argv[-2] == '--ppa': # if argument following --ppa, complete by ppa
         print " ".join(packaging.shell_complete_ppa(argv[-1]))
@@ -108,42 +108,14 @@ while i < len(argv):
         args.append(arg)
     i += 1
 
+    commit_msg = None
 if len(args) == 1:
-
-    try:
-        release_version = quicklyutils.get_setup_value('version')
-    except quicklyutils.cant_deal_with_setup_value:
-        print _("Release version not found in setup.py and no version specified in command line.")
-        sys.exit(1)       
-    commit_msg = _('quickly released')
+    proposed_version = None
 elif len(args) == 2:
-    release_version = args[1]
-    # add .0 to release if nothing specified (avoid for mess in search in bzr tags)
-    if "." not in release_version:
-        release_version + '.0'
-    commit_msg = _('quickly released: %s' % release_version)    
-    # write release version to setup.py if user specify it (needed for package build)
-    quicklyutils.set_setup_value('version', release_version)
+    proposed_version = None
 elif len(args) > 2:
-    release_version = args[1]
+    proposed_version = args[1]
     commit_msg = " ".join(args[2:])
-    # write release version to setup.py if user specify it (needed for package build)
-    quicklyutils.set_setup_value('version', release_version)
-
-try:
-    float(release_version)
-except ValueError:
-    # two cases:
-    # a "quickly share" has already be done, and so, we just remove all the ~publilcX stuff
-    splitted_release_version = release_version.split("~public")
-    if len(splitted_release_version) > 1:
-        release_version = splitted_release_version[0]
-
-    # elsewhere, it's an error
-    else:
-        print _("Release version specified in command arguments or in setup.py " \
-                "is not a valid number.")
-        sys.exit(1)
 
 # warning: project_name can be different from project.name (one local, one on launchpad)
 if not configurationhandler.project_config:
@@ -198,7 +170,18 @@ except packaging.ppa_not_found, e:
     for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):
         print "%s - %s" % (ppa_name, ppa_display_name)
     sys.exit(1)
-    
+
+try:
+    release_version = packaging.updateversion(proposed_version)
+except (packaging.invalid_versionning_scheme,
+        packaging.invalid_version_in_setup), error_message:
+    print(error_message)
+    sys.exit(1)
+
+if commit_msg is None:
+    commit_msg = _('quickly released: %s' % release_version)
+
+
 # check if already released with this name
 bzr_instance = subprocess.Popen(["bzr", "tags"], stdout=subprocess.PIPE)
 bzr_tags, err = bzr_instance.communicate()
@@ -209,10 +192,9 @@ if release_version in bzr_tags:
     print _("ERROR: quickly can't release: %s seems to be already released. Choose another name.") % release_version
     sys.exit(1)
 
-    
+
 # add files, setup release version, commit and push !
 #TODO: check or fix if we don't have an ssh key (don't tag otherwise to be able to release again)
-quicklyutils.set_setup_value('version', release_version)
 subprocess.call(["bzr", "add"])
 return_code = subprocess.call(["bzr", "commit", '-m', commit_msg])
 if return_code != 0 and return_code != 3:
@@ -248,20 +230,20 @@ if not ("parent branch" in bzr_info) or ((".staging." in bzr_info) and not bzr_s
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(return_code)
-    
+
     # make first pull too
     return_code = subprocess.call(["bzr", "pull", "--remember", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release correctly: can't pull from launchpad.")
         sys.exit(return_code)
-    
+
 else:
 
     return_code = subprocess.call(["bzr", "pull"])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't pull from launchpad.")
         sys.exit(return_code)
-        
+
     subprocess.call(["bzr", "push"])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
@@ -275,13 +257,9 @@ if return_code != 0:
     sys.exit(return_code)
 
 print _("%s %s released and building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, release_version, ppa_url)
-# now, we can bump version for next release
-next_release_version = float(release_version) + 0.1
-quicklyutils.set_setup_value('version', next_release_version)
 
 # as launchpad-open doesn't support staging server, put an url
 if launchpadaccess.lp_server == "staging":
     webbrowser.open(launchpadaccess.LAUNCHPAD_CODE_STAGING_URL + '/~' + launchpad.me.name + '/' + project.name + '/quickly_trunk')
 else:
     subprocess.call(["bzr", "launchpad-open"])
-

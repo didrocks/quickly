@@ -4,18 +4,19 @@
 #
 # This file is part of Quickly ubuntu-application template
 #
-#This program is free software: you can redistribute it and/or modify it 
-#under the terms of the GNU General Public License version 3, as published 
+#This program is free software: you can redistribute it and/or modify it
+#under the terms of the GNU General Public License version 3, as published
 #by the Free Software Foundation.
 
-#This program is distributed in the hope that it will be useful, but 
-#WITHOUT ANY WARRANTY; without even the implied warranties of 
-#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+#This program is distributed in the hope that it will be useful, but
+#WITHOUT ANY WARRANTY; without even the implied warranties of
+#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
 #PURPOSE.  See the GNU General Public License for more details.
 
-#You should have received a copy of the GNU General Public License along 
+#You should have received a copy of the GNU General Public License along
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 import re
 import subprocess
 import sys
@@ -23,6 +24,7 @@ import sys
 
 from quickly import configurationhandler
 from quickly import launchpadaccess
+from internal import quicklyutils
 
 import gettext
 from gettext import gettext as _
@@ -36,12 +38,23 @@ class not_ppa_owner(Exception):
     pass
 class user_team_not_found(Exception):
     pass
+class invalid_versionning_scheme(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    def __str__(self):
+        return repr(self.msg)
+class invalid_version_in_setup(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    def __str__(self):
+        return repr(self.msg)
+
 
 def updatepackaging():
     """create or update a package using python-mkdebian.
-    
+
     Commit after the first packaging creation"""
-    
+
     return_code = subprocess.call(["python-mkdebian"])
     if return_code == 0:
         print _("Ubuntu packaging created in debian/")
@@ -55,7 +68,7 @@ def updatepackaging():
     bzr_status, err = bzr_instance.communicate()
     if bzr_instance.returncode != 0:
         return(bzr_instance.returncode)
-    
+
     if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
         return_code = subprocess.call(["bzr", "add"])
         if return_code == 0:
@@ -65,7 +78,7 @@ def updatepackaging():
 
 def shell_complete_ppa(ppa_to_complete):
     ''' Complete from available ppas '''
-    
+
     # connect to LP and get ppa to complete
     try:
         launchpad = launchpadaccess.initialize_lpi(False)
@@ -138,7 +151,7 @@ def choose_ppa(launchpad, ppa_name=None):
 
 def push_to_ppa(dput_ppa_name, changes_file):
     """ Push some code to a ppa """
-    
+
     # creation/update debian packaging
     return_code = updatepackaging()
     if return_code != 0:
@@ -160,7 +173,7 @@ def get_all_ppas(launchpad, lp_team_or_user):
     """ get all from a team or users
 
     Return list of tuples (ppa_name, ppa_display_name)"""
-    
+
     ppa_list = []
     for ppa in lp_team_or_user.ppas:
         ppa_list.append((ppa.name, ppa.displayname))
@@ -181,3 +194,76 @@ def check_and_return_ppaname(launchpad, lp_team_or_user, ppa_name):
         raise ppa_not_found('ppa:%s:%s' % (lp_team_or_user.name, ppa_name.encode('UTF-8')))
     return(current_ppa_name)
 
+def updateversion(proposed_version=None, sharing=False):
+    '''Update versionning with year.month, handling intermediate release'''
+
+    if proposed_version:
+        # check manual versionning is correct
+        try:
+            for number in proposed_version.split('.'):
+                float(number)
+        except ValueError:
+            msg = _("Release version specified in command arguments is not a " \
+                    "valid version scheme like 'x(.y)(.z)'.")
+            raise invalid_versionning_scheme(msg)
+        new_version = proposed_version
+
+    else:
+        # get previous value
+        try:
+            old_version = quicklyutils.get_setup_value('version')
+        except quicklyutils.cant_deal_with_setup_value:
+            msg = _("No previous version found in setup.py. Put one please")
+            raise invalid_version_in_setup(msg)
+
+        # sharing only add -publicX to last release, no other update, no bumping
+        if sharing:
+            splitted_release_version = old_version.split("-public")
+            if len(splitted_release_version) > 1:
+                try:
+                    share_version = float(splitted_release_version[1])
+                except ValueError:
+                    msg = _("Share version specified after -public in "\
+                            "setup.py is not a valid number: %s") \
+                            % splitted_release_version[1]
+                    raise invalid_versionning_scheme(msg)
+                new_version = splitted_release_version[0] + '-public' + \
+                              str(int(share_version + 1))
+            else:
+                new_version = old_version + "-public1"
+
+        # automatically version to year.month(.subversion)
+        else:
+            current_date = datetime.datetime.now()
+            this_year = str(current_date.year)[-2:]
+            this_month = current_date.month
+            base_version = '%s.%s' % (this_year, this_month)
+
+            if base_version in old_version:
+                try:
+                    # try to get a minor version, removing -public if one
+                    (year, month, minor_version) = old_version.split('.')
+                    minor_version = minor_version.split('-public')[0]
+                    try:
+                        minor_version = float(minor_version)
+                    except ValueError:
+                        msg = _("Minor version specified in setup.py is not a " \
+                                "valid number: %s. Fix this or specify a " \
+                                "version as release command line argument") \
+                                % minor_version
+                        raise invalid_versionning_scheme(msg)
+                    new_version = base_version + '.' + str(int(minor_version + 1))
+
+                except ValueError:
+                    # no minor version, bump to first one (be careful,
+                    # old_version may contain -publicX)
+                    new_version = base_version + '.1'
+
+            else:
+                # new year/month
+                new_version = base_version
+
+    # write release version to setup.py
+    quicklyutils.set_setup_value('version', new_version)
+
+    return new_version
