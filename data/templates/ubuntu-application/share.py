@@ -5,16 +5,16 @@
 #
 # This file is part of Quickly ubuntu-application template
 #
-#This program is free software: you can redistribute it and/or modify it 
-#under the terms of the GNU General Public License version 3, as published 
+#This program is free software: you can redistribute it and/or modify it
+#under the terms of the GNU General Public License version 3, as published
 #by the Free Software Foundation.
 
-#This program is distributed in the hope that it will be useful, but 
-#WITHOUT ANY WARRANTY; without even the implied warranties of 
-#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+#This program is distributed in the hope that it will be useful, but
+#WITHOUT ANY WARRANTY; without even the implied warranties of
+#MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
 #PURPOSE.  See the GNU General Public License for more details.
 
-#You should have received a copy of the GNU General Public License along 
+#You should have received a copy of the GNU General Public License along
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
@@ -109,11 +109,11 @@ if not quicklyutils.check_gpg_secret_key():
 
 # changed upstream author and email
 quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
-quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)    
+quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
 
 # license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
 license.licensing()
-    
+
 # choose right ppa parameter (users, etc.) ppa or staging if ppa_name is None
 try:
     (ppa_user, ppa_name, dput_ppa_name, ppa_url) = packaging.choose_ppa(launchpad, ppa_name)
@@ -132,38 +132,14 @@ except packaging.ppa_not_found, e:
         print "%s - %s" % (ppa_name, ppa_display_name)
     sys.exit(1)
 
-# check version
-try:
-    release_version = quicklyutils.get_setup_value('version')
-except quicklyutils.cant_deal_with_setup_value:
-    print _("Release version not found in setup.py and no version specified in command line.")
-    sys.exit(1)       
-
 
 try:
-    float(release_version)
-except ValueError:
-    # two cases:
-    # a "quickly share" has already be done, and so, we just bump the number after ~private
-    splitted_release_version = release_version.split("~public")
-    if len(splitted_release_version) > 1:
-        try:
-            minor_version = float(splitted_release_version[1])
-        except ValueError:
-            print _("Minor release version specified before ~public in setup.py is not a valid number: %s") % splitted_release_version[1]
-            sys.exit(1)
-        version = splitted_release_version[0] + '~public' + str(int(minor_version + 1))
+    release_version = packaging.updateversion(sharing=True)
+except (packaging.invalid_versionning_scheme,
+        packaging.invalid_version_in_setup), error_message:
+    print(error_message)
+    sys.exit(1)
 
-    # elsewhere, it's an error
-    else:
-        print _("Release version specified in setup.py is not a valid number.")
-        sys.exit(1)
-    
-# we have to minimize the release_version to enable futur release (release_version is already at NEXT version release)
-# change setup.py as needed for python-mkdebian
-else:
-    version = release_version + '~public1'
-quicklyutils.set_setup_value('version', version)
 
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog).
 #TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
@@ -179,4 +155,3 @@ if return_code != 0:
 print _("%s %s is building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, version, ppa_url)
 
 sys.exit(0)
-
