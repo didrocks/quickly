@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-12-17 01:53+0000\n"
+"PO-Revision-Date: 2010-01-07 00:05+0000\n"
 "Last-Translator: Xuacu Saturio <xuacusk8@gmail.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-18 04:34+0000\n"
+"X-Launchpad-Export-Date: 2010-01-07 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -155,33 +155,37 @@ msgid ""
 "ERROR: %s command must be followed by a template and no template was found "
 "on the command line."
 msgstr ""
+"ERROR: tien d'haber una plantía dempués de la orde %s y nun s'alcontró "
+"plantía denguna na llinia d'ordes."
 
 #: ../bin/quickly.py:204 ../bin/quickly.py:217 ../bin/quickly.py:222
 #: ../quickly/builtincommands.py:158
 #, python-format
 msgid "Candidates template are: %s"
-msgstr ""
+msgstr "Les planties candidates son: %s"
 
 #: ../bin/quickly.py:221
 #, python-format
 msgid "No template were found on the command line for command %s."
-msgstr ""
+msgstr "Nun s'alcontró plantía denguna na llinia d'ordes del comandu %s."
 
 #. there is really not such command, in any template
 #: ../bin/quickly.py:225 ../quickly/builtincommands.py:160
 #, python-format
 msgid "ERROR: No %s command found."
-msgstr ""
+msgstr "ERROR: nun s'alcontró la orde %s."
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:85
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:126
 msgid "ERROR: Can't load setup.py file"
-msgstr ""
+msgstr "ERROR: Nun puede cargase setup.py"
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:156
 msgid ""
 "No gpg key set. Take a look at quickly tutorial to learn how to setup one"
 msgstr ""
+"Nun se conseñó una clave gpg. Eche-y una güeyada al tutorial de quickly pa "
+"deprender a configurar una"
 
 #: ../data/templates/ubuntu-project/release.py:34
 msgid ""
@@ -223,27 +227,33 @@ msgid ""
 "Release version not found in setup.py and no version specified in command "
 "line."
 msgstr ""
+"Nun s'alcontró la versión del llanzamientu en setup.py y nun se conseñó una "
+"versión na llinia de comandos."
 
 #: ../data/templates/ubuntu-project/release.py:79
 msgid "quickly released"
-msgstr ""
+msgstr "lliberáu quickly"
 
 #: ../data/templates/ubuntu-project/release.py:85
 #, python-format
 msgid "quickly released: %s"
-msgstr ""
+msgstr "lliberáu quickly: %s"
 
 #: ../data/templates/ubuntu-project/release.py:105
 msgid ""
 "Release version specified in command arguments or in setup.py is not a valid "
 "number."
 msgstr ""
+"La versión de llanzamientu conseñada nos argumentos de la orde o en setup.py "
+"nun ye un númberu válidu."
 
 #: ../data/templates/ubuntu-project/release.py:150
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
+"ppa:%s:%s nun esiste. Por favor, cree unu en launchpad enantes de facer el "
+"llanzamientu"
 
 #: ../data/templates/ubuntu-project/release.py:162
 #, python-format
@@ -251,6 +261,8 @@ msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
 msgstr ""
+"ERROR: quickly nun puede llanzar: %s paez que yá ta llanzáu. Escueya otru "
+"nome."
 
 #: ../data/templates/ubuntu-project/release.py:172
 msgid "ERROR: quickly can't release as it can't commit with bzr"
@@ -281,10 +293,12 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s llanzáu y compilando en Launchpad. Espere media hora y eche-y una "
+"güeyada a %s."
 
 #: ../quickly/version.py:35
 msgid "No quickly data path found."
-msgstr ""
+msgstr "Nun s'alcontró la ruta de datos de quickly."
 
 #: ../quickly/version.py:39
 msgid "No template found."
