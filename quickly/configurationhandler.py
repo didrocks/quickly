@@ -82,7 +82,6 @@ def saveConfig(global_config=None, config_file_path=None):
                 quickly_file_path = os.path.abspath(config_file_path) + '/.quickly'
             else:
                 quickly_file_path = os.getcwd() + "/.quickly"
-            print _("WARNING: No .quickly file found. Initiating a new one.")
         config = project_config
     
     try:
