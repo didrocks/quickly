@@ -62,6 +62,7 @@ Quickly 0.4
     personal license needs COPYING file now (and the header will be copied in
     every files). No more # needed in those files too. Some other little
     refactoring too (LP: #469330)
+  - set correctly title dialog (LP: #501999)
 
 Quickly 0.2.6
 -------------------------------------
