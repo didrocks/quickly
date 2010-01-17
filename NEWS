@@ -69,7 +69,7 @@ Quickly 0.4
      If there is already a release with that version, it will be YY.MM.1, 
      then YY.MM.2
   - add accelerators to menu items (jens persson)
-
+  - set correctly title dialog (Philip Peitsch) (LP: #501999)
 
 Quickly 0.2.6
 -------------------------------------
