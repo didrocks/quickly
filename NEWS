@@ -68,6 +68,7 @@ Quickly 0.4
    + quickly release remove -publicX (if any) and release with current YY.MM.
      If there is already a release with that version, it will be YY.MM.1, 
      then YY.MM.2
+  - add accelerators to menu items (jens persson)
 
 
 Quickly 0.2.6
