@@ -58,7 +58,7 @@ def Newdialog_camel_case_nameDialog():
     instance directly.
     """
     return make_window(
-        'dialog_camel_case_nameDialog', "dialog_name_dialog")
+        'dialog_camel_case_nameDialog', "dialog_python_name_dialog")
 
 
 if __name__ == "__main__":
