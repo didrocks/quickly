@@ -70,7 +70,12 @@ if argv[1] == "lp-project":
         print(e)
         sys.exit(1)
     # get the project now and save the url into setup.py
-    quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + project.name)
+    project_url  = launchpadaccess.launchpad_url + '/' + project.name
+    quicklyutils.set_setup_value('url', project_url)
+    about_dialog_file_name = quicklyutils.get_about_file_name()
+    if about_dialog_file_name:
+        quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
+                                     "name", "website", project_url, {})
 
 # change default ppa
 elif argv[1] == "ppa":

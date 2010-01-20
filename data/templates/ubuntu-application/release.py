@@ -146,7 +146,12 @@ try:
 except launchpadaccess.launchpad_project_error, e:
     print(e)
     sys.exit(1)
-quicklyutils.set_setup_value('url', launchpadaccess.launchpad_url + '/' + project.name)
+project_url  = launchpadaccess.launchpad_url + '/' + project.name
+quicklyutils.set_setup_value('url', project_url)
+about_dialog_file_name = quicklyutils.get_about_file_name()
+if about_dialog_file_name:
+    quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
+                                 "name", "website", project_url, {})
 
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
 #TODO: check that the gpg key contains it (or match preferred_email_adress to available gpg keys and take the name)
