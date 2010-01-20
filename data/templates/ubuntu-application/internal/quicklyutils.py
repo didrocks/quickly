@@ -19,7 +19,7 @@
 import os
 import sys
 import subprocess
-import xml.etree.ElementTree as etree
+from xml.etree import ElementTree as etree
 
 import gettext
 from gettext import gettext as _
@@ -188,7 +188,7 @@ def change_xml_elem(xml_file, path, attribute_name, attribute_value, value, attr
         child_node = path.split('/')[-1]
         new_node = etree.Element(child_node, attributes_if_new)
         new_node.text = value
-        xml_tree.find(parent_node).append(new_node)
+        xml_tree.find(parent_node).insert(0, new_node)
     xml_tree.write(xml_file + '.new')
     os.rename(xml_file + '.new', xml_file)
 
