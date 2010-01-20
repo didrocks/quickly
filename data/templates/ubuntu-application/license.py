@@ -232,11 +232,20 @@ def licensing(license=None):
         for line in file(fauthors_name, 'r'):
             if "copyright" in line.lower() or "(c)" in line.lower(): 
                 copyright_holders += line
+                authors_holders += line
             else:
                 authors_holders += line
 
-        quicklyutils.change_xml_elem(about_dialog_file_name, "object/property", "name", "copyright", copyright_holders, {'translatable': 'yes'})
-
+        # update without last \n
+        quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
+                                     "name", "copyright", copyright_holders[:-1],
+                                     {'translatable': 'yes'})
+        quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
+                                     "name", "authors", authors_holders[:-1],
+                                     {})
+        quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
+                                     "name", "license", license_content,
+                                     {'translatable': 'yes'})
     return(copy_license_to_files(license_content))
 
 
