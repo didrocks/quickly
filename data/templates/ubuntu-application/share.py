@@ -147,7 +147,7 @@ if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
     os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
 # upload to launchpad
 print _("pushing to launchpad")
-return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, version)) != 0
+return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
 if return_code != 0:
     sys.exit(return_code)
 

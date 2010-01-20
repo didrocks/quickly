@@ -263,7 +263,11 @@ def updateversion(proposed_version=None, sharing=False):
                 # new year/month
                 new_version = base_version
 
-    # write release version to setup.py
+    # write release version to setup.py and update it in aboutdialog
     quicklyutils.set_setup_value('version', new_version)
+    about_dialog_file_name = quicklyutils.get_about_file_name()
+    if about_dialog_file_name:
+        quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
+                                     "name", "version", new_version, {})
 
     return new_version
