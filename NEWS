@@ -70,6 +70,10 @@ Quickly 0.4
      then YY.MM.2
   - add accelerators to menu items (jens persson)
   - set correctly title dialog (Philip Peitsch) (LP: #501999)
+  - about dialog box is now fully automated: (LP: #478414)
+   + update copyright, authors, license (when licensing)
+   + version (when sharing and releasing)
+   + homepage (when changing launchpad project: release and configure)
 
 Quickly 0.2.6
 -------------------------------------
