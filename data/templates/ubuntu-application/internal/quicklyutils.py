@@ -19,12 +19,14 @@
 import os
 import sys
 import subprocess
+import xml.etree.ElementTree as etree
 
 import gettext
 from gettext import gettext as _
 #set domain text
 gettext.textdomain('quickly')
 
+from quickly import configurationhandler
 from quickly import templatetools
 
 class cant_deal_with_setup_value(Exception):
@@ -153,4 +155,40 @@ def check_gpg_secret_key():
 
     print _("No gpg key set. Take a look at quickly tutorial to learn how to setup one")
     return(False)
-    
+
+def get_about_file_name():
+    """Get about file name if exists"""
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    about_file_name = "data/ui/About%sDialog.ui" % templatetools.get_camel_case_name(configurationhandler.project_config['project'])
+    if not os.path.isfile(about_file_name):
+        return None
+    return about_file_name
+   
+def change_xml_elem(xml_file, path, attribute_name, attribute_value, value, attributes_if_new):
+    """change an elem in a xml tree and save it
+
+    xml_file: url of the xml file
+    path -> path to tag to change
+    attribute_value -> attribute name to match
+    attribute_value -> attribute value to match
+    value -> new value
+    attributes_if_new -> dictionnary of additional attributes if we create a new node"""
+    found = False
+    xml_tree = etree.parse(xml_file)
+    if not attributes_if_new:
+        attributes_if_new = {}
+    attributes_if_new[attribute_name] = attribute_value
+    for node in xml_tree.findall(path):
+        if not attribute_name or node.attrib[attribute_name] == attribute_value:
+            node.text = value
+            found = True
+    if not found:
+        parent_node = "/".join(path.split('/')[:-1])
+        child_node = path.split('/')[-1]
+        new_node = etree.Element(child_node, attributes_if_new)
+        new_node.text = value
+        xml_tree.find(parent_node).append(new_node)
+    xml_tree.write(xml_file + '.new')
+    os.rename(xml_file + '.new', xml_file)
+
