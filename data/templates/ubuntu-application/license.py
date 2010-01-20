@@ -223,6 +223,20 @@ def licensing(license=None):
         print _("%s/%sconfig.py file not found.") % (python_name, python_name)
         return(1)
 
+    # update About dialog, if present:
+    about_dialog_file_name = quicklyutils.get_about_file_name()
+    if about_dialog_file_name:
+        copyright_holders = ""
+        authors_holders = ""
+        # get copyright holders and authors
+        for line in file(fauthors_name, 'r'):
+            if "copyright" in line.lower() or "(c)" in line.lower(): 
+                copyright_holders += line
+            else:
+                authors_holders += line
+
+        quicklyutils.change_xml_elem(about_dialog_file_name, "object/property", "name", "copyright", copyright_holders, {'translatable': 'yes'})
+
     return(copy_license_to_files(license_content))
 
 
