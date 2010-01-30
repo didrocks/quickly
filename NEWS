@@ -78,6 +78,8 @@ Quickly 0.4
     (LP: #?)
   - enable automatic release and milestone built in LP, releasing and pushing
     upstream tarball (LP: #?)
+  - automatic collect and publish changelog message from commits and save
+    messages used during devlopment. (LP: #?)
 
 Quickly 0.2.6
 -------------------------------------
