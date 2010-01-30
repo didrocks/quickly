@@ -74,6 +74,8 @@ Quickly 0.4
    + update copyright, authors, license (when licensing)
    + version (when sharing and releasing)
    + homepage (when changing launchpad project: release and configure)
+  - add an 'add' command. $ quickly dialog … is now $ quickly add dialog …
+    (LP: #?)
 
 Quickly 0.2.6
 -------------------------------------
