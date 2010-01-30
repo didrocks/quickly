@@ -80,9 +80,9 @@ if argv[1] == "lp-project":
 # change default ppa
 elif argv[1] == "ppa":
     if len(argv != 3):
-        print(_('''Changing ppa parameter should be: quickly configure ppa <ppaname>.
+        print(_('''Usage is: $ quickly configure ppa <ppaname>
 Use shell completion to find all available ppas'''))
-        sys.exit(1)
+        sys.exit(4)
 
     ppa_name = argv[2]
     # choose right ppa parameter (users, etc.) ppa or staging
