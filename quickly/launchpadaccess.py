@@ -49,7 +49,7 @@ from gettext import gettext as _
 
 
 # check if there is no global variable specifying staging
-if os.getenv('QUICKLY') is not None and "staging" in os.getenv('QUICKLY').lower():
+if os.getenv('QUICKLY') and "staging" in os.getenv('QUICKLY').lower():
     launchpad_url = LAUNCHPAD_STAGING_URL
     lp_server = "staging"
 else:

@@ -135,7 +135,7 @@ def get_all_commands():
                     for event in ('pre', 'post'):
                         event_hook = getattr(
                             builtincommands, event + '_' + command_name, None)
-                        if event_hook is not None:
+                        if event_hook:
                             hooks[event] = event_hook
 
                     # define special options for command
@@ -214,7 +214,7 @@ def get_all_commands():
             for event in ('pre', 'post'):
                 event_hook = getattr(builtincommands,
                                      event + '_' + command_name, None)
-                if event_hook is not None:
+                if event_hook:
                     hooks[event] = event_hook
 
             __commands['builtins'][command_name] = Command(

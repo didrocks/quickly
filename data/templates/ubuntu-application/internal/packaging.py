@@ -88,7 +88,7 @@ def shell_complete_ppa(ppa_to_complete):
     except launchpadaccess.launchpad_connexion_error:
         sys.exit(0)
     available_ppas = []
-    if launchpad is not None:
+    if launchpad:
         try:
             (ppa_user, ppa_name) = get_ppa_parameters(launchpad, ppa_to_complete)
         except user_team_not_found:

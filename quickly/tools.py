@@ -121,7 +121,7 @@ def get_root_project_path(config_file_path=None):
     """
 
     global __project_path
-    if __project_path is not None:
+    if __project_path:
         return __project_path
 
     if config_file_path is None:

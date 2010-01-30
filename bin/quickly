@@ -157,7 +157,7 @@ def get_commands():
         # ask for the command what she needs (it automatically handle the case of command followed by template and command followed by command)
         available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in commands.get_commands_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
         
-    print " ".join(elem for elem in available_completion if elem is not None)
+    print " ".join(elem for elem in available_completion if elem)
     return(0)
 
 def main():

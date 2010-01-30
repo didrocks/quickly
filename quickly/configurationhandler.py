@@ -78,7 +78,7 @@ def saveConfig(global_config=None, config_file_path=None):
             quickly_file_path = tools.get_root_project_path(config_file_path) + '/.quickly'
         # if no .quickly, create it using config_file_path or cwd
         except tools.project_path_not_found:
-            if config_file_path is not None:
+            if config_file_path:
                 quickly_file_path = os.path.abspath(config_file_path) + '/.quickly'
             else:
                 quickly_file_path = os.getcwd() + "/.quickly"

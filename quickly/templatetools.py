@@ -86,7 +86,7 @@ def apply_file_rights(src_file_name, dest_file_name):
 def in_verbose_mode():
     """Return true if verbose mode is on"""
 
-    if os.getenv('QUICKLY') is not None and "verbose" in os.getenv('QUICKLY').lower():
+    if os.getenv('QUICKLY') and "verbose" in os.getenv('QUICKLY').lower():
         return True
     return False
 
