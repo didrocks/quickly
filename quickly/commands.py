@@ -212,9 +212,10 @@ def get_all_commands():
 
             hooks = {'pre': None, 'post': None}
             for event in ('pre', 'post'):
-                if hasattr(builtincommands, event + '_' + command_name):
-                    hooks[event] = getattr(
-                        builtincommands, event + '_' + command_name)
+                event_hook = getattr(builtincommands,
+                                     event + '_' + command_name, None)
+                if event_hook is not None:
+                    hooks[event] = event_hook
 
             __commands['builtins'][command_name] = Command(
                 command_name, command, None, launch_inside_project,
