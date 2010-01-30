@@ -195,7 +195,9 @@ def change_xml_elem(xml_file, path, attribute_name, attribute_value, value, attr
 def collect_commit_messages(previous_version):
     '''Collect commit messages from last revision'''
 
-
+    bzr_command = ['bzr', 'log']
+    if previous_version in not None:
+        bzr_command = ['bzr', 'log', '-r', 'tag:%s..' % previous_version]
     bzr_instance = subprocess.Popen(['bzr', 'log', '-r', 'tag:%s..' %
                                      previous_version], stdout=subprocess.PIPE)    
     result, err = bzr_instance.communicate()
@@ -205,7 +207,7 @@ def collect_commit_messages(previous_version):
 
     changelog = ''
     collect_switch = False
-    uncollect_msg = (_('quickly saved'),)
+    uncollect_msg = (_('quickly saved'), _('commit before release'))
     for line in result:
         if line == 'message:':
             collect_switch = True

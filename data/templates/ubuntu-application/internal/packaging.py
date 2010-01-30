@@ -50,12 +50,15 @@ class invalid_version_in_setup(Exception):
         return repr(self.msg)
 
 
-def updatepackaging():
+def updatepackaging(changelog=None):
     """create or update a package using python-mkdebian.
 
     Commit after the first packaging creation"""
 
-    return_code = subprocess.call(["python-mkdebian"])
+    command = ['python-mkdebian']
+    if changelog:
+        command = ["python-mkdebian", "--changelog-msg", changelog]
+    return_code = subprocess.call(command)
     if return_code == 0:
         print _("Ubuntu packaging created in debian/")
     else:
@@ -152,11 +155,6 @@ def choose_ppa(launchpad, ppa_name=None):
 def push_to_ppa(dput_ppa_name, changes_file):
     """ Push some code to a ppa """
 
-    # creation/update debian packaging
-    return_code = updatepackaging()
-    if return_code != 0:
-        print _("ERROR: can't create or update ubuntu package")
-        return(return_code)
     # creating local binary package
     return_code = subprocess.call(["dpkg-buildpackage", "-S", "-I.bzr"])
     if return_code != 0:

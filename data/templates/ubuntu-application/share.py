@@ -107,6 +107,12 @@ except launchpadaccess.launchpad_connexion_error, e:
 if not quicklyutils.check_gpg_secret_key():
     sys.exit(1)
 
+# creation/update debian packaging
+return_code = quicklyutils.updatepackaging()
+if return_code != 0:
+    print _("ERROR: can't create or update ubuntu package")
+    sys.exit(1)
+
 # changed upstream author and email
 quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
 quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)

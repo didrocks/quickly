@@ -86,7 +86,7 @@ templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 launchpad = None
 project = None
 ppa_name = None
-changelog_content = ""
+changelog = ""
 i = 0
 args = []
 argv = sys.argv
@@ -198,6 +198,27 @@ if release_version in bzr_tags:
     print _("ERROR: quickly can't release: %s seems to be already released. Choose another name.") % release_version
     sys.exit(1)
 
+# commit current changes
+subprocess.call(["bzr", "add"])
+return_code = subprocess.call(["bzr", "commit", '--unchanged', '-m',
+                                _('commit before release')])
+if return_code != 0 and return_code != 3:
+    print _("ERROR: quickly can't release as it can't commit with bzr")
+    sys.exit(return_code)
+
+previous_version = None
+bzr_instance = subprocess.Popen(['bzr', 'tags', '--sort=time'],
+                                stdout=subprocess.PIPE)    
+result, err = bzr_instance.communicate()
+if bzr_instance.returncode == 0:
+    previous_version = result.split('\n')[-2].split (' ')[0]
+
+changelog = quicklyutils.collect_commit_messages(previous_version)
+# creation/update debian packaging
+return_code = quicklyutils.updatepackaging(changelog)
+if return_code != 0:
+    print _("ERROR: can't create or update ubuntu package")
+    sys.exit(1)
 
 # add files, setup release version, commit and push !
 #TODO: check or fix if we don't have an ssh key (don't tag otherwise to be able to release again)
@@ -207,9 +228,6 @@ if return_code != 0 and return_code != 3:
     print _("ERROR: quickly can't release as it can't commit with bzr")
     sys.exit(return_code)
 subprocess.call(["bzr", "tag", release_version]) # tag revision
-
-
-# TODO: handle bzr rm
 
 # check if pull branch is set
 bzr_instance = subprocess.Popen(["bzr", "info"], stdout=subprocess.PIPE)
@@ -263,7 +281,9 @@ if return_code != 0:
     sys.exit(return_code)
 
 #create new release_date
-push_tarball_to_launchpad(project, release_version, "../%s_%s_source.changes" % (project_name, release_version), changelog_content)
+internal.push_tarball_to_launchpad(project, release_version,
+                                    "../%s_%s_source.changes" % (project_name,
+                                    release_version), changelog)
 
 print _("%s %s released and building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, release_version, ppa_url)
 
