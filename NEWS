@@ -76,6 +76,8 @@ Quickly 0.4
    + homepage (when changing launchpad project: release and configure)
   - add an 'add' command. $ quickly dialog … is now $ quickly add dialog …
     (LP: #?)
+  - enable automatic release and milestone built in LP, releasing and pushing
+    upstream tarball (LP: #?)
 
 Quickly 0.2.6
 -------------------------------------
