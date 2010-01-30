@@ -86,6 +86,7 @@ templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 launchpad = None
 project = None
 ppa_name = None
+changelog_content = ""
 i = 0
 args = []
 argv = sys.argv
@@ -260,6 +261,9 @@ print _("pushing to launchpad")
 return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
 if return_code != 0:
     sys.exit(return_code)
+
+#create new release_date
+push_tarball_to_launchpad(project, release_version, "../%s_%s_source.changes" % (project_name, release_version), changelog_content)
 
 print _("%s %s released and building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, release_version, ppa_url)
 
