@@ -205,6 +205,7 @@ def collect_commit_messages(previous_version):
 
     changelog = ''
     collect_switch = False
+    uncollect_msg = (_('quickly saved'),)
     for line in result:
         if line == 'message:':
             collect_switch = True
@@ -213,7 +214,7 @@ def collect_commit_messages(previous_version):
             collect_switch = False
         elif line == 'tags: %s' % previous_revision:
             break
-        if collect_switch:
+        if collect_switch and not line in uncollect_msg:
             changelog += line
     return(changelog)
 
