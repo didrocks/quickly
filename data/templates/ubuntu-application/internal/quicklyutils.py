@@ -192,3 +192,31 @@ def change_xml_elem(xml_file, path, attribute_name, attribute_value, value, attr
     xml_tree.write(xml_file + '.new')
     os.rename(xml_file + '.new', xml_file)
 
+def collect_commit_messages(previous_version):
+    '''Collect commit messages from last revision'''
+
+    bzr_command = ['bzr', 'log']
+    if previous_version in not None:
+        bzr_command = ['bzr', 'log', '-r', 'tag:%s..' % previous_version]
+    bzr_instance = subprocess.Popen(['bzr', 'log', '-r', 'tag:%s..' %
+                                     previous_version], stdout=subprocess.PIPE)    
+    result, err = bzr_instance.communicate()
+    
+    if bzr_instance.returncode != 0:
+        return(None)
+
+    changelog = ''
+    collect_switch = False
+    uncollect_msg = (_('quickly saved'), _('commit before release'))
+    for line in result:
+        if line == 'message:':
+            collect_switch = True
+            continue
+        elif '----------------------' in line
+            collect_switch = False
+        elif line == 'tags: %s' % previous_revision:
+            break
+        if collect_switch and not line in uncollect_msg:
+            changelog += line
+    return(changelog)
+
