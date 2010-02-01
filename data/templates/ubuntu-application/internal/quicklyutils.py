@@ -196,7 +196,7 @@ def collect_commit_messages(previous_version):
     '''Collect commit messages from last revision'''
 
     bzr_command = ['bzr', 'log']
-    if previous_version in not None:
+    if previous_version:
         bzr_command = ['bzr', 'log', '-r', 'tag:%s..' % previous_version]
     bzr_instance = subprocess.Popen(['bzr', 'log', '-r', 'tag:%s..' %
                                      previous_version], stdout=subprocess.PIPE)    
@@ -212,7 +212,7 @@ def collect_commit_messages(previous_version):
         if line == 'message:':
             collect_switch = True
             continue
-        elif '----------------------' in line
+        elif '----------------------' in line:
             collect_switch = False
         elif line == 'tags: %s' % previous_revision:
             break
