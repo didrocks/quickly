@@ -50,14 +50,14 @@ class invalid_version_in_setup(Exception):
         return repr(self.msg)
 
 
-def updatepackaging(changelog=None):
+def updatepackaging(changelog=[]):
     """create or update a package using python-mkdebian.
 
     Commit after the first packaging creation"""
 
     command = ['python-mkdebian']
-    if changelog:
-        command = ["python-mkdebian", "--changelog-msg", changelog]
+    for message in changelog:
+        command.extend(["--changelog", message])
     return_code = subprocess.call(command)
     if return_code == 0:
         print _("Ubuntu packaging created in debian/")
@@ -75,7 +75,7 @@ def updatepackaging(changelog=None):
     if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
         return_code = subprocess.call(["bzr", "add"])
         if return_code == 0:
-            return_code = subprocess.call(["bzr", "commit", "-m 'Creating ubuntu package'"])
+            return_code = subprocess.call(["bzr", "commit", "-m", 'Creating ubuntu package'])
 
     return(return_code)
 

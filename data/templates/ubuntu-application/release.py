@@ -208,14 +208,14 @@ if return_code != 0 and return_code != 3:
 
 previous_version = None
 bzr_instance = subprocess.Popen(['bzr', 'tags', '--sort=time'],
-                                stdout=subprocess.PIPE)    
+                                 stdout=subprocess.PIPE)    
 result, err = bzr_instance.communicate()
-if bzr_instance.returncode == 0:
+if bzr_instance.returncode == 0 and result:
     previous_version = result.split('\n')[-2].split (' ')[0]
 
 changelog = quicklyutils.collect_commit_messages(previous_version)
 # creation/update debian packaging
-return_code = quicklyutils.updatepackaging(changelog)
+return_code = packaging.updatepackaging(changelog)
 if return_code != 0:
     print _("ERROR: can't create or update ubuntu package")
     sys.exit(1)

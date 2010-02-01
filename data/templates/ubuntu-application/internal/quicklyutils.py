@@ -197,26 +197,32 @@ def collect_commit_messages(previous_version):
 
     bzr_command = ['bzr', 'log']
     if previous_version:
-        bzr_command = ['bzr', 'log', '-r', 'tag:%s..' % previous_version]
-    bzr_instance = subprocess.Popen(['bzr', 'log', '-r', 'tag:%s..' %
-                                     previous_version], stdout=subprocess.PIPE)    
+        bzr_command.extend(['-r', 'tag:%s..' % previous_version])
+    else:
+        previous_version = ''
+    bzr_instance = subprocess.Popen(bzr_command, stdout=subprocess.PIPE)
     result, err = bzr_instance.communicate()
-    
+
     if bzr_instance.returncode != 0:
         return(None)
 
-    changelog = ''
+    changelog = []
+    buffered_message = ""
     collect_switch = False
     uncollect_msg = (_('quickly saved'), _('commit before release'))
-    for line in result:
+    for line in result.splitlines():
+        #print buffered_message
         if line == 'message:':
             collect_switch = True
             continue
         elif '----------------------' in line:
+            if buffered_message:
+                changelog.append(buffered_message.strip())
+                buffered_message = ""
             collect_switch = False
-        elif line == 'tags: %s' % previous_revision:
+        elif line == 'tags: %s' % previous_version:
             break
-        if collect_switch and not line in uncollect_msg:
-            changelog += line
+        if collect_switch and not line.strip() in uncollect_msg:
+            buffered_message +=' %s' % line
     return(changelog)
 
