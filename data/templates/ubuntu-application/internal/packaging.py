@@ -20,6 +20,7 @@ import datetime
 import re
 import subprocess
 import sys
+from launchpadlib.errors import HTTPError
 
 
 from quickly import configurationhandler
@@ -50,11 +51,13 @@ class invalid_version_in_setup(Exception):
         return repr(self.msg)
 
 
-def updatepackaging(changelog=[]):
+def updatepackaging(changelog=None):
     """create or update a package using python-mkdebian.
 
     Commit after the first packaging creation"""
 
+    if not changelog:
+        changelog = []
     command = ['python-mkdebian']
     for message in changelog:
         command.extend(["--changelog", message])
@@ -161,7 +164,7 @@ def push_to_ppa(dput_ppa_name, changes_file):
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
     # now, pushing it to launchpad personal ppa (or team later)
-    return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
+    #return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")
         return(return_code)
