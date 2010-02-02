@@ -22,7 +22,7 @@ import sys
 import subprocess
 import webbrowser
 
-from internal import quicklyutils, packaging
+from internal import quicklyutils, packaging, launchpad_helper
 from quickly import templatetools, configurationhandler
 import license
 
@@ -86,7 +86,6 @@ templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 launchpad = None
 project = None
 ppa_name = None
-changelog = ""
 i = 0
 args = []
 argv = sys.argv
@@ -206,16 +205,23 @@ if return_code != 0 and return_code != 3:
     print _("ERROR: quickly can't release as it can't commit with bzr")
     sys.exit(return_code)
 
+# try to get last available version in bzr
 previous_version = None
 bzr_instance = subprocess.Popen(['bzr', 'tags', '--sort=time'],
-                                stdout=subprocess.PIPE)    
+                                 stdout=subprocess.PIPE)    
 result, err = bzr_instance.communicate()
-if bzr_instance.returncode == 0:
-    previous_version = result.split('\n')[-2].split (' ')[0]
+if bzr_instance.returncode == 0 and result:
+    output = result.split('\n')
+    output.reverse()
+    for tag_line in output:
+        tag_elem = tag_line.split (' ')
+        if not (tag_elem[-1] == '?' or tag_elem[-1] == ''):
+            previous_version = tag_elem[0]
+            break
 
 changelog = quicklyutils.collect_commit_messages(previous_version)
 # creation/update debian packaging
-return_code = quicklyutils.updatepackaging(changelog)
+return_code = packaging.updatepackaging(changelog)
 if return_code != 0:
     print _("ERROR: can't create or update ubuntu package")
     sys.exit(1)
@@ -281,7 +287,7 @@ if return_code != 0:
     sys.exit(return_code)
 
 #create new release_date
-internal.push_tarball_to_launchpad(project, release_version,
+launchpad_helper.push_tarball_to_launchpad(project, release_version,
                                     "../%s_%s_source.changes" % (project_name,
                                     release_version), changelog)
 
@@ -289,6 +295,6 @@ print _("%s %s released and building on Launchpad. Wait for half an hour and hav
 
 # as launchpad-open doesn't support staging server, put an url
 if launchpadaccess.lp_server == "staging":
-    webbrowser.open(launchpadaccess.LAUNCHPAD_CODE_STAGING_URL + '/~' + launchpad.me.name + '/' + project.name + '/quickly_trunk')
+    webbrowser.open(launchpadaccess.LAUNCHPAD_CODE_STAGING_URL + '/' + project.name)
 else:
-    subprocess.call(["bzr", "launchpad-open"])
+    webbrowser.open(launchpadaccess.LAUNCHPAD_URL + '/' + project.name)

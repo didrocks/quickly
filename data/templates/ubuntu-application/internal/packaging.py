@@ -20,6 +20,7 @@ import datetime
 import re
 import subprocess
 import sys
+from launchpadlib.errors import HTTPError
 
 
 from quickly import configurationhandler
@@ -55,9 +56,11 @@ def updatepackaging(changelog=None):
 
     Commit after the first packaging creation"""
 
+    if not changelog:
+        changelog = []
     command = ['python-mkdebian']
-    if changelog:
-        command = ["python-mkdebian", "--changelog-msg", changelog]
+    for message in changelog:
+        command.extend(["--changelog", message])
     return_code = subprocess.call(command)
     if return_code == 0:
         print _("Ubuntu packaging created in debian/")
@@ -75,7 +78,7 @@ def updatepackaging(changelog=None):
     if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
         return_code = subprocess.call(["bzr", "add"])
         if return_code == 0:
-            return_code = subprocess.call(["bzr", "commit", "-m 'Creating ubuntu package'"])
+            return_code = subprocess.call(["bzr", "commit", "-m", 'Creating ubuntu package'])
 
     return(return_code)
 
@@ -161,7 +164,7 @@ def push_to_ppa(dput_ppa_name, changes_file):
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
     # now, pushing it to launchpad personal ppa (or team later)
-    return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
+    #return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")
         return(return_code)

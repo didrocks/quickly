@@ -20,6 +20,7 @@
 
 import datetime
 import os
+import sys
 import subprocess
 
 import gettext
@@ -34,9 +35,12 @@ def create_release(project, version):
     If more than one release already exists, take the last one.'''
 
     release_date = datetime.date.today().strftime('%Y-%m-%d')
-    series = proj.series[-1]
-    milestone = series.newMilestone(name=version,
-                                    date_targeted=release_date)
+    if len(project.series) == 0:
+        print "No serie is not supported right now. Not uploading the tarball for you"
+        sys.exit(1)
+    serie = project.series[project.series.total_size - 1]
+    milestone = serie.newMilestone(name=version,
+                                   date_targeted=release_date)
     return milestone.createProductRelease(date_released=release_date)
 
 def push_tarball_to_launchpad(project, version, tarball, changelog_content):
@@ -73,6 +77,10 @@ def push_tarball_to_launchpad(project, version, tarball, changelog_content):
             file_type='Code Release Tarball', signature_filename=signature,
             signature_content=signature_content)
 
+    if not changelog_content:
+        changelog_content = _('New release available: %s') % version
+    else:
+        changelog_content = "\n".join(changelog_content)
     release.changelog = changelog_content
     release.release_notes = changelog_content
     try:
