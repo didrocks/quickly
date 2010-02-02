@@ -64,7 +64,6 @@ if len(sys.argv) < 2:
     print _("""Project name not defined.\nUsage isi: quickly create ubuntu-application project_name""")
     sys.exit(4)
 
-os.chdir(sys.argv[1])
 
 path_and_project = sys.argv[1].split('/')
 project_name = path_and_project[-1]
@@ -75,6 +74,8 @@ try:
 except templatetools.bad_project_name, e:
     print(e)
     sys.exit(1)
+
+os.chdir(project_name)
 
 # create additional directories
 data_dir = "data"
