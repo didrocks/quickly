@@ -14,7 +14,8 @@ Quickly 0.4
     (originated from Philip Peitsch's patch). (LP: #497688)
   - importing command in one template from another template is now possible
     support as well "all" keyword to import all commands from a template
-    into another one (take care of overridden commands too) (LP: #452306)
+    into another one (take care of overridden commands too)
+    (LP: #452306, #487301)
   - add an apport hook to get installed templates (LP: #411127)
   - enable option completion for templates
   - handle now version upgrade, launching script for templates and handling
@@ -75,11 +76,11 @@ Quickly 0.4
    + version (when sharing and releasing)
    + homepage (when changing launchpad project: release and configure)
   - add an 'add' command. $ quickly dialog … is now $ quickly add dialog …
-    (LP: #?)
+    (LP: #438320)
   - enable automatic release and milestone built in LP, releasing and pushing
-    upstream tarball (LP: #?)
+    upstream tarball (LP: #470344)
   - automatic collect and publish changelog message from commits and save
-    messages used during devlopment. (LP: #?)
+    messages used during devlopment. (LP: #476572)
 
 Quickly 0.2.6
 -------------------------------------
