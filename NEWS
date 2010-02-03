@@ -99,6 +99,8 @@ Quickly 0.2.5
     own options. Discuss at UDS how to shape a better solution
   ubuntu-project Template:
   - Fixed some some errors and oversites in the tutorial
+  - Remove request height/width for the default application and add a
+    bigger marge on the label (LP: #494388)
 
 Quickly 0.2.4
 -------------------------------------
