@@ -238,6 +238,8 @@ def updateversion(proposed_version=None, sharing=False):
             current_date = datetime.datetime.now()
             this_year = str(current_date.year)[-2:]
             this_month = current_date.month
+            if this_month < 10:
+                this_month = "0%i" % this_month
             base_version = '%s.%s' % (this_year, this_month)
 
             if base_version in old_version:
