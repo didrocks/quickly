@@ -54,16 +54,11 @@ $ quickly edit
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
-# get origin path
-pathname = os.path.dirname(__file__)
-abs_path = os.path.abspath(pathname) + "/"
-
 
 # get the name of the project
 if len(sys.argv) < 2:
-    print _("""Project name not defined.\nUsage isi: quickly create ubuntu-application project_name""")
+    print _("""Project name not defined.\nUsage is: quickly create ubuntu-application project_name""")
     sys.exit(4)
-
 
 path_and_project = sys.argv[1].split('/')
 project_name = path_and_project[-1]
@@ -77,17 +72,20 @@ except templatetools.bad_project_name, e:
 
 os.chdir(project_name)
 
+# get origin path
+pathname = templatetools.get_template_path_from_project()
+abs_path = os.path.abspath(pathname) + "/"
+
 # create additional directories
 data_dir = "data"
-print _("Creating project directory %s") % data_dir
-os.mkdir(data_dir)
-print _("Directory %s created\n") % data_dir
+if os.path.isdir(abs_path + data_dir):
+    print _("Creating project directory %s") % data_dir
+    os.mkdir(data_dir)
 
 python_name = templatetools.python_name(project_name)
-python_dir = python_name
-print _("Creating project directory %s") % python_dir
-os.mkdir(python_dir)
-print _("Directory %s created\n") % python_dir
+if os.path.isdir(abs_path + python_name):
+    print _("Creating project directory %s") % python_name
+    os.mkdir(python_name)
 
 bin_dir = "bin"
 print _("Creating project directory %s") % bin_dir
@@ -98,42 +96,47 @@ sentence_name, camel_case_name = quicklyutils.conventional_names(project_name)
 
 # copy files
 template_ui_dir = abs_path + "data/ui/"
-target_ui_dir = "data/ui"
-os.mkdir(target_ui_dir)
 
 substitutions = (("project_name",project_name),
             ("camel_case_name",camel_case_name),
             ("python_name",python_name),
             ("sentence_name",sentence_name),)
 
+if os.path.isdir(template_ui_dir):
+    target_ui_dir = "data/ui"
+    os.mkdir(target_ui_dir)
 
-# create the files for glade to use
-quicklyutils.file_from_template(template_ui_dir, "camel_case_nameWindow.ui", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "python_name_window.xml", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "Aboutcamel_case_nameDialog.ui", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "about_python_name_dialog.xml", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "Preferencescamel_case_nameDialog.ui", target_ui_dir, substitutions)
-quicklyutils.file_from_template(template_ui_dir, "preferences_python_name_dialog.xml", target_ui_dir, substitutions)
+    # create the files for glade to use
+    quicklyutils.file_from_template(template_ui_dir, "camel_case_nameWindow.ui", target_ui_dir, substitutions)
+    quicklyutils.file_from_template(template_ui_dir, "python_name_window.xml", target_ui_dir, substitutions)
+    quicklyutils.file_from_template(template_ui_dir, "Aboutcamel_case_nameDialog.ui", target_ui_dir, substitutions)
+    quicklyutils.file_from_template(template_ui_dir, "about_python_name_dialog.xml", target_ui_dir, substitutions)
+    quicklyutils.file_from_template(template_ui_dir, "Preferencescamel_case_nameDialog.ui", target_ui_dir, substitutions)
+    quicklyutils.file_from_template(template_ui_dir, "preferences_python_name_dialog.xml", target_ui_dir, substitutions)
 
 # create the python directory and files
 template_python_dir = abs_path + "python/"
-target_python_dir = python_name
-quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
-quicklyutils.file_from_template(template_python_dir, "Preferencescamel_case_nameDialog.py", target_python_dir, substitutions)
-quicklyutils.file_from_template(template_python_dir, "python_nameconfig.py", target_python_dir, substitutions)
-quicklyutils.file_from_template(template_python_dir, 'helpers.py', target_python_dir, substitutions)
+if os.path.isdir(template_python_dir):
+    target_python_dir = python_name
+    os.mkdir(target_python_dir)
+    quicklyutils.file_from_template(template_python_dir, "Aboutcamel_case_nameDialog.py", target_python_dir, substitutions)
+    quicklyutils.file_from_template(template_python_dir, "Preferencescamel_case_nameDialog.py", target_python_dir, substitutions)
+    quicklyutils.file_from_template(template_python_dir, "python_nameconfig.py", target_python_dir, substitutions)
+    quicklyutils.file_from_template(template_python_dir, 'helpers.py', target_python_dir, substitutions)
+    quicklyutils.file_from_template(template_python_dir, "__init__.py", target_python_dir)
 
 # copy the files needed for packaging
 quicklyutils.file_from_template(abs_path, "project_root/setup.py", ".", substitutions)
-quicklyutils.file_from_template(template_python_dir, "__init__.py", target_python_dir)
 
 # create the media directory, and copy them
 template_media_dir = abs_path + "data/media"
-target_media_dir = "data/media"
-shutil.copytree(template_media_dir,target_media_dir)
+if os.path.isdir(template_media_dir):
+    target_media_dir = "data/media"
+    shutil.copytree(template_media_dir,target_media_dir)
 
 # copy the desktop file
-quicklyutils.file_from_template(abs_path ,"project_root/project_name.desktop.in",".", substitutions)
+if os.path.isfile(abs_path + "/project_root/project_name.desktop.in"):
+    quicklyutils.file_from_template(abs_path ,"project_root/project_name.desktop.in",".", substitutions)
 
 # copy the executable file, set the mode to executable
 quicklyutils.file_from_template(abs_path ,"bin/project_name","bin", substitutions)
@@ -153,7 +156,7 @@ if templatetools.is_X_display():
     print _("Launching your newly created project!")
     subprocess.call(['./' + project_name], cwd='bin/')
 
-print _("Congrats, your new project is setup! cd %s/ to start hacking. Then '$ quickly tutorial' for quickly ubuntu-template tutorial and reference") % os.getcwd()
+print _("Congrats, your new project is setup! cd %s/ to start hacking.") % os.getcwd()
 
 sys.exit(0)
 

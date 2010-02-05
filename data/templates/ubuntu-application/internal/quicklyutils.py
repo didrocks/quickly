@@ -38,6 +38,9 @@ def conventional_names(name):
     return sentence_name, camel_case_name
 
 def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
+
+    if not os.path.isfile(template_dir + '/' + template_file):
+        return
     target_file = os.path.basename(template_file) # to get only file name (template_file can be internal/file)
     if rename:
         for s in substitutions:

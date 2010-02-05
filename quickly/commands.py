@@ -319,8 +319,14 @@ class Command:
                     else:
                         # complete with current template (which != from
                         # template_in_cli: ex create command (multiple
-                        # templates))
-                        completion.extend([self.template])
+                        # templates)). Fetch as well imported command in
+                        # other template
+                        for template in get_all_templates():
+                            try:
+                                if get_all_commands()[template][self.name] == self:
+                                    completion.extend([template])
+                            except KeyError:
+                                pass
             else: # there is a template, add template commands
                 if self.followed_by_command: # template command completion
                     completion.extend(
