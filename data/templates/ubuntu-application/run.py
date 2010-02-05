@@ -27,7 +27,8 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
-from quickly import configurationhandler, templatetools
+from quickly import configurationhandler
+from quickly import templatetools
 
 def help():
     print _("""Usage:

@@ -25,7 +25,8 @@ import re
 import gettext
 from gettext import gettext as _
 
-import configurationhandler, tools
+import configurationhandler
+import tools
 import quicklyconfig
 
 class bad_project_name(Exception):
@@ -143,4 +144,10 @@ def is_X_display():
         return True
     else:
         return False
+
+def get_template_path_from_project():
+    """Get current template path when in a project"""
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    return tools.get_template_directory(configurationhandler.project_config['template'])
 

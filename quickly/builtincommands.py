@@ -35,7 +35,7 @@ def pre_create(command_template, project_template, project_dir, command_args):
     if len(command_args) < 1:
         print _("Create command must be followed by a template and a project path.\nUsage: quickly create <template> <project_name>")
         return(4)
-        
+ 
     path_and_project = command_args[0].split('/')
     project_name = path_and_project[-1]
     
@@ -67,7 +67,7 @@ def pre_create(command_template, project_template, project_dir, command_args):
     # creating quickly file
     configurationhandler.project_config['version'] = quicklyconfig.__version__
     configurationhandler.project_config['project'] = project_name
-    configurationhandler.project_config['template'] = command_template
+    configurationhandler.project_config['template'] = project_template
     configurationhandler.saveConfig(config_file_path=project_name)
     
     os.chdir(project_name)

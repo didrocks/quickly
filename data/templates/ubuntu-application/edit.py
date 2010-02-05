@@ -21,7 +21,8 @@
 import os
 import sys
 
-from quickly import configurationhandler, templatetools
+from quickly import configurationhandler
+from quickly import templatetools
 
 import gettext
 from gettext import gettext as _
