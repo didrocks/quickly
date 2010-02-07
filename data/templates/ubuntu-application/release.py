@@ -129,8 +129,11 @@ except launchpadaccess.launchpad_connexion_error, e:
     print(e)
     sys.exit(1)
 
-# check if a gpg key is available
-if not quicklyutils.check_gpg_secret_key():
+# push the gpg key to the env
+try:
+    os.putenv('KEYID', quicklyutils.get_right_gpg_key_id(launchpad))
+except quicklyutils.gpg_error, e:
+    print(e)
     sys.exit(1)
 
 # changed upstream author and email
