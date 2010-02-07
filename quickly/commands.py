@@ -22,6 +22,7 @@ import subprocess
 import sys
 
 import builtincommands
+import configurationhandler
 import templatetools, tools
 
 import gettext
@@ -239,10 +240,7 @@ def get_commands_by_criteria(**criterias):
     for template_available in all_commands:
         if ('template' in criterias
             and criterias['template'] != template_available):
-            # XXX: I'm sure this speeds up the search, but what exactly is it
-            # that we're skipping and why is it ok to skip this? -- jml,
-            # 2009-11-18.
-            continue # to speed up the search
+            continue # go to next round if no template match
         for candidate_command_name in all_commands[template_available]:
             candidate_command = all_commands[
                 template_available][candidate_command_name]
@@ -260,7 +258,7 @@ def get_commands_by_criteria(**criterias):
 
 
 def get_command_names_by_criteria(**criteria):
-    """Get a list of all command names corresponding to criteria.
+    """Get a tuple of all command names corresponding to criteria.
 
     'criteria' correponds to Command object properties.
     """
@@ -268,11 +266,55 @@ def get_command_names_by_criteria(**criteria):
 
 
 def get_all_templates():
-    """Get a list of all templates"""
-    return [
+    """Get a tuple of all templates"""
+    return (
         template for template in get_all_commands().keys()
-        if template != "builtins"]
+        if template != "builtins")
 
+def get_commands_in_context(argv, process_command_line_function=None):
+    """seek for available commands for shell completion
+
+    : return tuples with list of available commands and origin (default or template)
+    """
+
+    available_completion = []
+
+    # option completion
+    if argv[-1].startswith("-"):
+        options = ("-h", "--help", "-t", "--template", "--staging", "--verbose", "--version")
+        available_completion = [option for option in options if option.startswith(sys.argv[-1])]
+        print " ".join(available_completion)
+
+    # get available templates after option if needed
+    if argv[-2] in ("-t", "--template"):
+        available_completion.extend(get_all_templates())
+        print " ".join(available_completion)
+        return(0)        
+    
+    # treat commands and try to get the template from the project directory if we are in a project (if not already provided by the -t option)
+    (opt_command, opt_template) = process_command_line_function(argv[3:])
+    if not opt_template and configurationhandler.loadConfig(can_stop=False) == 0:
+        try:
+            opt_template = configurationhandler.project_config['template']
+        except KeyError:
+            pass
+    # if no command yet, check for available command
+    if len(opt_command) == 1:
+        # list available command in template suiting context (even command "followed by template" native of that template)
+        if opt_template: 
+            available_completion.extend([command.name for command in get_commands_by_criteria(template=opt_template) if command.is_right_context(os.getcwd(), verbose=False)])
+        # add builtin commands
+        available_completion.extend([command.name for command in get_commands_by_criteria(template="builtins") if command.is_right_context(os.getcwd(), verbose=False)])
+        # add commands followed by a template if we don't already have a template provided (native command followed by template has already been handled before)
+        if not opt_template:
+            available_completion.extend([command.name for command in get_commands_by_criteria(followed_by_template=True) if command.is_right_context(os.getcwd(), verbose=False)])
+
+    else:
+        # ask for the command what she needs (it automatically handle the case of command followed by template and command followed by command)
+        available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in get_commands_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
+        
+    print " ".join(elem for elem in available_completion if elem)
+    return(0)
 
 class Command:
 
