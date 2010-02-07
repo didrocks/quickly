@@ -255,12 +255,32 @@ def upload_gpg_key_to_launchpad(key_id):
     pass
 
 
-def create_gpg_key(email_adress):
+def create_gpg_key(name, email):
     '''create a gpg key and return the corresponding id'''
 
+    key_generate = '''Key-Type: RSA       
+Name-Real: %s
+Name-Email: %s
+Expire-Date: 0
+%commit''' % (name, email)
+    gpg_instance = subprocess.Popen(['gpg', '--gen-key', '--batch'],
+                                       stdin=subprocess.PIPE,
+                                       stdout=subprocess.PIPE)
+    result, err = gpg_instance.communicate(key_generate)
+    if gpg_instance.returncode != 0:
+        raise gpg_error(err)
 
-    #!FIXME
-    return key_id
+    gpg_instance = subprocess.Popen(['gpg', '--list-secret-keys', '--with-colon'], stdout=subprocess.PIPE)
+    result, err = gpg_instance.communicate()
+    if gpg_instance.returncode != 0:
+        raise gpg_error(err)
+    secret_key_id = None
+    for line in result.splitlines():
+        if 'sec' in line:
+            secret_key_id = line.split(':')[4][-8:]
+    if not secret_key_id:
+        raise gpg_error(_("Can't create GPG key. Try to create it yourself"))
+    return secret_key_id
 
 def get_right_gpg_key_id(launchpad):
     '''Try to fech (and eventually upload) right GPG key'''
@@ -272,22 +292,19 @@ def get_right_gpg_key_id(launchpad):
                           "or export DEBEMAIL."))
 
     gpg_instance = subprocess.Popen(['gpg', '--list-secret-keys', '--with-colon'], stdout=subprocess.PIPE)
-    result, err = gpg_instance.communicate()
-    
+    result, err = gpg_instance.communicate()    
     if gpg_instance.returncode != 0:
         raise gpg_error(err)
-
     candidate_key_ids = {}
-    
     for line in result.splitlines():
         if 'sec' in line:
             secret_key_id = line.split(':')[4][-8:]
         candidate_email = take_email_from_string(line.split(':')[9])
         if candidate_email and candidate_email in prefered_emails:
             candidate_key_ids[candidate_email].append(secret_key_id)
-
     if not candidate_key_ids:
-        candidate_key_ids[prefered_emails[0]] = [create_gpg_key(prefered_emails[0])]
+        candidate_key_ids[prefered_emails[0]] = [create_gpg_key(
+                                 launchpad.me.display_name, prefered_emails[0])]
 
     # reorder key_id by email adress
     prefered_key_ids = []
