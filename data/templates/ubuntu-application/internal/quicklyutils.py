@@ -17,6 +17,7 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import sys
 import subprocess
 from xml.etree import ElementTree as etree
@@ -31,6 +32,11 @@ from quickly import templatetools
 
 class cant_deal_with_setup_value(Exception):
     pass
+class gpg_error(Exception):
+    def __init__(self, message):
+        self.message = message
+    def __str__(self):
+        return repr(self.message)
 
 def conventional_names(name):
     sentence_name = templatetools.get_sentence_name(name)
@@ -131,6 +137,7 @@ def set_setup_value(key, value):
 
     return 0
 
+#TODO: KILL THAT!!!
 def check_gpg_secret_key():
     """Check that the gpg secret key corresponding to the right email is present on the system"""
     
@@ -228,4 +235,105 @@ def collect_commit_messages(previous_version):
         if collect_switch and not line.strip() in uncollect_msg:
             buffered_message +=' %s' % line
     return(changelog)
+
+def take_email_from_string(value):
+    '''Try to take an email from a string'''
+
+    if value is not None:
+        result = re.match(".*[< ]?(.*@.*)[ <]?.*", value)[1] #FIXME !
+        if result:
+            return result.groups()[0]
+    return value
+
+def get_all_emails(launchpad=None):
+    '''Return a list with all available email in preference order'''
+
+    email_list = []
+    email_list.append(take_email_from_string(os.getenv("DEBEMAIL")))
+
+    bzr_instance = subprocess.Popen(["bzr", "whoami"], stdout=subprocess.PIPE)
+    bzr_user, err = bzr_instance.communicate()
+    if bzr_instance.returncode == 0:
+        email_list.append(take_email_from_string(bzr_user))
+    email_list.append(take_email_from_string(os.getenv("EMAIL")))
+    
+    # those information can be missing if there were no packaging or license
+    # command before
+    try:    
+        email_list.append(take_email_from_string(get_setup_value('author_email'))
+    except quicklyutils.cant_deal_with_setup_value:
+        pass
+
+    # AUTHORS
+    fauthors_name = 'AUTHORS'
+    for line in file(fauthors_name, 'r'):
+        if not "<Your E-mail>" in line:
+            email_list.append(line)
+
+    # LP adresses
+    if launchpad:
+        email_list.append(launchpad.preferred_email_address.email())
+   
+    return email_list
+
+def upload_gpg_key_to_launchpad(key_id):
+    '''push gpg key to launchpad'''
+
+
+    #!FIXME
+    pass
+
+
+def create_gpg_key(email_adress):
+    '''create a gpg key and return the corresponding id'''
+
+
+    #!FIXME
+    return key_id
+
+def get_right_gpg_key_id(launchpad):
+    '''Try to fech (and eventually upload) right GPG key'''
+
+    prefered_emails = get_all_emails():
+    if not prefered_emails:
+        raise gpg_error(_("Can't sign the package as no adress email found. " \
+                          "Fulfill the AUTHORS file with name <emailadress> " \
+                          "or export DEBEMAIL."))
+
+    gpg_instance = subprocess.Popen(['gpg', '--list-secret-keys', '--with-colon'], stdout=subprocess.PIPE)
+    result, err = gpg_instance.communicate()
+    
+    if gpg_instance.returncode != 0:
+        raise gpg_error(err)
+
+    candidate_key_ids = {}
+    
+    for line in result.splitlines():
+        if 'sec' in line:
+            secret_key_id = line.split(':')[4][-8:]
+        candidate_email = take_email_from_string(line.split(':')[9])
+        if candidate_email and candidate_email in prefered_emails:
+            candidate_key_ids[candidate_email].append(secret_key_id)
+
+    if not candidate_key_ids:
+        candidate_key_ids[prefered_emails[0]] = [create_gpg_key(prefered_emails[0])]
+
+    # reorder key_id by email adress
+    prefered_key_ids = []
+    for email in prefered_emails:
+        prefered_key_ids.append(candidate_key_ids[email])
+
+    # get from launchpad the gpg key
+    # FIXME
+    if not launchpad_key_ids:
+        upload_gpg_key_to_launchpad(prefered_key_ids[0])
+        launchpad_key_ids = [prefered_key_ids[0]]
+
+    # take first match:
+    for key_id in prefered_key_ids:
+        if key_id in launchpad_key_ids:
+            return key_id
+
+    # shouldn't happened as other errors are caught
+    raise gpg_error(_("No gpg key set and can't create one for you.'"))
 
