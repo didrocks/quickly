@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-11-05 17:45+0000\n"
-"Last-Translator: Yentl <y.v.t@scarlet.be>\n"
+"PO-Revision-Date: 2010-02-08 21:48+0000\n"
+"Last-Translator: Francis De Brabandere <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-07 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-02-09 05:15+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
 msgid "Fatal: "
-msgstr "Rampzalig: "
+msgstr "Fataal: "
 
 #: ../quickly/launchpadaccess.py:38
 msgid "Check whether python-launchpadlib is installed"
@@ -37,11 +37,11 @@ msgstr "Haal Launchpad Instellingen"
 
 #: ../quickly/launchpadaccess.py:99
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
-msgstr "Initiële Launchpad verbinding. Je moet kiezen voor \"Wijzig Alles\""
+msgstr "Initiële Launchpad verbinding. Gelieve \"Wijzig Alles\" te kiezen."
 
 #: ../quickly/launchpadaccess.py:111
 msgid "Unknown reason"
-msgstr "Onbekende reden"
+msgstr "Reden onbekend"
 
 #: ../quickly/launchpadaccess.py:113
 #, python-format
@@ -54,7 +54,7 @@ msgstr "Launchpad verbinding is ok"
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
-msgstr "Geen launchpad project opgegeven, afbreken."
+msgstr "Geen launchpad project opgegeven, annulering."
 
 #: ../quickly/launchpadaccess.py:140
 #, python-format
@@ -76,7 +76,7 @@ msgstr "Kies uw project nummer"
 
 #: ../quickly/launchpadaccess.py:160
 msgid "No right number given, aborting."
-msgstr "Geen correct nummer gegeven, afbreken."
+msgstr "Geen correct nummer opgegeven, annulering."
 
 #: ../quickly/bzrbinding.py:52
 msgid "Bzr not properly installed"
@@ -147,7 +147,7 @@ msgstr "FOUT: Geen %s commando gevonden in het template %s."
 
 #: ../bin/quickly.py:185 ../bin/quickly.py:226
 msgid "Aborting."
-msgstr "Afbreken."
+msgstr "Annulering."
 
 #: ../bin/quickly.py:203 ../bin/quickly.py:216
 #, python-format
@@ -185,8 +185,8 @@ msgstr "FOUT: Kan setup.py file niet laden"
 msgid ""
 "No gpg key set. Take a look at quickly tutorial to learn how to setup one"
 msgstr ""
-"Geen gpg key ingesteld. Neem een kijkje in de quickly handleiding om te "
-"leren hoe je er een aanmaakt"
+"Geen gpg sleutel ingesteld. Zie de quickly handleiding voor uitleg over het "
+"aanmaken van sleutels"
 
 #: ../data/templates/ubuntu-project/release.py:34
 msgid ""
@@ -261,33 +261,33 @@ msgid ""
 "Release version not found in setup.py and no version specified in command "
 "line."
 msgstr ""
-"Vrijgave versie is niet gevonden insetup.py en er is geen versie vermeld in "
+"Release versie is niet gevonden in setup.py en er is geen versie vermeld op "
 "de commando lijn."
 
 #: ../data/templates/ubuntu-project/release.py:79
 msgid "quickly released"
-msgstr "quickly vrijgegeven"
+msgstr "quickly gereleased"
 
 #: ../data/templates/ubuntu-project/release.py:85
 #, python-format
 msgid "quickly released: %s"
-msgstr "quickly vrijgegeven: %s"
+msgstr "quickly gereleased: %s"
 
 #: ../data/templates/ubuntu-project/release.py:105
 msgid ""
 "Release version specified in command arguments or in setup.py is not a valid "
 "number."
 msgstr ""
-"Vrijgave versie gespecifieerd en commando argumenten of in setup.py is geen "
-"geldige nummer."
+"Release versie gespecificeerd in commando argumenten of in setup.py is geen "
+"geldig nummer."
 
 #: ../data/templates/ubuntu-project/release.py:150
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
-"ppa:%s:%s bestaat niet. Maak er alsjeblief een aan op launchpad vooraleer "
-"vrij te geven"
+"ppa:%s:%s bestaat niet. Gelieve er een aan te maken op launchpad vooraleer "
+"een release uit te voeren"
 
 #: ../data/templates/ubuntu-project/release.py:162
 #, python-format
@@ -295,7 +295,7 @@ msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
 msgstr ""
-"FOUT: quickly kan niet vrijgeven: %s is blijkbaar reeds vrijgegeven. Kies "
+"FOUT: quickly kan niet releasen: %s is blijkbaar reeds een released. Kies "
 "een andere naam."
 
 #: ../data/templates/ubuntu-project/release.py:172
@@ -311,17 +311,17 @@ msgstr "FOUT: quickly kan niet vrijgeven: kan niet drukken naar launchpad."
 #: ../data/templates/ubuntu-project/release.py:208
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
 msgstr ""
-"FOUT: quickly kan niet correct vrijgeven: kan niets nemen van launchpad."
+"FOUT: quickly kan niet correct vrijgeven: ophalen van launchpad mislukt."
 
 #: ../data/templates/ubuntu-project/release.py:215
 msgid "ERROR: quickly can't release: can't pull from launchpad."
-msgstr "FOUT: quickly kan niet vrijgeven: kan niet trekken van launchpad."
+msgstr "quickly kan niet vrijgeven: kan niet ophalen van launchpad."
 
 #. upload to launchpad
 #: ../data/templates/ubuntu-project/release.py:225
 #: ../data/templates/ubuntu-project/share.py:124
 msgid "pushing to launchpad"
-msgstr "drukken naar launchpad"
+msgstr "versturen naar launchpad"
 
 #: ../data/templates/ubuntu-project/release.py:230
 #, python-format
@@ -329,12 +329,12 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
-"%s %s vrijgegeven en samengesteld op Launchpad. Wacht een half uurtje en "
-"neem een kijkje naar %s."
+"%s %s is vrijgegeven en wordt samengesteld op Launchpad. Gelieve een half "
+"uur te wachten alvorens te gaan kijken naar %s."
 
 #: ../quickly/version.py:35
 msgid "No quickly data path found."
-msgstr "Geen quickly data path gevonden."
+msgstr "Geen quickly data pad gevonden."
 
 #: ../quickly/version.py:39
 msgid "No template found."
@@ -389,7 +389,7 @@ msgid ""
 "Letters and digits only."
 msgstr ""
 "FOUT: oneldig karakter in naam.\n"
-"Enkel letters en cijfers."
+"Enkel letters en cijfers toegelaten."
 
 #: ../quickly/templatetools.py:59
 #, python-format
@@ -433,7 +433,7 @@ msgstr "Vrijgave versie niet gevonden in setup.py."
 #: ../data/templates/ubuntu-project/package.py:62
 #: ../data/templates/ubuntu-project/internal/packaging.py:64
 msgid "ERROR: can't create or update ubuntu package"
-msgstr "FOUT: Kan ubuntu package niet aanmaken of updaten"
+msgstr "FOUT: Kan ubuntu package niet aanmaken of bijwerken"
 
 #: ../data/templates/ubuntu-project/package.py:69
 #, python-format
@@ -442,7 +442,7 @@ msgstr "Ubuntu package is succesvol aangemaakt in ../%s_%s_all.deb"
 
 #: ../data/templates/ubuntu-project/package.py:71
 msgid "An error has occurred during package building"
-msgstr "Er is een fout opgetreden bij het aanmaken van de package"
+msgstr "Er is een fout opgetreden bij het aanmaken van het pakket"
 
 #: ../data/templates/ubuntu-project/save.py:31
 msgid ""
@@ -560,7 +560,7 @@ msgstr ""
 #: ../data/templates/ubuntu-project/license.py:226
 #, python-format
 msgid "%s file was not found"
-msgstr "%s bestand is niet gevonden"
+msgstr "%s bestand niet gevonden"
 
 #. that means we didn't find the END_LICENCE_TAG, don't copy the file
 #: ../data/templates/ubuntu-project/license.py:126
@@ -568,15 +568,15 @@ msgstr "%s bestand is niet gevonden"
 #, python-format
 msgid "WARNING: %s was not found in the file %s. No licence replacement"
 msgstr ""
-"WAARSCHUWING: %s is niet gevonden in het bestand %s. Geen lisentie vervanging"
+"WAARSCHUWING: %s is niet gevonden in het bestand %s. Geen licentie vervangen"
 
 #: ../data/templates/ubuntu-project/license.py:163
 msgid ""
 "This license seems to be unsupported by quickly. If you think it really "
 "should, please open a bug in quickly bugtracker"
 msgstr ""
-"Deze licentie blijkt niet ondersteund doorquickly. Als je denkt dat het "
-"zeker moet, open dan een bug in quickly bugtracker"
+"Deze licentie blijkt niet ondersteund door quickly. Acht U dit nodig, open "
+"dan een bug in quickly bugtracker"
 
 #: ../data/templates/ubuntu-project/license.py:184
 msgid ""
@@ -590,11 +590,11 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/license.py:259
 msgid "This command only take one optional argument: License"
-msgstr "Dit commando maakt enkel gebruik van 1 optioneel argument: License"
+msgstr "Dit commando verwacht 1 optioneel argument: License"
 
 #: ../quickly/tools.py:77
 msgid "No template directory found. Aborting"
-msgstr "Geen template directory gevonden. Afbreken"
+msgstr "Geen template directory gevonden. Annulering"
 
 #: ../quickly/tools.py:95
 #, python-format
@@ -604,7 +604,7 @@ msgstr "FOUT: Template '%s' niet gevonden."
 #: ../quickly/tools.py:96 ../quickly/commands.py:181
 #: ../quickly/commands.py:260 ../quickly/commands.py:268
 msgid "Aborting"
-msgstr "Afbreken"
+msgstr "Annulering"
 
 #: ../quickly/tools.py:136
 #, python-format
@@ -613,7 +613,7 @@ msgstr "FOUT: Template %s bestaat niet."
 
 #: ../quickly/tools.py:137
 msgid "Arborting."
-msgstr "Afbreken"
+msgstr "Annulering."
 
 #: ../data/templates/ubuntu-project/run.py:33
 msgid ""
@@ -648,13 +648,13 @@ msgid ""
 "To change the behavior and edit the python code, run 'quickly edit', which "
 "will bring up a text editor."
 msgstr ""
-"Uw applicatie is gecreëerd!\n"
+"Uw applicatie is aangemaakt!\n"
 "\n"
-"Om deze interface te beginnen wijzigen, voer 'quickly glade' uit, hetgeen "
-"Glade zal openen zodat je de standaard vensters en dialogen kunt bewerken.\n"
+"Wilt U de interface aan te passen, voer dan 'quickly glade' uit, dit opent "
+"Glade zodat je de standaard vensters en dialogen kunt bewerken.\n"
 "\n"
-"Om de python code te bewerken en het gedrag aan te passen, voer 'quickly "
-"edit' uit, hetwelke een tekst bewerker zal oproepen."
+"Wilt U de python code te bewerken en het gedrag aan te passen, voer dan "
+"'quickly edit' uit, dit opent een tekst bewerker."
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
@@ -666,7 +666,7 @@ msgstr "_Bestand"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr "_Help"
+msgstr "_Hulp"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
@@ -723,7 +723,7 @@ msgid ""
 "ERROR: project name not defined. Usage is project_name"
 msgstr ""
 "\n"
-"FOUT: project naam niet gedefineerd. gebruik is project_name"
+"FOUT: project naam niet gedefinieerd. Gebruik project_name"
 
 #. create directory and template file
 #: ../data/templates/ubuntu-project/create.py:78
@@ -732,7 +732,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:59
 #, python-format
 msgid "Creating project directory %s"
-msgstr "Aanmaken van project directory %s"
+msgstr "Aanmaken van project map %s"
 
 #: ../data/templates/ubuntu-project/create.py:80
 #: ../data/templates/ubuntu-project/create.py:85
@@ -740,7 +740,7 @@ msgstr "Aanmaken van project directory %s"
 #: ../quickly/builtincommands.py:61
 #, python-format
 msgid "Directory %s created\n"
-msgstr "Directory %s aangemaakt\n"
+msgstr "Map %s aangemaakt\n"
 
 #. add it to revision control
 #: ../data/templates/ubuntu-project/create.py:139
@@ -765,8 +765,8 @@ msgstr ""
 #: ../quickly/configurationhandler.py:43
 msgid "ERROR: Can't load configuration in current path or its parent ones."
 msgstr ""
-"FOUT: Kan de configuratie niet draaien in huidige path of zijn bovenliggende "
-"path."
+"FOUT: Kan de configuratie niet vinden in het huidige pad of bovenliggende "
+"paden."
 
 #: ../quickly/configurationhandler.py:59
 #, python-format
@@ -776,12 +776,12 @@ msgstr "FOUT: Kan de configuratie niet laden van %s: %s"
 #: ../quickly/configurationhandler.py:85
 msgid "WARNING: No .quickly file found. Initiating a new one."
 msgstr ""
-"WAARSCHUWING: Geen .quickly bestand gevonden. Aanmaken van een nieuwe."
+"WAARSCHUWING: Geen .quickly bestand gevonden. Er wordt een nieuw aangemaakt."
 
 #: ../quickly/configurationhandler.py:116
 #, python-format
 msgid "ERROR: Can't save configuration in %s"
-msgstr "FOUT: KAn de configuratie niet opslaan in %s"
+msgstr "Kan de configuratie niet bewaren in %s"
 
 #: ../data/templates/ubuntu-project/share.py:33
 msgid ""
@@ -818,8 +818,7 @@ msgstr ""
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before sharing"
 msgstr ""
-"ppa:%s:%s bestaat niet. Gelieve een launchpad aan te maken vooralleer te "
-"delen"
+"ppa:%s:%s bestaat niet. Gelieve er een aan te maken vooralleer te delen"
 
 #: ../data/templates/ubuntu-project/share.py:104
 #, python-format
@@ -839,7 +838,8 @@ msgstr "Release versie gespecifieerd in setup.py is geen geldig nummer."
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
-"%s %s word aangemaakt op Launchpad. wacht een half uurtje en kijk naar %s."
+"%s %s word aangemaakt op Launchpad. Gelieve een een half uurtje te wachten "
+"en ga dan naar %s."
 
 #: ../data/templates/ubuntu-project/glade.py:32
 msgid ""
@@ -901,7 +901,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:39
 msgid "Ubuntu packaging created in debian/"
-msgstr "Ubuntu packaging aangemaakt in debian/"
+msgstr "Ubuntu pakket(ten) aangemaakt in debian/"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:41
 msgid "An error has occurred"
@@ -909,12 +909,14 @@ msgstr "Er is een fout opgetreden"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:70
 msgid "ERROR: an error occurred during source package creation"
-msgstr "FOUT: er is een fout opgetreden de aanmaak van de bron package"
+msgstr ""
+"FOUT: er is een fout opgetreden bij de aanmaak van het broncode pakket"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:81
 msgid "ERROR: an error occurred during source upload to launchpad"
 msgstr ""
-"FOUT: er is een fout opgetreden gedurende de bron upload naar launchpad"
+"FOUT: er is een fout opgetreden gedurende het uploaden van het broncode "
+"pakket naar launchpad"
 
 #: ../quickly/commands.py:180
 #, python-format
@@ -938,7 +940,7 @@ msgid ""
 "choose another path."
 msgstr ""
 "FOUT: %s is een project. U kan geen %s commando uitvoeren vanuit een "
-"project. Gelieve een ander pathte gebruiken."
+"project. Gelieve een ander pad te gebruiken."
 
 #: ../data/templates/ubuntu-project/dialog.py:33
 msgid ""
@@ -1000,7 +1002,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/dialog.py:65
 msgid "Dialog command needs to be followed by new dialog name."
-msgstr "Dialog commando's dienen gevolgd te worden door dialoog namen."
+msgstr "Een Dialog commando dient gevolgd te worden door de dialoog naam."
 
 #: ../quickly/builtincommands.py:36
 msgid ""
@@ -1090,7 +1092,7 @@ msgstr ""
 
 #: ../quickly/builtincommands.py:139
 msgid "ERROR: No command provided to help command"
-msgstr "FOUT: Geen commando opgegeven voor help command"
+msgstr "FOUT: Geen commando opgegeven voor help commando"
 
 #: ../quickly/builtincommands.py:157
 #, python-format
@@ -1098,8 +1100,8 @@ msgid ""
 "ERROR: help command must be followed by a template name for getting help "
 "from templates commands like %s."
 msgstr ""
-"FOUT: help command dient gevolgd te worden door een template naam om hulp te "
-"krijgen over templates commando's zoals %s."
+"FOUT: help commando dient gevolgd te worden door een template naam om hulp "
+"te krijgen over template commando's zoals %s."
 
 #: ../quickly/builtincommands.py:162
 #, python-format
@@ -1111,8 +1113,8 @@ msgid ""
 "ERROR: Quickly command must be followed by a template and a template "
 "destination path"
 msgstr ""
-"FOUT: Quickly command dient gevolgd te worden door een template en een "
-"template doel path"
+"FOUT: Quickly commando dient gevolgd te worden door een template en een "
+"template doel pad"
 
 #: ../quickly/builtincommands.py:186
 #, python-format
@@ -1127,7 +1129,7 @@ msgstr "Copiëer %s om een nieuwe %s template aan te maken"
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:1
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:1
 msgid "gtk-cancel"
-msgstr "gtk-annuleren"
+msgstr "gtk-cancel"
 
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:2
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:2
