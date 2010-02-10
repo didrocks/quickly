@@ -10,7 +10,9 @@ import optparse
 import os
 import sys
 
+import gettext
 from gettext import gettext as _
+gettext.textdomain('project_name')
 
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
@@ -54,7 +56,7 @@ if __name__ == "__main__":
     # this is the easter egg (:
     if options.foo == 'bar':
         logging.warning(_('easter egg found'))
-        print("Schweet")
+        print(_("Schweet"))
 
     # Run your cli application there.
     print _("I'm launched and my args are: %s") % (" ".join(args))

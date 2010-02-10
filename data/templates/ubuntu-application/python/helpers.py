@@ -14,6 +14,9 @@ import gtk
 
 from python_name.python_nameconfig import get_data_file
 
+import gettext
+from gettext import gettext as _
+gettext.textdomain('project_name')
 
 def make_window(builder_file_name, window_name):
     """Return a fully-instantiated window or dialog.
