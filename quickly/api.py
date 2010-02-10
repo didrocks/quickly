@@ -19,7 +19,14 @@
 import os
 import sys
 
+quickly_module_directory = os.path.dirname(os.path.abspath(__file__))
+quickly_root_directory = os.path.dirname(quickly_module_directory)
+if os.path.exists(os.path.join(quickly_root_directory, 'quickly')) and quickly_root_directory not in sys.path:
+    sys.path.insert(0, quickly_root_directory)
+    os.putenv('PYTHONPATH', quickly_root_directory) # for subprocesses
+
 import commands
+import configurationhandler
 import tools
 
 '''public Quickly api'''
@@ -42,10 +49,27 @@ def get_commands_in_template(template):
     '''get a list of commands for a template'''
     return commands.get_command_names_by_criteria(template=template)
 
-def get_commands_in_context(path):
+def get_commands_in_context(path=None):
     '''typle of available commands in context (depending on path)'''
 
+    if path is None:
+        path = os.getcwd()
     # simulate a call with completion statement
     result = tools.get_completion_in_context(['quickly', 'shell-completion',
                                             'quickly', ''], path)
     return result
+
+def run_command(command_name, template='builtins', path=None, *args):
+    '''run a command from a template'''
+
+    if not path:
+        path = os.getcwd()
+    configurationhandler.loadConfig(can_stop=False, config_file_path=path)
+    try:
+        project_template = configurationhandler.project_config['template']
+    except KeyError:
+        project_template = None
+
+    command = commands.get_all_commands()[template][command_name]
+    return command.launch(path, list(args), project_template)
+
