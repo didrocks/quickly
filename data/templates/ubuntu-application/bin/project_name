@@ -8,6 +8,10 @@ import sys
 import os
 import gtk
 
+import gettext
+from gettext import gettext as _
+gettext.textdomain('project_name')
+
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
     os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
@@ -95,7 +99,7 @@ if __name__ == "__main__":
     parser = optparse.OptionParser(version="%prog %ver")
     parser.add_option(
         "-v", "--verbose", action="store_true", dest="verbose",
-        help="Show debug messages")
+        help=_("Show debug messages"))
     (options, args) = parser.parse_args()
 
     # Set the logging level to show debug messages.

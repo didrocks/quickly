@@ -7,6 +7,9 @@ import gtk
 
 from python_name.helpers import make_window
 
+import gettext
+from gettext import gettext as _
+gettext.textdomain('project_name')
 
 class Aboutcamel_case_nameDialog(gtk.AboutDialog):
     __gtype_name__ = "Aboutcamel_case_nameDialog"

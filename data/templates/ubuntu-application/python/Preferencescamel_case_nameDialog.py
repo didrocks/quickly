@@ -9,6 +9,9 @@ import gtk
 
 from python_name.helpers import make_window
 
+import gettext
+from gettext import gettext as _
+gettext.textdomain('project_name')
 
 class Preferencescamel_case_nameDialog(gtk.Dialog):
     __gtype_name__ = "Preferencescamel_case_nameDialog"
