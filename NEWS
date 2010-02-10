@@ -30,6 +30,7 @@ Quickly 0.4
   - Refactor some code in pre_create hook()
   - Now dashes and spaces support in project name! Dealing with python and
     packaging issues for you. (LP: #493130)
+  - Provide Quickly API (LP: #426480)
   ubuntu-application Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname
