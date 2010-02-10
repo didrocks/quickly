@@ -82,6 +82,7 @@ Quickly 0.4
     upstream tarball (LP: #470344)
   - automatic collect and publish changelog message from commits and save
     messages used during devlopment. (LP: #476572)
+  - add i18n to boiler plate (LP: #423529)
   ubuntu-cli Template:
   - first release using import command feature (no command written into the
     template itself). This is a basic ubuntu CLI application
