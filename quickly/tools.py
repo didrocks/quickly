@@ -25,6 +25,7 @@ from gettext import gettext as _
 
 import quicklyconfig
 import commands
+import configurationhandler
 
 __project_path = None
 
@@ -41,6 +42,29 @@ class template_path_not_found(Exception):
     pass
 class template_not_found(Exception):
     pass
+
+def usage():
+    print _("""Usage:
+    quickly [OPTIONS] command ...
+
+Options:
+    -t, --template <template>  Template to use if it differs from default
+                               project one
+                               one used to create the project)
+    --staging                  Target launchpad staging server
+    --verbose                  Verbose mode
+    -h, --help                 Show help information
+
+Commands:
+    create <template> <project-name> (template is mandatory for this command)
+    quickly <template_origin> <template_dest> to create a create derived template
+    getstarted to get some starting hints
+
+Examples:
+    quickly create ubuntu-application foobar
+    quickly push 'awesome new comment system'
+    quickly -t cool-template push 'awesome new comment system'""")
+
 
 def get_quickly_data_path():
     """Retrieve quickly data path
@@ -148,4 +172,110 @@ def check_template_exists(template):
         print _("Arborting.")
         return False
     return True
+
+def process_command_line(argv):
+    """Entry point for command line processing
+    use sys.argv by default if no args to parse
+
+    :return: options
+    """
+
+    opt_command = []
+    opt_template = None
+    i = 0
+
+    while i < len(argv):
+        arg = argv[i]
+
+        if arg.startswith('-'):
+            if arg == '--template' or arg == '-t':
+                if i + 1 < len(argv):
+                    opt_template = argv[i + 1]
+                    i += 1
+                else:
+                    print _("ERROR: %s needs one argument: %s" % ('--template', '<template name>'))
+                    sys.exit(1)
+            elif arg == '--staging':
+                oldenv = ""
+                if os.environ.has_key('QUICKLY'):
+                    oldenv = os.environ['QUICKLY']
+                os.environ['QUICKLY'] = "staging:" + oldenv
+            elif arg == '--verbose':
+                oldenv = ""
+                if os.environ.has_key('QUICKLY'):
+                    oldenv = os.environ['QUICKLY']
+                os.environ['QUICKLY'] = "verbose:" + oldenv
+            elif arg == '--version':
+                version.show_version()
+                sys.exit(0)
+            elif arg == '--help' or arg == '-h':
+                usage()
+                sys.exit(0)
+            elif arg == '--':
+                # turn off option detection, give everything to templates (even -f, --version)
+                opt_command.extend(argv[i:])
+                break
+            else:
+                opt_command.append(arg)
+        else:
+            opt_command.append(arg)
+        i += 1
+
+    if len(opt_command) == 0:
+        print _("ERROR: No command provided in command line")
+        usage()
+        sys.exit(1)
+
+    return (opt_command, opt_template)
+
+
+def get_completion_in_context(argv, context_path=None):
+    """seek for available completion (command, template…)
+
+    : return tuples with list of available commands and origin (default or template)
+    """
+
+    if context_path is None:
+        context_path = os.getcwd()
+    else:
+        context_path = os.path.abspath(context_path)
+
+    available_completion = []
+
+    # option completion
+    if argv[-1].startswith("-"):
+        options = ("-h", "--help", "-t", "--template", "--staging", "--verbose", "--version")
+        available_completion = [option for option in options if option.startswith(sys.argv[-1])]
+        print " ".join(available_completion)
+
+    # get available templates after option if needed
+    if argv[-2] in ("-t", "--template"):
+        available_completion.extend(get_all_templates())
+        print " ".join(available_completion)
+        return(0)        
+    
+    # treat commands and try to get the template from the project directory if we are in a project (if not already provided by the -t option)
+    (opt_command, opt_template) = process_command_line(argv[3:])
+    if not opt_template and configurationhandler.loadConfig(can_stop=False, config_file_path=context_path) == 0:
+        try:
+            opt_template = configurationhandler.project_config['template']
+        except KeyError:
+            pass
+    # if no command yet, check for available command
+    if len(opt_command) == 1:
+        # list available command in template suiting context (even command "followed by template" native of that template)
+        if opt_template: 
+            available_completion.extend([command.name for command in commands.get_commands_by_criteria(template=opt_template) if command.is_right_context(context_path, verbose=False)])
+        # add builtin commands
+        available_completion.extend([command.name for command in commands.get_commands_by_criteria(template="builtins") if command.is_right_context(context_path, verbose=False)])
+        # add commands followed by a template if we don't already have a template provided (native command followed by template has already been handled before)
+        if not opt_template:
+            available_completion.extend([command.name for command in commands.get_commands_by_criteria(followed_by_template=True) if command.is_right_context(context_path, verbose=False)])
+
+    else:
+        # ask for the command what she needs (it automatically handle the case of command followed by template and command followed by command)
+        available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in commands.get_commands_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
+    # remove duplicates
+    completion = set(available_completion)
+    return (completion)
 
