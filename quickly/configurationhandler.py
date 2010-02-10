@@ -24,26 +24,25 @@ from gettext import gettext as _
 
 import tools
 
-global_config = {} # retrieve from /etc/quickly
 project_config = {} # retrieved from project/.quickly
 
-def loadConfig(can_stop=True, global_config=None):
-    """ load configuration from /etc/quickly or .quickly file"""
+def loadConfig(can_stop=True, config_file_path=None):
+    """ load configuration from path/.quickly or pwd/.quickly file"""
 
-    if global_config:
-        quickly_file_path = '/etc/quickly'
-        config = global_config
-    else:
-        # retrieve .quickly file
-        try:
-            quickly_file_path = tools.get_root_project_path()  + '/.quickly'
-            config = project_config
-        except tools.project_path_not_found:
-            if can_stop:
-                print _("ERROR: Can't load configuration in current path or its parent ones.")
-                sys.exit(1)
-            else:
-                return(1)
+    # retrieve .quickly file
+    try:
+        if config_file_path is None:
+            root_conf_dir = tools.get_root_project_path()
+        else:
+            root_conf_dir = tools.get_root_project_path(config_file_path)
+        quickly_file_path = root_conf_dir  + '/.quickly'
+        config = project_config
+    except tools.project_path_not_found:
+        if can_stop:
+            print _("ERROR: Can't load configuration in current path or its parent ones.")
+            sys.exit(1)
+        else:
+            return(1)
         
         
     try:
@@ -61,28 +60,28 @@ def loadConfig(can_stop=True, global_config=None):
     return(0)
 
 
-def saveConfig(global_config=None, config_file_path=None):
+def saveConfig(config_file_path=None):
     """ save the configuration file from config dictionnary in project or global quuickly file
 
-    config_file_path is optional (needed by the create command, for instance).
+    path is optional (needed by the create command, for instance).
     getcwd() is taken by default.    
     
     keep commentaries and layout from original file """
 
-    if global_config:
-        quickly_file_path = '/etc/quickly'
-        config = global_config
-    else:
-        # retrieve .quickly file
-        try:
-            quickly_file_path = tools.get_root_project_path(config_file_path) + '/.quickly'
-        # if no .quickly, create it using config_file_path or cwd
-        except tools.project_path_not_found:
-            if config_file_path:
-                quickly_file_path = os.path.abspath(config_file_path) + '/.quickly'
-            else:
-                quickly_file_path = os.getcwd() + "/.quickly"
-        config = project_config
+    # retrieve .quickly file
+    try:
+        if config_file_path is None:
+            root_conf_dir = tools.get_root_project_path()
+        else:
+            root_conf_dir = tools.get_root_project_path(config_file_path)
+        quickly_file_path = root_conf_dir + '/.quickly'
+    # if no .quickly, create it using config_file_path or cwd
+    except tools.project_path_not_found:
+        if config_file_path:
+            quickly_file_path = os.path.abspath(config_file_path) + '/.quickly'
+        else:
+            quickly_file_path = os.getcwd() + "/.quickly"
+    config = project_config
     
     try:
         filedest = file(quickly_file_path + '.new', 'w')

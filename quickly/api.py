@@ -16,12 +16,16 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
+import sys
+
 import commands
+import tools
 
 '''public Quickly api'''
 
 def get_template_list():
-    '''get a tuple of available template'''
+    '''get a generator of available template'''
     return commands.get_all_templates()
 
 def get_all_commands():
@@ -30,14 +34,18 @@ def get_all_commands():
     templates_commands_dict = {}
     all_commands = commands.get_all_commands()
     for template in all_commands:
-        commands_in_template = (command_name for command_name in all_commands['template'])
+        commands_in_template = (command_name for command_name in all_commands[template])
         templates_commands_dict[template] = commands_in_template
     return templates_commands_dict
 
 def get_commands_in_template(template):
     '''get a list of commands for a template'''
-    return get_command_names_by_criteria(template=template)
+    return commands.get_command_names_by_criteria(template=template)
 
 def get_commands_in_context(path):
     '''typle of available commands in context (depending on path)'''
-    
+
+    # simulate a call with completion statement
+    result = tools.get_completion_in_context(['quickly', 'shell-completion',
+                                            'quickly', ''], path)
+    return result
