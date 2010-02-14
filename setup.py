@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 # quickly: quickly project handler
 #
-# Copyright (C) 2009 Canonical Ltd.fds
-# Author 2009 Didier Roche
+# Copyright (C) 2009 Didier Roche
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License version 3,

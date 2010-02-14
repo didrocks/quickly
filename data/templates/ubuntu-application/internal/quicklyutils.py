@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
