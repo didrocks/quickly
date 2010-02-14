@@ -1,7 +1,6 @@
 ''' apport package hook for Quickly
 
-Copyright 2009 Canonical Ltd.
-Author 2009 Didier Roche
+Copyright 2009 Didier Roche
 
 This file is part of Quickly
 

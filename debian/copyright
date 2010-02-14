@@ -4,12 +4,8 @@ Upstream-Maintainer: Quickly Developer Team <quickly@lists.launchpad.net>
 Upstream-Source: https://launchpad.net/quickly
 
 Files: *
-Copyright: (C) 2009 Canonical Ltd.
-# Author 2009 Rick Spencer
-# Author 2009 Didier Roche
-# Author 2009 Ken VanDine
-# Author 2009 Loïc Minier
-# Author 2009 Martin Albisetti
+Copyright: (C) 2009 Rick Spencer
+Copyright: (C) 2009-2010 Didier Roche
 License: GPL v3
  The full text of the GPL is distributed in
  /usr/share/common-licenses/GPL-3 on Debian systems.
