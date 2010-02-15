@@ -39,7 +39,7 @@ $ quickly configure [%s] <args>
 Enable to set or change some parameters of the project, like to which
 launchpad project should be binded with the current ubuntu application, what
 ppa should we use by default to share your package…
-""") % ("|".join(available_options))
+""") % ("|".join(options))
 def shell_completion(argv):
     ''' Complete args '''
     # option completion
