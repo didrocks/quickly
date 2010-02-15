@@ -107,7 +107,7 @@ if not quicklyutils.check_gpg_secret_key():
     sys.exit(1)
 
 # creation/update debian packaging
-return_code = quicklyutils.updatepackaging()
+return_code = packaging.updatepackaging()
 if return_code != 0:
     print _("ERROR: can't create or update ubuntu package")
     sys.exit(1)
