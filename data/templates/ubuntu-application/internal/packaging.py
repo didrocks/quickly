@@ -163,7 +163,7 @@ def push_to_ppa(dput_ppa_name, changes_file):
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
     # now, pushing it to launchpad personal ppa (or team later)
-    #return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
+    return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")
         return(return_code)
