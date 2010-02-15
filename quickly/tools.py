@@ -249,7 +249,7 @@ def get_completion_in_context(argv, context_path=None):
 
     # get available templates after option if needed
     if argv[-2] in ("-t", "--template"):
-        available_completion.extend(get_all_templates())
+        available_completion.extend(commands.get_all_templates())
         print " ".join(available_completion)
         return(0)        
     
