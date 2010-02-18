@@ -7,7 +7,7 @@ Build-Depends: cdbs (>= 0.4.43),
  python-central (>= 0.6.11),
  python-distutils-extra (>= 2.10)
 Maintainer: Quickly Developer Team <quickly@lists.launchpad.net>
-Standards-Version: 3.8.2
+Standards-Version: 3.8.4
 XS-Python-Version: current
 
 Package: quickly
@@ -25,6 +25,7 @@ Description: build new apps quickly
  This package contains the quickly binary and shell completion handling
 
 Package: python-quickly-core
+Section: python
 Architecture: all
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
@@ -41,6 +42,7 @@ Description: build new apps quickly
  This package contains the core function of Quickly
 
 Package: python-quickly-common
+Section: python
 Architecture: all
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
