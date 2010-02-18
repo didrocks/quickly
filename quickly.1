@@ -49,14 +49,16 @@ Show version information.
 
 Each command can be launched with or without options.
 
-.IP \fBcommand\fP args
+.TP
+.B command args
 Launch the command with args in the current contexte (inside or outside a project). Some commands needs to be launched inside a quickly project (for instance, quickly save in ubuntu-application template), some other can be launched only outside a project (quickly create) and some can be launched inside or outside a project (quickly quickly)
 .P
 If a command is launched inside a project, the current associated template will be automatically the one used at project creation (probably with quickly create template projectname). You can still launch builtin command (commands that doesn't depend on any template) or command from another template with quickly -t anothertemplate command_from_anothertemplate.
 .P
 Some commands (like quickly create, quickly quickly, quickly help) needs a template after their command name if you aren't in a project directory. This can also be achieved in using the -t template option.
 
-.IP \fBcreate\fP [ template ] projectname
+.TP
+.B create [ template ] projectname
 Create a new project from template. Can only be launched outside an existing project.
 .P
 You can also use:
@@ -70,7 +72,8 @@ List all commands available, sorted by template
 .IP \fBgetstarted\fP
 Have some info to get started
 
-.IP \fBquickly\fP [ template ] newtemplate
+.TP
+.B quickly [ template ] newtemplate
 Create a new personal template from an existing template. You can then modify this template for your own needs.
 .P
 You can also use:
@@ -82,7 +85,8 @@ or:
 quickly quickly newtemplate if you are in a project. The newtemplate will derivate from associated project template.
 .RE
 
-.IP \fBhelp\fP [ template ] command
+.TP
+.B help [ template ] command
 Get some help on a command. If no template is provided and you are outside any quickly project, you are only able to get some help from builtin commands.
 If you specify a template (or use quickly help -t template command, or you are in a quickly project directory), you will get some help from the current template context.
 
