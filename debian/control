@@ -32,6 +32,7 @@ Depends: ${misc:Depends},
          python-quickly-common
 Recommends: python-launchpadlib,
             bzr
+Replaces: quickly (<< 0.4)
 Description: build new apps quickly
  Quickly enables for prospective programmers a way to easily build new
  apps or contents based on templates and other systems for helping them
@@ -44,6 +45,7 @@ Architecture: all
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
          ${python:Depends}
+Replaces: quickly (<< 0.4)
 Description: build new apps quickly
  Quickly enables for prospective programmers a way to easily build new
  apps or contents based on templates and other systems for helping them
