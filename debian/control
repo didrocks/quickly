@@ -15,21 +15,21 @@ Architecture: all
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
          ${python:Depends},
-         python-quickly-core,
-         python-quickly-common
+         python-quickly-core
 Recommends: quickly-ubuntu-template | quickly-template,
 Description: build new apps quickly
  Quickly enables for prospective programmers a way to easily build new
  apps or contents based on templates and other systems for helping them
  write their code in a guided manner.
  .
- This package is an empty package just grabbing the right depends
+ This package contains the quickly binary and shell completion handling
 
 Package: python-quickly-core
 Architecture: all
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
-         ${python:Depends}
+         ${python:Depends},
+         python-quickly-common
 Recommends: python-launchpadlib,
             bzr
 Description: build new apps quickly

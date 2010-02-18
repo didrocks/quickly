@@ -7,4 +7,4 @@ include /usr/share/cdbs/1/class/python-distutils.mk
 include /usr/share/cdbs/1/rules/langpack.mk
 
 binary-post-install/python-quickly-core::
-	rm debian/python-quickly-core/__init__.py
+	rm debian/python-quickly-core/usr/share/pyshared/quickly/__init__.py
