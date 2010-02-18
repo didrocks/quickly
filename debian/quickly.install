@@ -1,6 +1,5 @@
 debian/tmp/etc/
 debian/tmp/usr/bin/
-debian/tmp/usr/lib/
 debian/tmp/usr/share/doc/
 debian/tmp/usr/share/locale/
 debian/tmp/usr/share/man/

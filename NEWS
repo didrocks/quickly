@@ -31,6 +31,7 @@ Quickly 0.4
   - Now dashes and spaces support in project name! Dealing with python and
     packaging issues for you. (LP: #493130)
   - Provide Quickly API (LP: #426480)
+  - Fix some issues in the man page
   ubuntu-application Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname
