@@ -19,7 +19,7 @@
 import os
 import sys
 
-from internal import quicklyutils, packaging
+from internal import quicklyutils, packaging, apportutils
 from quickly import configurationhandler, templatetools
 from quickly import launchpadaccess
 
@@ -30,7 +30,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('lp-project', 'ppa')
+options = ('lp-project', 'ppa', 'apport-bindings')
 
 def help():
     print _("""Usage:
@@ -63,8 +63,14 @@ if argv[1] == "lp-project":
     project_name = None
     if len(argv) > 2:
         project_name = argv[2]
+    # need to try and get the original project name if it exists.  We'll need this
+    # to replace any existing settings
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    previous_lp_project_name = configurationhandler.project_config.get('lp_id', None)
     try:
         project = launchpadaccess.link_project(launchpad, "Change your launchpad project:", project_name)
+        apportutils.update_apport(previous_lp_project_name, project.name)
     except launchpadaccess.launchpad_project_error, e:
         print(e)
         sys.exit(1)
@@ -105,3 +111,8 @@ Use shell completion to find all available ppas'''))
     configurationhandler.project_config['ppa'] = ppa_name
     configurationhandler.saveConfig()
 
+if argv[1] == "apport-bindings":
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    lp_project_name = configurationhandler.project_config.get('lp_id', None)
+    apportutils.update_apport(lp_project_name, lp_project_name)
