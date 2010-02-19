@@ -60,6 +60,15 @@ def updatepackaging(changelog=None):
     command = ['python-mkdebian']
     for message in changelog:
         command.extend(["--changelog", message])
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    try:
+        for elem in configurationhandler.project_config['dependencies'].split(' '):
+            if elem:
+                command.extend(["--dependency", elem])
+    except KeyError:
+        pass        
+
     return_code = subprocess.call(command)
     if return_code == 0:
         print _("Ubuntu packaging created in debian/")
