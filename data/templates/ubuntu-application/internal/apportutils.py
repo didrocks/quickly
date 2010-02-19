@@ -32,7 +32,7 @@ def update_apport(old_project_name, new_project_name):
         elif os.path.isdir(template_pr_path + relative_etc_dir):
             print _("Creating new apport crashdb configuration")
             if not os.path.isdir(relative_etc_dir):
-                os.mkdir(relative_etc_dir)
+                os.makedirs(relative_etc_dir)
             quicklyutils.file_from_template(template_pr_path + relative_etc_dir + '/', "project_name-crashdb.conf", relative_etc_dir, subst_new)
 
         if os.path.isfile(relative_apport_dir + '/' + old_hook_file):
@@ -43,7 +43,7 @@ def update_apport(old_project_name, new_project_name):
         elif os.path.isdir(template_pr_path + relative_apport_dir):
             print _("Creating new apport hooks")
             if not os.path.isdir(relative_apport_dir):
-                os.mkdir(relative_apport_dir)
+                os.makedirs(relative_apport_dir)
             quicklyutils.file_from_template(template_pr_path + relative_apport_dir+ '/', "source_project_name.py", relative_apport_dir, subst_new)
 
 def enable_apport_bindings(new_project_name):
