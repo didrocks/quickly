@@ -43,33 +43,9 @@ def update_data_path(prefix, oldvalue=None):
     return oldvalue
 
 
-def update_desktop_file(datadir):
-
-    try:
-        fin = file('project_name.desktop.in', 'r')
-        fout = file(fin.name + '.new', 'w')
-
-        for line in fin:            
-            if 'Icon=' in line:
-                line = "Icon=%s\n" % (datadir + 'media/icon.png')
-            fout.write(line)
-        fout.flush()
-        fout.close()
-        fin.close()
-        os.rename(fout.name, fin.name)
-    except (OSError, IOError), e:
-        print ("ERROR: Can't find project_name.desktop.in")
-        sys.exit(1)
-
-
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
-        if self.root or self.home:
-            print "WARNING: You don't use a standard --prefix installation, take care that you eventually " \
-            "need to update quickly/quicklyconfig.py file to adjust __quickly_data_directory__. You can " \
-            "ignore this warning if you are packaging and uses --prefix."
         previous_value = update_data_path(self.prefix + '/share/project_name/')
-        update_desktop_file(self.prefix + '/share/project_name/')
         DistUtilsExtra.auto.install_auto.run(self)
         update_data_path(self.prefix, previous_value)
 
