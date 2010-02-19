@@ -30,7 +30,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('lp-project', 'ppa', 'apport-bindings')
+options = ('lp-project', 'ppa')
 
 def help():
     print _("""Usage:
@@ -110,9 +110,3 @@ Use shell completion to find all available ppas'''))
 
     configurationhandler.project_config['ppa'] = ppa_name
     configurationhandler.saveConfig()
-
-if argv[1] == "apport-bindings":
-    if not configurationhandler.project_config:
-        configurationhandler.loadConfig()
-    lp_project_name = configurationhandler.project_config.get('lp_id', None)
-    apportutils.update_apport(lp_project_name, lp_project_name)
