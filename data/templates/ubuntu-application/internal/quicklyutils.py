@@ -228,3 +228,15 @@ def collect_commit_messages(previous_version):
             buffered_message +=' %s' % line
     return(changelog)
 
+def get_quickly_editors():
+    '''Return prefered editor for ubuntu-application template'''
+
+    editor = "gedit"
+    default_editor = os.environ.get("EDITOR")
+    if not default_editor:
+        default_editor = os.environ.get("SELECTED_EDITOR")
+    if not default_editor and os.path.exists(os.path.expanduser('~/.selected_editor')):
+        editor = 'sensible-editor'
+    elif default_editor:
+       editor = default_editor
+    return editor
