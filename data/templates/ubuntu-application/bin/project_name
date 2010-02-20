@@ -65,22 +65,6 @@ class camel_case_nameWindow(gtk.Window):
 
         # Code for other initialization actions should be added here.
 
-    def report_bug(self, widget, data=None):
-        # remove the following when enabling apport integration
-        window = gtk.MessageDialog(parent=self, flags=gtk.DIALOG_MODAL, type=gtk.MESSAGE_INFO, buttons=gtk.BUTTONS_OK,
-            message_format=_("Apport integration has not been enabled"))
-        window.set_title(_("Apport integration"))
-        window.format_secondary_text(_("You haven't enabled bug reporting functionality for your application." + \
-        "To enable this feature, you need to set the launchpad project name for your application.\n\n" + \
-        "This can be done by running 'quickly configure lp-project' in your application folder and then modifying this method"))
-        window.run()
-        window.destroy()
-        # Uncomment the following code to allow reporting problems to launchpad
-        # NOTE: You must have linked your project up to a launchpad project and then installed
-        # this application before this will functionality will work
-        #import subprocess
-        #subprocess.Popen(["ubuntu-bug","project_name"])
-
     def about(self, widget, data=None):
         """Display the about box for project_name."""
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
