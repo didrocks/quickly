@@ -50,11 +50,5 @@ def enable_apport_bindings(new_project_name):
     enable_apport = raw_input(_("Would you like to enable apport bindings to allow your application to report bugs to the launchpad bug tracking system (y/n)? [y] "))
     enable_apport = enable_apport.lower() in ['yes','y','']
     if enable_apport:
-        print "================================================================================"
-        print _("Once your application is installed, the following code can be used in a python project to trigger a bug report:")
-        print
-        print "import subprocess import Popen"
-        print 'Popen(["ubuntu-bug","%s"])'%(new_project_name)
-        print "================================================================================"
-        print
+        print _("Please view https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for details on how to activate the bug report menu")
     return enable_apport

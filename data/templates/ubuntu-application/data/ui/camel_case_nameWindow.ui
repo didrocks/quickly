@@ -155,7 +155,7 @@
                 <property name="label" translatable="yes">_Help</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
-                  <object class="GtkMenu" id="menu3">
+                  <object class="GtkMenu" id="helpMenu">
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkImageMenuItem" id="imagemenuitem10">
