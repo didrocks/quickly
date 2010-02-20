@@ -50,5 +50,11 @@ def enable_apport_bindings(new_project_name):
     enable_apport = raw_input(_("Would you like to enable apport bindings to allow your application to report bugs to the launchpad bug tracking system (y/n)? [y] "))
     enable_apport = enable_apport.lower() in ['yes','y','']
     if enable_apport:
-        print _("Please view https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for details on how to activate the bug report menu")
+        print _("An example for a python-based project would look like the following.  This is to be placed in the finish_initializing section of your main window:")
+        print "====================================================="
+        print "import LaunchpadIntegration"
+        print "LaunchpadIntegration.set_sourcepackagename('%s')"%new_project_name
+        print "LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)"
+        print "====================================================="
+        print _("Please view https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more code examples on how to activate the bug report menu")
     return enable_apport
