@@ -120,3 +120,23 @@ Use shell completion to find all available ppas'''))
 
     configurationhandler.project_config['ppa'] = ppa_name
     configurationhandler.saveConfig()
+
+# add additional depency
+elif argv[1] == "dependencies":
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    try:
+        dependencies = [elem for elem in configurationhandler.project_config['dependencies'].split(' ') if elem]
+    except KeyError:
+        dependencies = []
+    depfile_name = tempfile.mkstemp()[1]
+    open(depfile_name,'w').write("\n".join(dependencies))
+    editor = quicklyutils.get_quickly_editors()
+    dependencies = []
+    os.system("%s %s" % (editor, depfile_name))
+    for depends in file(depfile_name, 'r'):
+        dependencies.extend([elem for elem in depends[:-1].split(' ') if elem])
+    os.remove(depfile_name)
+    configurationhandler.project_config['dependencies'] = " ".join(dependencies)
+    configurationhandler.saveConfig()
+
