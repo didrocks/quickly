@@ -18,6 +18,7 @@
 
 import os
 import sys
+import tempfile
 
 from internal import quicklyutils, packaging, apportutils
 from quickly import configurationhandler, templatetools
@@ -30,7 +31,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('lp-project', 'ppa')
+options = ('dependencies', 'lp-project', 'ppa')
 
 def help():
     print _("""Usage:
@@ -38,7 +39,8 @@ $ quickly configure [%s] <args>
 
 Enable to set or change some parameters of the project, like to which
 launchpad project should be binded with the current ubuntu application, what
-ppa should we use by default to share your package…
+ppa should we use by default to share your package, what additinoal dependency
+should be added…
 """) % ("|".join(options))
 def shell_completion(argv):
     ''' Complete args '''
@@ -51,15 +53,16 @@ def shell_completion(argv):
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 
 
-# connect to LP
-try:
-    launchpad = launchpadaccess.initialize_lpi()
-except launchpadaccess.launchpad_connexion_error, e:
-    print(e)
-    sys.exit(1)
 
 # set the project, skipping the interactive phase if project_name is provided
 if argv[1] == "lp-project":
+    # connect to LP
+    try:
+        launchpad = launchpadaccess.initialize_lpi()
+    except launchpadaccess.launchpad_connexion_error, e:
+        print(e)
+        sys.exit(1)
+
     project_name = None
     if len(argv) > 2:
         project_name = argv[2]
@@ -84,7 +87,14 @@ if argv[1] == "lp-project":
 
 # change default ppa
 elif argv[1] == "ppa":
-    if len(argv != 3):
+    # connect to LP
+    try:
+        launchpad = launchpadaccess.initialize_lpi()
+    except launchpadaccess.launchpad_connexion_error, e:
+        print(e)
+        sys.exit(1)
+
+    if len(argv) != 3:
         print(_('''Usage is: $ quickly configure ppa <ppaname>
 Use shell completion to find all available ppas'''))
         sys.exit(4)

@@ -165,7 +165,7 @@ def licensing(license=None):
                 except quicklyutils.cant_deal_with_setup_value:
                     print _('Copyright is not attributed. ' \
                             'Edit the AUTHORS file to include your name for the copyright replacing ' \
-                            '<Your Name> <Your E-mail>. Update it in setup.py or use quickly share/quickly release' \
+                            '<Your Name> <Your E-mail>. Update it in setup.py or use quickly share/quickly release ' \
                             'to fill it automatically')
                     return(1)
             license_content += "# %s" % line

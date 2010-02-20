@@ -125,7 +125,8 @@ except packaging.ppa_not_found, e:
     sys.exit(1)
 
 # license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
-license.licensing()
+if (license.licensing() != 0):
+    sys.exit(1)
 
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog).
 #TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
