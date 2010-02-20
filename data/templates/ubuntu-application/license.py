@@ -31,6 +31,11 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
+class LicenceError(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    def __str__(self):
+        return repr(self.msg)
 
 BEGIN_LICENCE_TAG = '### BEGIN LICENSE'
 END_LICENCE_TAG = '### END LICENSE'
@@ -119,8 +124,8 @@ def copy_license_to_files(license_content):
                         os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
 
                 except (OSError, IOError), e:
-                    print _("%s file was not found") % fcopyright_name
-                    return(1)
+                    msg = _("%s file was not found") % fcopyright_name
+                    raise LicenceError(msg)
 
 
 def licensing(license=None):
@@ -163,15 +168,15 @@ def licensing(license=None):
                     fout.close()
                     os.rename(fout.name, fauthors_name)
                 except quicklyutils.cant_deal_with_setup_value:
-                    print _('Copyright is not attributed. ' \
+                    msg = _('Copyright is not attributed. ' \
                             'Edit the AUTHORS file to include your name for the copyright replacing ' \
                             '<Your Name> <Your E-mail>. Update it in setup.py or use quickly share/quickly release ' \
                             'to fill it automatically')
-                    return(1)
+                    raise LicenceError(msg)
             license_content += "# %s" % line
     except (OSError, IOError), e:
-        print _("%s file was not found") % fauthors_name
-        return(1)
+        msg = _("%s file was not found") % fauthors_name
+        raise LicenceError(msg)
 
     # add header to license_content
     # check that COPYING file is provided if using a personal license
@@ -185,10 +190,10 @@ def licensing(license=None):
             license_content += "# %s" % line
     except (OSError, IOError), e:
         if header_file_path == flicense_name:
-            print _("%s file was not found. It is compulsory for user defined license") % flicense_name
+            msg = _("%s file was not found. It is compulsory for user defined license") % flicense_name
         else:
-            print _("Header of %s license not found. Quickly installation corrupted?") % header_file_path
-        return(1)
+            msg = _("Header of %s license not found. Quickly installation corrupted?") % header_file_path
+        raise LicenceError(msg)
 
 
     # update license in config.py, setup.py and refresh COPYING if needed
@@ -216,11 +221,11 @@ def licensing(license=None):
         try:
             quicklyutils.set_setup_value('license', license)
         except quicklyutils.cant_deal_with_setup_value:
-            print(_("Can't update license in setup.py file\n"))
-            return(1)
+            msg = _("Can't update license in setup.py file\n")
+            raise LicenceError(msg)
     except (OSError, IOError), e:
-        print _("%s/%sconfig.py file not found.") % (python_name, python_name)
-        return(1)
+        msg = _("%s/%sconfig.py file not found.") % (python_name, python_name)
+        raise LicenceError(msg)
 
     # update About dialog, if present:
     about_dialog_file_name = quicklyutils.get_about_file_name()
@@ -245,7 +250,7 @@ def licensing(license=None):
         quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
                                      "name", "license", license_content,
                                      {'translatable': 'yes'})
-    return(copy_license_to_files(license_content))
+    copy_license_to_files(license_content)
 
 
 def shell_completion(argv):
@@ -265,6 +270,9 @@ if __name__ == "__main__":
         sys.exit(4)
     if len(sys.argv) == 2:
         license = sys.argv[1]
-
-    sys.exit(licensing(license))
+    try:
+        licensing(license)
+    except LicenceError, error_message:
+        print(error_message)
+        sys.exit(1)
 

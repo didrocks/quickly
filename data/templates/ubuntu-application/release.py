@@ -137,8 +137,11 @@ quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8')
 quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
 
 # license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
-if (license.licensing() !=0):
-     sys.exit(1)
+try:
+    license.licensing(license)
+except license.LicenceError, error_message:
+    print(error_message)
+    sys.exit(1)
 
 # get the project now and save the url into setup.py
 try:
