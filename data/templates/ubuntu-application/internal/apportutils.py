@@ -15,7 +15,7 @@ def update_apport(old_project_name, new_project_name):
     old_hook_file = "source_%s.py"%old_project_name
     new_hook_file = "source_%s.py"%new_project_name
 
-    if (not old_project_name == new_project_name) and enable_apport_bindings(new_project_name):
+    if (not old_project_name == new_project_name):
         pathname = templatetools.get_template_path_from_project()
         template_pr_path = os.path.abspath(pathname) + "/project_root/"
         relative_etc_dir = "etc/apport/crashdb.conf.d"
@@ -46,15 +46,27 @@ def update_apport(old_project_name, new_project_name):
                 os.makedirs(relative_apport_dir)
             quicklyutils.file_from_template(template_pr_path + relative_apport_dir+ '/', "source_project_name.py", relative_apport_dir, subst_new)
 
-def enable_apport_bindings(new_project_name):
-    enable_apport = raw_input(_("Would you like to enable apport bindings to allow your application to report bugs to the launchpad bug tracking system (y/n)? [y] "))
-    enable_apport = enable_apport.lower() in ['yes','y','']
-    if enable_apport:
-        print _("An example for a python-based project would look like the following.  This is to be placed in the finish_initializing section of your main window:")
-        print "====================================================="
-        print "import LaunchpadIntegration"
-        print "LaunchpadIntegration.set_sourcepackagename('%s')"%new_project_name
-        print "LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)"
-        print "====================================================="
-        print _("Please view https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more code examples on how to activate the bug report menu")
-    return enable_apport
+        print _("Updating launchpad integration references in existing application")
+        for root, dirs, files in os.walk('./'):
+            for name in files:
+                line_replaced = False
+                if name.endswith('.py') or os.path.join(root, name) == "./bin/" + project_name:
+                    target_file_name = os.path.join(root, name)
+                    ftarget_file_name = file(target_file_name, 'r')
+                    ftarget_file_name_out = file(ftarget_file_name.name + '.new', 'w')
+                    for line in ftarget_file_name:
+                        # seek if we have to add or Replace a License
+                        if "LaunchpadIntegration.set_sourcepackagename(" in line:
+                            line_replaced = True
+                            new_line = line.split("LaunchpadIntegration.set_sourcepackagename(")
+                            ftarget_file_name_out.write(new_line[0] + "('" + new_project_name + "')") # write this line, otherwise will be skipped
+                        else:
+                            ftarget_file_name_out.write(line) # write this line, otherwise will be skipped
+
+                    ftarget_file_name.close()
+                    ftarget_file_name_out.close()
+                    if line_replaced: # that means we didn't find the END_LICENCE_TAG, don't copy the file
+                        os.remove(ftarget_file_name_out.name)
+                    else:
+                        templatetools.apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
+                        os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
