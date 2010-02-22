@@ -20,7 +20,7 @@ import os
 import subprocess
 import sys
 
-from internal import quicklyutils
+from internal import quicklyutils, apportutils
 from quickly import configurationhandler, templatetools
 
 import gettext
@@ -100,5 +100,9 @@ if project_version < '0.4':
             quicklyutils.set_setup_value('version', version.replace("~public", "-public"))
     except quicklyutils.cant_deal_with_setup_value:
         pass
-
+    # add apport hooks if launchpad application is configured
+    lp_project_name = configurationhandler.project_config.get('lp_id', None)
+    if lp_project_name is not None:
+        apportutils.update_apport(None, lp_project_name)
+    
 sys.exit(0)
