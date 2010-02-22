@@ -4,7 +4,9 @@ import subprocess
 
 from gettext import gettext as _
 from quickly import templatetools, configurationhandler
-import quicklyutils
+import quicklyutils, bzrutils
+
+LPI_LINE = "LaunchpadIntegration.set_sourcepackagename("
 
 def update_apport(old_project_name, new_project_name):
     if not new_project_name:
@@ -27,8 +29,10 @@ def update_apport(old_project_name, new_project_name):
         if os.path.isfile(relative_etc_dir + '/' + old_crashdb_file):
             print _("Updating project name references in existing apport crashdb configuration")
             quicklyutils.file_from_template(relative_etc_dir + '/', old_crashdb_file, relative_etc_dir, subst_existing)
-            os.remove(relative_etc_dir + '/' + old_crashdb_file)
-            subprocess.call(["bzr", "rename","--after",relative_etc_dir+'/'+old_crashdb_file,relative_etc_dir+'/'+new_crashdb_file])
+            if bzrutils.is_file_versioned(relative_etc_dir+'/'+old_crashdb_file):
+                subprocess.call(["bzr", "rename","--after",relative_etc_dir+'/'+old_crashdb_file,relative_etc_dir+'/'+new_crashdb_file])
+            else:
+                os.remove(relative_etc_dir + '/' + old_crashdb_file)    
         elif os.path.isdir(template_pr_path + relative_etc_dir):
             print _("Creating new apport crashdb configuration")
             if not os.path.isdir(relative_etc_dir):
@@ -38,8 +42,10 @@ def update_apport(old_project_name, new_project_name):
         if os.path.isfile(relative_apport_dir + '/' + old_hook_file):
             print _("Updating project name references in existing apport hooks configuration")
             quicklyutils.file_from_template(relative_apport_dir + '/', old_hook_file, relative_apport_dir, subst_existing)
-            os.remove(relative_apport_dir + '/' + old_hook_file)
-            subprocess.call(["bzr", "rename","--after",relative_apport_dir+'/'+old_hook_file,relative_apport_dir+'/'+new_hook_file])
+            if bzrutils.is_file_versioned(relative_apport_dir+'/'+old_hook_file):
+                subprocess.call(["bzr", "rename","--after",relative_apport_dir+'/'+old_hook_file,relative_apport_dir+'/'+new_hook_file])
+            else:
+                os.remove(relative_apport_dir + '/' + old_hook_file)
         elif os.path.isdir(template_pr_path + relative_apport_dir):
             print _("Creating new apport hooks")
             if not os.path.isdir(relative_apport_dir):
@@ -50,22 +56,22 @@ def update_apport(old_project_name, new_project_name):
         for root, dirs, files in os.walk('./'):
             for name in files:
                 line_replaced = False
-                if name.endswith('.py') or os.path.join(root, name) == "./bin/" + project_name:
+                if name.endswith('.py') or root == "./bin":
                     target_file_name = os.path.join(root, name)
                     ftarget_file_name = file(target_file_name, 'r')
                     ftarget_file_name_out = file(ftarget_file_name.name + '.new', 'w')
                     for line in ftarget_file_name:
                         # seek if we have to add or Replace a License
-                        if "LaunchpadIntegration.set_sourcepackagename(" in line:
+                        if LPI_LINE in line:
                             line_replaced = True
-                            new_line = line.split("LaunchpadIntegration.set_sourcepackagename(")
-                            ftarget_file_name_out.write(new_line[0] + "('" + new_project_name + "')") # write this line, otherwise will be skipped
+                            new_line = line.split(LPI_LINE)
+                            ftarget_file_name_out.write(new_line[0] + LPI_LINE + "'" + new_project_name + "')\n") # write this line, otherwise will be skipped
                         else:
                             ftarget_file_name_out.write(line) # write this line, otherwise will be skipped
 
                     ftarget_file_name.close()
                     ftarget_file_name_out.close()
-                    if line_replaced: # that means we didn't find the END_LICENCE_TAG, don't copy the file
+                    if not line_replaced: # that means we didn't find the LPI_LINE, don't copy the file
                         os.remove(ftarget_file_name_out.name)
                     else:
                         templatetools.apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
