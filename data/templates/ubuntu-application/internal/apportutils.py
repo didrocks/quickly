@@ -28,11 +28,11 @@ def update_apport(old_project_name, new_project_name):
 
         if os.path.isfile(relative_etc_dir + '/' + old_crashdb_file):
             print _("Updating project name references in existing apport crashdb configuration")
+            file_is_revisioned = bzrutils.is_file_versioned(relative_etc_dir+'/'+old_crashdb_file)
             quicklyutils.file_from_template(relative_etc_dir + '/', old_crashdb_file, relative_etc_dir, subst_existing)
-            if bzrutils.is_file_versioned(relative_etc_dir+'/'+old_crashdb_file):
+            os.remove(relative_etc_dir + '/' + old_crashdb_file)    
+            if file_is_revisioned:
                 subprocess.call(["bzr", "rename","--after",relative_etc_dir+'/'+old_crashdb_file,relative_etc_dir+'/'+new_crashdb_file])
-            else:
-                os.remove(relative_etc_dir + '/' + old_crashdb_file)    
         elif os.path.isdir(template_pr_path + relative_etc_dir):
             print _("Creating new apport crashdb configuration")
             if not os.path.isdir(relative_etc_dir):
@@ -41,11 +41,11 @@ def update_apport(old_project_name, new_project_name):
 
         if os.path.isfile(relative_apport_dir + '/' + old_hook_file):
             print _("Updating project name references in existing apport hooks configuration")
+            file_is_revisioned = bzrutils.is_file_versioned(relative_apport_dir+'/'+old_hook_file)
             quicklyutils.file_from_template(relative_apport_dir + '/', old_hook_file, relative_apport_dir, subst_existing)
-            if bzrutils.is_file_versioned(relative_apport_dir+'/'+old_hook_file):
+            os.remove(relative_apport_dir + '/' + old_hook_file)
+            if file_is_revisioned:
                 subprocess.call(["bzr", "rename","--after",relative_apport_dir+'/'+old_hook_file,relative_apport_dir+'/'+new_hook_file])
-            else:
-                os.remove(relative_apport_dir + '/' + old_hook_file)
         elif os.path.isdir(template_pr_path + relative_apport_dir):
             print _("Creating new apport hooks")
             if not os.path.isdir(relative_apport_dir):
