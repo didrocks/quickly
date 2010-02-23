@@ -20,7 +20,9 @@ import os
 import sys
 import tempfile
 
-from internal import quicklyutils, packaging, apportutils
+import internal.apportutils
+
+from internal import quicklyutils, packaging
 from quickly import configurationhandler, templatetools
 from quickly import launchpadaccess
 
@@ -71,9 +73,10 @@ if argv[1] == "lp-project":
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
     previous_lp_project_name = configurationhandler.project_config.get('lp_id', None)
+    quickly_project_name = configurationhandler.project_config.get('project', None)
     try:
         project = launchpadaccess.link_project(launchpad, "Change your launchpad project:", project_name)
-        apportutils.update_apport(previous_lp_project_name, project.name)
+        internal.apportutils.update_apport(quickly_project_name, previous_lp_project_name, project.name)
     except launchpadaccess.launchpad_project_error, e:
         print(e)
         sys.exit(1)

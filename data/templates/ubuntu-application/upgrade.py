@@ -20,7 +20,9 @@ import os
 import subprocess
 import sys
 
-from internal import quicklyutils, apportutils
+import internal.apportutils
+
+from internal import quicklyutils
 from quickly import configurationhandler, templatetools
 
 import gettext
@@ -103,6 +105,6 @@ if project_version < '0.4':
     # add apport hooks if launchpad application is configured
     lp_project_name = configurationhandler.project_config.get('lp_id', None)
     if lp_project_name is not None:
-        apportutils.update_apport(None, lp_project_name)
+        internal.apportutils.update_apport(project_name, None, lp_project_name)
     
 sys.exit(0)
