@@ -86,6 +86,8 @@ Quickly 0.4
     messages used during devlopment. (LP: #476572)
   - add i18n to boiler plate (LP: #423529)
   - enable adding manual depdencies to quickly project (LP: #474639)
+  - enable configure its own bzr branch and resetting parent branch even once
+    already configured (quickly configure bzr <branch-path>)
   ubuntu-cli Template:
   - first release using import command feature (no command written into the
     template itself). This is a basic ubuntu CLI application
