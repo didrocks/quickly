@@ -21,6 +21,7 @@ import sys
 import tempfile
 
 from internal import quicklyutils, packaging
+from internal import bzrutils
 from quickly import configurationhandler, templatetools
 from quickly import launchpadaccess
 
@@ -31,7 +32,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('dependencies', 'lp-project', 'ppa')
+options = ('bzr', 'dependencies', 'lp-project', 'ppa')
 
 def help():
     print _("""Usage:
@@ -114,6 +115,14 @@ Use shell completion to find all available ppas'''))
 
     configurationhandler.project_config['ppa'] = ppa_name
     configurationhandler.saveConfig()
+
+# change default bzr push branch
+elif argv[1] == "bzr":
+    if len(argv) != 3:
+        print(_('''Usage is: $ quickly configure bzr <bzr-branch-string>'''))
+        sys.exit(4)
+    bzrutils.set_bzrbranch(argv[2])
+    configurationhandler.saveConfig()    
 
 # add additional depency
 elif argv[1] == "dependencies":
