@@ -22,6 +22,7 @@ import subprocess
 import webbrowser
 
 from internal import quicklyutils, packaging, launchpad_helper
+from internal import bzrutils
 from quickly import templatetools, configurationhandler
 import license
 
@@ -246,19 +247,35 @@ if bzr_instance.returncode !=0:
     sys.exit(1)
 
 
-# TODO: see if we want a strategy to set main branch in the project
-
 if (launchpadaccess.lp_server == "staging"):
     bzr_staging = "//staging/"
 else:
     bzr_staging = ""
 
+custom_location_in_info = None
 branch_location = []
+custom_location = bzrutils.get_bzrbranch()
+if custom_location:
+    branch_location = [custom_location]
+    custom_location_in_info = custom_location.replace('lp:', '')
 # if no branch, create it in ~user_name/project_name/quickly_trunk
 # or switch from staging to production
-if not ("parent branch" in bzr_info) or ((".staging." in bzr_info) and not bzr_staging) or (not (".staging." in bzr_info) and bzr_staging):
+if ("parent branch" in bzr_info) and not (
+    (custom_location_in_info and custom_location_in_info not in bzr_info) or
+   ((".staging." in bzr_info) and not bzr_staging) or
+   (not (".staging." in bzr_info) and bzr_staging)):
+    return_code = subprocess.call(["bzr", "pull"])
+    if return_code != 0:
+        print _("ERROR: quickly can't release: can't pull from launchpad.")
+        sys.exit(return_code)
 
-    branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
+    subprocess.call(["bzr", "push"])
+    if return_code != 0:
+        print _("ERROR: quickly can't release: can't push to launchpad.")
+        sys.exit(return_code)
+else:
+    if not branch_location:
+        branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
     return_code = subprocess.call(["bzr", "push", "--remember", "--overwrite", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
@@ -268,18 +285,6 @@ if not ("parent branch" in bzr_info) or ((".staging." in bzr_info) and not bzr_s
     return_code = subprocess.call(["bzr", "pull", "--remember", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release correctly: can't pull from launchpad.")
-        sys.exit(return_code)
-
-else:
-
-    return_code = subprocess.call(["bzr", "pull"])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't pull from launchpad.")
-        sys.exit(return_code)
-
-    subprocess.call(["bzr", "push"])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(return_code)
 
 
