@@ -71,6 +71,7 @@ Depends: ${misc:Depends},
          gedit | editor,
          bzr,
          python-distutils-extra (>= 2.10)
+Recommends: seahorse-plugins
 Description: quickly ubuntu application template
  Quickly enables for prospective programmers a way to easily build new
  apps or contents.
