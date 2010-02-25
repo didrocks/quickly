@@ -65,6 +65,7 @@ Quickly 0.4
     personal license needs COPYING file now (and the header will be copied in
     every files). No more # needed in those files too. Some other little
     refactoring too (LP: #469330)
+  - autolicence by default on first share/release (with LP info and on GPL-3)
   - change versionning support in ubuntu application: (LP: #476814)
    + quickly share just adds -publicX to current version where X is bumped
      at each "quicky share" execution
