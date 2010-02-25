@@ -132,17 +132,6 @@ except launchpadaccess.launchpad_connexion_error, e:
 if not quicklyutils.check_gpg_secret_key():
     sys.exit(1)
 
-# changed upstream author and email
-quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
-quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
-
-# update license if needed. Don't change anything if not needed
-try:
-    license.licensing()
-except license.LicenceError, error_message:
-    print(error_message)
-    sys.exit(1)
-
 # get the project now and save the url into setup.py
 try:
     project = launchpadaccess.get_project(launchpad)
@@ -155,11 +144,6 @@ about_dialog_file_name = quicklyutils.get_about_file_name()
 if about_dialog_file_name:
     quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
                                  "name", "website", project_url, {})
-
-# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
-#TODO: check that the gpg key contains it (or match preferred_email_adress to available gpg keys and take the name)
-if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
 
 # choose right ppa parameter (users, etc.) ppa or staging if ppa_name is None
 try:
@@ -177,6 +161,22 @@ except packaging.ppa_not_found, e:
     print(_("%s does not exist. Please create it on launchpad if you want to upload to it. %s has the following ppas available:") % (e, ppa_user.name))
     for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):
         print "%s - %s" % (ppa_name, ppa_display_name)
+    sys.exit(1)
+
+# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
+#TODO: check that the gpg key contains it (or match preferred_email_adress to available gpg keys and take the name)
+if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
+    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
+
+# changed upstream author and email
+quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
+quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
+
+# update license if needed. Don't change anything if not needed
+try:
+    license.licensing()
+except license.LicenceError, error_message:
+    print(error_message)
     sys.exit(1)
 
 try:

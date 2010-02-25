@@ -124,13 +124,6 @@ except packaging.ppa_not_found, e:
         print "%s - %s" % (ppa_name, ppa_display_name)
     sys.exit(1)
 
-# license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
-try:
-    license.licensing(license)
-except license.LicenceError, error_message:
-    print(error_message)
-    sys.exit(1)
-
 # if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog).
 #TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
 if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
@@ -139,6 +132,13 @@ if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
 # changed upstream author and email
 quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
 quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
+
+# license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
+try:
+    license.licensing()
+except license.LicenceError, error_message:
+    print(error_message)
+    sys.exit(1)
 
 # creation/update debian packaging
 return_code = packaging.updatepackaging()
