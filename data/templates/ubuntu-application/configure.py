@@ -53,7 +53,9 @@ def shell_completion(argv):
 
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 
-
+if len(argv) < 2:
+    help()
+    sys.exit (1)
 
 # set the project, skipping the interactive phase if project_name is provided
 if argv[1] == "lp-project":
