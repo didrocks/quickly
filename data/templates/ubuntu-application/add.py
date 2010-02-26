@@ -42,7 +42,7 @@ For instance $ quickly add dialog DialogName will create:
 3. A catalog file called dialog_name_dialog.xml also in the ui directory
 
 To edit the UI for the dialog, run:
-$ quickly glade
+$ quickly design
 
 To edit the behavior, run:
 $ quickly edit

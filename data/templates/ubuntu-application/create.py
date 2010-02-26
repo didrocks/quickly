@@ -46,7 +46,7 @@ creating the project, get started by:
 $ cd path/to/project_name
 
 2. Edit the UI with Glade:
-$ quickly glade
+$ quickly design
 
 3. Edit the Python code:
 $ quickly edit
