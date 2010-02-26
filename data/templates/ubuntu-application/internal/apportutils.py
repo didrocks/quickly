@@ -6,7 +6,6 @@ from gettext import gettext as _
 from quickly import templatetools, configurationhandler
 import quicklyutils
 
-LPI_LINE = "LaunchpadIntegration.set_sourcepackagename('%s')"
 
 def update_apport(project_name, old_lp_project, new_lp_project):
     if not new_lp_project:
