@@ -3,7 +3,7 @@
 ORIGINAL_DIR=$(pwd)
 
 SCRIPT=$1
-LOGFILE="$ORIGINAL_DIR/$2"
+LOGFILE="$ORIGINAL_DIR/results.log"
 CMD="$ORIGINAL_DIR/next-cmd.sh"
 CMD_OUTPUT="$ORIGINAL_DIR/output.log"
 
