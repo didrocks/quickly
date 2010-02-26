@@ -29,7 +29,7 @@ from quickly import configurationhandler, templatetools
 
 def help():
     print _("""Usage:
-$quickly glade
+$quickly design
 
 Opens Glade UI editor so that you can edit the UI for dialogs
 and windows in your project. Note that you *must* open Glade
