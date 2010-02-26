@@ -11,7 +11,8 @@ LPI_LINE = "LaunchpadIntegration.set_sourcepackagename('%s')"
 def update_apport(project_name, old_lp_project, new_lp_project):
     if not new_lp_project:
         return
-
+    # crashdb file doesn't support spaces or dashes in the crash db name
+    safe_project_name = project_name.replace(" ", "_").replace("-","_")
     crashdb_file = "%s-crashdb.conf"%project_name
     hook_file = "source_%s.py"%project_name
 
@@ -27,7 +28,8 @@ def update_apport(project_name, old_lp_project, new_lp_project):
         or not os.path.isfile(relative_apport_dir + '/' + hook_file):
 
         subst_existing = ((old_lp_project, new_lp_project),)
-        subst_new = (   ("project_name", project_name),
+        subst_new = (   ("safe_project_name", safe_project_name),
+                        ("project_name", project_name),
                         ("lp_project", new_lp_project))
 
         if os.path.isfile(relative_etc_dir + '/' + crashdb_file):

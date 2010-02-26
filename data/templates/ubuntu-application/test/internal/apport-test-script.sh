@@ -193,7 +193,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # # This file is in the public domain
 # ### END LICENSE
 # 
-# test-project = {
+# test_project = {
 #         'impl' : 'launchpad',
 #         'project' : 'hudson-notifier',
 #         'bug_pattern_base' : None,
@@ -213,7 +213,7 @@ cat apport/source_test-project.py
 # 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
-#         report['CrashDB'] = 'test-project'
+#         report['CrashDB'] = 'test_project'
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
@@ -263,7 +263,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # # This file is in the public domain
 # ### END LICENSE
 # 
-# test-project = {
+# test_project = {
 #         'impl' : 'launchpad',
 #         'project' : 'hudson-notifier',
 #         'bug_pattern_base' : None,
@@ -283,7 +283,7 @@ cat apport/source_test-project.py
 # 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
-#         report['CrashDB'] = 'test-project'
+#         report['CrashDB'] = 'test_project'
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
@@ -301,7 +301,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # # This file is in the public domain
 # ### END LICENSE
 # 
-# test-project = {
+# test_project = {
 #         'impl' : 'launchpad',
 #         'project' : 'gpoweroff',
 #         'bug_pattern_base' : None,
@@ -321,7 +321,7 @@ cat apport/source_test-project.py
 # 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
-#         report['CrashDB'] = 'test-project'
+#         report['CrashDB'] = 'test_project'
 
 bzr status
 
@@ -339,7 +339,7 @@ cat apport/source_test-project.py
 # 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
-#         report['CrashDB'] = 'test-project'
+#         report['CrashDB'] = 'test_project'
 
 rm apport/source_test-project.py
 
@@ -369,7 +369,7 @@ cat apport/source_test-project.py
 # 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
-#         report['CrashDB'] = 'test-project'
+#         report['CrashDB'] = 'test_project'
 
 quickly configure lp-project hudson-notifier
 # Get Launchpad Settings
@@ -441,7 +441,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # # This file is in the public domain
 # ### END LICENSE
 # 
-# test-project = {
+# test_project = {
 #         'impl' : 'launchpad',
 #         'project' : 'hudson-notifier',
 #         'bug_pattern_base' : None,
@@ -461,4 +461,4 @@ cat apport/source_test-project.py
 # 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
-#         report['CrashDB'] = 'test-project'
+#         report['CrashDB'] = 'test_project'
