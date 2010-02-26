@@ -22,4 +22,8 @@ done
 
 rm -f "$CMD"
 rm -f "$CMD_OUTPUT"
-mv -f "$LOGFILE" "$SCRIPT"
+if [[ -n $(diff -q "$LOGFILE" "$SCRIPT") ]]; then
+    echo "********************************"
+    echo "FILES DIFFERED"
+    mv -f "$LOGFILE" "$SCRIPT"
+fi
