@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-18 15:21+0100\n"
+"POT-Creation-Date: 2010-02-26 21:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,7 +100,7 @@ msgid ""
 "3. A catalog file called dialog_name_dialog.xml also in the ui directory\n"
 "\n"
 "To edit the UI for the dialog, run:\n"
-"$ quickly glade\n"
+"$ quickly design\n"
 "\n"
 "To edit the behavior, run:\n"
 "$ quickly edit\n"
@@ -131,19 +131,40 @@ msgstr ""
 msgid "Bzr not properly installed"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/glade.py:31
-msgid ""
-"Usage:\n"
-"$quickly glade\n"
-"\n"
-"Opens Glade UI editor so that you can edit the UI for dialogs\n"
-"and windows in your project. Note that you *must* open Glade\n"
-"in this manner for quickly to work. If you try to open Glade\n"
-"directly, and the open the UI files, Glade will throw errors\n"
-"and won't open the files.\n"
+#: ../bin/quickly.py:68
+#, python-format
+msgid "ERROR: No %s command found in template %s."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:36
+#: ../bin/quickly.py:69 ../bin/quickly.py:110
+msgid "Aborting."
+msgstr ""
+
+#: ../bin/quickly.py:87 ../bin/quickly.py:100
+#, python-format
+msgid ""
+"ERROR: %s command must be followed by a template and no template was found "
+"on the command line."
+msgstr ""
+
+#: ../bin/quickly.py:88 ../bin/quickly.py:101 ../bin/quickly.py:106
+#: ../quickly/builtincommands.py:160
+#, python-format
+msgid "Candidates template are: %s"
+msgstr ""
+
+#: ../bin/quickly.py:105
+#, python-format
+msgid "No template were found on the command line for command %s."
+msgstr ""
+
+#. there is really not such command, in any template
+#: ../bin/quickly.py:109 ../quickly/builtincommands.py:163
+#, python-format
+msgid "ERROR: No %s command found."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:38
 #, python-format
 msgid ""
 "Usage:\n"
@@ -152,39 +173,45 @@ msgid ""
 "Enable to set or change some parameters of the project, like to which\n"
 "launchpad project should be binded with the current ubuntu application, "
 "what\n"
-"ppa should we use by default to share your package…\n"
+"ppa should we use by default to share your package, what additinoal "
+"dependency\n"
+"should be added…\n"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:82
+#: ../data/templates/ubuntu-application/configure.py:95
 msgid ""
 "Usage is: $ quickly configure ppa <ppaname>\n"
 "Use shell completion to find all available ppas"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:91
+#: ../data/templates/ubuntu-application/configure.py:104
 #: ../data/templates/ubuntu-application/share.py:113
-#: ../data/templates/ubuntu-application/release.py:164
+#: ../data/templates/ubuntu-application/release.py:153
 #, python-format
 msgid "User or Team %s not found on Launchpad"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:94
+#: ../data/templates/ubuntu-application/configure.py:107
 #: ../data/templates/ubuntu-application/share.py:116
-#: ../data/templates/ubuntu-application/release.py:167
+#: ../data/templates/ubuntu-application/release.py:156
 #, python-format
 msgid "You have to be a member of %s team to upload to its ppas"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:100
+#: ../data/templates/ubuntu-application/configure.py:113
 #: ../data/templates/ubuntu-application/share.py:122
-#: ../data/templates/ubuntu-application/release.py:173
+#: ../data/templates/ubuntu-application/release.py:162
 #, python-format
 msgid ""
 "%s does not exist. Please create it on launchpad if you want to upload to "
 "it. %s has the following ppas available:"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/edit.py:33
+#: ../data/templates/ubuntu-application/configure.py:124
+msgid "Usage is: $ quickly configure bzr <bzr-branch-string>"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/edit.py:34
 msgid ""
 "Usage:\n"
 "$ quickly edit\n"
@@ -278,34 +305,34 @@ msgid ""
 msgstr ""
 
 #: ../data/templates/ubuntu-application/share.py:83
-#: ../data/templates/ubuntu-application/release.py:100
+#: ../data/templates/ubuntu-application/release.py:101
 msgid "--ppa needs one argument: <ppa_name> or <team/ppa_name>"
 msgstr ""
 
 #: ../data/templates/ubuntu-application/share.py:86
-#: ../data/templates/ubuntu-application/release.py:103
+#: ../data/templates/ubuntu-application/release.py:104
 #, python-format
 msgid "Unknown option: %s"
 msgstr ""
 
 #: ../data/templates/ubuntu-application/share.py:87
-#: ../data/templates/ubuntu-application/release.py:104
+#: ../data/templates/ubuntu-application/release.py:105
 msgid "General usage is: quickly release [release_version] [comments]"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/share.py:142
-#: ../data/templates/ubuntu-application/release.py:225
+#: ../data/templates/ubuntu-application/share.py:146
+#: ../data/templates/ubuntu-application/release.py:230
 #: ../data/templates/ubuntu-application/package.py:60
 msgid "ERROR: can't create or update ubuntu package"
 msgstr ""
 
 #. upload to launchpad
-#: ../data/templates/ubuntu-application/share.py:153
-#: ../data/templates/ubuntu-application/release.py:283
+#: ../data/templates/ubuntu-application/share.py:157
+#: ../data/templates/ubuntu-application/release.py:292
 msgid "pushing to launchpad"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/share.py:159
+#: ../data/templates/ubuntu-application/share.py:163
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
@@ -411,6 +438,18 @@ msgstr ""
 msgid "ERROR: %s is not permitted as a quickly project name"
 msgstr ""
 
+#: ../data/templates/ubuntu-application/design.py:31
+msgid ""
+"Usage:\n"
+"$quickly design\n"
+"\n"
+"Opens Glade UI editor so that you can edit the UI for dialogs\n"
+"and windows in your project. Note that you *must* open Glade\n"
+"in this manner for quickly to work. If you try to open Glade\n"
+"directly, and the open the UI files, Glade will throw errors\n"
+"and won't open the files.\n"
+msgstr ""
+
 #: ../data/templates/ubuntu-application/save.py:30
 msgid ""
 "Usage:\n"
@@ -463,7 +502,7 @@ msgid ""
 "$ cd path/to/project_name\n"
 "\n"
 "2. Edit the UI with Glade:\n"
-"$ quickly glade\n"
+"$ quickly design\n"
 "\n"
 "3. Edit the Python code:\n"
 "$ quickly edit\n"
@@ -515,41 +554,8 @@ msgid ""
 msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:214
-#: ../data/templates/ubuntu-application/release.py:202
+#: ../data/templates/ubuntu-application/release.py:207
 msgid "commit before release"
-msgstr ""
-
-#: ../bin/quickly.py:68
-#, python-format
-msgid "ERROR: No %s command found in template %s."
-msgstr ""
-
-#: ../bin/quickly.py:69 ../bin/quickly.py:110
-msgid "Aborting."
-msgstr ""
-
-#: ../bin/quickly.py:87 ../bin/quickly.py:100
-#, python-format
-msgid ""
-"ERROR: %s command must be followed by a template and no template was found "
-"on the command line."
-msgstr ""
-
-#: ../bin/quickly.py:88 ../bin/quickly.py:101 ../bin/quickly.py:106
-#: ../quickly/builtincommands.py:160
-#, python-format
-msgid "Candidates template are: %s"
-msgstr ""
-
-#: ../bin/quickly.py:105
-#, python-format
-msgid "No template were found on the command line for command %s."
-msgstr ""
-
-#. there is really not such command, in any template
-#: ../bin/quickly.py:109 ../quickly/builtincommands.py:163
-#, python-format
-msgid "ERROR: No %s command found."
 msgstr ""
 
 #: ../quickly/builtincommands.py:35
@@ -585,7 +591,7 @@ msgid ""
 "\n"
 "2. You can also try:\n"
 "$ quickly edit\n"
-"$ quickly glade\n"
+"$ quickly design\n"
 "$ quickly run\n"
 "Use bash completion to get every available command\n"
 "\n"
@@ -682,7 +688,7 @@ msgid ""
 "Opens a web browser with the tutorial for ubuntu-application template.\n"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:39
+#: ../data/templates/ubuntu-application/release.py:40
 msgid ""
 "Usage:\n"
 "$quickly release\n"
@@ -720,37 +726,37 @@ msgid ""
 "installs as expected. (This is not mandatory)\n"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:186
+#: ../data/templates/ubuntu-application/release.py:191
 #, python-format
 msgid "quickly released: %s"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:196
+#: ../data/templates/ubuntu-application/release.py:201
 #, python-format
 msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:204
-#: ../data/templates/ubuntu-application/release.py:233
+#: ../data/templates/ubuntu-application/release.py:209
+#: ../data/templates/ubuntu-application/release.py:238
 msgid "ERROR: quickly can't release as it can't commit with bzr"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:260
-#: ../data/templates/ubuntu-application/release.py:278
-msgid "ERROR: quickly can't release: can't push to launchpad."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/release.py:266
-msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/release.py:273
+#: ../data/templates/ubuntu-application/release.py:269
 msgid "ERROR: quickly can't release: can't pull from launchpad."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:293
+#: ../data/templates/ubuntu-application/release.py:274
+#: ../data/templates/ubuntu-application/release.py:281
+msgid "ERROR: quickly can't release: can't push to launchpad."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/release.py:287
+msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/release.py:302
 #, python-format
 msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
@@ -846,46 +852,46 @@ msgid ""
 "choose another path."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:65
+#: ../data/templates/ubuntu-application/internal/packaging.py:74
 msgid "Ubuntu packaging created in debian/"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:67
+#: ../data/templates/ubuntu-application/internal/packaging.py:76
 msgid "An error has occurred"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:163
+#: ../data/templates/ubuntu-application/internal/packaging.py:172
 msgid "ERROR: an error occurred during source package creation"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:168
+#: ../data/templates/ubuntu-application/internal/packaging.py:177
 msgid "ERROR: an error occurred during source upload to launchpad"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:206
+#: ../data/templates/ubuntu-application/internal/packaging.py:215
 msgid ""
 "Release version specified in command arguments is not a valid version scheme "
 "like 'x(.y)(.z)'."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:216
+#: ../data/templates/ubuntu-application/internal/packaging.py:225
 msgid "No previous version found in setup.py. Put one please"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:226
+#: ../data/templates/ubuntu-application/internal/packaging.py:235
 #, python-format
 msgid ""
 "Share version specified after -public in setup.py is not a valid number: %s"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:246
+#: ../data/templates/ubuntu-application/internal/packaging.py:255
 #, python-format
 msgid ""
 "Minor version specified in setup.py is not a valid number: %s. Fix this or "
 "specify a version as release command line argument"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:40
+#: ../data/templates/ubuntu-application/license.py:45
 msgid ""
 "Usage:\n"
 "$quickly license <Your_Licence>\n"
@@ -924,44 +930,44 @@ msgid ""
 msgstr ""
 
 #. that means we didn't find the END_LICENCE_TAG, don't copy the file
-#: ../data/templates/ubuntu-application/license.py:115
+#: ../data/templates/ubuntu-application/license.py:120
 #, python-format
 msgid "WARNING: %s was not found in the file %s. No licence replacement"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:122
-#: ../data/templates/ubuntu-application/license.py:173
+#: ../data/templates/ubuntu-application/license.py:127
+#: ../data/templates/ubuntu-application/license.py:178
 #, python-format
 msgid "%s file was not found"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:166
+#: ../data/templates/ubuntu-application/license.py:171
 msgid ""
 "Copyright is not attributed. Edit the AUTHORS file to include your name for "
 "the copyright replacing <Your Name> <Your E-mail>. Update it in setup.py or "
-"use quickly share/quickly releaseto fill it automatically"
+"use quickly share/quickly release to fill it automatically"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:188
+#: ../data/templates/ubuntu-application/license.py:193
 #, python-format
 msgid "%s file was not found. It is compulsory for user defined license"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:190
+#: ../data/templates/ubuntu-application/license.py:195
 #, python-format
 msgid "Header of %s license not found. Quickly installation corrupted?"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:219
+#: ../data/templates/ubuntu-application/license.py:224
 msgid "Can't update license in setup.py file\n"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:222
+#: ../data/templates/ubuntu-application/license.py:227
 #, python-format
 msgid "%s/%sconfig.py file not found."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:264
+#: ../data/templates/ubuntu-application/license.py:269
 msgid ""
 "This command only take one optional argument: License\n"
 "Usage is: quickly license <license>"
