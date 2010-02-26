@@ -20,6 +20,7 @@ egrep -v '(^#|^\s*$)' "$SCRIPT" | while read line; do
     cat "$CMD_OUTPUT" | tee | awk '{print "# " $0}' >> "$LOGFILE";
 done
 
+cd "$ORIGINAL_DIR"
 rm -f "$CMD"
 rm -f "$CMD_OUTPUT"
 if [[ -n $(diff -q "$LOGFILE" "$SCRIPT") ]]; then
