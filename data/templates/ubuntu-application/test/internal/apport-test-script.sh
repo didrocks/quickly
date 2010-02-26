@@ -1,7 +1,6 @@
 #!/bin/bash
 
-pushd /tmp
-# /tmp /media/storage/home/insanity/src/quickly/lp-apport-support/data/templates/ubuntu-application/test/internal
+cd /tmp
 
 rm -rf test-project
 
@@ -62,58 +61,58 @@ quickly create ubuntu-application test-project
 # Creating project directory data
 # Creating project directory bin
 # Directory bin created
-#
+# 
 # Creating data/ui/TestProjectWindow.ui
 # data/ui/TestProjectWindow.ui created
-#
+# 
 # Creating data/ui/test_project_window.xml
 # data/ui/test_project_window.xml created
-#
+# 
 # Creating data/ui/AboutTestProjectDialog.ui
 # data/ui/AboutTestProjectDialog.ui created
-#
+# 
 # Creating data/ui/about_test_project_dialog.xml
 # data/ui/about_test_project_dialog.xml created
-#
+# 
 # Creating data/ui/PreferencesTestProjectDialog.ui
 # data/ui/PreferencesTestProjectDialog.ui created
-#
+# 
 # Creating data/ui/preferences_test_project_dialog.xml
 # data/ui/preferences_test_project_dialog.xml created
-#
+# 
 # Creating test_project/AboutTestProjectDialog.py
 # test_project/AboutTestProjectDialog.py created
-#
+# 
 # Creating test_project/PreferencesTestProjectDialog.py
 # test_project/PreferencesTestProjectDialog.py created
-#
+# 
 # Creating test_project/test_projectconfig.py
 # test_project/test_projectconfig.py created
-#
+# 
 # Creating test_project/helpers.py
 # test_project/helpers.py created
-#
+# 
 # Creating test_project/__init__.py
 # test_project/__init__.py created
-#
+# 
 # Creating ./setup.py
 # ./setup.py created
-#
+# 
 # Creating ./test-project.desktop.in
 # ./test-project.desktop.in created
-#
+# 
 # Creating bin/test-project
 # bin/test-project created
-#
+# 
 # Creating ./AUTHORS
 # ./AUTHORS created
-#
+# 
 # Creating bzr repository and commiting
 # Launching your newly created project!
 # Congrats, your new project is setup! cd /tmp/test-project/ to start hacking.
 # Creating project directory test-project
 # Directory test-project created
-#
+# 
 
 cd test-project
 
@@ -126,11 +125,11 @@ quickly configure lp-project gpoweroff
 # Creating new apport crashdb configuration
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
-#
+# 
 # Creating new apport hooks
 # Creating apport/source_test-project.py
 # apport/source_test-project.py created
-#
+# 
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
 #         LaunchpadIntegration.set_sourcepackagename('test-project')
@@ -158,7 +157,7 @@ quickly configure lp-project hudson-notifier
 # Updating project name references in existing apport crashdb configuration
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
-#
+# 
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
 #         LaunchpadIntegration.set_sourcepackagename('test-project')
@@ -193,7 +192,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
-#
+# 
 # test-project = {
 #         'impl' : 'launchpad',
 #         'project' : 'hudson-notifier',
@@ -208,10 +207,10 @@ cat apport/source_test-project.py
 # # This file is in the public domain
 # ### END LICENSE
 # import apport
-#
+# 
 # def add_info(report):
 #     """add report info"""
-#
+# 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
 #         report['CrashDB'] = 'test-project'
@@ -222,7 +221,7 @@ quickly configure lp-project gpoweroff
 # Updating project name references in existing apport crashdb configuration
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
-#
+# 
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
 #         LaunchpadIntegration.set_sourcepackagename('test-project')
@@ -250,11 +249,11 @@ quickly configure lp-project hudson-notifier
 # Updating project name references in existing apport crashdb configuration
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
-#
+# 
 # Creating new apport hooks
 # Creating apport/source_test-project.py
 # apport/source_test-project.py created
-#
+# 
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
 #         LaunchpadIntegration.set_sourcepackagename('test-project')
@@ -263,7 +262,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
-#
+# 
 # test-project = {
 #         'impl' : 'launchpad',
 #         'project' : 'hudson-notifier',
@@ -278,10 +277,10 @@ cat apport/source_test-project.py
 # # This file is in the public domain
 # ### END LICENSE
 # import apport
-#
+# 
 # def add_info(report):
 #     """add report info"""
-#
+# 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
 #         report['CrashDB'] = 'test-project'
@@ -292,7 +291,7 @@ quickly configure lp-project gpoweroff
 # Updating project name references in existing apport crashdb configuration
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
-#
+# 
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
 #         LaunchpadIntegration.set_sourcepackagename('test-project')
@@ -301,7 +300,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
-#
+# 
 # test-project = {
 #         'impl' : 'launchpad',
 #         'project' : 'gpoweroff',
@@ -316,10 +315,10 @@ cat apport/source_test-project.py
 # # This file is in the public domain
 # ### END LICENSE
 # import apport
-#
+# 
 # def add_info(report):
 #     """add report info"""
-#
+# 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
 #         report['CrashDB'] = 'test-project'
@@ -327,12 +326,50 @@ cat apport/source_test-project.py
 bzr status
 
 cat apport/source_test-project.py
+# # Apport integration for test-project
+# #
+# # -*- coding: utf-8 -*-
+# ### BEGIN LICENSE
+# # This file is in the public domain
+# ### END LICENSE
+# import apport
+# 
+# def add_info(report):
+#     """add report info"""
+# 
+#     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
+#         report['ThirdParty'] = 'True'
+#         report['CrashDB'] = 'test-project'
 
 rm apport/source_test-project.py
 
 quickly configure lp-project gpoweroff
+# Get Launchpad Settings
+# Launchpad connexion is ok
+# Updating project name references in existing apport crashdb configuration
+# Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
+# etc/apport/crashdb.conf.d/test-project-crashdb.conf created
+# 
+# Creating new apport hooks
+# Creating apport/source_test-project.py
+# apport/source_test-project.py created
+# 
 
 cat apport/source_test-project.py
+# # Apport integration for test-project
+# #
+# # -*- coding: utf-8 -*-
+# ### BEGIN LICENSE
+# # This file is in the public domain
+# ### END LICENSE
+# import apport
+# 
+# def add_info(report):
+#     """add report info"""
+# 
+#     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
+#         report['ThirdParty'] = 'True'
+#         report['CrashDB'] = 'test-project'
 
 quickly configure lp-project hudson-notifier
 # Get Launchpad Settings
@@ -340,11 +377,7 @@ quickly configure lp-project hudson-notifier
 # Updating project name references in existing apport crashdb configuration
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
-#
-# Creating new apport hooks
-# Creating apport/source_test-project.py
-# apport/source_test-project.py created
-#
+# 
 
 bzr status
 # modified:
@@ -394,11 +427,11 @@ quickly upgrade
 # Creating new apport crashdb configuration
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
-#
+# 
 # Creating new apport hooks
 # Creating apport/source_test-project.py
 # apport/source_test-project.py created
-#
+# 
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
 #         LaunchpadIntegration.set_sourcepackagename('test-project')
@@ -407,7 +440,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
-#
+# 
 # test-project = {
 #         'impl' : 'launchpad',
 #         'project' : 'hudson-notifier',
@@ -422,13 +455,10 @@ cat apport/source_test-project.py
 # # This file is in the public domain
 # ### END LICENSE
 # import apport
-#
+# 
 # def add_info(report):
 #     """add report info"""
-#
+# 
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
 #         report['CrashDB'] = 'test-project'
-
-popd
-# /media/storage/home/insanity/src/quickly/lp-apport-support/data/templates/ubuntu-application/test/internal
