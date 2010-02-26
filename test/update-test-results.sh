@@ -27,8 +27,9 @@ if [[ -n $(diff -q "$LOGFILE" "$SCRIPT") ]]; then
     echo "********************************"
     echo "FILES DIFFERED"
     diff "$LOGFILE" "$SCRIPT"
-    echo -n "Would you like to accept the new results (y/n)? [y]"
+    echo -n "Would you like to accept the new results (y/n)? [y] "
     read -n1 RESULT
+    echo
     if [[ "$RESULT" = "y" || "$RESULT" = "" ]]; then
         mv -f "$LOGFILE" "$SCRIPT"
     fi
