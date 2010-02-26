@@ -112,7 +112,7 @@ $ quickly tutorial
 
 2. You can also try:
 $ quickly edit
-$ quickly glade
+$ quickly design
 $ quickly run
 Use bash completion to get every available command
 
