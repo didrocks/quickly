@@ -130,13 +130,15 @@ quickly configure lp-project gpoweroff
 # Creating apport/source_test-project.py
 # apport/source_test-project.py created
 # 
+# Updating launchpad integration references in existing application
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
-#         LaunchpadIntegration.set_sourcepackagename('test-project')
+#         LaunchpadIntegration.set_sourcepackagename('gpoweroff')
 
 bzr status
 # modified:
 #   .quickly
+#   bin/test-project
 #   data/ui/AboutTestProjectDialog.ui
 #   setup.py
 # unknown:
@@ -158,9 +160,10 @@ quickly configure lp-project hudson-notifier
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
 # 
+# Updating launchpad integration references in existing application
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
-#         LaunchpadIntegration.set_sourcepackagename('test-project')
+#         LaunchpadIntegration.set_sourcepackagename('hudson-notifier')
 
 bzr status
 # added:
@@ -172,6 +175,7 @@ bzr status
 #   etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # modified:
 #   .quickly
+#   bin/test-project
 #   data/ui/AboutTestProjectDialog.ui
 #   setup.py
 
@@ -182,6 +186,7 @@ bzr commit -m "Test save"
 # added etc
 # modified setup.py
 # added apport/source_test-project.py
+# modified bin/test-project
 # modified data/ui/AboutTestProjectDialog.ui
 # added etc/apport
 # added etc/apport/crashdb.conf.d
@@ -222,13 +227,15 @@ quickly configure lp-project gpoweroff
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
 # 
+# Updating launchpad integration references in existing application
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
-#         LaunchpadIntegration.set_sourcepackagename('test-project')
+#         LaunchpadIntegration.set_sourcepackagename('gpoweroff')
 
 bzr status
 # modified:
 #   .quickly
+#   bin/test-project
 #   data/ui/AboutTestProjectDialog.ui
 #   etc/apport/crashdb.conf.d/test-project-crashdb.conf
 #   setup.py
@@ -237,6 +244,7 @@ bzr commit -m "Renaming hooks"
 # Committing to: /tmp/test-project/
 # modified .quickly
 # modified setup.py
+# modified bin/test-project
 # modified data/ui/AboutTestProjectDialog.ui
 # modified etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # Committed revision 3.
@@ -254,9 +262,10 @@ quickly configure lp-project hudson-notifier
 # Creating apport/source_test-project.py
 # apport/source_test-project.py created
 # 
+# Updating launchpad integration references in existing application
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
-#         LaunchpadIntegration.set_sourcepackagename('test-project')
+#         LaunchpadIntegration.set_sourcepackagename('hudson-notifier')
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -292,9 +301,10 @@ quickly configure lp-project gpoweroff
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
 # 
+# Updating launchpad integration references in existing application
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
-#         LaunchpadIntegration.set_sourcepackagename('test-project')
+#         LaunchpadIntegration.set_sourcepackagename('gpoweroff')
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -354,6 +364,7 @@ quickly configure lp-project gpoweroff
 # Creating apport/source_test-project.py
 # apport/source_test-project.py created
 # 
+# Updating launchpad integration references in existing application
 
 cat apport/source_test-project.py
 # # Apport integration for test-project
@@ -378,10 +389,12 @@ quickly configure lp-project hudson-notifier
 # Creating etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # etc/apport/crashdb.conf.d/test-project-crashdb.conf created
 # 
+# Updating launchpad integration references in existing application
 
 bzr status
 # modified:
 #   .quickly
+#   bin/test-project
 #   data/ui/AboutTestProjectDialog.ui
 #   etc/apport/crashdb.conf.d/test-project-crashdb.conf
 #   setup.py
@@ -390,6 +403,7 @@ bzr commit -m "Prior to upgrade"
 # Committing to: /tmp/test-project/
 # modified .quickly
 # modified setup.py
+# modified bin/test-project
 # modified data/ui/AboutTestProjectDialog.ui
 # modified etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # Committed revision 4.
@@ -432,9 +446,10 @@ quickly upgrade
 # Creating apport/source_test-project.py
 # apport/source_test-project.py created
 # 
+# Updating launchpad integration references in existing application
 
 grep LaunchpadIntegration.set_sourcepackagename bin/test-project
-#         LaunchpadIntegration.set_sourcepackagename('test-project')
+#         LaunchpadIntegration.set_sourcepackagename('hudson-notifier')
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
