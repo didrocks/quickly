@@ -25,6 +25,7 @@ from gettext import gettext as _
 import quicklyconfig
 import commands
 import configurationhandler
+import version
 
 __project_path = None
 
