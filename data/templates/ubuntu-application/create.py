@@ -100,8 +100,9 @@ for root, dirs, files in os.walk(abs_path_project_root):
         quicklyutils.file_from_template(root, filename, relative_dir, substitutions)
 
 # set the mode to executable for executable file 
+exec_file = os.path.join('bin', project_name)
 try:
-    os.chmod(os.path.join('bin', project_name), 0755)
+    os.chmod(exec_file, 0755)
 except:
     pass
 
@@ -114,7 +115,7 @@ bzr_instance.wait()
 subprocess.Popen(["bzr", "commit", "-m", "Initial project creation with Quickly!"], stderr=subprocess.PIPE)
 
 # run the new application if X display
-if templatetools.is_X_display():
+if templatetools.is_X_display() and os.path.isfile(exec_file):
     print _("Launching your newly created project!")
     subprocess.call(['./' + project_name], cwd='bin/')
 
