@@ -61,7 +61,6 @@ def pre_create(command_template, project_template, project_dir, command_args):
     #create directory and template file
     print _("Creating project directory %s" % project_name)
     os.mkdir(project_name)
-    print _("Directory %s created\n" % project_name)
 
     # creating quickly file
     configurationhandler.project_config['version'] = quicklyconfig.__version__
