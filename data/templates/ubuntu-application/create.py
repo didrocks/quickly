@@ -107,9 +107,11 @@ except:
 
 # add it to revision control
 print _("Creating bzr repository and commiting")
-subprocess.call(["bzr", "init"])
-subprocess.call(["bzr", "add"])
-subprocess.call(["bzr", "commit", "-m", "Initial project creation with Quickly!"])
+bzr_instance = subprocess.Popen(["bzr", "init"], stdout=subprocess.PIPE)
+bzr_instance.wait()
+bzr_instance = subprocess.Popen(["bzr", "add"], stdout=subprocess.PIPE)
+bzr_instance.wait()
+subprocess.Popen(["bzr", "commit", "-m", "Initial project creation with Quickly!"], stderr=subprocess.PIPE)
 
 # run the new application if X display
 if templatetools.is_X_display():
