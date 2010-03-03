@@ -65,12 +65,9 @@ def shell_completion(argv):
     if len(argv) == 1:
         print " ".join([option for option in options
                         if option.startswith(sys.argv[-1])])
-
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 
-pathname = templatetools.get_template_path_from_project()
-abs_path = os.path.abspath(pathname)
-
+abs_path = templatetools.get_template_path_from_project()
 
 if len(sys.argv) < 2:
     print _("add command needs to be followed an action name.\n"

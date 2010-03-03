@@ -73,7 +73,7 @@ os.chdir(project_name)
 
 # get origin path
 pathname = templatetools.get_template_path_from_project()
-abs_path_project_root = os.path.join(os.path.abspath(pathname), 'project_root')
+abs_path_project_root = os.path.join(pathname, 'project_root')
 
 python_name = templatetools.python_name(project_name)
 sentence_name, camel_case_name = quicklyutils.conventional_names(project_name)
