@@ -37,7 +37,8 @@ add something to your project_bin
 Here, dialog_name is one or more words seperated with underscore
 
 For instance $ quickly add dialog DialogName will create:
-1. A subclass of gtk.Dialog called DialogNameDialog in the module DialogNameDialog.py
+1. A subclass of gtk.Dialog called DialogNameDialog in the module
+   DialogNameDialog.py
 2. A glade file called DialogNameDialog.ui in the ui directory
 3. A catalog file called dialog_name_dialog.xml also in the ui directory
 
@@ -62,17 +63,18 @@ def shell_completion(argv):
     ''' Complete args '''
     # option completion
     if len(argv) == 1:
-        print " ".join([option for option in options if option.startswith(sys.argv[-1])])
+        print " ".join([option for option in options
+                        if option.startswith(sys.argv[-1])])
 
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
 
-pathname = os.path.dirname(sys.argv[0])
+pathname = templatetools.get_template_path_from_project()
 abs_path = os.path.abspath(pathname)
 
 
-
 if len(sys.argv) < 2:
-    print _("add command needs to be followed an action name.\nUsage is: quickly add [dialog|] …")
+    print _("add command needs to be followed an action name.\n"
+"Usage is: quickly add [dialog|] …")
     sys.exit(4)
 
 if argv[1] == "dialog":
@@ -92,9 +94,9 @@ if argv[1] == "dialog":
             configurationhandler.loadConfig()
         project_name = configurationhandler.project_config['project']
 
-        template_ui_dir = abs_path + "/data/ui/"
-        template_python_dir = abs_path + "/python/"
-        target_ui_dir = "data/ui"
+        template_ui_dir = os.path.join(abs_path, 'store', 'data', 'ui')
+        template_python_dir = os.path.join(abs_path, 'store', 'python')
+        target_ui_dir = os.path.join('data', 'ui')
         python_name = templatetools.python_name(project_name)
         target_python_dir = python_name
 
