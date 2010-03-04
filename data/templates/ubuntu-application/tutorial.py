@@ -18,7 +18,8 @@
 
 import os
 import sys
-import webbrowser
+import locale
+import subprocess
 
 import gettext
 from gettext import gettext as _
@@ -34,7 +35,12 @@ Opens a web browser with the tutorial for ubuntu-application template.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
-webbrowser.open(os.path.dirname(__file__) + "/help/index.html")
+arg=os.path.dirname(__file__) + "/help/quickly-ubuntu-application-tutorial." + locale.getdefaultlocale()[0] + ".xml"
+
+if os.path.isfile(arg)=True:
+	subprocess.Popen("yelp "+arg, shell="true", executable="/bin/bash")
+else:
+	subprocess.Popen("yelp "+os.path.dirname(__file__) + "/help/quickly-ubuntu-application-tutorial.xml", shell="true", executable="/bin/bash")
 
 sys.exit(0)
 
