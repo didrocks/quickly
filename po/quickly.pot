@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-26 21:47+0100\n"
+"POT-Creation-Date: 2010-03-04 15:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,8 +94,8 @@ msgid ""
 "Here, dialog_name is one or more words seperated with underscore\n"
 "\n"
 "For instance $ quickly add dialog DialogName will create:\n"
-"1. A subclass of gtk.Dialog called DialogNameDialog in the module "
-"DialogNameDialog.py\n"
+"1. A subclass of gtk.Dialog called DialogNameDialog in the module\n"
+"   DialogNameDialog.py\n"
 "2. A glade file called DialogNameDialog.ui in the ui directory\n"
 "3. A catalog file called dialog_name_dialog.xml also in the ui directory\n"
 "\n"
@@ -123,7 +123,7 @@ msgid ""
 "Usage is: quickly add [dialog|] …"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/add.py:80
+#: ../data/templates/ubuntu-application/add.py:81
 msgid "Usage is: $ quickly add dialog <dialogname>"
 msgstr ""
 
@@ -148,7 +148,7 @@ msgid ""
 msgstr ""
 
 #: ../bin/quickly.py:88 ../bin/quickly.py:101 ../bin/quickly.py:106
-#: ../quickly/builtincommands.py:160
+#: ../quickly/builtincommands.py:159
 #, python-format
 msgid "Candidates template are: %s"
 msgstr ""
@@ -159,7 +159,7 @@ msgid "No template were found on the command line for command %s."
 msgstr ""
 
 #. there is really not such command, in any template
-#: ../bin/quickly.py:109 ../quickly/builtincommands.py:163
+#: ../bin/quickly.py:109 ../quickly/builtincommands.py:162
 #, python-format
 msgid "ERROR: No %s command found."
 msgstr ""
@@ -338,34 +338,27 @@ msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:62
-msgid "Calling GPG to create tarball signature..."
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:85
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:126
+msgid "ERROR: Can't load setup.py file"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:65
-msgid "Signing the tarball failed, not uploading the signature"
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:156
+msgid ""
+"No gpg key set. Take a look at quickly tutorial to learn how to setup one"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:80
-#, python-format
-msgid "New release available: %s"
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:212
+#: ../data/templates/ubuntu-application/save.py:45
+msgid "quickly saved"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:88
-msgid "An error happened during tarball upload:"
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:212
+#: ../data/templates/ubuntu-application/release.py:207
+msgid "commit before release"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/data/ui/Preferencescamel_case_nameDialog.ui.h:1
-#: ../data/templates/ubuntu-application/data/ui/dialog_camel_case_nameDialog.ui.h:1
-msgid "gtk-cancel"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/data/ui/Preferencescamel_case_nameDialog.ui.h:2
-#: ../data/templates/ubuntu-application/data/ui/dialog_camel_case_nameDialog.ui.h:2
-msgid "gtk-ok"
-msgstr ""
-
-#: ../quickly/tools.py:46
+#: ../quickly/tools.py:47
 msgid ""
 "Usage:\n"
 "    quickly [OPTIONS] command ...\n"
@@ -391,35 +384,35 @@ msgid ""
 "    quickly -t cool-template push 'awesome new comment system'"
 msgstr ""
 
-#: ../quickly/tools.py:112
+#: ../quickly/tools.py:113
 #, python-format
 msgid "%s is an invalid data path.\n"
 msgstr ""
 
-#: ../quickly/tools.py:113
+#: ../quickly/tools.py:114
 msgid "No template directory found. Aborting"
 msgstr ""
 
-#: ../quickly/tools.py:131
+#: ../quickly/tools.py:132
 #, python-format
 msgid "ERROR: Template '%s' not found. Aborting"
 msgstr ""
 
-#: ../quickly/tools.py:170
+#: ../quickly/tools.py:171
 #, python-format
 msgid "ERROR: Template %s does not exist."
 msgstr ""
 
-#: ../quickly/tools.py:171
+#: ../quickly/tools.py:172
 msgid "Arborting."
 msgstr ""
 
-#: ../quickly/tools.py:195
+#: ../quickly/tools.py:196
 #, python-format
 msgid "ERROR: %s needs one argument: %s"
 msgstr ""
 
-#: ../quickly/tools.py:224
+#: ../quickly/tools.py:225
 msgid "ERROR: No command provided in command line"
 msgstr ""
 
@@ -461,11 +454,6 @@ msgid ""
 "it does not push changes to any back up location. If you need revert\n"
 "or otherwise use the revision control, use bzr directly:\n"
 "$bzr help\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/save.py:45
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:214
-msgid "quickly saved"
 msgstr ""
 
 #: ../data/templates/ubuntu-application/save.py:51
@@ -514,48 +502,70 @@ msgid ""
 "Usage is: quickly create ubuntu-application project_name"
 msgstr ""
 
-#. create directory and template file
-#: ../data/templates/ubuntu-application/create.py:81
-#: ../data/templates/ubuntu-application/create.py:86
-#: ../data/templates/ubuntu-application/create.py:90
-#: ../quickly/builtincommands.py:62
-#, python-format
-msgid "Creating project directory %s"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/create.py:92
-#: ../quickly/builtincommands.py:64
-#, python-format
-msgid "Directory %s created\n"
-msgstr ""
-
 #. add it to revision control
-#: ../data/templates/ubuntu-application/create.py:148
+#: ../data/templates/ubuntu-application/create.py:110
 msgid "Creating bzr repository and commiting"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/create.py:155
+#: ../data/templates/ubuntu-application/create.py:119
 msgid "Launching your newly created project!"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/create.py:158
+#: ../data/templates/ubuntu-application/create.py:122
 #, python-format
 msgid "Congrats, your new project is setup! cd %s/ to start hacking."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:87
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:128
-msgid "ERROR: Can't load setup.py file"
+#. Support for command line options.
+#: ../data/templates/ubuntu-cli/project_root/bin/project_name.py:38
+msgid "project_name [options]"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:158
-msgid ""
-"No gpg key set. Take a look at quickly tutorial to learn how to setup one"
+#: ../data/templates/ubuntu-cli/project_root/bin/project_name.py:41
+msgid "Print the maximum debugging info (implies -vv)"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:214
-#: ../data/templates/ubuntu-application/release.py:207
-msgid "commit before release"
+#: ../data/templates/ubuntu-cli/project_root/bin/project_name.py:43
+msgid "set error_level output to warning, info, and then debug"
+msgstr ""
+
+#: ../data/templates/ubuntu-cli/project_root/bin/project_name.py:46
+msgid "foo should be assigned to bar"
+msgstr ""
+
+#: ../data/templates/ubuntu-cli/project_root/bin/project_name.py:58
+msgid "easter egg found"
+msgstr ""
+
+#: ../data/templates/ubuntu-cli/project_root/bin/project_name.py:59
+msgid "Schweet"
+msgstr ""
+
+#. Run your cli application there.
+#: ../data/templates/ubuntu-cli/project_root/bin/project_name.py:62
+#, python-format
+msgid "I'm launched and my args are: %s"
+msgstr ""
+
+#: ../data/templates/ubuntu-cli/project_root/bin/project_name.py:63
+msgid "end of prog"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:62
+msgid "Calling GPG to create tarball signature..."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:65
+msgid "Signing the tarball failed, not uploading the signature"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:80
+#, python-format
+msgid "New release available: %s"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:88
+msgid "An error happened during tarball upload:"
 msgstr ""
 
 #: ../quickly/builtincommands.py:35
@@ -574,7 +584,13 @@ msgstr ""
 msgid "There is already a file or directory named %s"
 msgstr ""
 
-#: ../quickly/builtincommands.py:101
+#. create directory and template file
+#: ../quickly/builtincommands.py:62
+#, python-format
+msgid "Creating project directory %s"
+msgstr ""
+
+#: ../quickly/builtincommands.py:100
 msgid ""
 "-------------------------------\n"
 "    Welcome to quickly!\n"
@@ -609,13 +625,13 @@ msgid ""
 "Have Fun!"
 msgstr ""
 
-#: ../quickly/builtincommands.py:140
+#: ../quickly/builtincommands.py:139
 msgid ""
 "No command provided to help command.\n"
 "Usage is: quickly help [template] <command>"
 msgstr ""
 
-#: ../quickly/builtincommands.py:159
+#: ../quickly/builtincommands.py:158
 #, python-format
 msgid ""
 "help command must be followed by a template name for getting help from "
@@ -623,64 +639,29 @@ msgid ""
 "Usage is: quickly help [template] <command>"
 msgstr ""
 
-#: ../quickly/builtincommands.py:165
+#: ../quickly/builtincommands.py:164
 #, python-format
 msgid "ERROR: No %s command found in %s template."
 msgstr ""
 
-#: ../quickly/builtincommands.py:179
+#: ../quickly/builtincommands.py:178
 msgid ""
 "Quickly command must be followed by a template and a template destination "
 "path\n"
 "Usage is: quickly quickly [origin_template] destination_template"
 msgstr ""
 
-#: ../quickly/builtincommands.py:189
+#: ../quickly/builtincommands.py:188
 #, python-format
 msgid "%s already exists."
 msgstr ""
 
-#: ../quickly/builtincommands.py:193
+#: ../quickly/builtincommands.py:192
 #, python-format
 msgid "Copy %s to create new %s template"
 msgstr ""
 
-#. Support for command line options.
-#: ../data/templates/ubuntu-cli/bin/project_name.py:38
-msgid "project_name [options]"
-msgstr ""
-
-#: ../data/templates/ubuntu-cli/bin/project_name.py:41
-msgid "Print the maximum debugging info (implies -vv)"
-msgstr ""
-
-#: ../data/templates/ubuntu-cli/bin/project_name.py:43
-msgid "set error_level output to warning, info, and then debug"
-msgstr ""
-
-#: ../data/templates/ubuntu-cli/bin/project_name.py:46
-msgid "foo should be assigned to bar"
-msgstr ""
-
-#: ../data/templates/ubuntu-cli/bin/project_name.py:58
-msgid "easter egg found"
-msgstr ""
-
-#: ../data/templates/ubuntu-cli/bin/project_name.py:59
-msgid "Schweet"
-msgstr ""
-
-#. Run your cli application there.
-#: ../data/templates/ubuntu-cli/bin/project_name.py:62
-#, python-format
-msgid "I'm launched and my args are: %s"
-msgstr ""
-
-#: ../data/templates/ubuntu-cli/bin/project_name.py:63
-msgid "end of prog"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/tutorial.py:30
+#: ../data/templates/ubuntu-application/tutorial.py:31
 msgid ""
 "Usage:\n"
 "$ quickly tutorial\n"
@@ -793,41 +774,6 @@ msgstr ""
 msgid "An error has occurred during package building"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/data/ui/camel_case_nameWindow.ui.h:1
-msgid "Status Area"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/data/ui/camel_case_nameWindow.ui.h:2
-msgid ""
-"Your application has been created!\n"
-"\n"
-"To start changing this user interface, run 'quickly glade', which will open "
-"Glade so you can edit the default windows and dialogs.\n"
-"\n"
-"To change the behavior and edit the python code, run 'quickly edit', which "
-"will bring up a text editor."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/data/ui/camel_case_nameWindow.ui.h:7
-msgid "_Edit"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/data/ui/camel_case_nameWindow.ui.h:8
-msgid "_File"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/data/ui/camel_case_nameWindow.ui.h:9
-msgid "_Help"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/data/ui/camel_case_nameWindow.ui.h:10
-msgid "_View"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/data/ui/camel_case_nameWindow.ui.h:11
-msgid "sentence_name"
-msgstr ""
-
 #: ../quickly/commands.py:278
 #, python-format
 msgid "ERROR: %s command failed"
@@ -850,6 +796,41 @@ msgstr ""
 msgid ""
 "ERROR: %s is a project. You can't launch %s command within a project. Please "
 "choose another path."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:1
+msgid "Status Area"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:2
+msgid ""
+"Your application has been created!\n"
+"\n"
+"To start changing this user interface, run 'quickly glade', which will open "
+"Glade so you can edit the default windows and dialogs.\n"
+"\n"
+"To change the behavior and edit the python code, run 'quickly edit', which "
+"will bring up a text editor."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:7
+msgid "_Edit"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:8
+msgid "_File"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:9
+msgid "_Help"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:10
+msgid "_View"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:11
+msgid "sentence_name"
 msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:74

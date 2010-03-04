@@ -1,4 +1,4 @@
-# Quickly Documentation
+# SOME DESCRIPTIVE TITLE.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2010-02-19 16:46+0000\n"
+"POT-Creation-Date: 2010-03-04 15:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
@@ -153,7 +153,7 @@ msgid "cd jotty"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:80 quickly-ubuntu-application-tutorial.xml:180 quickly-ubuntu-application-tutorial.xml:901
+#: quickly-ubuntu-application-tutorial.xml:80 quickly-ubuntu-application-tutorial.xml:180 quickly-ubuntu-application-tutorial.xml:897
 #, no-c-format
 msgid "<application>Quickly</application> run"
 msgstr ""
@@ -177,9 +177,9 @@ msgid "<application>Quickly</application> programs use Glade to edit the user in
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:87 quickly-ubuntu-application-tutorial.xml:142 quickly-ubuntu-application-tutorial.xml:307 quickly-ubuntu-application-tutorial.xml:388 quickly-ubuntu-application-tutorial.xml:722 quickly-ubuntu-application-tutorial.xml:750 quickly-ubuntu-application-tutorial.xml:788
+#: quickly-ubuntu-application-tutorial.xml:87 quickly-ubuntu-application-tutorial.xml:142 quickly-ubuntu-application-tutorial.xml:388 quickly-ubuntu-application-tutorial.xml:718 quickly-ubuntu-application-tutorial.xml:746 quickly-ubuntu-application-tutorial.xml:784
 #, no-c-format
-msgid "<application>Quickly</application> glade"
+msgid "<application>Quickly</application> design"
 msgstr ""
 
 #. Tag: para
@@ -345,7 +345,7 @@ msgid "Use the <application>Quickly</application> edit command to start editing 
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:170 quickly-ubuntu-application-tutorial.xml:725 quickly-ubuntu-application-tutorial.xml:754 quickly-ubuntu-application-tutorial.xml:778
+#: quickly-ubuntu-application-tutorial.xml:170 quickly-ubuntu-application-tutorial.xml:721 quickly-ubuntu-application-tutorial.xml:750 quickly-ubuntu-application-tutorial.xml:774
 #, no-c-format
 msgid "<application>Quickly</application> edit"
 msgstr ""
@@ -799,7 +799,7 @@ msgstr ""
 #. Tag: para
 #: quickly-ubuntu-application-tutorial.xml:296
 #, no-c-format
-msgid "In part 1, we created an application that can read and write text files, and persist them in the couchdb backend. However, the application has a hideous usability flaw, in the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix thay by adding a save and an open dialog."
+msgid "In part 1, we created an application that can read and write text files, and persist them in the couchdb backend. However, the application has a hideous usability flaw, in the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix that by adding a save and an open dialog."
 msgstr ""
 
 #. Tag: title
@@ -844,6 +844,12 @@ msgstr ""
 msgid "To edit the UI for the dialog, you'll need to load it into Glade again. If you already have an instance of glade running, you might want to go ahead and close it first, as it may get confusing if you have more than one open at a time. After closing glade, simply open it again:"
 msgstr ""
 
+#. Tag: code
+#: quickly-ubuntu-application-tutorial.xml:307
+#, no-c-format
+msgid "<application>Quickly</application> Design"
+msgstr ""
+
 #. Tag: para
 #: quickly-ubuntu-application-tutorial.xml:310
 #, no-c-format
@@ -853,7 +859,7 @@ msgstr ""
 #. Tag: para
 #: quickly-ubuntu-application-tutorial.xml:314
 #, no-c-format
-msgid "Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for JottyWindow in part 1. Set the padding and expand properties as well."
+msgid "Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put a label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for JottyWindow in part 1. Set the padding and expand properties as well."
 msgstr ""
 
 #. Tag: title
@@ -865,7 +871,7 @@ msgstr ""
 #. Tag: para
 #: quickly-ubuntu-application-tutorial.xml:318
 #, no-c-format
-msgid "You can use the \"<application>Quickly</application> edit\" command to open the SaveDialoy.py file. This dialog needs very little additional code to work. Essentially, you just need a way to retrieve the string specified by the user. We'll add a qiuck accessor method for this:"
+msgid "You can use the \"<application>Quickly</application> edit\" command to open the SaveDialog.py file. This dialog needs very little additional code to work. Essentially, you just need a way to retrieve the string specified by the user. We'll add a qiuck accessor method for this:"
 msgstr ""
 
 #. Tag: literallayout
@@ -914,7 +920,7 @@ msgid "In the save_file function, create an instance of SaveDialog"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:337 quickly-ubuntu-application-tutorial.xml:453
+#: quickly-ubuntu-application-tutorial.xml:337 quickly-ubuntu-application-tutorial.xml:455
 #, no-c-format
 msgid "Run the Dialog"
 msgstr ""
@@ -926,7 +932,7 @@ msgid "Get the String"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:343 quickly-ubuntu-application-tutorial.xml:459
+#: quickly-ubuntu-application-tutorial.xml:343 quickly-ubuntu-application-tutorial.xml:461
 #, no-c-format
 msgid "Destroy the dialog"
 msgstr ""
@@ -940,7 +946,7 @@ msgstr ""
 #. Tag: para
 #: quickly-ubuntu-application-tutorial.xml:347
 #, no-c-format
-msgid "Add the SaveDialog to the list of imported modules at the top of the, so it looks like this:"
+msgid "Add the SaveDialog to the list of the imported modules at the top of the bin file of your project, so it looks like this:"
 msgstr ""
 
 #. Tag: code
@@ -950,7 +956,7 @@ msgid "from jotty import AboutJottyDialog, PreferencesJottyDialog, SaveDialog"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:353 quickly-ubuntu-application-tutorial.xml:478
+#: quickly-ubuntu-application-tutorial.xml:353 quickly-ubuntu-application-tutorial.xml:480
 #, no-c-format
 msgid "Create an instance of the dialog and run it"
 msgstr ""
@@ -1088,7 +1094,7 @@ msgstr ""
 #. Tag: para
 #: quickly-ubuntu-application-tutorial.xml:391
 #, no-c-format
-msgid "Start by adding an HBox and label in the sammer manner as in the Save Dialog above. Leave an empty space in the HBox. We will use code to put the CouchGrid there."
+msgid "Start by adding a VBox and a label in the same manner as in the Save Dialog above. Leave an empty space in the VBox. We will use code to put the CouchGrid there."
 msgstr ""
 
 #. Tag: title
@@ -1154,11 +1160,11 @@ msgstr ""
 #. Tag: para
 #: quickly-ubuntu-application-tutorial.xml:415
 #, no-c-format
-msgid "A CouchGrid needs to know three things, the name of the database, the name of the record type to, and the name of the keys to use. \"keys\" is a list of fields that the widget will display, and by default will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:"
+msgid "A CouchGrid needs to know three things, the name of the database, the name of the record type, and the name of the keys to use. \"keys\" is a list of fields that the widget will display, and by default will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:418
+#: quickly-ubuntu-application-tutorial.xml:419
 #, no-c-format
 msgid ""
       "<code>database = \"jotty\"\n"
@@ -1168,19 +1174,19 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:419
+#: quickly-ubuntu-application-tutorial.xml:420
 #, no-c-format
 msgid "Add the CouchGrid to the Dialog"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:419
+#: quickly-ubuntu-application-tutorial.xml:420
 #, no-c-format
-msgid "When we added the HBox to the dialog, we left an open space at the bottom. We'll use this by \"packing\" the CouchGrid into the HBox. We need to show it as well. So add the following lines to the finish_initializing function as well:"
+msgid "we added the VBox to the dialog, we left an open space at the bottom. We'll use this by \"packing\" the CouchGrid into the VBox. We need to show it as well. So add the following lines to the finish_initializing function as well:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:422
+#: quickly-ubuntu-application-tutorial.xml:424
 #, no-c-format
 msgid ""
       "<code>self.couchgrid.show()\n"
@@ -1188,49 +1194,49 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:424
+#: quickly-ubuntu-application-tutorial.xml:426
 #, no-c-format
 msgid "Create the get_selection function"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:424
+#: quickly-ubuntu-application-tutorial.xml:426
 #, no-c-format
 msgid "The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchGrid what is selected. This is easy using the widgets selected_record_ids function. But the CouchGrid supports multiple selection, so we'll do the following:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:428
+#: quickly-ubuntu-application-tutorial.xml:430
 #, no-c-format
 msgid "Use a decorator to define the function as a property accessor."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:431
+#: quickly-ubuntu-application-tutorial.xml:433
 #, no-c-format
 msgid "Get all the selected record ids."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:434
+#: quickly-ubuntu-application-tutorial.xml:436
 #, no-c-format
 msgid "If none are selected, return None."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:437
+#: quickly-ubuntu-application-tutorial.xml:439
 #, no-c-format
 msgid "Pick the first one and return it."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:440
+#: quickly-ubuntu-application-tutorial.xml:442
 #, no-c-format
 msgid "So the function to add to OpenDialog looks like this:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:442
+#: quickly-ubuntu-application-tutorial.xml:444
 #, no-c-format
 msgid ""
       "<code>@property\n"
@@ -1243,79 +1249,79 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:443
+#: quickly-ubuntu-application-tutorial.xml:445
 #, no-c-format
 msgid "Using the Open Dialog"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:443
+#: quickly-ubuntu-application-tutorial.xml:445
 #, no-c-format
 msgid "Now we want to use the Open Dialog in the JottyWindow open_file function. To use it,we'll follow these steps:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:447
+#: quickly-ubuntu-application-tutorial.xml:449
 #, no-c-format
 msgid "Import OpenDialog in JottyWindow"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:450
+#: quickly-ubuntu-application-tutorial.xml:452
 #, no-c-format
 msgid "In the open_file function, create an instance of OpenDialog"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:456
+#: quickly-ubuntu-application-tutorial.xml:458
 #, no-c-format
 msgid "Get the id for the selected title."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:462
+#: quickly-ubuntu-application-tutorial.xml:464
 #, no-c-format
 msgid "Check the response before proceeding"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:465
+#: quickly-ubuntu-application-tutorial.xml:467
 #, no-c-format
 msgid "<para>Use the id to get the record from CouchDB</para>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:468
+#: quickly-ubuntu-application-tutorial.xml:470
 #, no-c-format
 msgid "<para>Update the UI</para>"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:472
+#: quickly-ubuntu-application-tutorial.xml:474
 #, no-c-format
 msgid "Import OpenDialog"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:472
+#: quickly-ubuntu-application-tutorial.xml:474
 #, no-c-format
 msgid "Just like the SaveDialog, add the import line to the list of imports:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:474
+#: quickly-ubuntu-application-tutorial.xml:476
 #, no-c-format
 msgid "from jotty import AboutJottyDialog, PreferencesJottyDialog, SaveDialog, OpenDialog"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:478
+#: quickly-ubuntu-application-tutorial.xml:480
 #, no-c-format
 msgid "So now we're ready to call the dialog from the JottyWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:481
+#: quickly-ubuntu-application-tutorial.xml:483
 #, no-c-format
 msgid ""
       "<code>opener = OpenDialog.NewOpenDialog()\n"
@@ -1323,19 +1329,19 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:483
+#: quickly-ubuntu-application-tutorial.xml:485
 #, no-c-format
 msgid "Get the id for the selected title"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:483
+#: quickly-ubuntu-application-tutorial.xml:485
 #, no-c-format
 msgid "Now use the property that we created to retrieve the title and text from the dialog. Don't forget to check the response type before going on."
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:486
+#: quickly-ubuntu-application-tutorial.xml:488
 #, no-c-format
 msgid ""
       "<code>rec_id = opener.selected_record_id\n"
@@ -1347,19 +1353,19 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:489
+#: quickly-ubuntu-application-tutorial.xml:491
 #, no-c-format
 msgid "<title>Use the id to get the record from CouchDB</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:489
+#: quickly-ubuntu-application-tutorial.xml:491
 #, no-c-format
 msgid "If nothing was selected, we'll just return. Otherwise, we'll retrieve the record from CouchDB and pull out the text for the document:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:492
+#: quickly-ubuntu-application-tutorial.xml:494
 #, no-c-format
 msgid ""
       "<code>#get the record from CouchDB and extract the text\n"
@@ -1370,19 +1376,19 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:494
+#: quickly-ubuntu-application-tutorial.xml:496
 #, no-c-format
 msgid "<title>Update the UI</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:494
+#: quickly-ubuntu-application-tutorial.xml:496
 #, no-c-format
 msgid "Now just put the text into the texview:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:497
+#: quickly-ubuntu-application-tutorial.xml:499
 #, no-c-format
 msgid ""
       "<code>#set the UI to display the string\n"
@@ -1391,13 +1397,13 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:498
+#: quickly-ubuntu-application-tutorial.xml:500
 #, no-c-format
 msgid "That's all there is to it. So the whole open_file function looks like this:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:500
+#: quickly-ubuntu-application-tutorial.xml:502
 #, no-c-format
 msgid ""
       "<code>def open_file(self, widget, data=None):\n"
@@ -1425,115 +1431,103 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:501
+#: quickly-ubuntu-application-tutorial.xml:503
 #, no-c-format
 msgid "Now users get a nice open dialog:"
 msgstr ""
 
-#. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:506
-#, no-c-format
-msgid "Finishing the Application"
-msgstr ""
-
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:506
-#, no-c-format
-msgid "Now opening a saved document is much more intuitive."
-msgstr ""
-
-#. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:512
+#: quickly-ubuntu-application-tutorial.xml:508
 #, no-c-format
 msgid "However, the application is not complete. There are a few things left for you to do:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:515
+#: quickly-ubuntu-application-tutorial.xml:511
 #, no-c-format
 msgid "Set the title of the JottyWindow to display the note title. Try self.set_text(title)."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:518
+#: quickly-ubuntu-application-tutorial.xml:514
 #, no-c-format
 msgid "The Save command works more like \"Save As\". The application probably shouldn't pop up a SaveDialog every time you want to save. If it's already been saved, you probably just want to save it, but use a SaveDialog when the user choose Save As, or is saving a document for the first time."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:521
+#: quickly-ubuntu-application-tutorial.xml:517
 #, no-c-format
 msgid "The OpenDialog should probably return when the user double clicks on an item in the list. Try connecting to the \"select-cursor-row\" signal on the TreeView, and calling self.response(gtk.RESPONSE_OK) in the handler."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:524
+#: quickly-ubuntu-application-tutorial.xml:520
 #, no-c-format
 msgid "Perhaps the Ok button in the OpenDialog should be disabled if nothing is selected. Try setting the \"sensitivity\" in Glade, and the set_sensitive function for the Ok button."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:527
+#: quickly-ubuntu-application-tutorial.xml:523
 #, no-c-format
 msgid "It would be more consistent for the Open and Close dialogs to have \"Open\" and \"Close\" for buttons instead of \"Ok\". You can set a different type in the properties window in Glade."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:530
+#: quickly-ubuntu-application-tutorial.xml:526
 #, no-c-format
 msgid "Loading every document into the open dialog is probably a bit inefficient. Perhaps storing the document id and using that to retrieve the document would be a better implementation."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:536
+#: quickly-ubuntu-application-tutorial.xml:532
 #, no-c-format
 msgid "<title>Introduction to <application>Quickly</application> Part 3</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:537
+#: quickly-ubuntu-application-tutorial.xml:533
 #, no-c-format
 msgid "In parts 1 and 2, we showed how to create a simple Ubuntu application using <application>Quickly</application>. This section will cover how to package an application so that it is easy for you to share, and easy for other people to install."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:538
+#: quickly-ubuntu-application-tutorial.xml:534
 #, no-c-format
 msgid "License your Application"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:538
+#: quickly-ubuntu-application-tutorial.xml:534
 #, no-c-format
 msgid "It's important to license your code so users and other programmers know their rights in terms of redistributing or modifying it. To <application>Quickly</application> grant a GPL license to your code, simply:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:542
+#: quickly-ubuntu-application-tutorial.xml:538
 #, no-c-format
 msgid "Specify your name and email address in the Copyright file."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:545
+#: quickly-ubuntu-application-tutorial.xml:541
 #, no-c-format
 msgid "Run the \"license\" command."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:549
+#: quickly-ubuntu-application-tutorial.xml:545
 #, no-c-format
 msgid "Specify your name and email"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:549
+#: quickly-ubuntu-application-tutorial.xml:545
 #, no-c-format
 msgid "When <application>Quickly</application> created your ubuntu application, it added a file named Copyright in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. Be sure not to modify other lines as it will interfere with the next step. For example, I would change the entire file to look like this:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:552
+#: quickly-ubuntu-application-tutorial.xml:548
 #, no-c-format
 msgid ""
       "<code># Copyright (C) 2009 Rick Spencer rick.spencer@canonical.com\n"
@@ -1543,61 +1537,61 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:553
+#: quickly-ubuntu-application-tutorial.xml:549
 #, no-c-format
 msgid "Run the \"License\" Command"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:553
+#: quickly-ubuntu-application-tutorial.xml:549
 #, no-c-format
 msgid "By default, <application>Quickly</application> will use a GPL 3 license for your project. To use this license, use this command:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:555 quickly-ubuntu-application-tutorial.xml:575
+#: quickly-ubuntu-application-tutorial.xml:551 quickly-ubuntu-application-tutorial.xml:571
 #, no-c-format
 msgid "<application>Quickly</application> license"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:558
+#: quickly-ubuntu-application-tutorial.xml:554
 #, no-c-format
 msgid "This will add the GPL 3 license to all of your code files that you've added to your project using <application>Quickly</application>."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:559
+#: quickly-ubuntu-application-tutorial.xml:555
 #, no-c-format
 msgid "Keep in mind a couple of things:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:562
+#: quickly-ubuntu-application-tutorial.xml:558
 #, no-c-format
 msgid "This is a one way trip. Once you license the project, changes to the license must be done manually."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:565
+#: quickly-ubuntu-application-tutorial.xml:561
 #, no-c-format
 msgid "If you prefer a GPL 2 license, you can specify that when you issue the license command:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:566
+#: quickly-ubuntu-application-tutorial.xml:562
 #, no-c-format
 msgid "<application>Quickly</application> license GPL-2"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:571
+#: quickly-ubuntu-application-tutorial.xml:567
 #, no-c-format
 msgid "<application>Quickly</application> doesn't care what license you use, but only knows natively what files and headers to include for BSD, GPL-2, GPL-3, LGPL-2 and LGPL-3. If you prefer another license, you can simply add whatever you license you like by adding your own license in the Copyright file:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:573
+#: quickly-ubuntu-application-tutorial.xml:569
 #, no-c-format
 msgid ""
       "<code>### BEGIN AUTOMATIC LICENSE GENERATION\n"
@@ -1606,25 +1600,25 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:574
+#: quickly-ubuntu-application-tutorial.xml:570
 #, no-c-format
 msgid "and then run:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:578
+#: quickly-ubuntu-application-tutorial.xml:574
 #, no-c-format
 msgid "to license every files."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:581
+#: quickly-ubuntu-application-tutorial.xml:577
 #, no-c-format
 msgid "If you've added code files or other files to your project manually, you will need to add the license to those files manually or add those tags at the beginning of the file:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:583
+#: quickly-ubuntu-application-tutorial.xml:579
 #, no-c-format
 msgid ""
       "<code>### BEGIN LICENSE\n"
@@ -1632,97 +1626,97 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:587
+#: quickly-ubuntu-application-tutorial.xml:583
 #, no-c-format
 msgid "Translate Your Application"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:587
+#: quickly-ubuntu-application-tutorial.xml:583
 #, no-c-format
 msgid "To allow for users from other countries to use your application you may want to translate it. Glade automatically creates a pot file for you but to translate strings in your code you have to:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:589
+#: quickly-ubuntu-application-tutorial.xml:585
 #, no-c-format
 msgid "import gettext"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:590
+#: quickly-ubuntu-application-tutorial.xml:586
 #, no-c-format
 msgid "gettext.gettext(\"What you want translated\")"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:592
+#: quickly-ubuntu-application-tutorial.xml:588
 #, no-c-format
 msgid "Specify Application Settings"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:592
+#: quickly-ubuntu-application-tutorial.xml:588
 #, no-c-format
 msgid "You should personalize your application a little before creating the archive. This is very easy to do, as all of the files that you need have already been created, and only need a few lines changed to make them your own. To do this you should:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:596
+#: quickly-ubuntu-application-tutorial.xml:592
 #, no-c-format
 msgid "Personalize the Application Icon"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:597
+#: quickly-ubuntu-application-tutorial.xml:593
 #, no-c-format
 msgid "<para>Edit the Desktop File</para>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:598
+#: quickly-ubuntu-application-tutorial.xml:594
 #, no-c-format
 msgid "Edit the setup.py File"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:601
+#: quickly-ubuntu-application-tutorial.xml:597
 #, no-c-format
 msgid "Personalize your Application Icon"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:601
+#: quickly-ubuntu-application-tutorial.xml:597
 #, no-c-format
 msgid "When users install your application, Ubuntu will display an icon next to it in the menus. You can create your own icon or edit the file called \"icon.png\" in the media directory (jotty/data/media). Ubuntu comes with a great image editing program called \"Gimp.\" So you can go:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:603
+#: quickly-ubuntu-application-tutorial.xml:599
 #, no-c-format
 msgid "gimp data/media/icon.png"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:609
+#: quickly-ubuntu-application-tutorial.xml:605
 #, no-c-format
 msgid "If you don't personalize the icon, it's ok, your app will just have the default icon, such as in the image below."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:611
+#: quickly-ubuntu-application-tutorial.xml:607
 #, no-c-format
 msgid "<title>Edit the Desktop File</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:611
+#: quickly-ubuntu-application-tutorial.xml:607
 #, no-c-format
 msgid "By default, <application>Quickly</application> Ubuntu applications are classified as \"utilities\", so they show up under the Accessories menu in Ubuntu. If we wanted to make Jotty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file \"jottydesktop.in\" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:615
+#: quickly-ubuntu-application-tutorial.xml:611
 #, no-c-format
 msgid ""
       "<code>[Desktop Entry]\n"
@@ -1737,13 +1731,13 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:617
+#: quickly-ubuntu-application-tutorial.xml:613
 #, no-c-format
 msgid "to this:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:621
+#: quickly-ubuntu-application-tutorial.xml:617
 #, no-c-format
 msgid ""
       "<code>[Desktop Entry]\n"
@@ -1757,31 +1751,31 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:622
+#: quickly-ubuntu-application-tutorial.xml:618
 #, no-c-format
 msgid "There are lots more categories that you can use, all defined by the FreeDesktop spec. You can see the complete list in the <ulink url=\"http://standards.freedesktop.org/menu-spec/latest/apa.html\">menu spec</ulink>."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:626
+#: quickly-ubuntu-application-tutorial.xml:622
 #, no-c-format
 msgid "Edit Setup.py"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:626
+#: quickly-ubuntu-application-tutorial.xml:622
 #, no-c-format
 msgid "Finally, you should include some information in the setup.py file to tell your users a little about yourself. The setup.py file was created for you, just like the desktop file. Most of of the setup.py file shouldn't be modified, as it is just boiler plate that makes your application work properly after it has been installed. However, there is a section at the bottom of the setup.py file that you should edit to describe yourself and the application."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:629
+#: quickly-ubuntu-application-tutorial.xml:625
 #, no-c-format
 msgid "So I would change this section:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:633
+#: quickly-ubuntu-application-tutorial.xml:629
 #, no-c-format
 msgid ""
       "<code>DistUtilsExtra.auto.setup(\n"
@@ -1799,13 +1793,13 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:634
+#: quickly-ubuntu-application-tutorial.xml:630
 #, no-c-format
 msgid "To look like this:"
 msgstr ""
 
 #. Tag: literallayout
-#: quickly-ubuntu-application-tutorial.xml:638
+#: quickly-ubuntu-application-tutorial.xml:634
 #, no-c-format
 msgid ""
       "<code>DistUtilsExtra.auto.setup(\n"
@@ -1822,571 +1816,571 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:639
+#: quickly-ubuntu-application-tutorial.xml:635
 #, no-c-format
 msgid "Note that the license has already been set up for you. author and author_email are updated each time you connect to Launchpad (with <application>Quickly</application> release or <application>Quickly</application> share) with your Launchpad real name and preferred email adress."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:640
+#: quickly-ubuntu-application-tutorial.xml:636
 #, no-c-format
 msgid "Notice that Jotty doesn't have a web page yet, so I just left that line commented out. Also, you don't have to increment version number as <application>Quickly</application> share and <application>Quickly</application> release commands will make it for you.."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:644
+#: quickly-ubuntu-application-tutorial.xml:640
 #, no-c-format
 msgid "Create and Test the Debian Archive"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:644
+#: quickly-ubuntu-application-tutorial.xml:640
 #, no-c-format
 msgid "After personalizing the project, we are now ready to create the package. This is easily done by issuing the package command:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:647 quickly-ubuntu-application-tutorial.xml:849
+#: quickly-ubuntu-application-tutorial.xml:643 quickly-ubuntu-application-tutorial.xml:845
 #, no-c-format
 msgid "<application>Quickly</application> package"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:650
+#: quickly-ubuntu-application-tutorial.xml:646
 #, no-c-format
 msgid "This command will take a little while to discover dependencies and create all the required archives, etc... It will also report some errors as we haven't created a PGP key, for instance. None the less, when it is done, the package will be created. Using the file browser, you can see the created package next to the project directory:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:654
+#: quickly-ubuntu-application-tutorial.xml:650
 #, no-c-format
 msgid "Right now, the specific file we are interested in is \"jotty_0.1_all.deb\". To test it out, double click on it, to open it in Ubuntu's graphical installer program:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:658
+#: quickly-ubuntu-application-tutorial.xml:654
 #, no-c-format
 msgid "Click \"Install Package\" to see how it installs onto your desktop. After chugging for a bit, you'll see that it is installed in the Applications->Office menu. If you customized your icon, you'll see that the menu uses your custom icon as well."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:662
+#: quickly-ubuntu-application-tutorial.xml:658
 #, no-c-format
 msgid "Now that you have a package"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:662
+#: quickly-ubuntu-application-tutorial.xml:658
 #, no-c-format
 msgid "Now that you've packaged your application, you can share the .deb file. However, if your users install their application this way, and you update the application, your users will have to find this out and resinstall. This hassle can be avoided in Ubuntu by using Personal Package Archives (or PPAs). Distrubuting your applications in this manner is covered in section 4 (not yet available)."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:666
+#: quickly-ubuntu-application-tutorial.xml:662
 #, no-c-format
 msgid "<title><application>Quickly</application>: <application>Quickly</application> Command Reference</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:667
+#: quickly-ubuntu-application-tutorial.xml:663
 #, no-c-format
 msgid "The ubuntu-application template template contains the following commands."
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:669
+#: quickly-ubuntu-application-tutorial.xml:665
 #, no-c-format
 msgid "<listitem>create</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:672
+#: quickly-ubuntu-application-tutorial.xml:668
 #, no-c-format
 msgid "<listitem>dialog</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:675
+#: quickly-ubuntu-application-tutorial.xml:671
 #, no-c-format
 msgid "<listitem>edit</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:678
+#: quickly-ubuntu-application-tutorial.xml:674
 #, no-c-format
-msgid "<listitem>glade</listitem>"
+msgid "design"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:681
+#: quickly-ubuntu-application-tutorial.xml:677
 #, no-c-format
 msgid "<listitem>help</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:684
+#: quickly-ubuntu-application-tutorial.xml:680
 #, no-c-format
 msgid "<listitem>license</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:687
+#: quickly-ubuntu-application-tutorial.xml:683
 #, no-c-format
 msgid "<listitem>package</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:690
+#: quickly-ubuntu-application-tutorial.xml:686
 #, no-c-format
 msgid "<listitem>release</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:693
+#: quickly-ubuntu-application-tutorial.xml:689
 #, no-c-format
 msgid "<listitem>run</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:696
+#: quickly-ubuntu-application-tutorial.xml:692
 #, no-c-format
 msgid "<listitem>save</listitem>"
 msgstr ""
 
 #. Tag: listitem
-#: quickly-ubuntu-application-tutorial.xml:699
+#: quickly-ubuntu-application-tutorial.xml:695
 #, no-c-format
 msgid "<listitem>share</listitem>"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:703 quickly-ubuntu-application-tutorial.xml:704
+#: quickly-ubuntu-application-tutorial.xml:699 quickly-ubuntu-application-tutorial.xml:700
 #, no-c-format
 msgid "<title>create</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:704 quickly-ubuntu-application-tutorial.xml:731 quickly-ubuntu-application-tutorial.xml:776 quickly-ubuntu-application-tutorial.xml:787 quickly-ubuntu-application-tutorial.xml:800 quickly-ubuntu-application-tutorial.xml:809 quickly-ubuntu-application-tutorial.xml:848 quickly-ubuntu-application-tutorial.xml:865 quickly-ubuntu-application-tutorial.xml:900 quickly-ubuntu-application-tutorial.xml:910 quickly-ubuntu-application-tutorial.xml:926
+#: quickly-ubuntu-application-tutorial.xml:700 quickly-ubuntu-application-tutorial.xml:727 quickly-ubuntu-application-tutorial.xml:772 quickly-ubuntu-application-tutorial.xml:783 quickly-ubuntu-application-tutorial.xml:796 quickly-ubuntu-application-tutorial.xml:805 quickly-ubuntu-application-tutorial.xml:844 quickly-ubuntu-application-tutorial.xml:861 quickly-ubuntu-application-tutorial.xml:896 quickly-ubuntu-application-tutorial.xml:906 quickly-ubuntu-application-tutorial.xml:922
 #, no-c-format
 msgid "Usage:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:706
+#: quickly-ubuntu-application-tutorial.xml:702
 #, no-c-format
 msgid "<application>Quickly</application> create ubuntu-application path/to/project_name"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:708
+#: quickly-ubuntu-application-tutorial.xml:704
 #, no-c-format
 msgid "where \"project_name\" is one or more words separated by an underscore and path/to can be any existing path."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:711
+#: quickly-ubuntu-application-tutorial.xml:707
 #, no-c-format
 msgid "This will create and run a new project, including Python code, Glade files, and packaging files to make the project work. After creating the project, get started by:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:717
+#: quickly-ubuntu-application-tutorial.xml:713
 #, no-c-format
 msgid "Changing your working directory to the new project:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:719
+#: quickly-ubuntu-application-tutorial.xml:715
 #, no-c-format
 msgid "cd path/to/project_name"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:721
+#: quickly-ubuntu-application-tutorial.xml:717
 #, no-c-format
 msgid "Edit the UI with Glade:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:724
+#: quickly-ubuntu-application-tutorial.xml:720
 #, no-c-format
 msgid "Edit the Python code:"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:730 quickly-ubuntu-application-tutorial.xml:731
+#: quickly-ubuntu-application-tutorial.xml:726 quickly-ubuntu-application-tutorial.xml:727
 #, no-c-format
 msgid "<title>dialog</title>"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:733
+#: quickly-ubuntu-application-tutorial.xml:729
 #, no-c-format
 msgid "<application>Quickly</application> dialog dialog_name"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:734
+#: quickly-ubuntu-application-tutorial.xml:730
 #, no-c-format
 msgid "where dialog_name is one or more words seperated with underscore"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:735
+#: quickly-ubuntu-application-tutorial.xml:731
 #, no-c-format
 msgid "This will create:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:739
+#: quickly-ubuntu-application-tutorial.xml:735
 #, no-c-format
 msgid "A subclass of gtk.Dialog called DialogNameDialog in the module DialogNameDialog.py"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:742
+#: quickly-ubuntu-application-tutorial.xml:738
 #, no-c-format
 msgid "A glade file called DialogNameDialog.ui in the ui directory"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:745
+#: quickly-ubuntu-application-tutorial.xml:741
 #, no-c-format
 msgid "A catalog file called dialog_name_dialog.xml also in the ui directory"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:748
+#: quickly-ubuntu-application-tutorial.xml:744
 #, no-c-format
 msgid "To edit the UI for the dialog, run:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:752
+#: quickly-ubuntu-application-tutorial.xml:748
 #, no-c-format
 msgid "To edit the behavior, run:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:755
+#: quickly-ubuntu-application-tutorial.xml:751
 #, no-c-format
 msgid "To use the dialog you have to invoke it from another python file:"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:759
+#: quickly-ubuntu-application-tutorial.xml:755
 #, no-c-format
 msgid "Import the dialog import DialogNameDialog"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:763
+#: quickly-ubuntu-application-tutorial.xml:759
 #, no-c-format
 msgid "Create an instance of the dialog dialog = DialogNameDialog.NewDialogNameDialog()"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:767
+#: quickly-ubuntu-application-tutorial.xml:763
 #, no-c-format
 msgid "Run the dialog and hide the dialog result = dialog.run() dialog.hide()"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:775 quickly-ubuntu-application-tutorial.xml:776
+#: quickly-ubuntu-application-tutorial.xml:771 quickly-ubuntu-application-tutorial.xml:772
 #, no-c-format
 msgid "<title>edit</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:780
+#: quickly-ubuntu-application-tutorial.xml:776
 #, no-c-format
 msgid "A convenience command to open all of your python files in your project directory in your default editor, ready for editing."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:786 quickly-ubuntu-application-tutorial.xml:787
+#: quickly-ubuntu-application-tutorial.xml:782 quickly-ubuntu-application-tutorial.xml:783
 #, no-c-format
-msgid "<title>glade</title>"
+msgid "glade"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:790
+#: quickly-ubuntu-application-tutorial.xml:786
 #, no-c-format
 msgid "Opens Glade UI editor so that you can edit the UI for dialogs and windows in your project. Note that you *must* open Glade in this manner for <application>Quickly</application> to work. If you try to open Glade directly, and the open the UI files, Glade will throw errors and won't open the files."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:799 quickly-ubuntu-application-tutorial.xml:800
+#: quickly-ubuntu-application-tutorial.xml:795 quickly-ubuntu-application-tutorial.xml:796
 #, no-c-format
 msgid "<title>help</title>"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:801
+#: quickly-ubuntu-application-tutorial.xml:797
 #, no-c-format
 msgid "<application>Quickly</application> help"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:803
+#: quickly-ubuntu-application-tutorial.xml:799
 #, no-c-format
 msgid "Opens a web browser with the help index."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:808 quickly-ubuntu-application-tutorial.xml:809
+#: quickly-ubuntu-application-tutorial.xml:804 quickly-ubuntu-application-tutorial.xml:805
 #, no-c-format
 msgid "<title>license</title>"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:810
+#: quickly-ubuntu-application-tutorial.xml:806
 #, no-c-format
 msgid "<application>Quickly</application> license &#60;Your_Licence&#61;"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:812
+#: quickly-ubuntu-application-tutorial.xml:808
 #, no-c-format
 msgid "Adds license to project files. Before using this command, you should:"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:816
+#: quickly-ubuntu-application-tutorial.xml:812
 #, no-c-format
 msgid "run <application>Quickly</application> save in case something goes wrong"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:819
+#: quickly-ubuntu-application-tutorial.xml:815
 #, no-c-format
 msgid "Edit the file Copyright to include your authorship."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:821
+#: quickly-ubuntu-application-tutorial.xml:817
 #, no-c-format
 msgid "If you want to put your own <application>Quickly</application> unsupported Licence, remove and replace the tags ### BEGIN AUTOMATIC LICENCE GENERATION and ### END AUTOMATIC LICENCE GENERATION in it by your own licence."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:825
+#: quickly-ubuntu-application-tutorial.xml:821
 #, no-c-format
 msgid "Executes either <code><application>Quickly</application> license</code> or <code><application>Quickly</application> licence &#60;License&#61;</code> where &#60;License&#61; can be either: - GPL-3 (default) - GPL-2"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:832
+#: quickly-ubuntu-application-tutorial.xml:828
 #, no-c-format
 msgid "This will modify the Copyright file with the chosen licence (with GPL-3 by default). Updating previous chosen Licence if needed. If you previously removed the tags to add your own licence, it will leave it pristine. If no name is attributed to the Copyright, it will try to retrieve it from Launchpad (in <application>Quickly</application> release or <application>Quickly</application> share command only)"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:838
+#: quickly-ubuntu-application-tutorial.xml:834
 #, no-c-format
 msgid "Finally, this will copy the Copyright at the head of every files."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:840
+#: quickly-ubuntu-application-tutorial.xml:836
 #, no-c-format
 msgid "Note that if you don't run <application>Quickly</application> licence before calling <application>Quickly</application> release or <application>Quickly</application> share, this one will execute it for you and guess the copyright holder from your launchpad account if you didn't update it."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:847 quickly-ubuntu-application-tutorial.xml:848
+#: quickly-ubuntu-application-tutorial.xml:843 quickly-ubuntu-application-tutorial.xml:844
 #, no-c-format
 msgid "<title>package</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:851
+#: quickly-ubuntu-application-tutorial.xml:847
 #, no-c-format
 msgid "Creates a debian file (deb) from your project. Before running the package command you can edit the Icon and Category entry of *.desktop.in file, where * is the name of your project."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:855
+#: quickly-ubuntu-application-tutorial.xml:851
 #, no-c-format
 msgid "Note that if you didn't run <application>Quickly</application> release, <application>Quickly</application> share or <application>Quickly</application> change-lp-project you may miss the name, email in setup.py. You can edit them if you don't want to use any of these commands afterwards. Those changes are not a mandatory at all for testing purpose."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:864 quickly-ubuntu-application-tutorial.xml:865
+#: quickly-ubuntu-application-tutorial.xml:860 quickly-ubuntu-application-tutorial.xml:861
 #, no-c-format
 msgid "<title>release</title>"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:866
+#: quickly-ubuntu-application-tutorial.xml:862
 #, no-c-format
 msgid "<application>Quickly</application> release"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:868
+#: quickly-ubuntu-application-tutorial.xml:864
 #, no-c-format
 msgid "Posts a release of your project to a PPA on launchpad so that users can install the application on their system."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:871
+#: quickly-ubuntu-application-tutorial.xml:867
 #, no-c-format
 msgid "You can also execute: <code><application>Quickly</application> release &#60;release_number&#61;</code> of you don't want to use current release_number. The release_number must be a number."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:875
+#: quickly-ubuntu-application-tutorial.xml:871
 #, no-c-format
 msgid "<code><application>Quickly</application> release &#60;release_number&#61;</code> notes about changes where \"notes about changes\" is optional text describing what changes were made since the last save"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:879
+#: quickly-ubuntu-application-tutorial.xml:875
 #, no-c-format
 msgid "Before running <application>Quickly</application> release, you should: create your account and a project page on http://launchpad.net. You also have to add a PPA to your launchpad account."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:883
+#: quickly-ubuntu-application-tutorial.xml:879
 #, no-c-format
 msgid "Name, email and version setup.py will be automatically changed. (version will be &#60;current_release&#61; and bzr will commit and tagged. Once the release is done, &#60;current_release&#61; will be incremented by 0.1 to be ready for next release."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:888
+#: quickly-ubuntu-application-tutorial.xml:884
 #, no-c-format
 msgid "If you previously used <application>Quickly</application> shared &#60;current_release&#61;~publicX will be dropped to release &#60;current_release&#61; version (&#60;current_release&#61;~publicX &#60;current_release&#61;) You can modify the description and long description if you wish."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:893
+#: quickly-ubuntu-application-tutorial.xml:889
 #, no-c-format
 msgid "You can run <code><application>Quickly</application> package</code> and test your package to make sure it installs as expected. (This is not mandatory)"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:899 quickly-ubuntu-application-tutorial.xml:900
+#: quickly-ubuntu-application-tutorial.xml:895 quickly-ubuntu-application-tutorial.xml:896
 #, no-c-format
 msgid "<title>run</title>"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:903
+#: quickly-ubuntu-application-tutorial.xml:899
 #, no-c-format
 msgid "Runs your application. This is the best way to try test it out while you are developing it. It starts up the main project window."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:909 quickly-ubuntu-application-tutorial.xml:910
+#: quickly-ubuntu-application-tutorial.xml:905 quickly-ubuntu-application-tutorial.xml:906
 #, no-c-format
 msgid "<title>save</title>"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:911
+#: quickly-ubuntu-application-tutorial.xml:907
 #, no-c-format
 msgid "<application>Quickly</application> save notes about changes"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:913
+#: quickly-ubuntu-application-tutorial.xml:909
 #, no-c-format
 msgid "where \"notes about changes\" is optional text describing what changes were made since the last save."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:916
+#: quickly-ubuntu-application-tutorial.xml:912
 #, no-c-format
 msgid "This command commits all changes since the last save to bzr. Note that it does not push changes to any back up location. If you need revert or otherwise use the revision control, use bzr directly: <code>bzr help</code>"
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:924 quickly-ubuntu-application-tutorial.xml:926
+#: quickly-ubuntu-application-tutorial.xml:920 quickly-ubuntu-application-tutorial.xml:922
 #, no-c-format
 msgid "<title>share</title>"
 msgstr ""
 
 #. Tag: code
-#: quickly-ubuntu-application-tutorial.xml:927
+#: quickly-ubuntu-application-tutorial.xml:923
 #, no-c-format
 msgid "<application>Quickly</application> share"
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:929
+#: quickly-ubuntu-application-tutorial.xml:925
 #, no-c-format
 msgid "Updates your PPA with the the latest saved project changes."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:931
+#: quickly-ubuntu-application-tutorial.xml:927
 #, no-c-format
 msgid "Before running <application>Quickly</application> release, you should: create your account on http://launchpad.net. You also have to add a PPA to your launchpad account."
 msgstr ""
 
 #. Tag: para
-#: quickly-ubuntu-application-tutorial.xml:935
+#: quickly-ubuntu-application-tutorial.xml:931
 #, no-c-format
 msgid "Name, email and version setup.py will be automatically changed. (version will be &#60;current_release~publicX&#61; where X will be incremented at each <application>Quickly</application> share execution) You can modify the description and long description if you wish."
 msgstr ""
 
 #. Tag: title
-#: quickly-ubuntu-application-tutorial.xml:945
+#: quickly-ubuntu-application-tutorial.xml:941
 #, no-c-format
 msgid "Links"
 msgstr ""
 
 #. Tag: link
-#: quickly-ubuntu-application-tutorial.xml:947
+#: quickly-ubuntu-application-tutorial.xml:943
 #, no-c-format
 msgid "<link><application>Quickly</application>: <application>Quickly</application> Command Reference</link>"
 msgstr ""
 
 #. Tag: ulink
-#: quickly-ubuntu-application-tutorial.xml:950
+#: quickly-ubuntu-application-tutorial.xml:946
 #, no-c-format
 msgid "Blog post on <application>Quickly</application>"
 msgstr ""
 
 #. Tag: ulink
-#: quickly-ubuntu-application-tutorial.xml:953
+#: quickly-ubuntu-application-tutorial.xml:949
 #, no-c-format
 msgid "Language: Python Language Reference"
 msgstr ""
 
 #. Tag: ulink
-#: quickly-ubuntu-application-tutorial.xml:956
+#: quickly-ubuntu-application-tutorial.xml:952
 #, no-c-format
 msgid "Core Library: Python 2.6 Library Reference"
 msgstr ""
 
 #. Tag: ulink
-#: quickly-ubuntu-application-tutorial.xml:959
+#: quickly-ubuntu-application-tutorial.xml:955
 #, no-c-format
 msgid "UI Library: PyGtk"
 msgstr ""
 
 #. Tag: ulink
-#: quickly-ubuntu-application-tutorial.xml:962
+#: quickly-ubuntu-application-tutorial.xml:958
 #, no-c-format
 msgid "Database: CouchDB Reference"
 msgstr ""
 
 #. Tag: ulink
-#: quickly-ubuntu-application-tutorial.xml:965
+#: quickly-ubuntu-application-tutorial.xml:961
 #, no-c-format
 msgid "UI Editing: Glade User Documenation"
 msgstr ""
 
 #. Tag: ulink
-#: quickly-ubuntu-application-tutorial.xml:968
+#: quickly-ubuntu-application-tutorial.xml:964
 #, no-c-format
 msgid "Editor: Gedit Help"
 msgstr ""
 
 #. Tag: ulink
-#: quickly-ubuntu-application-tutorial.xml:971
+#: quickly-ubuntu-application-tutorial.xml:967
 #, no-c-format
 msgid "Version Control: Bazaar"
 msgstr ""
