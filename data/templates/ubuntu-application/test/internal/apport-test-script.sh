@@ -12,8 +12,9 @@ quickly create ubuntu-application test-project
 
 cd test-project
 
-grep LaunchpadIntegration.set_sourcepackagename bin/test-project
+grep LaunchpadIntegration. bin/test-project
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
+#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
@@ -21,8 +22,9 @@ quickly configure lp-project gpoweroff
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
-grep LaunchpadIntegration.set_sourcepackagename bin/test-project
+grep LaunchpadIntegration. bin/test-project
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
+#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
 
 bzr status
 # modified:
@@ -46,8 +48,9 @@ quickly configure lp-project hudson-notifier
 # Launchpad connexion is ok
 # Updating project name references in existing apport crashdb configuration
 
-grep LaunchpadIntegration.set_sourcepackagename bin/test-project
+grep LaunchpadIntegration. bin/test-project
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
+#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
 
 bzr status
 # added:
@@ -107,8 +110,9 @@ quickly configure lp-project gpoweroff
 # Launchpad connexion is ok
 # Updating project name references in existing apport crashdb configuration
 
-grep LaunchpadIntegration.set_sourcepackagename bin/test-project
+grep LaunchpadIntegration. bin/test-project
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
+#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
 
 bzr status
 # modified:
@@ -133,8 +137,9 @@ quickly configure lp-project hudson-notifier
 # Updating project name references in existing apport crashdb configuration
 # Creating new apport hooks
 
-grep LaunchpadIntegration.set_sourcepackagename bin/test-project
+grep LaunchpadIntegration. bin/test-project
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
+#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -168,8 +173,9 @@ quickly configure lp-project gpoweroff
 # Launchpad connexion is ok
 # Updating project name references in existing apport crashdb configuration
 
-grep LaunchpadIntegration.set_sourcepackagename bin/test-project
+grep LaunchpadIntegration. bin/test-project
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
+#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -290,8 +296,9 @@ quickly upgrade
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
-grep LaunchpadIntegration.set_sourcepackagename bin/test-project
+grep LaunchpadIntegration. bin/test-project
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
+#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -319,3 +326,24 @@ cat apport/source_test-project.py
 #     if not apport.packaging.is_distro_package(report['Package'].split()[0]):
 #         report['ThirdParty'] = 'True'
 #         report['CrashDB'] = 'test_project'
+
+cp "$TEST_SCRIPT_DIR/test-project.no_lpi" ./bin/test-project
+
+cp "$TEST_SCRIPT_DIR/TestProjectWindow.ui.renamed_help_menu" ./data/ui/TestProjectWindow.ui
+
+rm -rf apport
+
+rm -rf etc
+
+grep LaunchpadIntegration. bin/test-project
+
+quickly upgrade
+# Creating new apport crashdb configuration
+# Creating new apport hooks
+# Adding launchpad integration to existing application
+
+grep LaunchpadIntegration. bin/test-project
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
+#             LaunchpadIntegration.add_items(self.builder.get_object('differentHelpMenu'), 0, False, True)
+
+quickly run
