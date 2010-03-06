@@ -338,12 +338,44 @@ rm -rf etc
 grep LaunchpadIntegration. bin/test-project
 
 quickly upgrade
+# Adding launchpad integration to existing application
 # Creating new apport crashdb configuration
 # Creating new apport hooks
-# Adding launchpad integration to existing application
 
 grep LaunchpadIntegration. bin/test-project
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 #             LaunchpadIntegration.add_items(self.builder.get_object('differentHelpMenu'), 0, False, True)
 
 quickly run
+
+cp "$TEST_SCRIPT_DIR/test-project.no_lpi" ./bin/test-project
+
+cp "$TEST_SCRIPT_DIR/TestProjectWindow.ui.no_gtk-about" ./data/ui/TestProjectWindow.ui
+
+rm -rf apport
+
+rm -rf etc
+
+grep LaunchpadIntegration. bin/test-project
+
+grep gtk-about data/ui/TestProjectWindow.ui
+
+bzr commit -m "Committing after removing all lpi integration"
+# Committing to: /tmp/test-project/
+# modified bin/test-project
+# modified data/ui/TestProjectWindow.ui
+# Committed revision 6.
+
+quickly upgrade
+
+grep LaunchpadIntegration. bin/test-project
+
+bzr status
+
+cp "$TEST_SCRIPT_DIR/test-project.no_lpi" ./bin/test-project
+
+rm ./data/ui/TestProjectWindow.ui
+
+grep LaunchpadIntegration. bin/test-project
+
+quickly upgrade

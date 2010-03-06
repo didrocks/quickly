@@ -73,24 +73,28 @@ def update_apport(project_name, old_lp_project, new_lp_project):
             quicklyutils.file_from_template(template_hook_dir, "source_project_name.py", relative_apport_dir, subst_new)
 
 def insert_lpi_if_required(project_name):
-    existing_bin_file = file(os.path.join("bin",project_name), "r")
-    existing_lines = existing_bin_file.readlines()
-    existing_bin_file.close()
-    
+    existing_bin_filename = os.path.join("bin",project_name)
     camel_case_project_name = quickly.templatetools.get_camel_case_name(project_name)
-    existing_file = os.path.join("data","ui", "%sWindow.ui"%camel_case_project_name)
-    tree = etree.parse(existing_file)
-    help_menu = find_about_menu(tree)
+    existing_ui_filename = os.path.join("data","ui", "%sWindow.ui"%camel_case_project_name)
     
-    if help_menu:
-        new_lines = detect_or_insert_lpi(existing_lines, project_name, help_menu)
-        if new_lines:
-            print _("Adding launchpad integration to existing application")
-            ftarget_file_name_out = file(existing_bin_file.name + '.new', 'w')
-            ftarget_file_name_out.writelines(new_lines)
-            ftarget_file_name_out.close()
-            quickly.templatetools.apply_file_rights(existing_bin_file.name, ftarget_file_name_out.name)
-            os.rename(ftarget_file_name_out.name, existing_bin_file.name)
+    if os.path.isfile(existing_bin_filename) and os.path.isfile(existing_ui_filename):
+        tree = etree.parse(existing_ui_filename)
+        help_menu = find_about_menu(tree)
+        
+        if help_menu:
+            existing_bin_file = file(existing_bin_filename, "r")
+            existing_lines = existing_bin_file.readlines()
+            existing_bin_file.close()
+            new_lines = detect_or_insert_lpi(existing_lines, project_name, help_menu)
+            if new_lines:
+                print _("Adding launchpad integration to existing application")
+                ftarget_file_name_out = file(existing_bin_file.name + '.new', 'w')
+                ftarget_file_name_out.writelines(new_lines)
+                ftarget_file_name_out.close()
+                quickly.templatetools.apply_file_rights(existing_bin_file.name, ftarget_file_name_out.name)
+                os.rename(ftarget_file_name_out.name, existing_bin_file.name)
+            return True
+    return False
         
 def detect_or_insert_lpi(existing_lines, project_name, help_menu):
     integration_present = False
