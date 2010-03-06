@@ -70,18 +70,18 @@ def update_apport(project_name, old_lp_project, new_lp_project):
             quicklyutils.file_from_template(template_hook_dir, "source_project_name.py", relative_apport_dir, subst_new)
 
 def insert_lpi_if_required(project_name):
-    print _("Updating launchpad integration in existing application")
     existing_bin_file = file(os.path.join("bin",project_name), "r")
-    existing_lines = file.readlines()
+    existing_lines = existing_bin_file.readlines()
     existing_bin_file.close()
 
     new_lines = detect_or_insert_lpi(existing_lines)
     if new_lines:
+        print _("Adding launchpad integration to existing application")
         ftarget_file_name_out = file(existing_bin_file.name + '.new', 'w')
         ftarget_file_name_out.writelines(new_lines)
         ftarget_file_name_out.close()
         templatetools.apply_file_rights(existing_bin_file.name, ftarget_file_name_out.name)
-        os.rename(ftarget_file_name_out.name, existing_lines.name)
+        os.rename(ftarget_file_name_out.name, existing_bin_file.name)
         
 def detect_or_insert_lpi(existing_lines):
     integration_present = False
@@ -93,9 +93,9 @@ def detect_or_insert_lpi(existing_lines):
             or "if launchpad_available:" in line:
             integration_present = True
             break
-        if not import_insert_line and line.endswith("import gettext"):
+        if not import_insert_line and "import gtk" in line:
             import_insert_line = current_line
-        if not init_insert_line and line.endswith("self.builder.connect_signals(self)"):
+        if not init_insert_line and "self.builder.connect_signals(self)" in line:
             init_insert_line = current_line
         current_line += 1
     
@@ -104,9 +104,9 @@ def detect_or_insert_lpi(existing_lines):
         and init_insert_line \
         and import_insert_line < init_insert_line:
         existing_lines = existing_lines[:import_insert_line+1] + \
-            LPI_import_block.splitlines() + \
+            ["%s\n"%l for l in LPI_import_block.splitlines()] + \
             existing_lines[import_insert_line+1:init_insert_line+1] + \
-            LPI_init_menu_block.splitlines() + \
+            ["%s\n"%l for l in LPI_init_menu_block.splitlines()] + \
             existing_lines[init_insert_line+1:]
         return existing_lines
     else:

@@ -109,12 +109,11 @@ class camel_case_nameWindow(gtk.Window):
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
         response = about.run()
         about.destroy()
-""".splitlines()
+""".splitlines(True)
         expected = """#!/usr/bin/python
 import sys
 import os
 import gtk
-import gettext
 
 # optional Launchpad integration
 # this shouldn't crash if not found as it is simply used for bug reporting
@@ -124,6 +123,7 @@ try:
 except:
     launchpad_available = False
 
+import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
        
@@ -147,7 +147,10 @@ class camel_case_nameWindow(gtk.Window):
     def about(self, widget, data=None):
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
         response = about.run()
-        about.destroy()"""
-        self.assertEqual(expected, "\n".join(apportutils.detect_or_insert_lpi(lines)))
+        about.destroy()
+"""
+        # print "".join(apportutils.detect_or_insert_lpi(lines))
+        # print "".join(expected.splitlines(True))
+        self.assertEqual("".join(expected.splitlines(True)), "".join(apportutils.detect_or_insert_lpi(lines)))
 
 unittest.main()

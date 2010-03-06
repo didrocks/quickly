@@ -109,9 +109,11 @@ if project_version < '0.4':
             quicklyutils.set_setup_value('version', version.replace("~public", "-public"))
     except quicklyutils.cant_deal_with_setup_value:
         pass
+
     # add apport hooks if launchpad application is configured
     lp_project_name = configurationhandler.project_config.get('lp_id', None)
     if lp_project_name is not None:
         internal.apportutils.update_apport(project_name, lp_project_name, lp_project_name)
+        internal.apportutils.insert_lpi_if_required(project_name)
         
 sys.exit(0)
