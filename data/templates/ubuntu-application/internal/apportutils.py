@@ -33,7 +33,8 @@ def update_apport(project_name, old_lp_project, new_lp_project):
     hook_file = "source_%s.py"%project_name
 
     pathname = templatetools.get_template_path_from_project()
-    template_pr_path = os.path.join(os.path.abspath(pathname),"apport")
+    template_pr_path = os.path.join(os.path.abspath(pathname), "store",
+                                    "apport")
     relative_crashdb_dir = os.path.join("etc", "apport", "crashdb.conf.d")
     relative_apport_dir = "apport"
     
