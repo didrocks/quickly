@@ -22,6 +22,7 @@ import subprocess
 import webbrowser
 
 from internal import quicklyutils, packaging, launchpad_helper
+from internal import bzrutils
 from quickly import templatetools, configurationhandler
 import license
 
@@ -132,14 +133,6 @@ except launchpadaccess.launchpad_connexion_error, e:
 if not quicklyutils.check_gpg_secret_key():
     sys.exit(1)
 
-# changed upstream author and email
-quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
-quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
-
-# license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
-if (license.licensing() !=0):
-     sys.exit(1)
-
 # get the project now and save the url into setup.py
 try:
     project = launchpadaccess.get_project(launchpad)
@@ -152,11 +145,6 @@ about_dialog_file_name = quicklyutils.get_about_file_name()
 if about_dialog_file_name:
     quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
                                  "name", "website", project_url, {})
-
-# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
-#TODO: check that the gpg key contains it (or match preferred_email_adress to available gpg keys and take the name)
-if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
 
 # choose right ppa parameter (users, etc.) ppa or staging if ppa_name is None
 try:
@@ -174,6 +162,22 @@ except packaging.ppa_not_found, e:
     print(_("%s does not exist. Please create it on launchpad if you want to upload to it. %s has the following ppas available:") % (e, ppa_user.name))
     for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):
         print "%s - %s" % (ppa_name, ppa_display_name)
+    sys.exit(1)
+
+# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
+#TODO: check that the gpg key contains it (or match preferred_email_adress to available gpg keys and take the name)
+if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
+    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
+
+# changed upstream author and email
+quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
+quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
+
+# update license if needed. Don't change anything if not needed
+try:
+    license.licensing()
+except license.LicenceError, error_message:
+    print(error_message)
     sys.exit(1)
 
 try:
@@ -243,19 +247,35 @@ if bzr_instance.returncode !=0:
     sys.exit(1)
 
 
-# TODO: see if we want a strategy to set main branch in the project
-
 if (launchpadaccess.lp_server == "staging"):
     bzr_staging = "//staging/"
 else:
     bzr_staging = ""
 
+custom_location_in_info = None
 branch_location = []
+custom_location = bzrutils.get_bzrbranch()
+if custom_location:
+    branch_location = [custom_location]
+    custom_location_in_info = custom_location.replace('lp:', '')
 # if no branch, create it in ~user_name/project_name/quickly_trunk
 # or switch from staging to production
-if not ("parent branch" in bzr_info) or ((".staging." in bzr_info) and not bzr_staging) or (not (".staging." in bzr_info) and bzr_staging):
+if ("parent branch" in bzr_info) and not (
+    (custom_location_in_info and custom_location_in_info not in bzr_info) or
+   ((".staging." in bzr_info) and not bzr_staging) or
+   (not (".staging." in bzr_info) and bzr_staging)):
+    return_code = subprocess.call(["bzr", "pull"])
+    if return_code != 0:
+        print _("ERROR: quickly can't release: can't pull from launchpad.")
+        sys.exit(return_code)
 
-    branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
+    subprocess.call(["bzr", "push"])
+    if return_code != 0:
+        print _("ERROR: quickly can't release: can't push to launchpad.")
+        sys.exit(return_code)
+else:
+    if not branch_location:
+        branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
     return_code = subprocess.call(["bzr", "push", "--remember", "--overwrite", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
@@ -265,18 +285,6 @@ if not ("parent branch" in bzr_info) or ((".staging." in bzr_info) and not bzr_s
     return_code = subprocess.call(["bzr", "pull", "--remember", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release correctly: can't pull from launchpad.")
-        sys.exit(return_code)
-
-else:
-
-    return_code = subprocess.call(["bzr", "pull"])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't pull from launchpad.")
-        sys.exit(return_code)
-
-    subprocess.call(["bzr", "push"])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(return_code)
 
 

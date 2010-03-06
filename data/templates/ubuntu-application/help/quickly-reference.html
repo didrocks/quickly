@@ -21,7 +21,7 @@ p
 <LI><A HREF="#create">create</A></LI>
 <LI><A HREF="#dialog">dialog</A></LI>
 <LI><A HREF="#edit">edit</A></LI>
-<LI><A HREF="#glade">glade</A></LI>
+<LI><A HREF="#design">design</A></LI>
 <LI><A HREF="#help">help</A></LI>
 <LI><A HREF="#license">license</A></LI>
 <LI><A HREF="#package">package</A></LI>
@@ -50,7 +50,7 @@ Changing your working directory to the new project:
 $cd path/to/project_name
 </LI><LI>
 Edit the UI with Glade:
-$quickly glade
+$quickly design
 </LI><LI>
 Edit the Python code:
 $quickly edit
@@ -78,7 +78,7 @@ A catalog file called dialog_name_dialog.xml also in the ui directory
 </OL>
 <P>
 To edit the UI for the dialog, run:
-$quickly glade
+$quickly design
 </P>
 <P>
 To edit the behavior, run:
@@ -101,6 +101,20 @@ dialog.hide()
 </LI>
 </OL>
 
+<A name="design">
+<H1>design</H1>
+</A>
+<P>
+Usage:
+$quickly design
+</P><P>
+Opens Glade UI editor so that you can edit the UI for dialogs
+and windows in your project. Note that you *must* open Glade
+in this manner for quickly to work. If you try to open Glade
+directly, and the open the UI files, Glade will throw errors
+and won't open the files.
+</P>
+
 <A name="edit">
 <H1>edit</H1>
 </A>
@@ -108,22 +122,8 @@ dialog.hide()
 Usage:
 $quickly edit
 </P><P>
-A convenience command to open all of your python files in your project 
+A convenience command to open all of your python files in your project
 directory in your default editor, ready for editing.
-</P>
-
-<A name="glade">
-<H1>glade</H1>
-</A>
-<P>
-Usage:
-$quickly glade
-</P><P>
-Opens Glade UI editor so that you can edit the UI for dialogs
-and windows in your project. Note that you *must* open Glade
-in this manner for quickly to work. If you try to open Glade
-directly, and the open the UI files, Glade will throw errors
-and won't open the files.
 </P>
 
 

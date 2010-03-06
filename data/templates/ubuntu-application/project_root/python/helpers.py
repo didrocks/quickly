@@ -31,6 +31,7 @@ def make_window(builder_file_name, window_name):
         ui_filename = None
 
     builder = gtk.Builder()
+    builder.set_translation_domain('project_name')
     builder.add_from_file(ui_filename)
     dialog = builder.get_object(window_name)
     dialog.finish_initializing(builder)

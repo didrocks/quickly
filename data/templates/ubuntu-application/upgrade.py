@@ -83,8 +83,12 @@ if project_version < '0.4':
         config_file = '%s/%sconfig.py' % (python_name, python_name)
         fin = file(config_file, 'r')
         fout = file(fin.name + '.new', 'w')
+        license_found_in_file = False
         for line in fin:
             fields = line.split(' = ') # Separate variable from value
+            if fields[0] == '__license__':
+                license_found_in_file = True
+                break
             if fields[0] == '__%s_data_directory__' % python_name:
                 fout.write(line)
                 line = "__license__ = '%s'\n" % license
@@ -92,7 +96,10 @@ if project_version < '0.4':
         fout.flush()
         fout.close()
         fin.close()
-        os.rename(fout.name, fin.name)
+        if not license_found_in_file:
+            os.rename(fout.name, fin.name)
+        else:
+            os.remove(fout.name)
     except (OSError, IOError), e:
         pass
     ## new ~public becomes -public
