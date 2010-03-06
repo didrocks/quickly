@@ -1,4 +1,4 @@
-# Basque translation for quickly
+# Sinhalese translation for quickly
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2010-03-05 19:13+0000\n"
-"Last-Translator: Oier Mees <Unknown>\n"
-"Language-Team: Basque <eu@li.org>\n"
+"PO-Revision-Date: 2010-03-05 06:48+0000\n"
+"Last-Translator: Aruna Hewapathirane <aruna.hewapathirane@gmail.com>\n"
+"Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:30
 msgid "Fatal: "
-msgstr "Errorea: "
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:38
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Aztertzen ea python-launchpadlib instalaturik dagoen"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:85
 msgid ""
@@ -32,7 +32,7 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:92
 msgid "Get Launchpad Settings"
-msgstr "Launchpad konfigurazioa lortu"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:99
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
@@ -40,46 +40,46 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:111
 msgid "Unknown reason"
-msgstr "Arrazoi ezezaguna"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:113
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "Ezin izan da Launchpad konfiguratu Quickly-rentzat; %s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:114
 msgid "Launchpad connexion is ok"
-msgstr "Launchpadekin konexioa ongi egin da"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
-msgstr ""
+msgstr "දියත් කිරීම් පැඩයේ සැලැස්මේ නම දී නැත, මෙයින් අත්හිටුවමි"
 
 #: ../quickly/launchpadaccess.py:140
 #, python-format
 msgid "Project name: %s"
-msgstr "Proiektu izena: %s"
+msgstr "සැලැස්මේ නම: %s"
 
 #: ../quickly/launchpadaccess.py:141
 #, python-format
 msgid "Launchpad url: %s/%s"
-msgstr "Launchpad url-a: %s/%s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:148
 msgid "No project found"
-msgstr "Ez da proiekturik aurkitu"
+msgstr "සැලැස්මක් සමුවි නැත"
 
 #: ../quickly/launchpadaccess.py:150
 msgid "Choose your project number"
-msgstr "Zure proiektu zenbaki aukeratu"
+msgstr "සැලැස්මේ අංකය තෝරා ගන්න"
 
 #: ../quickly/launchpadaccess.py:160
 msgid "No right number given, aborting."
-msgstr ""
+msgstr "හරි අංකය දී නැත, මෙයින් අත්හිටුවමි"
 
 #: ../quickly/bzrbinding.py:52
 msgid "Bzr not properly installed"
-msgstr "Bzr ez dago ongi instalaturik"
+msgstr ""
 
 #: ../bin/quickly.py:40
 msgid ""
@@ -110,16 +110,16 @@ msgstr ""
 #: ../bin/quickly.py:96
 #, python-format
 msgid "ERROR: Unknown option: %s"
-msgstr "ERROREA: Aukera ezezaguna: %s"
+msgstr ""
 
 #: ../bin/quickly.py:104
 msgid "ERROR: No command provided in command line"
-msgstr "ERROREA: Ez da agindurik sartu komando lerroan"
+msgstr ""
 
 #: ../bin/quickly.py:184
 #, python-format
 msgid "ERROR: No %s command found in template %s."
-msgstr "ERROREA: Ez da %s komandoa aurkitu %s txantiloian."
+msgstr ""
 
 #: ../bin/quickly.py:185 ../bin/quickly.py:226
 msgid "Aborting."
@@ -131,37 +131,33 @@ msgid ""
 "ERROR: %s command must be followed by a template and no template was found "
 "on the command line."
 msgstr ""
-"ERROREA: %s komandoaren jarraian txantiloi bat adierazi behar da eta ez da "
-"txantiloirik adierazi komando lerroan."
 
 #: ../bin/quickly.py:204 ../bin/quickly.py:217 ../bin/quickly.py:222
 #: ../quickly/builtincommands.py:158
 #, python-format
 msgid "Candidates template are: %s"
-msgstr "Txantiloi hautagaiak hurrengoak dira: %s"
+msgstr ""
 
 #: ../bin/quickly.py:221
 #, python-format
 msgid "No template were found on the command line for command %s."
-msgstr "Ez da txantiloirik aurkitu komando lerroan %s agindurako."
+msgstr ""
 
 #. there is really not such command, in any template
 #: ../bin/quickly.py:225 ../quickly/builtincommands.py:160
 #, python-format
 msgid "ERROR: No %s command found."
-msgstr "ERROREA: Ez da %s agindua aurkitu."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:85
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:126
 msgid "ERROR: Can't load setup.py file"
-msgstr "ERROREA: Ezin izan da setup.py kargatu"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:156
 msgid ""
 "No gpg key set. Take a look at quickly tutorial to learn how to setup one"
 msgstr ""
-"Ez dezu gpg gitzarik ezarrita. Botaiozu begirada bat quickly tutorialari "
-"nola ezartzen den ikasteko"
 
 #: ../data/templates/ubuntu-project/release.py:34
 msgid ""
@@ -206,7 +202,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:79
 msgid "quickly released"
-msgstr "quickly argitaratuta"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:85
 #, python-format
@@ -224,8 +220,6 @@ msgstr ""
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
-"ppa:%s:%s ez da existitzen. Mesedez bat sortu Launchpad-en argitaratu "
-"aurretik."
 
 #: ../data/templates/ubuntu-project/release.py:162
 #, python-format
@@ -270,7 +264,7 @@ msgstr ""
 
 #: ../quickly/version.py:39
 msgid "No template found."
-msgstr "Ez da txantiloirik aurkitu."
+msgstr "ටෙමිප්ලේටය නොමැත"
 
 #: ../quickly/version.py:41
 #, python-format
@@ -296,7 +290,7 @@ msgstr ""
 
 #: ../quickly/templatetools.py:35
 msgid "No help for this command"
-msgstr "Agindu honentzat ez dago laguntzarik"
+msgstr ""
 
 #: ../quickly/templatetools.py:54
 msgid ""
@@ -307,7 +301,7 @@ msgstr ""
 #: ../quickly/templatetools.py:59
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr "ERROREA: %s ez dago baimenduta quickly-ren proiektu izen bezala"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:31
 msgid ""
@@ -359,7 +353,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:46
 msgid "quickly saved"
-msgstr "quickly gordeta"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:52
 msgid "It seems that you have no change to record."
@@ -444,7 +438,7 @@ msgstr ""
 #: ../quickly/tools.py:95
 #, python-format
 msgid "ERROR: Template '%s' not found."
-msgstr ""
+msgstr "ERROR: ටෙම්ප්ලේටය '%s'  සමු වී නොමැත"
 
 #: ../quickly/tools.py:96 ../quickly/commands.py:181
 #: ../quickly/commands.py:260 ../quickly/commands.py:268
@@ -669,7 +663,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:41
 msgid "An error has occurred"
-msgstr ""
+msgstr "වැරැදිමක් වී ඇත"
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:70
 msgid "ERROR: an error occurred during source package creation"
