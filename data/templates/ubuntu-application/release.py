@@ -44,7 +44,7 @@ Posts a release of your project to a PPA on launchpad so that
 users can install the application on their system.
 
 You can also execute:
-$quickly release <release_number> of you don't want to use current
+$quickly release <release_number> if you don't want to use current
 release_number. The release_number must be a number.
 
 $quickly release <release_number> notes about changes
