@@ -64,7 +64,7 @@ if argv[1] == "lp-project":
     # connect to LP
     try:
         launchpad = launchpadaccess.initialize_lpi()
-    except launchpadaccess.launchpad_connexion_error, e:
+    except launchpadaccess.launchpad_connection_error, e:
         print(e)
         sys.exit(1)
 
@@ -96,7 +96,7 @@ elif argv[1] == "ppa":
     # connect to LP
     try:
         launchpad = launchpadaccess.initialize_lpi()
-    except launchpadaccess.launchpad_connexion_error, e:
+    except launchpadaccess.launchpad_connection_error, e:
         print(e)
         sys.exit(1)
 

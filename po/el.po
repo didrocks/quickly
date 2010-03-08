@@ -50,7 +50,7 @@ msgid "Couldn't setup Launchpad for quickly ; %s"
 msgstr "Αδυναμία ρυθμίσεως του Launchpad για το quickly: %s"
 
 #: ../quickly/launchpadaccess.py:114
-msgid "Launchpad connexion is ok"
+msgid "Launchpad connection is ok"
 msgstr "Η σύνδεση με το Launchpad είναι ΟΚ."
 
 #: ../quickly/launchpadaccess.py:130
