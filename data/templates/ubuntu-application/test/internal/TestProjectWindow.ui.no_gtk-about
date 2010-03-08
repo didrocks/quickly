@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
-  <!-- interface-requires python_name_window 1.0 -->
+  <!-- interface-requires test_project_window 1.0 -->
   <!-- interface-naming-policy project-wide -->
   <!-- interface-local-resource-path ../media -->
-  <object class="camel_case_nameWindow" id="python_name_window">
-    <property name="title" translatable="yes">sentence_name</property>
+  <object class="TestProjectWindow" id="test_project_window">
+    <property name="title" translatable="yes">Test Project</property>
     <property name="icon">../media/icon.png</property>
     <signal name="destroy" handler="on_destroy"/>
     <child>
@@ -155,11 +155,10 @@
                 <property name="label" translatable="yes">_Help</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
-                  <object class="GtkMenu" id="helpMenu">
+                  <object class="GtkMenu" id="differentHelpMenu">
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkImageMenuItem" id="imagemenuitem10">
-                        <property name="label">gtk-about</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>

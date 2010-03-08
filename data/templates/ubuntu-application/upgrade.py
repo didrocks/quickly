@@ -20,6 +20,8 @@ import os
 import subprocess
 import sys
 
+import internal.apportutils
+
 from internal import quicklyutils
 from quickly import configurationhandler, templatetools
 
@@ -44,15 +46,16 @@ python_name = templatetools.python_name(project_name)
 ##### 0.4 update
 if project_version < '0.4':
     ## new licensing format
-    bzr_instance = subprocess.Popen(["bzr", "mv", "LICENSE", "COPYING"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    # if file not versionned, try traditional move, (bzr returncode is None if dir not writable)
-    if bzr_instance.returncode == 3 or bzr_instance.returncode is None:
-        try:
-            os.rename('LICENSE', 'COPYING')
-        except OSError, e:
-            if e.errno == 13:
-                sys.stderr.write(_("Can't rename LICENSE file, check your file permission\n"))
-                sys.exit(1)
+    if os.path.isfile("LICENSE"):
+        bzr_instance = subprocess.Popen(["bzr", "mv", "LICENSE", "COPYING"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # if file not versionned, try traditional move, (bzr returncode is None if dir not writable)
+        if bzr_instance.returncode == 3 or bzr_instance.returncode is None:
+            try:
+                os.rename('LICENSE', 'COPYING')
+            except OSError, e:
+                if e.errno == 13:
+                    sys.stderr.write(_("Can't rename LICENSE file, check your file permission\n"))
+                    sys.exit(1)
     # transition Copyright -> AUTHORS
     if os.path.isfile('AUTHORS'):
         source_file = 'AUTHORS'
@@ -108,4 +111,10 @@ if project_version < '0.4':
     except quicklyutils.cant_deal_with_setup_value:
         pass
 
+    # add apport hooks if launchpad application is configured
+    lp_project_name = configurationhandler.project_config.get('lp_id', None)
+    if lp_project_name is not None:
+        internal.apportutils.insert_lpi_if_required(project_name)
+        internal.apportutils.update_apport(project_name, lp_project_name, lp_project_name)
+        
 sys.exit(0)
