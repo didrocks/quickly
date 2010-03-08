@@ -95,6 +95,8 @@ Quickly 0.4
     other template more easily
   - add translation domain to gtkbuilder and fix some items that shouldn't
     been translatable (Łukasz Jernaś)
+  - add apport and launchpadintegration to new and existing project once
+    bounded to LP (Philip Peitsch)
   ubuntu-cli Template:
   - first release using import command feature (no command written into the
     template itself). This is a basic ubuntu CLI application
