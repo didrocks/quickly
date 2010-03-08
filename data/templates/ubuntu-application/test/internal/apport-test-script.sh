@@ -18,7 +18,7 @@ grep LaunchpadIntegration. bin/test-project
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
-# Launchpad connexion is ok
+# Launchpad connection is ok
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
@@ -45,7 +45,7 @@ bzr add
 
 quickly configure lp-project hudson-notifier
 # Get Launchpad Settings
-# Launchpad connexion is ok
+# Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. bin/test-project
@@ -107,7 +107,7 @@ cat apport/source_test-project.py
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
-# Launchpad connexion is ok
+# Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. bin/test-project
@@ -133,7 +133,7 @@ rm -rf apport
 
 quickly configure lp-project hudson-notifier
 # Get Launchpad Settings
-# Launchpad connexion is ok
+# Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 # Creating new apport hooks
 
@@ -170,7 +170,7 @@ cat apport/source_test-project.py
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
-# Launchpad connexion is ok
+# Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. bin/test-project
@@ -226,7 +226,7 @@ rm apport/source_test-project.py
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
-# Launchpad connexion is ok
+# Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 # Creating new apport hooks
 
@@ -248,7 +248,7 @@ cat apport/source_test-project.py
 
 quickly configure lp-project hudson-notifier
 # Get Launchpad Settings
-# Launchpad connexion is ok
+# Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 
 bzr status
