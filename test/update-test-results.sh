@@ -3,6 +3,8 @@
 ORIGINAL_DIR=$(pwd)
 
 SCRIPT=$1
+TEMP_SCRIPT_DIR=$(dirname "$SCRIPT")
+SCRIPT_DIR=$(cd "$TEMP_SCRIPT_DIR"; pwd)
 LOGFILE="$ORIGINAL_DIR/results.log"
 CMD="$ORIGINAL_DIR/next-cmd.sh"
 CMD_OUTPUT="$ORIGINAL_DIR/output.log"
@@ -14,6 +16,7 @@ egrep -v '(^#|^\s*$)' "$SCRIPT" | while read line; do
     echo >> "$LOGFILE"
     echo $line >> "$LOGFILE";
     echo "#!/bin/bash" > $CMD;
+    echo "export TEST_SCRIPT_DIR=$SCRIPT_DIR" >> $CMD;
     # Piping this line will cause a separate subprocess to execute
     echo "$line &> \"$CMD_OUTPUT\"" >> $CMD;
     source $CMD

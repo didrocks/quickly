@@ -3,8 +3,11 @@ import shutil
 import subprocess
 
 from gettext import gettext as _
-from quickly import templatetools, configurationhandler
+
+import quickly
 import quicklyutils
+
+from lxml import etree
 
 LPI_import_block = """
 # optional Launchpad integration
@@ -21,8 +24,8 @@ LPI_init_menu_block = """
         if launchpad_available:
             # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
             # about LaunchpadIntegration
-            LaunchpadIntegration.set_sourcepackagename('project_name')
-            LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)"""
+            LaunchpadIntegration.set_sourcepackagename('%(project_name)s')
+            LaunchpadIntegration.add_items(self.builder.get_object('%(help_menu)s'), 0, False, True)"""
 
 def update_apport(project_name, old_lp_project, new_lp_project):
     if not new_lp_project:
@@ -32,7 +35,8 @@ def update_apport(project_name, old_lp_project, new_lp_project):
     crashdb_file = "%s-crashdb.conf"%project_name
     hook_file = "source_%s.py"%project_name
 
-    pathname = templatetools.get_template_path_from_project()
+
+    pathname = quickly.templatetools.get_template_path_from_project()
     template_pr_path = os.path.join(os.path.abspath(pathname), "store",
                                     "apport")
     relative_crashdb_dir = os.path.join("etc", "apport", "crashdb.conf.d")
@@ -71,20 +75,30 @@ def update_apport(project_name, old_lp_project, new_lp_project):
             quicklyutils.file_from_template(template_hook_dir, "source_project_name.py", relative_apport_dir, subst_new)
 
 def insert_lpi_if_required(project_name):
-    existing_bin_file = file(os.path.join("bin",project_name), "r")
-    existing_lines = existing_bin_file.readlines()
-    existing_bin_file.close()
-
-    new_lines = detect_or_insert_lpi(existing_lines)
-    if new_lines:
-        print _("Adding launchpad integration to existing application")
-        ftarget_file_name_out = file(existing_bin_file.name + '.new', 'w')
-        ftarget_file_name_out.writelines(new_lines)
-        ftarget_file_name_out.close()
-        templatetools.apply_file_rights(existing_bin_file.name, ftarget_file_name_out.name)
-        os.rename(ftarget_file_name_out.name, existing_bin_file.name)
+    existing_bin_filename = os.path.join("bin",project_name)
+    camel_case_project_name = quickly.templatetools.get_camel_case_name(project_name)
+    existing_ui_filename = os.path.join("data","ui", "%sWindow.ui"%camel_case_project_name)
+    
+    if os.path.isfile(existing_bin_filename) and os.path.isfile(existing_ui_filename):
+        tree = etree.parse(existing_ui_filename)
+        help_menu = find_about_menu(tree)
         
-def detect_or_insert_lpi(existing_lines):
+        if help_menu:
+            existing_bin_file = file(existing_bin_filename, "r")
+            existing_lines = existing_bin_file.readlines()
+            existing_bin_file.close()
+            new_lines = detect_or_insert_lpi(existing_lines, project_name, help_menu)
+            if new_lines:
+                print _("Adding launchpad integration to existing application")
+                ftarget_file_name_out = file(existing_bin_file.name + '.new', 'w')
+                ftarget_file_name_out.writelines(new_lines)
+                ftarget_file_name_out.close()
+                quickly.templatetools.apply_file_rights(existing_bin_file.name, ftarget_file_name_out.name)
+                os.rename(ftarget_file_name_out.name, existing_bin_file.name)
+            return True
+    return False
+        
+def detect_or_insert_lpi(existing_lines, project_name, help_menu):
     integration_present = False
     import_insert_line = None
     init_insert_line = None
@@ -104,11 +118,21 @@ def detect_or_insert_lpi(existing_lines):
         and import_insert_line \
         and init_insert_line \
         and import_insert_line < init_insert_line:
+        init_menu_block = LPI_init_menu_block%{"project_name":project_name, "help_menu":help_menu}
         existing_lines = existing_lines[:import_insert_line+1] + \
             ["%s\n"%l for l in LPI_import_block.splitlines()] + \
             existing_lines[import_insert_line+1:init_insert_line+1] + \
-            ["%s\n"%l for l in LPI_init_menu_block.splitlines()] + \
+            ["%s\n"%l for l in init_menu_block.splitlines()] + \
             existing_lines[init_insert_line+1:]
         return existing_lines
+    else:
+        return None
+
+
+def find_about_menu(tree):
+    """Finds the current help menu in the passed xml document by looking for the gtk-about element"""
+    help_item = tree.xpath('//property[@name="label" and .="gtk-about"]/../../../@id')
+    if len(help_item) == 1: # only one element matching this should be found
+        return help_item[0]
     else:
         return None

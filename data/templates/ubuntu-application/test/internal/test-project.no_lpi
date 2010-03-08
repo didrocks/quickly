@@ -10,43 +10,35 @@ import gtk
 
 import gettext
 from gettext import gettext as _
-gettext.textdomain('project_name')
-
-# optional Launchpad integration
-# this shouldn't crash if not found as it is simply used for bug reporting
-try:
-    import LaunchpadIntegration
-    launchpad_available = True
-except:
-    launchpad_available = False
+gettext.textdomain('test-project')
 
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
     os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
 
-if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'test_project'))
     and PROJECT_ROOT_DIRECTORY not in sys.path):
     sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
-from python_name import (
-    Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
-from python_name.helpers import make_window
+from test_project import (
+    AboutTestProjectDialog, PreferencesTestProjectDialog)
+from test_project.helpers import make_window
 
 
-class camel_case_nameWindow(gtk.Window):
-    __gtype_name__ = "camel_case_nameWindow"
+class TestProjectWindow(gtk.Window):
+    __gtype_name__ = "TestProjectWindow"
 
     def __init__(self):
-        """Construct a camel_case_nameWindow.
+        """Construct a TestProjectWindow.
 
         This function is typically not called directly. Creation a
-        camel_case_nameWindow requires rereading the associated ui file and
+        TestProjectWindow requires rereading the associated ui file and
         parsing the ui definition externally, and then calling
-        camel_case_nameWindow.finish_initializing().
+        TestProjectWindow.finish_initializing().
 
-        Use the convenience function Newcamel_case_nameWindow to create
-        camel_case_nameWindow object.
+        Use the convenience function NewTestProjectWindow to create
+        TestProjectWindow object.
         """
         pass
 
@@ -54,34 +46,28 @@ class camel_case_nameWindow(gtk.Window):
         """Called after we've finished initializing.
 
         finish_initalizing should be called after parsing the UI definition
-        and creating a camel_case_nameWindow object with it in order to finish
-        initializing the start of the new camel_case_nameWindow instance.
+        and creating a TestProjectWindow object with it in order to finish
+        initializing the start of the new TestProjectWindow instance.
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.builder.connect_signals(self)
 
-        if launchpad_available:
-            # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
-            # about LaunchpadIntegration
-            LaunchpadIntegration.set_sourcepackagename('project_name')
-            LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
-
         # Uncomment the following code to read in preferences at start up.
-        #dlg = Preferencescamel_case_nameDialog.NewPreferencescamel_case_nameDialog()
+        #dlg = PreferencesTestProjectDialog.NewPreferencesTestProjectDialog()
         #self.preferences = dlg.get_preferences()
 
         # Code for other initialization actions should be added here.
 
     def about(self, widget, data=None):
-        """Display the about box for project_name."""
-        about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
+        """Display the about box for test-project."""
+        about = AboutTestProjectDialog.NewAboutTestProjectDialog()
         response = about.run()
         about.destroy()
 
     def preferences(self, widget, data=None):
-        """Display the preferences window for project_name."""
-        prefs = Preferencescamel_case_nameDialog.NewPreferencescamel_case_nameDialog()
+        """Display the preferences window for test-project."""
+        prefs = PreferencesTestProjectDialog.NewPreferencesTestProjectDialog()
         response = prefs.run()
         if response == gtk.RESPONSE_OK:
             # Make any updates based on changed preferences here.
@@ -89,21 +75,21 @@ class camel_case_nameWindow(gtk.Window):
         prefs.destroy()
 
     def quit(self, widget, data=None):
-        """Signal handler for closing the camel_case_nameWindow."""
+        """Signal handler for closing the TestProjectWindow."""
         self.destroy()
 
     def on_destroy(self, widget, data=None):
-        """Called when the camel_case_nameWindow is closed."""
+        """Called when the TestProjectWindow is closed."""
         # Clean up code for saving application state should be added here.
         gtk.main_quit()
 
 
-def Newcamel_case_nameWindow():
-    """Newcamel_case_nameWindow - returns a fully instantiated
-    camel_case_nameWindow object. Use this function rather than
-    creating a camel_case_nameWindow directly.
+def NewTestProjectWindow():
+    """NewTestProjectWindow - returns a fully instantiated
+    TestProjectWindow object. Use this function rather than
+    creating a TestProjectWindow directly.
     """
-    return make_window('camel_case_nameWindow', "python_name_window")
+    return make_window('TestProjectWindow', "test_project_window")
 
 
 if __name__ == "__main__":
@@ -122,6 +108,6 @@ if __name__ == "__main__":
         logging.debug('logging enabled')
 
     # Run the application.
-    window = Newcamel_case_nameWindow()
+    window = NewTestProjectWindow()
     window.show()
     gtk.main()
