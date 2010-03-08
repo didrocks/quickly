@@ -24,8 +24,13 @@ LPI_init_menu_block = """
         if launchpad_available:
             # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
             # about LaunchpadIntegration
-            LaunchpadIntegration.set_sourcepackagename('%(project_name)s')
-            LaunchpadIntegration.add_items(self.builder.get_object('%(help_menu)s'), 0, False, True)"""
+            helpmenu = None
+            helpmenu = self.builder.get_object('%(help_menu)s')
+            if helpmenu:
+                LaunchpadIntegration.set_sourcepackagename('%(project_name)s')
+                LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+            else:
+                launchpad_available = False"""
 
 def update_apport(project_name, old_lp_project, new_lp_project):
     if not new_lp_project:
