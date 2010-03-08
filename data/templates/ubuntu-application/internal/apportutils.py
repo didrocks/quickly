@@ -21,6 +21,7 @@ except:
 """
 
 LPI_init_menu_block = """
+        global launchpad_available
         if launchpad_available:
             # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
             # about LaunchpadIntegration
