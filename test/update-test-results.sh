@@ -1,5 +1,6 @@
 #!/bin/bash
 
+LANG=C
 ORIGINAL_DIR=$(pwd)
 
 SCRIPT=$1
