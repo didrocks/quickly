@@ -140,20 +140,25 @@ class camel_case_nameWindow(gtk.Window):
         self.builder = builder
         self.builder.connect_signals(self)
 
+        global launchpad_available
         if launchpad_available:
             # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
             # about LaunchpadIntegration
-            LaunchpadIntegration.set_sourcepackagename('project_name1')
-            LaunchpadIntegration.add_items(self.builder.get_object('helpMenu1'), 0, False, True)
+            helpmenu = self.builder.get_object('helpMenu1')
+            if helpmenu:
+                LaunchpadIntegration.set_sourcepackagename('project_name1')
+                LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+            else:
+                launchpad_available = False
             
     def about(self, widget, data=None):
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
         response = about.run()
         about.destroy()
 """
-        # print "".join(apportutils.detect_or_insert_lpi(lines))
+        # print "".join(apportutils.detect_or_insert_lpi(lines, "project_name1", "helpMenu1"))
         # print "".join(expected.splitlines(True))
-        self.assertEqual("".join(expected.splitlines(True)), "".join(apportutils.detect_or_insert_lpi(lines, "project_name1", "helpMenu1")))
+        self.assertEqual("".join(expected.splitlines(True)).strip(), "".join(apportutils.detect_or_insert_lpi(lines, "project_name1", "helpMenu1")).strip())
 
     def test_find_about_menu(self):
         xml_tree = etree.parse(StringIO.StringIO("""<?xml version="1.0"?>

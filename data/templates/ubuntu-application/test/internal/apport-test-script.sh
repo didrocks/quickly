@@ -13,8 +13,13 @@ quickly create ubuntu-application test-project
 cd test-project
 
 grep LaunchpadIntegration. bin/test-project
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
+#                 LaunchpadIntegration.set_sourcepackagename('test-project')
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+
+grep helpmenu bin/test-project
+#             helpmenu = self.builder.get_object('helpMenu')
+#             if helpmenu:
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
@@ -23,8 +28,13 @@ quickly configure lp-project gpoweroff
 # Creating new apport hooks
 
 grep LaunchpadIntegration. bin/test-project
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
+#                 LaunchpadIntegration.set_sourcepackagename('test-project')
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+
+grep helpmenu bin/test-project
+#             helpmenu = self.builder.get_object('helpMenu')
+#             if helpmenu:
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
 
 bzr status
 # modified:
@@ -49,8 +59,13 @@ quickly configure lp-project hudson-notifier
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. bin/test-project
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
+#                 LaunchpadIntegration.set_sourcepackagename('test-project')
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+
+grep helpmenu bin/test-project
+#             helpmenu = self.builder.get_object('helpMenu')
+#             if helpmenu:
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
 
 bzr status
 # added:
@@ -111,8 +126,13 @@ quickly configure lp-project gpoweroff
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. bin/test-project
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
+#                 LaunchpadIntegration.set_sourcepackagename('test-project')
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+
+grep helpmenu bin/test-project
+#             helpmenu = self.builder.get_object('helpMenu')
+#             if helpmenu:
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
 
 bzr status
 # modified:
@@ -138,8 +158,13 @@ quickly configure lp-project hudson-notifier
 # Creating new apport hooks
 
 grep LaunchpadIntegration. bin/test-project
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
+#                 LaunchpadIntegration.set_sourcepackagename('test-project')
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+
+grep helpmenu bin/test-project
+#             helpmenu = self.builder.get_object('helpMenu')
+#             if helpmenu:
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -174,8 +199,13 @@ quickly configure lp-project gpoweroff
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. bin/test-project
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
+#                 LaunchpadIntegration.set_sourcepackagename('test-project')
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+
+grep helpmenu bin/test-project
+#             helpmenu = self.builder.get_object('helpMenu')
+#             if helpmenu:
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -297,8 +327,13 @@ quickly upgrade
 # Creating new apport hooks
 
 grep LaunchpadIntegration. bin/test-project
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-#             LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
+#                 LaunchpadIntegration.set_sourcepackagename('test-project')
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+
+grep helpmenu bin/test-project
+#             helpmenu = self.builder.get_object('helpMenu')
+#             if helpmenu:
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -337,14 +372,16 @@ rm -rf etc
 
 grep LaunchpadIntegration. bin/test-project
 
+grep helpmenu bin/test-project
+
 quickly upgrade
 # Adding launchpad integration to existing application
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
 grep LaunchpadIntegration. bin/test-project
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-#             LaunchpadIntegration.add_items(self.builder.get_object('differentHelpMenu'), 0, False, True)
+#                 LaunchpadIntegration.set_sourcepackagename('test-project')
+#                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
 
 quickly run
 
@@ -358,6 +395,8 @@ rm -rf etc
 
 grep LaunchpadIntegration. bin/test-project
 
+grep helpmenu bin/test-project
+
 grep gtk-about data/ui/TestProjectWindow.ui
 
 bzr commit -m "Committing after removing all lpi integration"
@@ -367,15 +406,24 @@ bzr commit -m "Committing after removing all lpi integration"
 # Committed revision 6.
 
 quickly upgrade
+# Creating new apport crashdb configuration
+# Creating new apport hooks
 
 grep LaunchpadIntegration. bin/test-project
 
+grep helpmenu bin/test-project
+
 bzr status
+# unknown:
+#   apport/
+#   etc/
 
 cp "$TEST_SCRIPT_DIR/test-project.no_lpi" ./bin/test-project
 
 rm ./data/ui/TestProjectWindow.ui
 
 grep LaunchpadIntegration. bin/test-project
+
+grep helpmenu bin/test-project
 
 quickly upgrade
