@@ -32,7 +32,7 @@ rm -f "$CMD_OUTPUT"
 if [[ -n $(diff -q "$LOGFILE" "$SCRIPT") ]]; then
     echo "********************************"
     echo "FILES DIFFERED"
-    diff "$LOGFILE" "$SCRIPT"
+    diff -Nup "$LOGFILE" "$SCRIPT"
     echo -n "Would you like to accept the new results (y/n)? [y] "
     read -n1 RESULT
     echo
