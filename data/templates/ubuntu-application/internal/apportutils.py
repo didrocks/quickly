@@ -25,7 +25,6 @@ LPI_init_menu_block = """
         if launchpad_available:
             # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
             # about LaunchpadIntegration
-            helpmenu = None
             helpmenu = self.builder.get_object('%(help_menu)s')
             if helpmenu:
                 LaunchpadIntegration.set_sourcepackagename('%(project_name)s')
