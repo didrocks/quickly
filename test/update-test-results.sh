@@ -1,6 +1,8 @@
 #!/bin/bash
 
 LANG=C
+PATH=$(pwd)/bin:$PATH
+
 ORIGINAL_DIR=$(pwd)
 
 SCRIPT=$1
