@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2009-11-22 16:33+0000\n"
-"Last-Translator: Artyom Packhomov <Unknown>\n"
+"PO-Revision-Date: 2010-03-10 06:46+0000\n"
+"Last-Translator: Артём Попов <artfwo@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-23 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-03-11 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -112,7 +112,7 @@ msgstr ""
 #: ../bin/quickly.py:96
 #, python-format
 msgid "ERROR: Unknown option: %s"
-msgstr "ОШИБКА: Неизвестная опция: %s"
+msgstr "ОШИБКА: Неизвестный параметр: %s"
 
 #: ../bin/quickly.py:104
 msgid "ERROR: No command provided in command line"
@@ -300,6 +300,24 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Интерпретатор Python: %s %s\n"
+"  Стандартная библиотека Python: %s\n"
+"  \n"
+"  Библиотека Quickly: %s\n"
+"  Путь поиска данных Quickly: %s\n"
+"  Обнаруженные каталоги шаблонов Quickly:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Canonical Ltd.\n"
+"  #Author 2009 Rick Spencer\n"
+"  #Author 2009 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly поставляется БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ. quickly является свободным\n"
+"программным обеспечением. Вы можете распространять и/или модифицировать\n"
+"его согласно условиям Стандартной Общественной Лицензии GNU версии 3 или\n"
+"более поздней версии."
 
 #: ../quickly/templatetools.py:35
 msgid "No help for this command"
@@ -502,7 +520,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
-msgstr ""
+msgstr "_Файл"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
@@ -514,7 +532,7 @@ msgstr "_Вид"
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
-msgstr ""
+msgstr "sentence_name"
 
 #: ../data/templates/ubuntu-project/create.py:36
 msgid ""
@@ -551,7 +569,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:59
 #, python-format
 msgid "Creating project directory %s"
-msgstr "Создаётся директория проекта %s"
+msgstr "Создание каталога проекта %s"
 
 #: ../data/templates/ubuntu-project/create.py:80
 #: ../data/templates/ubuntu-project/create.py:85
@@ -559,7 +577,7 @@ msgstr "Создаётся директория проекта %s"
 #: ../quickly/builtincommands.py:61
 #, python-format
 msgid "Directory %s created\n"
-msgstr ""
+msgstr "Каталог %s создан\n"
 
 #. add it to revision control
 #: ../data/templates/ubuntu-project/create.py:139
