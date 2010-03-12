@@ -35,12 +35,15 @@ Opens a web browser with the tutorial for ubuntu-application template.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
-arg=os.path.dirname(__file__) + "/help/quickly-ubuntu-application-tutorial-" + locale.getdefaultlocale()[0] + ".xml"
+help_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'help')
+help_file = os.path.join(help_dir, 'quickly-ubuntu-application-tutorial-%s.xml'
+                                    % locale.getdefaultlocale()[0])
+if not os.path.isfile(help_file):
+    help_file = os.path.join(help_dir,
+                            'quickly-ubuntu-application-tutorial-%s.xml'
+                            % locale.getdefaultlocale()[0].split('_')[0])
+if not os.path.isfile(help_file):
+    help_file = os.path.join(help_dir, 'quickly-ubuntu-application-tutorial.xml')
 
-if os.path.isfile(arg)=True:
-	subprocess.Popen("yelp "+arg, shell="true", executable="/bin/bash")
-else:
-	subprocess.Popen("yelp "+os.path.dirname(__file__) + "/help/quickly-ubuntu-application-tutorial.xml", shell="true", executable="/bin/bash")
-
-sys.exit(0)
+subprocess.Popen(['yelp', help_file], shell=True, stderr=file("/dev/null"))
 
