@@ -62,23 +62,29 @@ def update_data_path(prefix, oldvalue=None):
         sys.exit(1)
     return oldvalue
 
-def update_tutorial(tutorial_layouts)
+def update_tutorial(tutorial_layouts):
 
     for tutorial_layout in tutorial_layouts:
         tutorial_dir = tutorial_layout[0]
         file_name = tutorial_layout[1]
-        po_dir= "po/%s" % tutorial_dir
+        po_dir= "%s/po" % tutorial_dir
         # update .pot
-        subprocess.call('xml2po -e -o %s/%s.po %s/%s.xml' % (po_dir, file_name, tutorial_dir, file_name))
+        update_cmd = ['xml2po', '-e', '-o', '%s/%s.pot' % (po_dir, file_name),
+                      '%s/%s.xml' % (tutorial_dir, file_name)]
+        subprocess.call(update_cmd)
         # update lang
         for po_file in glob.glob("%s/*.po" % po_dir):
             lang = os.path.basename(po_file[:-3])
-            subprocess.call('xml2po -p %s/%s.po -o %s/%s-%s.xml %s/%s.xml') % (po_dir, lang, tutorial_dir, file_name, lang, tutorial_dir, file_name))
+            update_cmd = ['xml2po', '-p', '%s/%s.po' % (po_dir, lang), '-o',
+                          '%s/%s-%s.xml' % (tutorial_dir, file_name, lang),
+                          '%s/%s.xml' % (tutorial_dir, file_name)]
+            subprocess.call(update_cmd)
 
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
         previous_value = update_data_path(self.prefix + '/share/quickly/')
-        update_tutorial([("data/templates/ubuntu-application/help", quickly-ubuntu-application-tutorial)])
+        update_tutorial([("data/templates/ubuntu-application/help",
+                           'quickly-ubuntu-application-tutorial')])
         DistUtilsExtra.auto.install_auto.run(self)
         update_data_path(self.prefix, previous_value)
 
