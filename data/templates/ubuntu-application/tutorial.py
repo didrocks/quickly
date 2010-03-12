@@ -35,6 +35,9 @@ Opens a web browser with the tutorial for ubuntu-application template.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
+# TODO: FIX to take tutorial from the project path:
+# abs_template_path = templatetools.get_template_path_from_project() stop when
+# you are outside a project
 help_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'help')
 help_file = os.path.join(help_dir, 'quickly-ubuntu-application-tutorial-%s.xml'
                                     % locale.getdefaultlocale()[0])
@@ -44,6 +47,5 @@ if not os.path.isfile(help_file):
                             % locale.getdefaultlocale()[0].split('_')[0])
 if not os.path.isfile(help_file):
     help_file = os.path.join(help_dir, 'quickly-ubuntu-application-tutorial.xml')
-
-subprocess.Popen(['yelp', help_file], shell=True, stderr=file("/dev/null"))
+subprocess.Popen(['yelp', help_file], stderr=file("/dev/null"))
 
