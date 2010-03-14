@@ -48,10 +48,10 @@ game.level = 0
 g = Guy(bullets)
 enemies = pygame.sprite.RenderUpdates()
 
-#set up the game over screen
+#set up the game over screen, center is by default
 gov = BaseSprite(project_name.project_name_config.game_over_background)
-gov.x = 200
-gov.y = 70
+gov.x = (sw - gov.rect.width)/2
+gov.y = (sh - gov.rect.height)/2
 gov.update()
 
 def next_level():
