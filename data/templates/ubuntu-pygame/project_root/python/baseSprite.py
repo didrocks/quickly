@@ -67,8 +67,8 @@ class BaseSprite(pygame.sprite.Sprite):
         self.velocity_x = 0
         self.velocity_y = 0
         self._accelerating = False
-        self.x = 400
-        self.y = 240
+        self.x = project_name_config.screen_width / 2
+        self.y = project_name_config.screen_height / 2
         self.max_velocity = 50
   
   
