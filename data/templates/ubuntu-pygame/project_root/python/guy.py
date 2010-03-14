@@ -32,7 +32,6 @@ class Guy(BaseSprite):
         self.bullets = bullets_group
         self.hum = pygame.mixer.Sound(project_name_config.guy_eng)
         self.explosionSound = pygame.mixer.Sound(project_name_config.guy_explode)
-        self.explosionSound.set_volume(.2)
         self.alive = True
         self.exploding = False
         self.explodestage = 0

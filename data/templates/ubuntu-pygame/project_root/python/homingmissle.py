@@ -44,7 +44,6 @@ class HomingMissle(BaseSprite):
         self.explode_stage = 0
         self.exploding = False
         self.explosion_sound = pygame.mixer.Sound(project_name_config.enemy_explode_sound)
-        self.explosion_sound.set_volume(.2)
         self.points = 1
 
     def update(self):

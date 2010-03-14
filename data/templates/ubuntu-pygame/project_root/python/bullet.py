@@ -40,10 +40,8 @@ class Bullet(BaseSprite):
             img = img_name
         BaseSprite.__init__(self, img)
         self.launchSound = pygame.mixer.Sound(project_name_config.guy_shoot_sound)
-        self.launchSound.set_volume(.05)
         self.launchSound.play()
         self.explosionSound = pygame.mixer.Sound(project_name_config.guy_bullet_explode)
-        self.explosionSound.set_volume(.2)
         self.orientation = orientation
         self.x = x
         self.y = y
