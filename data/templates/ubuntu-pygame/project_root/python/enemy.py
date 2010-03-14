@@ -4,8 +4,8 @@ enemy module - contains the enemy class, an extenstion of BaseSprite.
 
 """
 
-import pygame, random
-from baseSprite import BaseSprite
+import pygame
+from base_sprite import BaseSprite
 import project_name_config
 
 class Enemy(BaseSprite):

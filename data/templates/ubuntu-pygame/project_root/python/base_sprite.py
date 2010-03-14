@@ -215,7 +215,7 @@ class BaseSprite(pygame.sprite.Sprite):
     def explode(self):
         """explode - function called when a sprite is destroyed
         in game play. Default implentation calls kill() which 
-        simply removes the sprite from play. Subclasses of baseSprite
+        simply removes the sprite from play. Subclasses of BaseSprite
         override explode to add explosion animations.
 
         """

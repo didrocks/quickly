@@ -6,7 +6,7 @@ predetermined time period.
 """
 
 import pygame, random
-from baseSprite import BaseSprite
+from base_sprite import BaseSprite
 import project_name_config
 
 class Bullet(BaseSprite):

@@ -7,7 +7,7 @@ BaseSprite functionality.
 """
 
 import pygame, random
-from baseSprite import BaseSprite
+from base_sprite import BaseSprite
 from bullet import Bullet
 import project_name_config
 

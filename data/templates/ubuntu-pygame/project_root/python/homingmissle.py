@@ -5,7 +5,7 @@ of BaseSprite
 """
 
 import pygame
-from baseSprite import BaseSprite
+from base_sprite import BaseSprite
 import math
 import project_name_config
 
