@@ -50,7 +50,7 @@ class Bullet(BaseSprite):
         self._accelerating = True
         self.acceleration_divisor = .75
         self.max_velocity = 100
-        self.maxticks = 10
+        self.max_ticks = 10
         self.ticks = 0
         self.exploding = False
         self.explodestage = 0
@@ -65,7 +65,7 @@ class Bullet(BaseSprite):
 
         BaseSprite.update(self)
         self.ticks += 1
-        if not self.exploding and self.ticks > self.maxticks:
+        if not self.exploding and self.ticks > self.max_ticks:
             self.kill()
 
         if self.exploding: 
