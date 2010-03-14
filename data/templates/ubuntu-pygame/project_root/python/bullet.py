@@ -35,9 +35,9 @@ class Bullet(BaseSprite):
         called 'bullet.png'.
  
         """
-        img = "bullet.png"
+        img = project_name_config.default_bullet
         if img_name != None:
-            img = img_name 
+            img = img_name
         BaseSprite.__init__(self, img)
         self.launchSound = pygame.mixer.Sound(project_name_config.guy_shoot_sound)
         self.launchSound.set_volume(.05)

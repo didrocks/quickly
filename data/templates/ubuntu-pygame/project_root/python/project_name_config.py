@@ -45,6 +45,8 @@ enemy_explode_stage = image_path + "guy_explode_"
 enemy_image = image_path + "enemy.png"
 homing_missle_image = image_path + "homing_missle.png"
 
+default_bullet = image_path + "bullet.png"
+
 #sounds
 sound_path = os.path.join(getdatapath(), "media/")
 
