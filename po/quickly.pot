@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-12 20:03+0100\n"
+"POT-Creation-Date: 2010-03-15 10:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,7 +164,7 @@ msgstr ""
 msgid "ERROR: No %s command found."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:38
+#: ../data/templates/ubuntu-application/configure.py:40
 #, python-format
 msgid ""
 "Usage:\n"
@@ -173,32 +173,32 @@ msgid ""
 "Enable to set or change some parameters of the project, like to which\n"
 "launchpad project should be binded with the current ubuntu application, "
 "what\n"
-"ppa should we use by default to share your package, what additinoal "
+"ppa should we use by default to share your package, what additional "
 "dependency\n"
 "should be added…\n"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:95
+#: ../data/templates/ubuntu-application/configure.py:104
 msgid ""
 "Usage is: $ quickly configure ppa <ppaname>\n"
 "Use shell completion to find all available ppas"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:104
+#: ../data/templates/ubuntu-application/configure.py:113
 #: ../data/templates/ubuntu-application/share.py:113
 #: ../data/templates/ubuntu-application/release.py:153
 #, python-format
 msgid "User or Team %s not found on Launchpad"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:107
+#: ../data/templates/ubuntu-application/configure.py:116
 #: ../data/templates/ubuntu-application/share.py:116
 #: ../data/templates/ubuntu-application/release.py:156
 #, python-format
 msgid "You have to be a member of %s team to upload to its ppas"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:113
+#: ../data/templates/ubuntu-application/configure.py:122
 #: ../data/templates/ubuntu-application/share.py:122
 #: ../data/templates/ubuntu-application/release.py:162
 #, python-format
@@ -207,7 +207,7 @@ msgid ""
 "it. %s has the following ppas available:"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/configure.py:124
+#: ../data/templates/ubuntu-application/configure.py:133
 msgid "Usage is: $ quickly configure bzr <bzr-branch-string>"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgid ""
 "General Public License version 3 or later."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/upgrade.py:54
+#: ../data/templates/ubuntu-application/upgrade.py:57
 msgid "Can't rename LICENSE file, check your file permission\n"
 msgstr ""
 
@@ -661,12 +661,86 @@ msgstr ""
 msgid "Copy %s to create new %s template"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/tutorial.py:31
+#: ../data/templates/ubuntu-application/license.py:45
 msgid ""
 "Usage:\n"
-"$ quickly tutorial\n"
+"$quickly license <Your_Licence>\n"
 "\n"
-"Opens a web browser with the tutorial for ubuntu-application template.\n"
+"Adds license to project files. Before using this command, you should:\n"
+"\n"
+"1. Edit the file AUTHORS to include your authorship (this step is "
+"automatically done\n"
+"   if you directly launch \"$ quickly release\" or \"$ quickly share\" "
+"before changing license)\n"
+"   In this case, license is GPL-3 by default.\n"
+"2. If you want to put your own quickly unsupported Licence, add a COPYING "
+"file containing\n"
+"   your own licence.\n"
+"3. Executes either $ quickly license or $ quickly license <License>\n"
+"   where <License> can be either:\n"
+"   - GPL-3 (default)\n"
+"   - GPL-2\n"
+"\n"
+"This will modify the Copyright file with the chosen licence (with GPL-3 by "
+"default).\n"
+"Updating previous chosen Licence if needed.\n"
+"If you previously removed the tags to add your own licence, it will leave it "
+"pristine.\n"
+"If no name is attributed to the Copyright, it will try to retrieve it from "
+"Launchpad\n"
+"(in quickly release or quickly share command only)\n"
+"\n"
+"Finally, this will copy the Copyright at the head of every files.\n"
+"\n"
+"Note that if you don't run quickly licence before calling quickly release or "
+"quickly\n"
+"share, this one will execute it for you and guess the copyright holder from "
+"your\n"
+"launchpad account if you didn't update it.\n"
+msgstr ""
+
+#. that means we didn't find the END_LICENCE_TAG, don't copy the file
+#: ../data/templates/ubuntu-application/license.py:120
+#, python-format
+msgid "WARNING: %s was not found in the file %s. No licence replacement"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/license.py:127
+#: ../data/templates/ubuntu-application/license.py:178
+#, python-format
+msgid "%s file was not found"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/license.py:171
+msgid ""
+"Copyright is not attributed. Edit the AUTHORS file to include your name for "
+"the copyright replacing <Your Name> <Your E-mail>. Update it in setup.py or "
+"use quickly share/quickly release to fill it automatically"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/license.py:193
+#, python-format
+msgid "%s file was not found. It is compulsory for user defined license"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/license.py:195
+#, python-format
+msgid "Header of %s license not found. Quickly installation corrupted?"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/license.py:224
+msgid "Can't update license in setup.py file\n"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/license.py:227
+#, python-format
+msgid "%s/%sconfig.py file not found."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/license.py:269
+msgid ""
+"This command only take one optional argument: License\n"
+"Usage is: quickly license <license>"
 msgstr ""
 
 #: ../data/templates/ubuntu-application/release.py:40
@@ -678,7 +752,7 @@ msgid ""
 "users can install the application on their system.\n"
 "\n"
 "You can also execute:\n"
-"$quickly release <release_number> of you don't want to use current\n"
+"$quickly release <release_number> if you don't want to use current\n"
 "release_number. The release_number must be a number.\n"
 "\n"
 "$quickly release <release_number> notes about changes\n"
@@ -774,6 +848,45 @@ msgstr ""
 msgid "An error has occurred during package building"
 msgstr ""
 
+#: ../data/templates/ubuntu-application/internal/packaging.py:74
+msgid "Ubuntu packaging created in debian/"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:76
+msgid "An error has occurred"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:172
+msgid "ERROR: an error occurred during source package creation"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:177
+msgid "ERROR: an error occurred during source upload to launchpad"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:215
+msgid ""
+"Release version specified in command arguments is not a valid version scheme "
+"like 'x(.y)(.z)'."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:225
+msgid "No previous version found in setup.py. Put one please"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:235
+#, python-format
+msgid ""
+"Share version specified after -public in setup.py is not a valid number: %s"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:255
+#, python-format
+msgid ""
+"Minor version specified in setup.py is not a valid number: %s. Fix this or "
+"specify a version as release command line argument"
+msgstr ""
+
 #: ../quickly/commands.py:278
 #, python-format
 msgid "ERROR: %s command failed"
@@ -833,123 +946,27 @@ msgstr ""
 msgid "sentence_name"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:74
-msgid "Ubuntu packaging created in debian/"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:76
-msgid "An error has occurred"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:172
-msgid "ERROR: an error occurred during source package creation"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:177
-msgid "ERROR: an error occurred during source upload to launchpad"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:215
+#: ../data/templates/ubuntu-application/internal/apportutils.py:68
 msgid ""
-"Release version specified in command arguments is not a valid version scheme "
-"like 'x(.y)(.z)'."
+"Updating project name references in existing apport crashdb configuration"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:225
-msgid "No previous version found in setup.py. Put one please"
+#: ../data/templates/ubuntu-application/internal/apportutils.py:71
+msgid "Creating new apport crashdb configuration"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:235
-#, python-format
-msgid ""
-"Share version specified after -public in setup.py is not a valid number: %s"
+#: ../data/templates/ubuntu-application/internal/apportutils.py:77
+msgid "Creating new apport hooks"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/packaging.py:255
-#, python-format
-msgid ""
-"Minor version specified in setup.py is not a valid number: %s. Fix this or "
-"specify a version as release command line argument"
+#: ../data/templates/ubuntu-application/internal/apportutils.py:97
+msgid "Adding launchpad integration to existing application"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/license.py:45
+#: ../data/templates/ubuntu-application/tutorial.py:31
 msgid ""
 "Usage:\n"
-"$quickly license <Your_Licence>\n"
+"$ quickly tutorial\n"
 "\n"
-"Adds license to project files. Before using this command, you should:\n"
-"\n"
-"1. Edit the file AUTHORS to include your authorship (this step is "
-"automatically done\n"
-"   if you directly launch \"$ quickly release\" or \"$ quickly share\" "
-"before changing license)\n"
-"   In this case, license is GPL-3 by default.\n"
-"2. If you want to put your own quickly unsupported Licence, add a COPYING "
-"file containing\n"
-"   your own licence.\n"
-"3. Executes either $ quickly license or $ quickly license <License>\n"
-"   where <License> can be either:\n"
-"   - GPL-3 (default)\n"
-"   - GPL-2\n"
-"\n"
-"This will modify the Copyright file with the chosen licence (with GPL-3 by "
-"default).\n"
-"Updating previous chosen Licence if needed.\n"
-"If you previously removed the tags to add your own licence, it will leave it "
-"pristine.\n"
-"If no name is attributed to the Copyright, it will try to retrieve it from "
-"Launchpad\n"
-"(in quickly release or quickly share command only)\n"
-"\n"
-"Finally, this will copy the Copyright at the head of every files.\n"
-"\n"
-"Note that if you don't run quickly licence before calling quickly release or "
-"quickly\n"
-"share, this one will execute it for you and guess the copyright holder from "
-"your\n"
-"launchpad account if you didn't update it.\n"
-msgstr ""
-
-#. that means we didn't find the END_LICENCE_TAG, don't copy the file
-#: ../data/templates/ubuntu-application/license.py:120
-#, python-format
-msgid "WARNING: %s was not found in the file %s. No licence replacement"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:127
-#: ../data/templates/ubuntu-application/license.py:178
-#, python-format
-msgid "%s file was not found"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:171
-msgid ""
-"Copyright is not attributed. Edit the AUTHORS file to include your name for "
-"the copyright replacing <Your Name> <Your E-mail>. Update it in setup.py or "
-"use quickly share/quickly release to fill it automatically"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:193
-#, python-format
-msgid "%s file was not found. It is compulsory for user defined license"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:195
-#, python-format
-msgid "Header of %s license not found. Quickly installation corrupted?"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:224
-msgid "Can't update license in setup.py file\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:227
-#, python-format
-msgid "%s/%sconfig.py file not found."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:269
-msgid ""
-"This command only take one optional argument: License\n"
-"Usage is: quickly license <license>"
+"Opens a web browser with the tutorial for ubuntu-application template.\n"
 msgstr ""

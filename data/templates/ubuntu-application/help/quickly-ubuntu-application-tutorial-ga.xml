@@ -3,7 +3,7 @@
 <!ENTITY appname "<application>Quickly</application>">
 <!ENTITY appversion "0.4">
 ]>
-<book lang="ie" id="index">
+<book lang="ga" id="index">
  <bookinfo id="Front">
    <authorgroup>
      <author role="maintainer">
