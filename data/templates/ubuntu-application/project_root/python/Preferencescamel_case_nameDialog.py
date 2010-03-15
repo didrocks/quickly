@@ -7,7 +7,7 @@ from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 import gtk
 
-from python_name.helpers import make_window
+from python_name.helpers import get_builder
 
 import gettext
 from gettext import gettext as _
@@ -17,26 +17,26 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
     __gtype_name__ = "Preferencescamel_case_nameDialog"
     preferences = {}
 
-    def __init__(self):
-        """Construct a Preferencescamel_case_nameDialog.
-
-        This function is typically not called directly. Creation of a
-        Preferencescamel_case_nameDialog requires rereading the associated UI
-        file and parsing the UI definition extrenally, and then calling
-        Preferencescamel_case_nameDialog.finish_initializing().
-
-        Use the convenience function NewPreferencescamel_case_nameDialog to
-        create NewAboutcamel_case_nameDialog objects.
+    def __new__(cls):
+        """Special static method that's automatically called by Python when 
+        constructing a new instance of this class.
+        
+        Returns a fully instantiated Preferencescamel_case_nameDialog object.
         """
-        pass
+        builder = get_builder('Preferencescamel_case_nameDialog')
+        new_object = builder.get_object("preferences_python_name_dialog")
+        new_object.finish_initializing(builder)
+        return new_object
 
     def finish_initializing(self, builder):
-        """Called after we've finished initializing.
+        """Called while initializing this instance in __new__
 
         finish_initalizing should be called after parsing the ui definition
-        and creating a Aboutcamel_case_nameDialog object with it in order to
-        finish initializing the start of the new Aboutcamel_case_nameDialog
+        and creating a Preferencescamel_case_nameDialog object with it in order to
+        finish initializing the start of the new Perferencescamel_case_nameDialog
         instance.
+        
+        Put your initialization code in here and leave __init__ undefined.
         """
 
         # Get a reference to the builder and set up the signals.
@@ -105,19 +105,7 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         # Restore any changes to self._preferences here.
         pass
 
-
-def NewPreferencescamel_case_nameDialog():
-    """Returns a fully instantiated Preferencescamel_case_nameDialog object.
-
-    Use this function rather than creating a Preferencescamel_case_nameDialog
-    instance directly.
-    """
-    return make_window(
-        'Preferencescamel_case_nameDialog',
-        "preferences_python_name_dialog")
-
-
 if __name__ == "__main__":
-    dialog = NewPreferencescamel_case_nameDialog()
+    dialog = Preferencescamel_case_nameDialog()
     dialog.show()
     gtk.main()

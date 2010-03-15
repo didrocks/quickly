@@ -5,7 +5,7 @@
 
 import gtk
 
-from python_name.helpers import make_window
+from python_name.helpers import get_builder
 
 import gettext
 from gettext import gettext as _
@@ -14,26 +14,26 @@ gettext.textdomain('project_name')
 class Aboutcamel_case_nameDialog(gtk.AboutDialog):
     __gtype_name__ = "Aboutcamel_case_nameDialog"
 
-    def __init__(self):
-        """Construct an Aboutcamel_case_nameDialog.
-
-        This function is typically not called directly. Creation of an
-        Aboutcamel_case_nameDialog requires redeading the associated UI file
-        and parsing the UI definition externally, and then calling
-        Aboutcamel_case_nameDialog.finish_initializing().
-
-        Use the convenience function NewAboutcamel_case_nameDialog to create
-        NewAboutcamel_case_nameDialog objects.
+    def __new__(cls):
+        """Special static method that's automatically called by Python when 
+        constructing a new instance of this class.
+        
+        Returns a fully instantiated Aboutcamel_case_nameDialog object.
         """
-        pass
+        builder = get_builder('Aboutcamel_case_nameDialog')
+        new_object = builder.get_object("about_python_name_dialog")
+        new_object.finish_initializing(builder)
+        return new_object
 
     def finish_initializing(self, builder):
-        """Called after we've finished initializing.
+        """Called while initializing this instance in __new__
 
         finish_initalizing should be called after parsing the ui definition
         and creating a Aboutcamel_case_nameDialog object with it in order to
         finish initializing the start of the new Aboutcamel_case_nameDialog
         instance.
+        
+        Put your initialization code in here and leave __init__ undefined.
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
@@ -42,17 +42,7 @@ class Aboutcamel_case_nameDialog(gtk.AboutDialog):
         # Code for other initialization actions should be added here.
 
 
-def NewAboutcamel_case_nameDialog():
-    """Returns a fully instantiated Aboutcamel_case_nameDialog object.
-
-    Use this function rather than creating a Aboutcamel_case_nameDialog
-    instance directly.
-    """
-    return make_window(
-        'Aboutcamel_case_nameDialog', "about_python_name_dialog")
-
-
 if __name__ == "__main__":
-    dialog = NewAboutcamel_case_nameDialog()
+    dialog = Aboutcamel_case_nameDialog()
     dialog.show()
     gtk.main()
