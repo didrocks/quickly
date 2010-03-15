@@ -358,7 +358,7 @@ When <application>Quickly</application> created your application, it automatical
 <para><title>Creating the Empty Dialog</title>
 It's simple to add an empty, but working dialog to your project. Simply specify the name of the new dialog, and it will be added automatically. Assuming that you are in the jotty project directory:</para>
 <para><code>
-<application>Quickly</application> dialog save
+<application>Quickly</application> add dialog
 </code></para>
 <para>This will add the dialog to your project.</para>
 <para><title>Editing the New Dialog</title>
@@ -844,7 +844,7 @@ Now that you've packaged your application, you can share the .deb file. However,
 <xref linkend="create">create</xref>
    </listitem>
    <listitem>
-<xref linkend="dialog">dialog</xref>
+<xref linkend="dialog">add dialog</xref>
    </listitem>
    <listitem>
 <xref linkend="edit">edit</xref>
@@ -901,7 +901,7 @@ Changing your working directory to the new project:</para>
 </itemizedlist>
 </sect1>
 
-<sect1 id="dialog"><title>dialog</title>
+<sect1 id="dialog"><title>add dialog</title>
 <para><title>dialog</title>
 Usage:</para>
 <para><code><application>Quickly</application> dialog dialog_name</code></para>
