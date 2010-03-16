@@ -7,7 +7,7 @@ predetermined time period.
 
 import pygame, random
 from base_sprite import BaseSprite
-import project_name_config
+import project_nameconfig
 
 class Bullet(BaseSprite):
     """
@@ -35,13 +35,13 @@ class Bullet(BaseSprite):
         called 'bullet.png'.
  
         """
-        img = project_name_config.default_bullet
+        img = project_nameconfig.default_bullet
         if img_name != None:
             img = img_name
         BaseSprite.__init__(self, img)
-        self.launchSound = pygame.mixer.Sound(project_name_config.guy_shoot_sound)
+        self.launchSound = pygame.mixer.Sound(project_nameconfig.guy_shoot_sound)
         self.launchSound.play()
-        self.explosionSound = pygame.mixer.Sound(project_name_config.guy_bullet_explode)
+        self.explosionSound = pygame.mixer.Sound(project_nameconfig.guy_bullet_explode)
         self.orientation = orientation
         self.x = x
         self.y = y
@@ -71,7 +71,7 @@ class Bullet(BaseSprite):
             e = self.explodestage
             if e < 5:
                 e = str(e)
-                self.masterImage = pygame.image.load(project_name_config.bullet_explode_stage + e  + ".png")
+                self.masterImage = pygame.image.load(project_nameconfig.bullet_explode_stage + e  + ".png")
                 self._update_image()
             else:
                 self.kill()

@@ -9,7 +9,7 @@ BaseSprite functionality.
 import pygame, random
 from base_sprite import BaseSprite
 from bullet import Bullet
-import project_name_config
+import project_nameconfig
 
 class Guy(BaseSprite):
     """
@@ -28,10 +28,10 @@ class Guy(BaseSprite):
 
         """
 
-        BaseSprite.__init__(self, project_name_config.guy_img)
+        BaseSprite.__init__(self, project_nameconfig.guy_img)
         self.bullets = bullets_group
-        self.hum = pygame.mixer.Sound(project_name_config.guy_eng)
-        self.explosionSound = pygame.mixer.Sound(project_name_config.guy_explode)
+        self.hum = pygame.mixer.Sound(project_nameconfig.guy_eng)
+        self.explosionSound = pygame.mixer.Sound(project_nameconfig.guy_explode)
         self.alive = True
         self.exploding = False
         self.explodestage = 0
@@ -45,14 +45,14 @@ class Guy(BaseSprite):
         
         """
 
-        sw = project_name_config.screen_width
-        sh = project_name_config.screen_height
+        sw = project_nameconfig.screen_width
+        sh = project_nameconfig.screen_height
 
         #start off in the center of screen, still, facing up
         self.stop()
         self.x = sw/2
         self.y = sh/2
-        self.master_image = pygame.image.load(project_name_config.guy_img)
+        self.master_image = pygame.image.load(project_nameconfig.guy_img)
         self._update_image()
         self.visible = True
         self.alive = True
@@ -107,7 +107,7 @@ class Guy(BaseSprite):
         if self.alive:
             #only allow max numbe of  bullets on the screen at a time
             if len(self.bullets.sprites()) < self.max_bullets:
-                imgName = project_name_config.guy_bullet
+                imgName = project_nameconfig.guy_bullet
                 b = Bullet(self.x,self.y,self.orientation, imgName)
                 self.bullets.add(b)
 
@@ -120,8 +120,8 @@ class Guy(BaseSprite):
         """
 
         self.stop()
-        self.x = random.randint(0,project_name_config.screen_width)
-        self.y = random.randint(0,project_name_config.screen_height)
+        self.x = random.randint(0,project_nameconfig.screen_width)
+        self.y = random.randint(0,project_nameconfig.screen_height)
         #every now and then, blow up on hyperspace for no reason
         if random.randint(0,5) == 2:
             self.explode()
@@ -160,7 +160,7 @@ class Guy(BaseSprite):
             e = self.explodestage
             if e < 8:#there are 7 explosion images
                 e = str(e)
-                img_name = project_name_config.guy_explode_stage + e  + ".png"
+                img_name = project_nameconfig.guy_explode_stage + e  + ".png"
                 self.master_image = pygame.image.load(img_name)
                 self._update_image()
 

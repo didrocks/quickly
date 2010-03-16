@@ -6,7 +6,7 @@ enemy module - contains the enemy class, an extenstion of BaseSprite.
 
 import pygame
 from base_sprite import BaseSprite
-import project_name_config
+import project_nameconfig
 
 class Enemy(BaseSprite):
     """
@@ -20,14 +20,14 @@ class Enemy(BaseSprite):
     def __init__(self):
         """Creates an Enemy """
 
-        BaseSprite.__init__(self, project_name_config.enemy_image)
+        BaseSprite.__init__(self, project_nameconfig.enemy_image)
         self.points = 1
         self.accelerationDivisor = 1  
         self.orientation = 0
         self.rotatingRight = False
         self.rotatingLeft = False
         self.rotationRate = 0
-        self.explosion_sound = pygame.mixer.Sound(project_name_config.enemy_explode_sound)
+        self.explosion_sound = pygame.mixer.Sound(project_nameconfig.enemy_explode_sound)
         self.explode_stage = 0
         self.exploding = False
         self.init_position()
@@ -42,7 +42,7 @@ class Enemy(BaseSprite):
             e = self.explode_stage
             if e < 8:
                 e = str(e)
-                img_name = project_name_config.enemy_explode_stage + e  + ".png"
+                img_name = project_nameconfig.enemy_explode_stage + e  + ".png"
                 self.master_image = pygame.image.load(img_name)
                 self._update_image()
                 return

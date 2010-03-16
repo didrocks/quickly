@@ -7,7 +7,7 @@ of BaseSprite
 import pygame
 from base_sprite import BaseSprite
 import math
-import project_name_config
+import project_nameconfig
 
 class HomingMissle(BaseSprite):
     """
@@ -43,7 +43,7 @@ class HomingMissle(BaseSprite):
         self.targetted = False
         self.explode_stage = 0
         self.exploding = False
-        self.explosion_sound = pygame.mixer.Sound(project_name_config.enemy_explode_sound)
+        self.explosion_sound = pygame.mixer.Sound(project_nameconfig.enemy_explode_sound)
         self.points = 1
 
     def update(self):
@@ -60,7 +60,7 @@ class HomingMissle(BaseSprite):
             e = self.explode_stage
             if e < 8:
                 e = str(e)
-                img_name = project_name_config.enemy_explode_stage + e  + ".png"
+                img_name = project_nameconfig.enemy_explode_stage + e  + ".png"
                 self.master_image = pygame.image.load(img_name)
                 self._update_image()
                 return

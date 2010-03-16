@@ -17,7 +17,7 @@ from project_name.guy import Guy
 from project_name.enemy import Enemy
 from project_name.homingmissle import HomingMissle
 from project_name.game import Game
-import project_name.project_name_config
+import project_name.project_nameconfig
 
 #set up translations
 import gettext
@@ -29,12 +29,12 @@ pygame.font.init()
 pygame.mixer.init()
 random.seed()
 
-sw = project_name.project_name_config.screen_width
-sh = project_name.project_name_config.screen_height
+sw = project_name.project_nameconfig.screen_width
+sh = project_name.project_nameconfig.screen_height
 
 #setup the display
 screen = pygame.display.set_mode((sw, sh))
-background = pygame.image.load(project_name.project_name_config.background_image)
+background = pygame.image.load(project_name.project_nameconfig.background_image)
 pygame.mouse.set_visible(False)
 
 #set up some objects and models
@@ -49,7 +49,7 @@ g = Guy(bullets)
 enemies = pygame.sprite.RenderUpdates()
 
 #set up the game over screen, center is by default
-gov = BaseSprite(project_name.project_name_config.game_over_background)
+gov = BaseSprite(project_name.project_nameconfig.game_over_background)
 gov.x = (sw - gov.rect.width)/2
 gov.y = (sh - gov.rect.height)/2
 gov.update()
@@ -68,7 +68,7 @@ def next_level():
     #depening on the level
     for i in xrange(0,1):
         enemies.add(Enemy())
-    enemies.add(HomingMissle(g,project_name.project_name_config.homing_missle_image))
+    enemies.add(HomingMissle(g,project_name.project_nameconfig.homing_missle_image))
 
 def reset_level():
     """reset_level - reset the current level after the player's 

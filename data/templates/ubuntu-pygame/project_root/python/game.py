@@ -5,7 +5,7 @@ game module. Contains the Game class.
 """
 
 import pygame
-import project_name_config
+import project_nameconfig
 
 class Game():
     """
@@ -24,7 +24,7 @@ class Game():
         self.multiplier = 1
         self.free_guys_from_points = 1
         self.free_guy_at = 10
-        self.free_guy_sound = pygame.mixer.Sound(project_name_config.free_guy_sound)
+        self.free_guy_sound = pygame.mixer.Sound(project_nameconfig.free_guy_sound)
         self.paused = False
 
     def add_free_guy(self):
