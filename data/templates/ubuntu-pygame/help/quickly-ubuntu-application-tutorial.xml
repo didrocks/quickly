@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+
+ <!ENTITY appname "<application>Quickly PyGame Template</application>" >
+ <!ENTITY appversion "0.4" >
+] >
+
+<book lang="en" id="index">
+ <bookinfo id="Front">
+   <authorgroup>
+     <author role="maintainer">
+       <firstname>Rick</firstname>
+       <surname>Spencer</surname>
+     </author> 
+   <corpauthor>
+     Canonical ltd
+   </corpauthor>
+   </authorgroup>
+   <date>
+     2010
+   </date>
+   <productname class="trade">&appname;</productname>
+   <productnumber>&appversion;</productnumber>
+   <invpartnumber>2010</invpartnumber>
+   <title>&appname; &appversion; Tutorial</title>
+ </bookinfo>
+
+
+<preface id="preface">
+ <title>About This Guide</title>
+ <para>
+Use <application>The Quickly Pygame Template</application> to write old school arcade games for running on Ubuntu. PyGame is a framework that handles sprites, collisons, sounds, and everything you need to make a game. You just need to add the game play. The Quickly template creates a starter game for you and comes ready for you to turn into your fun game, and then easily package and share it with other Ubuntu users.
+ </para>
+ <para>
+The Quickly Pygame Template inherits from the Quickly Application template. So you get all the commands that you get from the that template, except "design".
+ </para>
+</preface>
+
+<chapter id="introduction">
+ <title>
+Introduction to the <application>Quickly PyGame Template</application>
+ </title>
+ <para>
+This part 1 of the the <application>Quickly PyGame Template</application> tutorial. This part is will introduce some key the <application>Quickly PyGame Template</application> commands, adding your own sprite images, and editing code in Gedit. This part of the tutorial will familiarize you with these three tools, and how they work together with python and pygtk so that you can the <application>Quickly PyGame Template</application> build applications.
+ </para>
+</chapter>
+
+<chapter id="creating">
+ <title>
+Creating and Running your Game
+ </title>
+ <para>
+In this tutorial we will start making a top down shooter reminiscent of the space arcade shooters of the early 1980s.
+ </para>
+ <graphic fileref="./images/game0.png"></graphic>
+ <para>
+We'll do this by creating a default game, editing some of the generated code, writing some new code, and adding our images for sprits.
+ </para>
+ <para>
+Creating a default working game couldn't be simpler. First, open a terminal window to type commands into. When it's open, type the command:
+ </para>
+ <programlisting>
+$quickly create ubuntu-pygame shooter
+ </programlisting>
+ <graphic fileref="./images/terminal1.png"></graphic>
+ <para>
+This will create a shooter sub directory containing a complete directory tree and files for an empty python application. The command finishes by running the newly created game.
+ </para>
+ <graphic fileref="./images/game1.png"></graphic>
+ <title>Playing the Game</title> 
+ <para>
+You can play the newly created game. Notice that the <application>Quickly PyGame Template</application> inferred that the game title is "Shooter". Also note that there is a guy that you can control with the s,f,j, and l keys. There is an enemy and a homing missle. You also get a "Game Over" screen, scoring, and levels build in for free.
+ </para>
+ <graphic fileref="./images/game2.png"></graphic>
+ <title>Running the Game</title>
+ <para> 
+Close the game by closing the window or using the Esc key. Since the game isn't installed into Ubuntu yet, you can't start the game from the application menu yet. To start the game, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.
+ </para> 
+ <programlisting>
+$cd jotty
+$quickly run
+ </programlisting>
+ <graphic fileref="./images/terminal2.png"></graphic>
+</chapter>
+<chapter>
+ <title>Creating your own Sprites</title>
+ <para>
+The first think you probably noticed about the game is that the graphics are so blah! 
+ </para>
+</chapter>
+<chapter>
+ <title>Changing the Screen Dimensions</title>
+ <para>
+The first change we'll make is to change the screen dimensions to be oriented from top to bottom.
+ </para>
+</chapter>
+<chapter>
+ <title>Change the Guy</title>
+ <para>
+start at the bottom, move along the bottom, center bullets
+ </para>
+</chapter>
+<chapter>
+ <title>Make enemies</title>
+ <para>
+start in different places, move as desired, drop bombs
+ </para>
+</chapter>
+<chapter>
+ <title>Collisions</title>
+ <para>
+make bombs collide with guy, make guys bullets collide with bombs
+ </para>
+</chapter>
+<chapter>
+ <title>Playing Sounds</title>
+ <para>
+make a tink noise when the bombs collide with bullets
+ </para>
+</chapter>
+</book>

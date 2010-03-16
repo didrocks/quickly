@@ -31,7 +31,7 @@ def help():
     print _("""Usage:
 $ quickly tutorial
 
-Opens a web browser with the tutorial for ubuntu-application template.
+Opens help file with the tutorial for the current template.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
