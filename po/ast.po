@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2010-01-13 01:50+0000\n"
-"Last-Translator: Xuacu Saturio <xuacusk8@gmail.com>\n"
+"PO-Revision-Date: 2010-03-17 12:34+0000\n"
+"Last-Translator: Iñigo Varela <malditoastur@gmail.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-14 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-03-18 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -267,25 +267,29 @@ msgstr ""
 #: ../data/templates/ubuntu-project/release.py:172
 msgid "ERROR: quickly can't release as it can't commit with bzr"
 msgstr ""
+"ERROR: quickly nun puede llanzase darréu que nun puede facer commit con bzr"
 
 #: ../data/templates/ubuntu-project/release.py:202
 #: ../data/templates/ubuntu-project/release.py:220
 msgid "ERROR: quickly can't release: can't push to launchpad."
-msgstr ""
+msgstr "ERROR: quickly nun puede llanzase: nun puede facer push a launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:208
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
 msgstr ""
+"ERROR: quickly nun puede llanzase correutamente: nun puede facer pull de "
+"launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:215
 msgid "ERROR: quickly can't release: can't pull from launchpad."
 msgstr ""
+"ERROR: quickly nun puede llanzase: nun puede facer pull de launchpad."
 
 #. upload to launchpad
 #: ../data/templates/ubuntu-project/release.py:225
 #: ../data/templates/ubuntu-project/share.py:124
 msgid "pushing to launchpad"
-msgstr ""
+msgstr "faciendo push a launchpad"
 
 #: ../data/templates/ubuntu-project/release.py:230
 #, python-format
