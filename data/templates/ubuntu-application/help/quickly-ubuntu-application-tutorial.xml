@@ -161,8 +161,8 @@ Now you're ready to write some code. Of course just telling the glade file what 
 <para>JottyWindow.ui is now expecting to find a function JottyWindow.save_file(), so we simply add one to the JottyWindow class in the jotty file right under the on_destroy funtion.:</para> 
 <para> 
     <literallayout><programlisting>
-def save_file(self, widget, data=None):
-    print "save"
+    def save_file(self, widget, data=None):
+        print "save"
 
 </programlisting></literallayout></para> 
 
@@ -209,31 +209,33 @@ from desktopcouch.records.record import Record
 <para><title>Get a Reference to the Database</title> 
 Desktopcouch will set up a database for us, or create a new one if it's needed. We'll use "jotty" for the name of the database. Since we want this line to run every time the Jotty Window is created, put it at the end of the finish_initializing function:</para> 
 <para><programlisting> 
-self.database = CouchDatabase("jotty", create=True)
+        self.database = CouchDatabase("jotty", create=True)
 </programlisting></para>
 <para>Now that we have an instance-wide reference to the database, we'll add code to the save_file function to run whenever the Save command is issued.</para> 
 <para>Here's the code to pull the title out of the title entry:</para> 
 <para>
 <literallayout>
-<programlisting>#get the title for the note
-title = self.builder.get_object("entry1").get_text()
+<programlisting>
+        #get the title for the note
+        title = self.builder.get_object("entry1").get_text()
 </programlisting></literallayout></para>
 <para><title>Here's the code to get pull the text out of the TextView:</title> 
 In pygtk, TextView widgets have a text buffer that stores the text. So you ask the TextView for it's TextBuffer, and then you ask the TextBuffer for the text. You use iters to determine from which part of the text buffer you want text. Since we want all the text, it's easy to just get the start and end iters.</para> 
 <para>
-<literallayout><programlisting>#get the string
-buff = self.builder.get_object("textview1").get_buffer()
-start_iter = buff.get_start_iter()
-end_iter = buff.get_end_iter()
-text = buff.get_text(start_iter,end_iter)
+<literallayout><programlisting>
+        #get the string
+        buff = self.builder.get_object("textview1").get_buffer()
+        start_iter = buff.get_start_iter()
+        end_iter = buff.get_end_iter()
+        text = buff.get_text(start_iter,end_iter)
 </programlisting></literallayout></para>
 <para><title>Saving a document to Couchdb</title> 
 A record in couch is essentially a python dictionary with some extra key/value pairs to make the database work. So we can save the document to couch like this:</para> 
 <para>
 <literallayout><programlisting>
-record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-new_rec = Record({"record_type": record_type,"title":title, "text":text})
-self.database.put(new_rec)
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
+        new_rec = Record({"record_type": record_type,"title":title, "text":text})
+        self.database.put(new_rec)
 </programlisting></literallayout></para> 
 <para>The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.</para> 
 <para>
@@ -258,39 +260,48 @@ Before we just write the new document though, we have to take note of the fact t
   </itemizedlist>
 <para>This all may sound very weird, but in code, it's not quite so complicated:</para> 
 <para>
-<literallayout><programlisting>#get all the records
-record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-results = self.database.get_records(record_type = record_type,create_view = True)
-#update a record that has the same title
-for result in results:
-    document = result.value
-    if document["title"] == title:
-        key = document["_id"]
-        self.database.update_fields(key, {"text":text})
-           return</programlisting></literallayout></para>
+<literallayout><programlisting>
+        #get all the records
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
+        results = self.database.get_records(record_type = record_type,create_view = True)
+        #update a record that has the same title
+        for result in results:
+            document = result.value
+            if document["title"] == title:
+                key = document["_id"]
+                self.database.update_fields(key, {"text":text})
+                return
+
+</programlisting></literallayout></para>
 <para>So the whole function should look like this:</para> 
 <para> 
-<literallayout><programlisting>def save_file(self, widget, data=None): 
-#get the title for the note 
-    title = self.builder.get_object("entry1").get_text() 
-#get the text to save 
-    buff = self.builder.get_object("textview1").get_buffer() 
-    start_iter = buff.get_start_iter() 
-    end_iter = buff.get_end_iter() 
-    text = buff.get_text(start_iter,end_iter) 
-#get all the records 
-    record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc" 
-    results = self.database.get_records(record_type = record_type,create_view = True) 
-#update a record that has the same title 
-    for result in results: 
-        document = result.value 
-        if document["title"] == title: 
-            key = result.key 
-            self.database.update_fields(key, {"text":text}) 
-           return 
-#if no records had the title, create it 
-    new_rec = Record({"record_type":record_type,"title":title, "text":text})
-    self.database.put_record(new_rec)</programlisting></literallayout>
+<literallayout><programlisting>
+    def save_file(self, widget, data=None): 
+        #get the title for the note 
+        title = self.builder.get_object("entry1").get_text() 
+
+        #get the text to save 
+        buff = self.builder.get_object("textview1").get_buffer() 
+        start_iter = buff.get_start_iter() 
+        end_iter = buff.get_end_iter() 
+        text = buff.get_text(start_iter,end_iter) 
+
+        #get all the records 
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc" 
+        results = self.database.get_records(record_type = record_type,create_view = True) 
+
+        #update a record that has the same title 
+        for result in results: 
+            document = result.value 
+            if document["title"] == title: 
+                key = result.key 
+                self.database.update_fields(key, {"text":text}) 
+                return
+ 
+        #if no records had the title, create it 
+        new_rec = Record({"record_type":record_type,"title":title, "text":text})
+        self.database.put_record(new_rec)
+</programlisting></literallayout>
 </para>
 <para>Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</para>
 <para>file:///home/your_user_name/.local/share/desktop-couch/couchdb.html</para>
@@ -318,13 +329,14 @@ Follow these steps:</para>
   </itemizedlist>
 <para>So the open_file function looks like so:</para> 
 <para>
-    <literallayout><programlisting>def open_file(self, widget, data=None):
+    <literallayout><programlisting>
+    def open_file(self, widget, data=None):
         #get the name of the document to open
         title = self.builder.get_object("entry1").get_text()
         text = ""
  
         #get all the records
-        record_type = "http://wiki.ubuntu.com/<application>Quickly</application>/JottyDoc"
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
         results = self.database.get_records(record_type = record_type,create_view = True)
  
         #get the text if there is a matching title
@@ -335,14 +347,17 @@ Follow these steps:</para>
         
         #set the UI to display the string
         buff = self.builder.get_object("textview1").get_buffer()
-        buff.set_text(text)</programlisting></literallayout></para>
+        buff.set_text(text)
+</programlisting></literallayout></para>
 <para><title>Implement New</title> 
 First, add the new_file signal to the menu item in Glade, then add this code to clear out the text:</para> 
 <para>
-    <literallayout><programlisting>def new_file(self, widget, data=None):
+    <literallayout><programlisting>
+    def new_file(self, widget, data=None):
         self.builder.get_object("entry1").set_text("Note Title")
         buff = self.builder.get_object("textview1").get_buffer()
-        buff.set_text("")</programlisting></literallayout></para>
+        buff.set_text("")
+</programlisting></literallayout></para>
 <para>To make them work, add these functions to the JottyWindow class, and save. Then go back and connect the functions to the activate signals for the Open and New menu items.</para>
 <ulink url="./code/jotty">Complete jotty file</ulink>
 <para><title>Saving Your Work</title> 
@@ -675,7 +690,7 @@ Now just put the text into the texview:</para>
 </chapter>
 
 <chapter id="Quickly-part3">
-<title>Introduction to <application>Quickly</application> Part 3</title>
+<title>Packaging</title>
 <para>In parts 1 and 2, we showed how to create a simple Ubuntu application using <application>Quickly</application>. This section will cover how to package an application so that it is easy for you to share, and easy for other people to install.</para>
 <para><title>License your Application</title>
 It's important to license your code so users and other programmers know their rights in terms of redistributing or modifying it. To <application>Quickly</application> grant a GPL license to your  code, simply:</para>
