@@ -25,6 +25,7 @@ from launchpadlib.errors import HTTPError
 from quickly import configurationhandler
 from quickly import launchpadaccess
 from internal import quicklyutils
+from quickly import templatetools
 
 import gettext
 from gettext import gettext as _
@@ -49,6 +50,26 @@ class invalid_version_in_setup(Exception):
     def __str__(self):
         return repr(self.msg)
 
+class DomainLevel:
+    NONE=0
+    WARNING=1
+    ERROR=2
+
+def print_summary(err_output, warn_output):
+    """print existing error and warning"""
+
+    print #finish the current line
+    if err_output:
+        print ('----------------------------------')
+        print _('Command returned some ERRORS:')
+        print ('----------------------------------')
+        print ('\n'.join(err_output))
+        print ('----------------------------------')
+    if warn_output:
+        print _('Command returned some WARNINGS:')
+        print ('----------------------------------')
+        print ('\n'.join(warn_output))
+        print ('----------------------------------')
 
 def updatepackaging(changelog=None):
     """create or update a package using python-mkdebian.
@@ -67,14 +88,56 @@ def updatepackaging(changelog=None):
             if elem:
                 command.extend(["--dependency", elem])
     except KeyError:
-        pass        
+        pass
 
-    return_code = subprocess.call(command)
+    proc = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE)
+    output_domain = DomainLevel.NONE
+    verbose = templatetools.in_verbose_mode()
+    err_output = []
+    warn_output = []
+    while True:
+        line_stdout = proc.stdout.readline().rstrip()
+        line_stderr = proc.stderr.readline().rstrip()
+        if line_stderr:
+            if verbose:
+                print line_stdout
+            else:
+                err_output.append(line_stderr)
+        if not line_stdout:
+            # don't replace by if proc.poll() as the output can be empty
+            if proc.poll() != None:
+                break
+        else:
+            if verbose:
+                print line_stdout
+            else:
+                if 'ERR' in line_stdout:
+                    output_domain = DomainLevel.ERROR
+                elif 'WARN' in line_stdout:
+                    output_domain = DomainLevel.WARNING
+                elif not line_stdout.startswith(' '):
+                    output_domain = DomainLevel.NONE
+                    if '[not found]' in line_stdout:
+                        output_domain = DomainLevel.WARNING
+                if  output_domain == DomainLevel.ERROR:
+                    err_output.append(line_stdout)
+                elif output_domain == DomainLevel.WARNING:
+                    warn_output.append(line_stdout)
+                else:
+                    sys.stdout.write('.')
+
+    print_summary(err_output, warn_output)
+    return_code = proc.returncode
     if return_code == 0:
-        print _("Ubuntu packaging created in debian/")
+        if err_output or warn_output:
+            if not 'y' in raw_input("Do you want to continue (this is not safe!) y/[n]: "):
+                print _("An error has occurred")
+                return(4)            
     else:
         print _("An error has occurred")
         return(return_code)
+    print _("Ubuntu packaging created in debian/")
 
     # check if first python-mkdebian (debian/ creation) to commit it
     # that means debian/ under unknown
