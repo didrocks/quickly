@@ -39,13 +39,13 @@ templatetools.handle_additional_parameters(sys.argv, help)
 # abs_template_path = templatetools.get_template_path_from_project() stop when
 # you are outside a project
 help_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'help')
-help_file = os.path.join(help_dir, 'quickly-ubuntu-application-tutorial-%s.xml'
+help_file = os.path.join(help_dir, 'tutorial-%s.xml'
                                     % locale.getdefaultlocale()[0])
 if not os.path.isfile(help_file) and locale.getdefaultlocale()[0] is not None:
     help_file = os.path.join(help_dir,
-                            'quickly-ubuntu-application-tutorial-%s.xml'
+                            'tutorial-%s.xml'
                             % locale.getdefaultlocale()[0].split('_')[0])
 if not os.path.isfile(help_file):
-    help_file = os.path.join(help_dir, 'quickly-ubuntu-application-tutorial.xml')
+    help_file = os.path.join(help_dir, 'tutorial.xml')
 subprocess.Popen(['yelp', help_file], stderr=file("/dev/null"))
 
