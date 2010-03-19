@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2010-03-12 22:28+0000\n"
+"PO-Revision-Date: 2010-03-18 18:26+0000\n"
 "Last-Translator: Shane Fagan <shanepatrickfagan@ubuntu.com>\n"
 "Language-Team: Irish <ga@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-13 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-03-19 07:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
@@ -157,33 +157,39 @@ msgid ""
 "ERROR: %s command must be followed by a template and no template was found "
 "on the command line."
 msgstr ""
+"Earráid: %s Ní mór gceannas a bheith ag leanúint le teimpléad agus aimsíodh "
+"aon teimpléad ar an líne gceannas."
 
 #: ../bin/quickly.py:204 ../bin/quickly.py:217 ../bin/quickly.py:222
 #: ../quickly/builtincommands.py:158
 #, python-format
 msgid "Candidates template are: %s"
-msgstr ""
+msgstr "Teimpléad iarrthóirí iad: %s"
 
 #: ../bin/quickly.py:221
 #, python-format
 msgid "No template were found on the command line for command %s."
 msgstr ""
+"Uimh Fuarthas go raibh an teimpléad ar an líne orduithe le haghaidh orduithe "
+"%s."
 
 #. there is really not such command, in any template
 #: ../bin/quickly.py:225 ../quickly/builtincommands.py:160
 #, python-format
 msgid "ERROR: No %s command found."
-msgstr ""
+msgstr "Earráid: No gceannas %s ar bith aimsithe."
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:85
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:126
 msgid "ERROR: Can't load setup.py file"
-msgstr ""
+msgstr "Earráid: Ní féidir a luchtú setup.py comhad"
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:156
 msgid ""
 "No gpg key set. Take a look at quickly tutorial to learn how to setup one"
 msgstr ""
+"Uimh leagtha eochair GPG. Féach ar tapa teagaisc a fháil amach conas a thus "
+"amháin"
 
 #: ../data/templates/ubuntu-project/release.py:34
 msgid ""
@@ -218,6 +224,38 @@ msgid ""
 "You can run $quickly package and test your package to make sure it\n"
 "installs as expected. (This is not mandatory)\n"
 msgstr ""
+"Úsáide:\n"
+"$ scaoileadh go tapa\n"
+"\n"
+"Poist a scaoileadh do thionscadal le PPA ar launchpad ionas go\n"
+"Is féidir le húsáideoirí shuiteáil an t-iarratas ar a gcóras.\n"
+"\n"
+"Is féidir leat freisin rith:\n"
+"Ní $ scaoileadh sciobtha <release_number> ar mhaith leat a úsáid reatha\n"
+"release_number. Ní mór a bheith an release_number roinnt.\n"
+"\n"
+"$ Preaseisiúint <release_number> tapa agus nótaí maidir le hathruithe\n"
+"áit a bhfuil \"nótaí maidir le hathruithe\" téacs roghnach cur síos ar na "
+"hathruithe a\n"
+"Rinneadh ó na deireanach a shábháil\n"
+"\n"
+"\n"
+"Roimh a shíneann go tapa Preaseisiúint, ba chóir duit: chruthú do chuntas\n"
+"agus leathanach tionscadal ar http://launchpad.net.\n"
+"Tá tú chomh maith le PPA a chur le do chuntas launchpad.\n"
+"\n"
+"Beidh Ainm, ríomhphost agus setup.py leagan a athrú go huathoibríoch.\n"
+"Beidh (Leagan a <current_release> agus bzr beidh tiomantas agus tagged.\n"
+"Nuair atá an scaoileadh dhéanamh, beidh <current_release> a incremented\n"
+"ag 0.1 a bheith réidh le haghaidh scaoileadh amach romhainn.\n"
+"Má úsáidtear agat roimhe seo roinnte go tapa <current_release> ~ publicX\n"
+"Beidh thit a scaoileadh <current_release> leagan\n"
+"(<current_release> ~ publicX <<current_release>)\n"
+"Is féidir leat a mhodhnú ar an tuairisc agus cur síos fada más mian leat.\n"
+"\n"
+"Is féidir leat siúl $ pacáiste tapa agus pacáiste do thástáil a dhéanamh "
+"cinnte go\n"
+"Insealbhaíonn ag súil le. (Níl an sainordaitheach)\n"
 
 #: ../data/templates/ubuntu-project/release.py:77
 #: ../data/templates/ubuntu-project/share.py:90
@@ -225,27 +263,32 @@ msgid ""
 "Release version not found in setup.py and no version specified in command "
 "line."
 msgstr ""
+"Scaoileadh leagan Ní bhfuarthas i setup.py agus aon leagan a shonraítear i "
+"gceannas ar líne."
 
 #: ../data/templates/ubuntu-project/release.py:79
 msgid "quickly released"
-msgstr ""
+msgstr "quickly scaoileadh"
 
 #: ../data/templates/ubuntu-project/release.py:85
 #, python-format
 msgid "quickly released: %s"
-msgstr ""
+msgstr "quickly scaoileadh: %s"
 
 #: ../data/templates/ubuntu-project/release.py:105
 msgid ""
 "Release version specified in command arguments or in setup.py is not a valid "
 "number."
 msgstr ""
+"Ní Scaoileadh leagan sonraithe i argóintí gceannas nó i setup.py uimhir "
+"bailí."
 
 #: ../data/templates/ubuntu-project/release.py:150
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
 msgstr ""
+"ppa:%s:%s níl ann. Le do thoil amháin a chruthú ar launchpad roimh scaoileadh"
 
 #: ../data/templates/ubuntu-project/release.py:162
 #, python-format
@@ -253,29 +296,37 @@ msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
 msgstr ""
+"Dealraíonn sé go Earráid: %s ní féidir le scaoileadh go tapa: a scaoileadh "
+"cheana. Roghnaigh ainm eile."
 
 #: ../data/templates/ubuntu-project/release.py:172
 msgid "ERROR: quickly can't release as it can't commit with bzr"
 msgstr ""
+"Earráid: ní féidir Preaseisiúint tapa agus is féidir nach bhfuil sé tiomanta "
+"le bzr"
 
 #: ../data/templates/ubuntu-project/release.py:202
 #: ../data/templates/ubuntu-project/release.py:220
 msgid "ERROR: quickly can't release: can't push to launchpad."
 msgstr ""
+"Earráid: ní féidir Preaseisiúint tapa: ní féidir a bhrú chun launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:208
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
 msgstr ""
+"Earráid: ní féidir nach féidir Preaseisiúint go mear i gceart: tarraingt ó "
+"launchpad."
 
 #: ../data/templates/ubuntu-project/release.py:215
 msgid "ERROR: quickly can't release: can't pull from launchpad."
 msgstr ""
+"Earráid: ní féidir Preaseisiúint tapa: ní féidir le tarraingt as launchpad."
 
 #. upload to launchpad
 #: ../data/templates/ubuntu-project/release.py:225
 #: ../data/templates/ubuntu-project/share.py:124
 msgid "pushing to launchpad"
-msgstr ""
+msgstr "ag brú chun launchpad"
 
 #: ../data/templates/ubuntu-project/release.py:230
 #, python-format
@@ -283,14 +334,16 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s scaoilte agus tógáil ar Launchpad. Fan ar leath uair an chloig agus ag "
+"breathnú ar %s."
 
 #: ../quickly/version.py:35
 msgid "No quickly data path found."
-msgstr ""
+msgstr "Uimh tapa sonraí conair aimsithe."
 
 #: ../quickly/version.py:39
 msgid "No template found."
-msgstr ""
+msgstr "Uimh teimpléad ar bith aimsithe."
 
 #: ../quickly/version.py:41
 #, python-format
@@ -313,21 +366,40 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"Python interpreter: %s %s\n"
+"Python standard library: %s\n"
+"\n"
+"Quickly used library: %s\n"
+"Quickly data path: %s\n"
+"Quickly detected template directories:\n"
+"%s\n"
+"\n"
+"Copyright 2009 Canonical Ltd.\n"
+"#Author 2009 Rick Spencer\n"
+"#Author 2009 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and\n"
+"you may use, modify and redistribute it under the terms of the GNU\n"
+"General Public License version 3 or later."
 
 #: ../quickly/templatetools.py:35
 msgid "No help for this command"
-msgstr ""
+msgstr "Uimh cúnamh don ordú seo"
 
 #: ../quickly/templatetools.py:54
 msgid ""
 "ERROR: unpermitted character in name.\n"
 "Letters and digits only."
 msgstr ""
+"Earráid: carachtar unpermitted i ainm.\n"
+"Litreacha agus digití amháin."
 
 #: ../quickly/templatetools.py:59
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr ""
+msgstr "Earráid: %s ní ceadaithe mar ainm tionscadal go tapa"
 
 #: ../data/templates/ubuntu-project/package.py:31
 msgid ""
@@ -345,24 +417,41 @@ msgid ""
 "commands afterwards. Those changes are not a mandatory at all for\n"
 "testing purpose.\n"
 msgstr ""
+"Úsáide:\n"
+"$quickly package\n"
+"\n"
+"Cruthaigh comhad debian (deb) ó do thionscadal. Roimh rith\n"
+"an orduithe pacáiste is féidir leat a chur in eagar ar an deilbhín agus "
+"Catagóir iontráil *. desktop.in\n"
+"Saghas comhaid, áit a bhfuil * an t-ainm do thionscadal.\n"
+"\n"
+"Tabhair faoi deara gur féidir nach raibh tú ag rith go tapa scaoileadh, go "
+"tapa a roinnt\n"
+"nó a athrú go tapa-LP-tionscadal is féidir leat a chailleann an t-ainm, r-"
+"phost i\n"
+"setup.py. Is féidir leat iad a chur in eagar mura mian leat úsáid a bhaint "
+"as aon cheann de na\n"
+"orduithe ina dhiaidh sin. Nach bhfuil na hathruithe a éigeantach ag gach do\n"
+"cuspóir tástála.\n"
 
 #: ../data/templates/ubuntu-project/package.py:57
 msgid "Release version not found in setup.py."
-msgstr ""
+msgstr "Scaoileadh leagan Ní bhfuarthas i setup.py."
 
 #: ../data/templates/ubuntu-project/package.py:62
 #: ../data/templates/ubuntu-project/internal/packaging.py:64
 msgid "ERROR: can't create or update ubuntu package"
 msgstr ""
+"Earráid: Ní féidir a chruthú nó pacáiste Ubuntu thabhairt suas chun dáta"
 
 #: ../data/templates/ubuntu-project/package.py:69
 #, python-format
 msgid "Ubuntu package has been successfully created in ../%s_%s_all.deb"
-msgstr ""
+msgstr "Tá pacáiste Ubuntu cruthaithe go rathúil i ../%s_%s_all.deb"
 
 #: ../data/templates/ubuntu-project/package.py:71
 msgid "An error has occurred during package building"
-msgstr ""
+msgstr "Tá Tharla earráid le linn tógála pacáiste"
 
 #: ../data/templates/ubuntu-project/save.py:31
 msgid ""
@@ -376,14 +465,25 @@ msgid ""
 "or otherwise use the revision control, us bzr directly:\n"
 "$bzr help\n"
 msgstr ""
+"Úsáid:\n"
+"$quickly save nótaí faoi athruithe\n"
+"áit a bhfuil \"nótaí maidir le hathruithe\" téacs roghnach cur síos ar na "
+"hathruithe a\n"
+"Rinneadh ó na deireanach a shábháil.\n"
+"\n"
+"Tiomantas seo gceannas gach athrú ó na deireanach a shábháil ar bzr. Tabhair "
+"faoi deara go\n"
+"ní dhéanann sé ar son na hathruithe ar bith ar ais suas láthair. Más gá duit "
+"ar ais\n"
+"nó a úsáid ar shlí eile, athbhreithniú a rialú, bzr linn go díreach:\n"
 
 #: ../data/templates/ubuntu-project/save.py:46
 msgid "quickly saved"
-msgstr ""
+msgstr "quickly sábháladh"
 
 #: ../data/templates/ubuntu-project/save.py:52
 msgid "It seems that you have no change to record."
-msgstr ""
+msgstr "Dealraíonn sé go bhfuil aon athrú ar taifead."
 
 #: ../data/templates/ubuntu-project/license.py:42
 msgid ""
@@ -424,6 +524,43 @@ msgid ""
 "your\n"
 "launchpad account if you didn't update it.\n"
 msgstr ""
+"Úsáide:\n"
+"$quickly license <Your_Licence>\n"
+"\n"
+"Cuir comhaid ceadúnas chun tionscadail. Roimh an úsáid a bhaint as an "
+"ordaithe, ba chóir duit:\n"
+"\n"
+"1. Cuir an comhad Cóipcheart a chur san áireamh do authorship (an chéim seo "
+"a dhéanamh go huathoibríoch\n"
+"má tá tú ag seoladh díreach \"$ tapa Preaseisiúint\" nó \"a roinnt go tapa "
+"$\" roimh athrú cheadúnas)\n"
+"Sa chás seo, tá ceadúnas GPL-3 by default.\n"
+"2. Más mian leat a chur ar do féin go tapa gan tacaíocht Cheadúnais, aistriú "
+"agus a chur in ionad na clibeanna\n"
+"### BEGIN AUTOMATIC LICENCE GENERATION and ### END AUTOMATIC LICENCE "
+"GENERATION\n"
+"i sé le do cheadúnas féin.\n"
+"Executes ceachtar $ quickly license or $ quickly licence <License>\n"
+"áit ar féidir <License> a bheith:\n"
+"- GPL-3 (default)\n"
+"- GPL-2\n"
+"\n"
+"Beidh sé seo a mhodhnú an comhad Cóipcheart le ceadúnas a roghnaíodh (le GPL-"
+"3 by default).\n"
+"Nuashonrú Ceadúnas roghnaithe roimhe sin más gá.\n"
+"Má bhain tú roimhe clibeanna a chur ar do cheadúnas féin, beidh sé saoire é "
+"pristine.\n"
+"Mura bhfuil aon ainm ar leith ar an Cóipcheart, déanfaidh sé iarracht chun é "
+"a aisghabháil ó Launchpad\n"
+"(i tapa scaoileadh nó ordú go tapa scair amháin)\n"
+"\n"
+"Ar deireadh, beidh cóip de seo an Cóipcheart ag ceann de gach comhad.\n"
+"\n"
+"Tabhair faoi deara go mura bhfuil tú ag rith go tapa ceadúnas roimh ag "
+"glaoch go tapa scaoileadh nó go tapa\n"
+"sciar, beidh an ceann seo a rith sé duit agus an sealbhóir cóipchirt buille "
+"faoi thuairim ó do\n"
+"áireamh launchpad más rud é nach raibh tú ag tabhairt cothrom le dáta é.\n"
 
 #: ../data/templates/ubuntu-project/license.py:97
 #: ../data/templates/ubuntu-project/license.py:133
@@ -431,20 +568,22 @@ msgstr ""
 #: ../data/templates/ubuntu-project/license.py:226
 #, python-format
 msgid "%s file was not found"
-msgstr ""
+msgstr "%s Ní comhad aimsíodh"
 
 #. that means we didn't find the END_LICENCE_TAG, don't copy the file
 #: ../data/templates/ubuntu-project/license.py:126
 #: ../data/templates/ubuntu-project/license.py:216
 #, python-format
 msgid "WARNING: %s was not found in the file %s. No licence replacement"
-msgstr ""
+msgstr "RABHADH: %s ní raibh le fáil in an %s. comhad Uimh ionad ceadúnais"
 
 #: ../data/templates/ubuntu-project/license.py:163
 msgid ""
 "This license seems to be unsupported by quickly. If you think it really "
 "should, please open a bug in quickly bugtracker"
 msgstr ""
+"Dealraíonn sé an ceadúnas a bheith gan tacaíocht le go tapa. Má cheapann tú "
+"gur chóir, le do thoil oscailte a bug i tapa bugtracker"
 
 #: ../data/templates/ubuntu-project/license.py:184
 msgid ""
@@ -452,14 +591,17 @@ msgid ""
 "for the copyright in place of <Your Name> <Your E-mail> or use quickly "
 "share/quickly release"
 msgstr ""
+"Ní Cóipcheart leith. Cuir an comhad Cóipcheart a chur san áireamh d'ainm ar "
+"an cóipcheart i bhfeidhm de <Your Name> <Your E-mail> nó a úsáid go quickly "
+"share / quickly release"
 
 #: ../data/templates/ubuntu-project/license.py:259
 msgid "This command only take one optional argument: License"
-msgstr ""
+msgstr "An orduithe a ghlacadh ach amháin argóint roghnach: License"
 
 #: ../quickly/tools.py:77
 msgid "No template directory found. Aborting"
-msgstr ""
+msgstr "Uimh teimpléid eolaire aimsithe. Thobscor"
 
 #: ../quickly/tools.py:95
 #, python-format
