@@ -371,8 +371,7 @@ When <application>Quickly</application> created your application, it automatical
 <title>Using Dialogs</title>
 <para>In part 1, we created an application that can read and write text files, and persist them in the couchdb backend. However, the application has a hideous usability flaw, in the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix that by adding a save and an open dialog.</para>
 
-<para><title>Creating a <application>Quickly</application> Dialog</title></para>
-<para><title>Creating the Empty Dialog</title>
+<para><title>Creating an Empty Dialog</title>
 It's simple to add an empty, but working dialog to your project. Simply specify the name of the new dialog, and it will be added automatically. Assuming that you are in the jotty project directory:</para>
 <para><programlisting>
 quickly add dialog save
@@ -385,22 +384,24 @@ quickly design
 </programlisting></para>
 <para>Then use the project menu to switch to newly created SaveDialog.ui file.</para>
    <figure>
-    <graphic fileref="./images/glade17.png"></graphic>
+    <graphic fileref="./images/26.png"></graphic>
   </figure>
 <para>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put a label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for JottyWindow in part 1. Set the padding and expand properties as well.</para>
    <figure>
-    <graphic fileref="./images/glade18.png"></graphic>
+    <graphic fileref="./images/27.png"></graphic>
   </figure>
 <para><title>Code the Dialog</title>
 You can use the "<application>Quickly</application> edit" command to open the SaveDialog.py file. This dialog needs very little additional code to work. Essentially, you just need a way to retrieve the string specified by the user. We'll add a qiuck accessor method for this:</para>
 <para>
-    <literallayout><programlisting>@property
+<programlisting>
+    @property
     def title_text(self):
-        return self.builder.get_object("entry1").get_text()</programlisting></literallayout></para>
+        return self.builder.get_object("entry1").get_text()
+</programlisting></para>
 <para>We don't need to write any code for the Ok and Cancel buttons, as they were automatically hooked up by <application>Quickly</application> when it created the dialog.</para>
 <para>Before we go on to invoking the dialog, delete HBox from JottyWindow that holds the text entry and label, as we won't be needing those.</para>
    <figure>
-    <graphic fileref="./images/glade19.png"></graphic>
+    <graphic fileref="./images/28.png"></graphic>
   </figure>
 <para><title>Calling the Save Dialog</title>
 To use the dialog in JottyWindow, we need to follow these steps:</para>
@@ -444,9 +445,11 @@ When the user chooses Save, we want to open the SaveDialog and collect the title
 <para><title>Clean up the dialog</title>
 We need to tell the dialog to not show itself anymore. We could call saver.hide() to make it hide, but since we don't need it hanging around, we'll just destroy it. Before we go on, though, we need to ensure that the user actually wants to save, so if we didn't get the Ok result, we should just return out of the function:</para>
 <para>
-        <literallayout><programlisting>saver.destroy()
+        <literallayout><programlisting>
+        saver.destroy()
         if result != gtk.RESPONSE_OK:
-            return</programlisting></literallayout></para>
+            return
+</programlisting></literallayout></para>
 
 <para>Since we're now getting the title from the dialog instead of the text entry, we should delete the line of the code that sents it from entry1. So except for the addition of the dialog code, the save_file function looks pretty much the same as it did in part 1:</para>
 
@@ -469,7 +472,7 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
         text = buff.get_text(start_iter,end_iter)
 
         #get all the records
-        record_type = "http://wiki.ubuntu.com/<application>Quickly</application>/JottyDoc"
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
         results = self.database.get_records(record_type = record_type,create_view = True)
 
         #update a record that has the same title
@@ -482,10 +485,11 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
         
         #if no records had the title, create it  
         new_rec = Record({"record_type":record_type,"title":title, "text":text})
-        self.database.put_record(new_rec)</programlisting></literallayout></para>
+        self.database.put_record(new_rec)
+</programlisting></literallayout></para>
 <para>Now when we choose save, we get the SaveDialog instead:</para>
    <figure>
-    <graphic fileref="./images/application4_5.png"></graphic>
+    <graphic fileref="./images/29.png"></graphic>
   </figure>
 
 <para><title>Creating a Dialog with a CouchGrid</title>
@@ -502,7 +506,7 @@ quickly design
 </programlisting></para>
 <para>Start by adding a VBox and a label in the same manner as in the Save Dialog above. Leave an empty space in the VBox. We will use code to put the CouchGrid there.</para>
    <figure>
-    <graphic fileref="./images/glade20.png"></graphic>
+    <graphic fileref="./images/30.png"></graphic>
   </figure>
 <para><title>Coding the Open Dialog</title></para>
 <para><title>Creating and Adding a CouchGrid</title>
@@ -528,16 +532,22 @@ from quickly.widgets.couch_grid import CouchGrid
 A CouchGrid needs to know three things, the name of the database, the name of the record type, and the name of the keys to use. "keys" is a list of fields that the widget will display, and by default will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
 </para>
 <para>
-        <literallayout><programlisting>database = "jotty"
+        <literallayout><programlisting>
+        database = "jotty"
         keys = ["title"]
-        record_type = "http://wiki.ubuntu.com/<application>Quickly</application>/JottyDoc"
-        self.couchgrid = CouchGrid(database, record_type=record_type,keys=keys)</programlisting></literallayout></para>
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
+        self.couchgrid = CouchGrid(database, record_type=record_type,keys=keys)
+
+</programlisting></literallayout></para>
 <para><title>Add the CouchGrid to the Dialog</title>
 we added the VBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchGrid into the VBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
 </para>
 <para>
-        <literallayout><programlisting>self.couchgrid.show()
-        self.builder.get_object("vbox1").pack_end(self.couchgrid)</programlisting></literallayout></para>
+        <literallayout><programlisting>
+        self.couchgrid.show()
+        self.builder.get_object("vbox1").pack_end(self.couchgrid)
+
+</programlisting></literallayout></para>
 
 <para><title>Create the get_selection function</title>
 The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchGrid what is selected. This is easy using the widgets selected_record_ids function. But the CouchGrid supports multiple selection, so we'll do the following:</para>
@@ -564,7 +574,9 @@ The dialog still needs a bit more code to work. It needs to return the user's se
         if len(ids) &#60; 1:
             return None
         else:
-            return ids[0]</programlisting></literallayout></para>
+            return ids[0]
+
+</programlisting></literallayout></para>
 <para><title>Using the Open Dialog</title>
 Now we want to use the Open Dialog in the JottyWindow open_file function. To use it,we'll follow these steps:</para>
   <itemizedlist>
@@ -641,7 +653,7 @@ Now just put the text into the texview:</para>
     <literallayout><programlisting>
     def open_file(self, widget, data=None):
         #run the open dialog
-        opener = OpenDialog.NewDialog()
+        opener = OpenDialog.OpenDialog()
         result = opener.run()
 
         #get the record id from the dialog
@@ -660,10 +672,12 @@ Now just put the text into the texview:</para>
 
         #set the UI to display the string
         buff = self.builder.get_object("textview1").get_buffer()
-        buff.set_text(text)</programlisting></literallayout></para>
+        buff.set_text(text)
+
+</programlisting></literallayout></para>
 <para>Now users get a nice open dialog:</para>
    <figure>
-    <graphic fileref="./images/application5.png"></graphic>
+    <graphic fileref="./images/31.png"></graphic>
   </figure>
 
 <para>However, the application is not complete. There are a few things left for you to do:</para>
