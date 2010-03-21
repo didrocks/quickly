@@ -37,7 +37,6 @@ class Guy(BaseSprite):
         self.explodestage = 0
         self.visible = True
         self.max_bullets = 4
-        self.bigbullets = False
  
     def init_position(self):
         """init_position - resets the Guy's position on screen
@@ -107,8 +106,7 @@ class Guy(BaseSprite):
         if self.alive:
             #only allow max numbe of  bullets on the screen at a time
             if len(self.bullets.sprites()) < self.max_bullets:
-                imgName = project_nameconfig.guy_bullet
-                b = Bullet(self.x,self.y,self.orientation, imgName)
+                b = Bullet(self.x,self.y,self.orientation)
                 self.bullets.add(b)
 
     def hyperspace(self):

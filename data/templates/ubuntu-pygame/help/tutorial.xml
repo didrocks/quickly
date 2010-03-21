@@ -27,7 +27,7 @@
  </bookinfo>
 
 
-<preface id="preface">
+<preface>
  <title>About This Guide</title>
  <para>
 Use <application>The Quickly Pygame Template</application> to write old school arcade games for running on Ubuntu. PyGame is a framework that handles sprites, collisons, sounds, and everything you need to make a game. You just need to add the game play. The Quickly template creates a starter game for you and comes ready for you to turn into your fun game, and then easily package and share it with other Ubuntu users.
@@ -39,21 +39,12 @@ The Quickly Pygame Template inherits from the Quickly Application template. So y
 
 <chapter>
  <title>
-Introduction to the <application>Quickly PyGame Template</application>
- </title>
- <para>
-This part 1 of the the <application>Quickly PyGame Template</application> tutorial. This part is will introduce some key the <application>Quickly PyGame Template</application> commands, adding your own sprite images, and editing code in Gedit. This part of the tutorial will familiarize you with these three tools, and how they work together with python and pygtk so that you can the <application>Quickly PyGame Template</application> build applications.
- </para>
-</chapter>
-
-<chapter id="creating">
- <title>
 Creating and Running Your Game
  </title>
  <para>
-In this tutorial we will start making a top down shooter reminiscent of the space arcade shooters of the early 1980s.
+In this tutorial we will start making a top down shooter reminiscent of the space arcade shooters of the 1980s.
  </para>
- <graphic fileref="./images/game0.png"></graphic>
+ <figure></figure>
  <para>
 We'll do this by creating a default game, editing some of the generated code, writing some new code, and adding our images for sprits.
  </para>
@@ -65,10 +56,9 @@ $quickly create ubuntu-pygame shooter
  </programlisting>
  <graphic fileref="./images/1.png"></graphic>
  <para>
-This will create a shooter sub directory containing a complete directory tree and files for an empty python application. The command finishes by running the newly created game.
+This will create a shooter sub directory containing a complete directory tree and files for an empty python application. The command finishes by running the newly created game. The  game is played by using the "s" and "f" keys to rotate the guy, the "j" key to shoot, and the "l" key to thrust.
  </para>
- <graphic fileref="./images/2.png"></graphic>
- <title>Playing the Game</title> 
+ <graphic fileref="./images/2.png"></graphic> 
  <para>
 You can play the newly created game. Notice that the <application>Quickly PyGame Template</application> inferred that the game title is "Shooter". Also note that there is a guy that you can control with the s,f,j, and l keys. There is an enemy and a homing missle. You also get a "Game Over" screen, scoring, and levels build in for free.
  </para>
@@ -78,7 +68,7 @@ You can play the newly created game. Notice that the <application>Quickly PyGame
 Close the game by closing the window or using the Esc key. Since the game isn't installed into Ubuntu yet, you can't start the game from the application menu yet. To start the game, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.
  </para> 
  <programlisting>
-$cd jotty
+$cd shooter
 $quickly run
  </programlisting>
  <graphic fileref="./images/terminal2.png"></graphic>
@@ -86,20 +76,267 @@ $quickly run
 <chapter>
  <title>Creating your own Sprites</title>
  <para>
-The first think you probably noticed about the game is that the graphics are so blah! 
+The first think you probably noticed about the game is that the graphics are so blah! Let's start by adding our own sprites.  We;ll do a compbination of replacing sprites with our own images, and also add a new sprite which we'll use later. Here's a few things to keep in mind:
+<itemizedlist>
+<listitem>Ink Scape is a great and free tool for creating your sprites. It's in the Featured Applications section of the Software Center.</listitem>
+<listitem>If you use Ink Scape, you'll want to export the images as PNGs. But keep the Ink Scape files around in case you want to edit the sprites later.</listitem>
+<listitem>Whatever size you make the sprites, that's the size they will be in the game.</listitem>
+<listitem>The game will look for sprites in the data/media folder, so make sure you put them there.</listitem>
+</itemizedlist>
+ </para>
+ <para>
+I made new images for the guy (the sprite the player controls), enemies, bullets, and the game background. I also made a new sprite called "enemy_bullet.png" which we'll add into the game later. 
+<figure>
+
+</figure> 
+Just drag your new sprite images into the shooter/data/media and tell it to replace the images. Now when you run the game, you'll see your new sprites at work.
+<figure>
+
+</figure> 
+Oops. As you can see, the background image I created was for a game of different dimensions. It's for a game that's 400 pixels wide by 500 pixels high. In the next section, we'll make the game that size.
  </para>
 </chapter>
 <chapter>
  <title>Changing the Screen Dimensions</title>
  <para>
-The first change we'll make is to change the screen dimensions to be oriented from top to bottom.
+The first change we'll make is to change the screen dimensions to be oriented from top to bottom. We do this by changing a little code. So let's fire up the code editor first. Run the edit command to fire up the editor.
  </para>
+<programlisting>$quickly edit</programlisting> 
+<para>This command should open your code in Gedit. The screen dimensions are set in the file "shooterconfig.py". So just go to that file and change the width to 400 and the height to 500.
+<programlisting>
+#screen dimensions
+screen_width = 400
+screen_height = 500
+</programlisting>
+Save the file and run the game again. Notice that the screen wrapping and centering and everything was taken care of for you. That's because you made the change in the shooterconfig.py file. This is the right place to add and change variables that should be availble throughout the game. We'll be make a few more changes here later.
+</para>
 </chapter>
 <chapter>
- <title>Change the Guy</title>
+ <title>Program the Guy</title>
  <para>
-start at the bottom, move along the bottom, center bullets
+ For this game, what we want is the guy to move left and right across the bottom and not wrap through the screen. Also, we want to make the bullets look like they are coming out of the guy's front.
  </para>
+ <para>
+To make the guy move just left and right we need to:
+<orderedlist>
+<listitem>Place the guy at the beginning of each level at the middle and bottom of the screen.</listitem>
+<listitem>Add functions to guy.py for moving and stop movig right and left, and remove the rotate functions.</listitem>
+<listitem>Change the keyboard input in the bin/shooter file to call these new functions.</listitem>
+</orderedlist> 
+ </para>
+ <para> 
+ The functionaly that is specific to the player's sprite is in the guy.py file. The first thing we will do is work on placing the guy properly. Fortunately, the is an existing function that we can modify for this. The function init_position is called to each time the guy needs to be placed on the screen, like after he gets killed for instance. We only need to make a single change to this function. Intead of starting halfway down the screen, we want him to start a few pixels from the bottom. So make the slight change below to init_position. Change how self.y gets set.
+<programlisting>
+        sw = shooterconfig.screen_width
+        sh = shooterconfig.screen_height
+
+        #start off in the center of screen, still, facing up
+        self.stop()
+        self.x = sw/2
+        self.y = sh - 80
+</programlisting> 
+If you run it now, you may notice that the guy starts centered in the screen on the first run through. This is because nothing is calling init_position() yet, so the guy just defaults to being centered, which is behavior defined in BaseSprite base class. One easy change will fix this. Add a call to init_position to the guy's __init__ function. It's the last line added in the listing below.
+<programlisting>
+    def __init__(self, bullets_group):
+        """
+        Creates a Guy
+
+        arguments:
+
+        bullets_group - A pygame.SpriteGroup managed by the games
+        collision detection system.
+
+        """
+
+        BaseSprite.__init__(self, shooterconfig.guy_img)
+        self.bullets = bullets_group
+        self.hum = pygame.mixer.Sound(shooterconfig.guy_eng)
+        self.explosionSound = pygame.mixer.Sound(shooterconfig.guy_explode)
+        self.alive = True
+        self.exploding = False
+        self.explodestage = 0
+        self.visible = True
+        self.max_bullets = 4
+        self.init_position()
+
+</programlisting>
+Now when you run the game, the guy starts at the bottom, which is what we want, but he also rotates when we use the s and the d button, which we do not want. So let's change that next by implementing four new functions:
+<itemizedlist>
+<listitem>start_moving_left: the user pressed the "s" key</listitem>
+<listitem>stop_moving_left: the user released the "s" key</listitem>
+<listitem>start_moving_right: the user pressed the "f" key</listitem>
+<listitem>stop_moving_right: the user released the "f" key</listitem>
+</itemizedlist>
+Here's how we will implement these functions:
+<orderedlist>
+<listitem>Create two tracking variables, _moving_left and _moving_right</listitem>
+<listitem>Set these tracking variables to True or False in the start/stop_moving_left/right functions</listitem>
+<listitem>In the guy's update function, change the x coordinates of the guy based on these variables</listitem>
+</orderedlist>
+ </para>
+ <para>
+The stop function get's called in init_position to basically reset the guy so he stops moving. Since this gets called at start up, this is a fine place to initialize our tracking variables. So we'll modify the stop function by adding the tracking variables there. 
+<programlisting>
+    def stop(self):
+        """
+        stop - stops all velocity and totation, and sets the Sprite's
+        orientation to 0
+
+        """
+
+        self.orientation = 0
+        self._rotating_right = False
+        self._rotating_left = False
+        self.velocity_x = 0
+        self.velocity_y = 0
+        self._accelerating = False
+        self._moving_left = False
+        self._moving_right = False
+</programlisting>
+ </para>
+ <para>
+Now the functions for responding to keys simply set those tracking variables as appropriate. So we add these four new functions to guy.py.
+<programlisting>
+    def start_moving_right(self):
+        self._moving_left = False
+        self._moving_right = True
+
+    def start_moving_left(self):
+        self._moving_left = True
+        self._moving_right = False
+
+    def stop_moving_left(self):
+        self._moving_left = False
+
+    def stop_moving_right(self):
+        self._moving_right = False
+
+</programlisting> 
+ </para>
+<para>
+Now we need change the guy's coordinates based on the tracking variable. Every sprite has an update function. This function is called for every "tick" in the game, and the sprite looks at it's internal data, and updates itself appropriately. By default, the guy's rotation is handled by BaseSprite, so we can ignore that, especially since we won't be using rotation anyway. We're also not using acceleration for the guy, so we can delete a bit of code. Funally, we don't want the guy to "wrap" though the screen, so we whould catch that condition.
+</para>
+<para>
+Let's start with moving the guy 5 pixels per tick. So we can change the top of the update function to look like this:
+<programlisting>
+    def update(self):
+        """update - Update internal data for a game tick""" 
+    
+        BaseSprite.update(self)
+
+        if self._moving_left:
+            self.x -= 5
+            if self.x &#60; 0:
+                self.x = 0
+        if self._moving_right:
+            self.x += 5
+            if self.x + self.rect.width > shooterconfig.screen_width:
+                self.x = shooterconfig.screen_width - self.rect.width
+</programlisting>
+</para>
+<para>
+So the guy is ready. He starts in the right place, tracks whether he is moving left or right, and updates his position as desired. Now we just need to hook him up the keys.
+</para>
+<para>
+Keyboard contol is handled in the shoort file in the bin directory. For each click of the clock, the controller_tick function is called.  Detecting keyboard input and directing it as appropriate is handled in this funciton. So what we wante to do is find  where the f and s key events are handled, and call the guy's start/stop_moving_left/right functions there.
+</para>
+<para>
+Key down events are handled first, in a section commented "control" the guy. We want to make a few changes here.
+<itemizedlist>
+<listitem>Call the start_moving functions instead of rotate functions.</listitem>
+<listitem>Remove the call to the accelerate function.</listitem>
+<listitem>Remve the call to the hyperspace function.</listitem>
+</itemizedlist>
+These last two functions aren't needed for our new game. So let's make the changes and this part of the controller_tick function will change to this:
+<programlisting>
+            #control the guy
+            if not game.paused: 
+                if event.key == pygame.K_f:
+                    g.start_moving_right()
+                if event.key == pygame.K_s:
+                    g.start_moving_left()
+                if event.key == pygame.K_j:
+                    g.shoot()
+
+</programlisting>
+</para>
+<para>
+We'll handle the key up functions similarly.
+<programlisting>
+        #key up events, typically stop actions
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_F11:
+                pygame.display.toggle_fullscreen() 
+            if event.key == pygame.K_f:
+                g.stop_moving_right()
+            if event.key == pygame.K_s:
+                g.stop_moving_left()
+
+</programlisting>
+<figure>
+
+</figure>
+</para>
+<para>
+Now we've got the guy working the way we want, but we need to make a few changes to to how the guy's bullets are working:
+<itemizedlist>
+<listitem>The bullets accelerate and go way to fast, they'll miss enemies by skipping over them.</listitem>
+<listitem>The bullets should go to the top of the screen, and not stop before or wrap around</listitem>
+<listitem>The bullets should appear to come out of the middle of the guy, instead of the side.</listitem>
+</itemizedlist>
+We'll handle the first problem my changing the Bullet class in the bullet.py file. The acceleration and speed of bullets in the game is configured in the __init__ function of this file. The rate at whcih a bullet accelerates is controlled by member variable acceleration_divisor. We won't need to change that. However, the maximum speed a bullet will reach is defined ny max_velocity, and the lifetme of the bullet is defined by max_ticks. Let's make the bullets go slower, but last lonager, by changing max_velocity to 20, and max_ticks to 20 in the Bullet __init__ funciton.
+<programlisting>
+        self.max_velocity = 20
+        self.max_ticks = 20
+</programlisting>
+This simple change is all that is necessary to control the bullets throughout the game. Note that making this change in the Bullet class means all bullets in the game, including enemy bullets, will now work this way. So let's quickly deal with stopping bullets from wrapping as well. We'll add to the Bullet class's update function to see if the bullet is above or below the screen, and if so, we'll remove it. So we'll change the to of the update function in bullet.py to look like this:
+<programlisting>
+    def update(self):
+        """update - update internal data and position.
+        Typically called by the game controller each game
+        tick.
+
+        """
+
+        BaseSprite.update(self)
+
+        if self.y &#60; 1:
+            self.kill()
+        if self.y == wings_config.screen_height:
+            self.kill()
+</programlisting>
+Note that a Sprite's kill function, removes it from the game immediately, and with no fanfare. Finally, we need to adjust the bullet so it comes out from the guys the way we want it to. Since this is only related to the way the guy shoots bullets and won't have anything to do with enemy bullets, we'll configure how bullets emerge in the guy.py file.  Let's just tweak the shoot function a bit. 
+
+As you can see in this function, when you create a bullet, you provide it x and y coordinates. We'll just calculate at better x coordinate to start. We'll find the middle of the width of the guy's image, and offset it a bit so the bullet sprite looks like it comes out correctly.
+
+<progamlisting>
+                center_x = (self.x + self.rect.width / 2) - 3
+</progamlisting>
+
+So we change change the ugy's shoot funciton to look like this:
+<programlisting>
+    def shoot(self):
+        """shoot - fire a bullet. Adds the bullet to the bullet sprite group.
+        If the maximum number of bullets premitted would be exceeded, 
+        the bullet will not fire. If the guy is exploding, the guy will no
+        fire.
+
+        """
+
+        if self.alive:
+            #only allow max numbe of  bullets on the screen at a time
+            if len(self.bullets.sprites()) &#60; self.max_bullets:
+                center_x = (self.x + self.rect.width / 2) - 3
+                b = Bullet(center_x,self.y,self.orientation)
+                self.bullets.add(b)
+</programlisting>
+</para>
+<para>
+<figure>
+</figure>
+Now we have the guy working as desired. Moves back and forth across the bottom and shoots bullets the way we want. Next we'll go on to changing the way the enemies work.
+</para>
+
 </chapter>
 <chapter>
  <title>Make enemies</title>
