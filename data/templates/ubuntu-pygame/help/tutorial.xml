@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 
@@ -37,7 +37,7 @@ The Quickly Pygame Template inherits from the Quickly Application template. So y
  </para>
 </preface>
 
-<chapter id="introduction">
+<chapter>
  <title>
 Introduction to the <application>Quickly PyGame Template</application>
  </title>
@@ -48,7 +48,7 @@ This part 1 of the the <application>Quickly PyGame Template</application> tutori
 
 <chapter id="creating">
  <title>
-Creating and Running your Game
+Creating and Running Your Game
  </title>
  <para>
 In this tutorial we will start making a top down shooter reminiscent of the space arcade shooters of the early 1980s.
@@ -63,16 +63,16 @@ Creating a default working game couldn't be simpler. First, open a terminal wind
  <programlisting>
 $quickly create ubuntu-pygame shooter
  </programlisting>
- <graphic fileref="./images/terminal1.png"></graphic>
+ <graphic fileref="./images/1.png"></graphic>
  <para>
 This will create a shooter sub directory containing a complete directory tree and files for an empty python application. The command finishes by running the newly created game.
  </para>
- <graphic fileref="./images/game1.png"></graphic>
+ <graphic fileref="./images/2.png"></graphic>
  <title>Playing the Game</title> 
  <para>
 You can play the newly created game. Notice that the <application>Quickly PyGame Template</application> inferred that the game title is "Shooter". Also note that there is a guy that you can control with the s,f,j, and l keys. There is an enemy and a homing missle. You also get a "Game Over" screen, scoring, and levels build in for free.
  </para>
- <graphic fileref="./images/game2.png"></graphic>
+ <graphic fileref="./images/3.png"></graphic>
  <title>Running the Game</title>
  <para> 
 Close the game by closing the window or using the Esc key. Since the game isn't installed into Ubuntu yet, you can't start the game from the application menu yet. To start the game, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.
