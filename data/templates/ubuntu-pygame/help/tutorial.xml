@@ -112,7 +112,7 @@ Save the file and run the game again. Notice that the screen wrapping and center
 </para>
 </chapter>
 <chapter>
- <title>Program the Guy</title>
+ <title>Programming the Guy</title>
  <para>
  For this game, what we want is the guy to move left and right across the bottom and not wrap through the screen. Also, we want to make the bullets look like they are coming out of the guy's front.
  </para>
@@ -284,7 +284,7 @@ Now we've got the guy working the way we want, but we need to make a few changes
 <listitem>The bullets should go to the top of the screen, and not stop before or wrap around</listitem>
 <listitem>The bullets should appear to come out of the middle of the guy, instead of the side.</listitem>
 </itemizedlist>
-We'll handle the first problem my changing the Bullet class in the bullet.py file. The acceleration and speed of bullets in the game is configured in the __init__ function of this file. The rate at whcih a bullet accelerates is controlled by member variable acceleration_divisor. We won't need to change that. However, the maximum speed a bullet will reach is defined ny max_velocity, and the lifetme of the bullet is defined by max_ticks. Let's make the bullets go slower, but last lonager, by changing max_velocity to 20, and max_ticks to 20 in the Bullet __init__ funciton.
+We'll handle the first problem my changing the Bullet class in the bullet.py file. The acceleration and speed of bullets in the game is configured in the __init__ function of this file. The rate at whcih a bullet accelerates is controlled by member variable acceleration_divisor. We won't need to change that. However, the maximum speed a bullet will reach is defined ny max_velocity, and the lifetme of the bullet is defined by max_ticks. Let's make the bullets go slower, but last longer, by changing max_velocity to 20, and max_ticks to 20 in the Bullet __init__ funciton.
 <programlisting>
         self.max_velocity = 20
         self.max_ticks = 20
@@ -302,7 +302,7 @@ This simple change is all that is necessary to control the bullets throughout th
 
         if self.y &#60; 1:
             self.kill()
-        if self.y == wings_config.screen_height:
+        if self.y == shooterconfig.screen_height:
             self.kill()
 </programlisting>
 Note that a Sprite's kill function, removes it from the game immediately, and with no fanfare. Finally, we need to adjust the bullet so it comes out from the guys the way we want it to. Since this is only related to the way the guy shoots bullets and won't have anything to do with enemy bullets, we'll configure how bullets emerge in the guy.py file.  Let's just tweak the shoot function a bit. 
@@ -339,13 +339,110 @@ Now we have the guy working as desired. Moves back and forth across the bottom a
 
 </chapter>
 <chapter>
- <title>Make enemies</title>
+ <title>Programming Enemies</title>
  <para>
-start in different places, move as desired, drop bombs
+The generated game always adds two enemies for each level, a homing missle and a stock "enemy". The homing missle does pretty much what's it name suggests, homes in on the guy and kills him. The Enemy doesn't do much of anything. Just kind of plunks down and waits to get killed. First we're going to remove the homing missle from the game, and then we'll customize the enemies to be a bit more menancing.
  </para>
+ <para>
+The bin/shooter fileset up a  SpriteGroup already. It's called "enemies" and gets populated each time a new level is created. New levels are created in the next_level function in the bin/shooter file. The next_level function is pretty simple, it increments the game level bu 1, removes any remaining emenemities for the SpriteGroup and then repulates the enemies SpriteGroup. Let's make a couple of  basic chagnnges here. First,  we'll change the xrange so that it creates more enemies with each level, and second, we'll just delete the line that creates the homing missle. Change the next_level function  to make the last few lines as below.
+<programlisting>
+    #TODO: set up enemies here
+    #You can add more enemies or use different enemies
+    #depening on the level
+    for i in xrange(0,game.level + 3):
+        enemies.add(Enemy())
+</programlisting>
+So for the first level, there will by for enemies, and each time there is an new level created the number of enemies will increase by 1.  Aslo, no more homing missles.
+<figure>
+
+</figure>
+ </para>
+ <para>
+However, there are two things we need to do to enhance the game play with our enemies. First, as you can see, they can start quite close to the guy, even under. We'll need to fix that. Also, we should put them in motion so they are a bit more of a challenge to shoot. We'll do both of the things by modifying the Enemy class in the enemy.py file. Specifically in the  init_postion function.
+ </para>
+ <para>
+If you open the enemy.py file and look for the init_position function, you'll see there is a call to the function in __init__ but there is no function for it. That's because enemy inherits from BaseSprite, which has a default init_position implementation that randomly places it on the screen. So we'll simply override the init_position function in the Enemy class in enemy.py. 
+ </para>
+<para>
+First, to make it a bitter easier to code, grab a reference to the screen height and widgth that you configured and keep those in easier to use variables.
+<programlisting>
+        sh = shooterconfig.screen_height
+        sw = shooterconfig.screen_width
+</programlisting>
+Next, we want to choose random start position along the X axis. But we don't want the enemy to start too close to either side or it might get stuck in a spot where the guy can't shoot it.  To generate random integers, use the randome module, so you'll have to add an import to the top of the file.
+<programlisting>
+importrandom
+</programlisting>
+We can use the screenwidth to and the enemies own width to determine the right most starting position. For the Y axis, we want the enemies to be far enough away that they can't too easily kill the guy. We'll also make sure they don't get out of reach of the guy's bullets. So between 20 and half way down seems about right.
+<programlisting>
+        self.x = random.randint(20,sw - self.rect.width - 20)
+        self.y = random.randint(20,sh/2)
+</programlisting>
+Finally, let's put each enemy in motion by picking a random velocity_x within some reasonable bounds. 
+<programlisting>
+        self.velocity_x = random.randint(-30,30)
+</programlisting>
+Notice that one in 60 of the enemies won't be moving. That's okay because we added padding to keep the enemies from ending up too close to the sides. The full init_position function you need to add looks like this:
+<programlisting>
+    def init_position(self):
+        sh = shooterconfig.screen_height
+        sw = shooterconfig.screen_width
+
+        self.x = random.randint(20,sw - self.rect.width - 20)
+        self.y = random.randint(20,sh/2)
+        self.velocity_x = random.randint(-30,30)
+</programlisting>
+When you run the game, you can see that the enemies are moving and are good targets to shoot at. But next we'll make the enemies fight back. 
+</para> 
+<para>
+Let's add the ability for an enemy to drop a bomb. By default, enemies can't do anything like that, so we'll have to add a new function. The function will need to do the following things:
+<itemizedlist>
+<listitem>Figure out where to place the bullet on the screen</listitem>
+<listitem>Configure the bullet's velocity and maximum speed</listitem>
+<listitem>Create the bullet object and add it to a SpriteGroup</listitem>
+</itemizedlist>
+We should probably start with this last part. We'll want to create a special sprite group for the bullets to go into. This is primarily so that we can use the SpriteGroups collision detection capabilities later. Also it's easier to manage updates of sprites when they are in a group. First things first, we'll create the sprite group. There's a place in the bin/shooter  for setting up enemies and such, so create another  sprite group there. You create a sprite group by calling  a function in the pygame.sprite module called "RenderUpdates". Lookk for the code block below, and notice the new line creating the new sprite group by calling RenderUpdates.
+<programlisting>
+#create the player's guy and some enemies
+g = Guy(bullets)
+enemies = pygame.sprite.RenderUpdates()
+enemy_bullets = pygame.sprite.RenderUpdates()
+</programlisting>
+Now that we have the sprite group called enemy_bullets we want to do three more things with it for now. 
+<itemizedlist>
+<listitem>Clear out all the sprites in the group when creating a new level or resetting a level after the guy dies.</listitem>
+<listitem>Tell the bullets in the sprite group to update themselves at the right time.</listitem>
+<listitem>Pass a reference to the sprite group to each enemy that is created, so it can add it's bullets to the group.</listitem>
+</itemizedlist>
+So for the first part, we'll call the sprite group's empty function in next_level and reset_level This function simply removes each sprite in the sprite group from game play. Do this as the first thing for each of these function.
+<programlisting>
+    enemies.empty()
+</programlisting>
+For the second point, we'll add to the function in bin/shooter called update_sprites. As you may have guessed, this function is called each tick and tells each sprite to update. For sprites in a sprite group, this is easy, because the SpriteGroup class includes an update function that calls update for each of it's sprites. So just add that to the end of the update_sprites function in bin/shooter, so it looks like the listing here:
+<programlisting>
+def update_sprites():
+    """update_sprites - call update() for all sprites"""
+    g.update()
+    bullets.update()
+    enemies.update() 
+    enemy_bullets.update()
+</programlisting> 
+Finally, we need to pass a reference to each enemy as it is created. So we need to make a change in the enemy.py fil, to add  an argument for the SpriteGroup in the __init__ function, and also we need to pass the SpriteGroup when creating enemies. So change the Enemy class in enemy.py so the __init__ function signature looks like so:
+<programlisting>
+    def __init__(self,enemy_bullets):
+</programlisting>
+And then in next_level when creating enemies, pass in enemy_bullets.
+<programlisting>
+        enemies.add(Enemy(enemy_bullets))
+</programlisting>
+Now we have a functioning sprite group and the enemies have a reference to it, we are ready to start actually adding some bullets to it.
+</para>
+<para>
+
+</para>
 </chapter>
 <chapter>
- <title>Collisions</title>
+ <title>Collision Detection</title>
  <para>
 make bombs collide with guy, make guys bullets collide with bombs
  </para>
@@ -355,5 +452,8 @@ make bombs collide with guy, make guys bullets collide with bombs
  <para>
 make a tink noise when the bombs collide with bullets
  </para>
+</chapter>
+<chapter>
+<title>Points and Free Guys</title>
 </chapter>
 </book>

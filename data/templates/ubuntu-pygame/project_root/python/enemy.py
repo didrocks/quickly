@@ -30,9 +30,9 @@ class Enemy(BaseSprite):
         self.explosion_sound = pygame.mixer.Sound(project_nameconfig.enemy_explode_sound)
         self.explode_stage = 0
         self.exploding = False
-        self.init_position()
         self.velocity_x = 0
         self.velocity_y = 0
+        self.init_position()
 
     def update(self):
         BaseSprite.update(self)
