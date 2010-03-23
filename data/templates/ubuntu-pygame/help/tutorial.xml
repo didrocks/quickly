@@ -135,31 +135,7 @@ To make the guy move just left and right we need to:
         self.x = sw/2
         self.y = sh - 80
 </programlisting> 
-If you run it now, you may notice that the guy starts centered in the screen on the first run through. This is because nothing is calling init_position() yet, so the guy just defaults to being centered, which is behavior defined in BaseSprite base class. One easy change will fix this. Add a call to init_position to the guy's __init__ function. It's the last line added in the listing below.
-<programlisting>
-    def __init__(self, bullets_group):
-        """
-        Creates a Guy
 
-        arguments:
-
-        bullets_group - A pygame.SpriteGroup managed by the games
-        collision detection system.
-
-        """
-
-        BaseSprite.__init__(self, shooterconfig.guy_img)
-        self.bullets = bullets_group
-        self.hum = pygame.mixer.Sound(shooterconfig.guy_eng)
-        self.explosionSound = pygame.mixer.Sound(shooterconfig.guy_explode)
-        self.alive = True
-        self.exploding = False
-        self.explodestage = 0
-        self.visible = True
-        self.max_bullets = 4
-        self.init_position()
-
-</programlisting>
 Now when you run the game, the guy starts at the bottom, which is what we want, but he also rotates when we use the s and the d button, which we do not want. So let's change that next by implementing four new functions:
 <itemizedlist>
 <listitem>start_moving_left: the user pressed the "s" key</listitem>
@@ -174,26 +150,7 @@ Here's how we will implement these functions:
 <listitem>In the guy's update function, change the x coordinates of the guy based on these variables</listitem>
 </orderedlist>
  </para>
- <para>
-The stop function get's called in init_position to basically reset the guy so he stops moving. Since this gets called at start up, this is a fine place to initialize our tracking variables. So we'll modify the stop function by adding the tracking variables there. 
-<programlisting>
-    def stop(self):
-        """
-        stop - stops all velocity and totation, and sets the Sprite's
-        orientation to 0
 
-        """
-
-        self.orientation = 0
-        self._rotating_right = False
-        self._rotating_left = False
-        self.velocity_x = 0
-        self.velocity_y = 0
-        self._accelerating = False
-        self._moving_left = False
-        self._moving_right = False
-</programlisting>
- </para>
  <para>
 Now the functions for responding to keys simply set those tracking variables as appropriate. So we add these four new functions to guy.py.
 <programlisting>
@@ -412,6 +369,7 @@ Now that we have the sprite group called enemy_bullets we want to do three more 
 <itemizedlist>
 <listitem>Clear out all the sprites in the group when creating a new level or resetting a level after the guy dies.</listitem>
 <listitem>Tell the bullets in the sprite group to update themselves at the right time.</listitem>
+<listitem>Tell the bullets to draw themselves at the right time.</listitem>
 <listitem>Pass a reference to the sprite group to each enemy that is created, so it can add it's bullets to the group.</listitem>
 </itemizedlist>
 So for the first part, we'll call the sprite group's empty function in next_level and reset_level This function simply removes each sprite in the sprite group from game play. Do this as the first thing for each of these function.
@@ -427,18 +385,68 @@ def update_sprites():
     enemies.update() 
     enemy_bullets.update()
 </programlisting> 
-Finally, we need to pass a reference to each enemy as it is created. So we need to make a change in the enemy.py fil, to add  an argument for the SpriteGroup in the __init__ function, and also we need to pass the SpriteGroup when creating enemies. So change the Enemy class in enemy.py so the __init__ function signature looks like so:
+The view_tick function is called once per tick as well. This funciton updates the view on the screen. We'll add a line of code to tell the bullets to draw themselves right under where the enemies draw themselves.
+<programlisting>
+    #draw enemies
+    enemies.draw(screen)
+    enemy_bullets.draw(screen)
+</programlisting>
+Finally, we need to pass a reference to each enemy as it is created and create a member variable to store that reference. So we need to make a change in the enemy.py fil, to add  an argument for the SpriteGroup in the __init__ function, and also we need to pass the SpriteGroup when creating enemies. So change the Enemy class in enemy.py so the top of the __init__ function looks like so:
 <programlisting>
     def __init__(self,enemy_bullets):
+        """Creates an Enemy """
+        self.enemy_bullets = enemy_bullets
+
 </programlisting>
 And then in next_level when creating enemies, pass in enemy_bullets.
 <programlisting>
         enemies.add(Enemy(enemy_bullets))
 </programlisting>
-Now we have a functioning sprite group and the enemies have a reference to it, we are ready to start actually adding some bullets to it.
+Now we have a functioning sprite group and the enemies have a reference to it, we are ready to start actually adding some bullets to it. We'll do this by adding a member function called "shoot" to the enemy. Don't forget to import the Bullet class into the enemy.py file.
+<programlisting>
+from bullet import Bullet
+</programlisting>
+
+First thing is we'll check that the enemy is alive. We don't have to do this, but for this game, we don't want it to shoot if it's int the process of exploding. Then we'll just create a bullet and add it to the SpriteGroup. The last argument we'll pass in is to set the orientatin to 180. Orientation goes clockwise for 360 degrees, with zero being directly up, and 180 being directly down. In code, it looks like the listing below.
+<programlisting>
+    def shoot(self):
+        if self.alive:
+            b = Bullet(self.x,self.y, 180)
+            b.max_velocity = 6
+            b.max_ticks = 50
+            self.enemy_bullets.add(b)
+</programlisting>
+So now we just need to tell the enemies to shoot. We'll do this back in the bin/shooter file, in the"controller_tick function. After the section where we respond to keyboard input, we'll add a few lines to make the enemies shoot. First, we'll make sure the game is not paused, not very fair to shoot in a paused game, is it? Next we'll loop through the enemies and desider if we should call shoot. using our friend random.randint, we'll do this say, one time twenty. So if you add this code to the end of the controller_tick function, your enemies will start dropping bombs.
+
+<programlisting>
+    if not game.paused:
+        for e in enemies:
+            if random.randint(0,20) == 1:
+                e.shoot()
+</programlisting>
+<figure>
+
+</figure>
+So if you run the game, you'll see that the enemies are dropping bulltes like bombs. Nice. However, maybe it would be nicer if the sprites for the enemy bullets were different than the sprites for the guy's bullets. Remember at the beginning of the  tutorial we added an image called enemy_bullet.png to the data/media directory. Now we'll write a bit of code to use that image. First thing, we should add a reference to it in the shooterconfig.py file. In this way, the Enemy class will be able to find it. Just add the following line along with the other image path setting code in shooterconfig.py.
+<programlisting>
+enemy_bullet_image = image_path + "enemy_bullet.png"
+</programlisting>
+So now we need to tell the bullets in the Enemy class to use that image. Fortunately the Bullet class takes an optional parameter for the name of an image to use. So just modify the shoot function in the Enemy class to include the path.
+<programlisting>
+    def shoot(self):
+        if self.alive:
+            img = shooterconfig.enemy_bullet_image
+            b = Bullet(self.x,self.y, 180, img)
+            b.max_velocity = 6
+            b.max_ticks = 50
+            self.enemy_bullets.add(b)
+</programlisting>
+Now the enemies are dropping bombs with our new image.
+<figure>
+</figure>
 </para>
 <para>
-
+But of course, you many notice the bombs aren't too menancing. In the next chapter we'll add collision detection to make the bombs kill the guy.
 </para>
 </chapter>
 <chapter>

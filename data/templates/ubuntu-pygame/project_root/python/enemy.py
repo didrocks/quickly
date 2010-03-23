@@ -32,7 +32,7 @@ class Enemy(BaseSprite):
         self.exploding = False
         self.velocity_x = 0
         self.velocity_y = 0
-        self.init_position()
+        self.alive = True
 
     def update(self):
         BaseSprite.update(self)

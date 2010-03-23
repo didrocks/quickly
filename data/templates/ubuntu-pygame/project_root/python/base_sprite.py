@@ -24,8 +24,8 @@ class BaseSprite(pygame.sprite.Sprite):
 
         """
 
-        self.__init_position()
 
+        self.center_on_screen()
         #acceleration_divisor determines how fast a sprite
         #accelerates. The hight the divisor, the slower the
         #acceleration.
@@ -50,10 +50,11 @@ class BaseSprite(pygame.sprite.Sprite):
         self.rect.width -= 5
 
         self._update_image()
+        self.init_position()
 
 
-    def __init_position(self):
-        """init_position - initializes values for positioning, and provides 
+    def center_on_screen(self):
+        """center_on_screen - initializes values for positioning, and provides 
         a default position implemention, places the sprite in the center of
         the screen. This is an internal implementation that centers the 
         sprite. Use the default public implementation for a default
