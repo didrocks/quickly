@@ -452,16 +452,72 @@ But of course, you many notice the bombs aren't too menancing. In the next chapt
 <chapter>
  <title>Collision Detection</title>
  <para>
-make bombs collide with guy, make guys bullets collide with bombs
+ Collision detection is when you check for sprites that are overlapping, and run code based on what happened. PyGame makes this very easy by providing some functions to check for overlapping sprites for you. As you will see, it works for individual sprites as well as sprite groups.
+ </para>
+ <para>
+Ok, so let's start by making the bombs that the enemies drop actually kill the guy. To do this, we want to check if the bombs ever collide with the guy, and if they do, we'll tell the guy to explode, and then we'll remove the bomb from the screen. So the logic is "tell me if the guy collides with any enemy_bullets". There is a funciton for this called, pygame.sprite.spritecollideany, which takes a single sprite and a sprite group and returns a reference to any sprite in the sprite group that collided with the single sprite. If there were no collisions, than e will be None. Otherwise, we'll want to tell the guy to explode and tell the bullet to just "kill", which will remove it from play. So we can call it like this:
+<programlisting>
+        b = pygame.sprite.spritecollideany(g, enemy_bullets)
+        if b != None:
+            g.explode()
+            b.kill()
+</programlisting> 
+There is a function in bin/shooter called check_collisions which is called once per tick, and is the perfect place to add this code. Add it right under the similar test for the guy colliding with enemies. Now those bombs can kill the guys.
+<figure>
+
+</figure>
+If you play for a bit, you may notice that the bullets and the bombs just kind of pass by each other. We can ramp up the game play by making the enemy bullets destroy the guy's bullets, but not visa versa. So that logic here is, have any of the sprites in the bullets sprite group collided with the bullets in the enemy bullets sprite group. There is function for this as well, pygame.sprite.groupcollide. groupcollide takes two sprite lists and returns a dictionary. The keys in the dictionary are any sprites from the first group that are involved in a collision, and the values are the sprites from the second group that collided with the sprite that  for key.  It's a bit hard to explain, but I bet the code is pretty readable. Add this line to the  check_collisions function.
+<programlisting>
+    hits_dict = pygame.sprite.groupcollide(bullets, enemy_bullets, True, False)
+</programlisting>
+Now if you run the game, it's a bit more challenging as the enemies are a bit more offensive. This code just kills the bullets involed in any collisions. Notice that I passed in True False at the end of this function. These paramaters determine whether to  kill sprites form either group involved in the collusion.  The True tells the function to kill any bullets involved in collisions, so this was simple to code. 
  </para>
 </chapter>
 <chapter>
  <title>Playing Sounds</title>
  <para>
-make a tink noise when the bombs collide with bullets
+ The game is pretty much done in terms of game play, but I want to make one small enhancement. When the enemy bullets kill one of the guy's bullets, I'd like to play a little sound to signify this. So first, I added a little "tink" sound to the data/media directory. After you add your sound, you need to add a reference to it in the shootercongif.py file.
+ <programlisting>
+tink_sound = sound_path + "tink.wav" 
+ </programlisting>
+ Now, I want to add a little code after the collision detection between the bullets to play that sound if they collided. I can't just hop straight to that though, first I have to create a sound object.In pygame you manage sounds with the "mixer" module. I don't want to create this object over and over again. So I'll add it to the bin/shooter file where the other objects and such for the game are set up.
+ <programlisting>
+#set up some objects and models
+tink_sound = pygame.mixer.Sound(shooter.shooterconfig.tink_sound) 
+ </programlisting>
+ Now that I've told the mixer module to give me a sound, I can go ahead and check if there were any collisions between bullets, and play my sound.
+ <programlisting>
+    hits_dict = pygame.sprite.groupcollide(bullets, enemy_bullets, True, False)
+    if len(hits_dict) > 0:
+        tink_sound.play() 
+ </programlisting>
+ So it seems to be working well, but what if you are finding that one of the sounds is too quiet or too loud? Or perhpas you want a certain sound to be loud sometimes and queit other times, for example to simulate  distance. This is easy to do because each sound object has a set_volume function that you can use to set  the sound between 0 (for slient) and 1 (for normal volume). The bullet launch sound I used was a bit loud, so in the bullet.py file, I'll adjust the Bullet class to play the sound a bit more quietly.
+ <programlisting>
+        self.launch_sound = pygame.mixer.Sound(shooterconfig.guy_shoot_sound)
+        self.launch_sound.set_volume(.2)
+        self.launch_sound.play() 
+ </programlisting>
  </para>
 </chapter>
 <chapter>
-<title>Points and Free Guys</title>
+<title>Conclusion</title>
+<para>
+So now you have a working game! This tutorial introduced the following key concepts for using the Quickly PyGame Template.
+<itemizedlist>
+<listitem>Creating a game using $quickly create ubuntu-pygame</listitem>
+<listitem>Adding your own sprites to the game</listitem>
+<listitem>Setting the screen size and other info in the config file</listitem>
+<listitem>Programming a player's guy to respond to keyboard input and to shoot</listitem>
+<listitem>Programming enemies to move and shoot</listitem>
+<listitem>Using collision detection to blow up Sprites</listitem>
+<listitem>Playing and adjusting sounds</listitem>
+</itemizedlist>
+But there is still a lot to do to have a propper game. For example:
+<itemizedlist>
+<listitem>There are no power ups! You could create power up classes the derive from BaseSprite to give the guy extra powers, like bigger bullets, more bullets, or extra lives</listitem>
+<listitem>More special enemies, for example you could use the HomingMissle class to create harder to kill enemies</listitem>
+<listitem>There is no high scores list. You could use desktopcouch to store high scores and use the code in view_tick to see how to present the scores</listitem>
+</itemizedlist>
+</para>
 </chapter>
 </book>
