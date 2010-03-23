@@ -63,7 +63,6 @@ This will create a shooter sub directory containing a complete directory tree an
 You can play the newly created game. Notice that the <application>Quickly PyGame Template</application> inferred that the game title is "Shooter". Also note that there is a guy that you can control with the s,f,j, and l keys. There is an enemy and a homing missle. You also get a "Game Over" screen, scoring, and levels build in for free.
  </para>
  <graphic fileref="./images/3.png"></graphic>
- <title>Running the Game</title>
  <para> 
 Close the game by closing the window or using the Esc key. Since the game isn't installed into Ubuntu yet, you can't start the game from the application menu yet. To start the game, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.
  </para> 
