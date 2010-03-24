@@ -43,18 +43,7 @@ class Guy(BaseSprite):
         Will reset the Sprite's image to the starting image.
         
         """
-
-        sw = project_nameconfig.screen_width
-        sh = project_nameconfig.screen_height
-
-        #start off in the center of screen, still, facing up
-        self.stop()
-        self.x = sw/2
-        self.y = sh/2
-        self.master_image = pygame.image.load(project_nameconfig.guy_img)
-        self._update_image()
-        self.visible = True
-        self.alive = True
+        self.center_on_screen()
   
     def accelerate(self):
         """
@@ -165,3 +154,5 @@ class Guy(BaseSprite):
             else:#explosion is done
                 self.visible = False
                 self.exploding = False
+                self.master_image = pygame.image.load(project_nameconfig.guy_img)
+ 
