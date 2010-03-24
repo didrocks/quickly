@@ -155,4 +155,4 @@ class Guy(BaseSprite):
                 self.visible = False
                 self.exploding = False
                 self.master_image = pygame.image.load(project_nameconfig.guy_img)
- 
+                self._update_image()
