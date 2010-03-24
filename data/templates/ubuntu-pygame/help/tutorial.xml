@@ -124,13 +124,16 @@ To make the guy move just left and right we need to:
 </orderedlist> 
  </para>
  <para> 
- The functionaly that is specific to the player's sprite is in the guy.py file. The first thing we will do is work on placing the guy properly. Fortunately, the is an existing function that we can modify for this. The function init_position is called to each time the guy needs to be placed on the screen, like after he gets killed for instance. We only need to make a single change to this function. Intead of starting halfway down the screen, we want him to start a few pixels from the bottom. So make the slight change below to init_position. Change how self.y gets set.
+ The functionaly that is specific to the player's sprite is in the guy.py file. The first thing we will do is work on placing the guy properly. Fortunately, the is an existing function that we can modify for this. The function init_position is called to each time the guy needs to be placed on the screen, like after he gets killed for instance . When created, the guy calls the based class function center_on_screen. As you may guess, we will want to change this function. so the guys is positionedhalfway down the screen, and we want him to start a few pixels from the bottom.  Fortunaately we  know how to get the screen dimensions, so it's easy make the change  to init_position.
 <programlisting>
+    def init_position(self):
+        """init_position - resets the Guy's position near the
+        bottom of the screen
+        
+        """
         sw = shooterconfig.screen_width
         sh = shooterconfig.screen_height
 
-        #start off in the center of screen, still, facing up
-        self.stop()
         self.x = sw/2
         self.y = sh - 80
 </programlisting> 
@@ -151,6 +154,12 @@ Here's how we will implement these functions:
  </para>
 
  <para>
+First, add the tracking variables to the Guy.__init__function. Add these after the call to BaseSprite.__init__().
+<programlisting>
+        self._moving_left = False
+        self._moving_right = False
+</programlisting> 
+ 
 Now the functions for responding to keys simply set those tracking variables as appropriate. So we add these four new functions to guy.py.
 <programlisting>
     def start_moving_right(self):
