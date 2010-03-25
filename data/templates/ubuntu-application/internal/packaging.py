@@ -55,7 +55,8 @@ class DomainLevel:
     WARNING=1
     ERROR=2
 
-def continue_if_errors(err_output, warn_output, return_code):
+def _continue_if_errors(err_output, warn_output, return_code,
+                       ask_on_warn_or_error):
     """print existing error and warning"""
 
     print #finish the current line
@@ -65,23 +66,88 @@ def continue_if_errors(err_output, warn_output, return_code):
         print ('----------------------------------')
         print ('\n'.join(err_output))
         print ('----------------------------------')
-    print_warning = False
     if warn_output:
         # seek if not uneeded warning (noise from DistUtilsExtra.auto)
+        # line following the warning should be "  …"
+        line_number = 0
         for line in warn_output:
-            if not (re.match(".*not recognized by DistUtilsExtra.auto.*", line)
-                or re.match(' .*\.pot', line)
-                or re.match(' .*\.in', line)):
-                print_warning = True
-        if print_warning:
+            if (re.match(".*not recognized by DistUtilsExtra.auto.*", line)):
+                try:
+                    if not re.match('  .*',  warn_output[line_number + 1]):
+                        warn_output.remove(line)
+                        line_number -= 1
+                except IndexError:
+                    warn_output.remove(line)
+                    line_number -= 1  
+            line_number += 1
+        # if still something, print it     
+        if warn_output:
             print _('Command returned some WARNINGS:')
             print ('----------------------------------')
             print ('\n'.join(warn_output))
             print ('----------------------------------')
-    if return_code == 0 and (err_output or print_warning):
+    if ((err_output or warn_output) and ask_on_warn_or_error
+         and return_code == 0):
         if not 'y' in raw_input("Do you want to continue (this is not safe!) y/[n]: "):
             return(4)
     return return_code
+
+def _filter_out(line, output_domain, err_output, warn_output):
+    '''filter output dispatching right domain'''
+
+    if 'ERR' in line:
+        output_domain = DomainLevel.ERROR
+    elif 'WARN' in line:
+        output_domain = DomainLevel.WARNING
+    elif not line.startswith(' '):
+        output_domain = DomainLevel.NONE
+        if '[not found]' in line:
+            output_domain = DomainLevel.WARNING
+    if output_domain == DomainLevel.ERROR:
+        # only add once an error
+        if not line in err_output:
+            err_output.append(line)
+    elif output_domain == DomainLevel.WARNING:
+        # only add once a warning
+        if not line in warn_output:
+            # filter bad output from dpkg-buildpackage (on stderr) and p-d-e auto
+            if not(re.match('  .*\.pot', line)
+                   or re.match('  .*\.in', line)
+                   or re.match(' dpkg-genchanges  >.*', line)):
+                warn_output.append(line)
+    else:
+        sys.stdout.write('.')
+    return (output_domain, err_output, warn_output)
+ 
+
+def _exec_and_log_errors(command, ask_on_warn_or_error=False):
+    '''exec the giving command and hide output if not in verbose mode'''
+
+    if templatetools.in_verbose_mode():
+        return(subprocess.call(command))
+    else:
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                         stderr=subprocess.PIPE)
+        output_domain = DomainLevel.NONE
+        err_output = []
+        warn_output = []
+        while True:
+            line_stdout = proc.stdout.readline().rstrip()
+            line_stderr = proc.stderr.readline().rstrip()
+            # filter stderr
+            if line_stderr:
+                (output_domain, err_output, warn_output) = _filter_out(line_stderr, output_domain, err_output, warn_output)
+
+            if not line_stdout:
+                # don't replace by if proc.poll() as the output can be empty
+                if proc.poll() != None:
+                    break
+            # filter stdout
+            else:
+                (output_domain, err_output, warn_output) = _filter_out(line_stdout, output_domain, err_output, warn_output)
+
+        return(_continue_if_errors(err_output, warn_output, proc.returncode,
+                                     ask_on_warn_or_error))
 
 
 def updatepackaging(changelog=None):
@@ -103,48 +169,11 @@ def updatepackaging(changelog=None):
     except KeyError:
         pass
 
-    proc = subprocess.Popen(command, stdout=subprocess.PIPE,
-                                     stderr=subprocess.PIPE)
-    output_domain = DomainLevel.NONE
-    verbose = templatetools.in_verbose_mode()
-    err_output = []
-    warn_output = []
-    while True:
-        line_stdout = proc.stdout.readline().rstrip()
-        line_stderr = proc.stderr.readline().rstrip()
-        if line_stderr:
-            if verbose:
-                print line_stdout
-            else:
-                err_output.append(line_stderr)
-        if not line_stdout:
-            # don't replace by if proc.poll() as the output can be empty
-            if proc.poll() != None:
-                break
-        else:
-            if verbose:
-                print line_stdout
-            else:
-                if 'ERR' in line_stdout:
-                    output_domain = DomainLevel.ERROR
-                elif 'WARN' in line_stdout:
-                    output_domain = DomainLevel.WARNING
-                elif not line_stdout.startswith(' '):
-                    output_domain = DomainLevel.NONE
-                    if '[not found]' in line_stdout:
-                        output_domain = DomainLevel.WARNING
-                if  output_domain == DomainLevel.ERROR:
-                    err_output.append(line_stdout)
-                elif output_domain == DomainLevel.WARNING:
-                    warn_output.append(line_stdout)
-                else:
-                    sys.stdout.write('.')
-
-    
-    return_code = continue_if_errors(err_output, warn_output, proc.returncode)
-    if not return_code == 0:
-        print _("An error has occurred")
+    return_code = _exec_and_log_errors(command, True)
+    if return_code != 0:
+        print _("An error has occurred when creating debian packaging")
         return(return_code)
+
     print _("Ubuntu packaging created in debian/")
 
     # check if first python-mkdebian (debian/ creation) to commit it
@@ -160,6 +189,13 @@ def updatepackaging(changelog=None):
             return_code = subprocess.call(["bzr", "commit", "-m", 'Creating ubuntu package'])
 
     return(return_code)
+
+
+def filter_exec_command(command):
+    ''' Build either a source or a binary package'''
+
+    return(_exec_and_log_errors(command, False))
+
 
 def shell_complete_ppa(ppa_to_complete):
     ''' Complete from available ppas '''
@@ -238,11 +274,12 @@ def push_to_ppa(dput_ppa_name, changes_file):
     """ Push some code to a ppa """
 
     # creating local binary package
-    return_code = subprocess.call(["dpkg-buildpackage", "-S", "-I.bzr"])
+    return_code = filter_exec_command(["dpkg-buildpackage", "-S", "-I.bzr"])
     if return_code != 0:
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
     # now, pushing it to launchpad personal ppa (or team later)
+    sys.exit(0)
     return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")
