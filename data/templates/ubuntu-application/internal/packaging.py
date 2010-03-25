@@ -59,8 +59,8 @@ def _continue_if_errors(err_output, warn_output, return_code,
                        ask_on_warn_or_error):
     """print existing error and warning"""
 
-    print #finish the current line
     if err_output:
+        print #finish the current line
         print ('----------------------------------')
         print _('Command returned some ERRORS:')
         print ('----------------------------------')
@@ -82,6 +82,8 @@ def _continue_if_errors(err_output, warn_output, return_code,
             line_number += 1
         # if still something, print it     
         if warn_output:
+            if not err_output:
+                print #finish the current line
             print _('Command returned some WARNINGS:')
             print ('----------------------------------')
             print ('\n'.join(warn_output))
@@ -184,9 +186,9 @@ def updatepackaging(changelog=None):
         return(bzr_instance.returncode)
 
     if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
-        return_code = subprocess.call(["bzr", "add"])
+        return_code = filter_exec_command(["bzr", "add"])
         if return_code == 0:
-            return_code = subprocess.call(["bzr", "commit", "-m", 'Creating ubuntu package'])
+            return_code = filter_exec_command(["bzr", "commit", "-m", 'Creating ubuntu package'])
 
     return(return_code)
 
@@ -279,7 +281,6 @@ def push_to_ppa(dput_ppa_name, changes_file):
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
     # now, pushing it to launchpad personal ppa (or team later)
-    sys.exit(0)
     return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")

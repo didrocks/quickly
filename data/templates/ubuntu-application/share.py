@@ -18,7 +18,6 @@
 
 import os
 import sys
-import subprocess
 import webbrowser
 
 from quickly import templatetools
