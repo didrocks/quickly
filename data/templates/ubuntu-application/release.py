@@ -202,8 +202,8 @@ if release_version in bzr_tags:
     sys.exit(1)
 
 # commit current changes
-subprocess.call(["bzr", "add"])
-return_code = subprocess.call(["bzr", "commit", '--unchanged', '-m',
+packaging.filter_exec_command(["bzr", "add"])
+return_code = packaging.filter_exec_command(["bzr", "commit", '--unchanged', '-m',
                                 _('commit before release')])
 if return_code != 0 and return_code != 3:
     print _("ERROR: quickly can't release as it can't commit with bzr")
@@ -232,12 +232,12 @@ if return_code != 0:
 
 # add files, setup release version, commit and push !
 #TODO: check or fix if we don't have an ssh key (don't tag otherwise to be able to release again)
-subprocess.call(["bzr", "add"])
-return_code = subprocess.call(["bzr", "commit", '-m', commit_msg])
+packaging.filter_exec_command(["bzr", "add"])
+return_code = packaging.filter_exec_command(["bzr", "commit", '-m', commit_msg])
 if return_code != 0 and return_code != 3:
     print _("ERROR: quickly can't release as it can't commit with bzr")
     sys.exit(return_code)
-subprocess.call(["bzr", "tag", release_version]) # tag revision
+packaging.filter_exec_command(["bzr", "tag", release_version]) # tag revision
 
 # check if pull branch is set
 bzr_instance = subprocess.Popen(["bzr", "info"], stdout=subprocess.PIPE)
@@ -264,25 +264,25 @@ if ("parent branch" in bzr_info) and not (
     (custom_location_in_info and custom_location_in_info not in bzr_info) or
    ((".staging." in bzr_info) and not bzr_staging) or
    (not (".staging." in bzr_info) and bzr_staging)):
-    return_code = subprocess.call(["bzr", "pull"])
+    return_code = packaging.filter_exec_command(["bzr", "pull"])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't pull from launchpad.")
         sys.exit(return_code)
 
-    subprocess.call(["bzr", "push"])
+    return_code = packaging.filter_exec_command(["bzr", "push"])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(return_code)
 else:
     if not branch_location:
         branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
-    return_code = subprocess.call(["bzr", "push", "--remember", "--overwrite", "".join(branch_location)])
+    return_code = packaging.filter_exec_command(["bzr", "push", "--remember", "--overwrite", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(return_code)
 
     # make first pull too
-    return_code = subprocess.call(["bzr", "pull", "--remember", "".join(branch_location)])
+    return_code = packaging.filter_exec_command(["bzr", "pull", "--remember", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release correctly: can't pull from launchpad.")
         sys.exit(return_code)
