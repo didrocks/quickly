@@ -140,17 +140,17 @@ except license.LicenceError, error_message:
     print(error_message)
     sys.exit(1)
 
-# creation/update debian packaging
-return_code = packaging.updatepackaging()
-if return_code != 0:
-    print _("ERROR: can't create or update ubuntu package")
-    sys.exit(1)
-
 try:
     release_version = packaging.updateversion(sharing=True)
 except (packaging.invalid_versionning_scheme,
         packaging.invalid_version_in_setup), error_message:
     print(error_message)
+    sys.exit(1)
+
+# creation/update debian packaging
+return_code = packaging.updatepackaging()
+if return_code != 0:
+    print _("ERROR: can't create or update ubuntu package")
     sys.exit(1)
 
 # upload to launchpad
