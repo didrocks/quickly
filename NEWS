@@ -100,6 +100,8 @@ Quickly 0.4
   - fix spelling mistake "connexion" (Łukasz Jernaś) (LP: #532667)
   - the ubuntu-application tutorial is now internationalized and use docbook
     format. Translators, it's yours! (Shane Fagan) (LP: #525168)
+  - package/share/release are now more quiet and only print something on error
+    warning as a summary as with unfound packages, and so on (LP: #482915)
   ubuntu-cli Template:
   - first release using import command feature (no command written into the
     template itself). This is a basic ubuntu CLI application
