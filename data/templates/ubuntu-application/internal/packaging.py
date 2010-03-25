@@ -90,7 +90,7 @@ def _continue_if_errors(err_output, warn_output, return_code,
             print ('----------------------------------')
     if ((err_output or warn_output) and ask_on_warn_or_error
          and return_code == 0):
-        if not 'y' in raw_input("Do you want to continue (this is not safe!) y/[n]: "):
+        if not 'y' in raw_input("Do you want to continue (this is not safe!)? y/[n]: "):
             return(4)
     return return_code
 
