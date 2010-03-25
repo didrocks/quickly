@@ -298,6 +298,7 @@ So we change change the ugy's shoot funciton to look like this:
 </para>
 <para>
 <figure>
+
 </figure>
 Now we have the guy working as desired. Moves back and forth across the bottom and shoots bullets the way we want. Next we'll go on to changing the way the enemies work.
 </para>
@@ -336,14 +337,14 @@ First, to make it a bitter easier to code, grab a reference to the screen height
 </programlisting>
 Next, we want to choose random start position along the X axis. But we don't want the enemy to start too close to either side or it might get stuck in a spot where the guy can't shoot it.  To generate random integers, use the randome module, so you'll have to add an import to the top of the file.
 <programlisting>
-importrandom
+import random
 </programlisting>
 We can use the screenwidth to and the enemies own width to determine the right most starting position. For the Y axis, we want the enemies to be far enough away that they can't too easily kill the guy. We'll also make sure they don't get out of reach of the guy's bullets. So between 20 and half way down seems about right.
 <programlisting>
         self.x = random.randint(20,sw - self.rect.width - 20)
         self.y = random.randint(20,sh/2)
 </programlisting>
-Finally, let's put each enemy in motion by picking a random velocity_x within some reasonable bounds. 
+Finally, let's put each enemy in motion by picking a random velocity_x within some reasonable bounds.
 <programlisting>
         self.velocity_x = random.randint(-30,30)
 </programlisting>
@@ -369,6 +370,7 @@ Let's add the ability for an enemy to drop a bomb. By default, enemies can't do 
 We should probably start with this last part. We'll want to create a special sprite group for the bullets to go into. This is primarily so that we can use the SpriteGroups collision detection capabilities later. Also it's easier to manage updates of sprites when they are in a group. First things first, we'll create the sprite group. There's a place in the bin/shooter  for setting up enemies and such, so create another  sprite group there. You create a sprite group by calling  a function in the pygame.sprite module called "RenderUpdates". Lookk for the code block below, and notice the new line creating the new sprite group by calling RenderUpdates.
 <programlisting>
 #create the player's guy and some enemies
+bullets = pygame.sprite.RenderUpdates()
 g = Guy(bullets)
 enemies = pygame.sprite.RenderUpdates()
 enemy_bullets = pygame.sprite.RenderUpdates()
@@ -406,7 +408,7 @@ Finally, we need to pass a reference to each enemy as it is created and create a
         self.enemy_bullets = enemy_bullets
 
 </programlisting>
-And then in next_level when creating enemies, pass in enemy_bullets.
+And then back in the bin/shooter file in the next_level function  when creating enemies, pass in enemy_bullets.
 <programlisting>
         enemies.add(Enemy(enemy_bullets))
 </programlisting>
@@ -522,9 +524,11 @@ So now you have a working game! This tutorial introduced the following key conce
 </itemizedlist>
 But there is still a lot to do to have a propper game. For example:
 <itemizedlist>
-<listitem>There are no power ups! You could create power up classes the derive from BaseSprite to give the guy extra powers, like bigger bullets, more bullets, or extra lives</listitem>
-<listitem>More special enemies, for example you could use the HomingMissle class to create harder to kill enemies</listitem>
-<listitem>There is no high scores list. You could use desktopcouch to store high scores and use the code in view_tick to see how to present the scores</listitem>
+<listitem>The bullets that the guy shoots and the bombs that the enemies drop make the same sound, it would probably be nicer if they each made a different sounds.</listitem>
+<listitem>The default explosions are crayon drawings, they don't fit in much with the look of the game. Perhaps some new images for the explosion stages would be good.</listitem>
+<listitem>There are no power ups! You could create power up classes the derive from BaseSprite to give the guy extra powers, like bigger bullets, more bullets, or extra lives.</listitem>
+<listitem>More special enemies, for example you could use the HomingMissle class to create harder to kill enemies.</listitem>
+<listitem>There is no high scores list. You could use desktopcouch to store high scores and use the code in view_tick to see how to present the scores.</listitem>
 </itemizedlist>
 </para>
 </chapter>
