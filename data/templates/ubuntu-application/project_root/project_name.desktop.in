@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=sentence_name
-Comment=camel_case_name application
+_Name=sentence_name
+_Comment=camel_case_name application
 Categories=GNOME;Utility;
 Exec=project_name
 Icon=project_name

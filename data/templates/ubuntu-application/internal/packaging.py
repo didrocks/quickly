@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -26,6 +25,7 @@ from launchpadlib.errors import HTTPError
 from quickly import configurationhandler
 from quickly import launchpadaccess
 from internal import quicklyutils
+from quickly import templatetools
 
 import gettext
 from gettext import gettext as _
@@ -50,6 +50,107 @@ class invalid_version_in_setup(Exception):
     def __str__(self):
         return repr(self.msg)
 
+class DomainLevel:
+    NONE=0
+    WARNING=1
+    ERROR=2
+
+def _continue_if_errors(err_output, warn_output, return_code,
+                       ask_on_warn_or_error):
+    """print existing error and warning"""
+
+    if err_output:
+        print #finish the current line
+        print ('----------------------------------')
+        print _('Command returned some ERRORS:')
+        print ('----------------------------------')
+        print ('\n'.join(err_output))
+        print ('----------------------------------')
+    if warn_output:
+        # seek if not uneeded warning (noise from DistUtilsExtra.auto)
+        # line following the warning should be "  …"
+        line_number = 0
+        for line in warn_output:
+            if (re.match(".*not recognized by DistUtilsExtra.auto.*", line)):
+                try:
+                    if not re.match('  .*',  warn_output[line_number + 1]):
+                        warn_output.remove(line)
+                        line_number -= 1
+                except IndexError:
+                    warn_output.remove(line)
+                    line_number -= 1  
+            line_number += 1
+        # if still something, print it     
+        if warn_output:
+            if not err_output:
+                print #finish the current line
+            print _('Command returned some WARNINGS:')
+            print ('----------------------------------')
+            print ('\n'.join(warn_output))
+            print ('----------------------------------')
+    if ((err_output or warn_output) and ask_on_warn_or_error
+         and return_code == 0):
+        if not 'y' in raw_input("Do you want to continue (this is not safe!)? y/[n]: "):
+            return(4)
+    return return_code
+
+def _filter_out(line, output_domain, err_output, warn_output):
+    '''filter output dispatching right domain'''
+
+    if 'ERR' in line:
+        output_domain = DomainLevel.ERROR
+    elif 'WARN' in line:
+        output_domain = DomainLevel.WARNING
+    elif not line.startswith(' '):
+        output_domain = DomainLevel.NONE
+        if '[not found]' in line:
+            output_domain = DomainLevel.WARNING
+    if output_domain == DomainLevel.ERROR:
+        # only add once an error
+        if not line in err_output:
+            err_output.append(line)
+    elif output_domain == DomainLevel.WARNING:
+        # only add once a warning
+        if not line in warn_output:
+            # filter bad output from dpkg-buildpackage (on stderr) and p-d-e auto
+            if not(re.match('  .*\.pot', line)
+                   or re.match('  .*\.in', line)
+                   or re.match(' dpkg-genchanges  >.*', line)):
+                warn_output.append(line)
+    else:
+        sys.stdout.write('.')
+    return (output_domain, err_output, warn_output)
+ 
+
+def _exec_and_log_errors(command, ask_on_warn_or_error=False):
+    '''exec the giving command and hide output if not in verbose mode'''
+
+    if templatetools.in_verbose_mode():
+        return(subprocess.call(command))
+    else:
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                         stderr=subprocess.PIPE)
+        output_domain = DomainLevel.NONE
+        err_output = []
+        warn_output = []
+        while True:
+            line_stdout = proc.stdout.readline().rstrip()
+            line_stderr = proc.stderr.readline().rstrip()
+            # filter stderr
+            if line_stderr:
+                (output_domain, err_output, warn_output) = _filter_out(line_stderr, output_domain, err_output, warn_output)
+
+            if not line_stdout:
+                # don't replace by if proc.poll() as the output can be empty
+                if proc.poll() != None:
+                    break
+            # filter stdout
+            else:
+                (output_domain, err_output, warn_output) = _filter_out(line_stdout, output_domain, err_output, warn_output)
+
+        return(_continue_if_errors(err_output, warn_output, proc.returncode,
+                                     ask_on_warn_or_error))
+
 
 def updatepackaging(changelog=None):
     """create or update a package using python-mkdebian.
@@ -61,12 +162,21 @@ def updatepackaging(changelog=None):
     command = ['python-mkdebian']
     for message in changelog:
         command.extend(["--changelog", message])
-    return_code = subprocess.call(command)
-    if return_code == 0:
-        print _("Ubuntu packaging created in debian/")
-    else:
-        print _("An error has occurred")
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    try:
+        for elem in configurationhandler.project_config['dependencies'].split(' '):
+            if elem:
+                command.extend(["--dependency", elem])
+    except KeyError:
+        pass
+
+    return_code = _exec_and_log_errors(command, True)
+    if return_code != 0:
+        print _("An error has occurred when creating debian packaging")
         return(return_code)
+
+    print _("Ubuntu packaging created in debian/")
 
     # check if first python-mkdebian (debian/ creation) to commit it
     # that means debian/ under unknown
@@ -76,11 +186,18 @@ def updatepackaging(changelog=None):
         return(bzr_instance.returncode)
 
     if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
-        return_code = subprocess.call(["bzr", "add"])
+        return_code = filter_exec_command(["bzr", "add"])
         if return_code == 0:
-            return_code = subprocess.call(["bzr", "commit", "-m", 'Creating ubuntu package'])
+            return_code = filter_exec_command(["bzr", "commit", "-m", 'Creating ubuntu package'])
 
     return(return_code)
+
+
+def filter_exec_command(command):
+    ''' Build either a source or a binary package'''
+
+    return(_exec_and_log_errors(command, False))
+
 
 def shell_complete_ppa(ppa_to_complete):
     ''' Complete from available ppas '''
@@ -88,7 +205,7 @@ def shell_complete_ppa(ppa_to_complete):
     # connect to LP and get ppa to complete
     try:
         launchpad = launchpadaccess.initialize_lpi(False)
-    except launchpadaccess.launchpad_connexion_error:
+    except launchpadaccess.launchpad_connection_error:
         sys.exit(0)
     available_ppas = []
     if launchpad:
@@ -159,12 +276,12 @@ def push_to_ppa(dput_ppa_name, changes_file):
     """ Push some code to a ppa """
 
     # creating local binary package
-    return_code = subprocess.call(["dpkg-buildpackage", "-S", "-I.bzr"])
+    return_code = filter_exec_command(["dpkg-buildpackage", "-S", "-I.bzr"])
     if return_code != 0:
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
     # now, pushing it to launchpad personal ppa (or team later)
-    #return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
+    return_code = subprocess.call(["dput", dput_ppa_name, changes_file])
     if return_code != 0:
         print _("ERROR: an error occurred during source upload to launchpad")
         return(return_code)
@@ -235,13 +352,7 @@ def updateversion(proposed_version=None, sharing=False):
 
         # automatically version to year.month(.subversion)
         else:
-            current_date = datetime.datetime.now()
-            this_year = str(current_date.year)[-2:]
-            this_month = current_date.month
-            if this_month < 10:
-                this_month = "0%i" % this_month
-            base_version = '%s.%s' % (this_year, this_month)
-
+            base_version = datetime.datetime.now().strftime("%y.%m")
             if base_version in old_version:
                 try:
                     # try to get a minor version, removing -public if one

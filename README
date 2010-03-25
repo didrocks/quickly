@@ -42,7 +42,7 @@ $ quickly help
 
 2. You can also try:
 $ quickly edit
-$ quickly glade
+$ quickly design
 $ quickly run
 Use bash completion to get every available commands
 
@@ -57,6 +57,15 @@ You need at least having a Launchpad account and an opened ppa.
 You need also for quickly release a project where you can bind your
 work with.
 $ quickly release or $ quickly share
+
+RUNNING TESTS
+------------
+
+* integration test:
+  $ test/update-test-results.sh data/templates/ubuntu-application/test/internal/apport-test-script.sh
+
+* unit test:
+  $ python ./data/templates/ubuntu-application/test/internal/test_apportutils.py
 
 
 

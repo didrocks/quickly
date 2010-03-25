@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -19,7 +18,6 @@
 
 import os
 import sys
-import subprocess
 import webbrowser
 
 from quickly import templatetools
@@ -99,7 +97,7 @@ project_name = configurationhandler.project_config['project']
 # connect to LP
 try:
     launchpad = launchpadaccess.initialize_lpi()
-except launchpadaccess.launchpad_connexion_error, e:
+except launchpadaccess.launchpad_connection_error, e:
     print(e)
     sys.exit(1)
 
@@ -109,19 +107,6 @@ try:
 except quicklyutils.gpg_error, e:
     print(e)
     sys.exit(1)
-
-# creation/update debian packaging
-return_code = quicklyutils.updatepackaging()
-if return_code != 0:
-    print _("ERROR: can't create or update ubuntu package")
-    sys.exit(1)
-
-# changed upstream author and email
-quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
-quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
-
-# license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
-license.licensing()
 
 # choose right ppa parameter (users, etc.) ppa or staging if ppa_name is None
 try:
@@ -141,6 +126,21 @@ except packaging.ppa_not_found, e:
         print "%s - %s" % (ppa_name, ppa_display_name)
     sys.exit(1)
 
+# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog).
+#TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
+if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
+    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
+
+# changed upstream author and email
+quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
+quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
+
+# license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
+try:
+    license.licensing()
+except license.LicenceError, error_message:
+    print(error_message)
+    sys.exit(1)
 
 try:
     release_version = packaging.updateversion(sharing=True)
@@ -149,11 +149,12 @@ except (packaging.invalid_versionning_scheme,
     print(error_message)
     sys.exit(1)
 
+# creation/update debian packaging
+return_code = packaging.updatepackaging()
+if return_code != 0:
+    print _("ERROR: can't create or update ubuntu package")
+    sys.exit(1)
 
-# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog).
-#TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
-if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
 # upload to launchpad
 print _("pushing to launchpad")
 return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
@@ -161,6 +162,6 @@ if return_code != 0:
     sys.exit(return_code)
 
 
-print _("%s %s is building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, version, ppa_url)
+print _("%s %s is building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, release_version, ppa_url)
 
 sys.exit(0)

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly
 #
@@ -62,7 +61,6 @@ def pre_create(command_template, project_template, project_dir, command_args):
     #create directory and template file
     print _("Creating project directory %s" % project_name)
     os.mkdir(project_name)
-    print _("Directory %s created\n" % project_name)
 
     # creating quickly file
     configurationhandler.project_config['version'] = quicklyconfig.__version__
@@ -113,7 +111,7 @@ $ quickly tutorial
 
 2. You can also try:
 $ quickly edit
-$ quickly glade
+$ quickly design
 $ quickly run
 Use bash completion to get every available command
 

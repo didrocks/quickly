@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -45,7 +44,7 @@ def conventional_names(name):
 
 def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
 
-    if not os.path.isfile(template_dir + '/' + template_file):
+    if not os.path.isfile(os.path.join(template_dir, template_file)):
         return
     target_file = os.path.basename(template_file) # to get only file name (template_file can be internal/file)
     if rename:
@@ -53,19 +52,17 @@ def file_from_template(template_dir, template_file, target_dir, substitutions=[]
             pattern, sub = s
             target_file = target_file.replace(pattern,sub)
 
-    print "Creating %s" % target_dir + "/" + target_file
-    fin = open(template_dir + template_file,'r')
+    fin = open(os.path.join(template_dir, template_file),'r')
     file_contents = fin.read()
     for s in substitutions:
         pattern, sub = s
         file_contents = file_contents.replace(pattern,sub)
 
-    fout = open(target_dir + "/" + target_file, 'w')
+    fout = open(os.path.join(target_dir, target_file), 'w')
     fout.write(file_contents)
     fout.flush()
     fout.close()
     fin.close()
-    print "%s created\n" % (target_dir + "/" + target_file,)
 
 def get_setup_value(key):
     """ get value from setup.py file.
@@ -207,6 +204,21 @@ def collect_commit_messages(previous_version):
             buffered_message +=' %s' % line
     return(changelog)
 
+
+def get_quickly_editors():
+    '''Return prefered editor for ubuntu-application template'''
+
+    editor = "gedit"
+    default_editor = os.environ.get("EDITOR")
+    if not default_editor:
+        default_editor = os.environ.get("SELECTED_EDITOR")
+    if not default_editor and os.path.exists(os.path.expanduser('~/.selected_editor')):
+        editor = 'sensible-editor'
+    elif default_editor:
+       editor = default_editor
+    return editor
+
+
 def take_email_from_string(value):
     '''Try to take an email from a string'''
 
@@ -324,4 +336,5 @@ def get_right_gpg_key_id(launchpad):
 
     # shouldn't happened as other errors are caught
     raise gpg_error(_("No gpg key set and can't create one for you.'"))
+
 

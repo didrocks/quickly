@@ -7,8 +7,14 @@ quickly (0.2.6) karmic; urgency=low
    + common:
      - Remove outdated information in README
      - change getstarted wording (LP: #486180) - Grant
+  * reorganize packaging in creating python-quickly-core and
+    python-quickly-common:
+    - debian/control: add them and change depends
+    - create debian/python-quickly-co{re,mmon}.install
+  * debian/control:
+    - bump Standards-Version   
 
- -- Didier Roche <didrocks@ubuntu.com>  Sat, 21 Nov 2009 12:55:26 -0600
+ -- Didier Roche <didrocks@ubuntu.com>  Thu, 18 Feb 2010 17:02:36 +0100
 
 quickly (0.2.5) karmic; urgency=low
 

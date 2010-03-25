@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly
 #
@@ -149,5 +148,5 @@ def get_template_path_from_project():
     """Get current template path when in a project"""
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
-    return tools.get_template_directory(configurationhandler.project_config['template'])
+    return os.path.abspath(tools.get_template_directory(configurationhandler.project_config['template']))
 

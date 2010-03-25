@@ -52,7 +52,7 @@ msgid "Couldn't setup Launchpad for quickly ; %s"
 msgstr "La configuration de Launchpad pour quickly a échoué ; %s"
 
 #: ../quickly/launchpadaccess.py:114
-msgid "Launchpad connexion is ok"
+msgid "Launchpad connection is ok"
 msgstr "Connexion à Launchpad réussie"
 
 #: ../quickly/launchpadaccess.py:130

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly
 #
@@ -26,7 +25,7 @@ LAUNCHPAD_STAGING_URL = "https://staging.launchpad.net"
 LAUNCHPAD_CODE_STAGING_URL = "https://code.staging.launchpad.net"
 
 # TODO: see how to export this error on import launchpadaccess (in init.py ?)
-class launchpad_connexion_error(Exception):
+class launchpad_connection_error(Exception):
     pass
 class launchpad_project_error(Exception):
     pass
@@ -103,7 +102,7 @@ def initialize_lpi(interactive = True):
         try:
             launchpad = Launchpad(credentials, SERVICE_ROOT, lp_cache_dir)
         except httplib2.ServerNotFoundError, e:
-            raise launchpad_connexion_error(e)
+            raise launchpad_connection_error(e)
     except (IOError, HTTPError):
         if interactive:
             # case where autorization on Launchpad was removed
@@ -126,8 +125,8 @@ def initialize_lpi(interactive = True):
             if suggestion is None:
                  suggestion = _("Unknown reason")
             os.remove(lp_cred)
-            raise launchpad_connexion_error(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
-        print _("Launchpad connexion is ok")
+            raise launchpad_connection_error(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
+        print _("Launchpad connection is ok")
 
     return launchpad
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly
 #
@@ -47,9 +46,8 @@ def show_version():
   Quickly detected template directories:
           %s
 
-Copyright 2009 Canonical Ltd.
-  #Author 2009 Rick Spencer
-  #Author 2009 Didier Roche
+Copyright 2009 Rick Spencer
+Copyright 2009-2010 Didier Roche
 https://launchpad.net/quickly
 
 quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and

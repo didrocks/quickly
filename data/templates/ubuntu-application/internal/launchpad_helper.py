@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2010 Canonical Ltd.
-# Author 2010 Didier Roche, some part based on
+# Copyright 2010 Didier Roche, some part based on
 # Martin Pitt <martin.pitt@ubuntu.com>
 # and http://blog.launchpad.net/api/recipe-for-uploading-files-via-the-api
 #

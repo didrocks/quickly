@@ -48,7 +48,7 @@ msgid "Couldn't setup Launchpad for quickly ; %s"
 msgstr ""
 
 #: ../quickly/launchpadaccess.py:114
-msgid "Launchpad connexion is ok"
+msgid "Launchpad connection is ok"
 msgstr "Spojení s Launchpadem v pořádku"
 
 #: ../quickly/launchpadaccess.py:130

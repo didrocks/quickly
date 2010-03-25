@@ -7,21 +7,53 @@ Build-Depends: cdbs (>= 0.4.43),
  python-central (>= 0.6.11),
  python-distutils-extra (>= 2.10)
 Maintainer: Quickly Developer Team <quickly@lists.launchpad.net>
-Standards-Version: 3.8.2
+Standards-Version: 3.8.4
 XS-Python-Version: current
 
 Package: quickly
 Architecture: all
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
- ${python:Depends}
+         ${python:Depends},
+         python-quickly-core
 Recommends: quickly-ubuntu-template | quickly-template,
-            python-launchpadlib,
-            bzr
 Description: build new apps quickly
  Quickly enables for prospective programmers a way to easily build new
  apps or contents based on templates and other systems for helping them
  write their code in a guided manner.
+ .
+ This package contains the quickly binary and shell completion handling
+
+Package: python-quickly-core
+Section: python
+Architecture: all
+XB-Python-Version: ${python:Versions}
+Depends: ${misc:Depends},
+         ${python:Depends},
+         python-quickly-common
+Recommends: python-launchpadlib,
+            bzr
+Replaces: quickly (<< 0.4)
+Description: build new apps quickly
+ Quickly enables for prospective programmers a way to easily build new
+ apps or contents based on templates and other systems for helping them
+ write their code in a guided manner.
+ .
+ This package contains the core function of Quickly
+
+Package: python-quickly-common
+Section: python
+Architecture: all
+XB-Python-Version: ${python:Versions}
+Depends: ${misc:Depends},
+         ${python:Depends}
+Replaces: quickly (<< 0.4)
+Description: build new apps quickly
+ Quickly enables for prospective programmers a way to easily build new
+ apps or contents based on templates and other systems for helping them
+ write their code in a guided manner.
+ .
+ This package contains the common part needed for Quickly and Quickly extension
 
 Package: quickly-ubuntu-template
 Architecture: all
@@ -35,14 +67,16 @@ Depends: ${misc:Depends},
          glade,
          python-desktopcouch-records (>= 0.3),
          python-launchpadlib,
+         python-lxml,
          dput,
          gedit | editor,
          bzr,
          python-distutils-extra (>= 2.10)
+Recommends: seahorse-plugins
 Description: quickly ubuntu application template
  Quickly enables for prospective programmers a way to easily build new
  apps or contents.
  .
  This package provides templates to create easily new projects for
- Ubuntu using glade, pygtk and couchdb. This also includes packaging,
- proper licencing and deploying code.
+ Ubuntu using glade, pygtk and couchdb or for a CLI. This also includes
+ packaging, proper licencing and deploying code.

@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -21,6 +20,7 @@
 import os
 import sys
 
+from internal import quicklyutils
 from quickly import configurationhandler
 from quickly import templatetools
 
@@ -56,15 +56,7 @@ if not configurationhandler.project_config:
 # add launcher which does not end with .py
 filelist += 'bin/' + configurationhandler.project_config['project']
 
-editor = "gedit"
-default_editor = os.environ.get("EDITOR")
-if not default_editor:
-    default_editor = os.environ.get("SELECTED_EDITOR")
-if not default_editor and os.path.exists(os.path.expanduser('~/.selected_editor')):
-    editor = 'sensible-editor'
-elif default_editor:
-    editor = default_editor
-
+editor = quicklyutils.get_quickly_editors()
 # if editor is still gedit, launch it in background
 if editor == "gedit":
     filelist += " &"

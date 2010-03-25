@@ -10,115 +10,146 @@ import gtk
 from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 
-# Check if we are working in the source tree or from the installed 
-# package and mangle the python path accordingly
-if os.path.dirname(sys.argv[0]) != ".":
-    if sys.argv[0][0] == "/":
-        fullPath = os.path.dirname(sys.argv[0])
-    else:
-        fullPath = os.getcwd() + "/" + os.path.dirname(sys.argv[0])
-else:
-    fullPath = os.getcwd()
-sys.path.insert(0, os.path.dirname(fullPath))
+import gettext
+from gettext import gettext as _
+gettext.textdomain('jotty')
 
-from jotty import AboutJottyDialog, PreferencesJottyDialog
-from jotty.jottyconfig import getdatapath
+# optional Launchpad integration
+# this shouldn't crash if not found as it is simply used for bug reporting
+try:
+    import LaunchpadIntegration
+    launchpad_available = True
+except:
+    launchpad_available = False
+
+# Add project root directory (enable symlink, and trunk execution).
+PROJECT_ROOT_DIRECTORY = os.path.abspath(
+    os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
+
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'jotty'))
+    and PROJECT_ROOT_DIRECTORY not in sys.path):
+    sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
+    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
+
+from jotty import (
+    AboutJottyDialog, PreferencesJottyDialog)
+from jotty.helpers import get_builder
+
 
 class JottyWindow(gtk.Window):
     __gtype_name__ = "JottyWindow"
-
-    def __init__(self):
-        """__init__ - This function is typically not called directly.
-        Creation a JottyWindow requires redeading the associated ui
-        file and parsing the ui definition extrenally,
-        and then calling JottyWindow.finish_initializing().
-
-        Use the convenience function NewJottyWindow to create
-        JottyWindow object.
-
+    
+    # To construct a new instance of this method, the following notable 
+    # methods are called in this order:
+    # __new__(cls)
+    # __init__(self)
+    # finish_initializing(self, builder)
+    # __init__(self)
+    #
+    # For this reason, it's recommended you leave __init__ empty and put
+    # your inialization code in finish_intializing
+    
+    def __new__(cls):
+        """Special static method that's automatically called by Python when 
+        constructing a new instance of this class.
+        
+        Returns a fully instantiated JottyWindow object.
         """
-        pass
+        builder = get_builder('JottyWindow')
+        new_object = builder.get_object("jotty_window")
+        new_object.finish_initializing(builder)
+        return new_object
 
     def finish_initializing(self, builder):
-        """finish_initalizing should be called after parsing the ui definition
+        """Called while initializing this instance in __new__
+
+        finish_initalizing should be called after parsing the UI definition
         and creating a JottyWindow object with it in order to finish
         initializing the start of the new JottyWindow instance.
-
+        
+        Put your initilization code in here and leave __init__ undefined.
         """
-        #get a reference to the builder and set up the signals
+        # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.builder.connect_signals(self)
 
-        #uncomment the following code to read in preferences at start up
-        #dlg = JottyPreferencesDialog.NewJottyPreferencesDialog()
+        global launchpad_available
+        if launchpad_available:
+            # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
+            # about LaunchpadIntegration
+            helpmenu = self.builder.get_object('helpMenu')
+            if helpmenu:
+                LaunchpadIntegration.set_sourcepackagename('jotty')
+                LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+            else:
+                launchpad_available = False
+
+        # Uncomment the following code to read in preferences at start up.
+        #dlg = PreferencesJottyDialog.NewPreferencesJottyDialog()
         #self.preferences = dlg.get_preferences()
 
-        #code for other initialization actions should be added here
+        # Code for other initialization actions should be added here.
         self.database = CouchDatabase("jotty", create=True)
 
     def about(self, widget, data=None):
-        """about - display the about box for what_the_heck """
-        about = AboutJottyDialog.NewAboutJottyDialog()
+        """Display the about box for jotty."""
+        about = AboutJottyDialog.AboutJottyDialog()
         response = about.run()
         about.destroy()
 
     def preferences(self, widget, data=None):
-        """preferences - display the preferences window for jotty """
-        prefs = PreferencesJottyDialog.NewPreferencesJottyDialog()
+        """Display the preferences window for jotty."""
+        prefs = PreferencesJottyDialog.PreferencesJottyDialog()
         response = prefs.run()
         if response == gtk.RESPONSE_OK:
-            #make any updates based on changed preferences here
+            # Make any updates based on changed preferences here.
             pass
         prefs.destroy()
 
     def quit(self, widget, data=None):
-        """quit - signal handler for closing the JottyWindow"""
+        """Signal handler for closing the JottyWindow."""
         self.destroy()
 
     def on_destroy(self, widget, data=None):
-        """on_destroy - called when the JottyWindow is close. """
-        #clean up code for saving application state should be added here
-
+        """Called when the JottyWindow is closed."""
+        # Clean up code for saving application state should be added here.
         gtk.main_quit()
 
-    def save_file(self, widget, data=None):
-        #get the title for the note
-        title = self.builder.get_object("entry1").get_text()
+    def save_file(self, widget, data=None): 
+        #get the title for the note 
+        title = self.builder.get_object("entry1").get_text() 
 
-        #get the text to save
-        buff = self.builder.get_object("textview1").get_buffer()
-        start_iter = buff.get_start_iter()
-        end_iter = buff.get_end_iter()
-        text = buff.get_text(start_iter,end_iter)
+        #get the text to save 
+        buff = self.builder.get_object("textview1").get_buffer() 
+        start_iter = buff.get_start_iter() 
+        end_iter = buff.get_end_iter() 
+        text = buff.get_text(start_iter,end_iter) 
 
-        #get all the records
-        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        results = self.database.get_records(record_type = record_type, 
-                                            create_view = True)
+        #get all the records 
+        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc" 
+        results = self.database.get_records(record_type = record_type,create_view = True) 
 
-        #update a record that has the same title
-        for result in results:
-            document = result.value
-            if document["title"] == title:
-                key = result.key
-                self.database.update_fields(key, {"text":text})
+        #update a record that has the same title 
+        for result in results: 
+            document = result.value 
+            if document["title"] == title: 
+                key = result.key 
+                self.database.update_fields(key, {"text":text}) 
                 return
-        
-        #if no records had the title, create it  
-        new_rec = Record({"record_type":record_type ,
-                            "title":title, "text":text})
+ 
+        #if no records had the title, create it 
+        new_rec = Record({"record_type":record_type,"title":title, "text":text})
         self.database.put_record(new_rec)
 
     def open_file(self, widget, data=None):
         #get the name of the document to open
         title = self.builder.get_object("entry1").get_text()
         text = ""
-
+ 
         #get all the records
         record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        results = self.database.get_records(record_type = record_type, 
-                                            create_view = True)
-
+        results = self.database.get_records(record_type = record_type,create_view = True)
+ 
         #get the text if there is a matching title
         for result in results:
             document = result.value
@@ -129,32 +160,27 @@ class JottyWindow(gtk.Window):
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text(text)
 
-
     def new_file(self, widget, data=None):
         self.builder.get_object("entry1").set_text("Note Title")
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text("")
 
-
-def NewJottyWindow():
-    """NewJottyWindow - returns a fully instantiated
-    JottyWindow object. Use this function rather than
-    creating a JottyWindow directly.
-    """
-
-    #look for the ui file that describes the ui
-    ui_filename = os.path.join(getdatapath(), 'ui', 'JottyWindow.ui')
-    if not os.path.exists(ui_filename):
-        ui_filename = None
-
-    builder = gtk.Builder()
-    builder.add_from_file(ui_filename)
-    window = builder.get_object("jotty_window")
-    window.finish_initializing(builder)
-    return window
-
 if __name__ == "__main__":
-    window = NewJottyWindow()
+    # Support for command line options.
+    import logging
+    import optparse
+    parser = optparse.OptionParser(version="%prog %ver")
+    parser.add_option(
+        "-v", "--verbose", action="store_true", dest="verbose",
+        help=_("Show debug messages"))
+    (options, args) = parser.parse_args()
+
+    # Set the logging level to show debug messages.
+    if options.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+        logging.debug('logging enabled')
+
+    # Run the application.
+    window = JottyWindow()
     window.show()
     gtk.main()
-

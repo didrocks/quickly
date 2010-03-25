@@ -30,6 +30,8 @@ Quickly 0.4
   - Refactor some code in pre_create hook()
   - Now dashes and spaces support in project name! Dealing with python and
     packaging issues for you. (LP: #493130)
+  - Provide Quickly API (LP: #426480)
+  - Fix some issues in the man page
   ubuntu-application Template:
   - Enabling upload to team or user ppa, as well as any ppa.
     Use --ppa ppaname or --ppa team/ppaname
@@ -63,6 +65,7 @@ Quickly 0.4
     personal license needs COPYING file now (and the header will be copied in
     every files). No more # needed in those files too. Some other little
     refactoring too (LP: #469330)
+  - autolicence by default on first share/release (with LP info and on GPL-3)
   - change versionning support in ubuntu application: (LP: #476814)
    + quickly share just adds -publicX to current version where X is bumped
      at each "quicky share" execution
@@ -81,6 +84,24 @@ Quickly 0.4
     upstream tarball (LP: #470344)
   - automatic collect and publish changelog message from commits and save
     messages used during devlopment. (LP: #476572)
+  - add i18n to boiler plate (LP: #423529)
+  - enable adding manual depdencies to quickly project (LP: #474639)
+  - enable configure its own bzr branch and resetting parent branch even once
+    already configured (quickly configure bzr <branch-path>)
+  - now recommends seahorse-plugins to have a graphical prompt for signing
+    package
+  - rename quickly glade to quickly design (LP: #528664)
+  - create command is now more flexible and enable people to inherit from
+    other template more easily
+  - add translation domain to gtkbuilder and fix some items that shouldn't
+    been translatable (Łukasz Jernaś)
+  - add apport and launchpadintegration to new and existing project once
+    bounded to LP (Philip Peitsch)
+  - fix spelling mistake "connexion" (Łukasz Jernaś) (LP: #532667)
+  - the ubuntu-application tutorial is now internationalized and use docbook
+    format. Translators, it's yours! (Shane Fagan) (LP: #525168)
+  - package/share/release are now more quiet and only print something on error
+    warning as a summary as with unfound packages, and so on (LP: #482915)
   ubuntu-cli Template:
   - first release using import command feature (no command written into the
     template itself). This is a basic ubuntu CLI application

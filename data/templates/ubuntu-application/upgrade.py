@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -20,6 +19,8 @@
 import os
 import subprocess
 import sys
+
+import internal.apportutils
 
 from internal import quicklyutils
 from quickly import configurationhandler, templatetools
@@ -43,18 +44,18 @@ python_name = templatetools.python_name(project_name)
 
 
 ##### 0.4 update
-# transition to 0.3.1: new licensing format
-if project_version < '0.3.1':
-    # don't handle error in upgrade (maybe the file doesn't exist)
-    bzr_instance = subprocess.Popen(["bzr", "mv", "LICENSE", "COPYING"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    # if file not versionned, try traditional move, (bzr returncode is None if dir not writable ??)
-    if bzr_instance.returncode == 3 or bzr_instance.returncode is None:
-        try:
-            os.rename('LICENSE', 'COPYING')
-        except OSError, e:
-            if e.errno == 13:
-                sys.stderr.write(_("Can't rename LICENSE file, check your file permission\n"))
-                sys.exit(1)
+if project_version < '0.4':
+    ## new licensing format
+    if os.path.isfile("LICENSE"):
+        bzr_instance = subprocess.Popen(["bzr", "mv", "LICENSE", "COPYING"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # if file not versionned, try traditional move, (bzr returncode is None if dir not writable)
+        if bzr_instance.returncode == 3 or bzr_instance.returncode is None:
+            try:
+                os.rename('LICENSE', 'COPYING')
+            except OSError, e:
+                if e.errno == 13:
+                    sys.stderr.write(_("Can't rename LICENSE file, check your file permission\n"))
+                    sys.exit(1)
     # transition Copyright -> AUTHORS
     if os.path.isfile('AUTHORS'):
         source_file = 'AUTHORS'
@@ -83,8 +84,12 @@ if project_version < '0.3.1':
         config_file = '%s/%sconfig.py' % (python_name, python_name)
         fin = file(config_file, 'r')
         fout = file(fin.name + '.new', 'w')
+        license_found_in_file = False
         for line in fin:
             fields = line.split(' = ') # Separate variable from value
+            if fields[0] == '__license__':
+                license_found_in_file = True
+                break
             if fields[0] == '__%s_data_directory__' % python_name:
                 fout.write(line)
                 line = "__license__ = '%s'\n" % license
@@ -92,9 +97,24 @@ if project_version < '0.3.1':
         fout.flush()
         fout.close()
         fin.close()
-        os.rename(fout.name, fin.name)
+        if not license_found_in_file:
+            os.rename(fout.name, fin.name)
+        else:
+            os.remove(fout.name)
     except (OSError, IOError), e:
         pass
+    ## new ~public becomes -public
+    try:
+        version = quicklyutils.get_setup_value('version')
+        if "~public" in version:
+            quicklyutils.set_setup_value('version', version.replace("~public", "-public"))
+    except quicklyutils.cant_deal_with_setup_value:
+        pass
 
-
+    # add apport hooks if launchpad application is configured
+    internal.apportutils.insert_lpi_if_required(project_name)
+    lp_project_name = configurationhandler.project_config.get('lp_id', None)
+    if lp_project_name is not None:
+        internal.apportutils.update_apport(project_name, lp_project_name, lp_project_name)
+        
 sys.exit(0)

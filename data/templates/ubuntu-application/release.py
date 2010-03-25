@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -23,6 +22,7 @@ import subprocess
 import webbrowser
 
 from internal import quicklyutils, packaging, launchpad_helper
+from internal import bzrutils
 from quickly import templatetools, configurationhandler
 import license
 
@@ -44,7 +44,7 @@ Posts a release of your project to a PPA on launchpad so that
 users can install the application on their system.
 
 You can also execute:
-$quickly release <release_number> of you don't want to use current
+$quickly release <release_number> if you don't want to use current
 release_number. The release_number must be a number.
 
 $quickly release <release_number> notes about changes
@@ -125,7 +125,7 @@ project_name = configurationhandler.project_config['project']
 # connect to LP
 try:
     launchpad = launchpadaccess.initialize_lpi()
-except launchpadaccess.launchpad_connexion_error, e:
+except launchpadaccess.launchpad_connection_error, e:
     print(e)
     sys.exit(1)
 
@@ -135,13 +135,6 @@ try:
 except quicklyutils.gpg_error, e:
     print(e)
     sys.exit(1)
-
-# changed upstream author and email
-quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
-quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
-
-# license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
-license.licensing()
 
 # get the project now and save the url into setup.py
 try:
@@ -155,11 +148,6 @@ about_dialog_file_name = quicklyutils.get_about_file_name()
 if about_dialog_file_name:
     quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
                                  "name", "website", project_url, {})
-
-# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
-#TODO: check that the gpg key contains it (or match preferred_email_adress to available gpg keys and take the name)
-if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
 
 # choose right ppa parameter (users, etc.) ppa or staging if ppa_name is None
 try:
@@ -177,6 +165,22 @@ except packaging.ppa_not_found, e:
     print(_("%s does not exist. Please create it on launchpad if you want to upload to it. %s has the following ppas available:") % (e, ppa_user.name))
     for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):
         print "%s - %s" % (ppa_name, ppa_display_name)
+    sys.exit(1)
+
+# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog)
+#TODO: check that the gpg key contains it (or match preferred_email_adress to available gpg keys and take the name)
+if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
+    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
+
+# changed upstream author and email
+quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
+quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
+
+# update license if needed. Don't change anything if not needed
+try:
+    license.licensing()
+except license.LicenceError, error_message:
+    print(error_message)
     sys.exit(1)
 
 try:
@@ -201,8 +205,8 @@ if release_version in bzr_tags:
     sys.exit(1)
 
 # commit current changes
-subprocess.call(["bzr", "add"])
-return_code = subprocess.call(["bzr", "commit", '--unchanged', '-m',
+packaging.filter_exec_command(["bzr", "add"])
+return_code = packaging.filter_exec_command(["bzr", "commit", '--unchanged', '-m',
                                 _('commit before release')])
 if return_code != 0 and return_code != 3:
     print _("ERROR: quickly can't release as it can't commit with bzr")
@@ -231,12 +235,12 @@ if return_code != 0:
 
 # add files, setup release version, commit and push !
 #TODO: check or fix if we don't have an ssh key (don't tag otherwise to be able to release again)
-subprocess.call(["bzr", "add"])
-return_code = subprocess.call(["bzr", "commit", '-m', commit_msg])
+packaging.filter_exec_command(["bzr", "add"])
+return_code = packaging.filter_exec_command(["bzr", "commit", '-m', commit_msg])
 if return_code != 0 and return_code != 3:
     print _("ERROR: quickly can't release as it can't commit with bzr")
     sys.exit(return_code)
-subprocess.call(["bzr", "tag", release_version]) # tag revision
+packaging.filter_exec_command(["bzr", "tag", release_version]) # tag revision
 
 # check if pull branch is set
 bzr_instance = subprocess.Popen(["bzr", "info"], stdout=subprocess.PIPE)
@@ -246,40 +250,44 @@ if bzr_instance.returncode !=0:
     sys.exit(1)
 
 
-# TODO: see if we want a strategy to set main branch in the project
-
 if (launchpadaccess.lp_server == "staging"):
     bzr_staging = "//staging/"
 else:
     bzr_staging = ""
 
+custom_location_in_info = None
 branch_location = []
+custom_location = bzrutils.get_bzrbranch()
+if custom_location:
+    branch_location = [custom_location]
+    custom_location_in_info = custom_location.replace('lp:', '')
 # if no branch, create it in ~user_name/project_name/quickly_trunk
 # or switch from staging to production
-if not ("parent branch" in bzr_info) or ((".staging." in bzr_info) and not bzr_staging) or (not (".staging." in bzr_info) and bzr_staging):
+if ("parent branch" in bzr_info) and not (
+    (custom_location_in_info and custom_location_in_info not in bzr_info) or
+   ((".staging." in bzr_info) and not bzr_staging) or
+   (not (".staging." in bzr_info) and bzr_staging)):
+    return_code = packaging.filter_exec_command(["bzr", "pull"])
+    if return_code != 0:
+        print _("ERROR: quickly can't release: can't pull from launchpad.")
+        sys.exit(return_code)
 
-    branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
-    return_code = subprocess.call(["bzr", "push", "--remember", "--overwrite", "".join(branch_location)])
+    return_code = packaging.filter_exec_command(["bzr", "push"])
+    if return_code != 0:
+        print _("ERROR: quickly can't release: can't push to launchpad.")
+        sys.exit(return_code)
+else:
+    if not branch_location:
+        branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
+    return_code = packaging.filter_exec_command(["bzr", "push", "--remember", "--overwrite", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(return_code)
 
     # make first pull too
-    return_code = subprocess.call(["bzr", "pull", "--remember", "".join(branch_location)])
+    return_code = packaging.filter_exec_command(["bzr", "pull", "--remember", "".join(branch_location)])
     if return_code != 0:
         print _("ERROR: quickly can't release correctly: can't pull from launchpad.")
-        sys.exit(return_code)
-
-else:
-
-    return_code = subprocess.call(["bzr", "pull"])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't pull from launchpad.")
-        sys.exit(return_code)
-
-    subprocess.call(["bzr", "push"])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't push to launchpad.")
         sys.exit(return_code)
 
 

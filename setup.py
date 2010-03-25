@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 # quickly: quickly project handler
 #
-# Copyright (C) 2009 Canonical Ltd.fds
-# Author 2009 Didier Roche
+# Copyright (C) 2009 Didier Roche
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License version 3,
@@ -24,6 +23,7 @@ VERSION = '0.3'
 import glob
 import os
 import sys
+import subprocess
 
 try:
     import DistUtilsExtra.auto
@@ -62,16 +62,29 @@ def update_data_path(prefix, oldvalue=None):
         sys.exit(1)
     return oldvalue
 
+def update_tutorial(tutorial_layouts):
+
+    for tutorial_layout in tutorial_layouts:
+        tutorial_dir = tutorial_layout[0]
+        file_name = tutorial_layout[1]
+        po_dir= "%s/po" % tutorial_dir
+        # update .pot
+        update_cmd = ['xml2po', '-e', '-o', '%s/%s.pot' % (po_dir, file_name),
+                      '%s/%s.xml' % (tutorial_dir, file_name)]
+        subprocess.call(update_cmd)
+        # update lang
+        for po_file in glob.glob("%s/*.po" % po_dir):
+            lang = os.path.basename(po_file[:-3])
+            update_cmd = ['xml2po', '-p', '%s/%s.po' % (po_dir, lang), '-o',
+                          '%s/%s-%s.xml' % (tutorial_dir, file_name, lang),
+                          '%s/%s.xml' % (tutorial_dir, file_name)]
+            subprocess.call(update_cmd)
 
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
-        if self.root or self.home:
-            print "WARNING: You don't use a standard --prefix installation, take care that you eventually " \
-            "need to update quickly/quicklyconfig.py file to adjust __quickly_data_directory__. You can " \
-            "ignore this warning if you are packaging and uses --prefix."
-        else:
-            self.root='/usr'
         previous_value = update_data_path(self.prefix + '/share/quickly/')
+        update_tutorial([("data/templates/ubuntu-application/help",
+                           'quickly-ubuntu-application-tutorial')])
         DistUtilsExtra.auto.install_auto.run(self)
         update_data_path(self.prefix, previous_value)
 

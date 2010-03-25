@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -63,7 +62,9 @@ if packaging.updatepackaging() != 0:
 
 
 # creating local binary package
-return_code = subprocess.call(["dpkg-buildpackage", "-tc", "-I.bzr", "-us", "-uc"])
+return_code = packaging.filter_exec_command(["dpkg-buildpackage", "-tc",
+                                      "-I.bzr", "-us", "-uc"])
+
 if return_code == 0:
     print _("Ubuntu package has been successfully created in ../%s_%s_all.deb") % (project_name, release_version)
 else:

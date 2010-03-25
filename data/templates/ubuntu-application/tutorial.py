@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -19,7 +18,8 @@
 
 import os
 import sys
-import webbrowser
+import locale
+import subprocess
 
 import gettext
 from gettext import gettext as _
@@ -31,11 +31,21 @@ def help():
     print _("""Usage:
 $ quickly tutorial
 
-Opens a web browser with the tutorial for ubuntu-application template.
+Opens help file with the tutorial for the current template.
 """)
 templatetools.handle_additional_parameters(sys.argv, help)
 
-webbrowser.open(os.path.dirname(__file__) + "/help/index.html")
-
-sys.exit(0)
+# TODO: FIX to take tutorial from the project path:
+# abs_template_path = templatetools.get_template_path_from_project() stop when
+# you are outside a project
+help_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'help')
+help_file = os.path.join(help_dir, 'tutorial-%s.xml'
+                                    % locale.getdefaultlocale()[0])
+if not os.path.isfile(help_file) and locale.getdefaultlocale()[0] is not None:
+    help_file = os.path.join(help_dir,
+                            'tutorial-%s.xml'
+                            % locale.getdefaultlocale()[0].split('_')[0])
+if not os.path.isfile(help_file):
+    help_file = os.path.join(help_dir, 'tutorial.xml')
+subprocess.Popen(['yelp', help_file], stderr=file("/dev/null"))
 

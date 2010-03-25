@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009 Canonical Ltd.
-# Author 2009 Didier Roche
+# Copyright 2009 Didier Roche
 #
 # This file is part of Quickly
 #
@@ -22,6 +21,7 @@ import subprocess
 import sys
 
 import builtincommands
+import configurationhandler
 import templatetools, tools
 
 import gettext
@@ -239,10 +239,7 @@ def get_commands_by_criteria(**criterias):
     for template_available in all_commands:
         if ('template' in criterias
             and criterias['template'] != template_available):
-            # XXX: I'm sure this speeds up the search, but what exactly is it
-            # that we're skipping and why is it ok to skip this? -- jml,
-            # 2009-11-18.
-            continue # to speed up the search
+            continue # go to next round if no template match
         for candidate_command_name in all_commands[template_available]:
             candidate_command = all_commands[
                 template_available][candidate_command_name]
@@ -260,7 +257,7 @@ def get_commands_by_criteria(**criterias):
 
 
 def get_command_names_by_criteria(**criteria):
-    """Get a list of all command names corresponding to criteria.
+    """Get a tuple of all command names corresponding to criteria.
 
     'criteria' correponds to Command object properties.
     """
@@ -268,11 +265,10 @@ def get_command_names_by_criteria(**criteria):
 
 
 def get_all_templates():
-    """Get a list of all templates"""
-    return [
+    """Get a tuple of all templates"""
+    return (
         template for template in get_all_commands().keys()
-        if template != "builtins"]
-
+        if template != "builtins")
 
 class Command:
 
