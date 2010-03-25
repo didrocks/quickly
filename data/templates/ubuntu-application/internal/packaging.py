@@ -55,7 +55,7 @@ class DomainLevel:
     WARNING=1
     ERROR=2
 
-def print_summary(err_output, warn_output):
+def continue_if_errors(err_output, warn_output, return_code):
     """print existing error and warning"""
 
     print #finish the current line
@@ -65,11 +65,24 @@ def print_summary(err_output, warn_output):
         print ('----------------------------------')
         print ('\n'.join(err_output))
         print ('----------------------------------')
+    print_warning = False
     if warn_output:
-        print _('Command returned some WARNINGS:')
-        print ('----------------------------------')
-        print ('\n'.join(warn_output))
-        print ('----------------------------------')
+        # seek if not uneeded warning (noise from DistUtilsExtra.auto)
+        for line in warn_output:
+            if not (re.match(".*not recognized by DistUtilsExtra.auto.*", line)
+                or re.match(' .*\.pot', line)
+                or re.match(' .*\.in', line)):
+                print_warning = True
+        if print_warning:
+            print _('Command returned some WARNINGS:')
+            print ('----------------------------------')
+            print ('\n'.join(warn_output))
+            print ('----------------------------------')
+    if return_code == 0 and (err_output or print_warning):
+        if not 'y' in raw_input("Do you want to continue (this is not safe!) y/[n]: "):
+            return(4)
+    return return_code
+
 
 def updatepackaging(changelog=None):
     """create or update a package using python-mkdebian.
@@ -127,14 +140,9 @@ def updatepackaging(changelog=None):
                 else:
                     sys.stdout.write('.')
 
-    print_summary(err_output, warn_output)
-    return_code = proc.returncode
-    if return_code == 0:
-        if err_output or warn_output:
-            if not 'y' in raw_input("Do you want to continue (this is not safe!) y/[n]: "):
-                print _("An error has occurred")
-                return(4)            
-    else:
+    
+    return_code = continue_if_errors(err_output, warn_output, proc.returncode)
+    if not return_code == 0:
         print _("An error has occurred")
         return(return_code)
     print _("Ubuntu packaging created in debian/")
