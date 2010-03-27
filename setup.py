@@ -84,7 +84,9 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
         previous_value = update_data_path(self.prefix + '/share/quickly/')
         update_tutorial([("data/templates/ubuntu-application/help",
-                           'quickly-ubuntu-application-tutorial')])
+                           'tutorial'),
+                         ("data/templates/ubuntu-pygame/help",
+                           'tutorial')])
         DistUtilsExtra.auto.install_auto.run(self)
         update_data_path(self.prefix, previous_value)
 
