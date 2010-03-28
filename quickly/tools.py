@@ -246,35 +246,33 @@ def get_completion_in_context(argv, context_path=None):
     if argv[-1].startswith("-"):
         options = ("-h", "--help", "-t", "--template", "--staging", "--verbose", "--version")
         available_completion = [option for option in options if option.startswith(sys.argv[-1])]
-        print " ".join(available_completion)
 
     # get available templates after option if needed
-    if argv[-2] in ("-t", "--template"):
-        available_completion.extend(commands.get_all_templates())
-        print " ".join(available_completion)
-        return(0)        
-    
-    # treat commands and try to get the template from the project directory if we are in a project (if not already provided by the -t option)
-    (opt_command, opt_template) = process_command_line(argv[3:])
-    if not opt_template and configurationhandler.loadConfig(can_stop=False, config_file_path=context_path) == 0:
-        try:
-            opt_template = configurationhandler.project_config['template']
-        except KeyError:
-            pass
-    # if no command yet, check for available command
-    if len(opt_command) == 1:
-        # list available command in template suiting context (even command "followed by template" native of that template)
-        if opt_template: 
-            available_completion.extend([command.name for command in commands.get_commands_by_criteria(template=opt_template) if command.is_right_context(context_path, verbose=False)])
-        # add builtin commands
-        available_completion.extend([command.name for command in commands.get_commands_by_criteria(template="builtins") if command.is_right_context(context_path, verbose=False)])
-        # add commands followed by a template if we don't already have a template provided (native command followed by template has already been handled before)
-        if not opt_template:
-            available_completion.extend([command.name for command in commands.get_commands_by_criteria(followed_by_template=True) if command.is_right_context(context_path, verbose=False)])
+    elif argv[-2] in ("-t", "--template"):
+        available_completion.extend([template for template in commands.get_all_templates()])
 
     else:
-        # ask for the command what she needs (it automatically handle the case of command followed by template and command followed by command)
-        available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in commands.get_commands_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
+        # treat commands and try to get the template from the project directory if we are in a project (if not already provided by the -t option)
+        (opt_command, opt_template) = process_command_line(argv[3:])
+        if not opt_template and configurationhandler.loadConfig(can_stop=False, config_file_path=context_path) == 0:
+            try:
+                opt_template = configurationhandler.project_config['template']
+            except KeyError:
+                pass
+        # if no command yet, check for available command
+        if len(opt_command) == 1:
+            # list available command in template suiting context (even command "followed by template" native of that template)
+            if opt_template: 
+                available_completion.extend([command.name for command in commands.get_commands_by_criteria(template=opt_template) if command.is_right_context(context_path, verbose=False)])
+            # add builtin commands
+            available_completion.extend([command.name for command in commands.get_commands_by_criteria(template="builtins") if command.is_right_context(context_path, verbose=False)])
+            # add commands followed by a template if we don't already have a template provided (native command followed by template has already been handled before)
+            if not opt_template:
+                available_completion.extend([command.name for command in commands.get_commands_by_criteria(followed_by_template=True) if command.is_right_context(context_path, verbose=False)])
+
+        else:
+            # ask for the command what she needs (it automatically handle the case of command followed by template and command followed by command)
+            available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in commands.get_commands_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
     # remove duplicates
     completion = set(available_completion)
     return (completion)
