@@ -155,9 +155,16 @@ def help(project_template, project_dir, command_args, shell_completion=False):
                 # to help the user, we can search if this command_name corresponds to a command in a template
                 list_possible_commands = commands_module.get_commands_by_criteria(name=command_name, followed_by_template=True)
                 if list_possible_commands:
-                   print _("help command must be followed by a template name for getting help from templates commands like %s.\nUsage is: quickly help [template] <command>" % command_name)
-                   print _("Candidates template are: %s") % ", ".join([command.template for command in list_possible_commands])
-                   return(4)
+                    proposed_templates = []
+                    for template in commands_module.get_all_templates():
+                        try:
+                            commands_module.get_all_commands()[template][command_name]
+                            proposed_templates.append(template)
+                        except KeyError:
+                            pass
+                    print _("help command must be followed by a template name for getting help from templates commands like %s.\nUsage is: quickly help [template] <command>" % command_name)
+                    print _("Candidates template are: %s") % ", ".join(proposed_templates)
+                    return(4)
                 else:
                     print _("ERROR: No %s command found.") % command_name
             else:
