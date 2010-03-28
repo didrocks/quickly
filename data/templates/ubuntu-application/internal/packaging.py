@@ -159,7 +159,7 @@ def updatepackaging(changelog=None):
 
     if not changelog:
         changelog = []
-    command = ['python-mkdebian']
+    command = ['python-mkdebian', '--force-control']
     for message in changelog:
         command.extend(["--changelog", message])
     if not configurationhandler.project_config:
