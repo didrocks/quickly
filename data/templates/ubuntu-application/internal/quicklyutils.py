@@ -354,10 +354,6 @@ def export_right_gpg_key_id_and_email(launchpad):
     if not launchpad_key_ids:
         upload_gpg_key_to_launchpad(prefered_key_ids[0])
         launchpad_key_ids = [prefered_key_ids[0]]
-    print prefered_emails
-    print candidate_key_ids
-    print prefered_key_ids
-    print launchpad_key_ids
 
     # take first match:
     for key_ids, email in prefered_key_ids:
