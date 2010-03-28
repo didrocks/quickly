@@ -103,7 +103,7 @@ except launchpadaccess.launchpad_connection_error, e:
 
 # push the gpg key to the env
 try:
-    os.putenv('KEYID', quicklyutils.get_right_gpg_key_id(launchpad))
+    quicklyutils.export_right_gpg_key_id_and_email(launchpad)
 except quicklyutils.gpg_error, e:
     print(e)
     sys.exit(1)
@@ -125,15 +125,6 @@ except packaging.ppa_not_found, e:
     for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):
         print "%s - %s" % (ppa_name, ppa_display_name)
     sys.exit(1)
-
-# if no EMAIL or DEBEMAIL setup, use launchpad prefered email (for changelog).
-#TODO: check that the gpg key containis it (or match preferred_email_adress to available gpg keys and take the name)
-if not os.getenv("EMAIL") and not os.getenv("DEBEMAIL"):
-    os.putenv("DEBEMAIL", "%s <%s>" % (launchpad.me.display_name.encode('UTF-8'), launchpad.me.preferred_email_address.email))
-
-# changed upstream author and email
-quicklyutils.set_setup_value('author', launchpad.me.display_name.encode('UTF-8'))
-quicklyutils.set_setup_value('author_email', launchpad.me.preferred_email_address.email)
 
 # license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed
 try:
