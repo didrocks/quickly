@@ -22,17 +22,10 @@ class Enemy(BaseSprite):
 
         BaseSprite.__init__(self, project_nameconfig.enemy_image)
         self.points = 1
-        self.accelerationDivisor = 1  
-        self.orientation = 0
-        self.rotatingRight = False
-        self.rotatingLeft = False
-        self.rotationRate = 0
         self.explosion_sound = pygame.mixer.Sound(project_nameconfig.enemy_explode_sound)
         self.explode_stage = 0
         self.exploding = False
-        self.init_position()
-        self.velocity_x = 0
-        self.velocity_y = 0
+        self.alive = True
 
     def update(self):
         BaseSprite.update(self)

@@ -24,7 +24,16 @@ class BaseSprite(pygame.sprite.Sprite):
 
         """
 
-        self.__init_position()
+        #initialize member variables
+        self.orientation = 0
+        self._rotating_right = False
+        self._rotating_left = False
+        self.velocity_x = 0
+        self.velocity_y = 0
+        self._accelerating = False
+        self.x = 0
+        self.y = 0
+        self.max_velocity = 50
 
         #acceleration_divisor determines how fast a sprite
         #accelerates. The hight the divisor, the slower the
@@ -50,10 +59,10 @@ class BaseSprite(pygame.sprite.Sprite):
         self.rect.width -= 5
 
         self._update_image()
+        self.init_position()
 
-
-    def __init_position(self):
-        """init_position - initializes values for positioning, and provides 
+    def center_on_screen(self):
+        """center_on_screen - initializes values for positioning, and provides 
         a default position implemention, places the sprite in the center of
         the screen. This is an internal implementation that centers the 
         sprite. Use the default public implementation for a default
@@ -226,10 +235,19 @@ class BaseSprite(pygame.sprite.Sprite):
         """init_position - Typically called after a sprite is 
         created to place the sprite into game play. This defualt
         implementation places sprite randomly at the edges of the
-        screen. Sublclasess override this function to determine
+        screen by calling random_perimeter_placement. 
+        Sublclasess override this function to determine
         other start positions. This function can be modified to
         create different default start position logic for all
         sprites in the game.
+
+        """
+
+        self.random_perimeter_placement()
+
+    def random_perimeter_placement(self):
+        """init_position - Places sprite randomly at the edges of the
+        screen. 
 
         """
 
