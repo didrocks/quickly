@@ -102,7 +102,7 @@ Quickly 0.4
     format. Translators, it's yours! (Shane Fagan) (LP: #525168)
   - package/share/release are now more quiet and only print something on error
     warning as a summary as with unfound packages, and so on (LP: #482915)
-  - new algorithm to select good email automatically. Try to get the prefered
+  - new algorithm to select good email automatically. Try to get the preferred
     email and update the AUTHOR file with it.
   - test GPG key and create one automatically if none is available. The
     corresponding public key availabity in launchpad is also checked.
