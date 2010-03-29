@@ -14,8 +14,7 @@ try:
 except ImportError:
     print >> sys.stderr, 'To build project_name you need https://launchpad.net/python-distutils-extra'
     sys.exit(1)
-assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >=
-2.18'
+assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >= 2.18'
 
 def update_data_path(prefix, oldvalue=None):
 
