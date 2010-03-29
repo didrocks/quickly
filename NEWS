@@ -107,9 +107,15 @@ Quickly 0.4
   - test GPG key and create one automatically if none is available. The
     corresponding public key availabity in launchpad is also checked.
     (LP: #427730, #408993)
+  - add devscripts as a dependency (bug #465833), will fix all the depends
+     mess later
+  - bump python-distutils-extra (>= 2.18bzr1)
   ubuntu-cli Template:
   - first release using import command feature (no command written into the
     template itself). This is a basic ubuntu CLI application
+  ubuntu-pygame Template:
+  - first release using import command feature. python-pygame added as a
+    depends
 
 Quickly 0.2.6
 -------------------------------------
