@@ -1,4 +1,4 @@
-quickly (0.3.90-0ubuntu1) UNRELEASED; urgency=low
+quickly (0.3.90-0ubuntu1) lucid; urgency=low
 
   * New release:
     Quickly core:
@@ -121,7 +121,7 @@ quickly (0.3.90-0ubuntu1) UNRELEASED; urgency=low
       Quickly widgets (LP: #519633)
     - suggests python-quickly-widgets
 
- -- Didier Roche <didrocks@ubuntu.com>  Mon, 29 Mar 2010 17:50:40 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Mon, 29 Mar 2010 19:00:48 +0200
 
 quickly (0.2.6) karmic; urgency=low
 
