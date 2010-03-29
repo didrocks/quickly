@@ -101,7 +101,7 @@ def _filter_out(line, output_domain, err_output, warn_output):
         output_domain = DomainLevel.ERROR
     elif 'WARN' in line:
         output_domain = DomainLevel.WARNING
-    elif not line.startswith(' '):
+    elif not line.startswith('  '):
         output_domain = DomainLevel.NONE
         if '[not found]' in line:
             output_domain = DomainLevel.WARNING
@@ -115,7 +115,9 @@ def _filter_out(line, output_domain, err_output, warn_output):
             # filter bad output from dpkg-buildpackage (on stderr) and p-d-e auto
             if not(re.match('  .*\.pot', line)
                    or re.match('  .*\.in', line)
-                   or re.match(' dpkg-genchanges  >.*', line)):
+                   or re.match(' dpkg-genchanges  >.*', line)
+                   # FIXME: this warning is temporary: should be withed in p-d-e
+                   or re.match('.*XS-Python-Version and XB-Python-Version.*', line)):
                 warn_output.append(line)
     else:
         sys.stdout.write('.')
