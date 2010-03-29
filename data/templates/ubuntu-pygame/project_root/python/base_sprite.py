@@ -5,7 +5,7 @@ base_sprite - contains BaseSprite class.
 """
 
 import pygame, random
-import project_nameconfig
+from python_name import python_nameconfig
 
 class BaseSprite(pygame.sprite.Sprite):
     """

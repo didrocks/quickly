@@ -5,9 +5,9 @@ of BaseSprite
 """
 
 import pygame
-from base_sprite import BaseSprite
+from python_name.base_sprite import BaseSprite
 import math
-import project_nameconfig
+from python_name import python_nameconfig
 
 class HomingMissle(BaseSprite):
     """

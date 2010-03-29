@@ -6,8 +6,8 @@ predetermined time period.
 """
 
 import pygame, random
-from base_sprite import BaseSprite
-import project_nameconfig
+from python_name.base_sprite import BaseSprite
+from python_name import python_nameconfig
 
 class Bullet(BaseSprite):
     """
