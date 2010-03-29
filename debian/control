@@ -75,6 +75,7 @@ Depends: ${misc:Depends},
          python-distutils-extra (>= 2.18bzr1),
          python-pygame
 Recommends: seahorse-plugins
+Suggests: python-quickly-widgets
 Description: quickly ubuntu application template
  Quickly enables for prospective programmers a way to easily build new
  apps or contents.
