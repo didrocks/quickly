@@ -5,7 +5,7 @@ game module. Contains the Game class.
 """
 
 import pygame
-import project_nameconfig
+from python_name import python_nameconfig
 
 class Game():
     """

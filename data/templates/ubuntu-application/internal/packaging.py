@@ -101,21 +101,23 @@ def _filter_out(line, output_domain, err_output, warn_output):
         output_domain = DomainLevel.ERROR
     elif 'WARN' in line:
         output_domain = DomainLevel.WARNING
-    elif not line.startswith(' '):
+    elif not line.startswith('  '):
         output_domain = DomainLevel.NONE
         if '[not found]' in line:
             output_domain = DomainLevel.WARNING
     if output_domain == DomainLevel.ERROR:
         # only add once an error
         if not line in err_output:
-            err_output.append(line)
+                err_output.append(line)
     elif output_domain == DomainLevel.WARNING:
         # only add once a warning
         if not line in warn_output:
             # filter bad output from dpkg-buildpackage (on stderr) and p-d-e auto
             if not(re.match('  .*\.pot', line)
                    or re.match('  .*\.in', line)
-                   or re.match(' dpkg-genchanges  >.*', line)):
+                   or re.match(' dpkg-genchanges  >.*', line)
+                   # FIXME: this warning is temporary: should be withed in p-d-e
+                   or re.match('.*XS-Python-Version and XB-Python-Version.*', line)):
                 warn_output.append(line)
     else:
         sys.stdout.write('.')
@@ -130,7 +132,8 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
     else:
         proc = subprocess.Popen(command, stdout=subprocess.PIPE,
                                          stderr=subprocess.PIPE)
-        output_domain = DomainLevel.NONE
+        stdout_domain = DomainLevel.NONE
+        stderr_domain = DomainLevel.NONE
         err_output = []
         warn_output = []
         while True:
@@ -138,7 +141,7 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
             line_stderr = proc.stderr.readline().rstrip()
             # filter stderr
             if line_stderr:
-                (output_domain, err_output, warn_output) = _filter_out(line_stderr, output_domain, err_output, warn_output)
+                (stderr_domain, err_output, warn_output) = _filter_out(line_stderr, stderr_domain, err_output, warn_output)
 
             if not line_stdout:
                 # don't replace by if proc.poll() as the output can be empty
@@ -146,7 +149,7 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
                     break
             # filter stdout
             else:
-                (output_domain, err_output, warn_output) = _filter_out(line_stdout, output_domain, err_output, warn_output)
+                (stdout_domain, err_output, warn_output) = _filter_out(line_stdout, stdout_domain, err_output, warn_output)
 
         return(_continue_if_errors(err_output, warn_output, proc.returncode,
                                      ask_on_warn_or_error))

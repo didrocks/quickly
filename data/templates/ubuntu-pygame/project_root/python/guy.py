@@ -7,9 +7,9 @@ BaseSprite functionality.
 """
 
 import pygame, random
-from base_sprite import BaseSprite
-from bullet import Bullet
-import project_nameconfig
+from python_name.base_sprite import BaseSprite
+from python_name.bullet import Bullet
+from python_name import python_nameconfig
 
 class Guy(BaseSprite):
     """

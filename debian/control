@@ -63,6 +63,7 @@ Depends: ${misc:Depends},
          cdbs (>= 0.4.43),
          debhelper (>= 6),
          dpkg-dev,
+         devscripts,
          python-gtk2,
          glade,
          python-desktopcouch-records (>= 0.3),
@@ -71,7 +72,8 @@ Depends: ${misc:Depends},
          dput,
          gedit | editor,
          bzr,
-         python-distutils-extra (>= 2.10)
+         python-distutils-extra (>= 2.18bzr1),
+         python-pygame
 Recommends: seahorse-plugins
 Description: quickly ubuntu application template
  Quickly enables for prospective programmers a way to easily build new
