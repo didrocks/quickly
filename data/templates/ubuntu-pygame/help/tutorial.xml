@@ -44,7 +44,9 @@ Creating and Running Your Game
  <para>
 In this tutorial we will start making a top down shooter reminiscent of the space arcade shooters of the 1980s.
  </para>
- <figure></figure>
+ <figure>
+ <graphic fileref="./images/1.png"></graphic>
+ ></figure>
  <para>
 We'll do this by creating a default game, editing some of the generated code, writing some new code, and adding our images for sprits.
  </para>
@@ -54,15 +56,13 @@ Creating a default working game couldn't be simpler. First, open a terminal wind
  <programlisting>
 $quickly create ubuntu-pygame shooter
  </programlisting>
- <graphic fileref="./images/1.png"></graphic>
+ <graphic fileref="./images/2.png"></graphic>
  <para>
 This will create a shooter sub directory containing a complete directory tree and files for an empty python application. The command finishes by running the newly created game. The  game is played by using the "s" and "f" keys to rotate the guy, the "j" key to shoot, and the "l" key to thrust.
  </para>
- <graphic fileref="./images/2.png"></graphic> 
  <para>
 You can play the newly created game. Notice that the <application>Quickly PyGame Template</application> inferred that the game title is "Shooter". Also note that there is a guy that you can control with the s,f,j, and l keys. There is an enemy and a homing missle. You also get a "Game Over" screen, scoring, and levels build in for free.
  </para>
- <graphic fileref="./images/3.png"></graphic>
  <para> 
 Close the game by closing the window or using the Esc key. Since the game isn't installed into Ubuntu yet, you can't start the game from the application menu yet. To start the game, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.
  </para> 
@@ -70,7 +70,6 @@ Close the game by closing the window or using the Esc key. Since the game isn't 
 $cd shooter
 $quickly run
  </programlisting>
- <graphic fileref="./images/terminal2.png"></graphic>
 </chapter>
 <chapter>
  <title>Creating your own Sprites</title>
@@ -86,11 +85,11 @@ The first think you probably noticed about the game is that the graphics are so 
  <para>
 I made new images for the guy (the sprite the player controls), enemies, bullets, and the game background. I also made a new sprite called "enemy_bullet.png" which we'll add into the game later. 
 <figure>
-
+ <graphic fileref="./images/3.png"></graphic>
 </figure> 
 Just drag your new sprite images into the shooter/data/media and tell it to replace the images. Now when you run the game, you'll see your new sprites at work.
 <figure>
-
+<graphic fileref="./images/4.png"></graphic>
 </figure> 
 Oops. As you can see, the background image I created was for a game of different dimensions. It's for a game that's 400 pixels wide by 500 pixels high. In the next section, we'll make the game that size.
  </para>
@@ -108,6 +107,7 @@ screen_width = 400
 screen_height = 500
 </programlisting>
 Save the file and run the game again. Notice that the screen wrapping and centering and everything was taken care of for you. That's because you made the change in the shooterconfig.py file. This is the right place to add and change variables that should be availble throughout the game. We'll be make a few more changes here later.
+
 </para>
 </chapter>
 <chapter>
@@ -239,8 +239,8 @@ We'll handle the key up functions similarly.
 
 </programlisting>
 <figure>
-
-</figure>
+<graphic fileref="./images/5.png"></graphic>
+</figure> 
 </para>
 <para>
 Now we've got the guy working the way we want, but we need to make a few changes to to how the guy's bullets are working:
@@ -298,8 +298,8 @@ So we change change the ugy's shoot funciton to look like this:
 </para>
 <para>
 <figure>
-
-</figure>
+<graphic fileref="./images/6.png"></graphic>
+</figure> 
 Now we have the guy working as desired. Moves back and forth across the bottom and shoots bullets the way we want. Next we'll go on to changing the way the enemies work.
 </para>
 
@@ -320,8 +320,8 @@ The bin/shooter fileset up a  SpriteGroup already. It's called "enemies" and get
 </programlisting>
 So for the first level, there will by for enemies, and each time there is an new level created the number of enemies will increase by 1.  Aslo, no more homing missles.
 <figure>
-
-</figure>
+<graphic fileref="./images/7.png"></graphic>
+</figure> 
  </para>
  <para>
 However, there are two things we need to do to enhance the game play with our enemies. First, as you can see, they can start quite close to the guy, even under. We'll need to fix that. Also, we should put them in motion so they are a bit more of a challenge to shoot. We'll do both of the things by modifying the Enemy class in the enemy.py file. Specifically in the  init_postion function.
@@ -435,8 +435,8 @@ So now we just need to tell the enemies to shoot. We'll do this back in the bin/
                 e.shoot()
 </programlisting>
 <figure>
-
-</figure>
+<graphic fileref="./images/8.png"></graphic>
+</figure> 
 So if you run the game, you'll see that the enemies are dropping bulltes like bombs. Nice. However, maybe it would be nicer if the sprites for the enemy bullets were different than the sprites for the guy's bullets. Remember at the beginning of the  tutorial we added an image called enemy_bullet.png to the data/media directory. Now we'll write a bit of code to use that image. First thing, we should add a reference to it in the shooterconfig.py file. In this way, the Enemy class will be able to find it. Just add the following line along with the other image path setting code in shooterconfig.py.
 <programlisting>
 enemy_bullet_image = image_path + "enemy_bullet.png"
@@ -453,7 +453,8 @@ So now we need to tell the bullets in the Enemy class to use that image. Fortuna
 </programlisting>
 Now the enemies are dropping bombs with our new image.
 <figure>
-</figure>
+<graphic fileref="./images/9.png"></graphic>
+</figure> 
 </para>
 <para>
 But of course, you many notice the bombs aren't too menancing. In the next chapter we'll add collision detection to make the bombs kill the guy.
@@ -474,8 +475,8 @@ Ok, so let's start by making the bombs that the enemies drop actually kill the g
 </programlisting> 
 There is a function in bin/shooter called check_collisions which is called once per tick, and is the perfect place to add this code. Add it right under the similar test for the guy colliding with enemies. Now those bombs can kill the guys.
 <figure>
-
-</figure>
+<graphic fileref="./images/10.png"></graphic>
+</figure> 
 If you play for a bit, you may notice that the bullets and the bombs just kind of pass by each other. We can ramp up the game play by making the enemy bullets destroy the guy's bullets, but not visa versa. So that logic here is, have any of the sprites in the bullets sprite group collided with the bullets in the enemy bullets sprite group. There is function for this as well, pygame.sprite.groupcollide. groupcollide takes two sprite lists and returns a dictionary. The keys in the dictionary are any sprites from the first group that are involved in a collision, and the values are the sprites from the second group that collided with the sprite that  for key.  It's a bit hard to explain, but I bet the code is pretty readable. Add this line to the  check_collisions function.
 <programlisting>
     hits_dict = pygame.sprite.groupcollide(bullets, enemy_bullets, True, False)
