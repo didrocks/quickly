@@ -1,6 +1,13 @@
+quickly (0.3.90-0ubuntu2) lucid; urgency=low
+
+  * debian/control:
+    - add gnome-doc-utils for building l10n
+
+ -- Didier Roche <didrocks@ubuntu.com>  Tue, 30 Mar 2010 09:49:56 +0200
+
 quickly (0.3.90-0ubuntu1) lucid; urgency=low
 
-  * New release:
+  * New release: (LP: #550981)
     Quickly core:
     - check now that --template has one argument
     - -- enables to give options to templates (unknown options and arguments
