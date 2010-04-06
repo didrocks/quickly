@@ -305,7 +305,7 @@ Expire-Date: 0
         raise gpg_error(_("Can't create GPG key. Try to create it yourself."))
     return secret_key_id
 
-def export_right_gpg_key_id_and_email(launchpad):
+def get_right_gpg_key_id(launchpad):
     '''Try to fech (and explain how to upload) right GPG key'''
 
     prefered_emails = get_all_emails()
@@ -359,14 +359,14 @@ def export_right_gpg_key_id_and_email(launchpad):
     for key_ids, email in prefered_key_ids:
         for key_id in key_ids:
             if key_id in launchpad_key_ids:
-                print "key_id: %s, email: %s" % (key_id, email)
                 # export env variable for changelog and signing
-                os.putenv('DEBSIGN_KEYID', key_id)
                 author_name = launchpad.me.display_name.encode('UTF-8')
                 if not os.getenv('DEBFULLNAME'):
                     os.putenv('DEBFULLNAME', author_name)
                 if not os.getenv('DEBEMAIL'):
                     os.putenv('DEBEMAIL', email)
+                if templatetools.in_verbose_mode():
+                    print "key_id: %s, author: %s, email: %s" % (key_id, author_name, email)
                 # set upstream author and email
                 try:
                     get_setup_value('author')

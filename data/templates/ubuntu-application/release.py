@@ -131,7 +131,7 @@ except launchpadaccess.launchpad_connection_error, e:
 
 # push the gpg key and email to the env
 try:
-    quicklyutils.export_right_gpg_key_id_and_email(launchpad)
+    keyid = quicklyutils.get_right_gpg_key_id(launchpad)
 except quicklyutils.gpg_error, e:
     print(e)
     sys.exit(1)
@@ -284,7 +284,7 @@ else:
 
 # upload to launchpad
 print _("pushing to launchpad")
-return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, release_version)) != 0
+return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, release_version), keyid=keyid) != 0
 if return_code != 0:
     sys.exit(return_code)
 

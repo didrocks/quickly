@@ -275,11 +275,14 @@ def choose_ppa(launchpad, ppa_name=None):
     dput_ppa_name = 'ppa:%s/%s' % (ppa_user.name, ppa_name)
     return (ppa_user, ppa_name, dput_ppa_name, ppa_url.encode('UTF-8'))
 
-def push_to_ppa(dput_ppa_name, changes_file):
+def push_to_ppa(dput_ppa_name, changes_file, keyid=None):
     """ Push some code to a ppa """
 
     # creating local binary package
-    return_code = filter_exec_command(["dpkg-buildpackage", "-S", "-I.bzr"])
+    buildcommand = ["dpkg-buildpackage", "-S", "-I.bzr"]
+    if keyid:
+        buildcommand.append("-k%s" % keyid)
+    return_code = filter_exec_command(buildcommand)
     if return_code != 0:
         print _("ERROR: an error occurred during source package creation")
         return(return_code)
