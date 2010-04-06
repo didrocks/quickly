@@ -110,6 +110,7 @@ Quickly 0.4
   - add devscripts as a dependency (bug #465833), will fix all the depends
      mess later
   - bump python-distutils-extra (>= 2.18bzr1)
+  - add debug command relying on winpdb
   ubuntu-cli Template:
   - first release using import command feature (no command written into the
     template itself). This is a basic ubuntu CLI application
