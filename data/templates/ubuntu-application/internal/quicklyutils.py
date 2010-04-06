@@ -377,7 +377,7 @@ def get_right_gpg_key_id(launchpad):
                 except cant_deal_with_setup_value:
                     print email
                     set_setup_value('author_email', email)
-                return
+                return key_id
 
     # shouldn't happen as other errors are caught
     raise gpg_error(_("No gpg key set and can't create one for you.'"))
