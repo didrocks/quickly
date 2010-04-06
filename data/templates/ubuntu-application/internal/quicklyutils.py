@@ -279,13 +279,15 @@ def create_gpg_key(name, email):
     '''create a gpg key and return the corresponding id'''
 
     if not 'y' in raw_input("It seems you don't have a gpg key on your " \
-                            "computer. Do you want to create one? y/[n]: "):
+                            "computer. Do you want to create one (this may " \
+                            "take a while)? y/[n]: "):
         raise gpg_error(_("You choosed to not create your GPG key."))
     key_generate = '''Key-Type: RSA
+Key-Length: 1024
 Name-Real: %s
 Name-Email: %s
 Expire-Date: 0
-%commit''' % (name, email)
+%%commit''' % (name, email)
     gpg_instance = subprocess.Popen(['gpg', '--gen-key', '--batch'],
                                        stdin=subprocess.PIPE,
                                        stdout=subprocess.PIPE)
@@ -303,6 +305,12 @@ Expire-Date: 0
             secret_key_id = line.split(':')[4][-8:]
     if not secret_key_id:
         raise gpg_error(_("Can't create GPG key. Try to create it yourself."))
+
+    # TODO: to be able to upload key to LP
+    raw_input("Your gpg key has been create. You have to upload it to " \
+              "Launchpad. Guidance is provided in Launchpad help. " \
+              "Press any key once done.")
+
     return secret_key_id
 
 def get_right_gpg_key_id(launchpad):
@@ -380,6 +388,6 @@ def get_right_gpg_key_id(launchpad):
                 return key_id
 
     # shouldn't happen as other errors are caught
-    raise gpg_error(_("No gpg key set and can't create one for you.'"))
+    raise gpg_error(_("No gpg key set matching launchpad one found.'"))
 
 
