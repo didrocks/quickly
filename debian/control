@@ -75,7 +75,8 @@ Depends: ${misc:Depends},
          gedit | editor,
          bzr,
          python-distutils-extra (>= 2.18bzr1),
-         python-pygame
+         python-pygame,
+	 winpdb
 Recommends: seahorse-plugins
 Suggests: python-quickly-widgets
 Description: quickly ubuntu application template

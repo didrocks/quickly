@@ -52,7 +52,7 @@ if not templatetools.is_X_display():
     sys.exit(1)
 
 project_bin = 'bin/' + configurationhandler.project_config['project']
-command_line = ["/usr/bin/winpdb", project_bin]
+command_line = ["winpdb", project_bin]
 command_line.extend([arg for arg in sys.argv[1:] if arg != "--"])
 
 # run with args if bin/project exist
