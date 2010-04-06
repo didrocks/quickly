@@ -294,7 +294,7 @@ Before we just write the new document though, we have to take note of the fact t
         for result in results: 
             document = result.value 
             if document["title"] == title: 
-                key = result.key 
+                key = document["_id"]
                 self.database.update_fields(key, {"text":text}) 
                 return
  
