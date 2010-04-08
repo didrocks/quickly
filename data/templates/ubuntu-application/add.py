@@ -121,13 +121,13 @@ if argv[1] == "dialog":
             quicklyutils.conventional_names(project_name)
 
         substitutions = (("project_name",project_name),
-                         ("dialog_name",dialog_name),
-                         ("dialog_python_name",dialog_python_name),
-                         ("dialog_camel_case_name",dialog_camel_case_name),
-                         ("project_camel_case_name",project_camel_case_name),
-                         ("project_sentence_name",project_sentence_name),
-                         ("dialog_sentence_name",dialog_sentence_name),
-                        ( "python_name",python_name))
+                    ("dialog_name",dialog_name),
+                    ("dialog_python_name",dialog_python_name),
+                    ("dialog_camel_case_name",dialog_camel_case_name),
+                    ("project_camel_case_name",project_camel_case_name),
+                    ("project_sentence_name",project_sentence_name),
+                    ("dialog_sentence_name",dialog_sentence_name),
+                    ("python_name",python_name))
 
         quicklyutils.file_from_template(template_ui_dir, 
                                         "dialog_camel_case_nameDialog.ui", 

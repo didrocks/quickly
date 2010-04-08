@@ -47,5 +47,6 @@ if not os.path.isfile(help_file) and locale.getdefaultlocale()[0] is not None:
                             % locale.getdefaultlocale()[0].split('_')[0])
 if not os.path.isfile(help_file):
     help_file = os.path.join(help_dir, 'tutorial.xml')
-subprocess.Popen(['yelp', help_file], stderr=file("/dev/null"))
+instance = subprocess.Popen(['yelp', help_file], stderr=file("/dev/null"))
+instance.communicate()
 
