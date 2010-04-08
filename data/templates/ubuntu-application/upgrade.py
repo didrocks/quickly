@@ -17,6 +17,7 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import shutil
 import subprocess
 import sys
 
@@ -39,9 +40,16 @@ else:
 
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
+
 project_name = configurationhandler.project_config['project']
 python_name = templatetools.python_name(project_name)
+project_sentence_name, project_camel_case_name = \
+    quicklyutils.conventional_names(project_name)
 
+substitutions = (("project_name",project_name),
+                 ("project_camel_case_name",project_camel_case_name),
+                 ("project_sentence_name",project_sentence_name),
+                 ("python_name",python_name))
 
 ##### 0.4 update
 if project_version < '0.4':
@@ -81,23 +89,44 @@ if project_version < '0.4':
     except quicklyutils.cant_deal_with_setup_value:
         license = ''
     try:
+        skip = 0
         config_file = '%s/%sconfig.py' % (python_name, python_name)
         fin = file(config_file, 'r')
         fout = file(fin.name + '.new', 'w')
         license_found_in_file = False
+        data_file_function_found = False
         for line in fin:
+            if skip > 0:
+                fout.write(line)
+                skip -= 1
+                continue
             fields = line.split(' = ') # Separate variable from value
             if fields[0] == '__license__':
                 license_found_in_file = True
-                break
+                continue
             if fields[0] == '__%s_data_directory__' % python_name:
                 fout.write(line)
                 line = "__license__ = '%s'\n" % license
+            if "get_data_file(*path_segments):" in line:
+                data_file_function_found = True
+                skip = 9
+                continue
+            if "getdatapath" in line:
+                fout.write('''def get_data_file(*path_segments):
+    """Get the full path to a data file.
+
+    Returns the path to a file underneath the data directory (as defined by
+    `get_data_path`). Equivalent to os.path.join(get_data_path(),
+    *path_segments).
+    """
+    return os.path.join(getdatapath(), *path_segments)
+
+''')
             fout.write(line)
         fout.flush()
         fout.close()
         fin.close()
-        if not license_found_in_file:
+        if not license_found_in_file or not data_file_function_found:
             os.rename(fout.name, fin.name)
         else:
             os.remove(fout.name)
@@ -116,5 +145,14 @@ if project_version < '0.4':
     lp_project_name = configurationhandler.project_config.get('lp_id', None)
     if lp_project_name is not None:
         internal.apportutils.update_apport(project_name, lp_project_name, lp_project_name)
-        
+
+    # new dialog file needs helpers.py
+    if not os.path.isfile('%s/helpers.py' % python_name):
+        source_dir = os.path.join(os.path.dirname(__file__), 'project_root',
+                                  'python')
+        quicklyutils.file_from_template(source_dir, 
+                                        "helpers.py", 
+                                        python_name, 
+                                        substitutions)
+
 sys.exit(0)
