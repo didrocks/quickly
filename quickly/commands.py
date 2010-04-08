@@ -79,6 +79,7 @@ def get_all_commands():
             launch_inside_project_command_list = []
             launch_outside_project_command_list = []
             command_followed_by_command_list = []
+            command_exposed_in_bar_list = []
             current_template_import = None
 
             try:
@@ -108,6 +109,10 @@ def get_all_commands():
                         if (targeted_property
                             == 'COMMANDS_FOLLOWED_BY_COMMAND'):
                             command_followed_by_command_list.extend(
+                                command_list)
+                        if (targeted_property
+                            == 'COMMANDS_EXPOSED_IN_BAR'):
+                            command_exposed_in_bar_list.extend(
                                 command_list)
                         if (targeted_property
                             == 'IMPORT') and current_template_import:
@@ -143,13 +148,16 @@ def get_all_commands():
                     launch_outside_project = False
                     followed_by_template = False
                     followed_by_command = False
+                    exposed_in_bar = False
                     if command_name in launch_inside_project_command_list:
                         launch_inside_project = True
                     if command_name in launch_outside_project_command_list:
                         launch_outside_project = True
                         followed_by_template = True
-                    if command_name in builtincommands.followed_by_command:
+                    if command_name in command_followed_by_command_list:
                         followed_by_command = True
+                    if command_name in command_exposed_in_bar_list:
+                        exposed_in_bar = True
                     # default for commands: if not inside nor outside, and
                     # it's a template command, make it launch inside a project
                     # only
@@ -160,7 +168,7 @@ def get_all_commands():
                         command_name, file_path, template,
                         launch_inside_project, launch_outside_project,
                         followed_by_template, followed_by_command,
-                        hooks['pre'], hooks['post'])
+                        exposed_in_bar, hooks['pre'], hooks['post'])
 
     # now try to import command for existing templates
     for importing_template in import_commands:
@@ -194,6 +202,7 @@ def get_all_commands():
             launch_outside_project = False
             followed_by_template = False
             followed_by_command = False
+            exposed_in_bar = False
 
             if command_name in builtincommands.launched_inside_project_only:
                 launch_inside_project = True
@@ -203,6 +212,8 @@ def get_all_commands():
                 followed_by_template = True
             if command_name in builtincommands.followed_by_command:
                 followed_by_command = True
+            if command_name in builtincommands.exposed_in_bar:
+                exposed_in_bar = True
 
             # default for commands: if not inside nor outside only, and it's a
             # builtin command, make it launch wherever
@@ -220,7 +231,7 @@ def get_all_commands():
             __commands['builtins'][command_name] = Command(
                 command_name, command, None, launch_inside_project,
                 launch_outside_project, followed_by_template,
-                followed_by_command, hooks['pre'], hooks['post'])
+                followed_by_command, exposed_in_bar, hooks['pre'], hooks['post'])
 
     return __commands
 
@@ -272,17 +283,16 @@ def get_all_templates():
 
 class Command:
 
-    def _die(self, function_name, return_code):
+    def _errmsg(self, function_name, return_code):
        '''Quit immediately and print error if return_code != 4'''
        if return_code != 4:
             print _("ERROR: %s command failed") % function_name
             print _("Aborting")
-       sys.exit(return_code)
 
     def __init__(self, command_name, command, template=None,
                  inside_project=True, outside_project=False,
                  followed_by_template=False, followed_by_command=False,
-                 prehook=None, posthook=None):
+                 exposed_in_bar=False, prehook=None, posthook=None):
         self.command = command
         # self.template is the native template where the command is from
         # if this command is imported into another template, the object
@@ -296,6 +306,7 @@ class Command:
         self.followed_by_template = followed_by_template
         self.followed_by_command = followed_by_command
         self.name = command_name
+        self.exposed_in_bar = exposed_in_bar
 
     def shell_completion(self, template_in_cli, args):
         """Smart completion of a command
@@ -416,8 +427,6 @@ class Command:
         if not self.is_right_context(current_dir): # check in verbose mode
             return 1
 
-
-
         # get root project dir
         try:
             project_path = tools.get_root_project_path(current_dir)
@@ -444,7 +453,8 @@ class Command:
         if self.prehook:
             return_code = self.prehook(self.template, project_template, project_path, command_args)
             if return_code != 0:
-                self._die(self.prehook.__name__, return_code)
+                self._errmsg(self.prehook.__name__, return_code)
+                return return_code
 
         if callable(self.command): # Internal function
             return_code = self.command(project_template, project_path, command_args)
@@ -452,11 +462,13 @@ class Command:
             return_code = subprocess.call(
                 [self.command] + command_args, cwd=project_path)
         if return_code != 0:
-            self._die(self.name, return_code)
+            self._errmsg(self.name, return_code)
+            return return_code
 
         if self.posthook:
             return_code = self.posthook(project_template, project_path, command_args)
             if return_code != 0:
-                self._die(self.posthook.__name__, return_code)
+                self._errmsg(self.posthook.__name__, return_code)
+                return return_code
 
         return 0

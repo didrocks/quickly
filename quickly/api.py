@@ -46,7 +46,7 @@ def get_all_commands():
 
 def get_commands_in_template(template):
     '''get a list of commands for a template'''
-    return commands.get_command_names_by_criteria(template=template)
+    return commands.get_commands_by_criteria(template=template)
 
 def get_commands_in_context(path=None):
     '''typle of available commands in context (depending on path)'''
@@ -54,10 +54,10 @@ def get_commands_in_context(path=None):
     if path is None:
         path = os.getcwd()
     # simulate a call with completion statement
-    result = tools.get_completion_in_context(['quickly', 'shell-completion',
-                                            'quickly', ''], path)
+    result = tools.get_commands_in_context(path)
     return result
 
+# deprecate that and directly run command from command line
 def run_command(command_name, template='builtins', path=None, *args):
     '''run a command from a template'''
 
@@ -68,7 +68,30 @@ def run_command(command_name, template='builtins', path=None, *args):
         project_template = configurationhandler.project_config['template']
     except KeyError:
         project_template = None
+        if template != 'builtins':
+            project_template = template
+    command = commands.get_all_commands()[template][command_name]    
+    return_code = command.launch(path, list(args), project_template)
 
-    command = commands.get_all_commands()[template][command_name]
-    return command.launch(path, list(args), project_template)
+    return return_code    
+    
+
+def get_root_project_path(path=None):
+    '''return project path if found. Return None elsewhere'''
+    try:
+        return tools.get_root_project_path(path)
+    except tools.project_path_not_found, e:
+        return None
+
+def get_current_template(path=None):
+    '''return project template if we are in a project'''
+    configurationhandler.loadConfig(can_stop=False, config_file_path=path)
+    try:
+        return configurationhandler.project_config['template']
+    except KeyError:
+        return None
+
+def list_template_for_command(command_name):
+    '''from the command_name, return all templates containing it'''
+    return tools.list_template_for_command(command_name)
 
