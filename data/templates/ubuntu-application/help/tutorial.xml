@@ -883,7 +883,7 @@ Now that you've packaged your application, you can share the .deb file. However,
 <xref linkend="create">create</xref>
    </listitem>
    <listitem>
-<xref linkend="dialog">add dialog</xref>
+<xref linkend="add">add <dialog></xref>
    </listitem>
    <listitem>
 <xref linkend="edit">edit</xref>
@@ -943,7 +943,7 @@ Changing your working directory to the new project:</para>
 <sect1 id="dialog"><title>add dialog</title>
 <para><title>dialog</title>
 Usage:</para>
-<para><programlisting><application>Quickly</application> dialog dialog_name</programlisting></para>
+<para><programlisting><application>Quickly</application> add dialog dialog_name</programlisting></para>
 <para>where dialog_name is one or more words seperated with underscore</para>
 <para>
 This will create:
