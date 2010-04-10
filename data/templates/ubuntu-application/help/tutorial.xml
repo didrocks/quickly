@@ -883,7 +883,7 @@ Now that you've packaged your application, you can share the .deb file. However,
 <xref linkend="create">create</xref>
    </listitem>
    <listitem>
-<xref linkend="add">add <dialog></xref>
+<xref linkend="dialog">add dialog</xref>
    </listitem>
    <listitem>
 <xref linkend="edit">edit</xref>

@@ -383,7 +383,6 @@ def get_right_gpg_key_id(launchpad):
                 try:
                      get_setup_value('author_email')
                 except cant_deal_with_setup_value:
-                    print email
                     set_setup_value('author_email', email)
                 return key_id
 
