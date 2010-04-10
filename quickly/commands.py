@@ -132,6 +132,8 @@ def get_all_commands():
                 # if there is a ., remove extension
                 if "." in command_name:
                     command_name = ".".join(command_name.split('.')[0:-1])
+                icon_path = os.path.join(template_path, 'icons',
+                                         "%s.png" % command_name)
 
                 # add the command to the list if is executable (commands are
                 # only formed of executable files)
@@ -142,6 +144,8 @@ def get_all_commands():
                             builtincommands, event + '_' + command_name, None)
                         if event_hook:
                             hooks[event] = event_hook
+                    if not os.path.isfile(icon_path):
+                        icon_path = None
 
                     # define special options for command
                     launch_inside_project = False
@@ -168,7 +172,8 @@ def get_all_commands():
                         command_name, file_path, template,
                         launch_inside_project, launch_outside_project,
                         followed_by_template, followed_by_command,
-                        exposed_in_bar, hooks['pre'], hooks['post'])
+                        exposed_in_bar, hooks['pre'], hooks['post'], 
+                        icon=icon_path)
 
     # now try to import command for existing templates
     for importing_template in import_commands:
@@ -292,7 +297,8 @@ class Command:
     def __init__(self, command_name, command, template=None,
                  inside_project=True, outside_project=False,
                  followed_by_template=False, followed_by_command=False,
-                 exposed_in_bar=False, prehook=None, posthook=None):
+                 exposed_in_bar=False, prehook=None, posthook=None,
+                 icon=None):
         self.command = command
         # self.template is the native template where the command is from
         # if this command is imported into another template, the object
@@ -307,6 +313,7 @@ class Command:
         self.followed_by_command = followed_by_command
         self.name = command_name
         self.exposed_in_bar = exposed_in_bar
+        self.icon = icon
 
     def shell_completion(self, template_in_cli, args):
         """Smart completion of a command

@@ -59,9 +59,9 @@ class DevBar(nautilus.LocationWidgetProvider):
                     if command.name in commands_already_listed:
                         continue
                     if command.followed_by_template and not current_template:
-                        bar.add_button_with_selection(bar.click_on_quickly_button, command.name, quicklyapi.list_template_for_command(command.name), ["quickly", command.name], uri)
+                        bar.add_button_with_selection(bar.click_on_quickly_button, command.name, quicklyapi.list_template_for_command(command.name), ["quickly", command.name], uri, icon=command.icon)
                     else:
-                        bar.add_button(bar.click_on_quickly_button, command.name, ["quickly", command.name], uri)
+                        bar.add_button(bar.click_on_quickly_button, command.name, ["quickly", command.name], uri, icon=command.icon)
                     commands_already_listed.append(command.name)
                 bar.show()
         
@@ -99,16 +99,26 @@ class UbuntuDevBar(gtk.HBox):
         self.pack_start(self._logo, expand=False, fill=False, padding=0)
         self._logo.show()
 
-    def add_button(self, signal, label, command_line, path):
+    def add_button(self, signal, label, command_line, path, icon=None):
         """Adds a new new button to the bar widget."""
         button = gtk.Button()
         button.connect("clicked", signal, command_line, path)
         button.set_label(label)
+        if icon:
+            image = gtk.Image()
+            image.set_from_file(icon)
+            settings = button.get_settings()
+            settings.set_property("gtk-button-images", True)
+            button.set_image(image)
         button.show()
+        vbox = gtk.VBox(homogeneous=False, spacing=0)
+        vbox.pack_start(button, expand=True, fill=False, padding=0)
+        vbox.show()
         self._buttons.append(button)
-        self.pack_start(button, expand=False, fill=False, padding=0)
+        self.pack_start(vbox, expand=False, fill=False, padding=0)
 
-    def add_button_with_selection(self, signal, label, selection, command_line, path):
+    def add_button_with_selection(self, signal, label, selection, command_line,
+                                  path, icon=None):
         """Adds a new button with a multiple selection widget"""
         combobox = gtk.combo_box_new_text()
         for item in selection:
@@ -117,6 +127,12 @@ class UbuntuDevBar(gtk.HBox):
         button = gtk.Button()
         button.set_label(label)
         button.connect("clicked", signal, command_line, path, combobox)
+        if icon:
+            image = gtk.Image()
+            image.set_from_file(icon)
+            settings = button.get_settings()
+            settings.set_property("gtk-button-images", True)
+            button.set_image(image)
         button.show()
         vbox = gtk.VBox(homogeneous=False, spacing=0)
         vbox.pack_start(combobox, expand=True, fill=False, padding=0)
