@@ -1,3 +1,18 @@
+quickly (0.4-0ubuntu1) UNRELEASED; urgency=low
+
+  * New bugfix upstream release:
+    - various fix to tutorial command (LP: #559565)
+    - update some part of the existing tutorial (LP: #556237, #550510)
+    - fix gpg key creation parameter %commit with right error message as we
+      don't push it to LP (LP: #554302)
+    - fix some case where gpg secret key wasn't exported to sign the package
+      (LP: #555384)
+    - add debug command relying on winpdb (Nafai)
+    - remove some debug message
+    - updated translations
+
+ -- Didier Roche <didrocks@ubuntu.com>  Wed, 14 Apr 2010 18:59:13 +0200
+
 quickly (0.3.90-0ubuntu2) lucid; urgency=low
 
   * debian/control:
