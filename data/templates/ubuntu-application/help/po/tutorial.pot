@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-03-27 12:11+0100\n"
+"POT-Creation-Date: 2010-04-14 18:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -408,7 +408,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:278(programlisting)
 #, no-wrap
-msgid "\n    def save_file(self, widget, data=None): \n        #get the title for the note \n        title = self.builder.get_object(\"entry1\").get_text() \n\n        #get the text to save \n        buff = self.builder.get_object(\"textview1\").get_buffer() \n        start_iter = buff.get_start_iter() \n        end_iter = buff.get_end_iter() \n        text = buff.get_text(start_iter,end_iter) \n\n        #get all the records \n        record_type = \"http://wiki.ubuntu.com/Quickly/JottyDoc\" \n        results = self.database.get_records(record_type = record_type,create_view = True) \n\n        #update a record that has the same title \n        for result in results: \n            document = result.value \n            if document[\"title\"] == title: \n                key = result.key \n                self.database.update_fields(key, {\"text\":text}) \n                return\n \n        #if no records had the title, create it \n        new_rec = Record({\"record_type\":record_type,\"title\":title, \"text\":text})\n        self.database.put_record(new_rec)\n"
+msgid "\n    def save_file(self, widget, data=None): \n        #get the title for the note \n        title = self.builder.get_object(\"entry1\").get_text() \n\n        #get the text to save \n        buff = self.builder.get_object(\"textview1\").get_buffer() \n        start_iter = buff.get_start_iter() \n        end_iter = buff.get_end_iter() \n        text = buff.get_text(start_iter,end_iter) \n\n        #get all the records \n        record_type = \"http://wiki.ubuntu.com/Quickly/JottyDoc\" \n        results = self.database.get_records(record_type = record_type,create_view = True) \n\n        #update a record that has the same title \n        for result in results: \n            document = result.value \n            if document[\"title\"] == title: \n                key = document[\"_id\"]\n                self.database.update_fields(key, {\"text\":text}) \n                return\n \n        #if no records had the title, create it \n        new_rec = Record({\"record_type\":record_type,\"title\":title, \"text\":text})\n        self.database.put_record(new_rec)\n"
 msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:306(para)
@@ -1254,7 +1254,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:946(programlisting)
 #, no-wrap
-msgid "<application>Quickly</application> dialog dialog_name"
+msgid "<application>Quickly</application> add dialog dialog_name"
 msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:947(para)
