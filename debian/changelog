@@ -1,4 +1,4 @@
-quickly (0.4-0ubuntu1) UNRELEASED; urgency=low
+quickly (0.4-0ubuntu1) lucid; urgency=low
 
   * New bugfix upstream release:
     - various fix to tutorial command (LP: #559565)
@@ -11,7 +11,7 @@ quickly (0.4-0ubuntu1) UNRELEASED; urgency=low
     - remove some debug message
     - updated translations
 
- -- Didier Roche <didrocks@ubuntu.com>  Wed, 14 Apr 2010 18:59:13 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Wed, 14 Apr 2010 19:10:50 +0200
 
 quickly (0.3.90-0ubuntu2) lucid; urgency=low
 
