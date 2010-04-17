@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-04-14 10:39+0000\n"
+"PO-Revision-Date: 2010-04-16 18:07+0000\n"
 "Last-Translator: Boobek <bkanyo@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-15 04:03+0000\n"
+"X-Launchpad-Export-Date: 2010-04-17 04:25+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -581,7 +581,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:80
 #, python-format
 msgid "New release available: %s"
-msgstr ""
+msgstr "Elérhető egy új verzió: %s"
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:88
 msgid "An error happened during tarball upload:"
