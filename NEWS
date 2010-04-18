@@ -5,7 +5,7 @@ Quickly 0.4.1
   - add more debugging info in --verbose mode for gpg keys
   - remove ~/.selected_editor detection. Introduced confusion for users
     (LP: #565586)
-
+  - better message and user help when ppa not found (LP: #565581)
 
 Quickly 0.4
 ------------------------------------
