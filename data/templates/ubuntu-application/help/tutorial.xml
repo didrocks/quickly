@@ -391,7 +391,7 @@ quickly design
     <graphic fileref="./images/27.png"></graphic>
   </figure>
 <para><title>Code the Dialog</title>
-You can use the "<application>Quickly</application> edit" command to open the SaveDialog.py file. This dialog needs very little additional code to work. Essentially, you just need a way to retrieve the string specified by the user. We'll add a qiuck accessor method for this:</para>
+You can use the "<application>Quickly</application> edit" command to open the SaveDialog.py file. This dialog needs very little additional code to work.  Essentially, you just need a way to retrieve the string specified by the user.  We'll add a quick accessor method for this:</para>
 <para>
 <programlisting>
     @property
@@ -435,7 +435,7 @@ When the user chooses Save, we want to open the SaveDialog and collect the title
 
 <para>First, create an instance of the SaveDialog like this:</para>
 <para><programlisting>
-        saver = SaveDialog.SaveDialog()
+        saver = SaveDialog.NewSaveDialog()
 </programlisting></para>
 <para>To make the dialog appear, simply use the run() method. However, we want to check the result, so we'll need to store that in a variable. After it runs, we want to collect the string from the user, like this:</para>
 <para><programlisting>

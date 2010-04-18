@@ -6,6 +6,8 @@ Quickly 0.4.1
   - remove ~/.selected_editor detection. Introduced confusion for users
     (LP: #565586)
   - better message and user help when ppa not found (LP: #565581)
+  - fix again some tutorial issues which had been lost during html -> docbook
+    transition (LP: #499356)
 
 Quickly 0.4
 ------------------------------------
