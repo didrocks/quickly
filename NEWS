@@ -3,6 +3,9 @@ Quickly 0.4.1
 
   ubuntu-application template (and inherited):
   - add more debugging info in --verbose mode for gpg keys
+  - remove ~/.selected_editor detection. Introduced confusion for users
+    (LP: #565586)
+
 
 Quickly 0.4
 ------------------------------------
