@@ -264,7 +264,8 @@ def get_all_emails(launchpad=None):
         if 'sec' in line or 'uid' in line:
             email_list.append(take_email_from_string(line.split(':')[9]))
 
-    return email_list
+    # return email list without None elem
+    return [email for email in email_list if email]
 
 def upload_gpg_key_to_launchpad(key_id):
     '''push gpg key to launchpad not yet possible'''
