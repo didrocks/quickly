@@ -9,6 +9,7 @@ Quickly 0.4.1
   - fix again some tutorial issues which had been lost during html -> docbook
     transition (LP: #499356)
   - fix gpg key creation with no email address (LP: #567272)
+  - Updated translations
 
 Quickly 0.4
 ------------------------------------
