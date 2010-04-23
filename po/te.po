@@ -1,4 +1,4 @@
-# Czech translation for quickly
+# Telugu translation for quickly
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-10-12 19:47+0200\n"
-"PO-Revision-Date: 2010-03-31 03:30+0000\n"
-"Last-Translator: Roman Horník <roman.hornik@gmail.com>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"PO-Revision-Date: 2009-12-11 01:29+0000\n"
+"Last-Translator: వీవెన్ (Veeven) <Unknown>\n"
+"Language-Team: Telugu <te@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-01 03:45+0000\n"
+"X-Launchpad-Export-Date: 2009-12-12 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:30
 msgid "Fatal: "
-msgstr "Fatální: "
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:38
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Zkontrolujte jestli je nainstalován python-launchpadlib"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:85
 msgid ""
@@ -32,15 +32,15 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:92
 msgid "Get Launchpad Settings"
-msgstr "Získat nastavení Launchpadu"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:99
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
-msgstr "Počáteční spojení s Launchpadem. Zvolte \"Změnit cokoliv\""
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:111
 msgid "Unknown reason"
-msgstr "Neznámý důvod"
+msgstr "తెలియని కారణం"
 
 #: ../quickly/launchpadaccess.py:113
 #, python-format
@@ -49,33 +49,33 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:114
 msgid "Launchpad connexion is ok"
-msgstr "Spojení s Launchpadem v pořádku"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:130
 msgid "No launchpad project give, aborting."
-msgstr "Nezadán projekt Launchpadu, přerušuji."
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:140
 #, python-format
 msgid "Project name: %s"
-msgstr "Název projektu: %s"
+msgstr "ప్రాజెక్టు పేరు: %s"
 
 #: ../quickly/launchpadaccess.py:141
 #, python-format
 msgid "Launchpad url: %s/%s"
-msgstr "Url Launchpadu: %s/%s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:148
 msgid "No project found"
-msgstr "Nenalezen žádný projekt"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:150
 msgid "Choose your project number"
-msgstr "Zvolte vaše číslo projektu"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:160
 msgid "No right number given, aborting."
-msgstr "Zadáno špatné číslo, přerušuji."
+msgstr ""
 
 #: ../quickly/bzrbinding.py:52
 msgid "Bzr not properly installed"
@@ -106,27 +106,6 @@ msgid ""
 "    quickly push 'awesome new comment system'\n"
 "    quickly -t cool-template push 'awesome new comment system'"
 msgstr ""
-"Použití:\n"
-"    quickly [VOLBY] příkaz ...\n"
-"\n"
-"Volby:\n"
-"    -t, --template <šablona>  Šablona, která se použije, pokud se liší od "
-"výchozí projektové šablony\n"
-"    --staging                  Cílový Launchpad staging server\n"
-"    --verbose                  Upovídaný mód\n"
-"    -h, --help                  Ukázat nápovědu\n"
-"\n"
-"Commands:\n"
-"    create <template> <project-name> (template is mandatory for this "
-"command)\n"
-"    quickly <template_origin> <template_dest> to create a create derived "
-"template\n"
-"    getstarted to get some starting hints\n"
-"\n"
-"Examples:\n"
-"    quickly create ubuntu-project foobar\n"
-"    quickly push 'awesome new comment system'\n"
-"    quickly -t cool-template push 'awesome new comment system'"
 
 #: ../bin/quickly.py:96
 #, python-format
@@ -173,7 +152,7 @@ msgstr ""
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:85
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:126
 msgid "ERROR: Can't load setup.py file"
-msgstr "CHYBA: Nelze načíst soubor setup.py"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/quicklyutils.py:156
 msgid ""
@@ -220,60 +199,57 @@ msgid ""
 "Release version not found in setup.py and no version specified in command "
 "line."
 msgstr ""
-"Verze vydání nebyla nenalezena v setup.py a žádná verze nebyla neupřesněna "
-"ani v příkazovém řádku."
 
 #: ../data/templates/ubuntu-project/release.py:79
 msgid "quickly released"
-msgstr "quickly vydáno"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:85
 #, python-format
 msgid "quickly released: %s"
-msgstr "quickly vydáno: %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:105
 msgid ""
 "Release version specified in command arguments or in setup.py is not a valid "
 "number."
 msgstr ""
-"Verze vydání zadaná v příkazové řádce nebo v setup.py není správné číslo."
 
 #: ../data/templates/ubuntu-project/release.py:150
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
-msgstr "ppa:%s:%s neexistuje. Vytvořte ho před vydáváním"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:162
 #, python-format
 msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
-msgstr "CHYBA: nelze vydat: %s se zdá být už vydán. Vyberte jiný název."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:172
 msgid "ERROR: quickly can't release as it can't commit with bzr"
-msgstr "CHYBA: nelze vydat jelikož nelze odevzdat (commit) pomocí bzr"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:202
 #: ../data/templates/ubuntu-project/release.py:220
 msgid "ERROR: quickly can't release: can't push to launchpad."
-msgstr "CHYBA: nelze vydat: nelze provést push do Launchpadu."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:208
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
-msgstr "CHYBA: nelze vydat správně: nelze provést pull z Launchpadu."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:215
 msgid "ERROR: quickly can't release: can't pull from launchpad."
-msgstr "CHYBA: nelze vydat: nelze provést pull z Launchpadu."
+msgstr ""
 
 #. upload to launchpad
 #: ../data/templates/ubuntu-project/release.py:225
 #: ../data/templates/ubuntu-project/share.py:124
 msgid "pushing to launchpad"
-msgstr "provádím push do Launchpadu"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/release.py:230
 #, python-format
@@ -281,8 +257,6 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
-"%s %s vydán a sestavuje se na Launchpadu. Vyčkejte půl hodiny a podívejte se "
-"na %s."
 
 #: ../quickly/version.py:35
 msgid "No quickly data path found."
@@ -348,21 +322,21 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:57
 msgid "Release version not found in setup.py."
-msgstr "Verze vydání nenalezena v setup.py."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:62
 #: ../data/templates/ubuntu-project/internal/packaging.py:64
 msgid "ERROR: can't create or update ubuntu package"
-msgstr "CHYBA: nelze vytvořit nebo aktualizovat ubuntu balík"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:69
 #, python-format
 msgid "Ubuntu package has been successfully created in ../%s_%s_all.deb"
-msgstr "Ubuntu balík byl úspěšně vytvořen v ../%s_%s_all.deb"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/package.py:71
 msgid "An error has occurred during package building"
-msgstr "Během sestavování balíku se objevila chyba"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:31
 msgid ""
@@ -379,11 +353,11 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:46
 msgid "quickly saved"
-msgstr "quickly uloženo"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/save.py:52
 msgid "It seems that you have no change to record."
-msgstr "Záznam pravděpodobně neobsahuje změny."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/license.py:42
 msgid ""
@@ -431,22 +405,20 @@ msgstr ""
 #: ../data/templates/ubuntu-project/license.py:226
 #, python-format
 msgid "%s file was not found"
-msgstr "%s soubor nebyl nalezen"
+msgstr ""
 
 #. that means we didn't find the END_LICENCE_TAG, don't copy the file
 #: ../data/templates/ubuntu-project/license.py:126
 #: ../data/templates/ubuntu-project/license.py:216
 #, python-format
 msgid "WARNING: %s was not found in the file %s. No licence replacement"
-msgstr "VAROVÁNÍ: %s nebylo nalezeno v souboru %s. Žádná změna licence"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/license.py:163
 msgid ""
 "This license seems to be unsupported by quickly. If you think it really "
 "should, please open a bug in quickly bugtracker"
 msgstr ""
-"License se zdá být nepodporována. Pokud myslíte, že by opravdu být měla, "
-"prosím zadejte hlášení do bugtrackeru quickly"
 
 #: ../data/templates/ubuntu-project/license.py:184
 msgid ""
@@ -454,27 +426,24 @@ msgid ""
 "for the copyright in place of <Your Name> <Your E-mail> or use quickly "
 "share/quickly release"
 msgstr ""
-"Copyright není přivlastněn. Upravte soubor copyrightu, aby obsahoval vaše "
-"jméno pro copyright v místě <Your Name> <Your E-mail> nebo  použijte qucikly "
-"sdílet/quickly vydat"
 
 #: ../data/templates/ubuntu-project/license.py:259
 msgid "This command only take one optional argument: License"
-msgstr "Tento příkaz přijímá pouze jeden volitelný argument: licenci"
+msgstr ""
 
 #: ../quickly/tools.py:77
 msgid "No template directory found. Aborting"
-msgstr "Adresář šablon nenalezen. Přerušuji"
+msgstr ""
 
 #: ../quickly/tools.py:95
 #, python-format
 msgid "ERROR: Template '%s' not found."
-msgstr "CHYBA: Šablona '%s' nebyla nalezena."
+msgstr ""
 
 #: ../quickly/tools.py:96 ../quickly/commands.py:181
 #: ../quickly/commands.py:260 ../quickly/commands.py:268
 msgid "Aborting"
-msgstr "Ukončování"
+msgstr ""
 
 #: ../quickly/tools.py:136
 #, python-format
@@ -497,11 +466,11 @@ msgstr ""
 #: ../data/templates/ubuntu-project/run.py:55
 #, python-format
 msgid "Can't execute %s"
-msgstr "Nelze provést %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Status Area"
-msgstr "Stavový prostor"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:2
 msgid ""
@@ -513,33 +482,26 @@ msgid ""
 "To change the behavior and edit the python code, run 'quickly edit', which "
 "will bring up a text editor."
 msgstr ""
-"Vaše aplikace byla vytvořena!\n"
-"\n"
-"Pro úpravu uživatelského rozhraní, spusťte 'quickly glade', který otevře "
-"Glade, takže budete moci měnit výchozí okna a dialogy.\n"
-"\n"
-"Pro změnu chování a úpravu python kódu, spusťte 'quickly edit', který spustí "
-"textový editor."
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
-msgstr "_Upravit"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
-msgstr "_Soubor"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr "_Nápověda"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr "_Zobrazit"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
-msgstr "název_věty"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/create.py:36
 msgid ""
@@ -568,8 +530,6 @@ msgid ""
 "\n"
 "ERROR: project name not defined. Usage is project_name"
 msgstr ""
-"\n"
-"CHYBA: nebyl zadán název projektu. Používá se název_projektu"
 
 #. create directory and template file
 #: ../data/templates/ubuntu-project/create.py:78
@@ -578,7 +538,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:59
 #, python-format
 msgid "Creating project directory %s"
-msgstr "Vytváření projektového adresáře %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/create.py:80
 #: ../data/templates/ubuntu-project/create.py:85
@@ -586,17 +546,17 @@ msgstr "Vytváření projektového adresáře %s"
 #: ../quickly/builtincommands.py:61
 #, python-format
 msgid "Directory %s created\n"
-msgstr "Adresář %s vytvořen\n"
+msgstr ""
 
 #. add it to revision control
 #: ../data/templates/ubuntu-project/create.py:139
 msgid "Creating bzr repository and commiting"
-msgstr "Vytváření bzr repozitáře a odevzdávání (commit)"
+msgstr ""
 
 #. run the new application
 #: ../data/templates/ubuntu-project/create.py:145
 msgid "Launching your newly created project!"
-msgstr "Spouštění vašeho nově vytvořeného projektu!"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/create.py:148
 #, python-format
@@ -608,12 +568,11 @@ msgstr ""
 #: ../quickly/configurationhandler.py:43
 msgid "ERROR: Can't load configuration in current path or its parent ones."
 msgstr ""
-"CHYBA: Nelze načíst konfiguraci v současné cestě nebo jejích předchudcích."
 
 #: ../quickly/configurationhandler.py:59
 #, python-format
 msgid "ERROR: Can't load configuration in %s: %s"
-msgstr "CHYBA: Nelze načíst konfiguraci v %s: %s"
+msgstr ""
 
 #: ../quickly/configurationhandler.py:85
 msgid "WARNING: No .quickly file found. Initiating a new one."
@@ -622,7 +581,7 @@ msgstr ""
 #: ../quickly/configurationhandler.py:116
 #, python-format
 msgid "ERROR: Can't save configuration in %s"
-msgstr "CHYBA: Nelze uložit konfiguraci do %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/share.py:33
 msgid ""
@@ -645,7 +604,7 @@ msgstr ""
 #, python-format
 msgid ""
 "ppa:%s:%s does not exist. Please create one on launchpad before sharing"
-msgstr "ppa:%s:%s neexistuje. Vytvořte ji na Launchpadu před sdílením"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/share.py:104
 #, python-format
@@ -656,15 +615,13 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/share.py:110
 msgid "Release version specified in setup.py is not a valid number."
-msgstr "Verze vydání uvedená v setup.py není správné číslo."
+msgstr ""
 
 #: ../data/templates/ubuntu-project/share.py:130
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
-"%s %s se sestavuje na Launchpadu. Vyčkejte půl hodiny a pak se podívejte na "
-"%s."
 
 #: ../data/templates/ubuntu-project/glade.py:32
 msgid ""
@@ -702,31 +659,31 @@ msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:39
 msgid "Ubuntu packaging created in debian/"
-msgstr "Ubuntu balíčkování vytvořeno v debian/"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:41
 msgid "An error has occurred"
-msgstr "Vyskytla se chyba"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:70
 msgid "ERROR: an error occurred during source package creation"
-msgstr "CHYBA: během vytváření zdrojového balíku se vyskytla chyba"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/internal/packaging.py:81
 msgid "ERROR: an error occurred during source upload to launchpad"
-msgstr "CHYBA: během nahrávání zdroje na Launchpad se vyskytla chyba"
+msgstr ""
 
 #: ../quickly/commands.py:180
 #, python-format
 msgid "ERROR: %s command failed"
-msgstr "CHYBA: %s příkaz selhal"
+msgstr ""
 
 #: ../quickly/commands.py:259
 #, python-format
 msgid ""
 "ERROR: Can't find project in %s.\n"
 "Ensure you launch this command from a quickly project directory."
-msgstr "CHYBA: Nelze nalézt projekt v %s."
+msgstr ""
 
 #: ../quickly/commands.py:266
 #, python-format
@@ -777,12 +734,12 @@ msgstr ""
 #: ../quickly/builtincommands.py:46
 #, python-format
 msgid "%s does not exist"
-msgstr "%s neexistuje"
+msgstr ""
 
 #: ../quickly/builtincommands.py:55
 #, python-format
 msgid "There is already a file or directory named %s"
-msgstr "Soubor nebo adresář s názvem %s již existuje"
+msgstr ""
 
 #: ../quickly/builtincommands.py:98
 msgid ""
@@ -845,7 +802,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:186
 #, python-format
 msgid "%s already exists."
-msgstr "%s už existuje."
+msgstr ""
 
 #: ../quickly/builtincommands.py:190
 #, python-format
@@ -855,12 +812,12 @@ msgstr ""
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:1
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:1
 msgid "gtk-cancel"
-msgstr "gtk-cancel"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/data/ui/dialog_camel_case_nameDialog.ui.h:2
 #: ../data/templates/ubuntu-project/data/ui/Preferencescamel_case_nameDialog.ui.h:2
 msgid "gtk-ok"
-msgstr "gtk-ok"
+msgstr ""
 
 #: ../data/templates/ubuntu-project/change-lp-project.py:33
 msgid ""
@@ -870,171 +827,3 @@ msgid ""
 "Enable to set or change the launchpad project binded with the current\n"
 "ubuntu project.\n"
 msgstr ""
-
-#~ msgid ""
-#~ "\n"
-#~ "ERROR: unpermitted character in name.\n"
-#~ "Letters and underscore (\"_\") only."
-#~ msgstr ""
-#~ "\n"
-#~ "CHYBA: nepovolený znak v názvu.\n"
-#~ "Pouze písmena a podtržítko (\"_\")."
-
-#, python-format
-#~ msgid ""
-#~ "Congrats, your new project is setup! cd %s/ to start hacking. Then '$ "
-#~ "quickly help' for quickly tutorial and reference"
-#~ msgstr ""
-#~ "Gratulujeme, váš nový projekt je nastaven. Zadejte cd %s/ a můžete začít "
-#~ "hackovat. Zadejte 'quickly help' pro tutoriál a referenční příručku."
-
-#~ msgid "WARNING: No .quickly file found. Initiate a new one"
-#~ msgstr "VAROVÁNÍ: Soubor .quickly nenalezen. Vytvořte nový."
-
-#, python-format
-#~ msgid ""
-#~ "Minor release version specified after ~public in setup.py is not a valid "
-#~ "number: %s"
-#~ msgstr ""
-#~ "Minor verze vydání uvedená po ~public v setup.py není správné číslo: %s"
-
-#, python-format
-#~ msgid "ERROR: %s command must be followed by a template and destination name"
-#~ msgstr "CHYBA: %s příkaz musí být následován šablonou a názvem cíle"
-
-#~ msgid ""
-#~ "-------------------------------\n"
-#~ "    Welcome to quickly!\n"
-#~ "-------------------------------\n"
-#~ "\n"
-#~ "You can create a project in executing 'quickly create <template_name> <your "
-#~ "project>'.\n"
-#~ "\n"
-#~ "\n"
-#~ "Example with ubuntu-project template:\n"
-#~ "1. create a Ubuntu Project and run the tutorial:\n"
-#~ "$ quickly create ubuntu-project foo\n"
-#~ "$ cd foo\n"
-#~ "$ quickly help\n"
-#~ "\n"
-#~ "2. You can also try:\n"
-#~ "$ quickly edit\n"
-#~ "$ quickly glade\n"
-#~ "$ quickly run\n"
-#~ "Use bash completion to get every available commands\n"
-#~ "\n"
-#~ "3. How to play with package and release:\n"
-#~ "\n"
-#~ "optional, but recommended to build first your package locally:\n"
-#~ "$ quickly package\n"
-#~ "\n"
-#~ "BE WARNED: the two following commands will connect to Launchpad. You need at "
-#~ "least having a Launchpad account and an opened ppa.\n"
-#~ "You need also for quickly release a project where you can bind your work "
-#~ "with.\n"
-#~ "$ quickly release or $ quickly share\n"
-#~ "\n"
-#~ "Have Fun!"
-#~ msgstr ""
-#~ "-------------------------------\n"
-#~ "    Vítejte v quickly!\n"
-#~ "-------------------------------\n"
-#~ "\n"
-#~ "Můžete vytvořit projekt spuštěním 'quickly create <název_šablony> "
-#~ "<váš_projekt>'.\n"
-#~ "\n"
-#~ "\n"
-#~ "Příklad s ubuntu-project šablonou:\n"
-#~ "1. vytvoření Ubuntu projektu a spuštení tutoriálu:\n"
-#~ "$ quickly create ubuntu-project foo\n"
-#~ "$ cd foo\n"
-#~ "$ quickly help\n"
-#~ "\n"
-#~ "2. Také můžete zkusit:\n"
-#~ "$ quickly edit\n"
-#~ "$ quickly glade\n"
-#~ "$ quickly run\n"
-#~ "Použijte bash dokončování, abyste získali všechny dostupné příkazy.\n"
-#~ "\n"
-#~ "3. Jak si hrát s balíkem a vydáním:\n"
-#~ "\n"
-#~ "volitelné, ale doporučeno je sestavit nejprve váš balík lokálně:\n"
-#~ "$ quickly package\n"
-#~ "\n"
-#~ "VAROVÁNÍ: následující příkazy se připojí k Launchpadu. Potřebujete mít "
-#~ "alespoň Launchpad účet a otevřené ppa.\n"
-#~ "Pro quickly release také potřebujete Launchpad projekt, s kterým můžete "
-#~ "spojit svoji práci.\n"
-#~ "$ quickly release nebo $ quickly share\n"
-#~ "\n"
-#~ "Užijte si to!"
-
-#, python-format
-#~ msgid "ERROR: command '%s' in '%s' not found."
-#~ msgstr "CHYBA: příkaz '%s' v '%s' nebyl nalezen."
-
-#, python-format
-#~ msgid ""
-#~ "Quickly %s\n"
-#~ "  Python interpreter: %s %s\n"
-#~ "  Python standard library: /usr/lib/python2.6\n"
-#~ "  \n"
-#~ "  Quickly used library: %s\n"
-#~ "  Quickly data path: %s\n"
-#~ "  Quickly detected template directories:\n"
-#~ "          %s\n"
-#~ "\n"
-#~ "Copyright 2009 Canonical Ltd.\n"
-#~ "  #Author 2009 Rick Spencer\n"
-#~ "  #Author 2009 Didier Roche\n"
-#~ "https://launchpad.net/quickly\n"
-#~ "\n"
-#~ "quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and\n"
-#~ "you may use, modify and redistribute it under the terms of the GNU\n"
-#~ "General Public License version 3 or later."
-#~ msgstr ""
-#~ "Quickly %s\n"
-#~ "  Python interpret: %s %s\n"
-#~ "  Python standardní knihovna: /usr/lib/python2.6\n"
-#~ "  \n"
-#~ "  Quickly použitá knihovna: %s\n"
-#~ "  Quickly cesta k datům: %s\n"
-#~ "  Quickly nalezené adresáře šablon:\n"
-#~ "          %s\n"
-#~ "\n"
-#~ "Copyright 2009 Canonical Ltd.\n"
-#~ "  #Author 2009 Rick Spencer\n"
-#~ "  #Author 2009 Didier Roche\n"
-#~ "https://launchpad.net/quickly\n"
-#~ "\n"
-#~ "quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and\n"
-#~ "you may use, modify and redistribute it under the terms of the GNU\n"
-#~ "General Public License version 3 or later."
-
-#, python-format
-#~ msgid ""
-#~ "ERROR: %s is already a project. You can't create a project within another "
-#~ "project. Please choose another path."
-#~ msgstr ""
-#~ "CHYBA: %s už je projektem. Nemůžete vytvořit projekt uvnitř jiného projektu. "
-#~ "Vyberte prosím jinou cestu."
-
-#~ msgid "ERROR: No command found"
-#~ msgstr "CHYBA: Příkaz nenalezen"
-
-#, python-format
-#~ msgid "ERROR: post_%s command failed"
-#~ msgstr "CHYBA: post_%s příkaz selhal"
-
-#~ msgid ""
-#~ "ERROR: No template provided and none found in the current tree. Ensure you "
-#~ "don't want to create a new project or that your are in your directory "
-#~ "project."
-#~ msgstr ""
-#~ "CHYBA: Nebyla poskytnuta žádná šablona a ani v současném stromě nebyla žádná "
-#~ "nalezena. Ujistěte se jestli nechcete vytvořit nový projekt nebo jestli jste "
-#~ "v adresáři projektu."
-
-#, python-format
-#~ msgid "ERROR: pre_%s command failed"
-#~ msgstr "CHYBA: pre_%s příkaz selhal"
