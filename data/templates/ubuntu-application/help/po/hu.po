@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-27 12:11+0100\n"
+"POT-Creation-Date: 2010-04-14 18:57+0200\n"
 "PO-Revision-Date: 2010-04-13 16:47+0000\n"
 "Last-Translator: Boobek <bkanyo@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-14 03:54+0000\n"
+"X-Launchpad-Export-Date: 2010-04-24 03:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:13(firstname)
@@ -642,7 +642,7 @@ msgid ""
 "        for result in results: \n"
 "            document = result.value \n"
 "            if document[\"title\"] == title: \n"
-"                key = result.key \n"
+"                key = document[\"_id\"]\n"
 "                self.database.update_fields(key, {\"text\":text}) \n"
 "                return\n"
 " \n"
@@ -1933,7 +1933,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:946(programlisting)
 #, no-wrap
-msgid "<application>Quickly</application> dialog dialog_name"
+msgid "<application>Quickly</application> add dialog dialog_name"
 msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:947(para)
