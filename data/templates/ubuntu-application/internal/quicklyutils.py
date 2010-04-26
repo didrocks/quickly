@@ -387,7 +387,7 @@ def get_right_gpg_key_id(launchpad):
                     os.putenv('DEBFULLNAME', author_name)
                 if not os.getenv('DEBEMAIL'):
                     os.putenv('DEBEMAIL', email)
-                if verbose():
+                if verbose:
                     print "Selected key_id: %s, author: %s, email: %s" % (key_id, author_name, email)
                 # set upstream author and email
                 try:
