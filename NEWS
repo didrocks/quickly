@@ -4,6 +4,7 @@ Quickly 0.4.2
   ubuntu-application template (and inherited):
   - fix verbose check in quicklyutils making release and share fail
     (LP: #570239)
+  - updated translations
 
 Quickly 0.4.1
 ------------------------------------
