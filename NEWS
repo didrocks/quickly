@@ -1,3 +1,9 @@
+Quickly 0.4.3
+------------------------------------
+
+  quickly core:
+  - fix wrong template proposal for commands not followed by template
+
 Quickly 0.4.2
 ------------------------------------
 
