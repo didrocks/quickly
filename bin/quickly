@@ -96,21 +96,21 @@ def main():
             except IndexError:
                 # to help the user, we can search if this command_name corresponds to a command in a template
                 list_possible_commands = commands.get_commands_by_criteria(name=command_name, followed_by_template=True)
+                proposed_templates = []
+                for template in commands.get_all_templates():
+                    try:
+                        commands.get_all_commands()[template][command_name]
+                        proposed_templates.append(template)
+                    except KeyError:
+                        pass
                 if list_possible_commands:
-                    proposed_templates = []
-                    for template in commands.get_all_templates():
-                        try:
-                            commands.get_all_commands()[template][command_name]
-                            proposed_templates.append(template)
-                        except KeyError:
-                            pass
                     print _("ERROR: %s command must be followed by a template and no template was found on the command line." % command_name)
                     print _("Candidates template are: %s") % ", ".join(proposed_templates)
                 else:
                     list_possible_commands = commands.get_commands_by_criteria(name=command_name, followed_by_template=False)
                     if list_possible_commands:
                        print _("No template were found on the command line for command %s." % command_name)
-                       print _("Candidates template are: %s") % ", ".join([command.template for command in list_possible_commands])                        
+                       print _("Candidates template are: %s") % ", ".join(proposed_templates)                        
                     else:
                         # there is really not such command, in any template
                         print _("ERROR: No %s command found.") % command_name
