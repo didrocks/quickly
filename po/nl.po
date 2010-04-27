@@ -1,4 +1,4 @@
-# Ukrainian translation for quickly
+# Dutch translation for quickly
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2009-09-15 02:41+0000\n"
-"Last-Translator: Didier Roche <didrocks@gmail.com>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2010-02-08 21:48+0000\n"
+"Last-Translator: Francis De Brabandere <Unknown>\n"
+"Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,17 +19,17 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:39
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Перевірка чи встановлений python-launchpadlib"
+msgstr "Controleer of python-launchpadlib geïnstalleerd is"
 
 #: ../quickly/launchpadaccess.py:88
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
-"Увага: Ви використовуєте постановки і не Launchpad реальний виробничий сервер"
+"OPGELET: U gebruikt \"staging\" en niet de echte launchpad productie server"
 
 #: ../quickly/launchpadaccess.py:96
 msgid "Get Launchpad Settings"
-msgstr "Отримати настройки Launchpad"
+msgstr "Haal Launchpad Instellingen"
 
 #: ../quickly/launchpadaccess.py:111
 msgid ""
@@ -39,17 +39,16 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:113
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
-msgstr ""
-"Початкові біндінги Launchpad. Ви повинні вибрати \"змінити що-небудь\""
+msgstr "Initiële Launchpad verbinding. Gelieve \"Wijzig Alles\" te kiezen."
 
 #: ../quickly/launchpadaccess.py:126
 msgid "Unknown reason"
-msgstr "Невідома причина"
+msgstr "Reden onbekend"
 
 #: ../quickly/launchpadaccess.py:128
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "Не можу настроїти Launchpad для quickly ; %s"
+msgstr "Kon Launchpad niet instellen voor quickly ; %s"
 
 #: ../quickly/launchpadaccess.py:129
 msgid "Launchpad connection is ok"
@@ -72,15 +71,15 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:167
 msgid "No project found"
-msgstr "Проект не знайдено."
+msgstr "Geen project gevonden"
 
 #: ../quickly/launchpadaccess.py:169
 msgid "Choose your project number"
-msgstr "Оберіть номер вашого проекту."
+msgstr "Kies uw project nummer"
 
 #: ../quickly/launchpadaccess.py:179
 msgid "No right number given, aborting."
-msgstr "Обрано невірний номер, перервано."
+msgstr "Geen correct nummer opgegeven, annulering."
 
 #: ../quickly/launchpadaccess.py:186
 #, python-format
@@ -133,16 +132,16 @@ msgstr ""
 
 #: ../quickly/bzrbinding.py:51
 msgid "Bzr not properly installed"
-msgstr ""
+msgstr "Bzr niet correct geïnstalleerd"
 
 #: ../bin/quickly.py:68
 #, python-format
 msgid "ERROR: No %s command found in template %s."
-msgstr ""
+msgstr "FOUT: Geen %s commando gevonden in het template %s."
 
 #: ../bin/quickly.py:69 ../bin/quickly.py:117
 msgid "Aborting."
-msgstr ""
+msgstr "Annulering."
 
 #: ../bin/quickly.py:87 ../bin/quickly.py:107
 #, python-format
@@ -150,23 +149,26 @@ msgid ""
 "ERROR: %s command must be followed by a template and no template was found "
 "on the command line."
 msgstr ""
+"FOUT: %s commando moet gevolgd worden door een template en geen enkel "
+"template was gevonden op de commando lijn."
 
 #: ../bin/quickly.py:88 ../bin/quickly.py:108 ../bin/quickly.py:113
 #: ../quickly/builtincommands.py:166
 #, python-format
 msgid "Candidates template are: %s"
-msgstr ""
+msgstr "Mogelijke template's zijn: %s"
 
 #: ../bin/quickly.py:112
 #, python-format
 msgid "No template were found on the command line for command %s."
 msgstr ""
+"Geen enkel template was gevonden op de commando lijn voor het commando %s."
 
 #. there is really not such command, in any template
 #: ../bin/quickly.py:116 ../quickly/builtincommands.py:169
 #, python-format
 msgid "ERROR: No %s command found."
-msgstr ""
+msgstr "FOUT: Geen %s commando gevonden."
 
 #: ../data/templates/ubuntu-application/configure.py:40
 #, python-format
@@ -228,6 +230,17 @@ msgid ""
 "will be used. Also, if you configured sensible-editor, this one will be\n"
 "choosed.\n"
 msgstr ""
+"Gebruik:\n"
+"$ quickly edit\n"
+"\n"
+"Een handig commando om alle python bestanden in uw project te openen \n"
+"directory in uw standaard bewerker, klaar vor wijzigen.\n"
+"\n"
+"Indien je zelf EDITOR of SELECTED_EDITOR omgevingsvariabele benoemde, zal "
+"dit \n"
+"latter gebruikt worden. Ook, indien je de sensible-editor configureerde, zal "
+"deze \n"
+"gekozen worden.\n"
 
 #: ../data/templates/ubuntu-application/run.py:33
 msgid ""
@@ -250,7 +263,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/run.py:65
 #, python-format
 msgid "Can't execute %s"
-msgstr ""
+msgstr "Kan %s niet uitvoeren"
 
 #: ../quickly/version.py:34
 #, python-format
@@ -259,7 +272,7 @@ msgstr ""
 
 #: ../quickly/version.py:38
 msgid "No template found."
-msgstr ""
+msgstr "Geen template gevonden."
 
 #: ../quickly/version.py:40
 #, python-format
@@ -328,29 +341,31 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:224
 #: ../data/templates/ubuntu-application/package.py:60
 msgid "ERROR: can't create or update ubuntu package"
-msgstr ""
+msgstr "FOUT: Kan ubuntu package niet aanmaken of bijwerken"
 
 #. upload to launchpad
 #: ../data/templates/ubuntu-application/share.py:151
 #: ../data/templates/ubuntu-application/release.py:286
 msgid "pushing to launchpad"
-msgstr ""
+msgstr "versturen naar launchpad"
 
 #: ../data/templates/ubuntu-application/share.py:157
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
+"%s %s word aangemaakt op Launchpad. Gelieve een een half uurtje te wachten "
+"en ga dan naar %s."
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:91
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:132
 msgid "ERROR: Can't load setup.py file"
-msgstr "ПОМИЛКА: Не можу завантажити файл setup.py"
+msgstr "FOUT: Kan setup.py file niet laden"
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
 #: ../data/templates/ubuntu-application/save.py:45
 msgid "quickly saved"
-msgstr ""
+msgstr "quickly opgeslaan"
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
 #: ../data/templates/ubuntu-application/release.py:201
@@ -421,7 +436,7 @@ msgstr ""
 
 #: ../quickly/tools.py:114
 msgid "No template directory found. Aborting"
-msgstr ""
+msgstr "Geen template directory gevonden. Annulering"
 
 #: ../quickly/tools.py:132
 #, python-format
@@ -431,11 +446,11 @@ msgstr ""
 #: ../quickly/tools.py:171
 #, python-format
 msgid "ERROR: Template %s does not exist."
-msgstr ""
+msgstr "FOUT: Template %s bestaat niet."
 
 #: ../quickly/tools.py:172
 msgid "Arborting."
-msgstr ""
+msgstr "Annulering."
 
 #: ../quickly/tools.py:196
 #, python-format
@@ -444,11 +459,11 @@ msgstr ""
 
 #: ../quickly/tools.py:225
 msgid "ERROR: No command provided in command line"
-msgstr ""
+msgstr "FOUT: Geen commando opgegeven in commando lijn"
 
 #: ../quickly/templatetools.py:41
 msgid "No help for this command"
-msgstr ""
+msgstr "Geen help voor dit commando"
 
 #: ../quickly/templatetools.py:60
 msgid ""
@@ -459,7 +474,7 @@ msgstr ""
 #: ../quickly/templatetools.py:64
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr ""
+msgstr "FOUT: %s is niet toegelaten als naam voor een quickly project"
 
 #: ../data/templates/ubuntu-pygame/project_root/project_name.desktop.in.h:1
 msgid "camel_case_name game"
@@ -468,7 +483,7 @@ msgstr ""
 #: ../data/templates/ubuntu-pygame/project_root/project_name.desktop.in.h:2
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
-msgstr ""
+msgstr "sentence_name"
 
 #: ../data/templates/ubuntu-application/design.py:31
 msgid ""
@@ -497,7 +512,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/save.py:51
 msgid "It seems that you have no change to record."
-msgstr ""
+msgstr "Het lijkt erop dat u geen veranderingen dient te bewaren."
 
 #: ../data/templates/ubuntu-application/help/code/jotty.py:175
 msgid "Show debug messages"
@@ -506,11 +521,13 @@ msgstr ""
 #: ../quickly/configurationhandler.py:41
 msgid "ERROR: Can't load configuration in current path or its parent ones."
 msgstr ""
+"FOUT: Kan de configuratie niet vinden in het huidige pad of bovenliggende "
+"paden."
 
 #: ../quickly/configurationhandler.py:57
 #, python-format
 msgid "ERROR: Can't load configuration in %s: %s"
-msgstr ""
+msgstr "FOUT: Kan de configuratie niet laden van %s: %s"
 
 #: ../quickly/configurationhandler.py:116
 #, python-format
@@ -548,11 +565,11 @@ msgstr ""
 #. add it to revision control
 #: ../data/templates/ubuntu-application/create.py:110
 msgid "Creating bzr repository and commiting"
-msgstr ""
+msgstr "Aanmaken van bzr repository en committen"
 
 #: ../data/templates/ubuntu-application/create.py:119
 msgid "Launching your newly created project!"
-msgstr ""
+msgstr "Opstarten van uw nieuw aangemaakt project!"
 
 #: ../data/templates/ubuntu-application/create.py:122
 #, python-format
@@ -594,18 +611,18 @@ msgstr ""
 #: ../quickly/builtincommands.py:45
 #, python-format
 msgid "%s does not exist"
-msgstr ""
+msgstr "%s bestaat niet"
 
 #: ../quickly/builtincommands.py:58
 #, python-format
 msgid "There is already a file or directory named %s"
-msgstr ""
+msgstr "Er is reeds een bestand of map met de naam %s"
 
 #. create directory and template file
 #: ../quickly/builtincommands.py:62
 #, python-format
 msgid "Creating project directory %s"
-msgstr ""
+msgstr "Aanmaken van project map %s"
 
 #: ../quickly/builtincommands.py:100
 msgid ""
@@ -659,7 +676,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:171
 #, python-format
 msgid "ERROR: No %s command found in %s template."
-msgstr ""
+msgstr "FOUT: Geen %s commando gevonden in %s template."
 
 #: ../quickly/builtincommands.py:185
 msgid ""
@@ -671,12 +688,12 @@ msgstr ""
 #: ../quickly/builtincommands.py:195
 #, python-format
 msgid "%s already exists."
-msgstr ""
+msgstr "%s bestaat reeds."
 
 #: ../quickly/builtincommands.py:199
 #, python-format
 msgid "Copy %s to create new %s template"
-msgstr ""
+msgstr "Copiëer %s om een nieuwe %s template aan te maken"
 
 #: ../data/templates/ubuntu-application/license.py:45
 msgid ""
@@ -721,12 +738,13 @@ msgstr ""
 #, python-format
 msgid "WARNING: %s was not found in the file %s. No licence replacement"
 msgstr ""
+"WAARSCHUWING: %s is niet gevonden in het bestand %s. Geen licentie vervangen"
 
 #: ../data/templates/ubuntu-application/license.py:127
 #: ../data/templates/ubuntu-application/license.py:178
 #, python-format
 msgid "%s file was not found"
-msgstr ""
+msgstr "%s bestand niet gevonden"
 
 #: ../data/templates/ubuntu-application/license.py:171
 msgid ""
@@ -801,7 +819,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:185
 #, python-format
 msgid "quickly released: %s"
-msgstr "quickly випущений: %s"
+msgstr "quickly gereleased: %s"
 
 #: ../data/templates/ubuntu-application/release.py:195
 #, python-format
@@ -809,24 +827,28 @@ msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
 msgstr ""
+"FOUT: quickly kan niet releasen: %s is blijkbaar reeds een released. Kies "
+"een andere naam."
 
 #: ../data/templates/ubuntu-application/release.py:203
 #: ../data/templates/ubuntu-application/release.py:232
 msgid "ERROR: quickly can't release as it can't commit with bzr"
 msgstr ""
+"FOUT: quickly kan niet vrijgeven omdat het niet kan committen met bzr"
 
 #: ../data/templates/ubuntu-application/release.py:263
 msgid "ERROR: quickly can't release: can't pull from launchpad."
-msgstr ""
+msgstr "quickly kan niet vrijgeven: kan niet ophalen van launchpad."
 
 #: ../data/templates/ubuntu-application/release.py:268
 #: ../data/templates/ubuntu-application/release.py:275
 msgid "ERROR: quickly can't release: can't push to launchpad."
-msgstr ""
+msgstr "FOUT: quickly kan niet vrijgeven: kan niet drukken naar launchpad."
 
 #: ../data/templates/ubuntu-application/release.py:281
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
 msgstr ""
+"FOUT: quickly kan niet correct vrijgeven: ophalen van launchpad mislukt."
 
 #: ../data/templates/ubuntu-application/release.py:296
 #, python-format
@@ -834,6 +856,8 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s is vrijgegeven en wordt samengesteld op Launchpad. Gelieve een half "
+"uur te wachten alvorens te gaan kijken naar %s."
 
 #: ../data/templates/ubuntu-application/package.py:31
 msgid ""
@@ -851,19 +875,32 @@ msgid ""
 "commands afterwards. Those changes are not a mandatory at all for\n"
 "testing purpose.\n"
 msgstr ""
+"Gebruik:\n"
+"$quickly package\n"
+"\n"
+"Maakt een debian file (deb) van uw project. Alvorens het package commando\n"
+"uit te voeren kan je de Icon en Category ingang bewerken van het "
+"*.desktop.in \n"
+"bestand, waarbij  * de naam is van uw project.\n"
+"\n"
+"Merk op dat als je niet quickly release uitvoerde, quickly share\n"
+"of quickly change-lp-project u de naam, email mogelijk mist in\n"
+"setup.py. U kan deze bewerken als je geen enkel van deze commando's nadien\n"
+"wilt gebruiken. Deze wijzigingen zijn zeker niet verplicht voor\n"
+"test doeleinden.\n"
 
 #: ../data/templates/ubuntu-application/package.py:55
 msgid "Release version not found in setup.py."
-msgstr ""
+msgstr "Vrijgave versie niet gevonden in setup.py."
 
 #: ../data/templates/ubuntu-application/package.py:69
 #, python-format
 msgid "Ubuntu package has been successfully created in ../%s_%s_all.deb"
-msgstr ""
+msgstr "Ubuntu package is succesvol aangemaakt in ../%s_%s_all.deb"
 
 #: ../data/templates/ubuntu-application/package.py:71
 msgid "An error has occurred during package building"
-msgstr ""
+msgstr "Er is een fout opgetreden bij het aanmaken van het pakket"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:65
 msgid "Command returned some ERRORS:"
@@ -880,15 +917,18 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:182
 msgid "Ubuntu packaging created in debian/"
-msgstr ""
+msgstr "Ubuntu pakket(ten) aangemaakt in debian/"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:287
 msgid "ERROR: an error occurred during source package creation"
 msgstr ""
+"FOUT: er is een fout opgetreden bij de aanmaak van het broncode pakket"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:292
 msgid "ERROR: an error occurred during source upload to launchpad"
 msgstr ""
+"FOUT: er is een fout opgetreden gedurende het uploaden van het broncode "
+"pakket naar launchpad"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:330
 msgid ""
@@ -916,12 +956,12 @@ msgstr ""
 #: ../quickly/commands.py:278
 #, python-format
 msgid "ERROR: %s command failed"
-msgstr ""
+msgstr "FOUT: %s commando gefaald"
 
 #: ../quickly/commands.py:279 ../quickly/commands.py:392
 #: ../quickly/commands.py:402
 msgid "Aborting"
-msgstr ""
+msgstr "Annulering"
 
 #: ../quickly/commands.py:389
 #, python-format
@@ -929,6 +969,9 @@ msgid ""
 "ERROR: Can't find project in %s.\n"
 "Ensure you launch this command from a quickly project directory."
 msgstr ""
+"FOUT: Kan geen project vinden in %s.\n"
+"Vergewis u ervan dat u dit commando uitvoorde vanuit een quickly project "
+"directory."
 
 #: ../quickly/commands.py:399
 #, python-format
@@ -936,10 +979,12 @@ msgid ""
 "ERROR: %s is a project. You can't launch %s command within a project. Please "
 "choose another path."
 msgstr ""
+"FOUT: %s is een project. U kan geen %s commando uitvoeren vanuit een "
+"project. Gelieve een ander pad te gebruiken."
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Status Area"
-msgstr ""
+msgstr "Voortgangs Veld"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:2
 msgid ""
@@ -951,22 +996,29 @@ msgid ""
 "To change the behavior and edit the python code, run 'quickly edit', which "
 "will bring up a text editor."
 msgstr ""
+"Uw applicatie is aangemaakt!\n"
+"\n"
+"Wilt U de interface aan te passen, voer dan 'quickly glade' uit, dit opent "
+"Glade zodat je de standaard vensters en dialogen kunt bewerken.\n"
+"\n"
+"Wilt U de python code te bewerken en het gedrag aan te passen, voer dan "
+"'quickly edit' uit, dit opent een tekst bewerker."
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
-msgstr ""
+msgstr "B_ewerken"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
-msgstr ""
+msgstr "_Bestand"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr ""
+msgstr "_Hulp"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr ""
+msgstr "_Weergave"
 
 #: ../data/templates/ubuntu-application/internal/apportutils.py:68
 msgid ""
@@ -1005,42 +1057,3 @@ msgstr ""
 #: ../data/templates/ubuntu-application/debug.py:65
 msgid "Can't execute winpdb"
 msgstr ""
-
-#, python-format
-#~ msgid "Project name: %s"
-#~ msgstr "Імя, проекту: %s"
-
-#~ msgid "No launchpad project give, aborting."
-#~ msgstr "Не можу дістати проект з launchpad, перервано."
-
-#~ msgid "Launchpad connexion is ok"
-#~ msgstr "Звязок з Launchpad встановлено"
-
-#~ msgid ""
-#~ "Release version not found in setup.py and no version specified in command "
-#~ "line."
-#~ msgstr ""
-#~ "Реліз версії не знайдено у setup.py і незазначено у командному рядку."
-
-#~ msgid "quickly released"
-#~ msgstr "quickly випущений"
-
-#, python-format
-#~ msgid "Launchpad url: %s/%s"
-#~ msgstr "Launchpad url: %s/%s"
-
-#~ msgid ""
-#~ "Release version specified in command arguments or in setup.py is not a valid "
-#~ "number."
-#~ msgstr ""
-#~ "Номер релізу зазначений у командному рядку або в setup.py не є допустимим "
-#~ "числом."
-
-#, python-format
-#~ msgid ""
-#~ "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
-#~ msgstr ""
-#~ "ppa:%s:%s не існує. Будь ласка, створіть один на launchpad перед випуском"
-
-#~ msgid "Fatal: "
-#~ msgstr "Фатальна помилка: "

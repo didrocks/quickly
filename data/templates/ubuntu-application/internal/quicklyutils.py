@@ -212,9 +212,7 @@ def get_quickly_editors():
     default_editor = os.environ.get("EDITOR")
     if not default_editor:
         default_editor = os.environ.get("SELECTED_EDITOR")
-    if not default_editor and os.path.exists(os.path.expanduser('~/.selected_editor')):
-        editor = 'sensible-editor'
-    elif default_editor:
+    if default_editor:
        editor = default_editor
     return editor
 
@@ -266,7 +264,8 @@ def get_all_emails(launchpad=None):
         if 'sec' in line or 'uid' in line:
             email_list.append(take_email_from_string(line.split(':')[9]))
 
-    return email_list
+    # return email list without None elem
+    return [email for email in email_list if email]
 
 def upload_gpg_key_to_launchpad(key_id):
     '''push gpg key to launchpad not yet possible'''
@@ -316,11 +315,14 @@ Expire-Date: 0
 def get_right_gpg_key_id(launchpad):
     '''Try to fech (and explain how to upload) right GPG key'''
 
+    verbose = templatetools.in_verbose_mode()
     prefered_emails = get_all_emails()
     if not prefered_emails:
         raise gpg_error(_("Can't sign the package as no adress email found. " \
                           "Fulfill the AUTHORS file with name <emailadress> " \
                           "or export DEBEMAIL/EMAIL."))
+    if verbose:
+        print prefered_emails
 
     gpg_instance = subprocess.Popen(['gpg', '--list-secret-keys', '--with-colon'], stdout=subprocess.PIPE)
     result, err = gpg_instance.communicate()    
@@ -330,7 +332,11 @@ def get_right_gpg_key_id(launchpad):
     for line in result.splitlines():
         if 'sec' in line:
             secret_key_id = line.split(':')[4][-8:]
+            if verbose:
+                print "found secret gpg key. id: %s" % secret_key_id
         candidate_email = take_email_from_string(line.split(':')[9])
+        if verbose:
+            print "candidate email: %s" % candidate_email
         if candidate_email and candidate_email in prefered_emails:
             # create candidate_key_ids[candidate_email] if needed
             try:
@@ -341,6 +347,9 @@ def get_right_gpg_key_id(launchpad):
     if not candidate_key_ids:
         candidate_key_ids[prefered_emails[0]] = [create_gpg_key(
                                  launchpad.me.display_name, prefered_emails[0])]
+
+    if verbose:
+        print "candidate_key_ids: %s" % candidate_key_ids
 
     # reorder key_id by email adress
     prefered_key_ids = []
@@ -353,6 +362,8 @@ def get_right_gpg_key_id(launchpad):
         raise gpg_error(_("GPG keys found matching no prefered email. You " \
                           "can export DEBEMAIL or put it in AUTHORS file " \
                           "one matching your local gpg key."))
+    if verbose:
+        print "prefered_key_ids: %s" % prefered_key_ids
 
     # get from launchpad the gpg key
     launchpad_key_ids = []
@@ -362,6 +373,9 @@ def get_right_gpg_key_id(launchpad):
     if not launchpad_key_ids:
         upload_gpg_key_to_launchpad(prefered_key_ids[0])
         launchpad_key_ids = [prefered_key_ids[0]]
+
+    if verbose:
+        print "launchpad_key_ids: %s" % launchpad_key_ids
 
     # take first match:
     for key_ids, email in prefered_key_ids:
@@ -373,8 +387,8 @@ def get_right_gpg_key_id(launchpad):
                     os.putenv('DEBFULLNAME', author_name)
                 if not os.getenv('DEBEMAIL'):
                     os.putenv('DEBEMAIL', email)
-                if templatetools.in_verbose_mode():
-                    print "key_id: %s, author: %s, email: %s" % (key_id, author_name, email)
+                if verbose:
+                    print "Selected key_id: %s, author: %s, email: %s" % (key_id, author_name, email)
                 # set upstream author and email
                 try:
                     get_setup_value('author')

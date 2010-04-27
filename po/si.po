@@ -1,16 +1,16 @@
-# Ukrainian translation for quickly
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Sinhalese translation for quickly
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the quickly package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2009-09-15 02:41+0000\n"
-"Last-Translator: Didier Roche <didrocks@gmail.com>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2010-03-06 14:30+0000\n"
+"Last-Translator: Aruna Hewapathirane <aruna.hewapathirane@gmail.com>\n"
+"Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,17 +19,16 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:39
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Перевірка чи встановлений python-launchpadlib"
+msgstr "python-launchpadlib පදවි ප්‍රාප්ත කරදැයි පරීක්ෂා කර බලන්න"
 
 #: ../quickly/launchpadaccess.py:88
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
-"Увага: Ви використовуєте постановки і не Launchpad реальний виробничий сервер"
 
 #: ../quickly/launchpadaccess.py:96
 msgid "Get Launchpad Settings"
-msgstr "Отримати настройки Launchpad"
+msgstr "දියත් කිරීම් පැඩයේ කට්ටල අංග අත්පත් කරගන්න"
 
 #: ../quickly/launchpadaccess.py:111
 msgid ""
@@ -40,16 +39,17 @@ msgstr ""
 #: ../quickly/launchpadaccess.py:113
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
 msgstr ""
-"Початкові біндінги Launchpad. Ви повинні вибрати \"змінити що-небудь\""
+"දියත් කිරීම් පැඩයේ ආරම්භක බන්ධකය. ඔබ \"ඕනෑ දෙයක් වෙනස් කිරීම-Change "
+"Anything\" තෝරා ගත යුතුයි"
 
 #: ../quickly/launchpadaccess.py:126
 msgid "Unknown reason"
-msgstr "Невідома причина"
+msgstr "නාඳුනන කරුණකි"
 
 #: ../quickly/launchpadaccess.py:128
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "Не можу настроїти Launchpad для quickly ; %s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:129
 msgid "Launchpad connection is ok"
@@ -72,15 +72,15 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:167
 msgid "No project found"
-msgstr "Проект не знайдено."
+msgstr "සැලැස්මක් සමුවි නැත"
 
 #: ../quickly/launchpadaccess.py:169
 msgid "Choose your project number"
-msgstr "Оберіть номер вашого проекту."
+msgstr "සැලැස්මේ අංකය තෝරා ගන්න"
 
 #: ../quickly/launchpadaccess.py:179
 msgid "No right number given, aborting."
-msgstr "Обрано невірний номер, перервано."
+msgstr "හරි අංකය දී නැත, මෙය අසාර්ථක වෙනවා"
 
 #: ../quickly/launchpadaccess.py:186
 #, python-format
@@ -133,7 +133,7 @@ msgstr ""
 
 #: ../quickly/bzrbinding.py:51
 msgid "Bzr not properly installed"
-msgstr ""
+msgstr "Bzr සුදුසු ලෙස පිහිටුවා නොමැත"
 
 #: ../bin/quickly.py:68
 #, python-format
@@ -142,7 +142,7 @@ msgstr ""
 
 #: ../bin/quickly.py:69 ../bin/quickly.py:117
 msgid "Aborting."
-msgstr ""
+msgstr "මෙය අසාර්ථක වෙනවා"
 
 #: ../bin/quickly.py:87 ../bin/quickly.py:107
 #, python-format
@@ -155,7 +155,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:166
 #, python-format
 msgid "Candidates template are: %s"
-msgstr ""
+msgstr "අපේක්ෂක මාර්ගකය: %s"
 
 #: ../bin/quickly.py:112
 #, python-format
@@ -259,7 +259,7 @@ msgstr ""
 
 #: ../quickly/version.py:38
 msgid "No template found."
-msgstr ""
+msgstr "මාර්ගකය නොමැත"
 
 #: ../quickly/version.py:40
 #, python-format
@@ -334,7 +334,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/share.py:151
 #: ../data/templates/ubuntu-application/release.py:286
 msgid "pushing to launchpad"
-msgstr ""
+msgstr "දියත් කිරීම් පැඩයට තල්ලු කිරීම"
 
 #: ../data/templates/ubuntu-application/share.py:157
 #, python-format
@@ -345,7 +345,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:91
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:132
 msgid "ERROR: Can't load setup.py file"
-msgstr "ПОМИЛКА: Не можу завантажити файл setup.py"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
 #: ../data/templates/ubuntu-application/save.py:45
@@ -421,7 +421,7 @@ msgstr ""
 
 #: ../quickly/tools.py:114
 msgid "No template directory found. Aborting"
-msgstr ""
+msgstr "මාර්ගක නාමාවලිය (ඩිරෙක්ටරිය) නොමැත. අසාර්ථක වෙනවා"
 
 #: ../quickly/tools.py:132
 #, python-format
@@ -435,7 +435,7 @@ msgstr ""
 
 #: ../quickly/tools.py:172
 msgid "Arborting."
-msgstr ""
+msgstr "අසාර්ථක වෙනවා"
 
 #: ../quickly/tools.py:196
 #, python-format
@@ -448,7 +448,7 @@ msgstr ""
 
 #: ../quickly/templatetools.py:41
 msgid "No help for this command"
-msgstr ""
+msgstr "මෙම විධානයට අදාල සහාය නොමැත"
 
 #: ../quickly/templatetools.py:60
 msgid ""
@@ -801,7 +801,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:185
 #, python-format
 msgid "quickly released: %s"
-msgstr "quickly випущений: %s"
+msgstr "quickly ප්‍රචාරයට පැමිණවීම: %s"
 
 #: ../data/templates/ubuntu-application/release.py:195
 #, python-format
@@ -921,7 +921,7 @@ msgstr ""
 #: ../quickly/commands.py:279 ../quickly/commands.py:392
 #: ../quickly/commands.py:402
 msgid "Aborting"
-msgstr ""
+msgstr "අසාර්ථක වෙනවා"
 
 #: ../quickly/commands.py:389
 #, python-format
@@ -939,7 +939,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Status Area"
-msgstr ""
+msgstr "තත්ව ප්‍රදේශය"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:2
 msgid ""
@@ -962,7 +962,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr ""
+msgstr "සහායකයා"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
@@ -1005,42 +1005,3 @@ msgstr ""
 #: ../data/templates/ubuntu-application/debug.py:65
 msgid "Can't execute winpdb"
 msgstr ""
-
-#, python-format
-#~ msgid "Project name: %s"
-#~ msgstr "Імя, проекту: %s"
-
-#~ msgid "No launchpad project give, aborting."
-#~ msgstr "Не можу дістати проект з launchpad, перервано."
-
-#~ msgid "Launchpad connexion is ok"
-#~ msgstr "Звязок з Launchpad встановлено"
-
-#~ msgid ""
-#~ "Release version not found in setup.py and no version specified in command "
-#~ "line."
-#~ msgstr ""
-#~ "Реліз версії не знайдено у setup.py і незазначено у командному рядку."
-
-#~ msgid "quickly released"
-#~ msgstr "quickly випущений"
-
-#, python-format
-#~ msgid "Launchpad url: %s/%s"
-#~ msgstr "Launchpad url: %s/%s"
-
-#~ msgid ""
-#~ "Release version specified in command arguments or in setup.py is not a valid "
-#~ "number."
-#~ msgstr ""
-#~ "Номер релізу зазначений у командному рядку або в setup.py не є допустимим "
-#~ "числом."
-
-#, python-format
-#~ msgid ""
-#~ "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
-#~ msgstr ""
-#~ "ppa:%s:%s не існує. Будь ласка, створіть один на launchpad перед випуском"
-
-#~ msgid "Fatal: "
-#~ msgstr "Фатальна помилка: "

@@ -1,3 +1,24 @@
+Quickly 0.4.2
+------------------------------------
+
+  ubuntu-application template (and inherited):
+  - fix verbose check in quicklyutils making release and share fail
+    (LP: #570239)
+  - updated translations
+
+Quickly 0.4.1
+------------------------------------
+
+  ubuntu-application template (and inherited):
+  - add more debugging info in --verbose mode for gpg keys
+  - remove ~/.selected_editor detection. Introduced confusion for users
+    (LP: #565586)
+  - better message and user help when ppa not found (LP: #565581)
+  - fix again some tutorial issues which had been lost during html -> docbook
+    transition (LP: #499356)
+  - fix gpg key creation with no email address (LP: #567272)
+  - Updated translations
+
 Quickly 0.4
 ------------------------------------
 

@@ -1,4 +1,4 @@
-# Ukrainian translation for quickly
+# Hungarian translation for quickly
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2009-09-15 02:41+0000\n"
-"Last-Translator: Didier Roche <didrocks@gmail.com>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2010-04-16 18:07+0000\n"
+"Last-Translator: Boobek <bkanyo@gmail.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,17 +19,18 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:39
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Перевірка чи встановлений python-launchpadlib"
+msgstr "Ellenőrizze, hogy a python-launchpadlib telepítve van-e!"
 
 #: ../quickly/launchpadaccess.py:88
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
-"Увага: Ви використовуєте постановки і не Launchpad реальний виробничий сервер"
+"FIGYELEM: Ön a launchpad \"éles\" szervere helyett (production) a teszt "
+"szervert használja!"
 
 #: ../quickly/launchpadaccess.py:96
 msgid "Get Launchpad Settings"
-msgstr "Отримати настройки Launchpad"
+msgstr "Launchpad beállítások letöltése"
 
 #: ../quickly/launchpadaccess.py:111
 msgid ""
@@ -40,24 +41,25 @@ msgstr ""
 #: ../quickly/launchpadaccess.py:113
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
 msgstr ""
-"Початкові біндінги Launchpad. Ви повинні вибрати \"змінити що-небудь\""
+"Launchpad kapcsolódás kezdeti beállítása. A \"Változtatás\"-t kell "
+"választanod."
 
 #: ../quickly/launchpadaccess.py:126
 msgid "Unknown reason"
-msgstr "Невідома причина"
+msgstr "Ismeretlen ok"
 
 #: ../quickly/launchpadaccess.py:128
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "Не можу настроїти Launchpad для quickly ; %s"
+msgstr "Nem sikerült a Launchpad kapcsolatot kialakítani; %s"
 
 #: ../quickly/launchpadaccess.py:129
 msgid "Launchpad connection is ok"
-msgstr ""
+msgstr "A Launchpad kapcsolat létrejött"
 
 #: ../quickly/launchpadaccess.py:150
 msgid "No launchpad project given, aborting."
-msgstr ""
+msgstr "Nincs megadva Launchpad projekt. Művelet megszakítva"
 
 #: ../quickly/launchpadaccess.py:156
 #, python-format
@@ -72,15 +74,15 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:167
 msgid "No project found"
-msgstr "Проект не знайдено."
+msgstr "Nem található projekt."
 
 #: ../quickly/launchpadaccess.py:169
 msgid "Choose your project number"
-msgstr "Оберіть номер вашого проекту."
+msgstr "Válaszd ki a projekt számot"
 
 #: ../quickly/launchpadaccess.py:179
 msgid "No right number given, aborting."
-msgstr "Обрано невірний номер, перервано."
+msgstr "Nem jó a szám, művelet megszakítva."
 
 #: ../quickly/launchpadaccess.py:186
 #, python-format
@@ -129,20 +131,20 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/add.py:81
 msgid "Usage is: $ quickly add dialog <dialogname>"
-msgstr ""
+msgstr "Használat: $ quickly add dialog <párbeszédablak_neve>"
 
 #: ../quickly/bzrbinding.py:51
 msgid "Bzr not properly installed"
-msgstr ""
+msgstr "Bzr nincs megfelelően telepítve"
 
 #: ../bin/quickly.py:68
 #, python-format
 msgid "ERROR: No %s command found in template %s."
-msgstr ""
+msgstr "HIBA: %s parancs nem található a %s sablonban"
 
 #: ../bin/quickly.py:69 ../bin/quickly.py:117
 msgid "Aborting."
-msgstr ""
+msgstr "Művelet megszakítása."
 
 #: ../bin/quickly.py:87 ../bin/quickly.py:107
 #, python-format
@@ -166,7 +168,7 @@ msgstr ""
 #: ../bin/quickly.py:116 ../quickly/builtincommands.py:169
 #, python-format
 msgid "ERROR: No %s command found."
-msgstr ""
+msgstr "HIBA: Nem található a(z) %s parancs"
 
 #: ../data/templates/ubuntu-application/configure.py:40
 #, python-format
@@ -193,7 +195,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:156
 #, python-format
 msgid "User or Team %s not found on Launchpad"
-msgstr ""
+msgstr "A csapat vagy felhasználó (%s) nem található a Launchpad-en"
 
 #: ../data/templates/ubuntu-application/configure.py:116
 #: ../data/templates/ubuntu-application/share.py:119
@@ -334,7 +336,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/share.py:151
 #: ../data/templates/ubuntu-application/release.py:286
 msgid "pushing to launchpad"
-msgstr ""
+msgstr "publikálás a Launchpad-re"
 
 #: ../data/templates/ubuntu-application/share.py:157
 #, python-format
@@ -345,7 +347,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:91
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:132
 msgid "ERROR: Can't load setup.py file"
-msgstr "ПОМИЛКА: Не можу завантажити файл setup.py"
+msgstr "HIBA: A setup.py betöltése sikertelen"
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
 #: ../data/templates/ubuntu-application/save.py:45
@@ -435,7 +437,7 @@ msgstr ""
 
 #: ../quickly/tools.py:172
 msgid "Arborting."
-msgstr ""
+msgstr "Megszakítás"
 
 #: ../quickly/tools.py:196
 #, python-format
@@ -444,7 +446,7 @@ msgstr ""
 
 #: ../quickly/tools.py:225
 msgid "ERROR: No command provided in command line"
-msgstr ""
+msgstr "HIBA: nem került parancs megadásra"
 
 #: ../quickly/templatetools.py:41
 msgid "No help for this command"
@@ -552,7 +554,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/create.py:119
 msgid "Launching your newly created project!"
-msgstr ""
+msgstr "Az újonnan létrehozott projektje indul!"
 
 #: ../data/templates/ubuntu-application/create.py:122
 #, python-format
@@ -579,7 +581,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:80
 #, python-format
 msgid "New release available: %s"
-msgstr ""
+msgstr "Elérhető egy új verzió: %s"
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:88
 msgid "An error happened during tarball upload:"
@@ -594,7 +596,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:45
 #, python-format
 msgid "%s does not exist"
-msgstr ""
+msgstr "%s nem létezik"
 
 #: ../quickly/builtincommands.py:58
 #, python-format
@@ -659,7 +661,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:171
 #, python-format
 msgid "ERROR: No %s command found in %s template."
-msgstr ""
+msgstr "HIBA: Nem található %s parancs a %s sablonban."
 
 #: ../quickly/builtincommands.py:185
 msgid ""
@@ -671,7 +673,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:195
 #, python-format
 msgid "%s already exists."
-msgstr ""
+msgstr "%s már létezik."
 
 #: ../quickly/builtincommands.py:199
 #, python-format
@@ -726,7 +728,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/license.py:178
 #, python-format
 msgid "%s file was not found"
-msgstr ""
+msgstr "%s nem található"
 
 #: ../data/templates/ubuntu-application/license.py:171
 msgid ""
@@ -801,7 +803,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:185
 #, python-format
 msgid "quickly released: %s"
-msgstr "quickly випущений: %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/release.py:195
 #, python-format
@@ -921,7 +923,7 @@ msgstr ""
 #: ../quickly/commands.py:279 ../quickly/commands.py:392
 #: ../quickly/commands.py:402
 msgid "Aborting"
-msgstr ""
+msgstr "Megszakítás"
 
 #: ../quickly/commands.py:389
 #, python-format
@@ -954,19 +956,19 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:7
 msgid "_Edit"
-msgstr ""
+msgstr "_Szerkesztés"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_File"
-msgstr ""
+msgstr "_Fájl"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_Help"
-msgstr ""
+msgstr "_Súgó"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_View"
-msgstr ""
+msgstr "_Nézet"
 
 #: ../data/templates/ubuntu-application/internal/apportutils.py:68
 msgid ""
@@ -1005,42 +1007,3 @@ msgstr ""
 #: ../data/templates/ubuntu-application/debug.py:65
 msgid "Can't execute winpdb"
 msgstr ""
-
-#, python-format
-#~ msgid "Project name: %s"
-#~ msgstr "Імя, проекту: %s"
-
-#~ msgid "No launchpad project give, aborting."
-#~ msgstr "Не можу дістати проект з launchpad, перервано."
-
-#~ msgid "Launchpad connexion is ok"
-#~ msgstr "Звязок з Launchpad встановлено"
-
-#~ msgid ""
-#~ "Release version not found in setup.py and no version specified in command "
-#~ "line."
-#~ msgstr ""
-#~ "Реліз версії не знайдено у setup.py і незазначено у командному рядку."
-
-#~ msgid "quickly released"
-#~ msgstr "quickly випущений"
-
-#, python-format
-#~ msgid "Launchpad url: %s/%s"
-#~ msgstr "Launchpad url: %s/%s"
-
-#~ msgid ""
-#~ "Release version specified in command arguments or in setup.py is not a valid "
-#~ "number."
-#~ msgstr ""
-#~ "Номер релізу зазначений у командному рядку або в setup.py не є допустимим "
-#~ "числом."
-
-#, python-format
-#~ msgid ""
-#~ "ppa:%s:%s does not exist. Please create one on launchpad before releasing"
-#~ msgstr ""
-#~ "ppa:%s:%s не існує. Будь ласка, створіть один на launchpad перед випуском"
-
-#~ msgid "Fatal: "
-#~ msgstr "Фатальна помилка: "
