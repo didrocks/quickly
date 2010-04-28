@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-01-26 11:49+0000\n"
-"Last-Translator: David Planella <Unknown>\n"
+"POT-Creation-Date: 2010-04-23 16:20+0200\n"
+"PO-Revision-Date: 2010-04-27 09:24+0000\n"
+"Last-Translator: Didier Roche <didrocks@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-24 03:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-28 03:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -202,8 +202,6 @@ msgid "You have to be a member of %s team to upload to its ppas"
 msgstr ""
 
 #: ../data/templates/ubuntu-application/configure.py:122
-#: ../data/templates/ubuntu-application/share.py:125
-#: ../data/templates/ubuntu-application/release.py:165
 #, python-format
 msgid ""
 "%s does not exist. Please create it on launchpad if you want to upload to "
@@ -323,19 +321,34 @@ msgstr ""
 msgid "General usage is: quickly release [release_version] [comments]"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/share.py:147
-#: ../data/templates/ubuntu-application/release.py:224
+#: ../data/templates/ubuntu-application/share.py:125
+#: ../data/templates/ubuntu-application/release.py:165
+#, python-format
+msgid ""
+"%s does not exist. Please create it on launchpad if you want to push a "
+"package to it. %s has the following ppas available:"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/share.py:131
+#: ../data/templates/ubuntu-application/release.py:171
+msgid ""
+"You can temporary choose one of them with --ppa switch or definitely by "
+"executing quickly configure ppa <ppa_name>."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/share.py:151
+#: ../data/templates/ubuntu-application/release.py:228
 #: ../data/templates/ubuntu-application/package.py:60
 msgid "ERROR: can't create or update ubuntu package"
 msgstr ""
 
 #. upload to launchpad
-#: ../data/templates/ubuntu-application/share.py:151
-#: ../data/templates/ubuntu-application/release.py:286
+#: ../data/templates/ubuntu-application/share.py:155
+#: ../data/templates/ubuntu-application/release.py:290
 msgid "pushing to launchpad"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/share.py:157
+#: ../data/templates/ubuntu-application/share.py:161
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
@@ -352,21 +365,21 @@ msgid "quickly saved"
 msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
-#: ../data/templates/ubuntu-application/release.py:201
+#: ../data/templates/ubuntu-application/release.py:205
 msgid "commit before release"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:274
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:273
 msgid ""
 "There is no GPG key detected for your Launchpad account. Please upload one "
 "as you can read on the tutorial"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:284
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:283
 msgid "You choosed to not create your GPG key."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:307
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:306
 msgid "Can't create GPG key. Try to create it yourself."
 msgstr ""
 
@@ -376,14 +389,14 @@ msgid ""
 "with name <emailadress> or export DEBEMAIL/EMAIL."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:353
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:362
 msgid ""
 "GPG keys found matching no prefered email. You can export DEBEMAIL or put it "
 "in AUTHORS file one matching your local gpg key."
 msgstr ""
 
 #. shouldn't happen as other errors are caught
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:390
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:404
 msgid "No gpg key set matching launchpad one found.'"
 msgstr ""
 
@@ -797,37 +810,37 @@ msgid ""
 "installs as expected. (This is not mandatory)\n"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:185
+#: ../data/templates/ubuntu-application/release.py:189
 #, python-format
 msgid "quickly released: %s"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:195
+#: ../data/templates/ubuntu-application/release.py:199
 #, python-format
 msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
 "another name."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:203
-#: ../data/templates/ubuntu-application/release.py:232
+#: ../data/templates/ubuntu-application/release.py:207
+#: ../data/templates/ubuntu-application/release.py:236
 msgid "ERROR: quickly can't release as it can't commit with bzr"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:263
+#: ../data/templates/ubuntu-application/release.py:267
 msgid "ERROR: quickly can't release: can't pull from launchpad."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:268
-#: ../data/templates/ubuntu-application/release.py:275
+#: ../data/templates/ubuntu-application/release.py:272
+#: ../data/templates/ubuntu-application/release.py:279
 msgid "ERROR: quickly can't release: can't push to launchpad."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:281
+#: ../data/templates/ubuntu-application/release.py:285
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:296
+#: ../data/templates/ubuntu-application/release.py:300
 #, python-format
 msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
