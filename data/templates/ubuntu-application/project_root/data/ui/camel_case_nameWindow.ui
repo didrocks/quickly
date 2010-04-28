@@ -183,7 +183,7 @@
             <property name="ypad">5</property>
             <property name="label" translatable="yes">Your application has been created!
 
-To start changing this user interface, run 'quickly glade', which will open Glade so you can edit the default windows and dialogs.
+To start changing this user interface, run 'quickly design', which will open Glade so you can edit the default windows and dialogs.
 
 To change the behavior and edit the python code, run 'quickly edit', which will bring up a text editor.</property>
             <property name="wrap">True</property>
