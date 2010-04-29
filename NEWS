@@ -1,14 +1,10 @@
-Quickly 0.4.4
-------------------------------------
-
-  ubuntu-application template:
-  - change label caption from glade to design (LP: #571409)
-
 Quickly 0.4.3
 ------------------------------------
 
   quickly core:
   - fix wrong template proposal for commands not followed by template
+  ubuntu-application template:
+  - change label caption from glade to design (LP: #571409)
 
 Quickly 0.4.2
 ------------------------------------
