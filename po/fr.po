@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-23 16:20+0200\n"
-"PO-Revision-Date: 2010-04-27 09:26+0000\n"
-"Last-Translator: Didier Roche <didrocks@gmail.com>\n"
+"PO-Revision-Date: 2010-04-29 00:32+0000\n"
+"Last-Translator: François Blondel <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-28 03:47+0000\n"
+"X-Launchpad-Export-Date: 2010-04-29 03:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -55,11 +55,11 @@ msgstr "La configuration de Launchpad pour quickly a échoué ; %s"
 
 #: ../quickly/launchpadaccess.py:129
 msgid "Launchpad connection is ok"
-msgstr ""
+msgstr "La connection avec Launchpad est réalisée"
 
 #: ../quickly/launchpadaccess.py:150
 msgid "No launchpad project given, aborting."
-msgstr ""
+msgstr "Pas de projet Launchpad spécifié, annulation."
 
 #: ../quickly/launchpadaccess.py:156
 #, python-format
@@ -71,6 +71,12 @@ msgid ""
 "Launchpad url: %s/%s\n"
 "%s\n"
 msgstr ""
+"---------------- [%s] ----------------\n"
+"   %s\n"
+"--------------------------------------\n"
+"Nom du projet: %s\n"
+"URL Launchpad: %s/%s\n"
+"%s\n"
 
 #: ../quickly/launchpadaccess.py:167
 msgid "No project found"
@@ -90,6 +96,8 @@ msgid ""
 "Can't find %s project on Launchpad. You can try to find it interactively "
 "without providing a project name."
 msgstr ""
+"Le projet %s n'a pas été trouvé sur Launchpad. Vous pouvez essayer de le "
+"trouver de manière interactive sans donner de nom de projet."
 
 #: ../data/templates/ubuntu-application/add.py:33
 msgid ""
@@ -198,7 +206,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:156
 #, python-format
 msgid "User or Team %s not found on Launchpad"
-msgstr ""
+msgstr "Utilisateur ou Équipe %s non trouvé sur Launchpad"
 
 #: ../data/templates/ubuntu-application/configure.py:116
 #: ../data/templates/ubuntu-application/share.py:119
@@ -206,6 +214,7 @@ msgstr ""
 #, python-format
 msgid "You have to be a member of %s team to upload to its ppas"
 msgstr ""
+"Vous devez être un membre de l'équipe %s pour téléverser sur ses ppas"
 
 #: ../data/templates/ubuntu-application/configure.py:122
 #, python-format
@@ -288,6 +297,8 @@ msgstr ""
 #: ../data/templates/ubuntu-application/upgrade.py:65
 msgid "Can't rename LICENSE file, check your file permission\n"
 msgstr ""
+"Le fichier LICENSE ne peut pas être renommé, vérifiez les permissions de ce "
+"fichier.\n"
 
 #: ../data/templates/ubuntu-application/share.py:42
 msgid ""
