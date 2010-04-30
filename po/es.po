@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-23 16:20+0200\n"
-"PO-Revision-Date: 2010-04-28 17:33+0000\n"
+"PO-Revision-Date: 2010-04-29 18:09+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-29 03:56+0000\n"
+"X-Launchpad-Export-Date: 2010-04-30 03:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -310,6 +310,23 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Intérprete de Python: %s %s\n"
+"  Biblioteca estándar de Python: %s\n"
+"  \n"
+"  Biblioteca usada por Quickly: %s\n"
+"  Ruta de datos de Quickly: %s\n"
+"  Directorios de plantillas detectados por Quickly:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Rick Spencer\n"
+"Copyright 2009-2010 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly no tiene NINGUNA GARANTÍA. quickly es software libre y\n"
+"puede usarlo, modificarlo y redistribuirlo bajo los términos de la licencia "
+"GNU\n"
+"GPL (General Public License) en su versión 3 o posterior."
 
 #: ../data/templates/ubuntu-application/upgrade.py:65
 msgid "Can't rename LICENSE file, check your file permission\n"
@@ -649,7 +666,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:62
 msgid "Calling GPG to create tarball signature..."
-msgstr ""
+msgstr "Llamando a GPG para crear una firma tarball..."
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:65
 msgid "Signing the tarball failed, not uploading the signature"
@@ -669,6 +686,9 @@ msgid ""
 "Create command must be followed by a template and a project path.\n"
 "Usage: quickly create <template> <project_name>"
 msgstr ""
+"La orden create debe llevar a continuación una plantilla y una ruta de "
+"proyecto.\n"
+"Uso: quickly create <plantilla> <nombre_del_proyecto>"
 
 #: ../quickly/builtincommands.py:45
 #, python-format
@@ -736,6 +756,9 @@ msgid ""
 "templates commands like %s.\n"
 "Usage is: quickly help [template] <command>"
 msgstr ""
+"la orden de ayuda lleva a continuación un nombre de plantilla para obtener "
+"ayuda de órdenes de plantillas como %s.\n"
+"Uso: quickly help [plantilla] <orden>"
 
 #: ../quickly/builtincommands.py:171
 #, python-format
