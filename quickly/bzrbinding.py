@@ -15,8 +15,7 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import socket
-import subprocess
+from gettext import gettext as _
 
 def bzr_set_login(display_name, preferred_email_adress, launchpad_name=None):
     ''' try to setup bzr whoami for commit and sshing and bzr launchpad_login if provided
@@ -24,31 +23,39 @@ def bzr_set_login(display_name, preferred_email_adress, launchpad_name=None):
         launchpadname is optional if you don't want user to use launchpad in your template
         if already setup, it will not overwrite existing data
     '''
-
     try:
-
-        # retreive the current bzr login
-        bzr_instance = subprocess.Popen(["bzr", "whoami"], stdout=subprocess.PIPE)
-        bzr_user, err = bzr_instance.communicate()
-        if bzr_instance.returncode != 0:
-            return (1, err)
-
-        # if no bzr whoami set, the default contain the @hostname string
-        if '@' + socket.gethostname() in bzr_user:
-            identifier = display_name + ' <' + preferred_email_adress + '>'
-            subprocess.call(["bzr", "whoami", identifier])
-
-        # if no bzr launchpad-login set, set it now !
-        if launchpad_name:
-            bzr_instance = subprocess.Popen(["bzr", "launchpad-login"], stdout=subprocess.PIPE)
-            bzr_id, err = bzr_instance.communicate()
-            if bzr_instance.returncode == 1: # no user configured
-                subprocess.call(["bzr", "launchpad-login", launchpad_name])
-            elif bzr_instance.returncode != 0: # other errors
-                return (1, err)
-
-    except OSError:
+        import bzrlib.config
+        from bzrlib.errors import (
+            BzrError,
+            NoWhoami,
+            )
+    except ImportError:
         return (1, _("Bzr not properly installed"))
-    
+
+    config = bzrlib.config.GlobalConfig()
+
+    # retrieve the current bzr login
+    try:
+        bzr_user = config.username()
+    except NoWhoami:
+        # no bzr whoami set
+        identifier = display_name + ' <' + preferred_email_adress + '>'
+        config.set_user_option("email", identifier)
+    except BzrError, err:
+        return (1, err)
+
+    # if no bzr launchpad-login set, set it now !
+    if launchpad_name:
+        from bzrlib.plugins.launchpad import account
+        stored_username = account.get_lp_login()
+        if stored_username is not None:
+            # No account set yet
+            launchpad_name = launchpad_name.lower()
+            account.check_lp_login(launchpad_name)
+            account.set_lp_login(launchpad_name)
+        elif stored_username != launchpad_name:
+            return (1,
+                _("Stored username %s and specified username %s mismatch." % (
+                    stored_username, launchpad_name)))
     return (0, "")
 
