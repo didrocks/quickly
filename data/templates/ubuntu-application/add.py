@@ -82,7 +82,7 @@ if argv[1] == "dialog":
         sys.exit(4)
     else:
         try:
-            dialog_name = templatetools.quickly_name(argv[2])
+            dialog_name = templatetools.quickly_name(argv[2]).replace('-','_')
         except templatetools.bad_project_name, e:
             print(e)
             sys.exit(1)
@@ -127,7 +127,7 @@ if argv[1] == "dialog":
                          ("project_camel_case_name",project_camel_case_name),
                          ("project_sentence_name",project_sentence_name),
                          ("dialog_sentence_name",dialog_sentence_name),
-                        ( "python_name",python_name))
+                         ("python_name",python_name))
 
         quicklyutils.file_from_template(template_ui_dir, 
                                         "dialog_camel_case_nameDialog.ui", 
