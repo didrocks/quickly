@@ -235,10 +235,10 @@ def licensing(license=None):
         # get copyright holders and authors
         for line in file(fauthors_name, 'r'):
             if "copyright" in line.lower() or "(c)" in line.lower(): 
-                copyright_holders += line
-                authors_holders += line
+                copyright_holders += line.decode('UTF-8')
+                authors_holders += line.decode('UTF-8')
             else:
-                authors_holders += line
+                authors_holders += line.decode('UTF-8')
 
         # update without last \n
         quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",

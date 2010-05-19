@@ -6,6 +6,7 @@ Quickly 0.4.3
   ubuntu-application template:
   - change label caption from glade to design (LP: #571409)
   - fix dialog when having - in title name (LP: #578710)
+  - fix unicode problems in About dialog (LP: #582584) (Petar Vasić)
 
 Quickly 0.4.2
 ------------------------------------
