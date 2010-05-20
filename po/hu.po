@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-23 16:20+0200\n"
-"PO-Revision-Date: 2010-04-27 09:51+0000\n"
-"Last-Translator: Boobek <bkanyo@gmail.com>\n"
+"PO-Revision-Date: 2010-05-16 11:12+0000\n"
+"Last-Translator: Krasznecz Zoltán <zoltan.krasznecz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-28 03:47+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -250,7 +250,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/run.py:65
 #, python-format
 msgid "Can't execute %s"
-msgstr ""
+msgstr "%s nem végrehajtható"
 
 #: ../quickly/version.py:34
 #, python-format
@@ -259,7 +259,7 @@ msgstr ""
 
 #: ../quickly/version.py:38
 msgid "No template found."
-msgstr ""
+msgstr "Sablon nem található."
 
 #: ../quickly/version.py:40
 #, python-format
@@ -446,7 +446,7 @@ msgstr ""
 #: ../quickly/tools.py:171
 #, python-format
 msgid "ERROR: Template %s does not exist."
-msgstr ""
+msgstr "HIBA: %s sablon nem található."
 
 #: ../quickly/tools.py:172
 msgid "Arborting."
@@ -516,7 +516,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/help/code/jotty.py:175
 msgid "Show debug messages"
-msgstr ""
+msgstr "Hibakeresési üzenetek mutatása"
 
 #: ../quickly/configurationhandler.py:41
 msgid "ERROR: Can't load configuration in current path or its parent ones."
@@ -767,7 +767,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/license.py:227
 #, python-format
 msgid "%s/%sconfig.py file not found."
-msgstr ""
+msgstr "%s/%sconfig.py fájl nem található."
 
 #: ../data/templates/ubuntu-application/license.py:269
 msgid ""
@@ -899,7 +899,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:287
 msgid "ERROR: an error occurred during source package creation"
-msgstr ""
+msgstr "HIBA: hiba történt a forrás csomagkészítése közben"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:292
 msgid "ERROR: an error occurred during source upload to launchpad"
@@ -931,7 +931,7 @@ msgstr ""
 #: ../quickly/commands.py:278
 #, python-format
 msgid "ERROR: %s command failed"
-msgstr ""
+msgstr "HIBA: %s parancs sikertelen"
 
 #: ../quickly/commands.py:279 ../quickly/commands.py:392
 #: ../quickly/commands.py:402
