@@ -98,6 +98,14 @@ def get_template_directories():
     if os.path.exists(os.path.expanduser('~/quickly-templates')):
         template_directories.append(os.path.expanduser('~/quickly-templates'))
 
+    # Add any user defined template directories.
+    user_paths = os.environ.get('QUICKLY_TEMPLATES')
+    if user_paths is not None:
+        for path in user_paths.split(':'):
+            path = os.path.expanduser(path)
+            if os.path.exists(path):
+                template_directories.append(path)
+
     # retrieve from trunk or installed version
     try:
         abs_template_path = get_quickly_data_path() + '/templates/'
