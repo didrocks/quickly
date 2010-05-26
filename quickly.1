@@ -90,8 +90,18 @@ quickly quickly newtemplate if you are in a project. The newtemplate will deriva
 Get some help on a command. If no template is provided and you are outside any quickly project, you are only able to get some help from builtin commands.
 If you specify a template (or use quickly help -t template command, or you are in a quickly project directory), you will get some help from the current template context.
 
-.SH NOTES
-\fBQUICKLY\fP environment variable can contain multiple tags. The separator is \fB":"\fP.
-.P
-For instance: \fBQUICKLY=staging:verbose\fP
+.SH ENVIRONMENT
+
+.TP
+.B QUICKLY
+The \fBQUICKLY\fP environment variable can contain multiple tags. The separator is \fB":"\fP.
+
+For example: \fBQUICKLY=staging:verbose\fP
+
+.TP
+.B QUICKLY_TEMPLATES
+This variable contains additional template paths, separated by \fB":"\fP much
+like the \fBPATH\fP environment variable.
+
+E.g.: \fBQUICKLY_TEMPLATES=/home/foo/.quickly/templates:/home/foo/projects/mynewtemplate\fP
 
