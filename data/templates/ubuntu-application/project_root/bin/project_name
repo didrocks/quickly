@@ -83,7 +83,7 @@ class camel_case_nameWindow(gtk.Window):
                 launchpad_available = False
 
         # Uncomment the following code to read in preferences at start up.
-        #dlg = Preferencescamel_case_nameDialog.NewPreferencescamel_case_nameDialog()
+        #dlg = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()
         #self.preferences = dlg.get_preferences()
 
         # Code for other initialization actions should be added here.
