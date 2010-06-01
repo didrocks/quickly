@@ -27,22 +27,27 @@ def bzr_set_login(display_name, preferred_email_adress, launchpad_name=None):
         import bzrlib.config
         from bzrlib.errors import (
             BzrError,
-            NoWhoami,
             )
-    except ImportError:
-        return (1, _("Bzr not properly installed"))
+    except ImportError, e:
+        return (1, _("Bzr not properly installed %s" % e))
 
     config = bzrlib.config.GlobalConfig()
 
     # retrieve the current bzr login
     try:
         bzr_user = config.username()
-    except NoWhoami:
-        # no bzr whoami set
-        identifier = display_name + ' <' + preferred_email_adress + '>'
-        config.set_user_option("email", identifier)
     except BzrError, err:
-        return (1, err)
+        try:
+            from bzrlib.errors import NoWhoami
+        except ImportError:
+            return (1, err)
+        else:
+            if isinstance(err, NoWhoami):
+                # no bzr whoami set
+                identifier = display_name + ' <' + preferred_email_adress + '>'
+                config.set_user_option("email", identifier)
+            else:
+                return (1, err)
 
     # if no bzr launchpad-login set, set it now !
     if launchpad_name:
