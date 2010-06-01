@@ -124,7 +124,10 @@ Use shell completion to find all available ppas'''))
             print "%s - %s" % (ppa_name, ppa_display_name)
         sys.exit(1)
 
-    configurationhandler.project_config['ppa'] = ppa_name
+    if ppa_user.is_team:
+        configurationhandler.project_config['ppa'] = '%s/%s' % (ppa_user.name, ppa_name)
+    else:
+        configurationhandler.project_config['ppa'] = ppa_name
     configurationhandler.saveConfig()
 
 # change default bzr push branch
