@@ -9,6 +9,8 @@ Quickly 0.4.3
   - fix unicode problems in About dialog (LP: #582584) (Petar Vasić)
   - fix the boiler plate for faulty preferences dialog code (LP: #587090)
     (Nick Veitch)
+  ubuntu-application and inherited:
+  - fix configure stripping team name for ppa (LP: #587314) (Frederik Elwert)
 
 Quickly 0.4.2
 ------------------------------------
