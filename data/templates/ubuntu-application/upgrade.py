@@ -58,7 +58,7 @@ if project_version < '0.4':
     ## new licensing format
     if os.path.isfile("LICENSE"):
         try:
-            wt.rename("LICENSE", "COPYING"])
+            wt.rename_one("LICENSE", "COPYING")
         except OSError, e:
             if e.errno == 13:
                 sys.stderr.write(_("Can't rename LICENSE file, check your file permission\n"))
