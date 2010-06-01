@@ -7,6 +7,8 @@ Quickly 0.4.3
   - change label caption from glade to design (LP: #571409)
   - fix dialog when having - in title name (LP: #578710)
   - fix unicode problems in About dialog (LP: #582584) (Petar Vasić)
+  - fix the boiler plate for faulty preferences dialog code (LP: #587090)
+    (Nick Veitch)
 
 Quickly 0.4.2
 ------------------------------------
