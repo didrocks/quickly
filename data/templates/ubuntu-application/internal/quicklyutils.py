@@ -19,6 +19,9 @@ from bzrlib.config import (
     GlobalConfig,
     extract_email_address,
     )
+from bzrlib.errors import (
+    NoEmailInUsername,
+    )
 
 import os
 import sys
@@ -174,41 +177,6 @@ def change_xml_elem(xml_file, path, attribute_name, attribute_value, value, attr
     xml_tree.write(xml_file + '.new')
     os.rename(xml_file + '.new', xml_file)
 
-def collect_commit_messages(previous_version):
-    '''Collect commit messages from last revision'''
-
-    bzr_command = ['bzr', 'log']
-    if previous_version:
-        bzr_command.extend(['-r', 'tag:%s..' % previous_version])
-    else:
-        previous_version = ''
-    bzr_instance = subprocess.Popen(bzr_command, stdout=subprocess.PIPE)
-    result, err = bzr_instance.communicate()
-
-    if bzr_instance.returncode != 0:
-        return(None)
-
-    changelog = []
-    buffered_message = ""
-    collect_switch = False
-    uncollect_msg = (_('quickly saved'), _('commit before release'))
-    for line in result.splitlines():
-        #print buffered_message
-        if line == 'message:':
-            collect_switch = True
-            continue
-        elif '----------------------' in line:
-            if buffered_message:
-                changelog.append(buffered_message.strip())
-                buffered_message = ""
-            collect_switch = False
-        elif line == 'tags: %s' % previous_version:
-            break
-        if collect_switch and not line.strip() in uncollect_msg:
-            buffered_message +=' %s' % line
-    return(changelog)
-
-
 def get_quickly_editors():
     '''Return prefered editor for ubuntu-application template'''
 
@@ -327,16 +295,20 @@ def get_right_gpg_key_id(launchpad):
             secret_key_id = line.split(':')[4][-8:]
             if verbose:
                 print "found secret gpg key. id: %s" % secret_key_id
-        candidate_email = extract_email_address(line.split(':')[9])
-        if verbose:
-            print "candidate email: %s" % candidate_email
-        if candidate_email and candidate_email in prefered_emails:
-            # create candidate_key_ids[candidate_email] if needed
-            try:
-                candidate_key_ids[candidate_email]
-            except KeyError:
-                candidate_key_ids[candidate_email] = []
-            candidate_key_ids[candidate_email].append(secret_key_id)
+        try:
+            candidate_email = extract_email_address(line.split(':')[9])
+        except NoEmailInUsername:
+            pass
+        else:
+            if verbose:
+                print "candidate email: %s" % candidate_email
+            if candidate_email in prefered_emails:
+                # create candidate_key_ids[candidate_email] if needed
+                try:
+                    candidate_key_ids[candidate_email]
+                except KeyError:
+                    candidate_key_ids[candidate_email] = []
+                candidate_key_ids[candidate_email].append(secret_key_id)
     if not candidate_key_ids:
         candidate_key_ids[prefered_emails[0]] = [create_gpg_key(
                                  launchpad.me.display_name, prefered_emails[0])]
