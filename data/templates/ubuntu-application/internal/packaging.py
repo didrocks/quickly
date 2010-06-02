@@ -19,8 +19,8 @@ import datetime
 import re
 import subprocess
 import sys
-from launchpadlib.errors import HTTPError
 
+from bzrlib.workingtree import WorkingTree
 
 from quickly import configurationhandler
 from quickly import launchpadaccess
@@ -183,15 +183,11 @@ def updatepackaging(changelog=None):
 
     # check if first python-mkdebian (debian/ creation) to commit it
     # that means debian/ under unknown
-    bzr_instance = subprocess.Popen(["bzr", "status"], stdout=subprocess.PIPE)
-    bzr_status, err = bzr_instance.communicate()
-    if bzr_instance.returncode != 0:
-        return(bzr_instance.returncode)
+    wt = WorkingTree.open(".")
 
-    if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
-        return_code = filter_exec_command(["bzr", "add"])
-        if return_code == 0:
-            return_code = filter_exec_command(["bzr", "commit", "-m", 'Creating ubuntu package'])
+    if any(filter(lambda x: x.startswith("debian/"), wt.unknowns())):
+        wt.smart_add(["."])
+        wt.commit('Creating ubuntu package')
 
     return(return_code)
 
@@ -319,7 +315,7 @@ def check_and_return_ppaname(launchpad, lp_team_or_user, ppa_name):
     return(current_ppa_name)
 
 def updateversion(proposed_version=None, sharing=False):
-    '''Update versionning with year.month, handling intermediate release'''
+    '''Update versioning with year.month, handling intermediate release'''
 
     if proposed_version:
         # check manual versionning is correct
@@ -331,7 +327,6 @@ def updateversion(proposed_version=None, sharing=False):
                     "valid version scheme like 'x(.y)(.z)'.")
             raise invalid_versionning_scheme(msg)
         new_version = proposed_version
-
     else:
         # get previous value
         try:
