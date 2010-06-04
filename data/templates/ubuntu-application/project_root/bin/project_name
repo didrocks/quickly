@@ -20,11 +20,6 @@ try:
 except:
     launchpad_available = False
 
-#Will add AppIndicator after "quickly add indicator"
-try:
-    from python_name.indicator import Indicator
-except:
-    Indicator = False
 
 #Try adding AppIndicator. Will work after "qucikly add indicator"
 try:
@@ -95,7 +90,9 @@ class camel_case_nameWindow(gtk.Window):
             else:
                 launchpad_available = False
             
-            #Add appindicator support
+            #AppIndicator support
+            # use 'quickly add indicator' to get started
+            # can disable by commenting out the following lines or deleting 'python_name'/indicator.py
             if Indicator:
                 self.indicator = Indicator(self)
 

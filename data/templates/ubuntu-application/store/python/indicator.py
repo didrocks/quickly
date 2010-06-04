@@ -30,16 +30,23 @@ class Indicator:
 
         self.menu = gtk.Menu()
 
+        # Add items to Menu and connect signals. 
+        # Can access methods from bin/python_name using Window
+        
+        #Adding preferences button 
         preferences = gtk.MenuItem("Preferences")
+        #Calls preferences method from the Window class in python_name.py
         preferences.connect("activate",Window.preferences)
         preferences.show()
         self.menu.append(preferences)
+
 
         quit = gtk.MenuItem("Quit")
         quit.connect("activate",Window.quit)
         quit.show()
         self.menu.append(quit)
-                            
+
+        # Add more items above                           
         self.menu.show()
 
         self.indicator.set_menu(self.menu)
