@@ -14,10 +14,11 @@ from gettext import gettext as _
 gettext.textdomain('project_name')
 
 import appindicator
+from quickly import templatetools
 
 class Indicator:
     def __init__(self,Window):
-        self.indicator = appindicator.Indicator('Project_Name','Messages',appindicator.CATEGORY_APPLICATION_STATUS)
+        self.indicator = appindicator.Indicator('project_name','Messages',appindicator.CATEGORY_APPLICATION_STATUS)
         self.indicator.set_status(appindicator.STATUS_ACTIVE)
         self.icon = get_media_file("logo.png")
  
