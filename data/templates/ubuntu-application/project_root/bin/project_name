@@ -20,6 +20,13 @@ try:
 except:
     launchpad_available = False
 
+#Try adding AppIndicator. Will work after "qucikly add indicator"
+try:
+    from python_name.indicator import Indicator
+except:
+    Indicator = False
+
+
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
     os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
@@ -81,6 +88,10 @@ class camel_case_nameWindow(gtk.Window):
                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
             else:
                 launchpad_available = False
+            
+            #Add appindicator support
+            if Indicator:
+                self.indicator = Indicator(self)
 
         # Uncomment the following code to read in preferences at start up.
         #dlg = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()

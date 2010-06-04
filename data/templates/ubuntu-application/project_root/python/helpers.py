@@ -34,3 +34,14 @@ def get_builder(builder_file_name):
     builder.set_translation_domain('project_name')
     builder.add_from_file(ui_filename)
     return builder
+
+
+# Owais Lone : To get quick access to icons and stuff.
+def get_media_file(media_file_name):
+    media_filename = get_data_file('media', '%s' % (media_file_name,))
+    if not os.path.exists(media_filename):
+        media_filename = None
+
+    return "file:///"+media_filename
+
+
