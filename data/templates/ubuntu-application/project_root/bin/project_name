@@ -20,6 +20,12 @@ try:
 except:
     launchpad_available = False
 
+#Will add AppIndicator after "quickly add indicator"
+try:
+    from python_name.indicator import Indicator
+except:
+    Indicator = False
+
 #Try adding AppIndicator. Will work after "qucikly add indicator"
 try:
     from python_name.indicator import Indicator

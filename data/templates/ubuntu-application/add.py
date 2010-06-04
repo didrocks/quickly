@@ -144,3 +144,41 @@ if argv[1] == "dialog":
                                         target_python_dir, 
                                         substitutions)
 
+if argv[1] == "indicator":
+    if len(argv) != 2:
+        print(_('''Usage is: $ quickly add indicator'''))
+        sys.exit(4)
+    else:
+
+        path_and_project = sys.argv[0].split('/')
+
+        if not configurationhandler.project_config:
+            configurationhandler.loadConfig()
+        project_name = configurationhandler.project_config['project']
+
+        template_python_dir = os.path.join(abs_template_path, 'store', 'python')
+        # take files from command directory if don't exist
+        python_file = os.path.join(template_python_dir,
+                                   'indicator.py')
+        if not os.path.isfile(python_file):
+            
+            template_python_dir = os.path.join(abs_command_path, 'store',
+                                               'python')
+
+        python_name = templatetools.python_name(project_name)
+        target_python_dir = python_name
+
+        project_sentence_name, project_camel_case_name = \
+            quicklyutils.conventional_names(project_name)
+
+        substitutions = (("project_name",project_name),
+                         ("project_camel_case_name",project_camel_case_name),
+                         ("project_sentence_name",project_sentence_name),
+                        ( "python_name",python_name))
+
+        quicklyutils.file_from_template(template_python_dir, 
+                                        "indicator.py", 
+                                        target_python_dir, 
+                                        substitutions)
+
+
