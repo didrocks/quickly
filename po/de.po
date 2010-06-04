@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-23 16:20+0200\n"
-"PO-Revision-Date: 2010-05-13 01:28+0000\n"
+"PO-Revision-Date: 2010-06-03 20:21+0000\n"
 "Last-Translator: Jan-Christoph Borchardt <inquata@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:33+0000\n"
+"X-Launchpad-Export-Date: 2010-06-04 03:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -35,10 +35,12 @@ msgid ""
 "Previous Launchpad values seems to have been removed. You must choose again "
 "\"Change Anything\""
 msgstr ""
+"Anscheinend wurden vorherige Launchpad-Einstellungen entfernt. Bitte wählen "
+"Sie noch einmal »Alles ändern«"
 
 #: ../quickly/launchpadaccess.py:113
 msgid "Initial Launchpad binding. You must choose \"Change Anything\""
-msgstr ""
+msgstr "Erste Launchpad-Verbindung. Bitte wählen Sie »Alles ändern«"
 
 #: ../quickly/launchpadaccess.py:126
 msgid "Unknown reason"
@@ -51,7 +53,7 @@ msgstr "Konnte Launchpad für quickly nicht einrichten ; %s"
 
 #: ../quickly/launchpadaccess.py:129
 msgid "Launchpad connection is ok"
-msgstr ""
+msgstr "Erfolgreich mit Launchpad verbunden"
 
 #: ../quickly/launchpadaccess.py:150
 msgid "No launchpad project given, aborting."
@@ -67,6 +69,12 @@ msgid ""
 "Launchpad url: %s/%s\n"
 "%s\n"
 msgstr ""
+"---------------- [%s] ----------------\n"
+"   %s\n"
+"--------------------------------------\n"
+"Projektname: %s\n"
+"Launchpad-Adresse: %s/%s\n"
+"%s\n"
 
 #: ../quickly/launchpadaccess.py:167
 msgid "No project found"
@@ -78,7 +86,7 @@ msgstr "Projektnummer wählen"
 
 #: ../quickly/launchpadaccess.py:179
 msgid "No right number given, aborting."
-msgstr "Keine gültige Nummer angegeben. Abbruch."
+msgstr "Keine gültige Nummer angegeben, Vorgang wird abgebrochen."
 
 #: ../quickly/launchpadaccess.py:186
 #, python-format
@@ -86,6 +94,8 @@ msgid ""
 "Can't find %s project on Launchpad. You can try to find it interactively "
 "without providing a project name."
 msgstr ""
+"Konnte Projekt %s nicht in Launchpad finden. Sie können versuchen, das "
+"Projekt manuell zu suchen, ohne einen Projektnamen anzugeben."
 
 #: ../data/templates/ubuntu-application/add.py:33
 msgid ""
@@ -127,7 +137,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/add.py:81
 msgid "Usage is: $ quickly add dialog <dialogname>"
-msgstr ""
+msgstr "Syntax ist: $ quickly add dialog <Dialogname>"
 
 #: ../quickly/bzrbinding.py:51
 msgid "Bzr not properly installed"
@@ -136,11 +146,11 @@ msgstr "Bzr ist nicht korrekt installiert"
 #: ../bin/quickly.py:68
 #, python-format
 msgid "ERROR: No %s command found in template %s."
-msgstr ""
+msgstr "FEHLER: Kein Befehl %s in der Vorlage %s gefunden."
 
 #: ../bin/quickly.py:69 ../bin/quickly.py:117
 msgid "Aborting."
-msgstr ""
+msgstr "Wird abgebrochen."
 
 #: ../bin/quickly.py:87 ../bin/quickly.py:107
 #, python-format
@@ -148,17 +158,19 @@ msgid ""
 "ERROR: %s command must be followed by a template and no template was found "
 "on the command line."
 msgstr ""
+"FEHLER: Der Befehl %s muss mit einer Vorlage als Parameter aufgerufen "
+"werden. Es wurde keine Vorlage angegeben."
 
 #: ../bin/quickly.py:88 ../bin/quickly.py:108 ../bin/quickly.py:113
 #: ../quickly/builtincommands.py:166
 #, python-format
 msgid "Candidates template are: %s"
-msgstr ""
+msgstr "Mögliche Vorlagen sind: %s"
 
 #: ../bin/quickly.py:112
 #, python-format
 msgid "No template were found on the command line for command %s."
-msgstr ""
+msgstr "Für den Befehl %s wurden keine Vorlagen gefunden."
 
 #. there is really not such command, in any template
 #: ../bin/quickly.py:116 ../quickly/builtincommands.py:169
@@ -185,13 +197,16 @@ msgid ""
 "Usage is: $ quickly configure ppa <ppaname>\n"
 "Use shell completion to find all available ppas"
 msgstr ""
+"Syntax ist: $ quickly configure ppa <PPA-Name>\n"
+"Benutzen Sie die Auto-Vervollständigen-Funktion der Befehlszeile, um alle "
+"verfügbaren PPA anzuzeigen."
 
 #: ../data/templates/ubuntu-application/configure.py:113
 #: ../data/templates/ubuntu-application/share.py:116
 #: ../data/templates/ubuntu-application/release.py:156
 #, python-format
 msgid "User or Team %s not found on Launchpad"
-msgstr ""
+msgstr "Benutzer oder Team %s konnte nicht auf Launchpad gefunden werden"
 
 #: ../data/templates/ubuntu-application/configure.py:116
 #: ../data/templates/ubuntu-application/share.py:119
@@ -199,6 +214,7 @@ msgstr ""
 #, python-format
 msgid "You have to be a member of %s team to upload to its ppas"
 msgstr ""
+"Sie müssen Mitglied des Teams %s sein, um in das PPA hochladen zu können"
 
 #: ../data/templates/ubuntu-application/configure.py:122
 #, python-format
@@ -206,10 +222,12 @@ msgid ""
 "%s does not exist. Please create it on launchpad if you want to upload to "
 "it. %s has the following ppas available:"
 msgstr ""
+"%s exsitiert nicht. Bitte erstellen Sie es in Launchpad, falls Sie etwas "
+"hochladen möchten. %s stellt folgende PPA zur Verfügung:"
 
 #: ../data/templates/ubuntu-application/configure.py:133
 msgid "Usage is: $ quickly configure bzr <bzr-branch-string>"
-msgstr ""
+msgstr "Syntax ist: $quickly configure bzr <bzr-branch-string>"
 
 #: ../data/templates/ubuntu-application/edit.py:34
 msgid ""
@@ -242,6 +260,8 @@ msgstr ""
 #: ../data/templates/ubuntu-application/run.py:52
 msgid "Can't access to X server, so can't run gtk application"
 msgstr ""
+"Zugriff auf den X-Server nicht möglich, GTK-Anwendung konnte nicht "
+"ausgeführt werden"
 
 #: ../data/templates/ubuntu-application/run.py:65
 #, python-format
@@ -251,7 +271,7 @@ msgstr "Kann %s nicht ausführen."
 #: ../quickly/version.py:34
 #, python-format
 msgid "No quickly data path found in %s."
-msgstr ""
+msgstr "Kein quickly-Datenpfad in %s gefunden"
 
 #: ../quickly/version.py:38
 msgid "No template found."
@@ -281,6 +301,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/upgrade.py:65
 msgid "Can't rename LICENSE file, check your file permission\n"
 msgstr ""
+"Konnte LIZENZ-Datei nicht umbenennen. Bitte prüfen Sie die Zugrifssrechte\n"
 
 #: ../data/templates/ubuntu-application/share.py:42
 msgid ""
@@ -307,18 +328,19 @@ msgstr ""
 #: ../data/templates/ubuntu-application/share.py:82
 #: ../data/templates/ubuntu-application/release.py:101
 msgid "--ppa needs one argument: <ppa_name> or <team/ppa_name>"
-msgstr ""
+msgstr "--ppa benötigt ein Argument: <ppa_name> oder <team/ppa_name>"
 
 #: ../data/templates/ubuntu-application/share.py:85
 #: ../data/templates/ubuntu-application/release.py:104
 #, python-format
 msgid "Unknown option: %s"
-msgstr ""
+msgstr "Unbekannte Option: %s"
 
 #: ../data/templates/ubuntu-application/share.py:86
 #: ../data/templates/ubuntu-application/release.py:105
 msgid "General usage is: quickly release [release_version] [comments]"
 msgstr ""
+"Allgemeine Syntax ist: quickly release [Release_Version] [Kommentare]"
 
 #: ../data/templates/ubuntu-application/share.py:125
 #: ../data/templates/ubuntu-application/release.py:165
@@ -327,6 +349,8 @@ msgid ""
 "%s does not exist. Please create it on launchpad if you want to push a "
 "package to it. %s has the following ppas available:"
 msgstr ""
+"%s existiert nicht. Bitte erstellen Sie es zuerst in Launchpad, wenn Sie "
+"Pakete hochladen wollen. Folgende PPA sind in %s verfügbar:"
 
 #: ../data/templates/ubuntu-application/share.py:131
 #: ../data/templates/ubuntu-application/release.py:171
@@ -334,12 +358,14 @@ msgid ""
 "You can temporary choose one of them with --ppa switch or definitely by "
 "executing quickly configure ppa <ppa_name>."
 msgstr ""
+"Sie können temporär eines davon mit --ppa auswählen oder mit »quickly "
+"configure ppa <ppa_name>« dauerhaft ändern."
 
 #: ../data/templates/ubuntu-application/share.py:151
 #: ../data/templates/ubuntu-application/release.py:228
 #: ../data/templates/ubuntu-application/package.py:60
 msgid "ERROR: can't create or update ubuntu package"
-msgstr ""
+msgstr "FEHLER: Konnte Ubuntu-Paket nicht erstellen oder aktualisieren"
 
 #. upload to launchpad
 #: ../data/templates/ubuntu-application/share.py:155
@@ -352,6 +378,8 @@ msgstr "lade zu Launchpad hoch"
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
+"%s %s wird gerade auf Launchpad erstellt. Warten Sie ungefähr 30 Minuten und "
+"schauen Sie sich %s an."
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:91
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:132
@@ -373,6 +401,8 @@ msgid ""
 "There is no GPG key detected for your Launchpad account. Please upload one "
 "as you can read on the tutorial"
 msgstr ""
+"Es ist kein GPG-Schlüssel in Ihrem Launchpad-Konto vorhanden. Bitte folgen "
+"Sie den Anweisungen im Handbuch, um einen in Ihr Konto zu laden"
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:283
 msgid "You choosed to not create your GPG key."
@@ -381,6 +411,8 @@ msgstr ""
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:306
 msgid "Can't create GPG key. Try to create it yourself."
 msgstr ""
+"Konnte GPG-Schlüssel nicht automatisch erstellen. Versuchen Sie bitte, "
+"manuell einen zu erstellen."
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:321
 msgid ""
@@ -428,49 +460,51 @@ msgstr ""
 #: ../quickly/tools.py:113
 #, python-format
 msgid "%s is an invalid data path.\n"
-msgstr ""
+msgstr "%s ist kein gültiger Daten-Pfad.\n"
 
 #: ../quickly/tools.py:114
 msgid "No template directory found. Aborting"
-msgstr "Abbruch, kein Template-Verzeichnis gefunden."
+msgstr "Kein Vorlagen-Verzeichnis gefunden, Vorgang wird abgebrochen."
 
 #: ../quickly/tools.py:132
 #, python-format
 msgid "ERROR: Template '%s' not found. Aborting"
-msgstr ""
+msgstr "FEHLER: Vorlage »%s« nicht gefunden, Vorgang wird abgebrochen."
 
 #: ../quickly/tools.py:171
 #, python-format
 msgid "ERROR: Template %s does not exist."
-msgstr ""
+msgstr "FEHLER: Vorlage %s existiert nicht."
 
 #: ../quickly/tools.py:172
 msgid "Arborting."
-msgstr ""
+msgstr "Breche ab."
 
 #: ../quickly/tools.py:196
 #, python-format
 msgid "ERROR: %s needs one argument: %s"
-msgstr ""
+msgstr "FEHLER: %s benötigt ein Argument: %s"
 
 #: ../quickly/tools.py:225
 msgid "ERROR: No command provided in command line"
-msgstr ""
+msgstr "FEHLER: Kein Befehl eingegeben"
 
 #: ../quickly/templatetools.py:41
 msgid "No help for this command"
-msgstr ""
+msgstr "Zu diesem Befehl ist keine Hilfe vorhanden"
 
 #: ../quickly/templatetools.py:60
 msgid ""
 "ERROR: unpermitted character in name.\n"
 "Letters, spaces, dashes (-) and digits only."
 msgstr ""
+"FEHLER: Ungültige Zeichen im Namen.\n"
+"Erlaubt sind nur Buchstaben, Leerzeichen, Bindestriche (-) und Zahlen."
 
 #: ../quickly/templatetools.py:64
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr ""
+msgstr "FEHLER: %s ist kein gültiger quickly-Projektname"
 
 #: ../data/templates/ubuntu-pygame/project_root/project_name.desktop.in.h:1
 msgid "camel_case_name game"
@@ -512,21 +546,23 @@ msgstr "Es gibt anscheinend keine Änderung zu erfassen."
 
 #: ../data/templates/ubuntu-application/help/code/jotty.py:175
 msgid "Show debug messages"
-msgstr ""
+msgstr "Meldungen zur Fehlerbehebung anzeigen"
 
 #: ../quickly/configurationhandler.py:41
 msgid "ERROR: Can't load configuration in current path or its parent ones."
 msgstr ""
+"FEHLER: Konnte Konfiguration im aktuellen Pfad (oder einem übergeordneten) "
+"nicht laden."
 
 #: ../quickly/configurationhandler.py:57
 #, python-format
 msgid "ERROR: Can't load configuration in %s: %s"
-msgstr ""
+msgstr "FEHLER: Konnte Konfiguration in %s nicht laden: %s"
 
 #: ../quickly/configurationhandler.py:116
 #, python-format
 msgid "ERROR: Can't save configuration in %s\n"
-msgstr ""
+msgstr "FEHLER: Konnte Konfiguration nicht in %s speichern.\n"
 
 #: ../data/templates/ubuntu-application/create.py:35
 msgid ""
@@ -555,6 +591,8 @@ msgid ""
 "Project name not defined.\n"
 "Usage is: quickly create ubuntu-application project_name"
 msgstr ""
+"Projektname nicht festgelegt.\n"
+"Syntax ist: quickly create ubuntu-application <Projektname>"
 
 #. add it to revision control
 #: ../data/templates/ubuntu-application/create.py:110
@@ -563,12 +601,14 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/create.py:119
 msgid "Launching your newly created project!"
-msgstr ""
+msgstr "Ihr neu erstelltes Projekt starten!"
 
 #: ../data/templates/ubuntu-application/create.py:122
 #, python-format
 msgid "Congrats, your new project is setup! cd %s/ to start hacking."
 msgstr ""
+"Glückwunsch, Ihr neues Projekt wurde erstellt. cd %s/, um mit dem "
+"Programmieren zu beginnen."
 
 #: ../data/templates/ubuntu-pygame/tutorial.py:31
 #: ../data/templates/ubuntu-application/tutorial.py:31
@@ -590,22 +630,25 @@ msgstr ""
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:80
 #, python-format
 msgid "New release available: %s"
-msgstr ""
+msgstr "Neue Version verfügbar: %s"
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:88
 msgid "An error happened during tarball upload:"
-msgstr ""
+msgstr "Während des Hochladens ist ein Fehler aufgetreten:"
 
 #: ../quickly/builtincommands.py:35
 msgid ""
 "Create command must be followed by a template and a project path.\n"
 "Usage: quickly create <template> <project_name>"
 msgstr ""
+"Der create-Befehl muss mit einer Vorlage und einem Projektpfad aufgerufen "
+"werden.\n"
+"Syntax ist: quickly create <Vorlage> <Projektname>"
 
 #: ../quickly/builtincommands.py:45
 #, python-format
 msgid "%s does not exist"
-msgstr ""
+msgstr "%s existiert nicht"
 
 #: ../quickly/builtincommands.py:58
 #, python-format
@@ -617,7 +660,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:62
 #, python-format
 msgid "Creating project directory %s"
-msgstr ""
+msgstr "Neues Projektverzeichnis %s anlegen"
 
 #: ../quickly/builtincommands.py:100
 msgid ""
@@ -671,7 +714,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:171
 #, python-format
 msgid "ERROR: No %s command found in %s template."
-msgstr ""
+msgstr "FEHLER: Der Befehl %s wurde in der Vorlage %s nicht gefunden."
 
 #: ../quickly/builtincommands.py:185
 msgid ""
@@ -683,12 +726,12 @@ msgstr ""
 #: ../quickly/builtincommands.py:195
 #, python-format
 msgid "%s already exists."
-msgstr ""
+msgstr "%s existiert bereits."
 
 #: ../quickly/builtincommands.py:199
 #, python-format
 msgid "Copy %s to create new %s template"
-msgstr ""
+msgstr "Kopieren Sie %s, um eine neue Vorlage %s zu erstellen"
 
 #: ../data/templates/ubuntu-application/license.py:45
 msgid ""
@@ -756,6 +799,8 @@ msgstr ""
 #, python-format
 msgid "Header of %s license not found. Quickly installation corrupted?"
 msgstr ""
+"Der Kopfteil der %s-Lizenz wurde nicht gefunden. Ist die Quickly-"
+"Installation fehlerhaft?"
 
 #: ../data/templates/ubuntu-application/license.py:224
 msgid "Can't update license in setup.py file\n"
@@ -764,7 +809,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/license.py:227
 #, python-format
 msgid "%s/%sconfig.py file not found."
-msgstr ""
+msgstr "Konnte %s/%sconfig.py nicht finden."
 
 #: ../data/templates/ubuntu-application/license.py:269
 msgid ""
@@ -850,6 +895,8 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s ist freigegeben und wird gerade auf Launchpad erstellt. Warten Sie "
+"ungefähr 30 Minuten und schauen Sie sich %s an."
 
 #: ../data/templates/ubuntu-application/package.py:31
 msgid ""
@@ -883,16 +930,16 @@ msgstr "Beim Bauen des Pakets ist ein Fehler aufgetreten"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:65
 msgid "Command returned some ERRORS:"
-msgstr ""
+msgstr "Befehl gab einige FEHLER zurück:"
 
 #. finish the current line
 #: ../data/templates/ubuntu-application/internal/packaging.py:87
 msgid "Command returned some WARNINGS:"
-msgstr ""
+msgstr "Befehl gab einige WARNUNGEN zurück:"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:179
 msgid "An error has occurred when creating debian packaging"
-msgstr ""
+msgstr "Während der Erstellung des Debian-Paketes ist ein Fehler aufgetreten"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:182
 msgid "Ubuntu packaging created in debian/"
@@ -900,11 +947,12 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:287
 msgid "ERROR: an error occurred during source package creation"
-msgstr ""
+msgstr "FEHLER: Während der Quellpaket-Erstellung ist ein Fehler aufgetreten"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:292
 msgid "ERROR: an error occurred during source upload to launchpad"
 msgstr ""
+"FEHLER: Während des Hochladens der Quelldateien ist ein Fehler aufgetreten"
 
 #: ../data/templates/ubuntu-application/internal/packaging.py:330
 msgid ""
@@ -932,12 +980,12 @@ msgstr ""
 #: ../quickly/commands.py:278
 #, python-format
 msgid "ERROR: %s command failed"
-msgstr ""
+msgstr "FEHLER: Befehl %s fehlgeschlagen"
 
 #: ../quickly/commands.py:279 ../quickly/commands.py:392
 #: ../quickly/commands.py:402
 msgid "Aborting"
-msgstr ""
+msgstr "Wird abgebrochen"
 
 #: ../quickly/commands.py:389
 #, python-format
@@ -952,10 +1000,12 @@ msgid ""
 "ERROR: %s is a project. You can't launch %s command within a project. Please "
 "choose another path."
 msgstr ""
+"FEHLER: %s ist ein Projekt. Sie können den Befehl %s nicht innerhalb eines "
+"Projektes aufrufen. Bitte wählen Sie einen anderen Pfad."
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Status Area"
-msgstr ""
+msgstr "Statusbereich"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:2
 msgid ""
