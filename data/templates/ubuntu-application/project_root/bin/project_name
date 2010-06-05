@@ -90,11 +90,13 @@ class camel_case_nameWindow(gtk.Window):
             else:
                 launchpad_available = False
             
-            #AppIndicator support
-            # use 'quickly add indicator' to get started
-            # can disable by commenting out the following lines or deleting 'python_name'/indicator.py
-            if Indicator:
-                self.indicator = Indicator(self)
+        #AppIndicator support
+        # use 'quickly add indicator' to get started
+        # can disable by commenting out the following lines or deleting 'python_name'/indicator.py
+        # an instance of the current class is passed so that indicator items can call methods
+        # this is available as window in indicator.py
+        if Indicator:
+            self.indicator = Indicator(self)
 
         # Uncomment the following code to read in preferences at start up.
         #dlg = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()
