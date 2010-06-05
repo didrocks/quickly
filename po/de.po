@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-23 16:20+0200\n"
-"PO-Revision-Date: 2010-06-03 20:21+0000\n"
+"PO-Revision-Date: 2010-06-04 16:26+0000\n"
 "Last-Translator: Jan-Christoph Borchardt <inquata@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-04 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-06-05 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Überprüfen Sie ob python-launchpadlib installiert ist"
+msgstr "Überprüfen Sie, ob python-launchpadlib installiert ist"
 
 #: ../quickly/launchpadaccess.py:88
 msgid ""
@@ -44,7 +44,7 @@ msgstr "Erste Launchpad-Verbindung. Bitte wählen Sie »Alles ändern«"
 
 #: ../quickly/launchpadaccess.py:126
 msgid "Unknown reason"
-msgstr "Unbekannter Grund"
+msgstr "Unbekannte Ursache"
 
 #: ../quickly/launchpadaccess.py:128
 #, python-format
