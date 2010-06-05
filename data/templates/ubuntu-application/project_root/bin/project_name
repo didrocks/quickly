@@ -23,9 +23,9 @@ except:
 
 #Try adding AppIndicator. Will work after "qucikly add indicator"
 try:
-    from python_name.indicator import Indicator
+    from python_name import indicator
 except:
-    Indicator = False
+    indicator = False
 
 
 # Add project root directory (enable symlink, and trunk execution).
@@ -93,10 +93,14 @@ class camel_case_nameWindow(gtk.Window):
         #AppIndicator support
         # use 'quickly add indicator' to get started
         # can disable by commenting out the following lines or deleting 'python_name'/indicator.py
-        # an instance of the current class is passed so that indicator items can call methods
+        # an instance of the current class is passed so that indicator items can call it's methods
         # this is available as window in indicator.py
-        if Indicator:
-            self.indicator = Indicator(self)
+        if indicator:
+            self.indicator = indicator.new_application_indicator(self)
+        # use self.indicator to access the appindicator directly
+        # for example:
+        #import appindicator
+        #self.indicator.set_status(appindicator.STATUS_ATTENTION)
 
         # Uncomment the following code to read in preferences at start up.
         #dlg = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()

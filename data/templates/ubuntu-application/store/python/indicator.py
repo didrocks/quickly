@@ -53,3 +53,6 @@ class Indicator:
 
         self.indicator.set_menu(self.menu)
 
+def new_application_indicator(window):
+    ind = Indicator(window)
+    return ind.indicator
