@@ -18,15 +18,15 @@ from quickly import templatetools
 
 class Indicator:
     def __init__(self,window):
-        self.indicator = appindicator.Indicator('project_name','Messages',appindicator.CATEGORY_APPLICATION_STATUS)
+        self.indicator = appindicator.Indicator('project_name','distributor-logo',appindicator.CATEGORY_APPLICATION_STATUS)
         self.indicator.set_status(appindicator.STATUS_ACTIVE)
  
         #Uncomment and choose an icon for attention state. 
         #self.indicator.set_attention_icon("ICON-NAME")
     
         #Can use self.icon once appindicator python api supports custom icons.
-        #self.icon = get_media_file("logo.png")
-        self.indicator.set_icon("distributor-logo")
+        #icon = get_media_file("logo.png")
+        #self.indicator.set_icon(icon)
         
         self.menu = gtk.Menu()
 
