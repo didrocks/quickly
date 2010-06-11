@@ -155,4 +155,14 @@ if project_version < '0.4':
                                         python_name, 
                                         substitutions)
 
+if project_version < '0.4.3':
+    ## update dependencies format
+    if 'dependencies' in configurationhandler.project_config \
+        and not ',' in configurationhandler.project_config['dependencies']:
+        dependencies = [elem for elem 
+                        in configurationhandler.project_config['dependencies'].split(' ')
+                        if elem]
+        configurationhandler.project_config['dependencies'] = ", ".join(dependencies)
+        configurationhandler.saveConfig()
+
 sys.exit(0)

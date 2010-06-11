@@ -19,6 +19,7 @@
 import os
 import sys
 import tempfile
+import subprocess
 
 import internal.apportutils
 
@@ -143,7 +144,7 @@ elif argv[1] == "dependencies":
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
     try:
-        dependencies = [elem for elem in configurationhandler.project_config['dependencies'].split(' ') if elem]
+        dependencies = [elem.strip() for elem in configurationhandler.project_config['dependencies'].split(',') if elem]
     except KeyError:
         dependencies = []
     depfile_name = tempfile.mkstemp()[1]
@@ -152,8 +153,8 @@ elif argv[1] == "dependencies":
     dependencies = []
     os.system("%s %s" % (editor, depfile_name))
     for depends in file(depfile_name, 'r'):
-        dependencies.extend([elem for elem in depends[:-1].split(' ') if elem])
+        dependencies.extend([elem.strip() for elem in depends.split(',') if elem])
     os.remove(depfile_name)
-    configurationhandler.project_config['dependencies'] = " ".join(dependencies)
+    configurationhandler.project_config['dependencies'] = ", ".join(dependencies)
     configurationhandler.saveConfig()
 

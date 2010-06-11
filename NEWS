@@ -11,6 +11,8 @@ Quickly 0.4.3
     (Nick Veitch)
   ubuntu-application and inherited:
   - fix configure stripping team name for ppa (LP: #587314) (Frederik Elwert)
+  - fix not all syntax for dependencies supported (LP: #587520) (Frederik
+    Elwert)
 
 Quickly 0.4.2
 ------------------------------------
