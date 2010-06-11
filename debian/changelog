@@ -1,3 +1,22 @@
+quickly (0.4.3-0ubuntu1) UNRELEASED; urgency=low
+
+  * New bugfix release:
+    quickly core:
+    - fix wrong template proposal for commands not followed by template
+    ubuntu-application template:
+    - change label caption from glade to design (LP: #571409)
+    - fix dialog when having - in title name (LP: #578710)
+    - fix unicode problems in About dialog (LP: #582584) (Petar Vasić)
+    - fix the boiler plate for faulty preferences dialog code (LP: #587090)
+      (Nick Veitch)
+    ubuntu-application and inherited:
+    - fix configure stripping team name for ppa (LP: #587314) (Frederik Elwert)
+    - fix not all syntax for dependencies supported (LP: #587520) (Frederik
+      Elwert)
+    updated translations
+
+ -- Didier Roche <didrocks@ubuntu.com>  Fri, 11 Jun 2010 13:18:01 +0200
+
 quickly (0.4.2-0ubuntu1) lucid; urgency=low
 
   * New bugfix upstream release:
