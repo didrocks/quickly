@@ -1,4 +1,4 @@
-# Hungarian translation for quickly
+# French translation for quickly
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,34 +8,34 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-05-16 11:20+0000\n"
-"Last-Translator: Krasznecz Zoltán <zoltan.krasznecz@gmail.com>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
+"PO-Revision-Date: 2010-04-29 00:35+0000\n"
+"Last-Translator: François Blondel <Unknown>\n"
+"Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:33+0000\n"
+"X-Launchpad-Export-Date: 2010-04-30 03:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:13(firstname)
 msgid "Shane"
-msgstr "Shane"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:14(surname)
 msgid "Fagan"
-msgstr "Fagan"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:17(firstname)
 msgid "Rick"
-msgstr "Rick"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:18(surname)
 msgid "Spencer"
-msgstr "Spencer"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:20(corpauthor)
 msgid "Canonical ltd"
-msgstr ""
+msgstr "Canonical ltd"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:24(date) data/templates/ubuntu-application/help/tutorial.xml:29(invpartnumber)
 msgid "2010"
@@ -43,19 +43,19 @@ msgstr "2010"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:0(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1163(application)
 msgid "Quickly"
-msgstr "Quickly"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:28(productnumber)
 msgid "0.4"
-msgstr "0,4"
+msgstr "0.4"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:30(title)
 msgid "<application>Quickly</application> 0.4 User Guide"
-msgstr "<application>Quickly</application> 0.4 Felhasználó útmutató"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:35(title)
 msgid "About This Guide"
-msgstr "A kézikönyv névjegye"
+msgstr "À propos de ce guide"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:36(para)
 msgid ""
@@ -72,7 +72,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:39(link) data/templates/ubuntu-application/help/tutorial.xml:45(title)
 msgid "Getting Started"
-msgstr "Az első lépések"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:46(para)
 msgid ""
@@ -86,7 +86,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:48(title)
 msgid "Creating a <application>Quickly</application> Project"
-msgstr "<application>Quickly</application> projekt létrehozása"
+msgstr "Créer un projet <application>Quickly</application>"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:48(para)
 msgid ""
@@ -98,7 +98,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:49(programlisting)
 #, no-wrap
 msgid "quickly create ubuntu-application jotty"
-msgstr "quickly create ubuntu-application jotty"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:53(para)
 msgid ""
@@ -121,7 +121,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:61(title)
 msgid "Running the Application"
-msgstr "Az alkalmazás futtatása"
+msgstr "Lancement de l'application"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:61(para)
 msgid ""
@@ -139,9 +139,6 @@ msgid ""
 "cd jotty\n"
 "quickly run\n"
 msgstr ""
-"\n"
-"cd jotty\n"
-"quickly run\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:70(title)
 msgid "Editing an Application"
@@ -163,7 +160,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:73(programlisting) data/templates/ubuntu-application/help/tutorial.xml:128(programlisting)
 #, no-wrap
 msgid "quickly design"
-msgstr "quickly design"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:77(para)
 msgid "Glade will open with the project loaded up and ready to edit."
@@ -184,7 +181,6 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:92(para)
 msgid "Do the same with the image widget. This leave us two free slots."
 msgstr ""
-"Tedd ugyanezt a kép widgettel.  Így maradt két szabad hely az ablakon."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:96(para)
 msgid ""
@@ -286,7 +282,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:146(title)
 msgid "Edit the Code in Gedit"
-msgstr "Kód szerkesztése Gedit-ben"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:147(title)
 msgid "Set Up Tabs Correctly"
@@ -337,7 +333,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:156(programlisting)
 #, no-wrap
 msgid "quickly edit"
-msgstr "gyors szerkesztés"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:157(para)
 msgid ""
@@ -371,7 +367,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:170(para)
 msgid "Save the file, and run it again:"
-msgstr "A fájl mentése, és újrafuttatása:"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:171(programlisting)
 #, no-wrap
@@ -762,7 +758,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:363(title)
 msgid "Saving Your Work"
-msgstr "Munkájának mentése"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:363(para)
 msgid ""
@@ -1463,7 +1459,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:716(para)
 msgid "Run the \"license\" command."
-msgstr "A \"license\" parancs futtatása."
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:720(title)
 msgid "Specify your name and email"
@@ -1615,7 +1611,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:775(para)
 msgid "Edit the setup.py File"
-msgstr "A setup.py fájl szerkesztése"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:778(title)
 msgid "Personalize your Application Icon"
@@ -1694,7 +1690,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:818(title)
 msgid "Edit Setup.py"
-msgstr "Setup.py szerkesztése"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:817(para)
 msgid ""
@@ -2300,5 +2296,4 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Boobek https://launchpad.net/~bkanyo\n"
-"  Krasznecz Zoltán https://launchpad.net/~krasznecz-zoltan"
+"  Nicolas MARTIN https://launchpad.net/~nico-chatouille"

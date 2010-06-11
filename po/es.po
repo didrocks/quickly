@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-04-25 20:32+0000\n"
+"POT-Creation-Date: 2010-04-23 16:20+0200\n"
+"PO-Revision-Date: 2010-04-29 18:09+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-26 03:46+0000\n"
+"X-Launchpad-Export-Date: 2010-04-30 03:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -59,7 +59,7 @@ msgstr "Hay conexión con Launchpad"
 
 #: ../quickly/launchpadaccess.py:150
 msgid "No launchpad project given, aborting."
-msgstr ""
+msgstr "No se ha proporcionado un proyecto de Launchpad, cancelando."
 
 #: ../quickly/launchpadaccess.py:156
 #, python-format
@@ -136,6 +136,8 @@ msgid ""
 "add command needs to be followed an action name.\n"
 "Usage is: quickly add [dialog|] …"
 msgstr ""
+"la orden add necesita tener a continuación de ella un nombre de acción. \n"
+"Uso: quickly add [diálogo|]..."
 
 #: ../data/templates/ubuntu-application/add.py:81
 msgid "Usage is: $ quickly add dialog <dialogname>"
@@ -219,8 +221,6 @@ msgid "You have to be a member of %s team to upload to its ppas"
 msgstr "Ha de ser miembro del equipo %s para subir a sus ppas"
 
 #: ../data/templates/ubuntu-application/configure.py:122
-#: ../data/templates/ubuntu-application/share.py:125
-#: ../data/templates/ubuntu-application/release.py:165
 #, python-format
 msgid ""
 "%s does not exist. Please create it on launchpad if you want to upload to "
@@ -284,7 +284,7 @@ msgstr "Imposible ejecutar %s"
 #: ../quickly/version.py:34
 #, python-format
 msgid "No quickly data path found in %s."
-msgstr ""
+msgstr "No se ha encontrado una ruta de datos de quickly en %s."
 
 #: ../quickly/version.py:38
 msgid "No template found."
@@ -310,10 +310,29 @@ msgid ""
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Intérprete de Python: %s %s\n"
+"  Biblioteca estándar de Python: %s\n"
+"  \n"
+"  Biblioteca usada por Quickly: %s\n"
+"  Ruta de datos de Quickly: %s\n"
+"  Directorios de plantillas detectados por Quickly:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Rick Spencer\n"
+"Copyright 2009-2010 Didier Roche\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"quickly no tiene NINGUNA GARANTÍA. quickly es software libre y\n"
+"puede usarlo, modificarlo y redistribuirlo bajo los términos de la licencia "
+"GNU\n"
+"GPL (General Public License) en su versión 3 o posterior."
 
 #: ../data/templates/ubuntu-application/upgrade.py:65
 msgid "Can't rename LICENSE file, check your file permission\n"
 msgstr ""
+"No se puede renombrar el archivo LICENSE, compruebe sus permisos sobre el "
+"archivo\n"
 
 #: ../data/templates/ubuntu-application/share.py:42
 msgid ""
@@ -341,6 +360,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:101
 msgid "--ppa needs one argument: <ppa_name> or <team/ppa_name>"
 msgstr ""
+"--ppa necesita un argumento: <nombre_del_ppa> o <team/nombre_del_ppa>"
 
 #: ../data/templates/ubuntu-application/share.py:85
 #: ../data/templates/ubuntu-application/release.py:104
@@ -353,23 +373,42 @@ msgstr "Opción desconocida: %s"
 msgid "General usage is: quickly release [release_version] [comments]"
 msgstr "El uso general es: quickly release [versión] [comentarios]"
 
-#: ../data/templates/ubuntu-application/share.py:147
-#: ../data/templates/ubuntu-application/release.py:224
+#: ../data/templates/ubuntu-application/share.py:125
+#: ../data/templates/ubuntu-application/release.py:165
+#, python-format
+msgid ""
+"%s does not exist. Please create it on launchpad if you want to push a "
+"package to it. %s has the following ppas available:"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/share.py:131
+#: ../data/templates/ubuntu-application/release.py:171
+msgid ""
+"You can temporary choose one of them with --ppa switch or definitely by "
+"executing quickly configure ppa <ppa_name>."
+msgstr ""
+"Puede elegir temporalmente uno con --ppa switch o de forma definitiva "
+"ejecutando la orden quickly configure ppa <nombre_del_ppa>."
+
+#: ../data/templates/ubuntu-application/share.py:151
+#: ../data/templates/ubuntu-application/release.py:228
 #: ../data/templates/ubuntu-application/package.py:60
 msgid "ERROR: can't create or update ubuntu package"
 msgstr "ERROR: no se puede crear o actualizar paquete ubuntu"
 
 #. upload to launchpad
-#: ../data/templates/ubuntu-application/share.py:151
-#: ../data/templates/ubuntu-application/release.py:286
+#: ../data/templates/ubuntu-application/share.py:155
+#: ../data/templates/ubuntu-application/release.py:290
 msgid "pushing to launchpad"
 msgstr "subiendo cambios a launchpad"
 
-#: ../data/templates/ubuntu-application/share.py:157
+#: ../data/templates/ubuntu-application/share.py:161
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
+"%s %s se está construyendo en Launchpad. Espere una media hora y revíselo a "
+"las %s."
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:91
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:132
@@ -382,11 +421,11 @@ msgid "quickly saved"
 msgstr "quickly guardado"
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
-#: ../data/templates/ubuntu-application/release.py:201
+#: ../data/templates/ubuntu-application/release.py:205
 msgid "commit before release"
-msgstr ""
+msgstr "confirmar antes de publicar"
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:274
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:273
 msgid ""
 "There is no GPG key detected for your Launchpad account. Please upload one "
 "as you can read on the tutorial"
@@ -394,11 +433,11 @@ msgstr ""
 "No se ha detectado una clave GPG para su cuenta de Launchpad. Suba una como "
 "indica en el tutorial"
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:284
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:283
 msgid "You choosed to not create your GPG key."
 msgstr "Ha elegido no crear su clave GPG."
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:307
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:306
 msgid "Can't create GPG key. Try to create it yourself."
 msgstr "No se pudo crear una clave GPG. Intente crearla usted mismo."
 
@@ -407,17 +446,22 @@ msgid ""
 "Can't sign the package as no adress email found. Fulfill the AUTHORS file "
 "with name <emailadress> or export DEBEMAIL/EMAIL."
 msgstr ""
+"No se ha podido firmar el paquete ya que no se ha encontrado una cuenta de "
+"correo. Rellene el archivo AUTHORS con name <cuenta_de_correo>  o exporte "
+"DEBEMAIL/EMAIL."
 
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:353
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:362
 msgid ""
 "GPG keys found matching no prefered email. You can export DEBEMAIL or put it "
 "in AUTHORS file one matching your local gpg key."
 msgstr ""
 
 #. shouldn't happen as other errors are caught
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:390
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:404
 msgid "No gpg key set matching launchpad one found.'"
 msgstr ""
+"No hay ninguna clave GPG que concuerde con la que se ha encontrado en "
+"launchpad."
 
 #: ../quickly/tools.py:47
 msgid ""
@@ -501,7 +545,7 @@ msgstr ""
 #: ../data/templates/ubuntu-pygame/project_root/project_name.desktop.in.h:2
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
-msgstr ""
+msgstr "nombre_de_sentencia"
 
 #: ../data/templates/ubuntu-application/design.py:31
 msgid ""
@@ -514,6 +558,15 @@ msgid ""
 "directly, and the open the UI files, Glade will throw errors\n"
 "and won't open the files.\n"
 msgstr ""
+"Uso:\n"
+"$quickly design\n"
+"\n"
+"Abre el editor de interfaces gráficas Glade, de manera que pueda editar los "
+"diálogos\n"
+"y ventanas de su proyecto. Tenga en cuenta que debe abrir Glade\n"
+"de esta manera para que funcione con quickly. Si intenta abrir Glade\n"
+"directamente y abre los archivos de interfaz, Glade lanzará errores y\n"
+"no abrirá los archivos.\n"
 
 #: ../data/templates/ubuntu-application/save.py:30
 msgid ""
@@ -579,6 +632,8 @@ msgid ""
 "Project name not defined.\n"
 "Usage is: quickly create ubuntu-application project_name"
 msgstr ""
+"El nombre del proyecto no está definido. \n"
+"Uso: quickly create ubuntu-application nombre_del_proyecto"
 
 #. add it to revision control
 #: ../data/templates/ubuntu-application/create.py:110
@@ -611,26 +666,29 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:62
 msgid "Calling GPG to create tarball signature..."
-msgstr ""
+msgstr "Llamando a GPG para crear una firma tarball..."
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:65
 msgid "Signing the tarball failed, not uploading the signature"
-msgstr ""
+msgstr "Ha fallado la firma del tar, no se va a subir la firma"
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:80
 #, python-format
 msgid "New release available: %s"
-msgstr ""
+msgstr "Nueva publicación disponible: %s"
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:88
 msgid "An error happened during tarball upload:"
-msgstr ""
+msgstr "Ha ocurrido un error al subir el tar:"
 
 #: ../quickly/builtincommands.py:35
 msgid ""
 "Create command must be followed by a template and a project path.\n"
 "Usage: quickly create <template> <project_name>"
 msgstr ""
+"La orden create debe llevar a continuación una plantilla y una ruta de "
+"proyecto.\n"
+"Uso: quickly create <plantilla> <nombre_del_proyecto>"
 
 #: ../quickly/builtincommands.py:45
 #, python-format
@@ -688,6 +746,8 @@ msgid ""
 "No command provided to help command.\n"
 "Usage is: quickly help [template] <command>"
 msgstr ""
+"No se ha introducido ninguna orden para la orden de ayuda.\n"
+"Uso: quickly help [plantilla] <orden>"
 
 #: ../quickly/builtincommands.py:165
 #, python-format
@@ -696,6 +756,9 @@ msgid ""
 "templates commands like %s.\n"
 "Usage is: quickly help [template] <command>"
 msgstr ""
+"la orden de ayuda lleva a continuación un nombre de plantilla para obtener "
+"ayuda de órdenes de plantillas como %s.\n"
+"Uso: quickly help [plantilla] <orden>"
 
 #: ../quickly/builtincommands.py:171
 #, python-format
@@ -717,7 +780,7 @@ msgstr "%s ya existe."
 #: ../quickly/builtincommands.py:199
 #, python-format
 msgid "Copy %s to create new %s template"
-msgstr ""
+msgstr "Copiar %s para crear la nueva plantilla %s"
 
 #: ../data/templates/ubuntu-application/license.py:45
 msgid ""
@@ -785,6 +848,8 @@ msgstr ""
 #, python-format
 msgid "%s file was not found. It is compulsory for user defined license"
 msgstr ""
+"El archivo %s no se ha encontrado. Es obligatorio en el caso de una licencia "
+"definida por el usuario"
 
 #: ../data/templates/ubuntu-application/license.py:195
 #, python-format
@@ -848,12 +913,12 @@ msgid ""
 "installs as expected. (This is not mandatory)\n"
 msgstr ""
 
-#: ../data/templates/ubuntu-application/release.py:185
+#: ../data/templates/ubuntu-application/release.py:189
 #, python-format
 msgid "quickly released: %s"
 msgstr "quickly liberado: %s"
 
-#: ../data/templates/ubuntu-application/release.py:195
+#: ../data/templates/ubuntu-application/release.py:199
 #, python-format
 msgid ""
 "ERROR: quickly can't release: %s seems to be already released. Choose "
@@ -862,32 +927,32 @@ msgstr ""
 "Error: quickly no puede publicar la versión: %s parece que ya se ha "
 "publicado. Elija otro nombre."
 
-#: ../data/templates/ubuntu-application/release.py:203
-#: ../data/templates/ubuntu-application/release.py:232
+#: ../data/templates/ubuntu-application/release.py:207
+#: ../data/templates/ubuntu-application/release.py:236
 msgid "ERROR: quickly can't release as it can't commit with bzr"
 msgstr ""
 "Error: quickly no puede publicar la versión porque no puede confirmarse en "
 "bzr"
 
-#: ../data/templates/ubuntu-application/release.py:263
+#: ../data/templates/ubuntu-application/release.py:267
 msgid "ERROR: quickly can't release: can't pull from launchpad."
 msgstr ""
 "Error: quickly no puede publicar la versión: no se puede obtener información "
 "de launchpad."
 
-#: ../data/templates/ubuntu-application/release.py:268
-#: ../data/templates/ubuntu-application/release.py:275
+#: ../data/templates/ubuntu-application/release.py:272
+#: ../data/templates/ubuntu-application/release.py:279
 msgid "ERROR: quickly can't release: can't push to launchpad."
 msgstr ""
 "Error: quickly no puede publicar la versión: no se puede enviar a launchpad."
 
-#: ../data/templates/ubuntu-application/release.py:281
+#: ../data/templates/ubuntu-application/release.py:285
 msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
 msgstr ""
 "Error: quickly no puede publicar la versión correctamente: no se puede "
 "obtener información de launchpad."
 
-#: ../data/templates/ubuntu-application/release.py:296
+#: ../data/templates/ubuntu-application/release.py:300
 #, python-format
 msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
@@ -976,6 +1041,9 @@ msgid ""
 "Minor version specified in setup.py is not a valid number: %s. Fix this or "
 "specify a version as release command line argument"
 msgstr ""
+"La versión menor especificada en setup.py no es un número válido: %s. "
+"Arréglelo o especifique una versión de publicación como argumento en la "
+"línea de órdenes."
 
 #: ../quickly/commands.py:278
 #, python-format
@@ -1048,10 +1116,12 @@ msgstr "_Ver"
 msgid ""
 "Updating project name references in existing apport crashdb configuration"
 msgstr ""
+"Actualizando referencias al nombre del proyecto en la configuración "
+"existente del crashdb de apport"
 
 #: ../data/templates/ubuntu-application/internal/apportutils.py:71
 msgid "Creating new apport crashdb configuration"
-msgstr ""
+msgstr "Creando nueva configuración de crashdb de apport"
 
 #: ../data/templates/ubuntu-application/internal/apportutils.py:77
 msgid "Creating new apport hooks"
