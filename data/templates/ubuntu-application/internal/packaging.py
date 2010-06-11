@@ -168,9 +168,11 @@ def updatepackaging(changelog=None):
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
     try:
-        for elem in configurationhandler.project_config['dependencies'].split(' '):
-            if elem:
-                command.extend(["--dependency", elem])
+        dependencies = [elem.strip() for elem
+                        in configurationhandler.project_config['dependencies'].split(',')
+                        if elem]
+        for dep in dependencies:
+            command.extend(["--dependency", dep])
     except KeyError:
         pass
 

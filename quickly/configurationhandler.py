@@ -48,7 +48,7 @@ def loadConfig(can_stop=True, config_file_path=None):
         fileconfig = file(quickly_file_path, 'rb')
         for line in fileconfig: 
             fields = line.split('#')[0] # Suppress commentary after the value in configuration file and in full line
-            fields = fields.split('=') # Separate variable from value
+            fields = fields.split('=', 1) # Separate variable from value
             # normally, we have two fields in "fields"
             if len(fields) == 2:
                 config[fields[0].strip()] = fields[1].strip() 
@@ -90,7 +90,7 @@ def saveConfig(config_file_path=None):
             for line in fileconfig:
                 fields = line.split('#')[0] # Suppress commentary after the value in configuration file and in full line
                 fieldsafter = line.split('#')[1:]
-                fields = fields.split('=') # Separate variable from value
+                fields = fields.split('=', 1) # Separate variable from value
                 # normally, we have two fields in "fields" and it should be used by config tabular
                 if len(fields) == 2:
                     if fields[0].strip() in remaingconfigtosave:
