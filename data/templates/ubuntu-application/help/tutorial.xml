@@ -54,12 +54,12 @@
   <figure>
     <graphic fileref="./images/2.png"></graphic>
   </figure>
-  <para><title>Testing the Empty Application</title> They are populated and set up, and you can resize the window. Notice that <application>Quickly</application> inferred that the application title is "Jotty". Only a few of menu items do anything in the empty application, Help->About, Edit->Preferences, and File->Quit.</para>
+  <para><title>Testing the Empty Application</title> In the window that pops up you have a menubar, text and a statusbar. Notice that <application>Quickly</application> inferred that the application title is "Jotty". Only a few of menu items do anything in the empty application, Help->About, Edit->Preferences, and File->Quit.</para>
   <figure>
     <graphic fileref="./images/3.png"></graphic>
   </figure>
   <para><title>Running the Application</title> 
-Close the application by closing the window or using the Quit command. Since the empty application isn't installed into Ubuntu yet, you can't start the application from the application menu yet. To start the applicaton, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.</para> 
+Close the application by closing the window or using the File->Quit menu item. Since the empty application isn't actually installed, you can't start the application from the application menu yet. To start the applicaton, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.</para> 
   <para><programlisting>
 cd jotty
 quickly run
@@ -78,11 +78,11 @@ quickly run
   <figure>
     <graphic fileref="./images/6.png"></graphic>
   </figure>
-  <para>Use the Project Menu to choose "JottytWindow.ui" for editing.</para>
+  <para>Use the Projects Menu to choose "JottytWindow.ui" for editing.</para>
   <figure>
     <graphic fileref="./images/7.png"></graphic>
   </figure>
-  <para>We want to create a text area for typing into. There are some default Widgets added to the Window. We won't need these so we'll start with deleting them. Click on the label, and press delete, and it will disappear from the window.</para>
+  <para>The first thing we want to do is create a text area for typing into. There are some default Widgets added to the Window already, but we won't need these so we'll start with deleting them. Click on the label, and press delete, and it will disappear from the window.</para>
   <figure>
     <graphic fileref="./images/8.png"></graphic>
   </figure>
@@ -97,7 +97,7 @@ quickly run
   <figure>
     <graphic fileref="./images/11.png"></graphic>
   </figure>
-  <para>Make sure you save the file in Glade, or your changes won't take! Then run the application from terminal again. The window now has a place where the user can type.</para>
+  <para>Make sure you save the file in Glade, or your changes won't save! Then run the application from the terminal again. The window now has a place where the user can type.</para>
   <figure>
     <graphic fileref="./images/12.png"></graphic>
   </figure>
@@ -105,11 +105,11 @@ quickly run
   <figure>
     <graphic fileref="./images/13.png"></graphic>
   </figure> 
-  <para>The HBox is a container that arranges it's children horizontally. Add a label to the empty left hand box, and a Text Entry to the right hand one.</para>
+  <para>The HBox is a container that arranges whatever is in it horizontally. Add a label to the empty left hand box, and a Text Entry to the right hand one.</para>
   <figure>
     <graphic fileref="./images/14.png"></graphic>
   </figure>
-  <para>Before going on, let's clean up the UI just a tad here. Select the new HBox from the treeview in the inspector window. Then go to the Packing tab, and set Expand and Fill to "No".</para>
+  <para>Before going on, let's clean up the UI just a tad here. Select the new HBox from the list on the right. Then go to the Packing tab in the bottom right, and set Expand and Fill to "No".</para>
   <figure>
     <graphic fileref="./images/15.png"></graphic>
   </figure>
@@ -117,7 +117,7 @@ quickly run
   <figure>
     <graphic fileref="./images/16.png"></graphic>
   </figure>
-  <para>Select the label. On the general tab, set "Label" to "Name:". Set expand and fill to "no" for the label, but keep it "yes" for the entry. Set the padding for both to 5 (also on the Packing tab).</para>
+  <para>Select the label. On the general tab, set "Label" to "Name:". Set expand and fill to "no" for the label, but keep them as "yes" for the entry. Set the padding for both to 5 (also on the Packing tab).</para>
   <figure>
     <graphic fileref="./images/17.png"></graphic>
   </figure>
@@ -134,27 +134,27 @@ To tell the menu item what function to call. If glade is not still open, open up
   <figure>
     <graphic fileref="./images/19.png"></graphic>
   </figure>
-  <para>Then choose the "Signals" tab of the properties window.</para> 
+  <para>Then choose the Signals tab in the bottom right, near the Packing tab that we used earlier.</para> 
   <figure>
     <graphic fileref="./images/20.png"></graphic>
   </figure> 
-  <para>In pygtk, menu items are "activated" when a user chooses the item from the menu.  Since we want a function to run when the user chooses Save, we want to specify a function to respond to the activate signal from the menu item. We'll call the function "save_file". Simply type the function name into the box for the activate signal.Make sure to save the glade file.</para> 
+  <para>In pygtk, menu items are "activated" when a user chooses the item from the menu.  Since we want a function to run when the user chooses Save, we want to specify a function to respond to the activate signal from the menu item. We'll call the function "save_file". Simply type the function name into the box for the "activate" signal. Make sure to save the glade file.</para> 
   <figure>
     <graphic fileref="./images/21.png"></graphic>
   </figure> 
   <para>Note that you will need to setup the "open_file" signal and the "new_file" signal as well when you get to those functions later.</para>
 <para><title>Edit the Code in Gedit</title></para>
 <para><title>Set Up Tabs Correctly</title> 
-Note a major gotcha here. In python spaces and tabs are totally different, but they look just the same in an editor. So being indented one tab stop is not the same as being indented four spaces, even though they might look the same. And indentation level is very important in python. You will get a lot of errors if you mix tab indentation with space indentation. Your generated project follows the python standard of using four spaces for each indentation level. So you'll either have to hit the space bar four time every time you indent, or set up your editor to use the right number of spaces for tabs.</para> 
-<para>The upshot is that you should take a moment to set up your Gedit (or whatever editor you are using) to use spaces for tabs. In Gedit, select Preferences from the Edit menu, and choose the Editor tab. Then set Tab width to 4, and turn on "Insert spaces instead of tabs". Your preferences should look like this:</para>
+Note a major gotcha here. In python spaces and tabs are totally different, but they look just the same in an editor. So being indented one tab stop is not the same as being indented four spaces, even though they might look the same. And indentation level is very important in python. You will get a lot of errors if you mix tab indentation with space indentation. Your generated project follows the python standard of using four spaces for each indentation level. So you'll either have to hit the space bar four time's every time you indent, or set up your editor to use the right number of spaces for tabs.</para> 
+<para>The upshot is that you should take a moment to set up your Gedit (or whatever editor you are using) to use spaces for tabs. In Gedit, select Preferences from the Edit menu, and choose the Editor tab. Then set "Tab width" to 4, and turn on "Insert spaces instead of tabs". Your preferences should look like this:</para>
   <figure>
     <graphic fileref="./images/22.png"></graphic>
   </figure>
 <para><title>Create the Save File Signal Handler</title> 
-Now you're ready to write some code. Of course just telling the glade file what signal to emit won't make the file actually save, because we haven't created the "save_file" function yet. The code for JottyWindow is stored in the file  jotty. jotty is a special python file that is the entry point for your application. Other python files in your application have the ".py" suffix.</para>
+Now you're ready to write some code. Of course just telling the glade file what signal to emit won't make the file actually save, because we haven't created the "save_file" function yet. The code for JottyWindow is stored in the file "jotty". jotty is a special python file that is the entry point for your application. Other python files in your application have the ".py" suffix.</para>
 <para>Use the <application>Quickly</application> edit command to start editing your code files:</para> 
 <para><programlisting>quickly edit</programlisting></para> 
-<para>This will open the default Ubuntu text editor "Gedit" with any python files in the python directory.</para>
+<para>This will open the default Ubuntu text editor "Gedit" with all the default python files in the <application>Jotty</application> directory.</para>
    <figure>
     <graphic fileref="./images/23.png"></graphic>
   </figure>
@@ -171,7 +171,7 @@ Now you're ready to write some code. Of course just telling the glade file what 
 <para><programlisting> 
 quickly run
 </programlisting></para> 
-<para>Choose "File->Save" from the menu, and you'll see the word "save" printing out interminal. That's all there is to hookig up the functions!</para>
+<para>Choose "File->Save" from the menu, and you'll see the word "save" printing out interminal. That's all there is to hooking up the functions!</para>
    <figure>
     <graphic fileref="./images/24.png"></graphic>
   </figure>
@@ -181,7 +181,7 @@ Desktop couch and the desktopcouch records API should be installed for you alrea
 <para><programlisting>
 sudo apt-get install quickly-widgets
 </programlisting></para>
-<para>This will install the api, and everything you need for the api to run. After desktopcouch  is installed, you can write the code. The code will do the following:</para>
+<para>This will install the api, and everything you need for the api to run. After everything is installed, you can write the code. The code will do the following:</para>
   <itemizedlist>
    <listitem>
     <para>Import the stuff you'll need from Quickly Widgets and desktopcouch.</para>
@@ -200,7 +200,7 @@ sudo apt-get install quickly-widgets
    </listitem>
   </itemizedlist>
 <para><title>Import the stuff you'll need from python-desktopcouch-records.</title> 
-Add these import statements along with the other imports to the top of the jotty file:</para><para>
+Add these import statements near the other imports at the top of the jotty file:</para><para>
 <literallayout>
 <programlisting>
 from desktopcouch.records.server import CouchDatabase
@@ -230,7 +230,7 @@ In pygtk, TextView widgets have a text buffer that stores the text. So you ask t
         text = buff.get_text(start_iter,end_iter)
 </programlisting></literallayout></para>
 <para><title>Saving a document to Couchdb</title> 
-A record in couch is essentially a python dictionary with some extra key/value pairs to make the database work. So we can save the document to couch like this:</para> 
+A record in desktopcouch is essentially a python dictionary with some extra key/value pairs to make the database work. So we can save the document to couch like this:</para> 
 <para>
 <literallayout><programlisting>
         record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
@@ -242,7 +242,7 @@ A record in couch is essentially a python dictionary with some extra key/value p
 
 <title>Check for a pre-existing note with the same title</title> 
 
-Before we just write the new document though, we have to take note of the fact that couch will allow you to create as many documents as you want with the same title. We probably don't want this, so we we'll have to write a little code to check if there is already a document in couch with the same title, and if there is, update that document rather than create a new one.</para> 
+Before we just write the new document though, we have to take note of the fact that desktopcouch will allow you to create as many documents as you want with the same title. We probably don't want this, so we'll have to write a little code to check if there is already a document in desktopcouch with the same title, and if there is, update that document rather than create a new one.</para> 
 
 <para>In CouchDB, you don't do a lot of data processing in the database like you would with a relational database. To be most efficient, we could use the desktopcouch API to create a view in CouchDB, but it's probably simplest just to do the necessary processing on the client for now. To do this, we'll use a desktopcouch function to retrieve all of the records of a specified record type.</para>
 
@@ -358,10 +358,10 @@ First, add the new_file signal to the menu item in Glade, then add this code to 
         buff = self.builder.get_object("textview1").get_buffer()
         buff.set_text("")
 </programlisting></literallayout></para>
-<para>To make them work, add these functions to the JottyWindow class, and save. Then go back and connect the functions to the activate signals for the Open and New menu items.</para>
+<para>To make them work, add these functions to the JottyWindow class, and save. Then go back and connect the functions to the "activate" signals for the Open and New menu items.</para>
 <ulink url="./code/jotty">Complete jotty file</ulink>
 <para><title>Saving Your Work</title> 
-When <application>Quickly</application> created your application, it automatically added it to Bazaar, a source code versioning system. You can use Bazaar to roll back mistake, see code history, compare versions, etc... <application>Quickly</application> has a convenience function for backing up your work:</para> 
+When <application>Quickly</application> created your application, it automatically added it to Bazaar, a source code versioning system. You can use Bazaar to roll back mistakes, see code history, compare versions, etc... <application>Quickly</application> has a convenience function for backing up your work:</para> 
 <para><programlisting> 
 <application>Quickly</application> save "First working version of Jotty"
 </programlisting></para> 
@@ -369,7 +369,7 @@ When <application>Quickly</application> created your application, it automatical
 </chapter>
  <chapter id="Quickly-part2">
 <title>Using Dialogs</title>
-<para>In part 1, we created an application that can read and write text files, and persist them in the couchdb backend. However, the application has a hideous usability flaw, in the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix that by adding a save and an open dialog.</para>
+<para>In part 1, we created an application that can read and write text files, and persist them in the couchdb backend. However, the application has a hideous usability flaw, the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix that by adding a save and an open dialog.</para>
 
 <para><title>Creating an Empty Dialog</title>
 It's simple to add an empty, but working dialog to your project. Simply specify the name of the new dialog, and it will be added automatically. Assuming that you are in the jotty project directory:</para>
@@ -382,11 +382,11 @@ To edit the UI for the dialog, you'll need to load it into Glade again. If you a
 <para><programlisting>
 quickly design
 </programlisting></para>
-<para>Then use the project menu to switch to newly created SaveDialog.ui file.</para>
+<para>Then use the Projects menu to switch to newly created SaveDialog.ui file.</para>
    <figure>
     <graphic fileref="./images/26.png"></graphic>
   </figure>
-<para>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put a label in the top, and an HBox in the bottom slot. In the HBox, add a label and an edit widget, just like you did for JottyWindow in part 1. Set the padding and expand properties as well.</para>
+<para>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put a label in the top, and an HBox in the bottom slot. In the HBox, add a label and a text widget, just like you did for JottyWindow in part 1. Set the padding and expand properties as well.</para>
    <figure>
     <graphic fileref="./images/27.png"></graphic>
   </figure>
@@ -424,7 +424,7 @@ To use the dialog in JottyWindow, we need to follow these steps:</para>
   </itemizedlist>
 
 <para><title>Importing the SaveDialog</title>
-Add the SaveDialog to the list of the imported modules at the top of the bin file of your project, so it looks like this:</para>
+Add the SaveDialog to the list of the imported modules at the top of the jotty file, so it looks like this:</para>
 <para><programlisting>
 from jotty import (
     AboutJottyDialog, PreferencesJottyDialog, SaveDialog)
@@ -451,7 +451,7 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
             return
 </programlisting></literallayout></para>
 
-<para>Since we're now getting the title from the dialog instead of the text entry, we should delete the line of the code that sents it from entry1. So except for the addition of the dialog code, the save_file function looks pretty much the same as it did in part 1:</para>
+<para>Since we're now getting the title from the dialog instead of the text entry, we should delete the line of the code that gets it from the text entry. So except for the addition of the dialog code, the save_file function looks pretty much the same as it did in part 1:</para>
 
 <para>
     <literallayout><programlisting>
@@ -504,7 +504,7 @@ Start out by closing, and then reopening glade again:</para>
 <para><programlisting>
 quickly design
 </programlisting></para>
-<para>Start by adding a VBox and a label in the same manner as in the Save Dialog above. Leave an empty space in the VBox. We will use code to put the CouchGrid there.</para>
+<para>Start by adding a VBox and a label in the same manner as in the Save Dialog above. Leave an empty space in the VBox, We will use code to put the CouchGrid there.</para>
    <figure>
     <graphic fileref="./images/30.png"></graphic>
   </figure>
@@ -590,7 +590,7 @@ Now we want to use the Open Dialog in the JottyWindow open_file function. To use
     <para>Run the Dialog</para>
    </listitem>
    <listitem>
-    <para>Get the id for the selected title.</para>
+    <para>Get the id for the selected title</para>
    </listitem>
    <listitem>
     <para>Destroy the dialog</para>
@@ -845,11 +845,11 @@ To look like this:
     author='Rick Spencer',
     author_email='rick.spencer@canonical.com',
     description='Note taking application',
-    long_description='Note taking application that uses CouchDB as the backend to support easy replication across users and computers.',
+    long_description='Note taking application that uses CouchDB as the backend.',
     #url='https://launchpad.net/jotty',
     cmdclass={'install': InstallAndUpdateDataDirectory}
     )</programlisting></literallayout></para>
-<para>Note that the license has already been set up for you. author and author_email are updated each time you connect to Launchpad (with <application>Quickly</application> release or <application>Quickly</application> share) with your Launchpad real name and preferred email adress.</para>
+<para>Note that the license has already been set up for you, author and author_email are updated each time you connect to Launchpad (with <application>Quickly</application> release or <application>Quickly</application> share) with your Launchpad real name and preferred email adress.</para>
 <para>
 Notice that Jotty doesn't have a web page yet, so I just left that line commented out. Also, you don't have to increment version number as <application>Quickly</application> share and <application>Quickly</application> release commands will make it for you..
 </para>
@@ -873,7 +873,7 @@ After personalizing the project, we are now ready to create the package. This is
     <graphic fileref="./images/package3.png"></graphic>
   </figure>
 <para><title>Now that you have a package</title>
-Now that you've packaged your application, you can share the .deb file. However, if your users install their application this way, and you update the application, your users will have to find this out and resinstall. This hassle can be avoided in Ubuntu by using Personal Package Archives (or PPAs). Distrubuting your applications in this manner is covered in section 4 (not yet available).</para>
+Now that you've packaged your application, you can share the .deb file. However, if your users install your application this way, and you update the application, your users will have to find this out and reinstall the newer version themselves. This hassle can be avoided in Ubuntu by using Personal Package Archives (or PPAs). Distrubuting your applications in this manner is covered in section 4 (not yet available).</para>
 </chapter>
 <chapter id="Quickly-reference">
 <title><application>Quickly</application>: <application>Quickly</application> Command Reference</title>
