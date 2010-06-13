@@ -20,14 +20,6 @@ try:
 except:
     launchpad_available = False
 
-
-#Try adding AppIndicator. Will work after "qucikly add indicator"
-try:
-    from python_name import indicator
-except:
-    indicator = False
-
-
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
     os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
@@ -40,6 +32,11 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
 from python_name.helpers import get_builder
+#Try adding AppIndicator. Will work after "qucikly add indicator"
+try:
+    from python_name import indicator
+except:
+    indicator = False
 
 
 class camel_case_nameWindow(gtk.Window):
