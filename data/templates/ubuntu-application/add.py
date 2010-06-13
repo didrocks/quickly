@@ -62,11 +62,9 @@ dialog.hide()
 
 $ quickly add [indicator]
 
-This will add and Ayatana Application Indicator to you quickly project.
-This will create the following files:
-    1: indicator.py in 'project_name'
-
-You can change the behaviour of the indicator by editing indicator.py
+This will add support for Ubuntu Application Indicator to you quickly project.
+Next time you run your app, the Indicator will show up in the panel on top right.
+You can add/remove/modify items from the indicator menu by editing indicator.py
 """)
 def shell_completion(argv):
     ''' Complete args '''
