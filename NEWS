@@ -13,6 +13,7 @@ Quickly 0.4.3
   - fix configure stripping team name for ppa (LP: #587314) (Frederik Elwert)
   - fix not all syntax for dependencies supported (LP: #587520) (Frederik
     Elwert)
+  - fix issue and description of release: quickly release <number>
   updated translations
 
 Quickly 0.4.2

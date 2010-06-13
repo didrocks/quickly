@@ -62,11 +62,10 @@ You also have to add a PPA to your launchpad account.
 
 Name, email and version setup.py will be automatically changed.
 (version will be <current_release> and bzr will commit and tagged.
-Once the release is done,  <current_release> will be incremented
-by 0.1 to be ready for next release.
-If you previously used quickly shared <current_release>~publicX
-will be dropped to release <current_release> version
-(<current_release>~publicX   <   <current_release>)
+Once the release is done,  <current_release> will use year.month<.release>
+<.release> is incremented by 1 for each release in the same month.
+If you previously used quickly shared <current_release>-publicX
+
 You can modify the description and long description if you wish.
 
 You can run $quickly package and test your package to make sure it
@@ -112,7 +111,7 @@ while i < len(argv):
 if len(args) == 1:
     proposed_version = None
 elif len(args) == 2:
-    proposed_version = None
+    proposed_version = args[1]
 elif len(args) > 2:
     proposed_version = args[1]
     commit_msg = " ".join(args[2:])
