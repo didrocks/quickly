@@ -27,7 +27,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('dialog', )
+options = ('dialog','indicator' )
 
 def help():
     print _("""Usage:
@@ -58,6 +58,15 @@ dialog = DialogNameDialog.NewDialogNameDialog()
 3. Run the dialog and hide the dialog
 result = dialog.run()
 dialog.hide()
+
+
+$ quickly add [indicator]
+
+This will add and Ayatana Application Indicator to you quickly project.
+This will create the following files:
+    1: indicator.py in 'project_name'
+
+You can change the behaviour of the indicator by editing indicator.py
 """)
 def shell_completion(argv):
     ''' Complete args '''
@@ -73,7 +82,7 @@ abs_command_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
 if len(sys.argv) < 2:
     print _("add command needs to be followed an action name.\n"
-"Usage is: quickly add [dialog|] …")
+"Usage is: quickly add [dialog|indicator] …\n" )
     sys.exit(4)
 
 if argv[1] == "dialog":
@@ -143,4 +152,33 @@ if argv[1] == "dialog":
                                         "dialog_camel_case_nameDialog.py", 
                                         target_python_dir, 
                                         substitutions)
+
+if argv[1] == "indicator":
+    if len(argv) != 2:
+        print(_('''Usage is: $ quickly add indicator'''))
+        sys.exit(4)
+    else:
+
+        if not configurationhandler.project_config:
+            configurationhandler.loadConfig()
+        project_name = configurationhandler.project_config['project']
+
+        template_python_dir = os.path.join(abs_template_path, 'store', 'python')
+        # take files from command directory if don't exist
+        python_file = os.path.join(template_python_dir,
+                                   'indicator.py')
+        python_name = templatetools.python_name(project_name)
+        target_python_dir = python_name
+
+        project_sentence_name, project_camel_case_name = \
+            quicklyutils.conventional_names(project_name)
+
+        substitutions = (("project_name",project_name),
+                        ( "python_name",python_name))
+
+        quicklyutils.file_from_template(template_python_dir, 
+                                        "indicator.py", 
+                                        target_python_dir, 
+                                        substitutions)
+
 
