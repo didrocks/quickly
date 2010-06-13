@@ -13,6 +13,7 @@ quickly (0.4.3-0ubuntu1) lucid-proposed; urgency=low
     - fix configure stripping team name for ppa (LP: #587314) (Frederik Elwert)
     - fix not all syntax for dependencies supported (LP: #587520) (Frederik
       Elwert)
+    - fix issue and description of release: quickly release <number>
     updated translations
 
  -- Didier Roche <didrocks@ubuntu.com>  Fri, 11 Jun 2010 13:18:01 +0200
