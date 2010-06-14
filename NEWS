@@ -1,3 +1,10 @@
+Quickly 0.6
+------------------------------------
+
+  ubuntu-application-template:
+  - push the tarball to launchpad instead of the .changes (LP: #594256)
+
+
 Quickly 0.4.3
 ------------------------------------
 
