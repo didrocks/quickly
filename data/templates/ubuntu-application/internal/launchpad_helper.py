@@ -72,9 +72,10 @@ def push_tarball_to_launchpad(project, version, tarball, changelog_content):
 
     # Create a new product release file.
     tarball_pretty_name = os.path.basename(tarball)
+    signature_pretty_name = os.path.basename(signature)
     release.add_file(filename=tarball_pretty_name, description='%s tarball' % version,
             file_content=file_content, content_type='appplication/x-gzip',
-            file_type='Code Release Tarball', signature_filename=signature,
+            file_type='Code Release Tarball', signature_filename=signature_pretty_name,
             signature_content=signature_content)
 
     if not changelog_content:
