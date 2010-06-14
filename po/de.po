@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-23 16:20+0200\n"
-"PO-Revision-Date: 2010-06-04 16:26+0000\n"
-"Last-Translator: Jan-Christoph Borchardt <inquata@gmail.com>\n"
+"PO-Revision-Date: 2010-06-13 07:26+0000\n"
+"Last-Translator: Jens Maucher <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-05 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-06-14 03:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -389,7 +389,7 @@ msgstr "FEHLER: Konnte Datei \"setup.py\" nicht laden"
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
 #: ../data/templates/ubuntu-application/save.py:45
 msgid "quickly saved"
-msgstr ""
+msgstr "schnell gespeichert"
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
 #: ../data/templates/ubuntu-application/release.py:205
