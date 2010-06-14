@@ -293,7 +293,7 @@ if return_code != 0:
 
 #create new release_date
 launchpad_helper.push_tarball_to_launchpad(project, release_version,
-                                    "../%s_%s_source.changes" % (project_name,
+                                    "../%s_%s.tar.gz" % (project_name,
                                     release_version), changelog)
 
 print _("%s %s released and building on Launchpad. Wait for half an hour and have look at %s.") % (project_name, release_version, ppa_url)
