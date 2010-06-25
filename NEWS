@@ -8,6 +8,7 @@ Quickly 0.6
   ubuntu-application-template and derivatives:
   - push the tarball to launchpad instead of the .changes (LP: #594256)
   - move bzr call to use internal API (Jelmer Vernooij)
+  - add apache license (Monty Taylor)
 
 
 Quickly 0.4.3
