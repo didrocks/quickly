@@ -19,6 +19,7 @@
 
 import os
 import sys
+import subprocess
 
 from internal import quicklyutils
 from quickly import configurationhandler
@@ -59,6 +60,9 @@ filelist += 'bin/' + configurationhandler.project_config['project']
 editor = quicklyutils.get_quickly_editors()
 # if editor is still gedit, launch it in background
 if editor == "gedit":
-    filelist += " &"
+    command = ["gedit"]
+    command.extend(filelist.split(" "))
+    subprocess.call(command)
+else:
+    os.system("%s %s" % (editor, filelist))
 
-os.system("%s %s" % (editor, filelist))

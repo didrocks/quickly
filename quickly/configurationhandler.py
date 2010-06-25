@@ -29,6 +29,8 @@ def loadConfig(can_stop=True, config_file_path=None):
     """ load configuration from path/.quickly or pwd/.quickly file"""
 
     # retrieve .quickly file
+    global project_config
+    project_config = {} # reset project_config
     try:
         if config_file_path is None:
             root_conf_dir = tools.get_root_project_path()

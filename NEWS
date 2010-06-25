@@ -1,6 +1,8 @@
 Quickly 0.6
 ------------------------------------
 
+  quickly core:
+  - enhance API with real case usage: nautilus extension
   ubuntu-application-template:
   - push the tarball to launchpad instead of the .changes (LP: #594256)
 

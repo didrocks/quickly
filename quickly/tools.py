@@ -134,24 +134,26 @@ def get_template_directory(template):
     return template_path
 
 
-def get_root_project_path(config_file_path=None):
+def get_root_project_path(path=None):
     """Try to guess where the .quickly config file is.
 
-    config_file_path is optional (needed by the create command, for instance).
+    path is optional (needed by the create command or api, for instance).
     getcwd() is taken by default.
     If nothing found, try to find it up to 6 parent directory
 
     :return project_path. Raise a project_path_not_found elsewhere.
     """
 
+    # cache, but check that the path asked in still the same
     global __project_path
-    if __project_path:
-        return __project_path
+    if  __project_path:
+        if path and __project_path in path:
+            return __project_path
 
-    if config_file_path is None:
+    if path is None:
         current_path = os.getcwd()
     else:
-        current_path = config_file_path
+        current_path = path
 
     # check for .quickly file until root is found
     while os.path.dirname(current_path) != current_path:
@@ -261,19 +263,51 @@ def get_completion_in_context(argv, context_path=None):
                 pass
         # if no command yet, check for available command
         if len(opt_command) == 1:
-            # list available command in template suiting context (even command "followed by template" native of that template)
-            if opt_template: 
-                available_completion.extend([command.name for command in commands.get_commands_by_criteria(template=opt_template) if command.is_right_context(context_path, verbose=False)])
-            # add builtin commands
-            available_completion.extend([command.name for command in commands.get_commands_by_criteria(template="builtins") if command.is_right_context(context_path, verbose=False)])
-            # add commands followed by a template if we don't already have a template provided (native command followed by template has already been handled before)
-            if not opt_template:
-                available_completion.extend([command.name for command in commands.get_commands_by_criteria(followed_by_template=True) if command.is_right_context(context_path, verbose=False)])
-
+            available_completion.extend([command.name for command in _get_commands_in_context(opt_template, context_path)])
         else:
             # ask for the command what she needs (it automatically handle the case of command followed by template and command followed by command)
             available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in commands.get_commands_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
     # remove duplicates
     completion = set(available_completion)
     return (completion)
+
+
+def _get_commands_in_context(opt_template, context_path=None):
+    """seek for available commands in current context (internally called)"""
+
+    command_completion = []
+    # list available command in template suiting context (even command "followed by template" native of that template)
+    if opt_template: 
+        command_completion.extend([command for command in commands.get_commands_by_criteria(template=opt_template) if command.is_right_context(context_path, verbose=False)])
+
+    # add commands followed by a template if we don't already have a template provided (native command followed by template has already been handled before)
+    else:
+        command_completion.extend([command for command in commands.get_commands_by_criteria(followed_by_template=True) if command.is_right_context(context_path, verbose=False)])
+
+    # add builtin commands
+    command_completion.extend([command for command in commands.get_commands_by_criteria(template="builtins") if command.is_right_context(context_path, verbose=False)])
+
+    return command_completion
+
+def get_commands_in_context(context_path=None):
+    """seek for available commands in current context (extern call)"""
+    opt_template = None
+    if configurationhandler.loadConfig(can_stop=False, config_file_path=context_path) == 0:
+        try:
+            opt_template = configurationhandler.project_config['template']
+        except KeyError:
+            pass
+    return(_get_commands_in_context(opt_template, context_path))
+
+
+def list_template_for_command(command_name):
+    """from the command_name, return all templates containing it"""
+    proposed_templates = []
+    for template in commands.get_all_templates():
+        try:
+            commands.get_all_commands()[template][command_name]
+            proposed_templates.append(template)
+        except KeyError:
+            pass
+    return proposed_templates
 

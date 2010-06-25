@@ -53,7 +53,8 @@ cmd = "GLADE_CATALOG_PATH=./data/ui glade-3 " + " ".join(files)
 
 #run glade with env variables pointing to catalogue xml files
 if templatetools.in_verbose_mode():
-    subprocess.Popen(cmd, shell=True)
+    instance = subprocess.Popen(cmd, shell=True)
 else:
     nullfile=file("/dev/null") 
-    subprocess.Popen(cmd, shell=True, stderr=nullfile)
+    instance = subprocess.Popen(cmd, shell=True, stderr=nullfile)
+instance.communicate()
