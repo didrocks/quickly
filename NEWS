@@ -4,6 +4,7 @@ Quickly 0.6
   quickly core:
   - enhance API with real case usage: nautilus extension
   - move bzr call to use internal API (Jelmer Vernooij)
+  - support user defined template paths (Barry Warsaw) (LP: #585617)
   ubuntu-application-template and derivatives:
   - push the tarball to launchpad instead of the .changes (LP: #594256)
   - move bzr call to use internal API (Jelmer Vernooij)
