@@ -3,8 +3,10 @@ Quickly 0.6
 
   quickly core:
   - enhance API with real case usage: nautilus extension
-  ubuntu-application-template:
+  - move bzr call to use internal API (Jelmer Vernooij)
+  ubuntu-application-template and derivatives:
   - push the tarball to launchpad instead of the .changes (LP: #594256)
+  - move bzr call to use internal API (Jelmer Vernooij)
 
 
 Quickly 0.4.3

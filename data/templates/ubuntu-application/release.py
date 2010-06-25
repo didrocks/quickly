@@ -16,10 +16,14 @@
 #You should have received a copy of the GNU General Public License along
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import sys
-import subprocess
 import webbrowser
+
+from bzrlib.bzrdir import BzrDir
+from bzrlib.errors import NoSuchRevision, NotBranchError
+from bzrlib.plugin import load_plugins
+load_plugins() # Needed for lp: URLs
+from bzrlib.workingtree import WorkingTree
 
 from internal import quicklyutils, packaging, launchpad_helper
 from internal import bzrutils
@@ -187,40 +191,43 @@ except (packaging.invalid_versionning_scheme,
 if commit_msg is None:
     commit_msg = _('quickly released: %s' % release_version)
 
+wt = WorkingTree.open(".")
 
-# check if already released with this name
-bzr_instance = subprocess.Popen(["bzr", "tags"], stdout=subprocess.PIPE)
-bzr_tags, err = bzr_instance.communicate()
-if bzr_instance.returncode !=0:
-    print(err)
-    sys.exit(1)
-if release_version in bzr_tags:
+tags = wt.branch.tags.get_tag_dict()
+
+if release_version in tags:
     print _("ERROR: quickly can't release: %s seems to be already released. Choose another name.") % release_version
     sys.exit(1)
 
 # commit current changes
-packaging.filter_exec_command(["bzr", "add"])
-return_code = packaging.filter_exec_command(["bzr", "commit", '--unchanged', '-m',
-                                _('commit before release')])
-if return_code != 0 and return_code != 3:
-    print _("ERROR: quickly can't release as it can't commit with bzr")
-    sys.exit(return_code)
+wt.smart_add(["."])
+wt.commit(message=_('commit before release'), allow_pointless=True)
+
+tag_list = tags.items()
 
 # try to get last available version in bzr
-previous_version = None
-bzr_instance = subprocess.Popen(['bzr', 'tags', '--sort=time'],
-                                 stdout=subprocess.PIPE)    
-result, err = bzr_instance.communicate()
-if bzr_instance.returncode == 0 and result:
-    output = result.split('\n')
-    output.reverse()
-    for tag_line in output:
-        tag_elem = tag_line.split (' ')
-        if not (tag_elem[-1] == '?' or tag_elem[-1] == ''):
-            previous_version = tag_elem[0]
-            break
+timestamps = {}
+for tag, revid in tag_list:
+    try:
+        revobj = wt.branch.repository.get_revision(revid)
+    except NoSuchRevision:
+        timestamp = sys.maxint # place them at the end
+    else:
+        timestamp = revobj.timestamp
+    timestamps[revid] = timestamp
+tag_list.sort(key=lambda x: timestamps[x[1]])
 
-changelog = quicklyutils.collect_commit_messages(previous_version)
+revhistory = wt.branch.revision_history()
+# Find the first previous version that actually exists in the branch
+for previous_version, previous_revid in reversed(tag_list):
+    if previous_revid in revhistory:
+        revhistory = revhistory[revhistory.index(previous_revid)+1:]
+        break
+
+changelog = []
+for rev in wt.branch.repository.get_revisions(revhistory):
+    changelog.append(rev.message.strip())
+
 # creation/update debian packaging
 return_code = packaging.updatepackaging(changelog)
 if return_code != 0:
@@ -229,64 +236,39 @@ if return_code != 0:
 
 # add files, setup release version, commit and push !
 #TODO: check or fix if we don't have an ssh key (don't tag otherwise to be able to release again)
-packaging.filter_exec_command(["bzr", "add"])
-return_code = packaging.filter_exec_command(["bzr", "commit", '-m', commit_msg])
-if return_code != 0 and return_code != 3:
-    print _("ERROR: quickly can't release as it can't commit with bzr")
-    sys.exit(return_code)
-packaging.filter_exec_command(["bzr", "tag", release_version]) # tag revision
-
-# check if pull branch is set
-bzr_instance = subprocess.Popen(["bzr", "info"], stdout=subprocess.PIPE)
-bzr_info, err = bzr_instance.communicate()
-if bzr_instance.returncode !=0:
-    print(err)
-    sys.exit(1)
-
+wt.smart_add(["."])
+revid = wt.commit(message=commit_msg)
+wt.branch.tags.set_tag(release_version, revid)
 
 if (launchpadaccess.lp_server == "staging"):
     bzr_staging = "//staging/"
 else:
     bzr_staging = ""
 
-custom_location_in_info = None
-branch_location = []
-custom_location = bzrutils.get_bzrbranch()
-if custom_location:
-    branch_location = [custom_location]
-    custom_location_in_info = custom_location.replace('lp:', '')
-# if no branch, create it in ~user_name/project_name/quickly_trunk
-# or switch from staging to production
-if ("parent branch" in bzr_info) and not (
-    (custom_location_in_info and custom_location_in_info not in bzr_info) or
-   ((".staging." in bzr_info) and not bzr_staging) or
-   (not (".staging." in bzr_info) and bzr_staging)):
-    return_code = packaging.filter_exec_command(["bzr", "pull"])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't pull from launchpad.")
-        sys.exit(return_code)
+stored_push_location = bzrutils.get_bzrbranch()
+if not stored_push_location:
+    stored_push_location = wt.branch.get_push_location()
 
-    return_code = packaging.filter_exec_command(["bzr", "push"])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't push to launchpad.")
-        sys.exit(return_code)
+if stored_push_location:
+    branch_location = stored_push_location
 else:
-    if not branch_location:
-        branch_location = ['lp:', bzr_staging, '~', launchpad.me.name, '/', project.name, '/quickly_trunk']
-    return_code = packaging.filter_exec_command(["bzr", "push", "--remember", "--overwrite", "".join(branch_location)])
-    if return_code != 0:
-        print _("ERROR: quickly can't release: can't push to launchpad.")
-        sys.exit(return_code)
+    # No location set yet, come up with one
+    branch_location = 'lp:%s~%s/%s/quickly_trunk' % (bzr_staging, launchpad.me.name, project.name)
+    wt.branch.set_push_location(branch_location)
+    wt.branch.set_parent_branch(branch_location)
 
-    # make first pull too
-    return_code = packaging.filter_exec_command(["bzr", "pull", "--remember", "".join(branch_location)])
-    if return_code != 0:
-        print _("ERROR: quickly can't release correctly: can't pull from launchpad.")
-        sys.exit(return_code)
-
+if branch_location.startswith("lp:"):
+    stored_push_location = stored_push_location.replace("lp://staging/", "lp:")
+    branch_location = "lp:%s%s" % (bzr_staging, stored_push_location[3:])
 
 # upload to launchpad
 print _("pushing to launchpad")
+try:
+    target_dir = BzrDir.open(branch_location)
+except NotBranchError:
+    target_dir = BzrDir.create_branch_convenience(branch_location)
+target_dir.push_branch(wt.branch, overwrite=True)
+
 return_code = packaging.push_to_ppa(dput_ppa_name, "../%s_%s_source.changes" % (project_name, release_version), keyid=keyid) != 0
 if return_code != 0:
     sys.exit(return_code)

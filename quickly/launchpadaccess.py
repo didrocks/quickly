@@ -58,7 +58,7 @@ else:
 
 
 def initialize_lpi(interactive = True):
-    ''' Initialize launchpad binding, asking for crendential
+    ''' Initialize launchpad binding, asking for credentials
 
         interactive is True by default if we want to ask the user to setup LP
         :return the launchpad object
@@ -71,7 +71,7 @@ def initialize_lpi(interactive = True):
     launchpad = None
     return_code = 0
 
-    # setup right cache, credential and server
+    # setup right cache, credentials and server
     lp_cred_dir = os.path.expanduser("~/.cache/lp_credentials/")
     if not os.path.isdir(lp_cred_dir):
         os.makedirs(lp_cred_dir)
