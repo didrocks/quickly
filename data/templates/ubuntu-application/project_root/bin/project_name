@@ -92,6 +92,7 @@ class camel_case_nameWindow(gtk.Window):
             
         
         #AppIndicator support
+        #see http://owaislone.org/quickly-add-indicator/ 
         # use 'quickly add indicator' to get started
         # self is passed so methods of this class can be called from indicator.py
         # Comment to disable appindicator
