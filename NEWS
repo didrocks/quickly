@@ -10,6 +10,8 @@ Quickly 0.6
   - move bzr call to use internal API (Jelmer Vernooij)
   - add apache license (Monty Taylor)
   - update and improvment of the tutorial (Ryan Macnish)
+  - "$ quickly add indicator" to add indicator support to your project
+    (Owais Lone)
 
 
 Quickly 0.4.3
