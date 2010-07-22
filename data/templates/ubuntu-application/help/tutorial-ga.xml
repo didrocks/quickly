@@ -613,7 +613,7 @@ from jotty import (
 <para><title>Create an instance of the dialog and run it</title>
 So now we're ready to call the dialog from the JottyWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</para>
 <para>
-        <literallayout><programlisting>opener = OpenDialog.NewODialog()
+        <literallayout><programlisting>opener = OpenDialog.OpenDialog()
         result = opener.run()</programlisting></literallayout></para>
 
 <para><title>Get the id for the selected title</title>
