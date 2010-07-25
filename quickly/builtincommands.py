@@ -208,6 +208,27 @@ def quickly(project_template, project_dir, command_args, shell_completion=False)
         return 1
 
     shutil.copytree(template_source_path, template_destination_path)
+
+    # transform commands in import
+    import_cmd_list = []
+    for command_name in os.listdir(template_destination_path):
+        file_path = os.path.join(template_destination_path, command_name)
+        # if there is a ., remove extension
+        if "." in command_name:
+            command_name = ".".join(command_name.split('.')[0:-1])
+        if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
+            import_cmd_list.append(command_name)
+            os.remove(file_path)
+    if import_cmd_list:
+        commandsconfig_path = os.path.join(template_destination_path, 'commandsconfig')
+        filedest = file(commandsconfig_path + '.new', 'w')
+        fileconfig = file(commandsconfig_path, 'rb')
+        for line in fileconfig:
+            filedest.write(line)
+        filedest.write("\n[%s]\nIMPORT=%s" % (project_template, ';'.join(import_cmd_list)))
+        fileconfig.close()
+        filedest.close()
+        os.rename(filedest.name, commandsconfig_path)
     return 0
 
 
