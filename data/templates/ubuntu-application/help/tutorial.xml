@@ -435,7 +435,7 @@ When the user chooses Save, we want to open the SaveDialog and collect the title
 
 <para>First, create an instance of the SaveDialog like this:</para>
 <para><programlisting>
-        saver = SaveDialog.NewSaveDialog()
+        saver = SaveDialog.SaveDialog()
 </programlisting></para>
 <para>To make the dialog appear, simply use the run() method. However, we want to check the result, so we'll need to store that in a variable. After it runs, we want to collect the string from the user, like this:</para>
 <para><programlisting>
@@ -456,7 +456,7 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
 <para>
     <literallayout><programlisting>
     def save_file(self, widget, data=None):
-        #get the titel from the user
+        #get the title from the user
         saver = SaveDialog.SaveDialog()
         result = saver.run()
         title = saver.title_text
@@ -616,7 +616,7 @@ from jotty import (
 <para><title>Create an instance of the dialog and run it</title>
 So now we're ready to call the dialog from the JottyWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</para>
 <para>
-        <literallayout><programlisting>opener = OpenDialog.NewODialog()
+        <literallayout><programlisting>opener = OpenDialog.OpenDialog()
         result = opener.run()</programlisting></literallayout></para>
 
 <para><title>Get the id for the selected title</title>

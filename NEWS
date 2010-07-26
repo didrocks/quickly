@@ -15,7 +15,7 @@ Quickly 0.6
   - "$ quickly add indicator" to add indicator support to your project
     (Owais Lone)
   - add yelp dep for tutorial (Umang Varma) (LP: #610026)
-
+  - some fixes to the tutorial (Henrik H.) (LP: #30635)
 
 Quickly 0.4.3
 ------------------------------------
