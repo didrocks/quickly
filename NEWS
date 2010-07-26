@@ -5,6 +5,8 @@ Quickly 0.6
   - enhance API with real case usage: nautilus extension
   - move bzr call to use internal API (Jelmer Vernooij)
   - support user defined template paths (Barry Warsaw) (LP: #585617)
+  - quickly quickly now uses import command functionality from the origin
+    template
   ubuntu-application-template and derivatives:
   - push the tarball to launchpad instead of the .changes (LP: #594256)
   - move bzr call to use internal API (Jelmer Vernooij)
