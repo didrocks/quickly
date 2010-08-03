@@ -74,7 +74,7 @@ Depends: ${misc:Depends},
          dput,
          gedit | editor,
          bzr,
-         python-distutils-extra (>= 2.18bzr1),
+         python-distutils-extra (>= 2.21),
          python-pygame,
          winpdb,
          yelp

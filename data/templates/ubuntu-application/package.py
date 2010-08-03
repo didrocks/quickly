@@ -56,7 +56,7 @@ except quicklyutils.cant_deal_with_setup_value:
 
 
 # creation/update debian packaging
-if packaging.updatepackaging() != 0:
+if packaging.updatepackaging(no_changelog=True) != 0:
     print _("ERROR: can't create or update ubuntu package")
     sys.exit(1)
 

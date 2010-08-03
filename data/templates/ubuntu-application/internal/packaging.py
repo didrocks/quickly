@@ -155,7 +155,7 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
                                      ask_on_warn_or_error))
 
 
-def updatepackaging(changelog=None):
+def updatepackaging(changelog=None, no_changelog=False):
     """create or update a package using python-mkdebian.
 
     Commit after the first packaging creation"""
@@ -163,6 +163,8 @@ def updatepackaging(changelog=None):
     if not changelog:
         changelog = []
     command = ['python-mkdebian', '--force-control']
+    if no_changelog:
+        command.append("--no-changelog")
     for message in changelog:
         command.extend(["--changelog", message])
     if not configurationhandler.project_config:

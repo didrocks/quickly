@@ -17,6 +17,8 @@ Quickly 0.6
     (Owais Lone)
   - add yelp dep for tutorial (Umang Varma) (LP: #610026)
   - some fixes to the tutorial (Henrik H.) (LP: #608421)
+  - don't add changelog for quickly package command (Umang Varma)
+    (LP: #587538)
 
 Quickly 0.4.3
 ------------------------------------
