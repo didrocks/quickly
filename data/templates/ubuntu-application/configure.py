@@ -35,7 +35,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('bzr', 'dependencies', 'lp-project', 'ppa')
+options = ('bzr', 'dependencies', 'lp-project', 'ppa', 'target_distribution')
 
 def help():
     print _("""Usage:
@@ -45,6 +45,11 @@ Enable to set or change some parameters of the project, like to which
 launchpad project should be binded with the current ubuntu application, what
 ppa should we use by default to share your package, what additional dependency
 should be added…
+
+Note: If you are specifying a target_distribution apart from the one you are
+running, be warned that dependency detection may not be as accurate due to
+(rare) discrepancies between distributions.
+
 """) % ("|".join(options))
 def shell_completion(argv):
     ''' Complete args '''
@@ -156,5 +161,13 @@ elif argv[1] == "dependencies":
         dependencies.extend([elem.strip() for elem in depends.split(',') if elem])
     os.remove(depfile_name)
     configurationhandler.project_config['dependencies'] = ", ".join(dependencies)
+    configurationhandler.saveConfig()
+elif argv[1] == "target_distribution":
+    if len(argv) != 3:
+        print(_('''Usage is: $ quickly configure target_distribution <ubuntu-release-name>'''))
+        sys.exit(4)
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    configurationhandler.project_config["target_distribution"] = argv[2]
     configurationhandler.saveConfig()
 

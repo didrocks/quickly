@@ -177,6 +177,12 @@ def updatepackaging(changelog=None, no_changelog=False):
             command.extend(["--dependency", dep])
     except KeyError:
         pass
+    try:
+        distribution = configurationhandler.project_config['target_distribution']
+        command.extend(["--distribution", distribution])
+    except KeyError:
+        pass # Distribution has not been set by user, let python-mkdebian decide what it should be
+
 
     return_code = _exec_and_log_errors(command, True)
     if return_code != 0:
