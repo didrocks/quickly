@@ -163,4 +163,10 @@ if project_version < '0.4.3':
         configurationhandler.project_config['dependencies'] = ", ".join(dependencies)
         configurationhandler.saveConfig()
 
+if project_version < '0.4.4':
+    # Use full modelines for all python files
+    sedline = "sed -i 's/-\*- coding: utf-8 -\*-/-*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-/'"
+    os.system("find . -name '*.py' -exec %s {} \;" % sedline)
+    os.system("%s bin/%s" % (sedline, project_name))
+
 sys.exit(0)
