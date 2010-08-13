@@ -1,4 +1,5 @@
 #!/bin/bash
+# -*- Mode: sh; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 
 cd /tmp
 
@@ -107,7 +108,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 cat apport/source_test-project.py
 # # Apport integration for test-project
 # #
-# # -*- coding: utf-8 -*-
+# # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
@@ -180,7 +181,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 cat apport/source_test-project.py
 # # Apport integration for test-project
 # #
-# # -*- coding: utf-8 -*-
+# # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
@@ -221,7 +222,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 cat apport/source_test-project.py
 # # Apport integration for test-project
 # #
-# # -*- coding: utf-8 -*-
+# # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
@@ -239,7 +240,7 @@ bzr status
 cat apport/source_test-project.py
 # # Apport integration for test-project
 # #
-# # -*- coding: utf-8 -*-
+# # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
@@ -263,7 +264,7 @@ quickly configure lp-project gpoweroff
 cat apport/source_test-project.py
 # # Apport integration for test-project
 # #
-# # -*- coding: utf-8 -*-
+# # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE
@@ -349,7 +350,7 @@ cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 cat apport/source_test-project.py
 # # Apport integration for test-project
 # #
-# # -*- coding: utf-8 -*-
+# # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # ### BEGIN LICENSE
 # # This file is in the public domain
 # ### END LICENSE

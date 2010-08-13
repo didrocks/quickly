@@ -1,6 +1,6 @@
 # Apport integration for project_name
 #
-# -*- coding: utf-8 -*-
+# -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # This file is in the public domain
 ### END LICENSE
