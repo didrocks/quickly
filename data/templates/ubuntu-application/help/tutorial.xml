@@ -144,12 +144,6 @@ To tell the menu item what function to call. If glade is not still open, open up
   </figure> 
   <para>Note that you will need to setup the "open_file" signal and the "new_file" signal as well when you get to those functions later.</para>
 <para><title>Edit the Code in Gedit</title></para>
-<para><title>Set Up Tabs Correctly</title> 
-Note a major gotcha here. In python spaces and tabs are totally different, but they look just the same in an editor. So being indented one tab stop is not the same as being indented four spaces, even though they might look the same. And indentation level is very important in python. You will get a lot of errors if you mix tab indentation with space indentation. Your generated project follows the python standard of using four spaces for each indentation level. So you'll either have to hit the space bar four time's every time you indent, or set up your editor to use the right number of spaces for tabs.</para> 
-<para>The upshot is that you should take a moment to set up your Gedit (or whatever editor you are using) to use spaces for tabs. In Gedit, select Preferences from the Edit menu, and choose the Editor tab. Then set "Tab width" to 4, and turn on "Insert spaces instead of tabs". Your preferences should look like this:</para>
-  <figure>
-    <graphic fileref="./images/22.png"></graphic>
-  </figure>
 <para><title>Create the Save File Signal Handler</title> 
 Now you're ready to write some code. Of course just telling the glade file what signal to emit won't make the file actually save, because we haven't created the "save_file" function yet. The code for JottyWindow is stored in the file "jotty". jotty is a special python file that is the entry point for your application. Other python files in your application have the ".py" suffix.</para>
 <para>Use the <application>Quickly</application> edit command to start editing your code files:</para> 

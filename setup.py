@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # quickly: quickly project handler
 #
 # Copyright (C) 2009 Didier Roche
@@ -18,7 +18,7 @@
 
 
 # UPDATE VERSION WHEN NEEDED (it updates all versions needed to be updated)
-VERSION = '0.4.3'
+VERSION = '0.5'
 
 import glob
 import os

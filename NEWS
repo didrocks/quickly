@@ -21,6 +21,7 @@ Quickly 0.6
     (LP: #587538)
   - add quickly configure distribution <distro> to release to another
     distribution than your current one (Umang Varma) (LP: #608191)
+  - Provide a modeline in generated source (Michael Terry) (LP: #606285)
 
 Quickly 0.4.3
 ------------------------------------

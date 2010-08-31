@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # Copyright 2009 Didier Roche
 #
 # This file is part of Quickly
