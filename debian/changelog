@@ -1,6 +1,6 @@
-quickly (0.6-0ubuntu1) UNRELEASED; urgency=low
+quickly (0.6-0ubuntu1) maverick; urgency=low
 
-  * New upstream release:
+  * New upstream release: (LP: #638130)
    + quickly core:
     - enhance API with real case usage: nautilus extension
     - move bzr call to use internal API (Jelmer Vernooij)
@@ -28,7 +28,7 @@ quickly (0.6-0ubuntu1) UNRELEASED; urgency=low
       (LP: #635624)
     - quickly-ubuntu-template now depends on yelp (LP: #610026)
 
- -- Didier Roche <didrocks@ubuntu.com>  Tue, 14 Sep 2010 11:57:40 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Tue, 14 Sep 2010 17:12:23 +0200
 
 quickly (0.4.3-0ubuntu1) lucid-proposed; urgency=low
 
