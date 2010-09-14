@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-23 16:20+0200\n"
-"PO-Revision-Date: 2010-06-04 16:26+0000\n"
-"Last-Translator: Jan-Christoph Borchardt <inquata@gmail.com>\n"
+"PO-Revision-Date: 2010-07-16 14:39+0000\n"
+"Last-Translator: Protector <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-05 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-07-17 03:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -25,10 +25,12 @@ msgstr "Überprüfen Sie, ob python-launchpadlib installiert ist"
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
+"ACHTUNG: Sie benutzen einen staging und keinen echten Launchpad "
+"Produktionsserver"
 
 #: ../quickly/launchpadaccess.py:96
 msgid "Get Launchpad Settings"
-msgstr "Launchpad-Einstellungen bekommen"
+msgstr "Lade Launchpad-Einstellungen"
 
 #: ../quickly/launchpadaccess.py:111
 msgid ""
@@ -206,7 +208,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:156
 #, python-format
 msgid "User or Team %s not found on Launchpad"
-msgstr "Benutzer oder Team %s konnte nicht auf Launchpad gefunden werden"
+msgstr "Benutzer oder Team %s wurden auf Launchpad nicht gefunden"
 
 #: ../data/templates/ubuntu-application/configure.py:116
 #: ../data/templates/ubuntu-application/share.py:119
@@ -389,7 +391,7 @@ msgstr "FEHLER: Konnte Datei \"setup.py\" nicht laden"
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
 #: ../data/templates/ubuntu-application/save.py:45
 msgid "quickly saved"
-msgstr ""
+msgstr "schnell gespeichert"
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:190
 #: ../data/templates/ubuntu-application/release.py:205
@@ -406,7 +408,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:283
 msgid "You choosed to not create your GPG key."
-msgstr ""
+msgstr "Sie haben sich entschieden ihren GPG-Schlüssel nicht zu erstellen."
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:306
 msgid "Can't create GPG key. Try to create it yourself."
@@ -429,7 +431,7 @@ msgstr ""
 #. shouldn't happen as other errors are caught
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:404
 msgid "No gpg key set matching launchpad one found.'"
-msgstr ""
+msgstr "Kein zu Launchpad passendes Schlüssel-Set gefunden.'"
 
 #: ../quickly/tools.py:47
 msgid ""
@@ -508,12 +510,12 @@ msgstr "FEHLER: %s ist kein gültiger quickly-Projektname"
 
 #: ../data/templates/ubuntu-pygame/project_root/project_name.desktop.in.h:1
 msgid "camel_case_name game"
-msgstr ""
+msgstr "camel_case_name game"
 
 #: ../data/templates/ubuntu-pygame/project_root/project_name.desktop.in.h:2
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:11
 msgid "sentence_name"
-msgstr ""
+msgstr "sentence_name"
 
 #: ../data/templates/ubuntu-application/design.py:31
 msgid ""
@@ -597,7 +599,7 @@ msgstr ""
 #. add it to revision control
 #: ../data/templates/ubuntu-application/create.py:110
 msgid "Creating bzr repository and commiting"
-msgstr ""
+msgstr "Erstelle Bazaar-Repositorium und füge Projekt hinzu"
 
 #: ../data/templates/ubuntu-application/create.py:119
 msgid "Launching your newly created project!"
@@ -618,14 +620,18 @@ msgid ""
 "\n"
 "Opens help file with the tutorial for the current template.\n"
 msgstr ""
+"Syntax:\n"
+"$ quickly tutorial\n"
+"\n"
+"Öffnet die Hilfe mit dem entsprechendem Tutorial für die aktuelle Vorlage.\n"
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:62
 msgid "Calling GPG to create tarball signature..."
-msgstr ""
+msgstr "Rufe GPG auf, um eine Signatur der Tar-Datei zu erstellen…"
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:65
 msgid "Signing the tarball failed, not uploading the signature"
-msgstr ""
+msgstr "Signieren des tarball fehlgeschlagen. Lade die Signatur nicht hoch."
 
 #: ../data/templates/ubuntu-application/internal/launchpad_helper.py:80
 #, python-format
@@ -873,6 +879,8 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:236
 msgid "ERROR: quickly can't release as it can't commit with bzr"
 msgstr ""
+"FEHLER: quickly konnte es nicht freigeben, da es nicht mit bzr hinzufügen "
+"kann"
 
 #: ../data/templates/ubuntu-application/release.py:267
 msgid "ERROR: quickly can't release: can't pull from launchpad."

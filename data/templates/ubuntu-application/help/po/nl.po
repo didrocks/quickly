@@ -1,4 +1,4 @@
-# German translation for quickly
+# Dutch translation for quickly
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the quickly package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,54 +8,54 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-06-11 14:04+0000\n"
-"Last-Translator: Jens Maucher <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2010-08-10 09:59+0000\n"
+"Last-Translator: estiedi <Unknown>\n"
+"Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-12 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-08-11 03:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:13(firstname)
 msgid "Shane"
-msgstr "Shane"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:14(surname)
 msgid "Fagan"
-msgstr "Fagan"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:17(firstname)
 msgid "Rick"
-msgstr "Rick"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:18(surname)
 msgid "Spencer"
-msgstr "Spencer"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:20(corpauthor)
 msgid "Canonical ltd"
-msgstr "Canonical ltd"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:24(date) data/templates/ubuntu-application/help/tutorial.xml:29(invpartnumber)
 msgid "2010"
-msgstr "2010"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:0(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1163(application)
 msgid "Quickly"
-msgstr "Quickly"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:28(productnumber)
 msgid "0.4"
-msgstr "0.4"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:30(title)
 msgid "<application>Quickly</application> 0.4 User Guide"
-msgstr "<application>Quickly</application> 0.4 Anleitung"
+msgstr "<application>Quickly</application> 0.4 Gebruikershandleiding"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:35(title)
 msgid "About This Guide"
-msgstr "Über diese Anleitung"
+msgstr "Over deze handleiding"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:36(para)
 msgid ""
@@ -69,10 +69,21 @@ msgid ""
 "that it's also easier to write tools that make it even easier and more fun. "
 "So <application>Quickly</application> is also a set of commands."
 msgstr ""
+"<application>Quickly</application> is een verzameling keuzes met betrekking "
+"tot het schrijven van Ubuntu programma's. Uit alle prachtige rijkdom en "
+"verscheidenheid aan programmeermiddelen voor Linux, maakt "
+"<application>Quickly</application> een aantal zeer eigenwijze keuzes over "
+"welke hulpmiddelen te gebruiken, en hoe ze te combineren. De criteria voor "
+"deze keuzes zijn het makkelijk en leuk maken om Linux-applicaties te "
+"schrijven en te verspreiden, zelfs al is het je eerste keer, maar ook op een "
+"manier die de volledige kracht en flexibiliteit van het platform levert. Een "
+"voordeel van deze keuzes is dat het ook eenvoudiger is om gereedschappen te "
+"schrijven die het nog gemakkelijker en leuker te maken. Dus "
+"<application>Quickly</application> is ook een set van commando's."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:39(link) data/templates/ubuntu-application/help/tutorial.xml:45(title)
 msgid "Getting Started"
-msgstr "Erste Schritte"
+msgstr "Aan de slag"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:46(para)
 msgid ""
@@ -83,10 +94,16 @@ msgid ""
 "together with python and pygtk so that you can "
 "<application>Quickly</application> build applications."
 msgstr ""
+"Dit is deel 1 van de <application>Quickly</application> cursus. Dit deel zal "
+"een aantal belangrijke  <application>Quickly</application> commando's "
+"introduceren, het bewerken van een gebruiker interface in Glade, en het "
+"bewerken van code in gedit. In dit deel van de cursus maakt u kennis met "
+"deze drie instrumenten, en hoe ze samenwerken met Python en pygtk, zodat u "
+"snel applicaties kunt bouwen."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:48(title)
 msgid "Creating a <application>Quickly</application> Project"
-msgstr "Ein <application>Quickly</application>-Projekt erstellen"
+msgstr "Een <application>Quickly</application> Projekt starten"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:48(para)
 msgid ""
@@ -94,6 +111,9 @@ msgid ""
 "First, open a terminal window to type commands into. When it's open, type "
 "the command:"
 msgstr ""
+"<placeholder-1/> Het creëren van een leeg, maar functionerend programma kan "
+"niet eenvoudiger. Open eerst een terminal venster om commando's in te typen. "
+"Wanneer de terminal open is, typt u het commando:"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:49(programlisting)
 #, no-wrap
@@ -106,10 +126,13 @@ msgid ""
 "and files for an empty python application. The command finishes by running "
 "the newly created empty application."
 msgstr ""
+"Dit zal een jotty sub map creëren met een complete mappen boomstruktuur en "
+"bestanden voor een lege python applicatie. Het commando eindigt met het "
+"uitvoeren van het nieuwe programma."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:57(title)
 msgid "Testing the Empty Application"
-msgstr "Die leere Anwendung testen"
+msgstr "De Lege Applicatie testen"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:57(para)
 msgid ""
@@ -118,10 +141,14 @@ msgid ""
 "application title is \"Jotty\". Only a few of menu items do anything in the "
 "empty application, Help-&gt;About, Edit-&gt;Preferences, and File-&gt;Quit."
 msgstr ""
+"<placeholder-1/> Ze zijn bevolkt en klaar, en u kunt het venster vergroten "
+"of verkleinen. Merk op dat <application>Quickly</application> afleidde dat "
+"de titel van het programma \"Jotty\" is. Slechts een paar van de menus doen "
+"iets in de lege toepassing, Help-> About, Edit-> Preferences, en File-> Quit."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:61(title)
 msgid "Running the Application"
-msgstr "Die Anwendung ausführen"
+msgstr "De Applicatie starten"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:61(para)
 msgid ""
@@ -131,6 +158,11 @@ msgid ""
 "applicaton, use the terminal to first cd into the new subdirectory, and then "
 "use \"quickly run\" to start the program."
 msgstr ""
+"<placeholder-1/> Sluit de toepassing door het sluiten van het venster of het "
+"gebruik van het Quit commando. Aangezien de lege toepassing nog niet in "
+"Ubuntu geïnstalleerd is, kunt u het nog niet starten via het start menu. Om "
+"de toepassing te starten gebruik je de terminal: 'cd' in de nieuwe map, en "
+"typ \"quickly run\"."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:63(programlisting)
 #, no-wrap
@@ -145,11 +177,11 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:70(title)
 msgid "Editing an Application"
-msgstr "Eine Anwendung bearbeiten"
+msgstr "Een Applicatie bewerken"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:71(title)
 msgid "Edit the User Interface in Glade"
-msgstr "Die Oberfläche in Glade bearbeiten"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:71(para)
 msgid ""
@@ -163,7 +195,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:73(programlisting) data/templates/ubuntu-application/help/tutorial.xml:128(programlisting)
 #, no-wrap
 msgid "quickly design"
-msgstr "quickly design"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:77(para)
 msgid "Glade will open with the project loaded up and ready to edit."
@@ -285,7 +317,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:146(title)
 msgid "Edit the Code in Gedit"
-msgstr "Den Quelltext in Gedit bearbeiten"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:147(title)
 msgid "Set Up Tabs Correctly"
@@ -336,7 +368,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:156(programlisting)
 #, no-wrap
 msgid "quickly edit"
-msgstr "quickly edit"
+msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:157(para)
 msgid ""
@@ -359,10 +391,6 @@ msgid ""
 "        print \"save\"\n"
 "\n"
 msgstr ""
-"\n"
-"    def save_file(self, widget, data=None):\n"
-"        print \"speichern\"\n"
-"\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:169(para)
 msgid ""
@@ -382,8 +410,6 @@ msgid ""
 " \n"
 "quickly run\n"
 msgstr ""
-" \n"
-"quickly run\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:174(para)
 msgid ""
@@ -413,8 +439,6 @@ msgid ""
 "\n"
 "sudo apt-get install quickly-widgets\n"
 msgstr ""
-"\n"
-"sudo apt-get install quickly-widgets\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:184(para)
 msgid ""
@@ -462,9 +486,6 @@ msgid ""
 "from desktopcouch.records.server import CouchDatabase\n"
 "from desktopcouch.records.record import Record\n"
 msgstr ""
-"\n"
-"from desktopcouch.records.server import CouchDatabase\n"
-"from desktopcouch.records.record import Record\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:209(title)
 msgid "Get a Reference to the Database"
@@ -484,8 +505,6 @@ msgid ""
 " \n"
 "        self.database = CouchDatabase(\"jotty\", create=True)\n"
 msgstr ""
-" \n"
-"        self.database = CouchDatabase(\"jotty\", create=True)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:214(para)
 msgid ""
@@ -504,9 +523,6 @@ msgid ""
 "        #get the title for the note\n"
 "        title = self.builder.get_object(\"entry1\").get_text()\n"
 msgstr ""
-"\n"
-"        #Den Titel der Notiz erhalten\n"
-"        title = self.builder.get_object(\"entry1\").get_text()\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:222(title)
 msgid "Here's the code to get pull the text out of the TextView:"
@@ -531,12 +547,6 @@ msgid ""
 "        end_iter = buff.get_end_iter()\n"
 "        text = buff.get_text(start_iter,end_iter)\n"
 msgstr ""
-"\n"
-"        #Den String erhalten\n"
-"        buff = self.builder.get_object(\"textview1\").get_buffer()\n"
-"        start_iter = buff.get_start_iter()\n"
-"        end_iter = buff.get_end_iter()\n"
-"        text = buff.get_text(start_iter,end_iter)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:232(title)
 msgid "Saving a document to Couchdb"
@@ -558,11 +568,6 @@ msgid ""
 "\"text\":text})\n"
 "        self.database.put(new_rec)\n"
 msgstr ""
-"\n"
-"        record_type = \"http://wiki.ubuntu.com/Quickly/JottyDoc\"\n"
-"        new_rec = Record({\"record_type\": record_type,\"title\":title, "
-"\"text\":text})\n"
-"        self.database.put(new_rec)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:240(para)
 msgid ""
@@ -640,19 +645,6 @@ msgid ""
 "                return\n"
 "\n"
 msgstr ""
-"\n"
-"        #Alle Einträge erhalten\n"
-"        record_type = \"http://wiki.ubuntu.com/Quickly/JottyDoc\"\n"
-"        results = self.database.get_records(record_type = "
-"record_type,create_view = True)\n"
-"        #Einen Eintrag mit selbem Titel aktualisieren\n"
-"        for result in results:\n"
-"            document = result.value\n"
-"            if document[\"title\"] == title:\n"
-"                key = document[\"_id\"]\n"
-"                self.database.update_fields(key, {\"text\":text})\n"
-"                return\n"
-"\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:276(para)
 msgid "So the whole function should look like this:"
@@ -690,34 +682,6 @@ msgid ""
 "\"text\":text})\n"
 "        self.database.put_record(new_rec)\n"
 msgstr ""
-"\n"
-"    def save_file(self, widget, data=None): \n"
-"        #Den Titel der Notiz erhalten\n"
-"        title = self.builder.get_object(\"entry1\").get_text() \n"
-"\n"
-"        #Den zu speichernden Text erhalten\n"
-"        buff = self.builder.get_object(\"textview1\").get_buffer() \n"
-"        start_iter = buff.get_start_iter() \n"
-"        end_iter = buff.get_end_iter() \n"
-"        text = buff.get_text(start_iter,end_iter) \n"
-"\n"
-"        #Alle Einträge erhalten\n"
-"        record_type = \"http://wiki.ubuntu.com/Quickly/JottyDoc\" \n"
-"        results = self.database.get_records(record_type = "
-"record_type,create_view = True) \n"
-"\n"
-"        #Einen Eintrag mit selbem Titel aktualisieren\n"
-"        for result in results: \n"
-"            document = result.value \n"
-"            if document[\"title\"] == title: \n"
-"                key = document[\"_id\"]\n"
-"                self.database.update_fields(key, {\"text\":text}) \n"
-"                return\n"
-" \n"
-"        #Eintrag erstellen, falls keiner mit diesem Titel existierte\n"
-"        new_rec = Record({\"record_type\":record_type,\"title\":title, "
-"\"text\":text})\n"
-"        self.database.put_record(new_rec)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:306(para)
 msgid ""
@@ -728,7 +692,6 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:307(para)
 msgid "file:///home/your_user_name/.local/share/desktop-couch/couchdb.html"
 msgstr ""
-"file:///home/ihr_benutzername/.local/share/desktop-couch/couchdb.html"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:311(para)
 msgid ""
@@ -2368,5 +2331,4 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Jan-Christoph Borchardt https://launchpad.net/~inquata\n"
-"  lineak https://launchpad.net/~lineak"
+"  estiedi https://launchpad.net/~dirk-estievenart"
