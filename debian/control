@@ -5,7 +5,7 @@ Build-Depends: cdbs (>= 0.4.43),
  debhelper (>= 6),
  python,
  python-central (>= 0.6.11),
- python-distutils-extra (>= 2.10),
+ python-distutils-extra (>= 2.18),
  gnome-doc-utils
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Quickly Developer Team <quickly@lists.launchpad.net>
@@ -18,6 +18,7 @@ XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
          ${python:Depends},
          python-quickly-core
+Breaks: quickly-ubuntu-template (<< 0.5)
 Recommends: quickly-ubuntu-template | quickly-template,
 Description: build new apps quickly
  Quickly enables for prospective programmers a way to easily build new
