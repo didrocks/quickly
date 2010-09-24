@@ -188,21 +188,30 @@ def get_quickly_editors():
        editor = default_editor
     return editor
 
+def append_email_address(email_list, name):
+    '''Append email adress if something to append'''
+
+    email = None
+    if name:
+         email = extract_email_address(name)
+    if email:
+        email_list.append(email)
+    return email_list
 
 def get_all_emails(launchpad=None):
     '''Return a list with all available email in preference order'''
 
     email_list = []
-    email_list.append(extract_email_address(os.getenv("DEBEMAIL")))
+    email_list = append_email_address(email_list, os.getenv("DEBEMAIL"))
 
     bzr_config = GlobalConfig()
     email_list.append(bzr_config.user_email())
-    email_list.append(extract_email_address(os.getenv("EMAIL")))
+    email_list = append_email_address(email_list, os.getenv("EMAIL"))
     
     # those information can be missing if there were no packaging or license
     # command before
     try:
-        email_list.append(extract_email_address(get_setup_value('author_email')))
+        email_list = append_email_address(email_list, get_setup_value('author_email'))
     except cant_deal_with_setup_value:
         pass
 
@@ -210,7 +219,7 @@ def get_all_emails(launchpad=None):
     fauthors_name = 'AUTHORS'
     for line in file(fauthors_name, 'r'):
         if not "<Your E-mail>" in line:
-            email_list.append(extract_email_address(line))
+            email_list = append_email_address(email_list, line)
 
     # LP adresses
     if launchpad:
@@ -223,7 +232,7 @@ def get_all_emails(launchpad=None):
         raise gpg_error(err)
     for line in result.splitlines():
         if 'sec' in line or 'uid' in line:
-            email_list.append(extract_email_address(line.split(':')[9]))
+            email_list = append_email_address(email_list, line.split(':')[9])
 
     # return email list without None elem
     return [email for email in email_list if email]
@@ -296,7 +305,9 @@ def get_right_gpg_key_id(launchpad):
             if verbose:
                 print "found secret gpg key. id: %s" % secret_key_id
         try:
-            candidate_email = extract_email_address(line.split(':')[9])
+            candidate_string = line.split(':')[9]
+            if candidate_string:
+                candidate_email = extract_email_address(candidate_string)
         except NoEmailInUsername:
             pass
         else:
