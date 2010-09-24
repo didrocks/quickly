@@ -177,6 +177,40 @@ def change_xml_elem(xml_file, path, attribute_name, attribute_value, value, attr
     xml_tree.write(xml_file + '.new')
     os.rename(xml_file + '.new', xml_file)
 
+def collect_commit_messages(previous_version):
+    '''Collect commit messages from last revision'''
+
+    bzr_command = ['bzr', 'log']
+    if previous_version:
+        bzr_command.extend(['-r', 'tag:%s..' % previous_version])
+    else:
+        previous_version = ''
+    bzr_instance = subprocess.Popen(bzr_command, stdout=subprocess.PIPE)
+    result, err = bzr_instance.communicate()
+
+    if bzr_instance.returncode != 0:
+        return(None)
+
+    changelog = []
+    buffered_message = ""
+    collect_switch = False
+    uncollect_msg = (_('quickly saved'), _('commit before release'))
+    for line in result.splitlines():
+        #print buffered_message
+        if line == 'message:':
+            collect_switch = True
+            continue
+        elif '----------------------' in line:
+            if buffered_message:
+                changelog.append(buffered_message.strip())
+                buffered_message = ""
+            collect_switch = False
+        elif line == 'tags: %s' % previous_version:
+            break
+        if collect_switch and not line.strip() in uncollect_msg:
+            buffered_message +=' %s' % line
+    return(changelog)
+
 def get_quickly_editors():
     '''Return prefered editor for ubuntu-application template'''
 
