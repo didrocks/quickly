@@ -4,6 +4,8 @@ Quickly 0.6.1
   ubuntu-application-template and derivatives:
   - fix release command crashing and revert to get back lost features from
     previous version (LP: #642455)
+  - don't overwrite files in add command if already exists (Tony Byrne)
+    (LP: #645490)
 
 Quickly 0.6
 ------------------------------------
