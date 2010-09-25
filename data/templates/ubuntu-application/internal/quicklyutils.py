@@ -65,7 +65,12 @@ def file_from_template(template_dir, template_file, target_dir, substitutions=[]
         pattern, sub = s
         file_contents = file_contents.replace(pattern,sub)
 
-    fout = open(os.path.join(target_dir, target_file), 'w')
+    target_path = os.path.join(target_dir, target_file)
+    if os.path.exists(target_path):
+        print _("Failed to add file to project\n cannot add: %s - this file already exists." % target_path)
+        sys.exit(4)        
+
+    fout = open(target_path, 'w')
     fout.write(file_contents)
     fout.flush()
     fout.close()
