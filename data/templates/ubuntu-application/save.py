@@ -18,15 +18,13 @@
 
 
 import sys
+import subprocess
 
 import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
 from quickly import templatetools
-
-from bzrlib.errors import PointlessCommit
-from bzrlib.workingtree import WorkingTree
 
 def help():
     print _("""Usage:
@@ -46,14 +44,11 @@ commit_msg = " ".join(sys.argv[1:])
 if commit_msg == "":
    commit_msg = _('quickly saved')
 
-wt = WorkingTree.open(".")
-
 #save away
-wt.smart_add(["."])
-try:
-    wt.commit(commit_msg)
-except PointlessCommit:
+subprocess.call(["bzr", "add"])
+return_code = subprocess.call(["bzr", "commit", "-m" + commit_msg])
+if return_code == 3:
     print _("It seems that you have no change to record.")
-    sys.exit(1)
 
-sys.exit(0)
+sys.exit(return_code)
+

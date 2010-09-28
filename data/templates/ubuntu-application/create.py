@@ -18,6 +18,7 @@
 
 import sys
 import os
+import shutil
 import subprocess
 
 from quickly import templatetools
@@ -107,11 +108,11 @@ except:
 
 # add it to revision control
 print _("Creating bzr repository and commiting")
-from bzrlib.bzrdir import BzrDir
-branch = BzrDir.create_branch_convenience(".")
-wt = branch.bzrdir.open_workingtree()
-wt.smart_add(["."])
-wt.commit("Initial project creation with Quickly!")
+bzr_instance = subprocess.Popen(["bzr", "init"], stdout=subprocess.PIPE)
+bzr_instance.wait()
+bzr_instance = subprocess.Popen(["bzr", "add"], stdout=subprocess.PIPE)
+bzr_instance.wait()
+subprocess.Popen(["bzr", "commit", "-m", "Initial project creation with Quickly!"], stderr=subprocess.PIPE)
 
 # run the new application if X display
 if templatetools.is_X_display() and os.path.isfile(exec_file):

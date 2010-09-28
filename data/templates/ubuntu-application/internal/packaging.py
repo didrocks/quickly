@@ -19,8 +19,8 @@ import datetime
 import re
 import subprocess
 import sys
+from launchpadlib.errors import HTTPError
 
-from bzrlib.workingtree import WorkingTree
 
 from quickly import configurationhandler
 from quickly import launchpadaccess
@@ -193,11 +193,15 @@ def updatepackaging(changelog=None, no_changelog=False):
 
     # check if first python-mkdebian (debian/ creation) to commit it
     # that means debian/ under unknown
-    wt = WorkingTree.open(".")
+    bzr_instance = subprocess.Popen(["bzr", "status"], stdout=subprocess.PIPE)
+    bzr_status, err = bzr_instance.communicate()
+    if bzr_instance.returncode != 0:
+        return(bzr_instance.returncode)
 
-    if any(filter(lambda x: x.startswith("debian/"), wt.unknowns())):
-        wt.smart_add(["."])
-        wt.commit('Creating ubuntu package')
+    if re.match('(.|\n)*unknown:\n.*debian/(.|\n)*', bzr_status):
+        return_code = filter_exec_command(["bzr", "add"])
+        if return_code == 0:
+            return_code = filter_exec_command(["bzr", "commit", "-m", 'Creating ubuntu package'])
 
     return(return_code)
 

@@ -15,15 +15,8 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from bzrlib.config import (
-    GlobalConfig,
-    extract_email_address,
-    )
-from bzrlib.errors import (
-    NoEmailInUsername,
-    )
-
 import os
+import re
 import sys
 import subprocess
 from xml.etree import ElementTree as etree
@@ -216,6 +209,7 @@ def collect_commit_messages(previous_version):
             buffered_message +=' %s' % line
     return(changelog)
 
+
 def get_quickly_editors():
     '''Return prefered editor for ubuntu-application template'''
 
@@ -227,30 +221,32 @@ def get_quickly_editors():
        editor = default_editor
     return editor
 
-def append_email_address(email_list, name):
-    '''Append email adress if something to append'''
 
-    email = None
-    if name:
-         email = extract_email_address(name)
-    if email:
-        email_list.append(email)
-    return email_list
+def take_email_from_string(value):
+    '''Try to take an email from a string'''
+
+    if value is not None:
+        result = re.match("(.*[< ]|^)(.+@[^ >]+\.[^ >]+).*", value)
+        if result:
+            return result.groups()[1]
+    return value
 
 def get_all_emails(launchpad=None):
     '''Return a list with all available email in preference order'''
 
     email_list = []
-    email_list = append_email_address(email_list, os.getenv("DEBEMAIL"))
+    email_list.append(take_email_from_string(os.getenv("DEBEMAIL")))
 
-    bzr_config = GlobalConfig()
-    email_list.append(bzr_config.user_email())
-    email_list = append_email_address(email_list, os.getenv("EMAIL"))
+    bzr_instance = subprocess.Popen(["bzr", "whoami"], stdout=subprocess.PIPE)
+    bzr_user, err = bzr_instance.communicate()
+    if bzr_instance.returncode == 0:
+        email_list.append(take_email_from_string(bzr_user))
+    email_list.append(take_email_from_string(os.getenv("EMAIL")))
     
     # those information can be missing if there were no packaging or license
     # command before
     try:
-        email_list = append_email_address(email_list, get_setup_value('author_email'))
+        email_list.append(take_email_from_string(get_setup_value('author_email')))
     except cant_deal_with_setup_value:
         pass
 
@@ -258,7 +254,7 @@ def get_all_emails(launchpad=None):
     fauthors_name = 'AUTHORS'
     for line in file(fauthors_name, 'r'):
         if not "<Your E-mail>" in line:
-            email_list = append_email_address(email_list, line)
+            email_list.append(take_email_from_string(line))
 
     # LP adresses
     if launchpad:
@@ -271,7 +267,7 @@ def get_all_emails(launchpad=None):
         raise gpg_error(err)
     for line in result.splitlines():
         if 'sec' in line or 'uid' in line:
-            email_list = append_email_address(email_list, line.split(':')[9])
+            email_list.append(take_email_from_string(line.split(':')[9]))
 
     # return email list without None elem
     return [email for email in email_list if email]
@@ -343,22 +339,16 @@ def get_right_gpg_key_id(launchpad):
             secret_key_id = line.split(':')[4][-8:]
             if verbose:
                 print "found secret gpg key. id: %s" % secret_key_id
-        try:
-            candidate_string = line.split(':')[9]
-            if candidate_string:
-                candidate_email = extract_email_address(candidate_string)
-        except NoEmailInUsername:
-            pass
-        else:
-            if verbose:
-                print "candidate email: %s" % candidate_email
-            if candidate_email in prefered_emails:
-                # create candidate_key_ids[candidate_email] if needed
-                try:
-                    candidate_key_ids[candidate_email]
-                except KeyError:
-                    candidate_key_ids[candidate_email] = []
-                candidate_key_ids[candidate_email].append(secret_key_id)
+        candidate_email = take_email_from_string(line.split(':')[9])
+        if verbose:
+            print "candidate email: %s" % candidate_email
+        if candidate_email and candidate_email in prefered_emails:
+            # create candidate_key_ids[candidate_email] if needed
+            try:
+                candidate_key_ids[candidate_email]
+            except KeyError:
+                candidate_key_ids[candidate_email] = []
+            candidate_key_ids[candidate_email].append(secret_key_id)
     if not candidate_key_ids:
         candidate_key_ids[prefered_emails[0]] = [create_gpg_key(
                                  launchpad.me.display_name, prefered_emails[0])]
