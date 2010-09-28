@@ -1,9 +1,12 @@
 Quickly 0.6.1
 ------------------------------------
 
+  quickly core:
+  - revert internal bzr calls to use subprocess calls again (Michael Terry)
   ubuntu-application-template and derivatives:
   - don't overwrite files in add command if already exists (Tony Byrne)
     (LP: #645490)
+  - revert internal bzr calls to use subprocess calls again (Michael Terry)
 
 Quickly 0.6
 ------------------------------------

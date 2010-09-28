@@ -17,11 +17,11 @@
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import shutil
+import subprocess
 import sys
 
 import internal.apportutils
-
-from bzrlib.workingtree import WorkingTree
 
 from internal import quicklyutils
 from quickly import configurationhandler, templatetools
@@ -53,15 +53,17 @@ substitutions = (("project_name",project_name),
 
 ##### 0.4 update
 if project_version < '0.4':
-    wt = WorkingTree.open('.')
     ## new licensing format
     if os.path.isfile("LICENSE"):
-        try:
-            wt.rename_one("LICENSE", "COPYING")
-        except OSError, e:
-            if e.errno == 13:
-                sys.stderr.write(_("Can't rename LICENSE file, check your file permission\n"))
-                sys.exit(1)
+        bzr_instance = subprocess.Popen(["bzr", "mv", "LICENSE", "COPYING"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # if file not versionned, try traditional move, (bzr returncode is None if dir not writable)
+        if bzr_instance.returncode == 3 or bzr_instance.returncode is None:
+            try:
+                os.rename('LICENSE', 'COPYING')
+            except OSError, e:
+                if e.errno == 13:
+                    sys.stderr.write(_("Can't rename LICENSE file, check your file permission\n"))
+                    sys.exit(1)
     # transition Copyright -> AUTHORS
     if os.path.isfile('AUTHORS'):
         source_file = 'AUTHORS'
