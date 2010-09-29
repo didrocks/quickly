@@ -7,6 +7,7 @@ Quickly 0.6.1
   - don't overwrite files in add command if already exists (Tony Byrne)
     (LP: #645490)
   - revert internal bzr calls to use subprocess calls again (Michael Terry)
+  - fix crash in in help() (Michael Terry) (LP: #49881)
 
 Quickly 0.6
 ------------------------------------
