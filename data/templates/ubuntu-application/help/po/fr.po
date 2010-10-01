@@ -8,30 +8,30 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-09-28 13:04+0000\n"
-"Last-Translator: Emilien Klein <emilien+ubuntu@klein.st>\n"
+"PO-Revision-Date: 2010-09-30 12:46+0000\n"
+"Last-Translator: Ptitphysik <amalpeyre@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 05:23+0000\n"
+"X-Launchpad-Export-Date: 2010-10-01 08:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:13(firstname)
 msgid "Shane"
-msgstr ""
+msgstr "Shane"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:14(surname)
 msgid "Fagan"
-msgstr ""
+msgstr "Fagan"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:17(firstname)
 msgid "Rick"
-msgstr ""
+msgstr "Rick"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:18(surname)
 msgid "Spencer"
-msgstr ""
+msgstr "Spencer"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:20(corpauthor)
 msgid "Canonical ltd"
