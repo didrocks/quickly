@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-04-27 09:19+0000\n"
-"Last-Translator: Launchpad Translations Administrators "
-"<rosetta@launchpad.net>\n"
+"PO-Revision-Date: 2010-10-01 17:17+0000\n"
+"Last-Translator: Monkey <monkey.libre@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-28 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-10-02 05:10+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:13(firstname)
@@ -36,15 +35,15 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:20(corpauthor)
 msgid "Canonical ltd"
-msgstr ""
+msgstr "Canonical ltd"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:24(date) data/templates/ubuntu-application/help/tutorial.xml:29(invpartnumber)
 msgid "2010"
-msgstr ""
+msgstr "2010"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:0(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1163(application)
 msgid "Quickly"
-msgstr ""
+msgstr "Quickly"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:28(productnumber)
 msgid "0.4"
@@ -405,6 +404,8 @@ msgid ""
 "\n"
 "sudo apt-get install quickly-widgets\n"
 msgstr ""
+"\n"
+"sudo apt-get install quickly-widgets\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:184(para)
 msgid ""
@@ -452,6 +453,9 @@ msgid ""
 "from desktopcouch.records.server import CouchDatabase\n"
 "from desktopcouch.records.record import Record\n"
 msgstr ""
+"\n"
+"from desktopcouch.records.server import CouchDatabase\n"
+"from desktopcouch.records.record import Record\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:209(title)
 msgid "Get a Reference to the Database"
@@ -780,12 +784,12 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:368(programlisting)
 #, no-wrap
 msgid "bzr add"
-msgstr ""
+msgstr "bzr add"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:368(programlisting)
 #, no-wrap
 msgid "bzr commit -m [your message]"
-msgstr ""
+msgstr "bzr commit -m [su mensaje]"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:368(para)
 msgid "This will call <placeholder-1/> and then <placeholder-2/> for you."
@@ -824,7 +828,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:379(para)
 msgid "This will add the dialog to your project."
-msgstr ""
+msgstr "Esto añadirá el diálogo a su proyecto."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:380(title) data/templates/ubuntu-application/help/tutorial.xml:502(title)
 msgid "Editing the New Dialog"
@@ -844,6 +848,8 @@ msgid ""
 "\n"
 "quickly design\n"
 msgstr ""
+"\n"
+"quickly design\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:385(para)
 msgid ""
@@ -939,6 +945,9 @@ msgid ""
 "from jotty import (\n"
 "    AboutJottyDialog, PreferencesJottyDialog, SaveDialog)\n"
 msgstr ""
+"\n"
+"from jotty import (\n"
+"    AboutJottyDialog, PreferencesJottyDialog, SaveDialog)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:433(title) data/templates/ubuntu-application/help/tutorial.xml:616(title)
 msgid "Create an instance of the dialog and run it"
@@ -961,6 +970,8 @@ msgid ""
 "\n"
 "        saver = SaveDialog.SaveDialog()\n"
 msgstr ""
+"\n"
+"        saver = SaveDialog.SaveDialog()\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:440(para)
 msgid ""
@@ -998,6 +1009,10 @@ msgid ""
 "        if result != gtk.RESPONSE_OK:\n"
 "            return\n"
 msgstr ""
+"\n"
+"        saver.destroy()\n"
+"        if result != gtk.RESPONSE_OK:\n"
+"            return\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:454(para)
 msgid ""
@@ -1129,6 +1144,8 @@ msgid ""
 "\n"
 "from quickly.widgets.couch_grid import CouchGrid\n"
 msgstr ""
+"\n"
+"from quickly.widgets.couch_grid import CouchGrid\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:531(title)
 msgid "Create the CouchGrid"
@@ -1179,7 +1196,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:552(title)
 msgid "Create the get_selection function"
-msgstr ""
+msgstr "Cree la función get_selection"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:552(para)
 msgid ""
@@ -1223,6 +1240,15 @@ msgid ""
 "            return ids[0]\n"
 "\n"
 msgstr ""
+"\n"
+"    @property\n"
+"    def selected_record_id(self):\n"
+"        ids = self.couchgrid.selected_record_ids\n"
+"        if len(ids) &lt; 1:\n"
+"            return None\n"
+"        else:\n"
+"            return ids[0]\n"
+"\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:580(title)
 msgid "Using the Open Dialog"
@@ -1275,6 +1301,9 @@ msgid ""
 "from jotty import (\n"
 "    AboutJottyDialog, PreferencesJottyDialog, SaveDialog, OpenDialog)\n"
 msgstr ""
+"\n"
+"from jotty import (\n"
+"    AboutJottyDialog, PreferencesJottyDialog, SaveDialog, OpenDialog)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:616(para)
 msgid ""
@@ -1290,6 +1319,8 @@ msgid ""
 "opener = OpenDialog.NewODialog()\n"
 "        result = opener.run()"
 msgstr ""
+"opener = OpenDialog.NewODialog()\n"
+"        result = opener.run()"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:622(title)
 msgid "Get the id for the selected title"
@@ -1486,7 +1517,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:727(title)
 msgid "Run the \"License\" Command"
-msgstr ""
+msgstr "Ejecute la orden «license»"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:727(para)
 msgid ""
@@ -1549,7 +1580,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:750(para)
 msgid "and then run:"
-msgstr ""
+msgstr "y después ejecute:"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:754(para)
 msgid "to license every files."
@@ -2012,7 +2043,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:999(title) data/templates/ubuntu-application/help/tutorial.xml:1000(title)
 msgid "glade"
-msgstr ""
+msgstr "glade"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:1001(programlisting)
 #, no-wrap
@@ -2036,10 +2067,12 @@ msgid ""
 "\n"
 "<application>Quickly</application> help\n"
 msgstr ""
+"\n"
+"<application>Quickly</application> help\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:1016(para)
 msgid "Opens a web browser with the help index."
-msgstr ""
+msgstr "Abre un navegador web con el índice de la ayuda."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:1023(programlisting)
 #, no-wrap
@@ -2217,7 +2250,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:1133(programlisting)
 #, no-wrap
 msgid "bzr help"
-msgstr ""
+msgstr "bzr help"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:1129(para)
 msgid ""
@@ -2300,4 +2333,4 @@ msgstr ""
 "  Jose Ernesto Davila https://launchpad.net/~josernestodavila\n"
 "  Monkey https://launchpad.net/~monkey-libre\n"
 "  Pablo Rubianes https://launchpad.net/~pablorubianes-uy\n"
-"  Ricardo Moreno https://launchpad.net/~rmpossin"
+"  Ricardo Moreno https://launchpad.net/~ricardinho"
