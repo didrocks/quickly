@@ -8,6 +8,7 @@ Quickly 0.6.1
     (LP: #645490)
   - revert internal bzr calls to use subprocess calls again (Michael Terry)
   - fix crash in in help() (Michael Terry) (LP: #49881)
+  - force utf8 when creating a gpg key (LP: #640689)
 
 Quickly 0.6
 ------------------------------------

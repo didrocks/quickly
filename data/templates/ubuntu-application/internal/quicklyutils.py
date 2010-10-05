@@ -295,7 +295,7 @@ Expire-Date: 0
     gpg_instance = subprocess.Popen(['gpg', '--gen-key', '--batch'],
                                        stdin=subprocess.PIPE,
                                        stdout=subprocess.PIPE)
-    result, err = gpg_instance.communicate(key_generate)
+    result, err = gpg_instance.communicate(key_generate.encode('utf-8'))
     if gpg_instance.returncode != 0:
         raise gpg_error(err)
 
