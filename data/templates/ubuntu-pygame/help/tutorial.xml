@@ -3,7 +3,7 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 
  <!ENTITY appname "<application>Quickly PyGame Template</application>" >
- <!ENTITY appversion "0.4" >
+ <!ENTITY appversion "0.6.1" >
 ] >
 
 <book lang="en" id="index">

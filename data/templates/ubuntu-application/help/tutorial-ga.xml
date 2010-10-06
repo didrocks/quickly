@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 <!ENTITY appname "<application>Quickly</application>">
-<!ENTITY appversion "0.4">
+<!ENTITY appversion "0.6.1">
 ]>
 <book lang="ga" id="index">
  <bookinfo id="Front">
@@ -24,7 +24,7 @@
    <productname class="trade">&appname;</productname>
    <productnumber>&appversion;</productnumber>
    <invpartnumber>2010</invpartnumber>
-   <title><application>Quickly</application> 0.4 User Guide</title>
+   <title><application>Quickly</application> 0.6.1 User Guide</title>
  </bookinfo>
 
 

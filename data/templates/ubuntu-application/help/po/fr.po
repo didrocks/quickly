@@ -46,12 +46,12 @@ msgid "Quickly"
 msgstr "Quickly"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:28(productnumber)
-msgid "0.4"
-msgstr "0.4"
+msgid "0.6.1"
+msgstr "0.6.1"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:30(title)
-msgid "<application>Quickly</application> 0.4 User Guide"
-msgstr "Guide d'utilisateur de <application>Quickly</application> 0.4"
+msgid "<application>Quickly</application> 0.6.1 User Guide"
+msgstr "Guide d'utilisateur de <application>Quickly</application> 0.6.1"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:35(title)
 msgid "About This Guide"

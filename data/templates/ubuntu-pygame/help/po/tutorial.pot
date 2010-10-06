@@ -30,11 +30,11 @@ msgid "Quickly PyGame Template"
 msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:24(productnumber)
-msgid "0.4"
+msgid "0.6.1"
 msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:26(title)
-msgid "<application>Quickly PyGame Template</application> 0.4 Tutorial"
+msgid "<application>Quickly PyGame Template</application> 0.6.1 Tutorial"
 msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:31(title)

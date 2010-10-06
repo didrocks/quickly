@@ -34,7 +34,7 @@ msgid "2010"
 msgstr ""
 
 #: quickly-ubuntu-application-tutorial.xml:30(title)
-msgid "<application>Quickly</application> 0.4 User Guide"
+msgid "<application>Quickly</application> 0.6.1 User Guide"
 msgstr ""
 
 #: quickly-ubuntu-application-tutorial.xml:35(title)

@@ -10,6 +10,8 @@ Quickly 0.6.1
    - revert internal bzr calls to use subprocess calls again
      (LP: #648496, #642455)
    - translations update (en_GB, es, fr, uk)
+   - urkkk, just saw that the tutorial contains the name and revision number. 
+     Update that as a workaround. Should be removed for next release.
 
 Quickly 0.6
 ------------------------------------
