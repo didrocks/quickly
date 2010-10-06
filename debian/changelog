@@ -1,4 +1,4 @@
-quickly (0.6.1-0ubuntu1) UNRELEASED; urgency=low
+quickly (0.6.1-0ubuntu1) maverick; urgency=low
 
   * New bugfix release:
    + ubuntu-application-template and derivatives:
@@ -13,7 +13,7 @@ quickly (0.6.1-0ubuntu1) UNRELEASED; urgency=low
     - urkkk, just saw that the tutorial contains the name and revision number.
       Update that as a workaround. Should be removed for next release.
 
- -- Didier Roche <didrocks@ubuntu.com>  Wed, 06 Oct 2010 11:44:53 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Wed, 06 Oct 2010 12:18:39 +0200
 
 quickly (0.6-0ubuntu1) maverick; urgency=low
 
