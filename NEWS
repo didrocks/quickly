@@ -1,14 +1,14 @@
 Quickly 0.6.1
 ------------------------------------
 
-  quickly core:
-  - revert internal bzr calls to use subprocess calls again (Michael Terry)
-  ubuntu-application-template and derivatives:
-  - don't overwrite files in add command if already exists (Tony Byrne)
-    (LP: #645490)
-  - revert internal bzr calls to use subprocess calls again (Michael Terry)
-  - fix crash in in help() (Michael Terry) (LP: #49881)
-  - force utf8 when creating a gpg key (LP: #640689)
+ + ubuntu-application-template and derivatives:
+   - don't overwrite files in add command if already exists (Tony Byrne)
+     (LP: #645490)
+   - fix crash in in help() (Michael Terry) (LP: #649881)
+   - force utf8 when creating a gpg key (LP: #640689)
+ + common:
+   - revert internal bzr calls to use subprocess calls again
+     (LP: #648496, #642455)
 
 Quickly 0.6
 ------------------------------------
