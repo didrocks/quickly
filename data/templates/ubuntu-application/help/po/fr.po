@@ -8,30 +8,30 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-04-29 00:35+0000\n"
-"Last-Translator: François Blondel <Unknown>\n"
+"PO-Revision-Date: 2010-09-30 12:46+0000\n"
+"Last-Translator: Ptitphysik <amalpeyre@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-30 03:55+0000\n"
+"X-Launchpad-Export-Date: 2010-10-01 08:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:13(firstname)
 msgid "Shane"
-msgstr ""
+msgstr "Shane"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:14(surname)
 msgid "Fagan"
-msgstr ""
+msgstr "Fagan"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:17(firstname)
 msgid "Rick"
-msgstr ""
+msgstr "Rick"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:18(surname)
 msgid "Spencer"
-msgstr ""
+msgstr "Spencer"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:20(corpauthor)
 msgid "Canonical ltd"
@@ -43,7 +43,7 @@ msgstr "2010"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:0(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1163(application)
 msgid "Quickly"
-msgstr ""
+msgstr "Quickly"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:28(productnumber)
 msgid "0.4"
@@ -51,7 +51,7 @@ msgstr "0.4"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:30(title)
 msgid "<application>Quickly</application> 0.4 User Guide"
-msgstr ""
+msgstr "Guide d'utilisateur de <application>Quickly</application> 0.4"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:35(title)
 msgid "About This Guide"
@@ -72,7 +72,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:39(link) data/templates/ubuntu-application/help/tutorial.xml:45(title)
 msgid "Getting Started"
-msgstr ""
+msgstr "Pour commencer"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:46(para)
 msgid ""
@@ -83,6 +83,12 @@ msgid ""
 "together with python and pygtk so that you can "
 "<application>Quickly</application> build applications."
 msgstr ""
+"Première partie du tutoriel <application>Quickly</application>. Cette partie "
+"introduit quelques commandes clés de  <application>Quickly</application>, "
+"l'édition d'une interface avec Glade et l'édition du code avec Gedit. Cette "
+"partie du tutoriel va vous familiariser avec ces trois outils, et vous "
+"montrer comment construire rapidement une application en les utilisant "
+"conjointement avec python et pygtk."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:48(title)
 msgid "Creating a <application>Quickly</application> Project"
@@ -94,11 +100,14 @@ msgid ""
 "First, open a terminal window to type commands into. When it's open, type "
 "the command:"
 msgstr ""
+"<placeholder-1/>Créer un programme vierge mais fonctionnel ne pourrait pas "
+"être plus simple. Premièrement, ouvrez une fenêtre de terminal puis tapez la "
+"commande :"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:49(programlisting)
 #, no-wrap
 msgid "quickly create ubuntu-application jotty"
-msgstr ""
+msgstr "quickly create ubuntu-application jotty"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:53(para)
 msgid ""
@@ -106,10 +115,13 @@ msgid ""
 "and files for an empty python application. The command finishes by running "
 "the newly created empty application."
 msgstr ""
+"Cela va créer un sous-dossier jotty contenant l'arborescence de fichiers et "
+"de répertoires de votre application vierge en python. Cette commande se "
+"termine par le lancement de votre toute nouvelle application."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:57(title)
 msgid "Testing the Empty Application"
-msgstr ""
+msgstr "Tester votre application vierge"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:57(para)
 msgid ""
@@ -2296,4 +2308,5 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Emilien Klein https://launchpad.net/~emilien-klein\n"
 "  Nicolas MARTIN https://launchpad.net/~nico-chatouille"

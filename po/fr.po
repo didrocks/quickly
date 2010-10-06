@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: quickly VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-23 16:20+0200\n"
-"PO-Revision-Date: 2010-04-29 00:32+0000\n"
-"Last-Translator: François Blondel <Unknown>\n"
+"PO-Revision-Date: 2010-09-28 13:10+0000\n"
+"Last-Translator: Emilien Klein <emilien+ubuntu@klein.st>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-30 03:55+0000\n"
+"X-Launchpad-Export-Date: 2010-09-29 05:23+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../quickly/launchpadaccess.py:39
@@ -136,10 +136,12 @@ msgid ""
 "add command needs to be followed an action name.\n"
 "Usage is: quickly add [dialog|] …"
 msgstr ""
+"la commande add doit être suivie d'un nom d'action.\n"
+"Utilisation : quickly add [dialog] ..."
 
 #: ../data/templates/ubuntu-application/add.py:81
 msgid "Usage is: $ quickly add dialog <dialogname>"
-msgstr ""
+msgstr "Utilisation : $ quickly add dialog <nom_du_dialogue>"
 
 #: ../quickly/bzrbinding.py:51
 msgid "Bzr not properly installed"
@@ -194,12 +196,23 @@ msgid ""
 "dependency\n"
 "should be added…\n"
 msgstr ""
+"Utilisation :\n"
+"$ quickly configure [%s] <args>\n"
+"\n"
+"Permet de définir ou de changer certains paramètres du projet, comme par\n"
+"exemple quel projet Launchpad devrait être relié à l'application Ubuntu "
+"courante,\n"
+"le ppa qui devrait être utilisé par défaut pour partager votre paquet, "
+"quelles\n"
+"dépendances supplémentaires devraient être ajoutées...\n"
 
 #: ../data/templates/ubuntu-application/configure.py:104
 msgid ""
 "Usage is: $ quickly configure ppa <ppaname>\n"
 "Use shell completion to find all available ppas"
 msgstr ""
+"Utilisation : $ quickly configure ppa <nom_du_ppa>\n"
+"Utilisez l'auto-complétion pour trouver tout les ppas disponibles"
 
 #: ../data/templates/ubuntu-application/configure.py:113
 #: ../data/templates/ubuntu-application/share.py:116
@@ -225,7 +238,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/configure.py:133
 msgid "Usage is: $ quickly configure bzr <bzr-branch-string>"
-msgstr ""
+msgstr "Utilisation : $ quickly configure bzr <branche-bzr>"
 
 #: ../data/templates/ubuntu-application/edit.py:34
 msgid ""
@@ -258,6 +271,8 @@ msgstr ""
 #: ../data/templates/ubuntu-application/run.py:52
 msgid "Can't access to X server, so can't run gtk application"
 msgstr ""
+"Impossible d'accéder au serveur X, donc il est impossible de lancer "
+"l'application GTK"
 
 #: ../data/templates/ubuntu-application/run.py:65
 #, python-format
@@ -267,7 +282,7 @@ msgstr "Ne peut pas exécuter %s"
 #: ../quickly/version.py:34
 #, python-format
 msgid "No quickly data path found in %s."
-msgstr ""
+msgstr "Aucun emplacement de données quickly trouvé dans %s."
 
 #: ../quickly/version.py:38
 msgid "No template found."
@@ -325,13 +340,13 @@ msgstr ""
 #: ../data/templates/ubuntu-application/share.py:82
 #: ../data/templates/ubuntu-application/release.py:101
 msgid "--ppa needs one argument: <ppa_name> or <team/ppa_name>"
-msgstr ""
+msgstr "--ppa attend un argument : <nom_du_ppa> ou <equipe/nom_du_ppa>"
 
 #: ../data/templates/ubuntu-application/share.py:85
 #: ../data/templates/ubuntu-application/release.py:104
 #, python-format
 msgid "Unknown option: %s"
-msgstr ""
+msgstr "Option « %s » inconnue"
 
 #: ../data/templates/ubuntu-application/share.py:86
 #: ../data/templates/ubuntu-application/release.py:105
@@ -345,6 +360,8 @@ msgid ""
 "%s does not exist. Please create it on launchpad if you want to push a "
 "package to it. %s has the following ppas available:"
 msgstr ""
+"%s n'existe pas. Merci de le créer si vous voulez y insérer un paquet. %s "
+"permet l'accès aux PPAs suivants :"
 
 #: ../data/templates/ubuntu-application/share.py:131
 #: ../data/templates/ubuntu-application/release.py:171
@@ -393,20 +410,25 @@ msgid ""
 "There is no GPG key detected for your Launchpad account. Please upload one "
 "as you can read on the tutorial"
 msgstr ""
+"Aucune clef GPG n'a été détectée sur votre compte Launchpad. Merci d'en "
+"indiquer une comme expliqué dans le tutoriel"
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:283
 msgid "You choosed to not create your GPG key."
-msgstr ""
+msgstr "Vous avez choisi de ne pas créer votre clef GPG."
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:306
 msgid "Can't create GPG key. Try to create it yourself."
-msgstr ""
+msgstr "La clef GPG ne peut être créée. Essayez manuellement."
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:321
 msgid ""
 "Can't sign the package as no adress email found. Fulfill the AUTHORS file "
 "with name <emailadress> or export DEBEMAIL/EMAIL."
 msgstr ""
+"Impossible de signer le paquet car aucune adresse email n'a été trouvée. "
+"Remplissez le fichier AUTHORS avec nom <adresse_electronique> ou exportez "
+"DEBEMAIL/EMAIL."
 
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:362
 msgid ""
@@ -471,7 +493,7 @@ msgstr "Arrêt."
 #: ../quickly/tools.py:196
 #, python-format
 msgid "ERROR: %s needs one argument: %s"
-msgstr ""
+msgstr "ERREUR : %s a besoin d'un argument : %s"
 
 #: ../quickly/tools.py:225
 msgid "ERROR: No command provided in command line"

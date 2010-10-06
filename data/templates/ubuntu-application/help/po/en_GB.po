@@ -8,55 +8,54 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 18:57+0200\n"
-"PO-Revision-Date: 2010-04-13 18:31+0000\n"
-"Last-Translator: Launchpad Translations Administrators "
-"<rosetta@launchpad.net>\n"
+"PO-Revision-Date: 2010-09-09 22:28+0000\n"
+"Last-Translator: James Thorrold <jameslin@inbox.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-24 03:57+0000\n"
+"X-Launchpad-Export-Date: 2010-09-29 05:23+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:13(firstname)
 msgid "Shane"
-msgstr ""
+msgstr "Shane"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:14(surname)
 msgid "Fagan"
-msgstr ""
+msgstr "Fagan"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:17(firstname)
 msgid "Rick"
-msgstr ""
+msgstr "Rick"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:18(surname)
 msgid "Spencer"
-msgstr ""
+msgstr "Spencer"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:20(corpauthor)
 msgid "Canonical ltd"
-msgstr ""
+msgstr "Canonical Ltd"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:24(date) data/templates/ubuntu-application/help/tutorial.xml:29(invpartnumber)
 msgid "2010"
-msgstr ""
+msgstr "2010"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:0(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1160(application) data/templates/ubuntu-application/help/tutorial.xml:1163(application)
 msgid "Quickly"
-msgstr ""
+msgstr "Quickly"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:28(productnumber)
 msgid "0.4"
-msgstr ""
+msgstr "0.4"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:30(title)
 msgid "<application>Quickly</application> 0.4 User Guide"
-msgstr ""
+msgstr "<application>Quickly</application> 0.4 User Guide"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:35(title)
 msgid "About This Guide"
-msgstr ""
+msgstr "About This Guide"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:36(para)
 msgid ""
@@ -2296,3 +2295,5 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:0(None)
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  James Thorrold https://launchpad.net/~jthorrold"
