@@ -42,6 +42,13 @@ def conventional_names(name):
     camel_case_name = templatetools.get_camel_case_name(name)
     return sentence_name, camel_case_name
 
+def set_file_contents(filename, contents):
+    fout = file(filename + '.new', 'w')
+    fout.write(contents)
+    fout.flush()
+    fout.close()
+    os.rename(filename + '.new', filename)
+
 def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
 
     if not os.path.isfile(os.path.join(template_dir, template_file)):
@@ -63,10 +70,7 @@ def file_from_template(template_dir, template_file, target_dir, substitutions=[]
         print _("Failed to add file to project\n cannot add: %s - this file already exists." % target_path)
         sys.exit(4)        
 
-    fout = open(target_path, 'w')
-    fout.write(file_contents)
-    fout.flush()
-    fout.close()
+    set_file_contents(target_path, file_contents)
     fin.close()
 
 def update_file(target_file, substitutions=[], rename = True):
@@ -88,10 +92,7 @@ def update_file(target_file, substitutions=[], rename = True):
         pattern, sub = s
         file_contents = file_contents.replace(pattern,sub)
 
-    fout = open(target_file, 'w')
-    fout.write(file_contents)
-    fout.flush()
-    fout.close()
+    set_file_contents(target_file, file_contents)
     fin.close()
 
 def get_setup_value(key):
