@@ -66,7 +66,7 @@ def update_apport(project_name, old_lp_project, new_lp_project):
 
         if os.path.isfile(existing_crashdb):
             print _("Updating project name references in existing apport crashdb configuration")
-            quicklyutils.file_from_template(relative_crashdb_dir, crashdb_file, relative_crashdb_dir, subst_existing)
+            quicklyutils.update_file(existing_crashdb, subst_existing)
         elif os.path.isdir(template_crashdb_dir):
             print _("Creating new apport crashdb configuration")
             if not os.path.isdir(relative_crashdb_dir):

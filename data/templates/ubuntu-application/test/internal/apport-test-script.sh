@@ -1,5 +1,4 @@
 #!/bin/bash
-# -*- Mode: sh; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 
 cd /tmp
 
@@ -297,7 +296,7 @@ bzr commit -m "Prior to upgrade"
 # modified etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # Committed revision 4.
 
-quickly upgrade
+quickly upgrade 0.3 0.4
 
 bzr status
 
@@ -323,7 +322,7 @@ bzr commit -m "Re-running upgrade again"
 
 bzr status
 
-quickly upgrade
+quickly upgrade 0.3 0.4
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
@@ -375,7 +374,7 @@ grep LaunchpadIntegration. bin/test-project
 
 grep helpmenu bin/test-project
 
-quickly upgrade
+quickly upgrade 0.3 0.4
 # Adding launchpad integration to existing application
 # Creating new apport crashdb configuration
 # Creating new apport hooks
@@ -406,7 +405,7 @@ bzr commit -m "Committing after removing all lpi integration"
 # modified data/ui/TestProjectWindow.ui
 # Committed revision 6.
 
-quickly upgrade
+quickly upgrade 0.3 0.4
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
@@ -427,4 +426,4 @@ grep LaunchpadIntegration. bin/test-project
 
 grep helpmenu bin/test-project
 
-quickly upgrade
+quickly upgrade 0.3 0.4

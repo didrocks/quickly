@@ -5,10 +5,6 @@
 
 """Helpers for an Ubuntu application."""
 
-__all__ = [
-    'make_window',
-    ]
-
 import os
 import gtk
 
