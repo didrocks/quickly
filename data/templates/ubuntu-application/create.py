@@ -112,12 +112,14 @@ bzr_instance = subprocess.Popen(["bzr", "init"], stdout=subprocess.PIPE)
 bzr_instance.wait()
 bzr_instance = subprocess.Popen(["bzr", "add"], stdout=subprocess.PIPE)
 bzr_instance.wait()
-subprocess.Popen(["bzr", "commit", "-m", "Initial project creation with Quickly!"], stderr=subprocess.PIPE)
+bzr_instance = subprocess.Popen(["bzr", "commit", "-m", "Initial project creation with Quickly!"], stderr=subprocess.PIPE)
 
 # run the new application if X display
 if templatetools.is_X_display() and os.path.isfile(exec_file):
     print _("Launching your newly created project!")
     subprocess.call(['./' + project_name], cwd='bin/')
+
+bzr_instance.wait()
 
 print _("Congrats, your new project is setup! cd %s/ to start hacking.") % os.getcwd()
 

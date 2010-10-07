@@ -89,7 +89,7 @@ if argv[1] == "dialog":
         sys.exit(4)
     else:
         try:
-            dialog_name = templatetools.quickly_name(argv[2]).replace('-','_')
+            dialog_name = templatetools.quickly_name(argv[2])
         except templatetools.bad_project_name, e:
             print(e)
             sys.exit(1)
@@ -126,6 +126,7 @@ if argv[1] == "dialog":
             quicklyutils.conventional_names(dialog_name)
         project_sentence_name, project_camel_case_name = \
             quicklyutils.conventional_names(project_name)
+        dialog_name = dialog_name.replace('-','_')
 
         substitutions = (("project_name",project_name),
                          ("dialog_name",dialog_name),

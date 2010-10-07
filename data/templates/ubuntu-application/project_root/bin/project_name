@@ -32,7 +32,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
 from python_name.helpers import get_builder
-#Try adding AppIndicator. Will work after "qucikly add indicator"
+#Try adding AppIndicator. Will work after "quickly add indicator"
 try:
     from python_name import indicator
 except:
