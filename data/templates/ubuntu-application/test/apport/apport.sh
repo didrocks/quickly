@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 cd /tmp
 
@@ -6,7 +6,6 @@ rm -rf test-project
 
 quickly create ubuntu-application test-project
 # Creating bzr repository and commiting
-# Launching your newly created project!
 # Congrats, your new project is setup! cd /tmp/test-project/ to start hacking.
 # Creating project directory test-project
 
@@ -382,8 +381,6 @@ quickly upgrade 0.3 0.4
 grep LaunchpadIntegration. bin/test-project
 #                 LaunchpadIntegration.set_sourcepackagename('test-project')
 #                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
-
-quickly run
 
 cp "$TEST_SCRIPT_DIR/test-project.no_lpi" ./bin/test-project
 
