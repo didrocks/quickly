@@ -54,20 +54,17 @@ $ quickly edit
 templatetools.handle_additional_parameters(sys.argv, help)
 
 
-# get the name of the project
-if len(sys.argv) < 2:
-    print _("""Project name not defined.\nUsage is: quickly create ubuntu-application project_name""")
-    sys.exit(4)
-
 path_and_project = sys.argv[1].split('/')
 project_name = path_and_project[-1]
 
-# check that project name follow quickly rules and reformat it.
 try:
     project_name = templatetools.quickly_name(project_name)
-except templatetools.bad_project_name, e:
-    print(e)
+except:
+    # user friendly message already caught in pre_create
     sys.exit(1)
+
+if len(path_and_project) > 1:
+    os.chdir(str(os.path.sep).join(path_and_project[0:-1]))
 
 os.chdir(project_name)
 
@@ -107,7 +104,7 @@ except:
     pass
 
 # add it to revision control
-print _("Creating bzr repository and commiting")
+print _("Creating bzr repository and committing")
 bzr_instance = subprocess.Popen(["bzr", "init"], stdout=subprocess.PIPE)
 bzr_instance.wait()
 bzr_instance = subprocess.Popen(["bzr", "add"], stdout=subprocess.PIPE)
