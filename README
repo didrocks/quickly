@@ -58,14 +58,12 @@ You need also for quickly release a project where you can bind your
 work with.
 $ quickly release or $ quickly share
 
+
+
 RUNNING TESTS
 ------------
 
-* integration test:
-  $ test/update-test-results.sh data/templates/ubuntu-application/test/internal/apport-test-script.sh
-
-* unit test:
-  $ python ./data/templates/ubuntu-application/test/internal/test_apportutils.py
+$ test/run.sh
 
 
 

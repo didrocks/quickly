@@ -11,8 +11,8 @@ import sys
 import StringIO
 from lxml import etree
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..")))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..","..","..","..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),"..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..","..","..")))
 
 from internal import apportutils
 
