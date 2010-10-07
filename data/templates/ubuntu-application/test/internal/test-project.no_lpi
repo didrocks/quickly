@@ -23,7 +23,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'test_project'))
 
 from test_project import (
     AboutTestProjectDialog, PreferencesTestProjectDialog)
-from test_project.helpers import make_window
+from test_project.helpers import get_builder
 
 
 class TestProjectWindow(gtk.Window):
@@ -89,8 +89,10 @@ def NewTestProjectWindow():
     TestProjectWindow object. Use this function rather than
     creating a TestProjectWindow directly.
     """
-    return make_window('TestProjectWindow', "test_project_window")
-
+    builder = get_builder('TestProjectWindow')
+    dialog = builder.get_object("test_project_window")
+    dialog.finish_initializing(builder)
+    return dialog
 
 if __name__ == "__main__":
     # Support for command line options.

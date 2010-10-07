@@ -1,3 +1,11 @@
+Quickly XXX
+------------------------------------
+
+ + ubuntu-application-template:
+   - Fix apport code to not fail when lp-project name changes
+   - Fix apport test to run cleanly by always upgrading from 0.3 to 0.4
+     template (test was originally written to test that upgrade)
+
 Quickly 0.6.1
 ------------------------------------
 
