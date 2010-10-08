@@ -22,6 +22,7 @@ import os
 import re
 import shutil
 import sys
+import subprocess
 
 from quickly import configurationhandler, templatetools
 from internal import quicklyutils
@@ -57,7 +58,7 @@ Adds license to project files. Before using this command, you should:
    - GPL-3 (default)
    - GPL-2
 
-This will modify the Copyright file with the chosen licence (with GPL-3 by default).
+This will modify the COPYING file with the chosen licence (with GPL-3 by default).
 Updating previous chosen Licence if needed.
 If you previously removed the tags to add your own licence, it will leave it pristine.
 If no name is attributed to the Copyright, it will try to retrieve it from Launchpad
@@ -128,6 +129,29 @@ def copy_license_to_files(license_content):
                     raise LicenceError(msg)
 
 
+def is_custom_license(flicense):
+    """Determines if the user currently has specified a custom license"""
+    try:
+        f = file(flicense)
+        contents = f.read()
+        if not contents:
+            return False
+    except:
+        return False
+
+    # flicense exists and has content.  So now we check if it is just a copy
+    # of any existing license.
+    supported_licenses_list = get_supported_licenses()
+    for license in supported_licenses_list:
+        path = os.path.dirname(__file__) + "/available_licenses/header_" + license
+        return_code = subprocess.call(['diff', '-q', flicense, path], stdout=subprocess.PIPE)
+        if return_code == 0:
+            return False
+
+    # must be!
+    return True
+
+
 def licensing(license=None):
     """Add license or update it to the project files
 
@@ -143,12 +167,14 @@ def licensing(license=None):
     python_name = templatetools.python_name(project_name)
 
     # check if we have a license tag in setup.py otherwise, default to GPL-3
-    if license is None:
+    if not license:
         try:
             license = quicklyutils.get_setup_value('license')
         except quicklyutils.cant_deal_with_setup_value:
             pass
-    if license is None or license == '':
+    if not license and is_custom_license(flicense_name):
+        license = 'custom'
+    if not license:
         license = 'GPL-3'
 
     # get Copyright holders in AUTHORS file
