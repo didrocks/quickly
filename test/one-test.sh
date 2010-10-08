@@ -54,7 +54,7 @@ DISPLAY="" # to avoid popup projects when creating them
 head -n1 "$SCRIPT" >> "$LOGFILE"
 egrep -v '(^#|^\s*$)' "$SCRIPT" | while read line; do
     echo >> "$LOGFILE"
-    echo $line >> "$LOGFILE";
+    echo "$line" >> "$LOGFILE";
     echo "#!/bin/sh" > $CMD;
     echo "export TEST_SCRIPT_DIR=$SCRIPT_DIR" >> $CMD;
     # Piping this line will cause a separate subprocess to execute
