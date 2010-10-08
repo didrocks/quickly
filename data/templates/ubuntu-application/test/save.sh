@@ -13,7 +13,7 @@ cd test-project
 
 bzr status
 
-(echo "Copyright (C) 2010 Oliver Twist <twist@gmail.com>" > AUTHORS)
+(echo "Copyright (C) 2010 Oliver Twist <twist@example.com>" > AUTHORS)
 
 (echo "My super cool project" > README)
 

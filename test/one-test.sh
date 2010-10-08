@@ -52,9 +52,12 @@ CMD_OUTPUT="$ORIGINAL_DIR/output.log"
 DISPLAY="" # to avoid popup projects when creating them
 
 head -n1 "$SCRIPT" >> "$LOGFILE"
-egrep -v '(^#|^\s*$)' "$SCRIPT" | while read line; do
+egrep -v '(^#[^#]|^\s*$)' "$SCRIPT" | while read -r line; do
     echo >> "$LOGFILE"
     echo "$line" >> "$LOGFILE";
+    if echo "$line" | grep '^##' > /dev/null; then
+        continue
+    fi
     echo "#!/bin/sh" > $CMD;
     echo "export TEST_SCRIPT_DIR=$SCRIPT_DIR" >> $CMD;
     # Piping this line will cause a separate subprocess to execute
