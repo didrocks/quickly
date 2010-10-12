@@ -52,11 +52,12 @@ Adds license to project files. Before using this command, you should:
    if you directly launch "$ quickly release" or "$ quickly share" before changing license)
    In this case, license is GPL-3 by default.
 2. If you want to put your own quickly unsupported Licence, add a COPYING file containing
-   your own licence.
+   your own licence and execute $ quickly license other.
 3. Executes either $ quickly license or $ quickly license <License>
    where <License> can be either:
    - GPL-3 (default)
    - GPL-2
+   - other
 
 This will modify the COPYING file with the chosen licence (with GPL-3 by default).
 Updating previous chosen Licence if needed.
@@ -174,6 +175,9 @@ def licensing(license=None):
             pass
     if not license:
         license = guess_license(flicense_name)
+        if license == 'other':
+            msg = _("COPYING contains an unknown license.  Please run 'quickly license other' to confirm that you want to use a custom license.")
+            raise LicenceError(msg)
     if not license:
         license = 'GPL-3'
 
