@@ -20,6 +20,9 @@ quickly license GPL-2 GPL-3
 # ERROR: This command only take one optional argument: License
 # Usage is: quickly license <license>
 
+quickly license GPL-0
+# ERROR: License must be one of Apache-2.0, BSD, GPL-2, GPL-3, LGPL-2, LGPL-3, MIT, or 'other'
+
 (echo "Copyright (C) 2010 Oliver Twist <twist@example.com>" > AUTHORS)
 
 (echo "This file is licensed under the OTL (Oliver Twist License)" > COPYING)
@@ -27,13 +30,27 @@ quickly license GPL-2 GPL-3
 quickly license
 
 grep license= setup.py
-#     license='custom',
+#     license='other',
 
 grep "Oliver Twist License" setup.py
 # # This file is licensed under the OTL (Oliver Twist License)
 
 cat COPYING
 # This file is licensed under the OTL (Oliver Twist License)
+
+sed -i "s/license=.*,/#license='other',/" setup.py
+
+cp /usr/share/common-licenses/BSD COPYING
+
+quickly license
+
+diff -q /usr/share/common-licenses/BSD COPYING
+
+grep license= setup.py
+#     license='BSD',
+
+grep "The Regents of the University of California" setup.py
+# # Copyright (c) The Regents of the University of California.
 
 sed -i "s/license=.*,/license='GPL-2',/" setup.py
 
