@@ -28,6 +28,11 @@ quickly license GPL-0
 (echo "This file is licensed under the OTL (Oliver Twist License)" > COPYING)
 
 quickly license
+# COPYING contains an unknown license.  Please run 'quickly license other' to confirm that you want to use a custom license.
+# ERROR: license command failed
+# Aborting
+
+quickly license other
 
 grep license= setup.py
 #     license='other',
