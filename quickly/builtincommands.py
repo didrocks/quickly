@@ -206,6 +206,9 @@ def quickly(project_template, project_dir, command_args, shell_completion=False)
     import_cmd_list = []
     for command_name in os.listdir(template_destination_path):
         file_path = os.path.join(template_destination_path, command_name)
+        if file_path.split(".")[-1] == "pyc":
+            os.remove(file_path)
+            continue
         # if there is a ., remove extension
         if "." in command_name:
             command_name = ".".join(command_name.split('.')[0:-1])
