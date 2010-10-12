@@ -33,7 +33,9 @@ quickly create ubuntu-application "test project"
 # Creating project directory test-project
 
 quickly create ubuntu-application test-project
-# ERROR: There is already a file or directory named test-project
+# There is already a file or directory named test-project
+# ERROR: pre_create command failed
+# Aborting
 
 quickly create ubuntu-application subdir/test-project
 # Creating bzr repository and committing

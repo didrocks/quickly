@@ -12,7 +12,9 @@ quickly create ubuntu-application test-project
 cd test-project
 
 quickly license
-# ERROR: Copyright is not attributed. Edit the AUTHORS file to include your name for the copyright replacing <Your Name> <Your E-mail>. Update it in setup.py or use quickly share/quickly release to fill it automatically
+# Copyright is not attributed. Edit the AUTHORS file to include your name for the copyright replacing <Your Name> <Your E-mail>. Update it in setup.py or use quickly share/quickly release to fill it automatically
+# ERROR: license command failed
+# Aborting
 
 quickly license GPL-2 GPL-3
 # ERROR: This command only take one optional argument: License

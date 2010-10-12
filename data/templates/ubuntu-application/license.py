@@ -273,6 +273,6 @@ if __name__ == "__main__":
     try:
         licensing(license)
     except LicenceError, error_message:
-        print "ERROR:", error_message
-        sys.exit(4)
+        print(error_message)
+        sys.exit(1)
 

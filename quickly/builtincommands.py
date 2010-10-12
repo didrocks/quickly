@@ -54,8 +54,8 @@ def pre_create(command_template, project_template, project_dir, command_args):
 
     #bail if the name if taken
     if os.path.exists(project_name):
-        print _("ERROR: There is already a file or directory named %s") % project_name
-        return(4)
+        print _("There is already a file or directory named %s") % project_name
+        return(1)
 
     #create directory and template file
     print _("Creating project directory %s" % project_name)
