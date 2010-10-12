@@ -1,3 +1,10 @@
+Quickly 0.7
+------------------------------------
+
+  + common:
+    - quickly quickly should remove *.pyc files as commands are imported
+      (LP: #658710)
+
 Quickly 0.6.1
 ------------------------------------
 
