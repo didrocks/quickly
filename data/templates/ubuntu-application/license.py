@@ -129,27 +129,27 @@ def copy_license_to_files(license_content):
                     raise LicenceError(msg)
 
 
-def is_custom_license(flicense):
-    """Determines if the user currently has specified a custom license"""
+def guess_license(flicense):
+    """Determines if the user currently has specified a other license"""
     try:
         f = file(flicense)
         contents = f.read()
         if not contents:
-            return False
+            return None
     except:
-        return False
+        return None
 
     # flicense exists and has content.  So now we check if it is just a copy
     # of any existing license.
     supported_licenses_list = get_supported_licenses()
     for license in supported_licenses_list:
-        path = os.path.dirname(__file__) + "/available_licenses/header_" + license
-        return_code = subprocess.call(['diff', '-q', flicense, path], stdout=subprocess.PIPE)
-        if return_code == 0:
-            return False
+        path = "/usr/share/common-licenses/" + license
+        if os.path.isfile(path):
+            return_code = subprocess.call(['diff', '-q', flicense, path], stdout=subprocess.PIPE)
+            if return_code == 0:
+                return license
 
-    # must be!
-    return True
+    return 'other'
 
 
 def licensing(license=None):
@@ -172,10 +172,16 @@ def licensing(license=None):
             license = quicklyutils.get_setup_value('license')
         except quicklyutils.cant_deal_with_setup_value:
             pass
-    if not license and is_custom_license(flicense_name):
-        license = 'custom'
+    if not license:
+        license = guess_license(flicense_name)
     if not license:
         license = 'GPL-3'
+
+    supported_licenses_list = get_supported_licenses()
+    supported_licenses_list.sort()
+    if license not in supported_licenses_list and license != 'other':
+        print _("ERROR: License must be one of %s, or 'other'") % ', '.join(supported_licenses_list)
+        sys.exit(4)
 
     # get Copyright holders in AUTHORS file
     license_content = ""
@@ -206,7 +212,6 @@ def licensing(license=None):
 
     # add header to license_content
     # check that COPYING file is provided if using a personal license
-    supported_licenses_list = get_supported_licenses()
     if license in supported_licenses_list:
         header_file_path = os.path.dirname(__file__) + "/available_licenses/header_" + license
     else:
