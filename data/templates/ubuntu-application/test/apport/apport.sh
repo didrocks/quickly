@@ -5,7 +5,7 @@ cd /tmp
 rm -rf test-project
 
 quickly create ubuntu-application test-project
-# Creating bzr repository and commiting
+# Creating bzr repository and committing
 # Congrats, your new project is setup! cd /tmp/test-project/ to start hacking.
 # Creating project directory test-project
 

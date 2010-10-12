@@ -36,7 +36,7 @@ class LicenceError(Exception):
     def __init__(self, msg):
         self.msg = msg
     def __str__(self):
-        return repr(self.msg)
+        return self.msg
 
 BEGIN_LICENCE_TAG = '### BEGIN LICENSE'
 END_LICENCE_TAG = '### END LICENSE'
@@ -301,7 +301,7 @@ if __name__ == "__main__":
     templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
     license = None
     if len(sys.argv) > 2:
-        print _("This command only take one optional argument: License\nUsage is: quickly license <license>")
+        print _("ERROR: This command only take one optional argument: License\nUsage is: quickly license <license>")
         sys.exit(4)
     if len(sys.argv) == 2:
         license = sys.argv[1]

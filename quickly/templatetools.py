@@ -48,7 +48,7 @@ def handle_additional_parameters(args, help=None, shell_completion=None):
 def quickly_name(name):
     """Enforce quickly name to be ascii, dashed and digit only in lowercase
 
-    return formated name"""
+    return formatted name"""
     forbidden_name = ['bin', 'data']
     name = name.strip().replace(" ", "-").lower()
     
@@ -56,9 +56,9 @@ def quickly_name(name):
     # allowed, such as '_'. The underscore is not allowed because
     # it indicates the separation between a Debian package name and its
     # version.
-    if not re.match("[a-z0-9-]+$", name):
+    if not re.match("[a-z][a-z0-9-]*$", name):
         raise bad_project_name(_("""ERROR: unpermitted character in name.
-Letters, spaces, dashes (-) and digits only."""))
+The name must start with a letter and contain only letters, spaces, dashes (-), and digits."""))
 
     if name in forbidden_name:
         raise bad_project_name(_('ERROR: %s is not permitted as a quickly project name'))

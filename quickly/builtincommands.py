@@ -32,18 +32,17 @@ def pre_create(command_template, project_template, project_dir, command_args):
     """Create the project directory before create command call"""
 
     if len(command_args) < 1:
-        print _("Create command must be followed by a template and a project path.\nUsage: quickly create <template> <project_name>")
+        print _("ERROR: Create command must be followed by a template and a project path.\nUsage: quickly create <template> <project-name>")
         return(4)
  
     path_and_project = command_args[0].split('/')
     project_name = path_and_project[-1]
     
-    # if a path is present, create it
+    # if a path is not present, create it
     if len(path_and_project) > 1:
         path = str(os.path.sep).join(path_and_project[0:-1])
         if not os.path.exists(path):
-            print _("%s does not exist") % path
-            return 1
+            os.makedirs(path)
         os.chdir(path)
     
     # check that project name follow quickly rules and reformat it.
@@ -51,7 +50,7 @@ def pre_create(command_template, project_template, project_dir, command_args):
         project_name = templatetools.quickly_name(project_name)
     except templatetools.bad_project_name, e:
         print(e)
-        return(1)
+        return(4)
 
     #bail if the name if taken
     if os.path.exists(project_name):
