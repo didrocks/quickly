@@ -97,10 +97,10 @@ def getstarted(project_template, project_dir, command_args, shell_completion=Fal
         return("")
 
     print _('''-------------------------------
-    Welcome to quickly!
+    Welcome to Quickly!
 -------------------------------
 
-You can create a project by executing 'quickly create <template_name> <your project>'.
+You can create a project by executing 'quickly create <template-name> <your-project>'.
 
 Example with ubuntu-application template:
 1. create an ubuntu application and run the tutorial:
@@ -175,7 +175,7 @@ def quickly(project_template, project_dir, command_args, shell_completion=False)
         return("")
 
     if len(command_args) < 1:
-        print _("Quickly command must be followed by a template and a template destination path\nUsage is: quickly quickly [origin_template] destination_template")
+        print _("Quickly command must be followed by a template and a template destination path\nUsage is: quickly quickly [origin-template] destination-template")
         return(4)
 
     destination_path = os.path.expanduser("~/quickly-templates/")

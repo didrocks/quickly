@@ -57,7 +57,7 @@ Options:
 
 Commands:
     create <template> <project-name> (template is mandatory for this command)
-    quickly <template_origin> <template_dest> to create a create derived template
+    quickly <template-origin> <template-dest> to create a create derived template
     getstarted to get some starting hints
 
 Examples:

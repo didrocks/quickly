@@ -21,18 +21,18 @@ exit_status() {
 ORIGINAL_DIR=$(pwd)
 
 SCRIPT=$1
-TEMPLATE_NAME=$(echo "$SCRIPT" | cut -d/ -f3)
+CATEGORY=${2:-test}
 SCRIPT_NAME=$(basename "$SCRIPT")
 LOGFILE="$ORIGINAL_DIR/results.log"
 
 rm -f "$LOGFILE"
 
 if [ -d "$SCRIPT" ]; then
-    echo -n "Running $TEMPLATE_NAME $SCRIPT_NAME.sh... "
+    echo -n "Running $CATEGORY $SCRIPT_NAME.sh... "
     SCRIPT="$SCRIPT/$SCRIPT_NAME.sh"
 elif echo "$SCRIPT_NAME" | grep "\.py$" > /dev/null; then
     # this is actually a python unit test
-    echo -n "Running $TEMPLATE_NAME $SCRIPT_NAME... "
+    echo -n "Running $CATEGORY $SCRIPT_NAME... "
     python "$SCRIPT" > "$LOGFILE" 2>&1
     rv=$?
     if [ $rv -ne 0 ]; then
@@ -42,7 +42,7 @@ elif echo "$SCRIPT_NAME" | grep "\.py$" > /dev/null; then
     rm -f "$LOGFILE"
     exit_status $rv
 else
-    echo -n "Running $TEMPLATE_NAME $SCRIPT_NAME... "
+    echo -n "Running $CATEGORY $SCRIPT_NAME... "
 fi
 
 TEMP_SCRIPT_DIR=$(dirname "$SCRIPT")
