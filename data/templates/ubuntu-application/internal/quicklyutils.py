@@ -241,10 +241,13 @@ def get_quickly_editors():
 
     editor = "gedit"
     default_editor = os.environ.get("EDITOR")
+    quickly_editor = os.environ.get("QUICKLY_EDITOR")
     if not default_editor:
         default_editor = os.environ.get("SELECTED_EDITOR")
     if default_editor:
        editor = default_editor
+    if quickly_editor:
+       editor = quickly_editor
     return editor
 
 
