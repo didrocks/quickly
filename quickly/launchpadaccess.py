@@ -108,10 +108,10 @@ def initialize_lpi(interactive = True):
             # case where autorization on Launchpad was removed
             if lp_cred_file:
                 os.remove(lp_cred_file.name)
-                print _('Previous Launchpad values seems to have been removed. You must choose again "Change Anything"')
+                print _('Previous Launchpad values seems to have been removed.')
             else:
-                print _('Initial Launchpad binding. You must choose "Change Anything"')
-            launchpad = Launchpad.get_token_and_login('quickly', SERVICE_ROOT, lp_cache_dir)
+                print _('Initial Launchpad binding.')
+            launchpad = Launchpad.get_token_and_login(_('Quickly'), SERVICE_ROOT, lp_cache_dir, allow_access_levels=["WRITE_PRIVATE"])
             lp_cred_file = open(lp_cred, 'w')
             launchpad.credentials.save(lp_cred_file)
             lp_cred_file.close()

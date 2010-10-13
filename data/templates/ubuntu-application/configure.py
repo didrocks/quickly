@@ -18,7 +18,6 @@
 
 import os
 import sys
-import tempfile
 import subprocess
 
 import internal.apportutils
@@ -35,7 +34,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('bzr', 'dependencies', 'lp-project', 'ppa', 'target_distribution')
+options = ('bzr', 'dependencies', 'lp-project', 'ppa', 'target-distribution')
 
 def help():
     print _("""Usage:
@@ -77,6 +76,8 @@ if argv[1] == "lp-project":
     project_name = None
     if len(argv) > 2:
         project_name = argv[2]
+    else:
+        project_name = quicklyutils.read_input()
     # need to try and get the original project name if it exists.  We'll need this
     # to replace any existing settings
     if not configurationhandler.project_config:
@@ -99,6 +100,11 @@ if argv[1] == "lp-project":
 
 # change default ppa
 elif argv[1] == "ppa":
+    if len(argv) != 3:
+        print(_('''Usage is: $ quickly configure ppa <ppaname>
+Use shell completion to find all available ppas'''))
+        sys.exit(4)
+
     # connect to LP
     try:
         launchpad = launchpadaccess.initialize_lpi()
@@ -106,26 +112,21 @@ elif argv[1] == "ppa":
         print(e)
         sys.exit(1)
 
-    if len(argv) != 3:
-        print(_('''Usage is: $ quickly configure ppa <ppaname>
-Use shell completion to find all available ppas'''))
-        sys.exit(4)
-
     ppa_name = argv[2]
     # choose right ppa parameter (users, etc.) ppa or staging
     try:
         (ppa_user, ppa_name, dput_ppa_name, ppa_url) = packaging.choose_ppa(launchpad, ppa_name)
     except packaging.user_team_not_found, e:
-        print(_("User or Team %s not found on Launchpad") % e)
+        print(_("User or team %s not found on Launchpad") % e)
         sys.exit(1)
     except packaging.not_ppa_owner, e:
-        print(_("You have to be a member of %s team to upload to its ppas") % e)
+        print(_("You have to be a member of %s team to upload to its PPAs") % e)
         sys.exit(1)
 
     try:
         ppa_name = packaging.check_and_return_ppaname(launchpad, ppa_user, ppa_name) # ppa_name can be ppa name or ppa display name. Find the right one if exists
     except packaging.ppa_not_found, e:
-        print(_("%s does not exist. Please create it on launchpad if you want to upload to it. %s has the following ppas available:") % (e, ppa_user.name))
+        print(_("%s does not exist. Please create it on launchpad if you want to upload to it. %s has the following PPAs available:") % (e, ppa_user.name))
         for ppa_name, ppa_display_name in packaging.get_all_ppas(launchpad, ppa_user):
             print "%s - %s" % (ppa_name, ppa_display_name)
         sys.exit(1)
@@ -144,7 +145,7 @@ elif argv[1] == "bzr":
     bzrutils.set_bzrbranch(argv[2])
     configurationhandler.saveConfig()    
 
-# add additional depency
+# add additional dependencies
 elif argv[1] == "dependencies":
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
@@ -152,19 +153,17 @@ elif argv[1] == "dependencies":
         dependencies = [elem.strip() for elem in configurationhandler.project_config['dependencies'].split(',') if elem]
     except KeyError:
         dependencies = []
-    depfile_name = tempfile.mkstemp()[1]
-    open(depfile_name,'w').write("\n".join(dependencies))
-    editor = quicklyutils.get_quickly_editors()
+    userinput = quicklyutils.read_input('\n'.join(dependencies))
     dependencies = []
-    os.system("%s %s" % (editor, depfile_name))
-    for depends in file(depfile_name, 'r'):
+    for depends in userinput.split('\n'):
         dependencies.extend([elem.strip() for elem in depends.split(',') if elem])
-    os.remove(depfile_name)
     configurationhandler.project_config['dependencies'] = ", ".join(dependencies)
     configurationhandler.saveConfig()
-elif argv[1] == "target_distribution":
+
+# Originally, this was target_distribution, but we changed it to be more consistent with other commands
+elif argv[1] == "target-distribution" or argv[1] == "target_distribution":
     if len(argv) != 3:
-        print(_('''Usage is: $ quickly configure target_distribution <ubuntu-release-name>'''))
+        print(_('''Usage is: $ quickly configure target-distribution <ubuntu-release-name>'''))
         sys.exit(4)
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()

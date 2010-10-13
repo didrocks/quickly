@@ -36,7 +36,9 @@ grep url= setup.py
 grep website data/ui/AboutTestProjectDialog.ui
 #     <property name="website">https://launchpad.net/gpoweroff</property>
 
-quickly configure lp-project hudson-notifier
+(echo hudson-notifier > tmp)
+
+quickly configure lp-project < tmp
 # Get Launchpad Settings
 # Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
@@ -73,23 +75,88 @@ grep bzrbranch .quickly
 ## Test configure target_distribution
 
 quickly configure target_distribution
-# Usage is: $ quickly configure target_distribution <ubuntu-release-name>
+# Usage is: $ quickly configure target-distribution <ubuntu-release-name>
 
 quickly configure target_distribution 1 2
-# Usage is: $ quickly configure target_distribution <ubuntu-release-name>
+# Usage is: $ quickly configure target-distribution <ubuntu-release-name>
 
 grep target_distribution .quickly
 
-## For the eventual Quickly Quetzal release
+## For the eventual Quickly Quetzal release (note that we test both underscore and dash for this command)
 
 quickly configure target_distribution quickly
 
 grep target_distribution .quickly
 # target_distribution = quickly
 
-quickly configure target_distribution slowly
+quickly configure target-distribution slowly
 
 grep target_distribution .quickly
 # target_distribution = slowly
 
-## TODO: ppa and dependencies
+## Test configure dependencies
+
+grep dependencies .quickly
+
+(echo -e one, potato \\n two potato > tmp)
+
+quickly configure dependencies < tmp
+
+grep dependencies .quickly
+# dependencies = one, potato, two potato
+
+(echo blarg > tmp)
+
+quickly configure dependencies < tmp
+
+grep dependencies .quickly
+# dependencies = blarg
+
+## test configure ppa
+
+quickly configure ppa
+# Usage is: $ quickly configure ppa <ppaname>
+# Use shell completion to find all available ppas
+
+quickly configure ppa 1 2
+# Usage is: $ quickly configure ppa <ppaname>
+# Use shell completion to find all available ppas
+
+quickly configure ppa quickly-does-not-exist/does-not-exist
+# Get Launchpad Settings
+# Launchpad connection is ok
+# User or team quickly-does-not-exist not found on Launchpad
+# ERROR: configure command failed
+# Aborting
+
+quickly configure ppa bug-watch-updater/does-not-exist
+# Get Launchpad Settings
+# Launchpad connection is ok
+# You have to be a member of bug-watch-updater team to upload to its PPAs
+# ERROR: configure command failed
+# Aborting
+
+quickly configure ppa quickly/does-not-exist
+# Get Launchpad Settings
+# Launchpad connection is ok
+# ppa:quickly:does-not-exist does not exist. Please create it on launchpad if you want to upload to it. quickly has the following PPAs available:
+# daily-build - Daily build
+# ppa - quickly
+# ERROR: configure command failed
+# Aborting
+
+grep ppa .quickly
+
+quickly configure ppa quickly/ppa
+# Get Launchpad Settings
+# Launchpad connection is ok
+
+grep ppa .quickly
+# ppa = quickly/ppa
+
+quickly configure ppa quickly/daily-build
+# Get Launchpad Settings
+# Launchpad connection is ok
+
+grep ppa .quickly
+# ppa = quickly/daily-build
