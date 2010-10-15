@@ -27,11 +27,10 @@ from internal import quicklyutils, packaging
 from quickly import templatetools, configurationhandler
 
 
+def usage():
+    templatetools.print_usage('quickly package')
 def help():
-    print _("""Usage:
-$quickly package
-
-Creates a debian file (deb) from your project. Before running
+    print _("""Creates a debian file (deb) from your project. Before running
 the package command you can edit the Icon and Category entry of *.desktop.in 
 file, where * is the name of your project.
 
@@ -39,9 +38,8 @@ Note that if you didn't run quickly release, quickly share
 or quickly change-lp-project you may miss the name, email in
 setup.py. You can edit them if you don't want to use any of these
 commands afterwards. Those changes are not a mandatory at all for
-testing purpose.
-""")
-templatetools.handle_additional_parameters(sys.argv, help)
+testing purpose.""")
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
 
 # retrieve useful information

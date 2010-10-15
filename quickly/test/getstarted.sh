@@ -1,5 +1,5 @@
 #!/bin/sh
- 
+
 quickly getstarted
 # -------------------------------
 #     Welcome to Quickly!

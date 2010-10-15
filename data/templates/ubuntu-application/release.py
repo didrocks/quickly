@@ -23,7 +23,7 @@ import webbrowser
 
 from internal import quicklyutils, packaging, launchpad_helper
 from internal import bzrutils
-from quickly import templatetools, configurationhandler
+from quickly import templatetools, configurationhandler, commands
 import license
 
 import logging
@@ -36,41 +36,28 @@ gettext.textdomain('quickly')
 
 options = ("--ppa",)
 
+def usage():
+    templatetools.print_usage(_('quickly release [--ppa <ppa-name>] [release-version] [comments]'))
 def help():
-    print _("""Usage:
-$quickly release
-
-Posts a release of your project to a PPA on launchpad so that
+    print _("""Posts a release of your project to a PPA on launchpad so that
 users can install the application on their system.
-
-You can also execute:
-$quickly release <release_number> if you don't want to use current
-release_number. The release_number must be a number.
-
-$quickly release <release_number> notes about changes
-where "notes about changes" is optional text describing what changes
-were made since the last save
-
---ppa your_ppa (name or display name) to specify to which ppa you want
-to share
---ppa team/ppa (name or display name) to specify to which ppa team you
-want to share
 
 Before running quickly release, you should: create your account
 and a project page on http://launchpad.net.
 You also have to add a PPA to your launchpad account.
 
-Name, email and version setup.py will be automatically changed.
-(version will be <current_release> and bzr will commit and tagged.
-Once the release is done,  <current_release> will use year.month<.release>
-<.release> is incremented by 1 for each release in the same month.
-If you previously used quickly shared <current_release>-publicX
+Name, email, and version will be automatically changed in setup.py and
+bzr will tag the current source with the new version number.
 
-You can modify the description and long description if you wish.
+The new version number will be 'YEAR.MONTH[.RELEASE]'.
 
-You can run $quickly package and test your package to make sure it
-installs as expected. (This is not mandatory)
-""")
+For example, the third release in July 2010 will be versioned 10.07.2.
+
+You may want to make sure that the description and long description in
+setup.py are up to date before releasing.
+
+You can optionally run 'quickly package' and test your package to make
+sure it installs as expected.""")
 def shell_completion(argv):
     ''' Complete --args '''
     # option completion
@@ -79,7 +66,7 @@ def shell_completion(argv):
     elif len(argv) > 1 and argv[-2] == '--ppa': # if argument following --ppa, complete by ppa
         print " ".join(packaging.shell_complete_ppa(argv[-1]))
 
-templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
+templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
 
 
 launchpad = None
@@ -97,12 +84,11 @@ while i < len(argv):
                 ppa_name = argv[i + 1]
                 i += 1
             else:
-                print _("--ppa needs one argument: <ppa_name> or <team/ppa_name>")
-                sys.exit(4)
+                cmd = commands.get_command('release', 'ubuntu-application')
+                templatetools.usage_error(_("No PPA provided."), cmd=cmd)
         else:
-            print _("Unknown option: %s"  % arg)
-            print _("General usage is: quickly release [release_version] [comments]")
-            sys.exit(4)
+            cmd = commands.get_command('release', 'ubuntu-application')
+            templatetools.usage_error(_("Unknown option: %s."  % arg), cmd=cmd)
     else:
         args.append(arg)
     i += 1

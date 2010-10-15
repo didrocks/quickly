@@ -34,22 +34,23 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('bzr', 'dependencies', 'lp-project', 'ppa', 'target-distribution')
+options = {'bzr': _('quickly configure bzr <bzr-branch-string>'),
+          'dependencies': 'quickly configure dependencies',
+          'lp-project': _('quickly configure lp-project [project-name]'),
+          'ppa': _('quickly configure ppa <ppa-name>'),
+          'target-distribution': _('quickly configure target-distribution <ubuntu-release-name>')}
 
+def usage():
+    templatetools.print_usage(options.values())
 def help():
-    print _("""Usage:
-$ quickly configure [%s] <args>
-
-Enable to set or change some parameters of the project, like to which
-launchpad project should be binded with the current ubuntu application, what
-ppa should we use by default to share your package, what additional dependency
+    print _("""Enable to set or change some parameters of the project, like which
+launchpad project should be bound with the current ubuntu application, what
+PPA should we use by default to share your package, what additional dependencies
 should be added…
 
-Note: If you are specifying a target_distribution apart from the one you are
+Note: If you are specifying a target-distribution apart from the one you are
 running, be warned that dependency detection may not be as accurate due to
-(rare) discrepancies between distributions.
-
-""") % ("|".join(options))
+(rare) discrepancies between distributions.""")
 def shell_completion(argv):
     ''' Complete args '''
     # option completion
@@ -58,7 +59,7 @@ def shell_completion(argv):
     elif len(argv) > 1 and argv[-2] == 'ppa': # if argument following ppa keyname, complete by ppa
         print " ".join(packaging.shell_complete_ppa(argv[-1]))
 
-templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
+templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
 
 if len(argv) < 2:
     help()
@@ -101,8 +102,8 @@ if argv[1] == "lp-project":
 # change default ppa
 elif argv[1] == "ppa":
     if len(argv) != 3:
-        print(_('''Usage is: $ quickly configure ppa <ppaname>
-Use shell completion to find all available ppas'''))
+        templatetools.print_usage(options['ppa'])
+        print _("\nUse shell completion to find all available PPAs")
         sys.exit(4)
 
     # connect to LP
@@ -140,7 +141,7 @@ Use shell completion to find all available ppas'''))
 # change default bzr push branch
 elif argv[1] == "bzr":
     if len(argv) != 3:
-        print(_('''Usage is: $ quickly configure bzr <bzr-branch-string>'''))
+        templatetools.print_usage(options['bzr'])
         sys.exit(4)
     bzrutils.set_bzrbranch(argv[2])
     configurationhandler.saveConfig()    
@@ -163,7 +164,7 @@ elif argv[1] == "dependencies":
 # Originally, this was target_distribution, but we changed it to be more consistent with other commands
 elif argv[1] == "target-distribution" or argv[1] == "target_distribution":
     if len(argv) != 3:
-        print(_('''Usage is: $ quickly configure target-distribution <ubuntu-release-name>'''))
+        templatetools.print_usage(options['target-distribution'])
         sys.exit(4)
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()

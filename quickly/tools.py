@@ -49,8 +49,7 @@ def usage():
 
 Options:
     -t, --template <template>  Template to use if it differs from default
-                               project one
-                               one used to create the project)
+                               project template
     --staging                  Target launchpad staging server
     --verbose                  Verbose mode
     -h, --help                 Show help information
@@ -176,8 +175,6 @@ def check_template_exists(template):
     try: 
         commands.get_all_commands()[template]
     except KeyError:
-        print _("ERROR: Template %s does not exist.") % (template)
-        print _("Arborting.")
         return False
     return True
 

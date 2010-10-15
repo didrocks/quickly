@@ -31,10 +31,65 @@ if os.path.exists(os.path.join(quickly_root_directory, 'quickly')) and quickly_r
     sys.path.insert(0, quickly_root_directory)
     os.putenv('PYTHONPATH', quickly_root_directory) # for subprocesses
 
-from quickly import commands, configurationhandler, quicklyconfig, coreupgrade, tools, version
+from quickly import commands, configurationhandler, quicklyconfig, coreupgrade, templatetools, tools, version
 
 gettext.textdomain('quickly')
 
+def check_args(cmd, command_args, project_template):
+    if not cmd.followed_by_template and not cmd.followed_by_command:
+        return command_args # nothing to check
+
+    command = None
+
+    if cmd.followed_by_template and cmd.followed_by_command:
+        # If no arguments, there is something obviously wrong
+        if len(command_args) == 0:
+            if project_template:
+                templatetools.usage_error(_("No command provided to %s command.") % cmd.name, cmd=cmd, template=project_template)
+            else:
+                templatetools.usage_error(_("No template or command provided to %s command.") % cmd.name, cmd=cmd)
+        # At least one argument.  What is it?  First check if it's a command if we already have a template
+        if project_template:
+            command = commands.get_command(command_args[0], project_template)
+            if command:
+                command_args.insert(0, project_template) # use default template
+            elif not command and not tools.check_template_exists(command_args[0]):
+                # Wasn't a command or a template name, but we are in the context of a template
+                templatetools.usage_error(_("No %s command found in %s template.") % (command_args[0], project_template), cmd=cmd, template=project_template)
+        if not command:
+            # must be a template name then (or nonsense)
+            if not tools.check_template_exists(command_args[0]):
+                command = commands.get_command(command_args[0]) # did user provid a valid builtin command?
+                if command:
+                    command_args.insert(0, 'builtins')
+                elif len(command_args) == 1:
+                    templatetools.usage_error(_("%s is neither a template nor a standard command.") % (command_args[0]), cmd=cmd)
+                else:
+                    templatetools.usage_error(_("Template %s does not exist.") % (command_args[0]), cmd=cmd, show_templates_for=None)
+            project_template = command_args[0]
+            # OK, we have a template!
+            if len(command_args) < 2:
+                templatetools.usage_error(_("No command provided to %s command.") % cmd.name, cmd=cmd, template=project_template)
+            command = commands.get_command(command_args[1], project_template)
+            if not command:
+                templatetools.usage_error(_("No %s command found in %s template.") % (command_args[1], project_template), cmd=cmd, template=project_template)
+
+    elif cmd.followed_by_template:
+        if len(command_args) > 0:
+            if tools.check_template_exists(command_args[0]):
+                project_template = command_args[0]
+        if not project_template:
+            templatetools.usage_error(_("No template provided to %s command.") % cmd.name, cmd=cmd)
+
+    elif cmd.followed_by_command:
+        if len(command_args) > 0:
+            command = commands.get_command(command_args[0], project_template)
+            if not command:
+                templatetools.usage_error(_("No %s command found.") % command_args[0], cmd=cmd, template=project_template)
+        if not command:
+            templatetools.usage_error(_("No command provided to %s command.") % cmd.name, cmd=cmd, template=project_template)
+
+    return command_args
 
 def main():
     """Main ubuntu command line processor
@@ -55,69 +110,36 @@ def main():
     # check that the command exists in current template
     if opt_template:
         if not tools.check_template_exists(opt_template):
-            return(1)
+            templatetools.usage_error(_("Template %s does not exist.") % (opt_template), show_templates_for=command_name)
 
         # with this search, we are sure that only one command: (name,template) is unique
-        try:
-            command = commands.get_commands_by_criteria(name=command_name, template=opt_template)[0]
-        except IndexError:
-            # if not found, try for builtins command
-            try:
-                command = commands.get_commands_by_criteria(name=command_name, template='builtins')[0]
-            except IndexError: 
-                print _("ERROR: No %s command found in template %s.") % (command_name, opt_template)
-                print _("Aborting.")
-                return(1)
-            
+        command = commands.get_command(command_name, opt_template)
+        if not command:
+            templatetools.usage_error(_("No %s command found in template %s.") % (command_name, opt_template), template=opt_template)
+
     # from this line, if we don't have a template, only builtins commands and template command followed_by_template are candidates
     else:
         # check for a builtin command (again, one solution only)
-        try:
-            command = commands.get_commands_by_criteria(name=command_name, template='builtins')[0]    
-            # if it's a builtin command which has to be followed by a template, check that everything is correct
-            if command.followed_by_template:
-                try:
-                    # this condition is for the case of, for instance $ quickly help <builtin_command> (no template associated and can be followed by a builtin command)
-                    if not (command.followed_by_command and len(opt_command) == 2):
-                        opt_template = opt_command[1]
-                        opt_command.remove(opt_command[1])
-                        if not tools.check_template_exists(opt_template):
-                            return(1)
-                except IndexError:
-                    print _("ERROR: %s command must be followed by a template and no template was found on the command line." % command_name)
-                    print _("Candidates template are: %s") % ", ".join(commands.get_all_templates())
-                    return(1)
-        except IndexError:        
+        command = commands.get_command(command_name, 'builtins')
+        if not command:
             # so, check for a template command followed by template
-            try:
-                command = commands.get_commands_by_criteria(name=command_name, template=opt_command[1], followed_by_template=True)[0]
-                opt_template = opt_command[1]
-                opt_command.remove(opt_command[1])
-            except IndexError:
+            if len(opt_command) > 1 and tools.check_template_exists(opt_command[1]):
+                command = commands.get_command(command_name, opt_command[1], followed_by_template=True)
+                if command:
+                    opt_template = opt_command[1]
+                    opt_command.remove(opt_template)
+            if not command:
                 # to help the user, we can search if this command_name corresponds to a command in a template
-                list_possible_commands = commands.get_commands_by_criteria(name=command_name, followed_by_template=True)
-                proposed_templates = []
-                for template in commands.get_all_templates():
-                    try:
-                        commands.get_all_commands()[template][command_name]
-                        proposed_templates.append(template)
-                    except KeyError:
-                        pass
-                if list_possible_commands:
-                    print _("ERROR: %s command must be followed by a template and no template was found on the command line." % command_name)
-                    print _("Candidates template are: %s") % ", ".join(proposed_templates)
+                possible_commands = commands.get_commands_by_criteria(name=command_name, followed_by_template=True)
+                if possible_commands:
+                    templatetools.usage_error(_("No template specified for command %s." % command_name), cmd=possible_commands[0], show_templates_for=command_name)
                 else:
-                    list_possible_commands = commands.get_commands_by_criteria(name=command_name, followed_by_template=False)
-                    if list_possible_commands:
-                       print _("No template were found on the command line for command %s." % command_name)
-                       print _("Candidates template are: %s") % ", ".join(proposed_templates)                        
-                    else:
-                        # there is really not such command, in any template
-                        print _("ERROR: No %s command found.") % command_name
-                print _("Aborting.")
-                return(1)
+                    # there is really not such command, in any template
+                    templatetools.usage_error(_("No %s command found.") % command_name)
 
-    return(command.launch(os.getcwd(), opt_command[1:], opt_template))
+    command_args = check_args(command, opt_command[1:], opt_template)
+
+    return(command.launch(os.getcwd(), command_args, opt_template))
 
 
 if __name__ == '__main__':

@@ -3,8 +3,8 @@
 rm -r /tmp/quickly-test
 
 quickly quickly ubuntu-application
-# Quickly command must be followed by a template and a template destination path
-# Usage is: quickly quickly [origin-template] destination-template
+# ERROR: No destination template name provided.
+# Usage: quickly quickly [origin-template] destination-template
 
 export HOME=/tmp/quickly-test; quickly quickly ubuntu-application test-template
 # Copy ubuntu-application to create new /tmp/quickly-test/quickly-templates/test-template template

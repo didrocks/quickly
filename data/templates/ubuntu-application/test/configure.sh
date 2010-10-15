@@ -55,10 +55,10 @@ grep website data/ui/AboutTestProjectDialog.ui
 ## Test configure bzr
 
 quickly configure bzr
-# Usage is: $ quickly configure bzr <bzr-branch-string>
+# Usage: quickly configure bzr <bzr-branch-string>
 
 quickly configure bzr 1 2
-# Usage is: $ quickly configure bzr <bzr-branch-string>
+# Usage: quickly configure bzr <bzr-branch-string>
 
 grep bzrbranch .quickly
 
@@ -75,10 +75,10 @@ grep bzrbranch .quickly
 ## Test configure target_distribution
 
 quickly configure target_distribution
-# Usage is: $ quickly configure target-distribution <ubuntu-release-name>
+# Usage: quickly configure target-distribution <ubuntu-release-name>
 
 quickly configure target_distribution 1 2
-# Usage is: $ quickly configure target-distribution <ubuntu-release-name>
+# Usage: quickly configure target-distribution <ubuntu-release-name>
 
 grep target_distribution .quickly
 
@@ -115,12 +115,14 @@ grep dependencies .quickly
 ## test configure ppa
 
 quickly configure ppa
-# Usage is: $ quickly configure ppa <ppaname>
-# Use shell completion to find all available ppas
+# Usage: quickly configure ppa <ppa-name>
+# 
+# Use shell completion to find all available PPAs
 
 quickly configure ppa 1 2
-# Usage is: $ quickly configure ppa <ppaname>
-# Use shell completion to find all available ppas
+# Usage: quickly configure ppa <ppa-name>
+# 
+# Use shell completion to find all available PPAs
 
 quickly configure ppa quickly-does-not-exist/does-not-exist
 # Get Launchpad Settings
