@@ -875,7 +875,7 @@ Now that you've packaged your application, you can share the .deb file. However,
 <xref linkend="edit">edit</xref>
    </listitem>
    <listitem>
-<xref linkend="glade">design</xref>
+<xref linkend="design">design</xref>
    </listitem>
    <listitem>
 <xref linkend="help">help</xref>
@@ -982,8 +982,8 @@ directory in your default editor, ready for editing.
 </para>
 </sect1>
 
-<sect1 id="glade"><title>glade</title>
-<para><title>glade</title>
+<sect1 id="design"><title>design</title>
+<para><title>design</title>
 Usage:</para><para><programlisting>
 <application>Quickly</application> design
 </programlisting></para><para>
@@ -1167,7 +1167,7 @@ You can modify the description and long description if you wish.
     <ulink url="http://library.gnome.org/users/gedit/stable/index.html">Editor: Gedit Help</ulink>
    </listitem>
    <listitem>
-    <ulink url="http://doc.bazaar-vcs.org/bzr.dev/en/user-reference/bzr_man.html">Version Control: Bazaar</ulink>
+    <ulink url="http://bazaar.canonical.com/en/">Version Control: Bazaar</ulink>
    </listitem>
   </itemizedlist>
 </para>
