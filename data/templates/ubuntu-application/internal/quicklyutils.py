@@ -19,6 +19,7 @@ import os
 import re
 import sys
 import subprocess
+import tempfile
 from xml.etree import ElementTree as etree
 
 import gettext
@@ -239,17 +240,39 @@ def collect_commit_messages(previous_version):
 def get_quickly_editors():
     '''Return prefered editor for ubuntu-application template'''
 
-    editor = "gedit"
-    default_editor = os.environ.get("EDITOR")
-    quickly_editor = os.environ.get("QUICKLY_EDITOR")
+    default_editor = os.environ.get("QUICKLY_EDITOR")
+    if not default_editor:
+        default_editor = os.environ.get("EDITOR")
     if not default_editor:
         default_editor = os.environ.get("SELECTED_EDITOR")
     if default_editor:
-       editor = default_editor
-    if quickly_editor:
-       editor = quickly_editor
+        editor = default_editor
+    elif templatetools.is_X_display():
+        editor = "gedit"
+    else:
+        editor = "nano"
     return editor
 
+def read_input(start=''):
+    depfile_name = tempfile.mkstemp()[1]
+    open(depfile_name,'w').write(start)
+
+    # Run the editor with a new tmpdir.  This is because gedit uses tmpdir
+    # to find other instances of gedit, and we don't want that.  If we allowed
+    # that, gedit would return immediately and open a new tab in the other
+    # gedit.  This makes it difficult to tell when user is done editing (how
+    # to detect that vs nano opening and closing without the user saving it?).
+    editor = get_quickly_editors()
+    subenv = dict(os.environ)
+    subenv['TMPDIR'] = tempfile.mkdtemp()
+    subprocess.call([editor, depfile_name], stdout=subprocess.PIPE, env=subenv)
+    os.rmdir(subenv['TMPDIR'])
+
+    # Grab file contents
+    rv = file(depfile_name, 'r').read().strip()
+    os.remove(depfile_name)
+
+    return rv
 
 def take_email_from_string(value):
     '''Try to take an email from a string'''

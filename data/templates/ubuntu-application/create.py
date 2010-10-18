@@ -31,19 +31,15 @@ gettext.textdomain('quickly')
 
 
 
+def usage():
+    templatetools.print_usage(_('quickly create <template> <project-name>'))
 def help():
-    print _("""Usage:
-$ quickly create ubuntu-application path/to/project_name
-
-where "project_name" is one or more words separated by an underscore and
-path/to can be any existing path.
-
-This will create and run a new project, including Python code, 
+    print _("""This will create and run a new project, including Python code, 
 Glade files, and packaging files to make the project work. After
 creating the project, get started by:
 
 1. Changing your working directory to the new project:
-$ cd path/to/project_name
+$ cd path/to/project-name
 
 2. Edit the UI with Glade:
 $ quickly design
@@ -51,7 +47,7 @@ $ quickly design
 3. Edit the Python code:
 $ quickly edit
 """)
-templatetools.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
 
 path_and_project = sys.argv[1].split('/')

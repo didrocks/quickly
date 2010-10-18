@@ -20,7 +20,7 @@ import os
 import sys
 import webbrowser
 
-from quickly import templatetools
+from quickly import templatetools, commands
 import license
 
 import gettext
@@ -38,26 +38,26 @@ args = []
 argv = sys.argv
 
 
+def usage():
+    templatetools.print_usage(_('quickly share [--ppa <ppa | group/ppa>]'))
 def help():
-    print _("""Usage:
-$quickly share
-
-Updates your PPA with the the latest saved project changes.
+    print _("""Updates your PPA with the the latest saved project changes.
 
 Before running quickly share, you should: create your account
 on http://launchpad.net.
 You also have to add a PPA to your launchpad account.
 
-Name, email and version setup.py will be automatically changed.
-(version will be <current_release~publicX> where X will be incremented
-at each quickly share execution)
-You can modify the description and long description if you wish.
+Name, email, and version will be automatically changed in setup.py.
 
---ppa your_ppa (name or display name) to specify to which ppa you want
-to share
---ppa team/ppa (name or display name) to specify to which ppa team you
-want to share
-""")
+The new version number will be 'CURRENT.VERSION-publicX', where X will
+be incremented each time you share.
+
+For example, if you most recently released 10.07.2 and you have shared
+the package three times since then, another run of 'quickly share' will
+use a new version of 10.07.2-public4.
+
+You can optionally run 'quickly package' and test your package to make
+sure it installs as expected.""")
 def shell_completion(argv):
     ''' Complete --args '''
     # option completion
@@ -68,7 +68,7 @@ def shell_completion(argv):
     elif len(argv) > 1 and argv[-2] == '--ppa': # if argument following --ppa, complete by ppa
         print " ".join(packaging.shell_complete_ppa(argv[-1]))
 
-templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
+templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
 
 
 while i < len(argv):
@@ -79,12 +79,11 @@ while i < len(argv):
                 ppa_name = argv[i + 1]
                 i += 1
             else:
-                print _("--ppa needs one argument: <ppa_name> or <team/ppa_name>")
-                sys.exit(4)
+                cmd = commands.get_command('share', 'ubuntu-application')
+                templatetools.usage_error(_("No PPA provided."), cmd=cmd)
         else:
-            print _("Unknown option: %s"  % arg)
-            print _("General usage is: quickly release [release_version] [comments]")
-            sys.exit(4)
+            cmd = commands.get_command('share', 'ubuntu-application')
+            templatetools.usage_error(_("Unknown option: %s."  % arg), cmd=cmd)
     else:
         args.append(arg)
     i += 1

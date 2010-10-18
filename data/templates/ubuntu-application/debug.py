@@ -29,18 +29,16 @@ gettext.textdomain('quickly')
 from quickly import configurationhandler
 from quickly import templatetools
 
+def usage():
+    templatetools.print_usage(_('quickly debug -- [program arguments]'))
 def help():
-    print _("""Usage:
-$quickly debug
-
-Debugs your application with winpdb.
+    print _("""Debugs your application with winpdb.
 
 $ quickly debug -- values -<whatever>
 to pass "-whatever" and "values" to the executed program. Without that
 if you use for instance --help, it would be Quickly help and not your
-program one.
-""")
-templatetools.handle_additional_parameters(sys.argv, help)
+program one.""")
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
 # if config not already loaded
 if not configurationhandler.project_config:

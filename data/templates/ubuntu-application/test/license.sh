@@ -17,11 +17,14 @@ quickly license
 # Aborting
 
 quickly license GPL-2 GPL-3
-# ERROR: This command only take one optional argument: License
-# Usage is: quickly license <license>
+# ERROR: This command only take one optional argument.
+# Usage: quickly license [license-name]
+# Candidate licenses: Apache-2.0, BSD, GPL-2, GPL-3, LGPL-2, LGPL-3, MIT, other
 
 quickly license GPL-0
-# ERROR: License must be one of Apache-2.0, BSD, GPL-2, GPL-3, LGPL-2, LGPL-3, MIT, or 'other'
+# ERROR: Unknown licence GPL-0.
+# Usage: quickly license [license-name]
+# Candidate licenses: Apache-2.0, BSD, GPL-2, GPL-3, LGPL-2, LGPL-3, MIT, other
 
 (echo "Copyright (C) 2010 Oliver Twist <twist@example.com>" > AUTHORS)
 

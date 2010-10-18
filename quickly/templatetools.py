@@ -27,12 +27,13 @@ from gettext import gettext as _
 import configurationhandler
 import tools
 import quicklyconfig
+import commands
 
 class bad_project_name(Exception):
     pass
 
-def handle_additional_parameters(args, help=None, shell_completion=None):
-    """Enable handling additional parameter like help of shell_completion"""
+def handle_additional_parameters(args, help=None, shell_completion=None, usage=None):
+    """Enable handling additional parameter like help or shell_completion"""
 
     if len(args) > 1 and args[1] == "help":
         if help:
@@ -43,6 +44,10 @@ def handle_additional_parameters(args, help=None, shell_completion=None):
     elif len(args) > 1 and args[1] == "shell-completion":
         if shell_completion:
             shell_completion(args[2:])
+        sys.exit(0)
+    elif len(args) > 1 and args[1] == "_usage": # use leading underscore to avoid collisions
+        if usage:
+            usage()
         sys.exit(0)
 
 def quickly_name(name):
@@ -149,4 +154,50 @@ def get_template_path_from_project():
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
     return os.path.abspath(tools.get_template_directory(configurationhandler.project_config['template']))
+
+def print_usage(usages):
+    if not usages:
+        return
+    if isinstance(usages, list):
+        usages.sort()
+        print "\n  ".join([_("Usage:")] + usages)
+    else:
+        print _("Usage:") + " " + usages
+
+def usage_error(msg=None, cmd=None, template=None, **kwargs):
+    def print_template_candidates(for_cmd=None):
+        templates = []
+        if for_cmd:
+            possible_command = commands.get_command_names_by_criteria(name=for_cmd, followed_by_template=True)
+            if possible_command:
+                templates = tools.list_template_for_command(for_cmd)
+        else:
+            templates = templates or commands.get_all_templates()
+        if templates:
+            templates.sort()
+            print _("Candidate templates are: %s") % ", ".join(templates)
+
+    def print_command_candidates(template=None):
+        cmds = []
+        if template:
+            cmds.extend(commands.get_command_names_by_criteria(template=template))
+        if template != "builtins":
+            cmds.extend(commands.get_command_names_by_criteria(template="builtins"))
+        cmds.sort()
+        print _("Candidate commands are: %s") % ", ".join(cmds)
+
+    if msg:
+        print _("ERROR: %s") % msg
+    if cmd:
+        cmd.usage()
+    if 'show_templates_for' in kwargs:
+        print_template_candidates(kwargs['show_templates_for'])
+    elif cmd:
+        if cmd.followed_by_template and not template:
+            print_template_candidates() # such commands can take any template
+        if cmd.followed_by_command:
+            print_command_candidates(template)
+    else:
+        print_command_candidates(template)
+    sys.exit(4)
 

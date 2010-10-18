@@ -24,7 +24,7 @@ import shutil
 import sys
 import subprocess
 
-from quickly import configurationhandler, templatetools
+from quickly import configurationhandler, templatetools, commands
 from internal import quicklyutils
 
 import gettext
@@ -42,11 +42,13 @@ BEGIN_LICENCE_TAG = '### BEGIN LICENSE'
 END_LICENCE_TAG = '### END LICENSE'
 
 
+def usage():
+    templatetools.print_usage(_('quickly license [license-name]'))
+    licenses = get_supported_licenses()
+    licenses.sort()
+    print _('Candidate licenses: %s') % ', '.join(licenses + ['other'])
 def help():
-    print _("""Usage:
-$quickly license <Your_Licence>
-
-Adds license to project files. Before using this command, you should:
+    print _("""Adds license to project files. Before using this command, you should:
 
 1. Edit the file AUTHORS to include your authorship (this step is automatically done
    if you directly launch "$ quickly release" or "$ quickly share" before changing license)
@@ -69,8 +71,7 @@ Finally, this will copy the Copyright at the head of every files.
 
 Note that if you don't run quickly licence before calling quickly release or quickly
 share, this one will execute it for you and guess the copyright holder from your
-launchpad account if you didn't update it.
-""")
+launchpad account if you didn't update it.""")
 
 def get_supported_licenses():
     """Get supported licenses"""
@@ -184,8 +185,8 @@ def licensing(license=None):
     supported_licenses_list = get_supported_licenses()
     supported_licenses_list.sort()
     if license not in supported_licenses_list and license != 'other':
-        print _("ERROR: License must be one of %s, or 'other'") % ', '.join(supported_licenses_list)
-        sys.exit(4)
+        cmd = commands.get_command('license', 'ubuntu-application')
+        templatetools.usage_error(_("Unknown licence %s.") % license, cmd=cmd)
 
     # get Copyright holders in AUTHORS file
     license_content = ""
@@ -298,11 +299,11 @@ def shell_completion(argv):
 
 if __name__ == "__main__":
 
-    templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
+    templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
     license = None
     if len(sys.argv) > 2:
-        print _("ERROR: This command only take one optional argument: License\nUsage is: quickly license <license>")
-        sys.exit(4)
+        cmd = commands.get_command('license', 'ubuntu-application')
+        templatetools.usage_error(_("This command only take one optional argument."), cmd=cmd)
     if len(sys.argv) == 2:
         license = sys.argv[1]
     try:

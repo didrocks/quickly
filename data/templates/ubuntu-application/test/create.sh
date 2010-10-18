@@ -6,13 +6,13 @@ rm -rf test-project
 
 rm -rf subdir
 
-quickly create
-# ERROR: create command must be followed by a template and no template was found on the command line.
-# Candidates template are: ubuntu-pygame, ubuntu-application, ubuntu-cli
-# Aborting.
+HOME=/ quickly create
+# ERROR: No template specified for command create.
+# Usage: quickly create <template> <project-name>
+# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-pygame
 
 quickly create ubuntu-application
-# ERROR: Create command must be followed by a template and a project path.
+# ERROR: No project name specified.
 # Usage: quickly create <template> <project-name>
 
 quickly create ubuntu-application 42

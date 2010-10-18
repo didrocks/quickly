@@ -17,6 +17,7 @@
 
 import os
 import shutil
+import sys
 
 import configurationhandler
 import commands as commands_module
@@ -32,8 +33,8 @@ def pre_create(command_template, project_template, project_dir, command_args):
     """Create the project directory before create command call"""
 
     if len(command_args) < 1:
-        print _("ERROR: Create command must be followed by a template and a project path.\nUsage: quickly create <template> <project-name>")
-        return(4)
+        cmd = commands_module.get_command('create', project_template)
+        templatetools.usage_error(_("No project name specified."), cmd=cmd, template=project_template)
  
     path_and_project = command_args[0].split('/')
     project_name = path_and_project[-1]
@@ -71,6 +72,7 @@ def pre_create(command_template, project_template, project_dir, command_args):
 
     return 0
 
+help_commands = _("List all commands ordered by templates")
 def commands(project_template, project_dir, command_args, shell_completion=False):
     """List all commands ordered by templates"""
 
@@ -88,19 +90,20 @@ def commands(project_template, project_dir, command_args, shell_completion=False
             print "[%s]\t%s" % (template_available, command_name)
             
     return(0)
-    
+
+help_getstarted = _("Give some getstarted advice")
 def getstarted(project_template, project_dir, command_args, shell_completion=False):
-    """ Give some getstarted advice"""
+    """Give some getstarted advice"""
 
     # We have nothing for this
     if shell_completion:
         return("")
 
     print _('''-------------------------------
-    Welcome to quickly!
+    Welcome to Quickly!
 -------------------------------
 
-You can create a project by executing 'quickly create <template_name> <your project>'.
+You can create a project by executing 'quickly create <template-name> <your-project>'.
 
 Example with ubuntu-application template:
 1. create an ubuntu application and run the tutorial:
@@ -125,48 +128,28 @@ $ quickly release or $ quickly share
 Have Fun!''')
     return 0
 
+help_help = _("Get help from commands")
+usage_help = _("Usage: quickly help [template] <command>")
 def help(project_template, project_dir, command_args, shell_completion=False):
     """Get help from commands"""
 
     # We have nothing for this
     if shell_completion:
         return("")
-    
-    if len(command_args) > 0:
-        command_name = command_args[0]
-    else:
-        print _("No command provided to help command.\nUsage is: quickly help [template] <command>")
-        return(4)
 
-    template = project_template
-    if template is None:
-        template = "builtins"
-    try:
-        command = commands_module.get_commands_by_criteria(name=command_name, template=project_template)[0]
-    except IndexError:
-        # check if a builtin commands corresponds
-        template = "builtins"
-        try:
-            command = commands_module.get_commands_by_criteria(name=command_name, template=template)[0]
-        except IndexError:       
-            # there is really not such command
-            if template == "builtins":
-                # to help the user, we can search if this command_name corresponds to a command in a template
-                list_possible_commands = commands_module.get_commands_by_criteria(name=command_name, followed_by_template=True)
-                if list_possible_commands:
-                    proposed_templates = tools.list_template_for_command(command_name)
-                    print _("help command must be followed by a template name for getting help from templates commands like %s.\nUsage is: quickly help [template] <command>" % command_name)
-                    print _("Candidates template are: %s") % ", ".join(proposed_templates)
-                    return(4)
-                else:
-                    print _("ERROR: No %s command found.") % command_name
-            else:
-                print _("ERROR: No %s command found in %s template.") % (command_name, template)
-            return(1)
-        
-    return(command.help(project_dir, command_args))
+    # main quickly script has already made sure input is sane
 
+    project_template = command_args[0]
+    command_name = command_args[1]
+    command = commands_module.get_command(command_name, project_template)
 
+    # Also print usage if we can
+    if command.usage():
+        print # blank line before getting to help
+    return command.help(project_dir, command_args)
+
+help_quickly = _("Create a new quickly template from an existing one")
+usage_quickly = _("Usage: quickly quickly [origin-template] destination-template")
 def quickly(project_template, project_dir, command_args, shell_completion=False):
     """Create a new quickly template from an existing one"""
 
@@ -174,16 +157,17 @@ def quickly(project_template, project_dir, command_args, shell_completion=False)
     if shell_completion:
         return("")
 
-    if len(command_args) < 1:
-        print _("Quickly command must be followed by a template and a template destination path\nUsage is: quickly quickly [origin_template] destination_template")
-        return(4)
+    project_template = command_args[0]
+    if len(command_args) < 2:
+        cmd = commands_module.get_command('quickly', project_template)
+        templatetools.usage_error(_("No destination template name provided."), cmd=cmd, template=project_template)
 
     destination_path = os.path.expanduser("~/quickly-templates/")
     # create ~/quickly-templates/ if needed
     if not os.path.exists(destination_path):
         os.makedirs(destination_path)
 
-    template_destination_path = destination_path + command_args[0]
+    template_destination_path = destination_path + command_args[1]
     if os.path.exists(template_destination_path):
         print _("%s already exists." % template_destination_path)
         return 1
