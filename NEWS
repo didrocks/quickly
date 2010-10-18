@@ -12,6 +12,7 @@ Quickly 0.7
    - Add many testsa
    - add $QUICKLLY_EDITOR variable to override SELECTED_EDITOR or EDITOR
      if we want a dedicated editor for Quickly (Dennis Craven)
+   - regenerate debian/copyright at each quickly release/package (LP: #656943)
  + common:
    - Reorganize tests to be easier to run as a group (./test/run.sh)
    - quickly quickly should remove *.pyc files as commands are imported
