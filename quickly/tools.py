@@ -248,13 +248,8 @@ def get_completion_in_context(argv, context_path=None):
 
     available_completion = []
 
-    # option completion
-    if argv[-1].startswith("-"):
-        options = ("-h", "--help", "-t", "--template", "--staging", "--verbose", "--version")
-        available_completion = [option for option in options if option.startswith(sys.argv[-1])]
-
     # get available templates after option if needed
-    elif argv[-2] in ("-t", "--template"):
+    if argv[-2] in ("-t", "--template"):
         available_completion.extend([template for template in commands.get_all_templates()])
 
     else:
@@ -270,9 +265,19 @@ def get_completion_in_context(argv, context_path=None):
             available_completion.extend([command.name for command in _get_commands_in_context(opt_template, context_path)])
         else:
             # ask for the command what she needs (it automatically handle the case of command followed by template and command followed by command)
-            available_completion.extend([command.shell_completion(opt_template, opt_command[1:]) for command in commands.get_commands_by_criteria(name=opt_command[0])]) # as 1: is '' or the begining of a word
-    # remove duplicates
-    completion = set(available_completion)
+            for command in commands.get_commands_by_criteria(name=opt_command[0]): # as 1: is '' or the begining of a word
+                available_completion.extend(command.shell_completion(opt_template, opt_command[1:]))
+
+    # dash option completion.  Some commands have dash args, but we also have them.  So we take what command thought
+    # should be the completions and add our own.  We also strip anything that doesn't start with a dash, since many
+    # completion functions are naive and just give all possible matches, even if they don't match.
+    if argv[-1].startswith("-"):
+        available_completion.extend(["-h", "--help", "-t", "--template", "--staging", "--verbose", "--version"])
+        available_completion = [arg for arg in available_completion if arg.startswith('-')]
+
+    # remove duplicates and sort
+    completion = list(set(available_completion))
+    completion.sort()
     return (completion)
 
 

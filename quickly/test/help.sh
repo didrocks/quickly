@@ -57,7 +57,7 @@ HOME=/ quickly help not-a-template help
 
 cd /tmp
 
-rm -r test-project
+rm -fr test-project
 
 quickly create ubuntu-application test-project
 # Creating bzr repository and committing
