@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rm -r /tmp/quickly-test
+rm -fr /tmp/quickly-test
 
 quickly quickly ubuntu-application
 # ERROR: No destination template name provided.

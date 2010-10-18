@@ -162,7 +162,7 @@ def updatepackaging(changelog=None, no_changelog=False):
 
     if not changelog:
         changelog = []
-    command = ['python-mkdebian', '--force-control']
+    command = ['python-mkdebian', '--force-control', '--force-copyright']
     if no_changelog:
         command.append("--no-changelog")
     for message in changelog:

@@ -26,6 +26,7 @@ import quicklyconfig
 import commands
 import configurationhandler
 import version
+import templatetools
 
 __project_path = None
 
@@ -332,12 +333,12 @@ def check_for_followed_by_args(cmd, command_args, project_template):
             command = commands.get_command(command_args[0], project_template)
             if command:
                 command_args.insert(0, project_template) # use default template
-            elif not command and not tools.check_template_exists(command_args[0]):
+            elif not command and not check_template_exists(command_args[0]):
                 # Wasn't a command or a template name, but we are in the context of a template
                 templatetools.usage_error(_("No %s command found in %s template.") % (command_args[0], project_template), cmd=cmd, template=project_template)
         if not command:
             # must be a template name then (or nonsense)
-            if not tools.check_template_exists(command_args[0]):
+            if not check_template_exists(command_args[0]):
                 command = commands.get_command(command_args[0]) # did user provid a valid builtin command?
                 if command:
                     command_args.insert(0, 'builtins')
@@ -355,7 +356,7 @@ def check_for_followed_by_args(cmd, command_args, project_template):
 
     elif cmd.followed_by_template:
         if len(command_args) > 0:
-            if tools.check_template_exists(command_args[0]):
+            if check_template_exists(command_args[0]):
                 project_template = command_args[0]
         if not project_template:
             templatetools.usage_error(_("No template provided to %s command.") % cmd.name, cmd=cmd)

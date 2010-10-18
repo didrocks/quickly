@@ -240,16 +240,17 @@ def collect_commit_messages(previous_version):
 def get_quickly_editors():
     '''Return prefered editor for ubuntu-application template'''
 
-    default_editor = os.environ.get("EDITOR")
+    default_editor = os.environ.get("QUICKLY_EDITOR")
+    if not default_editor:
+        default_editor = os.environ.get("EDITOR")
     if not default_editor:
         default_editor = os.environ.get("SELECTED_EDITOR")
     if default_editor:
         editor = default_editor
-    elif os.environ.get("DISPLAY"):
+    elif templatetools.is_X_display():
         editor = "gedit"
     else:
         editor = "nano"
-
     return editor
 
 def read_input(start=''):
