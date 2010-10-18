@@ -37,7 +37,7 @@ gettext.textdomain('quickly')
 options = ("--ppa",)
 
 def usage():
-    templatetools.print_usage(_('quickly release [--ppa <ppa-name>] [release-version] [comments]'))
+    templatetools.print_usage(_('quickly release [--ppa <ppa | group/ppa>] [release-version] [comments]'))
 def help():
     print _("""Posts a release of your project to a PPA on launchpad so that
 users can install the application on their system.
@@ -49,9 +49,9 @@ You also have to add a PPA to your launchpad account.
 Name, email, and version will be automatically changed in setup.py and
 bzr will tag the current source with the new version number.
 
-The new version number will be 'YEAR.MONTH[.RELEASE]'.
+If not specified, the new version number will be 'YEAR.MONTH[.RELEASE]'.
 
-For example, the third release in July 2010 will be versioned 10.07.2.
+For example, the third release in July 2010 would be versioned 10.07.2.
 
 You may want to make sure that the description and long description in
 setup.py are up to date before releasing.

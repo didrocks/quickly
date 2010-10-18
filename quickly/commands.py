@@ -273,7 +273,7 @@ def get_commands_by_criteria(**criterias):
 
 
 def get_command_names_by_criteria(**criteria):
-    """Get a tuple of all command names corresponding to criteria.
+    """Get a list of all command names corresponding to criteria.
 
     'criteria' correponds to Command object properties.
     """
@@ -295,7 +295,7 @@ def get_command(command_name, template=None, **kwargs):
 
 
 def get_all_templates():
-    """Get a tuple of all templates"""
+    """Get a list of all templates"""
     return [
         template for template in get_all_commands().keys()
         if template != "builtins"]

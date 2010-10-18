@@ -39,7 +39,7 @@ argv = sys.argv
 
 
 def usage():
-    templatetools.print_usage(_('quickly share [--ppa <ppa-name>]'))
+    templatetools.print_usage(_('quickly share [--ppa <ppa | group/ppa>]'))
 def help():
     print _("""Updates your PPA with the the latest saved project changes.
 
@@ -49,15 +49,12 @@ You also have to add a PPA to your launchpad account.
 
 Name, email, and version will be automatically changed in setup.py.
 
-The new version number will be 'YEAR.MONTH.RELEASE~publicX', where X will
+The new version number will be 'CURRENT.VERSION-publicX', where X will
 be incremented each time you share.
 
 For example, if you most recently released 10.07.2 and you have shared
 the package three times since then, another run of 'quickly share' will
-use a new version of 10.07.2~public4.
-
-You may want to make sure that the description and long description in
-setup.py are up to date before sharing.
+use a new version of 10.07.2-public4.
 
 You can optionally run 'quickly package' and test your package to make
 sure it installs as expected.""")
