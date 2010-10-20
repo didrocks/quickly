@@ -21,7 +21,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
     sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
-from python_name import Basecamel_case_nameWindow
+from python_name import (Basecamel_case_nameWindow)
 import python_name.helpers as helpers
 
 
