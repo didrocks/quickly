@@ -44,11 +44,14 @@ def conventional_names(name):
     return sentence_name, camel_case_name
 
 def set_file_contents(filename, contents):
-    fout = file(filename + '.new', 'w')
+    new_filename = filename + '.new'
+    fout = file(new_filename, 'w')
     fout.write(contents)
     fout.flush()
     fout.close()
-    os.rename(filename + '.new', filename)
+    if os.path.exists(filename):
+        templatetools.apply_file_rights(filename, new_filename)
+    os.rename(new_filename, filename)
 
 def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
 
