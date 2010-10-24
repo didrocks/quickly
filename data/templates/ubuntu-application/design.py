@@ -27,17 +27,15 @@ gettext.textdomain('quickly')
 
 from quickly import configurationhandler, templatetools
 
+def usage():
+    templatetools.print_usage('quickly design')
 def help():
-    print _("""Usage:
-$quickly design
-
-Opens Glade UI editor so that you can edit the UI for dialogs
+    print _("""Opens Glade UI editor so that you can edit the UI for dialogs
 and windows in your project. Note that you *must* open Glade
 in this manner for quickly to work. If you try to open Glade
 directly, and the open the UI files, Glade will throw errors
-and won't open the files.
-""")
-templatetools.handle_additional_parameters(sys.argv, help)
+and won't open the files.""")
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()

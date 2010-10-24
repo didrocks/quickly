@@ -200,7 +200,7 @@ def get_all_commands():
     for elem in dir(builtincommands):
         command = getattr(builtincommands, elem)
         if (callable(command)
-            and not command.__name__.startswith(('pre_', 'post_', 'gettext'))):
+            and not command.__name__.startswith(('pre_', 'post_', 'help_', 'usage_', 'gettext'))):
             command_name = command.__name__
             # here, special case for some commands
             launch_inside_project = False
@@ -273,18 +273,32 @@ def get_commands_by_criteria(**criterias):
 
 
 def get_command_names_by_criteria(**criteria):
-    """Get a tuple of all command names corresponding to criteria.
+    """Get a list of all command names corresponding to criteria.
 
     'criteria' correponds to Command object properties.
     """
-    return (command.name for command in get_commands_by_criteria(**criteria))
+    return [command.name for command in get_commands_by_criteria(**criteria)]
+
+
+def get_command(command_name, template=None, **kwargs):
+    template = template or "builtins"
+    try:
+        command = get_commands_by_criteria(name=command_name, template=template, **kwargs)[0]
+    except IndexError:
+        if template == "builtins":
+            return None
+        try:
+            command = get_commands_by_criteria(name=command_name, template="builtins", **kwargs)[0]
+        except IndexError:
+            return None
+    return command
 
 
 def get_all_templates():
-    """Get a tuple of all templates"""
-    return (
+    """Get a list of all templates"""
+    return [
         template for template in get_all_commands().keys()
-        if template != "builtins")
+        if template != "builtins"]
 
 class Command:
 
@@ -379,15 +393,41 @@ class Command:
 
         return " ".join(completion)
 
+    def usage(self):
+        """Print usage of the current command"""
+
+        return_code = False
+        if callable(self.command): # intern function
+            name = 'usage_'+self.name
+            if hasattr(builtincommands, name):
+                print getattr(builtincommands, name)
+                return_code = True
+        else: # launch command with "_usage" parameter
+            process = subprocess.Popen([self.command, "_usage"], stdout=subprocess.PIPE)
+            output = process.communicate()[0].strip()
+            if output:
+                print output
+                return_code = True
+
+        return return_code
+
     def help(self, dest_path, command_args):
         """Print help of the current command"""
 
         return_code = 0
-        if callable(self.command): # intern function, return __doc__
-            print (self.command.__doc__)
+        if callable(self.command): # intern function
+            name = 'help_'+self.name
+            if hasattr(builtincommands, name):
+                print getattr(builtincommands, name)
+            else:
+                print self.command.__doc__ # untranslatable fallback
         else: # launch command with "help" parameter
-            return_code = subprocess.call(
-                [self.command, "help"] + command_args, cwd=dest_path)
+            process = subprocess.Popen([self.command, "help"] + command_args,
+                                       cwd=dest_path, stdout=subprocess.PIPE)
+            output = process.communicate()[0].strip()
+            if output:
+                print output
+            return_code = process.returncode
 
         return return_code
 

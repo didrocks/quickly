@@ -19,7 +19,7 @@
 import os
 import sys
 import internal.quicklyutils as quicklyutils
-from quickly import configurationhandler, templatetools
+from quickly import configurationhandler, templatetools, commands
 
 import gettext
 from gettext import gettext as _
@@ -27,16 +27,20 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = ('dialog','indicator' )
+options = {'dialog': _('quickly add dialog <dialog-name>'),
+           'indicator': 'quickly add indicator'}
 
+def usage():
+    templatetools.print_usage(options.values())
 def help():
-    print _("""Usage:
-$ quickly add [dialog dialog_name]
-add something to your project_bin
+    print _("""Add something to your project
 
-Here, dialog_name is one or more words seperated with underscore
 
-For instance $ quickly add dialog DialogName will create:
+$ quickly add dialog <dialog-name>
+
+Here, dialog-name is one or more words separated with dash
+
+For instance $ quickly add dialog dialog-name will create:
 1. A subclass of gtk.Dialog called DialogNameDialog in the module
    DialogNameDialog.py
 2. A glade file called DialogNameDialog.ui in the ui directory
@@ -60,7 +64,7 @@ result = dialog.run()
 dialog.hide()
 
 
-$ quickly add [indicator]
+$ quickly add indicator
 
 This will add support for Ubuntu Application Indicator to you quickly project.
 Next time you run your app, the Indicator will show up in the panel on top right.
@@ -72,24 +76,23 @@ def shell_completion(argv):
     if len(argv) == 1:
         print " ".join([option for option in options
                         if option.startswith(sys.argv[-1])])
-templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
+templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
 
 abs_template_path = templatetools.get_template_path_from_project()
 abs_command_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
 
 if len(sys.argv) < 2:
-    print _("add command needs to be followed an action name.\n"
-"Usage is: quickly add [dialog|indicator] …\n" )
-    sys.exit(4)
+    cmd = commands.get_command('add', 'ubuntu-application')
+    templatetools.usage_error(_("No action name provided."), cmd=cmd, template='ubuntu-application')
 
 if argv[1] == "dialog":
     if len(argv) != 3:
-        print(_('''Usage is: $ quickly add dialog <dialogname>'''))
+        templatetools.print_usage(options['dialog'])
         sys.exit(4)
     else:
         try:
-            dialog_name = templatetools.quickly_name(argv[2]).replace('-','_')
+            dialog_name = templatetools.quickly_name(argv[2])
         except templatetools.bad_project_name, e:
             print(e)
             sys.exit(1)
@@ -126,6 +129,7 @@ if argv[1] == "dialog":
             quicklyutils.conventional_names(dialog_name)
         project_sentence_name, project_camel_case_name = \
             quicklyutils.conventional_names(project_name)
+        dialog_name = dialog_name.replace('-','_')
 
         substitutions = (("project_name",project_name),
                          ("dialog_name",dialog_name),
@@ -153,7 +157,7 @@ if argv[1] == "dialog":
 
 if argv[1] == "indicator":
     if len(argv) != 2:
-        print(_('''Usage is: $ quickly add indicator'''))
+        templatetools.print_usage(options['indicator'])
         sys.exit(4)
     else:
 

@@ -29,19 +29,17 @@ gettext.textdomain('quickly')
 from quickly import configurationhandler
 from quickly import templatetools
 
+def usage():
+    templatetools.print_usage(_('quickly run -- [program arguments]'))
 def help():
-    print _("""Usage:
-$quickly run
-
-Runs your application. This is the best way to try test it out
+    print _("""Runs your application. This is the best way to try test it out
 while you are developing it. It starts up the main project window.
 
 $ quickly run -- values -<whathever>
 to pass "-whatever" and "values" to the executed program. Without that
 if you use for instance --help, it would be Quickly help and not your
-program one.
-""")
-templatetools.handle_additional_parameters(sys.argv, help)
+program one.""")
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
 # if config not already loaded
 if not configurationhandler.project_config:

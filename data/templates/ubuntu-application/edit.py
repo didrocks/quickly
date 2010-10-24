@@ -31,18 +31,16 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 
+def usage():
+    templatetools.print_usage('quickly edit')
 def help():
-    print _("""Usage:
-$ quickly edit
-
-A convenience command to open all of your python files in your project 
+    print _("""A convenience command to open all of your python files in your project 
 directory in your default editor, ready for editing.
 
 If you put yourself EDITOR or SELECTED_EDITOR environment variable, this latter
 will be used. Also, if you configured sensible-editor, this one will be
-choosed.
-""")
-templatetools.handle_additional_parameters(sys.argv, help)
+choosed.""")
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
 filelist = ""
 for root, dirs, files in os.walk('./'):

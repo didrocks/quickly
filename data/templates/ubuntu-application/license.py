@@ -22,8 +22,9 @@ import os
 import re
 import shutil
 import sys
+import subprocess
 
-from quickly import configurationhandler, templatetools
+from quickly import configurationhandler, templatetools, commands
 from internal import quicklyutils
 
 import gettext
@@ -35,29 +36,32 @@ class LicenceError(Exception):
     def __init__(self, msg):
         self.msg = msg
     def __str__(self):
-        return repr(self.msg)
+        return self.msg
 
 BEGIN_LICENCE_TAG = '### BEGIN LICENSE'
 END_LICENCE_TAG = '### END LICENSE'
 
 
+def usage():
+    templatetools.print_usage(_('quickly license [license-name]'))
+    licenses = get_supported_licenses()
+    licenses.sort()
+    print _('Candidate licenses: %s') % ', '.join(licenses + ['other'])
 def help():
-    print _("""Usage:
-$quickly license <Your_Licence>
-
-Adds license to project files. Before using this command, you should:
+    print _("""Adds license to project files. Before using this command, you should:
 
 1. Edit the file AUTHORS to include your authorship (this step is automatically done
    if you directly launch "$ quickly release" or "$ quickly share" before changing license)
    In this case, license is GPL-3 by default.
 2. If you want to put your own quickly unsupported Licence, add a COPYING file containing
-   your own licence.
+   your own licence and execute $ quickly license other.
 3. Executes either $ quickly license or $ quickly license <License>
    where <License> can be either:
    - GPL-3 (default)
    - GPL-2
+   - other
 
-This will modify the Copyright file with the chosen licence (with GPL-3 by default).
+This will modify the COPYING file with the chosen licence (with GPL-3 by default).
 Updating previous chosen Licence if needed.
 If you previously removed the tags to add your own licence, it will leave it pristine.
 If no name is attributed to the Copyright, it will try to retrieve it from Launchpad
@@ -67,8 +71,7 @@ Finally, this will copy the Copyright at the head of every files.
 
 Note that if you don't run quickly licence before calling quickly release or quickly
 share, this one will execute it for you and guess the copyright holder from your
-launchpad account if you didn't update it.
-""")
+launchpad account if you didn't update it.""")
 
 def get_supported_licenses():
     """Get supported licenses"""
@@ -128,6 +131,29 @@ def copy_license_to_files(license_content):
                     raise LicenceError(msg)
 
 
+def guess_license(flicense):
+    """Determines if the user currently has specified a other license"""
+    try:
+        f = file(flicense)
+        contents = f.read()
+        if not contents:
+            return None
+    except:
+        return None
+
+    # flicense exists and has content.  So now we check if it is just a copy
+    # of any existing license.
+    supported_licenses_list = get_supported_licenses()
+    for license in supported_licenses_list:
+        path = "/usr/share/common-licenses/" + license
+        if os.path.isfile(path):
+            return_code = subprocess.call(['diff', '-q', flicense, path], stdout=subprocess.PIPE)
+            if return_code == 0:
+                return license
+
+    return 'other'
+
+
 def licensing(license=None):
     """Add license or update it to the project files
 
@@ -143,13 +169,24 @@ def licensing(license=None):
     python_name = templatetools.python_name(project_name)
 
     # check if we have a license tag in setup.py otherwise, default to GPL-3
-    if license is None:
+    if not license:
         try:
             license = quicklyutils.get_setup_value('license')
         except quicklyutils.cant_deal_with_setup_value:
             pass
-    if license is None or license == '':
+    if not license:
+        license = guess_license(flicense_name)
+        if license == 'other':
+            msg = _("COPYING contains an unknown license.  Please run 'quickly license other' to confirm that you want to use a custom license.")
+            raise LicenceError(msg)
+    if not license:
         license = 'GPL-3'
+
+    supported_licenses_list = get_supported_licenses()
+    supported_licenses_list.sort()
+    if license not in supported_licenses_list and license != 'other':
+        cmd = commands.get_command('license', 'ubuntu-application')
+        templatetools.usage_error(_("Unknown licence %s.") % license, cmd=cmd)
 
     # get Copyright holders in AUTHORS file
     license_content = ""
@@ -180,7 +217,6 @@ def licensing(license=None):
 
     # add header to license_content
     # check that COPYING file is provided if using a personal license
-    supported_licenses_list = get_supported_licenses()
     if license in supported_licenses_list:
         header_file_path = os.path.dirname(__file__) + "/available_licenses/header_" + license
     else:
@@ -263,11 +299,11 @@ def shell_completion(argv):
 
 if __name__ == "__main__":
 
-    templatetools.handle_additional_parameters(sys.argv, help, shell_completion)
+    templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
     license = None
     if len(sys.argv) > 2:
-        print _("This command only take one optional argument: License\nUsage is: quickly license <license>")
-        sys.exit(4)
+        cmd = commands.get_command('license', 'ubuntu-application')
+        templatetools.usage_error(_("This command only take one optional argument."), cmd=cmd)
     if len(sys.argv) == 2:
         license = sys.argv[1]
     try:

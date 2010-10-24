@@ -26,6 +26,7 @@ import quicklyconfig
 import commands
 import configurationhandler
 import version
+import templatetools
 
 __project_path = None
 
@@ -49,15 +50,14 @@ def usage():
 
 Options:
     -t, --template <template>  Template to use if it differs from default
-                               project one
-                               one used to create the project)
+                               project template
     --staging                  Target launchpad staging server
     --verbose                  Verbose mode
     -h, --help                 Show help information
 
 Commands:
     create <template> <project-name> (template is mandatory for this command)
-    quickly <template_origin> <template_dest> to create a create derived template
+    quickly <template-origin> <template-dest> to create a create derived template
     getstarted to get some starting hints
 
 Examples:
@@ -176,8 +176,6 @@ def check_template_exists(template):
     try: 
         commands.get_all_commands()[template]
     except KeyError:
-        print _("ERROR: Template %s does not exist.") % (template)
-        print _("Arborting.")
         return False
     return True
 
@@ -316,4 +314,60 @@ def list_template_for_command(command_name):
         except KeyError:
             pass
     return proposed_templates
+
+def check_for_followed_by_args(cmd, command_args, project_template):
+    if not cmd.followed_by_template and not cmd.followed_by_command:
+        return command_args # nothing to check
+
+    command = None
+
+    if cmd.followed_by_template and cmd.followed_by_command:
+        # If no arguments, there is something obviously wrong
+        if len(command_args) == 0:
+            if project_template:
+                templatetools.usage_error(_("No command provided to %s command.") % cmd.name, cmd=cmd, template=project_template)
+            else:
+                templatetools.usage_error(_("No template or command provided to %s command.") % cmd.name, cmd=cmd)
+        # At least one argument.  What is it?  First check if it's a command if we already have a template
+        if project_template:
+            command = commands.get_command(command_args[0], project_template)
+            if command:
+                command_args.insert(0, project_template) # use default template
+            elif not command and not check_template_exists(command_args[0]):
+                # Wasn't a command or a template name, but we are in the context of a template
+                templatetools.usage_error(_("No %s command found in %s template.") % (command_args[0], project_template), cmd=cmd, template=project_template)
+        if not command:
+            # must be a template name then (or nonsense)
+            if not check_template_exists(command_args[0]):
+                command = commands.get_command(command_args[0]) # did user provid a valid builtin command?
+                if command:
+                    command_args.insert(0, 'builtins')
+                elif len(command_args) == 1:
+                    templatetools.usage_error(_("%s is neither a template nor a standard command.") % (command_args[0]), cmd=cmd)
+                else:
+                    templatetools.usage_error(_("Template %s does not exist.") % (command_args[0]), cmd=cmd, show_templates_for=None)
+            project_template = command_args[0]
+            # OK, we have a template!
+            if len(command_args) < 2:
+                templatetools.usage_error(_("No command provided to %s command.") % cmd.name, cmd=cmd, template=project_template)
+            command = commands.get_command(command_args[1], project_template)
+            if not command:
+                templatetools.usage_error(_("No %s command found in %s template.") % (command_args[1], project_template), cmd=cmd, template=project_template)
+
+    elif cmd.followed_by_template:
+        if len(command_args) > 0:
+            if check_template_exists(command_args[0]):
+                project_template = command_args[0]
+        if not project_template:
+            templatetools.usage_error(_("No template provided to %s command.") % cmd.name, cmd=cmd)
+
+    elif cmd.followed_by_command:
+        if len(command_args) > 0:
+            command = commands.get_command(command_args[0], project_template)
+            if not command:
+                templatetools.usage_error(_("No %s command found.") % command_args[0], cmd=cmd, template=project_template)
+        if not command:
+            templatetools.usage_error(_("No command provided to %s command.") % cmd.name, cmd=cmd, template=project_template)
+
+    return command_args
 

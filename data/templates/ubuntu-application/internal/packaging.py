@@ -162,7 +162,7 @@ def updatepackaging(changelog=None, no_changelog=False):
 
     if not changelog:
         changelog = []
-    command = ['python-mkdebian', '--force-control']
+    command = ['python-mkdebian', '--force-control', '--force-copyright']
     if no_changelog:
         command.append("--no-changelog")
     for message in changelog:
@@ -332,7 +332,7 @@ def updateversion(proposed_version=None, sharing=False):
     '''Update versioning with year.month, handling intermediate release'''
 
     if proposed_version:
-        # check manual versionning is correct
+        # check manual versioning is correct
         try:
             for number in proposed_version.split('.'):
                 float(number)

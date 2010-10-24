@@ -27,13 +27,11 @@ gettext.textdomain('quickly')
 
 from quickly import templatetools
 
+def usage():
+    templatetools.print_usage('quickly tutorial')
 def help():
-    print _("""Usage:
-$ quickly tutorial
-
-Opens help file with the tutorial for the current template.
-""")
-templatetools.handle_additional_parameters(sys.argv, help)
+    print _("""Opens help file with the tutorial for the current template.""")
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
 # TODO: FIX to take tutorial from the project path:
 # abs_template_path = templatetools.get_template_path_from_project() stop when

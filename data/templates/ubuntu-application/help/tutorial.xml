@@ -704,7 +704,7 @@ Now just put the text into the texview:</para>
 It's important to license your code so users and other programmers know their rights in terms of redistributing or modifying it. To <application>Quickly</application> grant a GPL license to your  code, simply:</para>
   <itemizedlist>
    <listitem>
-    <para>Specify your name and email address in the Copyright file.</para>
+    <para>Specify your name and email address in the AUTHORS file.</para>
    </listitem>
    <listitem>
     <para>Run the "license" command.</para>
@@ -712,12 +712,9 @@ It's important to license your code so users and other programmers know their ri
   </itemizedlist>
 
 <para><title>Specify your name and email</title>
-When <application>Quickly</application> created your ubuntu application, it added a file named Copyright in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. Be sure not to modify other lines as it will interfere with the next step. For example, I would change the entire file to look like this:</para>
+When <application>Quickly</application> created your ubuntu application, it added a file named AUTHORS in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. For example, I would change the entire file to look like this:</para>
 <para>
-<literallayout><programlisting># Copyright (C) 2009 Rick Spencer rick.spencer@canonical.com
-### BEGIN AUTOMATIC LICENSE GENERATION
-### END AUTOMATIC LICENSE GENERATION
-</programlisting></literallayout></para>
+<literallayout><programlisting>Copyright (C) 2009 Rick Spencer rick.spencer@canonical.com</programlisting></literallayout></para>
 <para><title>Run the "License" Command</title>
 By default, <application>Quickly</application> will use a GPL 3 license for your project. To use this license, use this command:</para>
 <para><programlisting>
@@ -736,16 +733,11 @@ By default, <application>Quickly</application> will use a GPL 3 license for your
 </programlisting></para>
 </listitem>
 <listitem>
-<para><application>Quickly</application> doesn't care what license you use, but only knows natively what files and headers to include for BSD, GPL-2, GPL-3, LGPL-2 and LGPL-3. If you prefer another license, you can simply add whatever you license you like by adding your own license in the Copyright file:</para>
-<para>
-<literallayout><programlisting>### BEGIN AUTOMATIC LICENSE GENERATION
-# My personal license here
-### END AUTOMATIC LICENSE GENERATION</programlisting></literallayout></para>
-<para>and then run:</para>
+<para><application>Quickly</application> doesn't care what license you use, but only knows natively what files and headers to include for BSD, GPL-2, GPL-3, LGPL-2 and LGPL-3. If you prefer another license, you can simply add whatever you license you like by creating a COPYING file and putting it there.  Then run:</para>
 <para><programlisting>
 <application>Quickly</application> license
 </programlisting></para>
-<para>to license every files.</para>
+<para>to license every file.</para>
 </listitem>
 <listitem>
 <para>If you've added code files or other files to your project manually, you will need to add the license to those files manually or add those tags at the beginning of the file:</para>
@@ -883,7 +875,7 @@ Now that you've packaged your application, you can share the .deb file. However,
 <xref linkend="edit">edit</xref>
    </listitem>
    <listitem>
-<xref linkend="glade">design</xref>
+<xref linkend="design">design</xref>
    </listitem>
    <listitem>
 <xref linkend="help">help</xref>
@@ -990,8 +982,8 @@ directory in your default editor, ready for editing.
 </para>
 </sect1>
 
-<sect1 id="glade"><title>glade</title>
-<para><title>glade</title>
+<sect1 id="design"><title>design</title>
+<para><title>design</title>
 Usage:</para><para><programlisting>
 <application>Quickly</application> design
 </programlisting></para><para>
@@ -1175,7 +1167,7 @@ You can modify the description and long description if you wish.
     <ulink url="http://library.gnome.org/users/gedit/stable/index.html">Editor: Gedit Help</ulink>
    </listitem>
    <listitem>
-    <ulink url="http://doc.bazaar-vcs.org/bzr.dev/en/user-reference/bzr_man.html">Version Control: Bazaar</ulink>
+    <ulink url="http://bazaar.canonical.com/en/">Version Control: Bazaar</ulink>
    </listitem>
   </itemizedlist>
 </para>

@@ -31,19 +31,15 @@ gettext.textdomain('quickly')
 
 
 
+def usage():
+    templatetools.print_usage(_('quickly create <template> <project-name>'))
 def help():
-    print _("""Usage:
-$ quickly create ubuntu-application path/to/project_name
-
-where "project_name" is one or more words separated by an underscore and
-path/to can be any existing path.
-
-This will create and run a new project, including Python code, 
+    print _("""This will create and run a new project, including Python code, 
 Glade files, and packaging files to make the project work. After
 creating the project, get started by:
 
 1. Changing your working directory to the new project:
-$ cd path/to/project_name
+$ cd path/to/project-name
 
 2. Edit the UI with Glade:
 $ quickly design
@@ -51,23 +47,20 @@ $ quickly design
 3. Edit the Python code:
 $ quickly edit
 """)
-templatetools.handle_additional_parameters(sys.argv, help)
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
-
-# get the name of the project
-if len(sys.argv) < 2:
-    print _("""Project name not defined.\nUsage is: quickly create ubuntu-application project_name""")
-    sys.exit(4)
 
 path_and_project = sys.argv[1].split('/')
 project_name = path_and_project[-1]
 
-# check that project name follow quickly rules and reformat it.
 try:
     project_name = templatetools.quickly_name(project_name)
-except templatetools.bad_project_name, e:
-    print(e)
+except:
+    # user friendly message already caught in pre_create
     sys.exit(1)
+
+if len(path_and_project) > 1:
+    os.chdir(str(os.path.sep).join(path_and_project[0:-1]))
 
 os.chdir(project_name)
 
@@ -107,17 +100,19 @@ except:
     pass
 
 # add it to revision control
-print _("Creating bzr repository and commiting")
+print _("Creating bzr repository and committing")
 bzr_instance = subprocess.Popen(["bzr", "init"], stdout=subprocess.PIPE)
 bzr_instance.wait()
 bzr_instance = subprocess.Popen(["bzr", "add"], stdout=subprocess.PIPE)
 bzr_instance.wait()
-subprocess.Popen(["bzr", "commit", "-m", "Initial project creation with Quickly!"], stderr=subprocess.PIPE)
+bzr_instance = subprocess.Popen(["bzr", "commit", "-m", "Initial project creation with Quickly!"], stderr=subprocess.PIPE)
 
 # run the new application if X display
 if templatetools.is_X_display() and os.path.isfile(exec_file):
     print _("Launching your newly created project!")
     subprocess.call(['./' + project_name], cwd='bin/')
+
+bzr_instance.wait()
 
 print _("Congrats, your new project is setup! cd %s/ to start hacking.") % os.getcwd()
 
