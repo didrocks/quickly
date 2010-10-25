@@ -365,7 +365,7 @@ class Command:
                     get_command_names_by_criteria(template="builtins"))
 
         elif len(args) == 2:
-            if not template_in_cli and self.followed_by_template:
+            if self.followed_by_template and tools.check_template_exists(args[0]):
                 template_in_cli = args[0]
                 # template command completion and builtins command.
                 if self.followed_by_command:
@@ -389,9 +389,9 @@ class Command:
                 if instance.returncode != 0:
                     print err
                     sys.exit(1)
-                completion.extend(command_return_completion.split(','))
+                completion.extend(command_return_completion.strip().split(' '))
 
-        return " ".join(completion)
+        return completion
 
     def usage(self):
         """Print usage of the current command"""

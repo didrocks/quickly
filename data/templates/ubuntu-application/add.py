@@ -73,9 +73,12 @@ You can add/remove/modify items from the indicator menu by editing indicator.py
 def shell_completion(argv):
     ''' Complete args '''
     # option completion
+    rv = []
     if len(argv) == 1:
-        print " ".join([option for option in options
-                        if option.startswith(sys.argv[-1])])
+        rv = options.keys()
+    if rv:
+        rv.sort()
+        print ' '.join(rv)
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
 
 abs_template_path = templatetools.get_template_path_from_project()
