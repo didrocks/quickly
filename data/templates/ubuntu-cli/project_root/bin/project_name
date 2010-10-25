@@ -4,7 +4,6 @@
 # This file is in the public domain
 ### END LICENSE
 
-import gettext
 import logging
 import optparse
 import os
