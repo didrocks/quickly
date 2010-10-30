@@ -294,7 +294,9 @@ def shell_completion(argv):
     
     # if then license argument given, returns available licenses
     if len(argv) == 1:
-        print " ".join(get_supported_licenses())
+        rv = get_supported_licenses()
+        rv.sort()
+        print ' '.join(rv)
 
 
 if __name__ == "__main__":

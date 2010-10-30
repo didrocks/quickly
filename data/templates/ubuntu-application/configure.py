@@ -54,10 +54,14 @@ running, be warned that dependency detection may not be as accurate due to
 def shell_completion(argv):
     ''' Complete args '''
     # option completion
+    rv = []
     if len(argv) == 1:
-        print " ".join([option for option in options if option.startswith(sys.argv[-1])])
+        rv = options.keys()
     elif len(argv) > 1 and argv[-2] == 'ppa': # if argument following ppa keyname, complete by ppa
-        print " ".join(packaging.shell_complete_ppa(argv[-1]))
+        rv = packaging.shell_complete_ppa(argv[-1])
+    if rv:
+        rv.sort()
+        print ' '.join(rv)
 
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
 

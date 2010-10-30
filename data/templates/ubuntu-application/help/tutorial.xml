@@ -152,7 +152,7 @@ Now you're ready to write some code. Of course just telling the glade file what 
    <figure>
     <graphic fileref="./images/23.png"></graphic>
   </figure>
-<para>JottyWindow.ui is now expecting to find a function JottyWindow.save_file(), so we simply add one to the JottyWindow class in the jotty file right under the on_destroy funtion.:</para> 
+<para>JottyWindow.ui is now expecting to find a function JottyWindow.save_file(), so we simply add one to the JottyWindow class in the jotty file right under the preferences_updated funtion.:</para> 
 <para> 
     <literallayout><programlisting>
     def save_file(self, widget, data=None):
@@ -420,8 +420,7 @@ To use the dialog in JottyWindow, we need to follow these steps:</para>
 <para><title>Importing the SaveDialog</title>
 Add the SaveDialog to the list of the imported modules at the top of the jotty file, so it looks like this:</para>
 <para><programlisting>
-from jotty import (
-    AboutJottyDialog, PreferencesJottyDialog, SaveDialog)
+from jotty import (BaseJottyWindow, SaveDialog)
 </programlisting></para>
 
 <para><title>Create an instance of the dialog and run it</title>
@@ -603,8 +602,7 @@ Now we want to use the Open Dialog in the JottyWindow open_file function. To use
 <para><title>Import OpenDialog</title>
 Just like the SaveDialog, add the import line to the list of imports:</para>
 <para><programlisting>
-from jotty import (
-    AboutJottyDialog, PreferencesJottyDialog, SaveDialog, OpenDialog)
+from jotty import (BaseJottyWindow, SaveDialog, OpenDialog)
 </programlisting></para>
 
 <para><title>Create an instance of the dialog and run it</title>
