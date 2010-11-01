@@ -65,7 +65,7 @@ class Basecamel_case_nameWindow(gtk.Window):
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.builder.connect_signals(self)
-		self.preferences_dialog = None
+        self.preferences_dialog = None
 
         # Optional Launchpad integration
         # This shouldn't crash if not found as it is simply used for bug reporting.
