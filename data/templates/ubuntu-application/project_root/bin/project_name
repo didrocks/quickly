@@ -23,6 +23,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
 
 from python_name import (Basecamel_case_nameWindow)
 import python_name.helpers as helpers
+from python_name.preferences import preferences
 
 
 # See Basecamel_case_nameWindow.py for more details about how this class works
@@ -53,5 +54,9 @@ if __name__ == "__main__":
 
     # Run the application.
     window = camel_case_nameWindow()
+    preferences.db_connect()
+    preferences.connect('changed', window.on_preferences_changed)
+    preferences.connect('loaded', window.on_preferences_loaded)
+    preferences.load()
     window.show()
     gtk.main()
