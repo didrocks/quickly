@@ -143,10 +143,9 @@ class camel_case_nameWindow(gtk.Window):
         # for more information about Launchpad integration.
         try:
             import LaunchpadIntegration
-            helpmenu = self.builder.get_object('helpMenu1')
-            if helpmenu:
+            if hasattr(self.ui, 'helpMenu1'):
                 LaunchpadIntegration.set_sourcepackagename('project_name1')
-                LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+                LaunchpadIntegration.add_items(self.ui.helpMenu1, 0, False, True)
         except:
             pass
             

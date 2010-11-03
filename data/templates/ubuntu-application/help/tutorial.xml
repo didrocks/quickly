@@ -211,14 +211,14 @@ Desktopcouch will set up a database for us, or create a new one if it's needed. 
 <literallayout>
 <programlisting>
         #get the title for the note
-        title = self.builder.get_object("entry1").get_text()
+        title = self.ui.entry1.get_text()
 </programlisting></literallayout></para>
 <para><title>Here's the code to get pull the text out of the TextView:</title> 
 In pygtk, TextView widgets have a text buffer that stores the text. So you ask the TextView for it's TextBuffer, and then you ask the TextBuffer for the text. You use iters to determine from which part of the text buffer you want text. Since we want all the text, it's easy to just get the start and end iters.</para> 
 <para>
 <literallayout><programlisting>
         #get the string
-        buff = self.builder.get_object("textview1").get_buffer()
+        buff = self.ui.textview1.get_buffer()
         start_iter = buff.get_start_iter()
         end_iter = buff.get_end_iter()
         text = buff.get_text(start_iter,end_iter)
@@ -272,10 +272,10 @@ Before we just write the new document though, we have to take note of the fact t
 <literallayout><programlisting>
     def save_file(self, widget, data=None): 
         #get the title for the note 
-        title = self.builder.get_object("entry1").get_text() 
+        title = self.ui.entry1.get_text() 
 
         #get the text to save 
-        buff = self.builder.get_object("textview1").get_buffer() 
+        buff = self.ui.textview1.get_buffer() 
         start_iter = buff.get_start_iter() 
         end_iter = buff.get_end_iter() 
         text = buff.get_text(start_iter,end_iter) 
@@ -326,7 +326,7 @@ Follow these steps:</para>
     <literallayout><programlisting>
     def open_file(self, widget, data=None):
         #get the name of the document to open
-        title = self.builder.get_object("entry1").get_text()
+        title = self.ui.entry1.get_text()
         text = ""
  
         #get all the records
@@ -340,7 +340,7 @@ Follow these steps:</para>
                 text = document["text"]
         
         #set the UI to display the string
-        buff = self.builder.get_object("textview1").get_buffer()
+        buff = self.ui.textview1.get_buffer()
         buff.set_text(text)
 </programlisting></literallayout></para>
 <para><title>Implement New</title> 
@@ -348,8 +348,8 @@ First, add the new_file signal to the menu item in Glade, then add this code to 
 <para>
     <literallayout><programlisting>
     def new_file(self, widget, data=None):
-        self.builder.get_object("entry1").set_text("Note Title")
-        buff = self.builder.get_object("textview1").get_buffer()
+        self.ui.entry1.set_text("Note Title")
+        buff = self.ui.textview1.get_buffer()
         buff.set_text("")
 </programlisting></literallayout></para>
 <para>To make them work, add these functions to the JottyWindow class, and save. Then go back and connect the functions to the "activate" signals for the Open and New menu items.</para>
@@ -390,7 +390,7 @@ You can use the "<application>Quickly</application> edit" command to open the Sa
 <programlisting>
     @property
     def title_text(self):
-        return self.builder.get_object("entry1").get_text()
+        return self.ui.entry1.get_text()
 </programlisting></para>
 <para>We don't need to write any code for the Ok and Cancel buttons, as they were automatically hooked up by <application>Quickly</application> when it created the dialog.</para>
 <para>Before we go on to invoking the dialog, delete HBox from JottyWindow that holds the text entry and label, as we won't be needing those.</para>
@@ -459,7 +459,7 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
             return
 
         #get the text to save
-        buff = self.builder.get_object("textview1").get_buffer()
+        buff = self.ui.textview1.get_buffer()
         start_iter = buff.get_start_iter()
         end_iter = buff.get_end_iter()
         text = buff.get_text(start_iter,end_iter)
@@ -538,7 +538,7 @@ we added the VBox to the dialog, we left an open space at the bottom. We'll use 
 <para>
         <literallayout><programlisting>
         self.couchgrid.show()
-        self.builder.get_object("vbox1").pack_end(self.couchgrid)
+        self.ui.vbox1.pack_end(self.couchgrid)
 
 </programlisting></literallayout></para>
 
@@ -638,7 +638,7 @@ Now just put the text into the texview:</para>
 <para>
         <literallayout><programlisting>
         #set the UI to display the string
-        buff = self.builder.get_object("textview1").get_buffer()
+        buff = self.ui.textview1.get_buffer()
         buff.set_text(text)</programlisting></literallayout></para>
 <para>That's all there is to it. So the whole open_file function looks like this:</para>
 <para>
@@ -663,7 +663,7 @@ Now just put the text into the texview:</para>
         text = record["text"]
 
         #set the UI to display the string
-        buff = self.builder.get_object("textview1").get_buffer()
+        buff = self.ui.textview1.get_buffer()
         buff.set_text(text)
 
 </programlisting></literallayout></para>
