@@ -264,9 +264,7 @@ def get_ppa_parameters(launchpad, full_ppa_name):
                     ppa_user = team[0]
                 else:
                     raise not_ppa_owner(ppa_user_name)
-        except KeyError:
-            raise user_team_not_found(ppa_user_name)
-        except HTTPError: # launchpadlib may give 404 instead
+        except (KeyError, HTTPError): # launchpadlib may give 404 instead
             raise user_team_not_found(ppa_user_name)
     else:
         ppa_user = launchpad.me
