@@ -13,6 +13,7 @@ exit_status() {
     if [ $1 -eq 0 ]; then
         echo -e '\e[32mPASSED\e[0m'
     else
+        rm -f "$LOGFILE"
         echo -e '\e[31mFAILED\e[0m'
     fi
     exit $1
@@ -27,22 +28,26 @@ LOGFILE="$ORIGINAL_DIR/results.log"
 
 rm -f "$LOGFILE"
 
+echo -n "Running $CATEGORY $SCRIPT_NAME... "
+
 if [ -d "$SCRIPT" ]; then
-    echo -n "Running $CATEGORY $SCRIPT_NAME.sh... "
-    SCRIPT="$SCRIPT/$SCRIPT_NAME.sh"
-elif echo "$SCRIPT_NAME" | grep "\.py$" > /dev/null; then
+    if [ -e "$SCRIPT/$SCRIPT_NAME.py" ]; then
+        SCRIPT_NAME="$SCRIPT_NAME.py"
+    else
+        SCRIPT_NAME="$SCRIPT_NAME.sh"
+    fi
+    SCRIPT="$SCRIPT/$SCRIPT_NAME"
+fi
+
+if echo "$SCRIPT_NAME" | grep "\.py$" > /dev/null; then
     # this is actually a python unit test
-    echo -n "Running $CATEGORY $SCRIPT_NAME... "
-    python "$SCRIPT" > "$LOGFILE" 2>&1
+    python "$SCRIPT" &> "$LOGFILE"
     rv=$?
     if [ $rv -ne 0 ]; then
         echo
         cat "$LOGFILE"
     fi
-    rm -f "$LOGFILE"
     exit_status $rv
-else
-    echo -n "Running $CATEGORY $SCRIPT_NAME... "
 fi
 
 TEMP_SCRIPT_DIR=$(dirname "$SCRIPT")
@@ -77,6 +82,5 @@ if [[ -n $(diff -q "$SCRIPT" "$LOGFILE") ]]; then
     echo "********************************"
     exit_status 1
 else
-    rm -f "$LOGFILE"
     exit_status 0
 fi

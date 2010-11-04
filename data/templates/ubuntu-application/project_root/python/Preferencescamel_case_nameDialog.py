@@ -7,6 +7,7 @@ from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 import gtk
 
+from python_name import BuilderGlue
 from python_name.helpers import get_builder
 
 import gettext
@@ -41,7 +42,7 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
 
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.builder.connect_signals(self)
+        self.ui = BuilderGlue.BuilderGlue(builder, self)
 
         # Set up couchdb and the preference info.
         self._db_name = "project_name"
