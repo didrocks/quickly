@@ -12,12 +12,11 @@ quickly create ubuntu-application test-project
 cd test-project
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
-#                 LaunchpadIntegration.set_sourcepackagename('test-project')
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
 
 grep helpMenu test_project/BaseTestProjectWindow.py
-#             if hasattr(self.ui, 'helpMenu'):
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
 
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
@@ -26,12 +25,11 @@ quickly configure lp-project gpoweroff
 # Creating new apport hooks
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
-#                 LaunchpadIntegration.set_sourcepackagename('test-project')
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
 
 grep helpMenu test_project/BaseTestProjectWindow.py
-#             if hasattr(self.ui, 'helpMenu'):
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
 
 bzr status
 # modified:
@@ -56,12 +54,11 @@ quickly configure lp-project hudson-notifier
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
-#                 LaunchpadIntegration.set_sourcepackagename('test-project')
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
 
 grep helpMenu test_project/BaseTestProjectWindow.py
-#             if hasattr(self.ui, 'helpMenu'):
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
 
 bzr status
 # added:
@@ -122,12 +119,11 @@ quickly configure lp-project gpoweroff
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
-#                 LaunchpadIntegration.set_sourcepackagename('test-project')
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
 
 grep helpMenu test_project/BaseTestProjectWindow.py
-#             if hasattr(self.ui, 'helpMenu'):
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
 
 bzr status
 # modified:
@@ -153,12 +149,11 @@ quickly configure lp-project hudson-notifier
 # Creating new apport hooks
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
-#                 LaunchpadIntegration.set_sourcepackagename('test-project')
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
 
 grep helpMenu test_project/BaseTestProjectWindow.py
-#             if hasattr(self.ui, 'helpMenu'):
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -193,12 +188,11 @@ quickly configure lp-project gpoweroff
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
-#                 LaunchpadIntegration.set_sourcepackagename('test-project')
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
 
 grep helpMenu test_project/BaseTestProjectWindow.py
-#             if hasattr(self.ui, 'helpMenu'):
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -320,12 +314,11 @@ quickly upgrade 0.3 0.4
 # Creating new apport hooks
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
-#                 LaunchpadIntegration.set_sourcepackagename('test-project')
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
 
 grep helpMenu test_project/BaseTestProjectWindow.py
-#             if hasattr(self.ui, 'helpMenu'):
-#                 LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -372,8 +365,8 @@ quickly upgrade 0.3 0.4
 # Creating new apport hooks
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
-#                 LaunchpadIntegration.set_sourcepackagename('test-project')
-#                 LaunchpadIntegration.add_items(self.ui.differentHelpMenu, 0, False, True)
+#             LaunchpadIntegration.add_items(self.ui.differentHelpMenu, 0, False, True)
+#             LaunchpadIntegration.set_sourcepackagename('test-project')
 
 cp "$TEST_SCRIPT_DIR/BaseTestProjectWindow.py.no_lpi" ./test_project/BaseTestProjectWindow.py
 

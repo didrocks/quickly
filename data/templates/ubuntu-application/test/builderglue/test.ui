@@ -13,4 +13,17 @@
     </child>
   </object>
   <object class="GtkFileFilter" id="filefilter"/>
+  <object class="GtkWindow" id="wind?o-w two">
+    <child>
+      <object class="GtkLabel" id="wind_o_w_two">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">label</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="1wind-o w/3">
+    <child>
+      <placeholder/>
+    </child>
+  </object>
 </interface>
