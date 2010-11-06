@@ -9,9 +9,6 @@ import os
 # TODO: replace defaults with your own values
 defaults = {
 'example_entry': 'I remember stuff',
-'height': 50,
-'zoom': True,
-'folder': '/',
  }
 
 from desktopcouch.records.server import CouchDatabase
@@ -58,6 +55,7 @@ class User_dict(IterableUserDict):
     def save(self):
         # couchdb
         self._database.update_fields(self._key, self.data)
+
  
     def load(self):
         # couchdb

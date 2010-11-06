@@ -7,21 +7,15 @@
 
 requirements:
 in module preferences: defaults[key] has a value
-a widget, named key, created using glade therefore
 self.builder.get_object(key) is a suitable widget to adjust value
 widget_methods[key] provides method names for the widget
 each widget calls set_preference(...) when it has adjusted value
 """
 
-# defined because there are choices for many widget types
+# defined because there are choices for some widget types
 # TODO: replace example widget_methods with your values
 widget_methods = {
-'FileChooserButton (folder)': ['get_filename', 'set_current_folder'],
-'folder': ['get_filename', 'set_current_folder'],
-'SpinButton (integer)': ['get_value_as_int', 'set_value'],
 'example_entry': ['get_text', 'set_text'],
-"height": ['get_value', 'set_value'],
-"zoom": ['get_active', 'set_active'],
 }
 
 import gtk
@@ -36,19 +30,6 @@ gettext.textdomain('project_name')
 
 class Preferencescamel_case_nameDialog(gtk.Dialog):
     __gtype_name__ = "Preferencescamel_case_nameDialog"
-
-    __gsignals__ = {
-        "configure-event" : "override"
-        }
-
-    def do_configure_event(self, event):
-        '''save size and position
-        
-        when user resizes or moves window'''
-        w, h = event.width, event.height
-        x, y = event.x, event.y
-        preferences['preferences dialog geometry'] = [w, h, x, y]
-        gtk.Window.do_configure_event(self, event)
 
     def __new__(cls):
         """Special static method that's automatically called by Python when 
@@ -77,14 +58,7 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         self.builder.connect_signals(self)
 
         # TODO: code for other initialization actions should be added here
-        self.set_geometry_from_preferences()
         self.set_widgets_from_preferences()
-
-    def set_geometry_from_preferences(self):
-        [w, h, x, y] = preferences.get('preferences dialog geometry', [0, 0, 0, 0])
-        if [w, h, x, y] != [0, 0, 0, 0]:
-            self.resize(w, h)
-            self.move(x, y)
 
     def set_widgets_from_preferences(self):
         ''' these widgets show values in the preferences dictionary '''

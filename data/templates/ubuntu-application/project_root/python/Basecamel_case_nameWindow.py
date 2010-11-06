@@ -21,19 +21,6 @@ gettext.textdomain('project_name')
 class Basecamel_case_nameWindow(gtk.Window):
     __gtype_name__ = "Basecamel_case_nameWindow"
 
-    __gsignals__ = {
-        "configure-event" : "override"
-        }
-
-    def do_configure_event(self, event):
-        '''save size and position
-        
-        when user resizes or moves window'''
-        w, h = event.width, event.height
-        x, y = event.x, event.y
-        preferences['main window geometry'] = [w, h, x, y]
-        gtk.Window.do_configure_event(self, event)
-
     # To construct a new instance of this method, the following notable 
     # methods are called in this order:
     # __new__(cls)
@@ -127,12 +114,6 @@ class Basecamel_case_nameWindow(gtk.Window):
         preferences.save()
         gtk.main_quit()
 
-    def on_preferences_loaded(self, widget, data=None):
-        [w, h, x, y] = preferences.get('main window geometry', [0, 0, 0, 0])
-        if [w, h, x, y] != [0, 0, 0, 0]:
-            self.resize(w, h)
-            self.move(x, y)
-
     def on_preferences_dialog_destroyed(self, widget, data=None):
         '''only affects gui
         
@@ -142,12 +123,6 @@ class Basecamel_case_nameWindow(gtk.Window):
         # to determine whether to create or present preferences_dialog
         self.preferences_dialog = None
 
-    def on_preferences_changed(self, widget, data=()):
-        '''Respond to preferences that have visual effect
-        
-        for example show/hide toolbar'''
-        # move and resize cannot go here :(
-        logging.debug('on_preferences_changed: %s' % str(data))
 
 if __name__ == "__main__":
     window = Basecamel_case_nameWindow()
