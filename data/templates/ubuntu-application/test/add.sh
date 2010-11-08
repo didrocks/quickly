@@ -17,6 +17,12 @@ quickly add
 #   quickly add dialog <dialog-name>
 #   quickly add indicator
 
+quickly add foo
+# ERROR: Cannot add foo: it is not in the store
+# Usage:
+#   quickly add dialog <dialog-name>
+#   quickly add indicator
+
 quickly add dialog
 # Usage: quickly add dialog <dialog-name>
 

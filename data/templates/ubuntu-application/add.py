@@ -35,8 +35,9 @@ options = {}
 for module in addable:
     try:
         options[module] = getattr(store, module).option
-    except:
-        print 'warn:', getattr(store, module)
+    except AttributeError:
+        # ignore files in store that have no option for us
+        pass
 
 def usage():
     templatetools.print_usage(options.values())
@@ -44,7 +45,11 @@ def usage():
 def help():
     help_list = ['Add something to your project\n']
     for module in addable:
-        help_list.append(getattr(store, module).help_text)
+        try:
+            help_list.append(getattr(store, module).help_text)
+        except AttributeError:
+            # ignore files in store that have no help for us
+            pass
     help_text = ''.join(help_list)
     print _(help_text)
 
@@ -66,5 +71,6 @@ if len(sys.argv) < 2:
 if argv[1] in addable:
     getattr(store, argv[1]).add(options)
 else:
-    print _('cannot add %s: it is not in the store' % argv[1])
+    cmd = commands.get_command('add', 'ubuntu-application')
+    templatetools.usage_error(_('Cannot add %s: it is not in the store' % argv[1]), cmd=cmd, template='ubuntu-application')
     sys.exit(4)
