@@ -82,8 +82,13 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         except KeyError:
             logging.warn('%s not in widget_methods' % key)
             return
-    
-        method = getattr(widget, write_method_name)
+
+        try:
+            method = getattr(widget, write_method_name)
+        except AttributeError:
+            logging.warn("'%s' does not have a '%s' method.\n Plase edit 'widget_methods' in %s" % (key, write_method_name, __file__))
+            return
+
         method(value)
 
     def get_key_for_widget(self, widget):
@@ -107,7 +112,12 @@ to defaults in preferences module''')
         # so no KeyError test is needed here
         read_method_name=widget_methods[key][0]
 
-        read_method = getattr(widget, read_method_name)
+        try:
+            read_method = getattr(widget, read_method_name)
+        except AttributeError:
+            logging.warn("'%s' does not have a '%s' method.\n Plase edit 'widget_methods' in %s" % (key, read_method_name, __file__))
+            return
+
         value=read_method()
         logging.debug('set_preference: %s = %s' % (key, str(value)))
         preferences[key] = value
@@ -116,14 +126,8 @@ to defaults in preferences module''')
         self.destroy()
 
     def on_btn_help_clicked(self, widget, data=None):
-        no_help = gtk.MessageDialog(parent=self,
-        flags=gtk.DIALOG_MODAL,
-        type=gtk.MESSAGE_INFO, 
-        buttons=gtk.BUTTONS_CLOSE,
-        message_format='No help written yet')
-        no_help.run()
-        # destroy the help dialog
-        no_help.destroy()
+        #TODO add your help code here, or remove the help button
+        pass
 
 if __name__ == "__main__":
     dialog = Preferencescamel_case_nameDialog()

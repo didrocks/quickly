@@ -111,7 +111,6 @@ class Basecamel_case_nameWindow(gtk.Window):
     def on_destroy(self, widget, data=None):
         """Called when the camel_case_nameWindow is closed."""
         # Clean up code for saving application state should be added here.
-        preferences.save()
         gtk.main_quit()
 
     def on_preferences_dialog_destroyed(self, widget, data=None):
@@ -122,6 +121,11 @@ class Basecamel_case_nameWindow(gtk.Window):
         logging.debug('on_preferences_dialog_destroyed')
         # to determine whether to create or present preferences_dialog
         self.preferences_dialog = None
+
+    def on_preferences_changed(self, widget, data=None):
+        logging.debug('main window received preferences changed')
+        for key in data:
+            logging.debug('preference changed: %s = %s' % (key, preferences[key]))
 
 
 if __name__ == "__main__":

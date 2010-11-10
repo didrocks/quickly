@@ -43,6 +43,8 @@ if __name__ == "__main__":
     # Run the application.
     window = camel_case_nameWindow()
     preferences.db_connect()
+    preferences.connect('changed', window.on_preferences_changed)
     preferences.load()
     window.show()
     gtk.main()
+    preferences.save()
