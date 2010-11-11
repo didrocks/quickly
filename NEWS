@@ -5,6 +5,7 @@ Quickly 0.7
    - tutorial command reference 4.4 glade should be design (Tony Byrne)
      LP: #661699
    - refresh the branding to the new ubuntu brand (Daniel Fore) (LP: #666557)
+   - Support self.ui.label1 syntax
  + ubuntu-application-template and derivatives:
    - Fix apport code to not fail when lp-project name changes
    - Fix apport test to run cleanly by always upgrading from 0.3 to 0.4
