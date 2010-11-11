@@ -159,18 +159,20 @@ def get_python_mkdebian_version():
     version = proc.communicate()[0]
     return float(version)
 
-def updatepackaging(changelog=None, no_changelog=False):
+def updatepackaging(changelog=None, no_changelog=False, installopt=False):
     """create or update a package using python-mkdebian.
 
     Commit after the first packaging creation"""
 
     if not changelog:
         changelog = []
-    command = ['python-mkdebian', '--force-control']
+    command = ['python-mkdebian', '--force-control', '--force-rules']
     if get_python_mkdebian_version() > 2.22:
         command.append("--force-copyright")
     if no_changelog:
         command.append("--no-changelog")
+    if installopt:
+       command.append("--prefix=/opt/%s" % configurationhandler.project_config['project'])
     for message in changelog:
         command.extend(["--changelog", message])
     if not configurationhandler.project_config:
