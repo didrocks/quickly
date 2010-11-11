@@ -5,6 +5,7 @@
 
 import gtk
 
+from python_name import BuilderGlue
 from python_name.helpers import get_builder
 
 import gettext
@@ -37,7 +38,7 @@ class Aboutcamel_case_nameDialog(gtk.AboutDialog):
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.builder.connect_signals(self)
+        self.ui = BuilderGlue.BuilderGlue(builder, self)
 
         # Code for other initialization actions should be added here.
 

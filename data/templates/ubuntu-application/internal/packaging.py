@@ -154,6 +154,10 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
         return(_continue_if_errors(err_output, warn_output, proc.returncode,
                                      ask_on_warn_or_error))
 
+def get_python_mkdebian_version():
+    proc = subprocess.Popen(["python-mkdebian", "--version"], stdout=subprocess.PIPE)
+    version = proc.communicate()[0]
+    return float(version)
 
 def updatepackaging(changelog=None, no_changelog=False):
     """create or update a package using python-mkdebian.
@@ -162,7 +166,9 @@ def updatepackaging(changelog=None, no_changelog=False):
 
     if not changelog:
         changelog = []
-    command = ['python-mkdebian', '--force-control', '--force-copyright']
+    command = ['python-mkdebian', '--force-control']
+    if get_python_mkdebian_version() > 2.22:
+        command.append("--force-copyright")
     if no_changelog:
         command.append("--no-changelog")
     for message in changelog:
@@ -258,7 +264,7 @@ def get_ppa_parameters(launchpad, full_ppa_name):
                     ppa_user = team[0]
                 else:
                     raise not_ppa_owner(ppa_user_name)
-        except KeyError:
+        except (KeyError, HTTPError): # launchpadlib may give 404 instead
             raise user_team_not_found(ppa_user_name)
     else:
         ppa_user = launchpad.me

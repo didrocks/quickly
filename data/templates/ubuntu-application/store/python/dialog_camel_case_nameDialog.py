@@ -5,6 +5,7 @@
 
 import gtk
 
+from python_name import BuilderGlue
 from python_name.helpers import get_builder
 
 import gettext
@@ -35,7 +36,7 @@ class dialog_camel_case_nameDialog(gtk.Dialog):
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.builder.connect_signals(self)
+        self.ui = BuilderGlue.BuilderGlue(builder, self)
 
     def ok(self, widget, data=None):
         """The user has elected to save the changes.

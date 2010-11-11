@@ -7,7 +7,7 @@ import gtk
 import logging
 
 from python_name import (
-    Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
+    Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog, BuilderGlue)
 import python_name.helpers as helpers
 from python_name.preferences import preferences
 
@@ -51,7 +51,7 @@ class Basecamel_case_nameWindow(gtk.Window):
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.builder.connect_signals(self)
+        self.ui = BuilderGlue.BuilderGlue(builder, self)
         self.preferences_dialog = None
 
         # Optional Launchpad integration
@@ -60,10 +60,8 @@ class Basecamel_case_nameWindow(gtk.Window):
         # for more information about Launchpad integration.
         try:
             import LaunchpadIntegration
-            helpmenu = self.builder.get_object('helpMenu')
-            if helpmenu:
-                LaunchpadIntegration.set_sourcepackagename('project_name')
-                LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+            LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+            LaunchpadIntegration.set_sourcepackagename('project_name')
         except:
             pass
 

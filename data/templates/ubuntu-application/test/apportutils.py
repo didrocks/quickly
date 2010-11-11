@@ -122,15 +122,6 @@ class camel_case_nameWindow(gtk.Window):
 import sys
 import os
 import gtk
-
-# optional Launchpad integration
-# this shouldn't crash if not found as it is simply used for bug reporting
-try:
-    import LaunchpadIntegration
-    launchpad_available = True
-except:
-    launchpad_available = False
-
 import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
@@ -146,16 +137,16 @@ class camel_case_nameWindow(gtk.Window):
         self.builder = builder
         self.builder.connect_signals(self)
 
-        global launchpad_available
-        if launchpad_available:
-            # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
-            # about LaunchpadIntegration
-            helpmenu = self.builder.get_object('helpMenu1')
-            if helpmenu:
-                LaunchpadIntegration.set_sourcepackagename('project_name1')
-                LaunchpadIntegration.add_items(helpmenu, 0, False, True)
-            else:
-                launchpad_available = False
+        # Optional Launchpad integration
+        # This shouldn't crash if not found as it is simply used for bug reporting.
+        # See https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding
+        # for more information about Launchpad integration.
+        try:
+            import LaunchpadIntegration
+            LaunchpadIntegration.add_items(self.ui.helpMenu1, 0, False, True)
+            LaunchpadIntegration.set_sourcepackagename('project_name1')
+        except:
+            pass
             
     def about(self, widget, data=None):
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
