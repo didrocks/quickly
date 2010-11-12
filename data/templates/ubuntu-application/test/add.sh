@@ -12,7 +12,13 @@ quickly create ubuntu-application test-project
 cd test-project
 
 quickly add
-# ERROR: No action name provided.
+# ERROR: Cannot add, no plugin name provided.
+# Usage:
+#   quickly add dialog <dialog-name>
+#   quickly add indicator
+
+quickly add foo
+# ERROR: Cannot add, did not recognize plugin name: foo
 # Usage:
 #   quickly add dialog <dialog-name>
 #   quickly add indicator
