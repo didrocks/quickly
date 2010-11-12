@@ -16,10 +16,8 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import sys
-import internal.quicklyutils as quicklyutils
-from quickly import configurationhandler, templatetools, commands
+from quickly import templatetools, commands
 
 import gettext
 from gettext import gettext as _
@@ -27,49 +25,34 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 argv = sys.argv
-options = {'dialog': _('quickly add dialog <dialog-name>'),
-           'indicator': 'quickly add indicator'}
+
+from store import *
+import store
+
+addable = [x for x in dir(store) if x[0] != '_']
+
+options = {}
+for module in addable:
+    try:
+        options[module] = getattr(store, module).option
+    except AttributeError:
+        # ignore files in store that have no option for us
+        pass
 
 def usage():
     templatetools.print_usage(options.values())
+
 def help():
-    print _("""Add something to your project
+    help_list = [_('Add something to your project\n')]
+    for module in addable:
+        try:
+            help_list.append(getattr(store, module).help_text)
+        except AttributeError:
+            # ignore files in store that have no help for us
+            pass
+    help_text = '\n\n'.join(help_list)
+    print help_text
 
-
-$ quickly add dialog <dialog-name>
-
-Here, dialog-name is one or more words separated with dash
-
-For instance $ quickly add dialog dialog-name will create:
-1. A subclass of gtk.Dialog called DialogNameDialog in the module
-   DialogNameDialog.py
-2. A glade file called DialogNameDialog.ui in the ui directory
-3. A catalog file called dialog_name_dialog.xml also in the ui directory
-
-To edit the UI for the dialog, run:
-$ quickly design
-
-To edit the behavior, run:
-$ quickly edit
-
-To use the dialog you have to invoke it from another python file:
-1. Import the dialog
-import DialogNameDialog
-
-2. Create an instance of the dialog
-dialog = DialogNameDialog.NewDialogNameDialog()
-
-3. Run the dialog and hide the dialog
-result = dialog.run()
-dialog.hide()
-
-
-$ quickly add indicator
-
-This will add support for Ubuntu Application Indicator to you quickly project.
-Next time you run your app, the Indicator will show up in the panel on top right.
-You can add/remove/modify items from the indicator menu by editing indicator.py
-""")
 def shell_completion(argv):
     ''' Complete args '''
     # option completion
@@ -81,109 +64,13 @@ def shell_completion(argv):
         print ' '.join(rv)
 templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
 
-abs_template_path = templatetools.get_template_path_from_project()
-abs_command_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-
-
 if len(sys.argv) < 2:
     cmd = commands.get_command('add', 'ubuntu-application')
-    templatetools.usage_error(_("No action name provided."), cmd=cmd, template='ubuntu-application')
+    templatetools.usage_error(_("Cannot add, no plugin name provided."), cmd=cmd, template='ubuntu-application')
 
-if argv[1] == "dialog":
-    if len(argv) != 3:
-        templatetools.print_usage(options['dialog'])
-        sys.exit(4)
-    else:
-        try:
-            dialog_name = templatetools.quickly_name(argv[2])
-        except templatetools.bad_project_name, e:
-            print(e)
-            sys.exit(1)
-
-        path_and_project = sys.argv[0].split('/')
-
-        if not configurationhandler.project_config:
-            configurationhandler.loadConfig()
-        project_name = configurationhandler.project_config['project']
-
-        template_ui_dir = os.path.join(abs_template_path, 'store', 'data', 'ui')
-        template_python_dir = os.path.join(abs_template_path, 'store', 'python')
-        # take files from command directory if don't exist
-        origin_ui_file_list = [os.path.join(template_ui_dir,
-                                            'dialog_camel_case_nameDialog.ui'),
-                               os.path.join(template_ui_dir,
-                                            'dialog_python_name_dialog.xml')]
-        python_file = os.path.join(template_ui_dir,
-                                   'dialog_camel_case_nameDialog.py')
-        if len([file_exist for file_exist in origin_ui_file_list if
-                os.path.isfile(file_exist)]) != len(origin_ui_file_list):
-            template_ui_dir = os.path.join(abs_command_path, 'store', 'data',
-                                           'ui')
-        if not os.path.isfile(python_file):
-            template_python_dir = os.path.join(abs_command_path, 'store',
-                                               'python')
-
-        target_ui_dir = os.path.join('data', 'ui')
-        python_name = templatetools.python_name(project_name)
-        target_python_dir = python_name
-
-        dialog_python_name = templatetools.python_name(dialog_name)
-        dialog_sentence_name, dialog_camel_case_name = \
-            quicklyutils.conventional_names(dialog_name)
-        project_sentence_name, project_camel_case_name = \
-            quicklyutils.conventional_names(project_name)
-        dialog_name = dialog_name.replace('-','_')
-
-        substitutions = (("project_name",project_name),
-                         ("dialog_name",dialog_name),
-                         ("dialog_python_name",dialog_python_name),
-                         ("dialog_camel_case_name",dialog_camel_case_name),
-                         ("project_camel_case_name",project_camel_case_name),
-                         ("project_sentence_name",project_sentence_name),
-                         ("dialog_sentence_name",dialog_sentence_name),
-                         ("python_name",python_name))
-
-        quicklyutils.file_from_template(template_ui_dir, 
-                                        "dialog_camel_case_nameDialog.ui", 
-                                        target_ui_dir, 
-                                        substitutions)
-
-        quicklyutils.file_from_template(template_ui_dir, 
-                                        "dialog_python_name_dialog.xml", 
-                                        target_ui_dir,
-                                        substitutions)
-
-        quicklyutils.file_from_template(template_python_dir, 
-                                        "dialog_camel_case_nameDialog.py", 
-                                        target_python_dir, 
-                                        substitutions)
-
-if argv[1] == "indicator":
-    if len(argv) != 2:
-        templatetools.print_usage(options['indicator'])
-        sys.exit(4)
-    else:
-
-        if not configurationhandler.project_config:
-            configurationhandler.loadConfig()
-        project_name = configurationhandler.project_config['project']
-
-        template_python_dir = os.path.join(abs_template_path, 'store', 'python')
-        # take files from command directory if don't exist
-        python_file = os.path.join(template_python_dir,
-                                   'indicator.py')
-        python_name = templatetools.python_name(project_name)
-        target_python_dir = python_name
-
-        project_sentence_name, project_camel_case_name = \
-            quicklyutils.conventional_names(project_name)
-
-        substitutions = (("project_name",project_name),
-                        ( "python_name",python_name))
-
-        quicklyutils.file_from_template(template_python_dir, 
-                                        "indicator.py", 
-                                        target_python_dir, 
-                                        substitutions)
-
-
+if argv[1] in addable:
+    getattr(store, argv[1]).add(options)
+else:
+    cmd = commands.get_command('add', 'ubuntu-application')
+    templatetools.usage_error(_('Cannot add, did not recognize plugin name: %s' % argv[1]), cmd=cmd, template='ubuntu-application')
+    sys.exit(4)

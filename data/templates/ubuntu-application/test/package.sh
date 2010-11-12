@@ -49,8 +49,8 @@ grep UNKNOWN debian/*
 # debian/control:Maintainer: UNKNOWN <UNKNOWN>
 # debian/control:Description: UNKNOWN
 # debian/control: UNKNOWN
-# debian/copyright:Upstream-Maintainer: UNKNOWN <UNKNOWN>
-# debian/copyright:Upstream-Source: UNKNOWN
+# debian/copyright:Maintainer: UNKNOWN <UNKNOWN>
+# debian/copyright:Source: UNKNOWN
 # debian/copyright:License: UNKNOWN
 
 (echo "Copyright (C) 2010 Oliver Twist <twist@example.com>" > AUTHORS)
@@ -74,8 +74,8 @@ quickly package | sed 's/^\.\+//'
 ## These next few steps are due to a bug in python-mkdebian (LP: #656943)
 
 grep UNKNOWN debian/*
-# debian/copyright:Upstream-Maintainer: UNKNOWN <UNKNOWN>
-# debian/copyright:Upstream-Source: UNKNOWN
+# debian/copyright:Maintainer: UNKNOWN <UNKNOWN>
+# debian/copyright:Source: UNKNOWN
 # debian/copyright:License: UNKNOWN
 
 rm debian/copyright
