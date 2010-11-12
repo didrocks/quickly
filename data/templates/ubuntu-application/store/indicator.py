@@ -19,26 +19,31 @@ import os
 import sys
 argv = sys.argv
 
+import gettext
+from gettext import gettext as _
+# set domain text
+gettext.textdomain('quickly')
+
 import internal.quicklyutils as quicklyutils
 from quickly import configurationhandler, templatetools, commands
 
-abs_template_path = templatetools.get_template_path_from_project()
-abs_command_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-
 option = 'quickly add indicator'
 
-help_text="""
+help_text=_("""
 $ quickly add indicator
 
 This will add support for Ubuntu Application Indicator to you quickly project.
 Next time you run your app, the Indicator will show up in the panel on top right.
 You can add/remove/modify items from the indicator menu by editing indicator.py
-"""
+""")
 
 def add(options):
     if len(argv) != 2:
         templatetools.print_usage(options['indicator'])
         sys.exit(4)
+
+    abs_template_path = templatetools.get_template_path_from_project()
+    abs_command_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()

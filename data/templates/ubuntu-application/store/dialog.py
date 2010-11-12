@@ -19,15 +19,17 @@ import os
 import sys
 argv = sys.argv
 
+import gettext
+from gettext import gettext as _
+# set domain text
+gettext.textdomain('quickly')
+
 import internal.quicklyutils as quicklyutils
 from quickly import configurationhandler, templatetools, commands
 
-abs_template_path = templatetools.get_template_path_from_project()
-abs_command_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-
 option = 'quickly add dialog <dialog-name>'
 
-help_text= """Here, dialog-name is one or more words separated with dash
+help_text= _("""Here, dialog-name is one or more words separated with dash
 
 For instance $ quickly add dialog dialog-name will create:
 1. A subclass of gtk.Dialog called DialogNameDialog in the module
@@ -50,9 +52,7 @@ dialog = DialogNameDialog.NewDialogNameDialog()
 
 3. Run the dialog and hide the dialog
 result = dialog.run()
-dialog.hide()
-
-"""
+dialog.hide()""")
 
 def add(options):
     if len(argv) != 3:
@@ -64,6 +64,9 @@ def add(options):
     except templatetools.bad_project_name, e:
         print(e)
         sys.exit(1)
+
+    abs_template_path = templatetools.get_template_path_from_project()
+    abs_command_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()

@@ -43,15 +43,15 @@ def usage():
     templatetools.print_usage(options.values())
 
 def help():
-    help_list = ['Add something to your project\n']
+    help_list = [_('Add something to your project\n')]
     for module in addable:
         try:
             help_list.append(getattr(store, module).help_text)
         except AttributeError:
             # ignore files in store that have no help for us
             pass
-    help_text = ''.join(help_list)
-    print _(help_text)
+    help_text = '\n\n'.join(help_list)
+    print help_text
 
 def shell_completion(argv):
     ''' Complete args '''
@@ -66,11 +66,11 @@ templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usa
 
 if len(sys.argv) < 2:
     cmd = commands.get_command('add', 'ubuntu-application')
-    templatetools.usage_error(_("No action name provided."), cmd=cmd, template='ubuntu-application')
+    templatetools.usage_error(_("Cannot add, no plugin name provided."), cmd=cmd, template='ubuntu-application')
 
 if argv[1] in addable:
     getattr(store, argv[1]).add(options)
 else:
     cmd = commands.get_command('add', 'ubuntu-application')
-    templatetools.usage_error(_('Cannot add %s: it is not in the store' % argv[1]), cmd=cmd, template='ubuntu-application')
+    templatetools.usage_error(_('Cannot add, did not recognize plugin name: %s' % argv[1]), cmd=cmd, template='ubuntu-application')
     sys.exit(4)
