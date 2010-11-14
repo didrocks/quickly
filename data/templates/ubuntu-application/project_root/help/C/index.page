@@ -1,0 +1,27 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="guide"
+      id="index">
+
+<info>
+  <credit type="author">
+    <name>Your Name</name>
+    <email>Your E-mail</email>
+    <years>2010</years>
+  </credit>
+</info>
+<title>Help for project_name</title>
+<p>This is an example guide page. It's main function is to link together the help topics. </p>
+<note>
+  <!-- delete this note -->
+  <p>
+    Your script or application looks better if it has help files similar to other applications in ubuntu.
+  </p>
+  <p>
+    Some people think that help files are only for apps that are difficult to use.
+  </p>
+</note>
+<section id="contents">
+<!-- other pages needs to have a link to index#contents for this to work-->
+<title>Contents</title>
+</section>
+</page>
