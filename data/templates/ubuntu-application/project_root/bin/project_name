@@ -23,7 +23,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
 
 from python_name import (Basecamel_case_nameWindow)
 import python_name.helpers as helpers
-
+from python_name.preferences import preferences
 
 # See Basecamel_case_nameWindow.py for more details about how this class works
 class camel_case_nameWindow(Basecamel_case_nameWindow.Basecamel_case_nameWindow):
@@ -33,25 +33,22 @@ class camel_case_nameWindow(Basecamel_case_nameWindow.Basecamel_case_nameWindow)
         """Set up the main window"""
         super(camel_case_nameWindow, self).finish_initializing(builder)
 
-        # Uncomment the following code to read in preferences at start up (this
-        # function is defined in Basecamel_case_nameWindow.py).
-        # Preferences can be read from the dictionary self.preferences after this call.
-        #self.load_preferences()
-
         # Code for other initialization actions should be added here.
+        preferences.connect('changed', self.on_preferences_changed)
 
-    def preferences_updated(self):
-        """Update window based on preference changes"""
-        # This will be called when the preference dialog is closed.
-        # Preferences can be read from the dictionary self.preferences.
-        pass
-
+    def on_preferences_changed(self, widget, data=None):
+        logging.debug('main window received preferences changed')
+        for key in data:
+            logging.debug('preference changed: %s = %s' % (key, preferences[key]))
 
 if __name__ == "__main__":
     # Support for command line options.  See helpers.py to add more.
     helpers.parse_options()
 
     # Run the application.
+    preferences.db_connect()
+    preferences.load()
     window = camel_case_nameWindow()
     window.show()
     gtk.main()
+    preferences.save()
