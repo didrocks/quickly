@@ -57,7 +57,7 @@ if not configurationhandler.project_config:
 filelist.append('bin/' + configurationhandler.project_config['project'])
 
 # add helpfile sources
-filelist.extend(glob.glob('help/C/*'))
+filelist.extend(glob.glob('help/C/*.page'))
 
 editor = quicklyutils.get_quickly_editors()
 subprocess.call([editor] + filelist)
