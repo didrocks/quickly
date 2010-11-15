@@ -16,10 +16,20 @@ gettext.textdomain('project_name')
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
     os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
 
+python_path = []
+if os.path.abspath(__file__).startswith('/opt'):
+    syspath = sys.path[:] # copy to avoid infinite loop in pending objects
+    for path in syspath:
+        opt_path = path.replace('/usr', '/opt/python_name')
+        python_path.insert(0, opt_path)
+        sys.path.insert(0, opt_path)
 if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
     and PROJECT_ROOT_DIRECTORY not in sys.path):
+    python_path.insert(0, PROJECT_ROOT_DIRECTORY)
     sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
-    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
+if python_path:
+    os.putenv('PYTHONPATH', "%s:%s" % (os.getenv('PYTHONPATH', ''), python_path)) # for subprocesses
+
 
 from python_name import (Basecamel_case_nameWindow)
 import python_name.helpers as helpers
