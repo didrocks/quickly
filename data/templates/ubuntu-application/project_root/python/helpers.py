@@ -57,25 +57,24 @@ def parse_options():
         logging.debug('logging enabled')
 
 def get_help_uri(page=None):
+    # help_uri from source tree - default language
     here = os.path.dirname(__file__)
-    trunk_help_path = os.path.abspath(os.path.join(here, '../help'))
-    if os.path.exists(trunk_help_path):
-        # running in trunk - default language
-        help_uri = os.path.join(trunk_help_path, 'C')
-    else:
-        # running installed - user's language
+    help_uri = os.path.abspath(os.path.join(here, '..', 'help', 'C'))
+
+    if not os.path.exists(help_uri):
+        # installed so use gnome help tree - user's language
         help_uri = 'project_name'
 
+    # unspecified page is the index.page
     if page is not None:
         help_uri = '%s#%s' % (help_uri, page)
 
     return help_uri
 
 def show_uri(parent, link):
-    # pythonised version of vala code from deja-dup
     screen = parent.get_screen()
-    # TODO: hide yelp's asserts
+    # TODO: hide gnome-help's asserts
     # stderr = sys.stderr
     # sys.stderr = file('/dev/null')
-    gtk.show_uri(screen, link, gtk.gdk.CURRENT_TIME)
+    gtk.show_uri(screen, link, gtk.get_current_event_time())
     # sys.stderr = stderr

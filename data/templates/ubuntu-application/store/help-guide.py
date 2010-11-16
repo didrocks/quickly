@@ -1,5 +1,5 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-# Copyright 2009 Didier Roche
+# Copyright 2010 Didier Roche
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -27,17 +27,25 @@ gettext.textdomain('quickly')
 import internal.quicklyutils as quicklyutils
 from quickly import configurationhandler, templatetools, commands
 
-option = 'quickly add indicator'
+option = 'quickly add help-guide <guide-name>'
 
-help_text=_("""This will add support for Ubuntu Application Indicator to you quickly project.
-Next time you run your app, the Indicator will show up in the panel on top right.
-You can add/remove/modify items from the indicator menu by editing indicator.py
+help_text=_("""adds a help guide to your project.
+
+To edit the guide, run:
+$ quickly edit
+All the help pages are loaded into your editor as well as the python files.
 """)
 
 def add(options):
-    if len(argv) != 2:
-        templatetools.print_usage(options['indicator'])
+    if len(argv) != 3:
+        templatetools.print_usage(options['help-guide'])
         sys.exit(4)
+
+    try:
+        guide_name = templatetools.quickly_name(argv[2])
+    except templatetools.bad_project_name, e:
+        print(e)
+        sys.exit(1)
 
     abs_template_path = templatetools.get_template_path_from_project()
     abs_command_path = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -46,20 +54,26 @@ def add(options):
         configurationhandler.loadConfig()
     project_name = configurationhandler.project_config['project']
 
-    template_python_dir = os.path.join(abs_template_path, 'store', 'python')
+    template_help_dir = os.path.join(abs_template_path,
+     'store', 'data', 'mallard')
+
     # take files from command directory if don't exist
-    python_file = os.path.join(template_python_dir,
-                               'indicator.py')
-    python_name = templatetools.python_name(project_name)
-    target_python_dir = python_name
+    help_page = os.path.join(template_help_dir,
+                               'g_u_i_d_e.page')
 
-    project_sentence_name, project_camel_case_name = \
-        quicklyutils.conventional_names(project_name)
+    if not os.path.isfile(help_page):
+        template_help_dir = os.path.join(abs_command_path,
+         'store', 'data', 'mallard')
+        help_page = os.path.join(template_help_dir,
+                   'g_u_i_d_e.page')
 
-    substitutions = (("project_name",project_name),
-                    ( "python_name",python_name))
+    target_help_dir = os.path.join('help', 'C')
+    if not os.path.exists(target_help_dir):
+        os.makedirs(target_help_dir)
 
-    quicklyutils.file_from_template(template_python_dir, 
-                                    "indicator.py", 
-                                    target_python_dir, 
-                                    substitutions)
+    python_name = templatetools.python_name(guide_name)
+    substitutions = (('g_u_i_d_e', guide_name),)
+
+    quicklyutils.file_from_template(template_help_dir, 
+                                    'g_u_i_d_e.page', 
+                                    target_help_dir, substitutions)
