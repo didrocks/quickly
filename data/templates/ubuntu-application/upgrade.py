@@ -171,4 +171,30 @@ if project_version < '0.4.4':
     os.system("find . -name '*.py' -exec %s {} \;" % sedline)
     os.system("%s bin/%s" % (sedline, project_name))
 
+### 0.7 update
+if project_version < '0.7':
+    # support /opt installation
+    content_to_update = '''python_path = []
+if os.path.abspath(__file__).startswith('/opt'):
+    syspath = sys.path[:] # copy to avoid infinite loop in pending objects
+    for path in syspath:
+        opt_path = path.replace('/usr', '/opt/%(python_name)s')
+        python_path.insert(0, opt_path)
+        sys.path.insert(0, opt_path)
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, '%(python_name)s'))
+    and PROJECT_ROOT_DIRECTORY not in sys.path):
+    python_path.insert(0, PROJECT_ROOT_DIRECTORY)
+    sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
+if python_path:
+    os.putenv('PYTHONPATH', "%%s:%%s" %% (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses''' % {'python_name' : python_name}
+
+    try:
+        templatetools.update_file_content("./bin/%s" % project_name,
+                'if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY',
+                "    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses",
+                content_to_update)
+    except templatetools.CantUpdateFile, e:
+        print _("WARNING: can't update your project to support /opt. This doesn't mind if you don't plan to submit your project to the application review board. Cause is: %s" % e)
+
+
 sys.exit(0)

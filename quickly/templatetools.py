@@ -31,6 +31,11 @@ import commands
 
 class bad_project_name(Exception):
     pass
+class CantUpdateFile(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    def __str__(self):
+        return self.msg
 
 def handle_additional_parameters(args, help=None, shell_completion=None, usage=None):
     """Enable handling additional parameter like help or shell_completion"""
@@ -87,6 +92,46 @@ def apply_file_rights(src_file_name, dest_file_name):
     st = os.stat(src_file_name)
     mode = stat.S_IMODE(st.st_mode)
     os.chmod(dest_file_name, mode)
+
+def update_file_content(filename, start_marker, end_marker, replacing_content):
+    """Safely replace the content of a file"""
+
+    skip_until_end_found = False
+    marker_found = False
+    try:
+        filename = os.path.abspath(filename)
+        ftarget_file_name = file(filename, 'r')
+        ftarget_file_name_out = file(ftarget_file_name.name + '.new', 'w')
+        for line in ftarget_file_name:
+            # seek if we have to add something
+            if start_marker in line:
+                skip_until_end_found = True
+                marker_found = True
+                ftarget_file_name_out.write(replacing_content)
+
+            if end_marker in line:
+                skip_until_end_found = False
+
+            if not skip_until_end_found:
+                ftarget_file_name_out.write(line)
+
+        ftarget_file_name.close()
+        ftarget_file_name_out.close()
+
+        if skip_until_end_found: # that means we didn't find the end_tag, don't copy the file
+            os.remove(ftarget_file_name_out.name)
+            raise CantUpdateFile(_("%s was not found in the file %s.") % (end_marker, ftarget_file_name.name))
+
+        if not marker_found:
+             os.remove(ftarget_file_name_out.name)
+             raise CantUpdateFile(_("%s was not found in the file %s.") % (start_marker, ftarget_file_name.name))
+
+        apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
+        os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
+
+    except (OSError, IOError), e:
+        msg = _("%s file was not found or can't update it") % ftarget_file_name
+        raise CantUpdateFile(msg)
 
 def in_verbose_mode():
     """Return true if verbose mode is on"""
