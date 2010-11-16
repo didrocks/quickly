@@ -174,7 +174,7 @@ def updatepackaging(changelog=None, no_changelog=False, installopt=False):
     if no_changelog:
         command.append("--no-changelog")
     if installopt:
-       command.append("--prefix=/opt/%s" % configurationhandler.project_config['project'])
+       command.append("--prefix=/opt/extras/%s" % configurationhandler.project_config['project'])
     for message in changelog:
         command.extend(["--changelog", message])
     if not configurationhandler.project_config:

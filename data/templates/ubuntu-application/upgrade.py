@@ -178,7 +178,7 @@ if project_version < '0.7':
 if os.path.abspath(__file__).startswith('/opt'):
     syspath = sys.path[:] # copy to avoid infinite loop in pending objects
     for path in syspath:
-        opt_path = path.replace('/usr', '/opt/%(python_name)s')
+        opt_path = path.replace('/usr', '/opt/extras/%(python_name)s')
         python_path.insert(0, opt_path)
         sys.path.insert(0, opt_path)
 if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, '%(python_name)s'))
