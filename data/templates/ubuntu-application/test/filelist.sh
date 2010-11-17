@@ -36,8 +36,8 @@ bzr ls -R
 # help/C/figures/
 # help/C/figures/icon.png
 # help/C/index.page
+# help/C/preferences.page
 # help/C/topic1.page
-# help/C/topic2.page
 # setup.py
 # test-project.desktop.in
 # test_project/
