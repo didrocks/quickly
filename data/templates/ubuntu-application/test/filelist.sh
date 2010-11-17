@@ -47,4 +47,5 @@ bzr ls -R
 # test_project/PreferencesTestProjectDialog.py
 # test_project/__init__.py
 # test_project/helpers.py
+# test_project/preferences.py
 # test_project/test_projectconfig.py

@@ -4,10 +4,12 @@
 ### END LICENSE
 
 import gtk
+import logging
 
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog, BuilderGlue)
 import python_name.helpers as helpers
+from python_name.preferences import preferences
 
 import gettext
 from gettext import gettext as _
@@ -18,7 +20,7 @@ gettext.textdomain('project_name')
 # common functions and some boilerplate.
 class Basecamel_case_nameWindow(gtk.Window):
     __gtype_name__ = "Basecamel_case_nameWindow"
-    
+
     # To construct a new instance of this method, the following notable 
     # methods are called in this order:
     # __new__(cls)
@@ -50,6 +52,7 @@ class Basecamel_case_nameWindow(gtk.Window):
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.ui = BuilderGlue.BuilderGlue(builder, self)
+        self.preferences_dialog = None
 
         # Optional Launchpad integration
         # This shouldn't crash if not found as it is simply used for bug reporting.
@@ -75,27 +78,29 @@ class Basecamel_case_nameWindow(gtk.Window):
         except:
             pass
 
-    def load_preferences(self):
-        """Loads preferences into self.preferences"""
-        prefs = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()
-        self.preferences = prefs.get_preferences()
-
     def about(self, widget, data=None):
         """Display the about box for project_name."""
         about = Aboutcamel_case_nameDialog.Aboutcamel_case_nameDialog()
         response = about.run()
         about.destroy()
 
-    def preferences(self, widget, data=None):
+    def on_preferences_activate(self, widget, data=None):
         """Display the preferences window for project_name."""
-        prefs = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()
-        response = prefs.run()
-        if response == gtk.RESPONSE_OK and hasattr(self, 'preferences_updated'):
-            # Add a preferences_updated function to subclasses to react to
-            # changes that a user makes.  You'll find such changes in self.preferences
-            self.preferences = prefs.get_preferences() # in case load_preferences was never called
-            self.preferences_updated()
-        prefs.destroy()
+
+        """ From the PyGTK Reference manual
+           Say for example the preferences dialog is currently open,
+           and the user chooses Preferences from the menu a second time;
+           use the present() method to move the already-open dialog
+           where the user can see it."""
+        if self.preferences_dialog is not None:
+            logging.debug('show existing preferences_dialog')
+            self.preferences_dialog.present()
+        else:
+            logging.debug('create new preferences_dialog')
+            self.preferences_dialog = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()
+            self.preferences_dialog.connect('destroy', self.on_preferences_dialog_destroyed)
+            self.preferences_dialog.show()
+        # destroy command moved into dialog to allow for a help button
 
     def quit(self, widget, data=None):
         """Signal handler for closing the camel_case_nameWindow."""
@@ -106,8 +111,19 @@ class Basecamel_case_nameWindow(gtk.Window):
         # Clean up code for saving application state should be added here.
         gtk.main_quit()
 
+    def on_preferences_dialog_destroyed(self, widget, data=None):
+        '''only affects gui
+        
+        logically there is no difference between the user closing,
+        minimising or ignoring the preferences dialog'''
+        logging.debug('on_preferences_dialog_destroyed')
+        # to determine whether to create or present preferences_dialog
+        self.preferences_dialog = None
+
+
     def on_contents_activate(self, widget, data=None):
         helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
+        #helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri('preferences'))
         #Popen(['yelp', get_data_path('help')], stderr=file("/dev/null"))
 
 if __name__ == "__main__":

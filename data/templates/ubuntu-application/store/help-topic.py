@@ -75,10 +75,12 @@ def add(options):
         os.makedirs(target_help_dir)
 
     python_name = templatetools.python_name(topic_name)
-    substitutions = (('t_o_p_i_c', topic_name),)
+    sentence_name, cc_name = quicklyutils.conventional_names(topic_name)
 
-    print 'help_page', help_page
-    print 'target_help_dir', target_help_dir
+    substitutions = (
+    ('t_o_p_i_c', topic_name),
+    ('sentence_name', sentence_name),
+    )
 
     quicklyutils.file_from_template(template_help_dir, 
                                     't_o_p_i_c.page', 

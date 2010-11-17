@@ -15,12 +15,16 @@ quickly add
 # ERROR: Cannot add, no plugin name provided.
 # Usage:
 #   quickly add dialog <dialog-name>
+#   quickly add help-guide <guide-name>
+#   quickly add help-topic <topic-name>
 #   quickly add indicator
 
 quickly add foo
 # ERROR: Cannot add, did not recognize plugin name: foo
 # Usage:
 #   quickly add dialog <dialog-name>
+#   quickly add help-guide <guide-name>
+#   quickly add help-topic <topic-name>
 #   quickly add indicator
 
 quickly add dialog
@@ -63,3 +67,51 @@ bzr status
 
 grep new_application_indicator test_project/indicator.py
 # def new_application_indicator(window):
+
+rm  test_project/indicator.py
+
+quickly add help-topic
+# Usage: quickly add help-topic <topic-name>
+
+quickly add help-topic a.b
+# ERROR: unpermitted character in name.
+# The name must start with a letter and contain only letters, spaces, dashes (-), and digits.
+# ERROR: add command failed
+# Aborting
+
+quickly add help-topic "Quickly Rocks"
+
+bzr status
+# unknown:
+#   help/C/quickly-rocks.page
+
+grep title help/C/quickly-rocks.page
+# <title>Quickly Rocks</title>
+
+grep id= help/C/quickly-rocks.page
+#       id="quickly-rocks">
+
+rm help/C/quickly-rocks.page
+
+quickly add help-guide
+# Usage: quickly add help-guide <guide-name>
+
+quickly add help-guide a.b
+# ERROR: unpermitted character in name.
+# The name must start with a letter and contain only letters, spaces, dashes (-), and digits.
+# ERROR: add command failed
+# Aborting
+
+quickly add help-guide "Quickly Rocks and Rolls"
+
+bzr status
+# unknown:
+#   help/C/quickly-rocks-and-rolls.page
+
+grep title help/C/quickly-rocks-and-rolls.page
+# <title>Quickly Rocks And Rolls</title>
+
+grep id= help/C/quickly-rocks-and-rolls.page
+#       id="quickly-rocks-and-rolls">
+
+rm help/C/quickly-rocks-and-rolls.page

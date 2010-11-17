@@ -62,4 +62,3 @@ filelist.extend(glob.glob('help/C/*.page'))
 editor = quicklyutils.get_quickly_editors()
 subprocess.call([editor] + filelist)
 
-

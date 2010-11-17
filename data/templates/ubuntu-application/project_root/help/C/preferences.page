@@ -1,6 +1,6 @@
 <page xmlns="http://projectmallard.org/1.0/"
       type="topic"
-      id="topic2">
+      id="preferences">
 
 <info>
   <link type="guide" xref="index#contents"/>
@@ -9,10 +9,10 @@
     <email>Your E-mail</email>
     <years>2010</years>
   </credit>
-  <desc>Optional short description of Topic 2 for contents page</desc>
+  <desc>Optional short description of Preferences for contents page</desc>
 </info>
 
-<title>Topic 2</title>
-<p>This is an example topic page. It's main function is to describe one topic.</p>
+<title>Preferences</title>
+<p>This is the preferences page.</p>
 
 </page>

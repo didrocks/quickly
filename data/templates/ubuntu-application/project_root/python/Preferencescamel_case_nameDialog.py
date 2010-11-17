@@ -3,12 +3,27 @@
 # This file is in the public domain
 ### END LICENSE
 
-from desktopcouch.records.server import CouchDatabase
-from desktopcouch.records.record import Record
+"""this dialog adjusts values in the preferences dictionary
+
+requirements:
+in module preferences: defaults[key] has a value
+self.builder.get_object(key) is a suitable widget to adjust value
+widget_methods[key] provides method names for the widget
+each widget calls set_preference(...) when it has adjusted value
+"""
+
+# defined because there are choices for some widget types
+# TODO: replace example widget_methods with your values
+widget_methods = {
+'example_entry': ['get_text', 'set_text'],
+}
+
 import gtk
+import logging
 
 from python_name import BuilderGlue
-from python_name.helpers import get_builder
+from python_name.helpers import get_builder, show_uri, get_help_uri
+from python_name.preferences import preferences
 
 import gettext
 from gettext import gettext as _
@@ -16,7 +31,6 @@ gettext.textdomain('project_name')
 
 class Preferencescamel_case_nameDialog(gtk.Dialog):
     __gtype_name__ = "Preferencescamel_case_nameDialog"
-    preferences = {}
 
     def __new__(cls):
         """Special static method that's automatically called by Python when 
@@ -44,66 +58,76 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         self.builder = builder
         self.ui = BuilderGlue.BuilderGlue(builder, self)
 
-        # Set up couchdb and the preference info.
-        self._db_name = "project_name"
-        self._database = CouchDatabase(self._db_name, create=True)
-        self._preferences = None
-        self._key = None
-
-        # Set the record type and then initalize the preferences.
-        self._record_type = (
-            "http://wiki.ubuntu.com/Quickly/RecordTypes/camel_case_name/"
-            "Preferences")
-        self._preferences = self.get_preferences()
         # TODO: code for other initialization actions should be added here
+        self.set_widgets_from_preferences()
 
-    def get_preferences(self):
-        """Return a dict of preferences for project_name.
+    def set_widgets_from_preferences(self):
+        ''' these widgets show values in the preferences dictionary '''
+        for key in preferences.keys():
+            self.set_widget_from_preference(key)
 
-        Creates a couchdb record if necessary.
-        """
-        if self._preferences == None:
-            # The dialog is initializing.
-            self._load_preferences()
+    def set_widget_from_preference(self, key):
+        '''set widget value from item in preferences'''
 
-        # If there were no saved preference, this.
-        return self._preferences
+        value = preferences.get(key)
+        widget = self.builder.get_object(key)
+        if widget is None:
+            # this preference is not adjustable by this dialog
+            # for example: window and dialog geometries
+            logging.debug('no widget for preference: %s' % key)
+            return
 
-    def _load_preferences(self):
-        # TODO: add preferences to the self._preferences dict default
-        # preferences that will be overwritten if some are saved
-        self._preferences = {"record_type": self._record_type}
+        logging.debug('set_widget_from_preference: %s' % key)
+        try:
+            write_method_name=widget_methods[key][1]
+        except KeyError:
+            logging.warn('%s not in widget_methods' % key)
+            return
 
-        results = self._database.get_records(
-            record_type=self._record_type, create_view=True)
+        try:
+            method = getattr(widget, write_method_name)
+        except AttributeError:
+            logging.warn("'%s' does not have a '%s' method.\n Plase edit 'widget_methods' in %s" % (key, write_method_name, __file__))
+            return
 
-        if len(results.rows) == 0:
-            # No preferences have ever been saved, save them before returning.
-            self._key = self._database.put_record(Record(self._preferences))
-        else:
-            self._preferences = results.rows[0].value
-            del self._preferences['_rev']
-            self._key = results.rows[0].value["_id"]
+        method(value)
 
-    def _save_preferences(self):
-        self._database.update_fields(self._key, self._preferences)
+    def get_key_for_widget(self, widget):
+        key = None
+        for key_try in preferences.keys():
+            obj = self.builder.get_object(key_try)
+            if obj == widget:
+                key = key_try
+        return key
+ 
+    def set_preference(self, widget, data=None):
+        '''set a preference from a widget'''
+        key = self.get_key_for_widget(widget)
+        if key is None:
+            logging.warn('''This widget will not write to a preference.
+The preference must already exist so add this widget's name
+to defaults in preferences module''')
+            return
 
-    def ok(self, widget, data=None):
-        """The user has elected to save the changes.
+        # set_widget_from_preference is called first
+        # so no KeyError test is needed here
+        read_method_name=widget_methods[key][0]
 
-        Called before the dialog returns gtk.RESONSE_OK from run().
-        """
+        try:
+            read_method = getattr(widget, read_method_name)
+        except AttributeError:
+            logging.warn("'%s' does not have a '%s' method.\n Plase edit 'widget_methods' in %s" % (key, read_method_name, __file__))
+            return
 
-        # Make any updates to self._preferences here. e.g.
-        #self._preferences["preference1"] = "value2"
-        self._save_preferences()
+        value=read_method()
+        logging.debug('set_preference: %s = %s' % (key, str(value)))
+        preferences[key] = value
 
-    def cancel(self, widget, data=None):
-        """The user has elected cancel changes.
+    def on_button_close_clicked(self, widget, data=None):
+        self.destroy()
 
-        Called before the dialog returns gtk.RESPONSE_CANCEL for run()
-        """
-        # Restore any changes to self._preferences here.
+    def on_btn_help_clicked(self, widget, data=None):
+        show_uri(self, "ghelp:%s" % get_help_uri('preferences'))
         pass
 
 if __name__ == "__main__":
