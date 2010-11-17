@@ -131,3 +131,6 @@ class TestPreferences(unittest.TestCase):
         self.assertEqual(len(self.messages), 1)
         # preferences persist so we need to clean our changes
         del preferences['too']
+
+if __name__ == '__main__':
+    unittest.main()
