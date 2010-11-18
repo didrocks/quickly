@@ -3,12 +3,13 @@
 # This file is in the public domain
 ### END LICENSE
 
+from gi.repository import GObject
 import gtk
 import string
 import sys
 
 class BuilderGlue:
-    def __init__(self, builder, callback_obj = None):
+    def __init__(self, builder, callback_obj = None, autoconnect = True):
         "Takes a gtk.Builder and makes all its objects easily accessible"
 
         # Hook up any signals the user defined in glade
@@ -56,4 +57,24 @@ class BuilderGlue:
                     print >> sys.stderr, "BuilderGlue: Not binding %s, name already exists" % pyname
                 else:
                     setattr(self, pyname, obj)
+
+            # Support hooking up callback functions defined in callback_obj
+            if callback_obj is not None and autoconnect:
+                # Now, automatically find any the user didn't specify
+                sig_ids = GObject.signal_list_ids(type(obj))
+                sigs = [GObject.signal_name(sid) for sid in sig_ids]
+                funcs = dict(inspect.getmembers(callback_obj, inspect.ismethod))
+
+                def connect_if_present(cb_name):
+                    if cb_name in funcs:
+                        obj.connect(cb_name, funcs[cb_name])
+
+                # We avoid clearer on_OBJ_SIG pattern, because that is
+                # suggested by glade, and we don't have a way to detect if
+                # the user already defined a callback in glade.
+                for sig in sigs:
+                    connect_if_present("%s_%s_event" % (pyname, sig))
+                    # Special case where callback_obj is itself a builder obj
+                    if obj is callback_obj:
+                        connect_if_present("%s_event" % sig)
 
