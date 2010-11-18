@@ -15,7 +15,7 @@ each widget calls set_preference(...) when it has adjusted value
 # defined because there are choices for some widget types
 # TODO: replace example widget_methods with your values
 widget_methods = {
-'example_entry': ['get_text', 'set_text'],
+'example_entry': ['get_text', 'set_text', 'changed'],
 }
 
 import gtk
@@ -87,8 +87,10 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
         try:
             method = getattr(widget, write_method_name)
         except AttributeError:
-            logging.warn("'%s' does not have a '%s' method.\n Plase edit 'widget_methods' in %s" % (key, write_method_name, __file__))
+            logging.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, write_method_name, __file__))
             return
+
+        widget.connect(widget_methods[key][2], self.set_preference)
 
         method(value)
 
@@ -116,17 +118,17 @@ to defaults in preferences module''')
         try:
             read_method = getattr(widget, read_method_name)
         except AttributeError:
-            logging.warn("'%s' does not have a '%s' method.\n Plase edit 'widget_methods' in %s" % (key, read_method_name, __file__))
+            logging.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, read_method_name, __file__))
             return
 
         value=read_method()
         logging.debug('set_preference: %s = %s' % (key, str(value)))
         preferences[key] = value
 
-    def on_button_close_clicked(self, widget, data=None):
+    def closeButton_clicked_event(self, widget, data=None):
         self.destroy()
 
-    def on_btn_help_clicked(self, widget, data=None):
+    def helpButton_clicked_event(self, widget, data=None):
         #TODO add your help code here, or remove the help button
         pass
 

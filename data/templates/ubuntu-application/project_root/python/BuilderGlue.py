@@ -7,6 +7,7 @@ from gi.repository import GObject
 import gtk
 import string
 import sys
+import inspect
 
 class BuilderGlue:
     def __init__(self, builder, callback_obj = None, autoconnect = True):
@@ -61,20 +62,27 @@ class BuilderGlue:
             # Support hooking up callback functions defined in callback_obj
             if callback_obj is not None and autoconnect:
                 # Now, automatically find any the user didn't specify
-                sig_ids = GObject.signal_list_ids(type(obj))
+                sig_ids = []
+                try:
+                    t = type(obj)
+                    while t:
+                        sig_ids.extend(GObject.signal_list_ids(t))
+                        t = GObject.type_parent(t)
+                except:
+                    pass
                 sigs = [GObject.signal_name(sid) for sid in sig_ids]
                 funcs = dict(inspect.getmembers(callback_obj, inspect.ismethod))
 
-                def connect_if_present(cb_name):
+                def connect_if_present(sig, cb_name):
                     if cb_name in funcs:
-                        obj.connect(cb_name, funcs[cb_name])
+                        obj.connect(sig, funcs[cb_name])
 
                 # We avoid clearer on_OBJ_SIG pattern, because that is
                 # suggested by glade, and we don't have a way to detect if
                 # the user already defined a callback in glade.
                 for sig in sigs:
-                    connect_if_present("%s_%s_event" % (pyname, sig))
+                    connect_if_present(sig, "%s_%s_event" % (pyname, sig))
                     # Special case where callback_obj is itself a builder obj
                     if obj is callback_obj:
-                        connect_if_present("%s_event" % sig)
+                        connect_if_present(sig, "%s_event" % sig)
 
