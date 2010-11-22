@@ -169,7 +169,6 @@ def updatepackaging(changelog=None, no_changelog=False, installopt=False):
     command = ['python-mkdebian', '--force-control']
     if get_python_mkdebian_version() > 2.22:
         command.append("--force-copyright")
-    if get_python_mkdebian_version() > 2.23:
         command.append("--force-rules")
     if no_changelog:
         command.append("--no-changelog")
