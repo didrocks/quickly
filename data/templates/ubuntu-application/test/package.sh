@@ -71,17 +71,4 @@ quickly package | sed 's/^\.\+//'
 # Ubuntu packaging created in debian/
 # Ubuntu package has been successfully created in ../test-project_0.1_all.deb
 
-## These next few steps are due to a bug in python-mkdebian (LP: #656943)
-
-grep UNKNOWN debian/*
-# debian/copyright:Maintainer: UNKNOWN <UNKNOWN>
-# debian/copyright:Source: UNKNOWN
-# debian/copyright:License: UNKNOWN
-
-rm debian/copyright
-
-quickly package | sed 's/^\.\+//'
-# Ubuntu packaging created in debian/
-# Ubuntu package has been successfully created in ../test-project_0.1_all.deb
-
 grep UNKNOWN debian/*
