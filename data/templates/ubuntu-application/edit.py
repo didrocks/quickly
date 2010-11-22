@@ -61,5 +61,10 @@ filelist.append('bin/' + configurationhandler.project_config['project'])
 filelist.extend(glob.glob('help/C/*.page'))
 
 editor = quicklyutils.get_quickly_editors()
-subprocess.call([editor] + filelist)
-
+if templatetools.in_verbose_mode():
+    instance = subprocess.Popen([editor] + filelist)
+else:
+    nullfile=file("/dev/null")
+    instance = subprocess.Popen([editor] + filelist, stderr=nullfile)
+if editor != 'gedit':
+    instance.wait()
