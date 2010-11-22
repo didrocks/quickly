@@ -133,7 +133,7 @@ quickly shell-completion quickly -t ubuntu-pygame foo
 # commands configure debug edit getstarted help license package quickly release run save share tutorial
 
 quickly shell-completion quickly add foo
-# dialog indicator
+# dialog help-guide help-topic indicator
 
 quickly shell-completion quickly add dialog foo
 # 

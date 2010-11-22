@@ -56,3 +56,21 @@ def parse_options():
         logging.basicConfig(level=logging.DEBUG)
         logging.debug('logging enabled')
 
+def get_help_uri(page=None):
+    # help_uri from source tree - default language
+    here = os.path.dirname(__file__)
+    help_uri = os.path.abspath(os.path.join(here, '..', 'help', 'C'))
+
+    if not os.path.exists(help_uri):
+        # installed so use gnome help tree - user's language
+        help_uri = 'project_name'
+
+    # unspecified page is the index.page
+    if page is not None:
+        help_uri = '%s#%s' % (help_uri, page)
+
+    return help_uri
+
+def show_uri(parent, link):
+    screen = parent.get_screen()
+    gtk.show_uri(screen, link, gtk.get_current_event_time())

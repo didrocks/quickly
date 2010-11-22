@@ -22,7 +22,7 @@ import gtk
 import logging
 
 from python_name import BuilderGlue
-from python_name.helpers import get_builder
+from python_name.helpers import get_builder, show_uri, get_help_uri
 from python_name.preferences import preferences
 
 import gettext
@@ -127,8 +127,7 @@ to defaults in preferences module''')
         self.destroy()
 
     def on_btn_help_clicked(self, widget, data=None):
-        #TODO add your help code here, or remove the help button
-        pass
+        show_uri(self, "ghelp:%s" % get_help_uri('preferences'))
 
 if __name__ == "__main__":
     dialog = Preferencescamel_case_nameDialog()

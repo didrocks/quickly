@@ -60,7 +60,7 @@ class Basecamel_case_nameWindow(gtk.Window):
         # for more information about Launchpad integration.
         try:
             import LaunchpadIntegration
-            LaunchpadIntegration.add_items(self.ui.helpMenu, 0, False, True)
+            LaunchpadIntegration.add_items(self.ui.helpMenu, 1, False, True)
             LaunchpadIntegration.set_sourcepackagename('project_name')
         except:
             pass
@@ -120,6 +120,8 @@ class Basecamel_case_nameWindow(gtk.Window):
         # to determine whether to create or present preferences_dialog
         self.preferences_dialog = None
 
+    def on_contents_activate(self, widget, data=None):
+        helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
 
 if __name__ == "__main__":
     window = Basecamel_case_nameWindow()

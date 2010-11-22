@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # Copyright 2009 Didier Roche
+# Copyright 2010 Tony Byrne
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -20,6 +21,7 @@
 import os
 import sys
 import subprocess
+import glob
 
 from internal import quicklyutils
 from quickly import configurationhandler
@@ -42,25 +44,22 @@ will be used. Also, if you configured sensible-editor, this one will be
 choosed.""")
 templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
-filelist = ""
+filelist = []
 for root, dirs, files in os.walk('./'):
     for name in files:
         if name.endswith('.py') and name not in ('__init__.py', 'setup.py'):
-            filelist += os.path.join(root, name) + ' '
+            filelist.append(os.path.join(root, name))
 
 # if config not already loaded
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 
 # add launcher which does not end with .py
-filelist += 'bin/' + configurationhandler.project_config['project']
+filelist.append('bin/' + configurationhandler.project_config['project'])
+
+# add helpfile sources
+filelist.extend(glob.glob('help/C/*.page'))
 
 editor = quicklyutils.get_quickly_editors()
-# if editor is still gedit, launch it in background
-if editor == "gedit":
-    command = ["gedit"]
-    command.extend(filelist.split(" "))
-    subprocess.call(command)
-else:
-    os.system("%s %s" % (editor, filelist))
+subprocess.call([editor] + filelist)
 

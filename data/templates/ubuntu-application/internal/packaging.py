@@ -1,5 +1,6 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # Copyright 2009 Didier Roche
+# Copyright 2010 Tony Byrne
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -116,6 +117,8 @@ def _filter_out(line, output_domain, err_output, warn_output):
             if not(re.match('  .*\.pot', line)
                    or re.match('  .*\.in', line)
                    or re.match(' dpkg-genchanges  >.*', line)
+                   # python-mkdebian warns on help files
+                   or re.match('  help/.*/.*', line)
                    # FIXME: this warning is temporary: should be withed in p-d-e
                    or re.match('.*XS-Python-Version and XB-Python-Version.*', line)):
                 warn_output.append(line)

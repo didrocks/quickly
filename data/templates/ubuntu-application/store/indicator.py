@@ -29,10 +29,7 @@ from quickly import configurationhandler, templatetools, commands
 
 option = 'quickly add indicator'
 
-help_text=_("""
-$ quickly add indicator
-
-This will add support for Ubuntu Application Indicator to you quickly project.
+help_text=_("""This will add support for Ubuntu Application Indicator to your quickly project.
 Next time you run your app, the Indicator will show up in the panel on top right.
 You can add/remove/modify items from the indicator menu by editing indicator.py
 """)
