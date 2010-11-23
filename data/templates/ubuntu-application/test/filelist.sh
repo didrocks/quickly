@@ -31,6 +31,13 @@ bzr ls -R
 # data/ui/about_test_project_dialog.xml
 # data/ui/preferences_test_project_dialog.xml
 # data/ui/test_project_window.xml
+# help/
+# help/C/
+# help/C/figures/
+# help/C/figures/icon.png
+# help/C/index.page
+# help/C/preferences.page
+# help/C/topic1.page
 # setup.py
 # test-project.desktop.in
 # test_project/
@@ -40,4 +47,5 @@ bzr ls -R
 # test_project/PreferencesTestProjectDialog.py
 # test_project/__init__.py
 # test_project/helpers.py
+# test_project/preferences.py
 # test_project/test_projectconfig.py

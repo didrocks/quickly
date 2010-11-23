@@ -49,8 +49,8 @@ grep UNKNOWN debian/*
 # debian/control:Maintainer: UNKNOWN <UNKNOWN>
 # debian/control:Description: UNKNOWN
 # debian/control: UNKNOWN
-# debian/copyright:Upstream-Maintainer: UNKNOWN <UNKNOWN>
-# debian/copyright:Upstream-Source: UNKNOWN
+# debian/copyright:Maintainer: UNKNOWN <UNKNOWN>
+# debian/copyright:Source: UNKNOWN
 # debian/copyright:License: UNKNOWN
 
 (echo "Copyright (C) 2010 Oliver Twist <twist@example.com>" > AUTHORS)
@@ -66,19 +66,6 @@ sed -i "s/#description=.*,/description='My super cool project',/" setup.py
 sed -i "s/#long_description=.*,/long_description='This project will rock your socks',/" setup.py
 
 sed -i "s|#url=.*,|url='http://example.com/test-project',|" setup.py
-
-quickly package | sed 's/^\.\+//'
-# Ubuntu packaging created in debian/
-# Ubuntu package has been successfully created in ../test-project_0.1_all.deb
-
-## These next few steps are due to a bug in python-mkdebian (LP: #656943)
-
-grep UNKNOWN debian/*
-# debian/copyright:Upstream-Maintainer: UNKNOWN <UNKNOWN>
-# debian/copyright:Upstream-Source: UNKNOWN
-# debian/copyright:License: UNKNOWN
-
-rm debian/copyright
 
 quickly package | sed 's/^\.\+//'
 # Ubuntu packaging created in debian/

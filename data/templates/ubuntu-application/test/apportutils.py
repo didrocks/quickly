@@ -49,7 +49,7 @@ class camel_case_nameWindow(gtk.Window):
             # see https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding for more information
             # about LaunchpadIntegration
             LaunchpadIntegration.set_sourcepackagename('project_name')
-            LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 0, False, True)
+            LaunchpadIntegration.add_items(self.builder.get_object('helpMenu'), 1, False, True)
             
     def about(self, widget, data=None):
         about = Aboutcamel_case_nameDialog.NewAboutcamel_case_nameDialog()
@@ -143,7 +143,7 @@ class camel_case_nameWindow(gtk.Window):
         # for more information about Launchpad integration.
         try:
             import LaunchpadIntegration
-            LaunchpadIntegration.add_items(self.ui.helpMenu1, 0, False, True)
+            LaunchpadIntegration.add_items(self.ui.helpMenu1, 1, False, True)
             LaunchpadIntegration.set_sourcepackagename('project_name1')
         except:
             pass

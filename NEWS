@@ -6,12 +6,15 @@ Quickly 0.7
      LP: #661699
    - refresh the branding to the new ubuntu brand (Daniel Fore) (LP: #666557)
    - Support self.ui.label1 syntax
+   - support submitubuntu command to install applications in /opt (LP: #625581)
  + ubuntu-application-template and derivatives:
    - Fix apport code to not fail when lp-project name changes
    - Fix apport test to run cleanly by always upgrading from 0.3 to 0.4
      template (test was originally written to test that upgrade)
    - Add many tests
+   - Provide mallard-formatted starter help files (Tony Byrne)
    - Fix 'add dialog' to rename dialog name with dashes correctly
+   - Add 'add help-guide' and 'add help-topic' (Tony Byrne)
    - Support custom licenses better by noticing when they are being used
    - add QUICKLY_EDITOR variable to override SELECTED_EDITOR or EDITOR
      if we want a dedicated editor for Quickly (Dennis Craven)
