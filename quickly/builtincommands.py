@@ -205,7 +205,7 @@ def quickly(project_template, project_dir, command_args, shell_completion=False)
         fileconfig = file(commandsconfig_path, 'rb')
         for line in fileconfig:
             filedest.write(line)
-        filedest.write("\n[%s]\nIMPORT=%s" % (project_template, ';'.join(import_cmd_list)))
+        filedest.write("\n[%s]\nIMPORT=%s" % (project_template, ';'.join(sorted(import_cmd_list))))
         fileconfig.close()
         filedest.close()
         os.rename(filedest.name, commandsconfig_path)

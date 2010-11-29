@@ -194,7 +194,7 @@ if python_path:
                 "    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses",
                 content_to_update)
     except templatetools.CantUpdateFile, e:
-        print _("WARNING: can't update your project to support /opt. This doesn't mind if you don't plan to submit your project to the application review board. Cause is: %s" % e)
+        print _("WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is: %s" % e)
 
 
 sys.exit(0)

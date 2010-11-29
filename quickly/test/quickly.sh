@@ -32,10 +32,10 @@ cat /tmp/quickly-test/quickly-templates/test-template/commandsconfig
 # COMMANDS_LAUNCHED_IN_OR_OUTSIDE_PROJECT = tutorial
 # COMMANDS_LAUNCHED_OUTSIDE_PROJECT_ONLY = create
 # COMMANDS_FOLLOWED_BY_COMMAND = 
-# COMMANDS_EXPOSED_IN_BAR = create;tutorial;edit;save;share;release;design;package
+# COMMANDS_EXPOSED_IN_BAR = create;design;edit;package;release;save;share;tutorial
 # 
 # [ubuntu-application]
-# IMPORT=run;debug;create;package;upgrade;save;tutorial;add;share;design;edit;license;release;configure
+# IMPORT=add;configure;create;debug;design;edit;license;package;release;run;save;share;submitubuntu;tutorial;upgrade
 
 diff -qr data/templates/ubuntu-application/available_licenses /tmp/quickly-test/quickly-templates/test-template/available_licenses
 

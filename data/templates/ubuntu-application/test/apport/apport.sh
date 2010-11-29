@@ -284,6 +284,7 @@ bzr commit -m "Prior to upgrade"
 # Committed revision 4.
 
 quickly upgrade 0.3 0.4
+# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 bzr status
 
@@ -312,6 +313,7 @@ bzr status
 quickly upgrade 0.3 0.4
 # Creating new apport crashdb configuration
 # Creating new apport hooks
+# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, False, True)
@@ -363,6 +365,7 @@ quickly upgrade 0.3 0.4
 # Adding launchpad integration to existing application
 # Creating new apport crashdb configuration
 # Creating new apport hooks
+# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
 #             LaunchpadIntegration.add_items(self.ui.differentHelpMenu, 1, False, True)
@@ -391,6 +394,7 @@ bzr commit -m "Committing after removing all lpi integration"
 quickly upgrade 0.3 0.4
 # Creating new apport crashdb configuration
 # Creating new apport hooks
+# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
 
@@ -410,3 +414,4 @@ grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
 grep helpMenu test_project/BaseTestProjectWindow.py
 
 quickly upgrade 0.3 0.4
+# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.

@@ -37,7 +37,7 @@ HOME=/ quickly help help
 HOME=/ quickly help ubuntu-application
 # ERROR: No command provided to help command.
 # Usage: quickly help [template] <command>
-# Candidate commands are: add, commands, configure, create, debug, design, edit, getstarted, help, license, package, quickly, release, run, save, share, tutorial, upgrade
+# Candidate commands are: add, commands, configure, create, debug, design, edit, getstarted, help, license, package, quickly, release, run, save, share, submitubuntu, tutorial, upgrade
 
 HOME=/ quickly help ubuntu-application help
 # Usage: quickly help [template] <command>
@@ -69,7 +69,7 @@ cd test-project
 HOME=/ quickly help
 # ERROR: No command provided to help command.
 # Usage: quickly help [template] <command>
-# Candidate commands are: add, commands, configure, create, debug, design, edit, getstarted, help, license, package, quickly, release, run, save, share, tutorial, upgrade
+# Candidate commands are: add, commands, configure, create, debug, design, edit, getstarted, help, license, package, quickly, release, run, save, share, submitubuntu, tutorial, upgrade
 
 HOME=/ quickly help help
 # Usage: quickly help [template] <command>
@@ -89,4 +89,4 @@ HOME=/ quickly help ubuntu-cli
 HOME=/ quickly help foobar
 # ERROR: No foobar command found in ubuntu-application template.
 # Usage: quickly help [template] <command>
-# Candidate commands are: add, commands, configure, create, debug, design, edit, getstarted, help, license, package, quickly, release, run, save, share, tutorial, upgrade
+# Candidate commands are: add, commands, configure, create, debug, design, edit, getstarted, help, license, package, quickly, release, run, save, share, submitubuntu, tutorial, upgrade
