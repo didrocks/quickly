@@ -7,6 +7,7 @@
 import sys
 import os
 import gtk
+import logging
 
 import gettext
 from gettext import gettext as _
