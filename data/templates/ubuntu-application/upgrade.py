@@ -171,8 +171,8 @@ if project_version < '0.4.4':
     os.system("find . -name '*.py' -exec %s {} \;" % sedline)
     os.system("%s bin/%s" % (sedline, project_name))
 
-### 0.7 update
-if project_version < '0.7':
+### 11.03 update
+if project_version < '11.03':
     # support /opt installation
     content_to_update = '''python_path = []
 if os.path.abspath(__file__).startswith('/opt'):
