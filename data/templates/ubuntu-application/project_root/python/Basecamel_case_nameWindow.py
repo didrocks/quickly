@@ -78,13 +78,16 @@ class Basecamel_case_nameWindow(gtk.Window):
         except:
             pass
 
-    def about(self, widget, data=None):
+    def contentsMenuItem_activate_event(self, widget, data=None):
+        helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
+
+    def aboutMenuItem_activate_event(self, widget, data=None):
         """Display the about box for project_name."""
         about = Aboutcamel_case_nameDialog.Aboutcamel_case_nameDialog()
         response = about.run()
         about.destroy()
 
-    def on_preferences_activate(self, widget, data=None):
+    def preferencesMenuItem_activate_event(self, widget, data=None):
         """Display the preferences window for project_name."""
 
         """ From the PyGTK Reference manual
@@ -102,11 +105,11 @@ class Basecamel_case_nameWindow(gtk.Window):
             self.preferences_dialog.show()
         # destroy command moved into dialog to allow for a help button
 
-    def quit(self, widget, data=None):
+    def quitMenuItem_activate_event(self, widget, data=None):
         """Signal handler for closing the camel_case_nameWindow."""
         self.destroy()
 
-    def on_destroy(self, widget, data=None):
+    def destroy_event(self, widget, data=None):
         """Called when the camel_case_nameWindow is closed."""
         # Clean up code for saving application state should be added here.
         gtk.main_quit()
@@ -119,9 +122,6 @@ class Basecamel_case_nameWindow(gtk.Window):
         logging.debug('on_preferences_dialog_destroyed')
         # to determine whether to create or present preferences_dialog
         self.preferences_dialog = None
-
-    def on_contents_activate(self, widget, data=None):
-        helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
 
 if __name__ == "__main__":
     window = Basecamel_case_nameWindow()

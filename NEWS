@@ -6,6 +6,7 @@ Quickly 0.7
      LP: #661699
    - refresh the branding to the new ubuntu brand (Daniel Fore) (LP: #666557)
    - Support self.ui.label1 syntax
+   - Support auto-connection of signal handlers named widget_signal_event()
    - support submitubuntu command to install applications in /opt (LP: #625581)
  + ubuntu-application-template and derivatives:
    - Fix apport code to not fail when lp-project name changes
