@@ -19,7 +19,7 @@ class Architect(gtk.Builder):
         gtk.Builder.__init__(self)
         self.widgets = {}
 
-    def ui(self, callback_obj):
+    def ui(self, callback_obj=None):
         # TODO refactor these 2 classes into one
         # and pick a sensible name
         return BuilderGlue(self, callback_obj)
@@ -81,7 +81,8 @@ class BuilderGlue:
             pyname = make_pyname(name)
             if pyname != name:
                 if hasattr(self, pyname):
-                    print >> sys.stderr, "BuilderGlue: Not binding %s, name already exists" % pyname
+                    # makes a successful unittest silent
+                    logging.debug("BuilderGlue: Not binding %s, name already exists" % pyname)
                 else:
                     setattr(self, pyname, obj)
 

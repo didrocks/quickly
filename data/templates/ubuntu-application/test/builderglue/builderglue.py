@@ -20,8 +20,18 @@ class TestBuilderGlue(unittest.TestCase):
         self.builder = BuilderGlue.Architect()
         self.builder.add_from_file(os.path.join(os.path.dirname(__file__), 'test.ui'))
 
+    def test_interface(self):
+        builder = dir(gtk.Builder)
+        
+        # sanity test
+        self.assertTrue('add_from_file' in builder)
+        
+        # any name clashes ?
+        self.assertTrue('widgets' not in builder)
+        self.assertTrue('ui' not in builder)
+
     def test_iterate(self):
-        glue = BuilderGlue.BuilderGlue(self.builder)
+        glue = self.builder.ui()
         objs = list(glue)
         objs2 = []
         for obj in glue:
@@ -30,7 +40,12 @@ class TestBuilderGlue(unittest.TestCase):
         self.assertEqual(objs, objs2)
 
     def test_dot_access(self):
-        glue = BuilderGlue.BuilderGlue(self.builder)
+        glue = self.builder.ui()
+        
+        # TODO: remove this test when new API approved
+        old_api = BuilderGlue.BuilderGlue(self.builder)
+        self.assertTrue(dir(old_api) == dir(glue))
+        
         self.assertTrue(hasattr(glue, 'filefilter'))
         self.assertTrue(hasattr(glue, 'window'))
         self.assertTrue(hasattr(glue, 'label'))
