@@ -20,7 +20,7 @@ import datetime
 import re
 import subprocess
 import sys
-from launchpadlib.errors import HTTPError
+from launchpadlib.errors import HTTPError # pylint: disable=E0611
 
 
 from quickly import configurationhandler

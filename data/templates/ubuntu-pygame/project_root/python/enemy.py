@@ -8,6 +8,8 @@ import pygame
 from python_name.base_sprite import BaseSprite
 from python_name import python_nameconfig
 
+# pylint: disable=E1101
+
 class Enemy(BaseSprite):
     """
     Enemy - A very simple enemy that does not move, shoot, turn, etc...
@@ -20,9 +22,9 @@ class Enemy(BaseSprite):
     def __init__(self):
         """Creates an Enemy """
 
-        BaseSprite.__init__(self, project_nameconfig.enemy_image)
+        BaseSprite.__init__(self, python_nameconfig.enemy_image)
         self.points = 1
-        self.explosion_sound = pygame.mixer.Sound(project_nameconfig.enemy_explode_sound)
+        self.explosion_sound = pygame.mixer.Sound(python_nameconfig.enemy_explode_sound)
         self.explode_stage = 0
         self.exploding = False
         self.alive = True
@@ -35,7 +37,7 @@ class Enemy(BaseSprite):
             e = self.explode_stage
             if e < 8:
                 e = str(e)
-                img_name = project_nameconfig.enemy_explode_stage + e  + ".png"
+                img_name = python_nameconfig.enemy_explode_stage + e  + ".png"
                 self.master_image = pygame.image.load(img_name)
                 self._update_image()
                 return

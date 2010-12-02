@@ -7,6 +7,8 @@ base_sprite - contains BaseSprite class.
 import pygame, random
 from python_name import python_nameconfig
 
+# pylint: disable=E1101
+
 class BaseSprite(pygame.sprite.Sprite):
     """
     BaseSprite - handles all common sprite data and functionality
@@ -76,8 +78,8 @@ class BaseSprite(pygame.sprite.Sprite):
         self.velocity_x = 0
         self.velocity_y = 0
         self._accelerating = False
-        self.x = project_nameconfig.screen_width / 2
-        self.y = project_nameconfig.screen_height / 2
+        self.x = python_nameconfig.screen_width / 2
+        self.y = python_nameconfig.screen_height / 2
         self.max_velocity = 50
   
   
@@ -191,8 +193,8 @@ class BaseSprite(pygame.sprite.Sprite):
         self.y += self.velocity_y/self.acceleration_divisor
 
 
-        sw = project_nameconfig.screen_width
-        sh = project_nameconfig.screen_height
+        sw = python_nameconfig.screen_width
+        sh = python_nameconfig.screen_height
         #wrap the sprite around the screen, maintain "hyper zone"
         if self.x > sw:
             self.x = 0 - self.rect.height
@@ -252,8 +254,8 @@ class BaseSprite(pygame.sprite.Sprite):
         """
 
         #leave room in the center for the guy
-        sw = project_nameconfig.screen_width
-        sh = project_nameconfig.screen_height
+        sw = python_nameconfig.screen_width
+        sh = python_nameconfig.screen_height
 
         quad = random.randint(0,3)
         if quad == 0:

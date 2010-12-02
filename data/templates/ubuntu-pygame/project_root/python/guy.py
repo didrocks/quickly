@@ -11,6 +11,8 @@ from python_name.base_sprite import BaseSprite
 from python_name.bullet import Bullet
 from python_name import python_nameconfig
 
+# pylint: disable=E1101
+
 class Guy(BaseSprite):
     """
     Guy - The sprite controlled by the player. managers 
@@ -28,10 +30,10 @@ class Guy(BaseSprite):
 
         """
 
-        BaseSprite.__init__(self, project_nameconfig.guy_img)
+        BaseSprite.__init__(self, python_nameconfig.guy_img)
         self.bullets = bullets_group
-        self.hum = pygame.mixer.Sound(project_nameconfig.guy_eng)
-        self.explosionSound = pygame.mixer.Sound(project_nameconfig.guy_explode)
+        self.hum = pygame.mixer.Sound(python_nameconfig.guy_eng)
+        self.explosionSound = pygame.mixer.Sound(python_nameconfig.guy_explode)
         self.alive = True
         self.exploding = False
         self.explodestage = 0
@@ -107,8 +109,8 @@ class Guy(BaseSprite):
         """
 
         self.stop()
-        self.x = random.randint(0,project_nameconfig.screen_width)
-        self.y = random.randint(0,project_nameconfig.screen_height)
+        self.x = random.randint(0,python_nameconfig.screen_width)
+        self.y = random.randint(0,python_nameconfig.screen_height)
         #every now and then, blow up on hyperspace for no reason
         if random.randint(0,5) == 2:
             self.explode()
@@ -147,12 +149,12 @@ class Guy(BaseSprite):
             e = self.explodestage
             if e < 8:#there are 7 explosion images
                 e = str(e)
-                img_name = project_nameconfig.guy_explode_stage + e  + ".png"
+                img_name = python_nameconfig.guy_explode_stage + e  + ".png"
                 self.master_image = pygame.image.load(img_name)
                 self._update_image()
 
             else:#explosion is done
                 self.visible = False
                 self.exploding = False
-                self.master_image = pygame.image.load(project_nameconfig.guy_img)
+                self.master_image = pygame.image.load(python_nameconfig.guy_img)
                 self._update_image()

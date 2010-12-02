@@ -12,12 +12,12 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'project_name'))
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 #import classes from the project_name library
-from project_name.base_sprite import BaseSprite
-from project_name.guy import Guy
-from project_name.enemy import Enemy
-from project_name.homingmissle import HomingMissle
-from project_name.game import Game
-import project_name.project_nameconfig
+from python_name.base_sprite import BaseSprite
+from python_name.guy import Guy
+from python_name.enemy import Enemy
+from python_name.homingmissle import HomingMissle
+from python_name.game import Game
+import python_name.python_nameconfig
 
 #set up translations
 import gettext

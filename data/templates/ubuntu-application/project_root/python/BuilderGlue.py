@@ -3,7 +3,7 @@
 # This file is in the public domain
 ### END LICENSE
 
-from gi.repository import GObject
+from gi.repository import GObject # pylint: disable=E0611
 import gtk
 import string
 import sys

@@ -9,6 +9,8 @@ import pygame, random
 from python_name.base_sprite import BaseSprite
 from python_name import python_nameconfig
 
+# pylint: disable=E1101
+
 class Bullet(BaseSprite):
     """
     Bullet - A sprite that represents a bullet that lacks AI. The
@@ -35,13 +37,13 @@ class Bullet(BaseSprite):
         called 'bullet.png'.
  
         """
-        img = project_nameconfig.default_bullet
+        img = python_nameconfig.default_bullet
         if img_name != None:
             img = img_name
         BaseSprite.__init__(self, img)
-        self.launch_sound = pygame.mixer.Sound(project_nameconfig.guy_shoot_sound)
+        self.launch_sound = pygame.mixer.Sound(python_nameconfig.guy_shoot_sound)
         self.launch_sound.play()
-        self.explosionSound = pygame.mixer.Sound(project_nameconfig.guy_bullet_explode)
+        self.explosionSound = pygame.mixer.Sound(python_nameconfig.guy_bullet_explode)
         self.orientation = orientation
         self.x = x
         self.y = y
@@ -71,7 +73,7 @@ class Bullet(BaseSprite):
             e = self.explodestage
             if e < 5:
                 e = str(e)
-                self.masterImage = pygame.image.load(project_nameconfig.bullet_explode_stage + e  + ".png")
+                self.masterImage = pygame.image.load(python_nameconfig.bullet_explode_stage + e  + ".png")
                 self._update_image()
             else:
                 self.kill()
