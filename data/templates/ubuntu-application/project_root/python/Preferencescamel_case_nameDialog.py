@@ -21,7 +21,6 @@ widget_methods = {
 import gtk
 import logging
 
-from python_name import BuilderGlue
 from python_name.helpers import get_builder, show_uri, get_help_uri
 from python_name.preferences import preferences
 
@@ -56,7 +55,7 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
 
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.ui = BuilderGlue.BuilderGlue(builder, self)
+        self.ui = builder.ui(self)
 
         # TODO: code for other initialization actions should be added here
         self.set_widgets_from_preferences()

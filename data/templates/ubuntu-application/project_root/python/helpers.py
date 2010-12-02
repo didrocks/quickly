@@ -10,6 +10,10 @@ import gtk
 
 from python_name.python_nameconfig import get_data_file
 
+# these both work but I don't understand all the name mangling
+from python_name.BuilderGlue import Architect
+#from BuilderGlue import Architect
+
 import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
@@ -26,7 +30,7 @@ def get_builder(builder_file_name):
     if not os.path.exists(ui_filename):
         ui_filename = None
 
-    builder = gtk.Builder()
+    builder = Architect()
     builder.set_translation_domain('project_name')
     builder.add_from_file(ui_filename)
     return builder

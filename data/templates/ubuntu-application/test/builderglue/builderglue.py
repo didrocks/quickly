@@ -17,7 +17,7 @@ os.remove(os.path.join(proj_root, 'python', 'BuilderGlue.pyc'))
 
 class TestBuilderGlue(unittest.TestCase):
     def setUp(self):
-        self.builder = gtk.Builder()
+        self.builder = BuilderGlue.Architect()
         self.builder.add_from_file(os.path.join(os.path.dirname(__file__), 'test.ui'))
 
     def test_iterate(self):
@@ -31,10 +31,7 @@ class TestBuilderGlue(unittest.TestCase):
 
     def test_dot_access(self):
         glue = BuilderGlue.BuilderGlue(self.builder)
-        # This first one is False because Builder can't provide the name of
-        # such non-Buildable objects.  When we have a fix for that, we can
-        # switch this to True.
-        self.assertFalse(hasattr(glue, 'filefilter'))
+        self.assertTrue(hasattr(glue, 'filefilter'))
         self.assertTrue(hasattr(glue, 'window'))
         self.assertTrue(hasattr(glue, 'label'))
         self.assertTrue(hasattr(glue, 'wind?o-w two'))

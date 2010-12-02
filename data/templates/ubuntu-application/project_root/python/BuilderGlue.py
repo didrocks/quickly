@@ -10,6 +10,33 @@ import sys
 import inspect
 import logging
 
+class Architect(gtk.Builder):
+    ''' this "builder" keeps the build blueprints hence "Architect".
+    
+    Makes adding indexes, e.g. BuilderGlue, to builder easier''' 
+    
+    def __init__(self):
+        gtk.Builder.__init__(self)
+        self.widgets = {}
+
+    def ui(self, callback_obj):
+        # TODO refactor these 2 classes into one
+        # and pick a sensible name
+        return BuilderGlue(self, callback_obj)
+
+    def add_from_file(self, filename):
+        gtk.Builder.add_from_file(self, filename)
+        
+        # extract data for the extra interfaces
+        from xml.etree.ElementTree import ElementTree
+        tree = ElementTree()
+        tree.parse(filename)
+
+        widgets = tree.getiterator("object")
+        for widget in widgets:
+            name = widget.attrib['id']
+            self.widgets[name] = self.get_object(name)
+
 class BuilderGlue:
     def __init__(self, builder, callback_obj = None, autoconnect = True):
         "Takes a gtk.Builder and makes all its objects easily accessible"
@@ -31,18 +58,8 @@ class BuilderGlue:
             return iter(builder.get_objects())
         setattr(self, '__iter__', iterator)
 
-        names = {}
-        for obj in self:
-            if issubclass(type(obj), gtk.Buildable):
-                name = gtk.Buildable.get_name(obj)
-            else:
-                # The below line is the ideal, but it causes a segfault.
-                # See https://bugzilla.gnome.org/show_bug.cgi?id=633727
-                #name = obj.get_data('gtk-builder-name')
-                # So since we can't get name, just skip this one
-                continue
-            names[name] = obj
-
+        names = builder.widgets
+        
         # Support self.label1
         for (name, obj) in names.items():
             if not hasattr(self, name):
