@@ -28,11 +28,10 @@ class Guy(BaseSprite):
 
         """
 
-        BaseSprite.__init__(self, project_nameconfig.guy_img)
+        BaseSprite.__init__(self, python_nameconfig.guy_img)
         self.bullets = bullets_group
-        self.hum = pygame.mixer.Sound(project_nameconfig.guy_eng)
-        self.explosionSound = pygame.mixer.Sound(project_nameconfig.guy_explode)
-        self.alive = True
+        self.hum = pygame.mixer.Sound(python_nameconfig.guy_eng)
+        self.explosionSound = pygame.mixer.Sound(python_nameconfig.guy_explode)
         self.exploding = False
         self.explodestage = 0
         self.visible = True
@@ -53,7 +52,7 @@ class Guy(BaseSprite):
         """
 
         #only accelerate if the Guy is alive
-        if self.alive and not self.exploding:
+        if self.alive() and not self.exploding:
             BaseSprite.accelerate(self)
             self.hum.play(-1)#loop sound endlessly
   
@@ -78,10 +77,9 @@ class Guy(BaseSprite):
         """
 
         self.stop()
-        if self.alive:
+        if not self.exploding:
             self.hum.stop()
             self.explosionSound.play()
-            self.alive = False
             self.exploding = True
    
     def shoot(self):
@@ -92,7 +90,7 @@ class Guy(BaseSprite):
 
         """
 
-        if self.alive:
+        if self.alive():
             #only allow max numbe of  bullets on the screen at a time
             if len(self.bullets.sprites()) < self.max_bullets:
                 b = Bullet(self.x,self.y,self.orientation)
@@ -107,8 +105,8 @@ class Guy(BaseSprite):
         """
 
         self.stop()
-        self.x = random.randint(0,project_nameconfig.screen_width)
-        self.y = random.randint(0,project_nameconfig.screen_height)
+        self.x = random.randint(0,python_nameconfig.screen_width)
+        self.y = random.randint(0,python_nameconfig.screen_height)
         #every now and then, blow up on hyperspace for no reason
         if random.randint(0,5) == 2:
             self.explode()
@@ -147,12 +145,13 @@ class Guy(BaseSprite):
             e = self.explodestage
             if e < 8:#there are 7 explosion images
                 e = str(e)
-                img_name = project_nameconfig.guy_explode_stage + e  + ".png"
+                img_name = python_nameconfig.guy_explode_stage + e  + ".png"
                 self.master_image = pygame.image.load(img_name)
                 self._update_image()
 
             else:#explosion is done
                 self.visible = False
                 self.exploding = False
-                self.master_image = pygame.image.load(project_nameconfig.guy_img)
+                self.kill()
+                self.master_image = pygame.image.load(python_nameconfig.guy_img)
                 self._update_image()

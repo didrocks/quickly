@@ -18,7 +18,7 @@ class HomingMissle(BaseSprite):
 
     def __init__(self, target, img):
         """
-        Create a HomingMissle. Useful as an emeny or a as weapon
+        Create a HomingMissle. Useful as an enemy or as a weapon
         for the player.
 
         arguments:
@@ -43,7 +43,7 @@ class HomingMissle(BaseSprite):
         self.targetted = False
         self.explode_stage = 0
         self.exploding = False
-        self.explosion_sound = pygame.mixer.Sound(project_nameconfig.enemy_explode_sound)
+        self.explosion_sound = pygame.mixer.Sound(python_nameconfig.enemy_explode_sound)
         self.points = 1
 
     def update(self):
@@ -60,7 +60,7 @@ class HomingMissle(BaseSprite):
             e = self.explode_stage
             if e < 8:
                 e = str(e)
-                img_name = project_nameconfig.enemy_explode_stage + e  + ".png"
+                img_name = python_nameconfig.enemy_explode_stage + e  + ".png"
                 self.master_image = pygame.image.load(img_name)
                 self._update_image()
                 return
@@ -103,14 +103,15 @@ class HomingMissle(BaseSprite):
 
     def explode(self):
         """explode - called when the homing missle is destroyed in
-        game play. Sets the alive flag to False, and sets a flag to
-        start animating an explosion in the update function. Also
-        plays the explosion sound.
+        game play. Sets a flag to start animating an explosion in the
+        update function. Also plays the explosion sound.
 
         """
 
-        if self.alive:
+        self._accelerating = False
+        self.velocity_x = 0
+        self.velocity_y = 0
+        if not self.exploding:
             self.explosion_sound.play()
-            self.alive = False
             self.exploding = True
 
