@@ -27,7 +27,6 @@ class Enemy(BaseSprite):
         self.explosion_sound = pygame.mixer.Sound(python_nameconfig.enemy_explode_sound)
         self.explode_stage = 0
         self.exploding = False
-        self.alive = True
 
     def update(self):
         BaseSprite.update(self)
@@ -57,8 +56,7 @@ class Enemy(BaseSprite):
 
         """
 
-        if self.alive:
+        if not self.exploding:
             self.explosion_sound.play()
-            self.alive = False
             self.exploding = True
 

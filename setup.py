@@ -18,7 +18,7 @@
 
 
 # UPDATE VERSION WHEN NEEDED (it updates all versions needed to be updated)
-VERSION = '0.7'
+VERSION = '11.03'
 
 import glob
 import os
@@ -92,7 +92,7 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 
 
 DistUtilsExtra.auto.setup(name='quickly',
-      version="'%s'" % VERSION,
+      version="%s" % VERSION,
       description='build new Ubuntu apps quickly',
       long_description='Quickly enables for prospective programmer a way to easily build new ' \
                   'apps for Ubuntu based on templates and other systems for helping them ' \
@@ -101,7 +101,8 @@ DistUtilsExtra.auto.setup(name='quickly',
       url='https://launchpad.net/quickly',
       license="GPL v3",
       author='Quickly Developer Team',
-      author_email='quickly@lists.launchpad.net',
-      data_files=[('share/quickly/templates/ubuntu-application/project_root', glob.glob('data/templates/ubuntu-application/project_root/project_name.desktop.in'))],
+      author_email='quickly-talk@lists.launchpad.net',
+      data_files=[('share/quickly/templates/ubuntu-application/project_root', glob.glob('data/templates/ubuntu-application/project_root/project_name.desktop.in')),
+                  ('share/quickly/templates/ubuntu-pygame/project_root', glob.glob('data/templates/ubuntu-pygame/project_root/project_name.desktop.in'))],
       cmdclass={'install': InstallAndUpdateDataDirectory})
 

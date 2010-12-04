@@ -6,12 +6,12 @@ import pygame, random
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
     os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
 
-if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'project_name'))
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
     and PROJECT_ROOT_DIRECTORY not in sys.path):
     sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
-#import classes from the project_name library
+#import classes from the python_name library
 from python_name.base_sprite import BaseSprite
 from python_name.guy import Guy
 from python_name.enemy import Enemy
@@ -29,12 +29,12 @@ pygame.font.init()
 pygame.mixer.init()
 random.seed()
 
-sw = project_name.project_nameconfig.screen_width
-sh = project_name.project_nameconfig.screen_height
+sw = python_name.python_nameconfig.screen_width
+sh = python_name.python_nameconfig.screen_height
 
 #setup the display
 screen = pygame.display.set_mode((sw, sh))
-background = pygame.image.load(project_name.project_nameconfig.background_image)
+background = pygame.image.load(python_name.python_nameconfig.background_image)
 pygame.mouse.set_visible(False)
 
 #set up some objects and models
@@ -45,11 +45,13 @@ game.level = 0
 
 #create the player's guy and some enemies
 bullets = pygame.sprite.RenderUpdates()
-g = Guy(bullets)
+guys = pygame.sprite.RenderUpdates()
 enemies = pygame.sprite.RenderUpdates()
+g = Guy(bullets)
+guys.add(g)
 
 #set up the game over screen, center is by default
-gov = BaseSprite(project_name.project_nameconfig.game_over_background)
+gov = BaseSprite(python_name.python_nameconfig.game_over_background)
 gov.x = (sw - gov.rect.width)/2
 gov.y = (sh - gov.rect.height)/2
 gov.update()
@@ -68,7 +70,7 @@ def next_level():
     #depening on the level
     for i in xrange(0,1):
         enemies.add(Enemy())
-    enemies.add(HomingMissle(g,project_name.project_nameconfig.homing_missle_image))
+    enemies.add(HomingMissle(g,python_name.python_nameconfig.homing_missle_image))
 
 def reset_level():
     """reset_level - reset the current level after the player's 
@@ -80,7 +82,7 @@ def reset_level():
     #and reset the guy
     game.lives -= 1
     g.explodestage = 0 #he's done exploding
-    g.alive = True #make him live again
+    guys.add(g) #make him live again
     g.visible = True
     g.init_position()
 
@@ -106,7 +108,7 @@ def controller_tick():
 
     #if the guy has been killed and the explosion is over
     #reset the level
-    if(not g.alive and not g.exploding):
+    if(not g.alive() and not g.exploding):
         reset_level()
  
     #if all the enemies are kill and there are more lives,
@@ -154,7 +156,7 @@ def controller_tick():
 
 def update_sprites():
     """update_sprites - call update() for all sprites"""
-    g.update()
+    guys.update()
     bullets.update()
     enemies.update() 
 
@@ -198,10 +200,10 @@ def check_collisions():
     #if the player's guy is not alive, don't let it collide
     #this occurs if he is exploding
     #otherwise, if he collides with enemies, explode them both
-    if g.alive:
+    if g.alive():
         e = pygame.sprite.spritecollideany(g, enemies)
         if e != None:
-            if e.alive:
+            if e.alive():
                 g.explode()
                 e.explode()
   
@@ -210,7 +212,7 @@ def check_collisions():
     if len(hits_dict) != 0:
         for b in hits_dict:
             for e in hits_dict[b]:
-                if e.alive:
+                if e.alive():
                     e.explode()
                     game.increase_score(e.points)
                     b.explode()

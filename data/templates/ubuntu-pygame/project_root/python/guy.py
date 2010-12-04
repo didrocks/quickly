@@ -34,7 +34,6 @@ class Guy(BaseSprite):
         self.bullets = bullets_group
         self.hum = pygame.mixer.Sound(python_nameconfig.guy_eng)
         self.explosionSound = pygame.mixer.Sound(python_nameconfig.guy_explode)
-        self.alive = True
         self.exploding = False
         self.explodestage = 0
         self.visible = True
@@ -55,7 +54,7 @@ class Guy(BaseSprite):
         """
 
         #only accelerate if the Guy is alive
-        if self.alive and not self.exploding:
+        if self.alive() and not self.exploding:
             BaseSprite.accelerate(self)
             self.hum.play(-1)#loop sound endlessly
   
@@ -80,10 +79,9 @@ class Guy(BaseSprite):
         """
 
         self.stop()
-        if self.alive:
+        if not self.exploding:
             self.hum.stop()
             self.explosionSound.play()
-            self.alive = False
             self.exploding = True
    
     def shoot(self):
@@ -94,7 +92,7 @@ class Guy(BaseSprite):
 
         """
 
-        if self.alive:
+        if self.alive():
             #only allow max numbe of  bullets on the screen at a time
             if len(self.bullets.sprites()) < self.max_bullets:
                 b = Bullet(self.x,self.y,self.orientation)
@@ -156,5 +154,6 @@ class Guy(BaseSprite):
             else:#explosion is done
                 self.visible = False
                 self.exploding = False
+                self.kill()
                 self.master_image = pygame.image.load(python_nameconfig.guy_img)
                 self._update_image()

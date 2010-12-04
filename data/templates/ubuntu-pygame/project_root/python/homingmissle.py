@@ -110,6 +110,9 @@ class HomingMissle(BaseSprite):
 
         """
 
+        self._accelerating = False
+        self.velocity_x = 0
+        self.velocity_y = 0
         if not self.exploding:
             self.explosion_sound.play()
             self.exploding = True
