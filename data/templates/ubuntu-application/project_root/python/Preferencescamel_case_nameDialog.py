@@ -55,7 +55,7 @@ class Preferencescamel_case_nameDialog(gtk.Dialog):
 
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.ui = builder.ui(self)
+        self.ui = builder.get_ui(self, True)
 
         # TODO: code for other initialization actions should be added here
         self.set_widgets_from_preferences()
@@ -124,10 +124,10 @@ to defaults in preferences module''')
         logging.debug('set_preference: %s = %s' % (key, str(value)))
         preferences[key] = value
 
-    def closeButton_clicked_event(self, widget, data=None):
+    def on_closeButton_clicked(self, widget, data=None):
         self.destroy()
 
-    def helpButton_clicked_event(self, widget, data=None):
+    def on_helpButton_clicked(self, widget, data=None):
         show_uri(self, "ghelp:%s" % get_help_uri('preferences'))
 
 if __name__ == "__main__":

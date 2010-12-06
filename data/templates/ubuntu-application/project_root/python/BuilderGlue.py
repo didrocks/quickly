@@ -8,6 +8,7 @@ import gtk
 import string
 import sys
 import inspect
+import functools
 import logging
 
 class Architect(gtk.Builder):
@@ -18,11 +19,18 @@ class Architect(gtk.Builder):
     def __init__(self):
         gtk.Builder.__init__(self)
         self.widgets = {}
+        self._glade_handlers = {}
+        self._reverse = {}
 
-    def ui(self, callback_obj=None):
-        # TODO refactor these 2 classes into one
-        # and pick a sensible name
-        return BuilderGlue(self, callback_obj)
+    def _default_handler(self, handler_name, *args, **kwargs):
+        # lets help the apprentice guru
+        logging.warn('called missing handler %s()' % handler_name)
+
+    def get_name(self, widget):
+        ''' allows handler to get the name (id) of the calling widget
+        
+         this method does not appear in gtk.Builder'''
+        return self._reverse.get(widget)
 
     def add_from_file(self, filename):
         gtk.Builder.add_from_file(self, filename)
@@ -36,83 +44,173 @@ class Architect(gtk.Builder):
         for widget in widgets:
             name = widget.attrib['id']
             self.widgets[name] = self.get_object(name)
+            self._reverse[self.get_object(name)] = name
 
-class BuilderGlue:
-    def __init__(self, builder, callback_obj = None, autoconnect = True):
-        "Takes a gtk.Builder and makes all its objects easily accessible"
+        signals = tree.getiterator("signal")
+        for i in signals:
+            self._glade_handlers.update({i.attrib["handler"]: None})
 
-        unconnected_funcs = []
+    def connect_signals(self, callback_obj):
+        '''connect the handlers defined in glade
+        
+        and logs call to missing handlers'''
+        methods = inspect.getmembers(callback_obj, inspect.ismethod)
+        public_methods = [x for x in methods if x[0][0] != '_']
+        funcs = dict(public_methods)
+        
+        connection_dictionary = {}
+        connection_dictionary.update(self._glade_handlers)
+        connection_dictionary.update(funcs)
+
+        for item in connection_dictionary.items():
+            if item[1] is None:
+                # the handler is missing so reroute to _default_handler
+                handler = functools.partial(
+                    self._default_handler, item[0])
+
+                connection_dictionary[item[0]] = handler
+
+                # replace the run time warning
+                logging.warn("missing handler '%s'" % item[0])
+
+        # connect glade define handlers
+        gtk.Builder.connect_signals(self, connection_dictionary)
+
+    def get_ui(self, callback_obj=None, by_name=False):
+        '''Creates the ui object with widgets as attributes
+        
+        connects signals by 3 methods
+        this method does not appear in gtk.Builder'''
+        
+        result = make_ui(self.widgets)
 
         # Hook up any signals the user defined in glade
         if callback_obj is not None:
-            builder.connect_signals(callback_obj)
+            # connect glade define handlers
+            self.connect_signals(callback_obj)
 
-            # This function list is used below, but created once here
-            funcs = dict(inspect.getmembers(callback_obj, inspect.ismethod))
+            # connect decorated handlers
+            auto_connect_by_decoration(callback_obj)
 
-            # test for typos in event handlers
-            unconnected_funcs = funcs.keys()
+            if by_name:
+                # connect using BuilderGlue automation
+                auto_connect_by_name(callback_obj, self)
+
+        return result
+
+UNKNOWN_WIDGET, UNKNOWN_SIGNAL = 1, 2
+def auto_connect_by_decoration(callback_obj):
+    ''' find handlers and connect them to widgets'''
+    status = 0
+    builder = callback_obj.builder
+    methods = inspect.getmembers(callback_obj, inspect.ismethod)
+    decorated_functions = [x for x in methods if hasattr(x[1], 'signals')]
+    for ob in decorated_functions:
+        handler = ob[1]
+        connection_dict = handler.signals
+        for signal, widgets in connection_dict.items():
+            for widget_name in widgets:
+                widget = builder.get_object(widget_name)
+                if widget is None:
+                    message = '%s.builder.%s: unknown widget' % (
+                    callback_obj.__class__, widget_name)
+                    logging.warn(message)
+                    status = UNKNOWN_WIDGET
+                else:
+                    try:
+                        widget.connect(signal, handler)
+                    except TypeError:
+                        message = '%s.builder.%s.%s unknown signal' % (
+                        callback_obj.__class__, widget_name, signal)
+                        logging.warn(message)
+                        status = UNKNOWN_SIGNAL
+    return status
+
+# below is the refactored mterry's BuilderGlue module 
+# first part is the object interface
+class UI_factory():
+    def __init__(self, data):
+        for item in data.items():
+            setattr(self, item[0], item[1])
 
         # Support 'for o in self'
         def iterator():
-            return iter(builder.get_objects())
+            return iter(data.values())
         setattr(self, '__iter__', iterator)
 
-        names = builder.widgets
+def make_ui(widgets_dict):
+
+    result = UI_factory(widgets_dict)
+
+    # Mangle any non-usable names (like with spaces or dashes) into pythonic ones
+    for (name, obj) in widgets_dict.items():
+        pyname = make_pyname(name)
+        if pyname != name:
+            if hasattr(result, pyname):
+                logging.debug("BuilderGlue: Not binding %s, name already exists" % pyname)
+            else:
+                setattr(result, pyname, obj)
+
+    return result
+
+# second part connect handlers by name
+# This function mangles non-pythonic names into pythonic ones
+def make_pyname(name):
+    pyname = ''
+    for l in name:
+        if (l in string.ascii_letters or l == '_' or
+            (pyname and l in string.digits)):
+            pyname += l
+        else:
+            pyname += '_'
+    return pyname
+
+def auto_connect_by_name(callback_obj, achitect):
+
+    methods = inspect.getmembers(callback_obj, inspect.ismethod)
+    handlers = [x for x in methods if x[0].startswith('on_')]
+    undecorated_handlers = [x for x in handlers if not hasattr(x[1], 'signals')]
+    
+    funcs = dict(undecorated_handlers)
+
+    # test for typos in event handlers
+    unconnected_funcs = funcs.keys()
+
+    for handler in achitect._glade_handlers.keys():
+        # clean glade connected handler
+        unconnected_funcs.remove(handler)
+
+    names = achitect.widgets
+
+    for (name, obj) in names.items():
+        sig_ids = []
+        try:
+            t = type(obj)
+            while t:
+                sig_ids.extend(GObject.signal_list_ids(t))
+                t = GObject.type_parent(t)
+        except:
+            pass
+        sigs = [GObject.signal_name(sid) for sid in sig_ids]
         
-        # Support self.label1
-        for (name, obj) in names.items():
-            if not hasattr(self, name):
-                setattr(self, name, obj)
+        # Now, automatically find any the user didn't specify
+        pyname = make_pyname(name)
 
-        # This function mangles non-python names into python ones (used below)
-        def make_pyname(name):
-            pyname = ''
-            for l in name:
-                if (l in string.ascii_letters or l == '_' or
-                    (pyname and l in string.digits)):
-                    pyname += l
-                else:
-                    pyname += '_'
-            return pyname
+        def connect_if_present(sig, cb_name):
+            if cb_name in unconnected_funcs:
+                obj.connect(sig, funcs[cb_name])
+                unconnected_funcs.remove(cb_name)
 
-        # Mangle any bad names (like with spaces or dashes) into usable ones
-        for (name, obj) in names.items():
-            pyname = make_pyname(name)
-            if pyname != name:
-                if hasattr(self, pyname):
-                    # makes a successful unittest silent
-                    logging.debug("BuilderGlue: Not binding %s, name already exists" % pyname)
-                else:
-                    setattr(self, pyname, obj)
+        for sig in sigs:
+            # using convention suggested by glade
+            connect_if_present(sig, "on_%s_%s" % (pyname, sig))
 
-            # Support hooking up callback functions defined in callback_obj
-            if callback_obj is not None and autoconnect:
-                # Now, automatically find any the user didn't specify
-                sig_ids = []
-                try:
-                    t = type(obj)
-                    while t:
-                        sig_ids.extend(GObject.signal_list_ids(t))
-                        t = GObject.type_parent(t)
-                except:
-                    pass
-                sigs = [GObject.signal_name(sid) for sid in sig_ids]
+            # Using the convention that the top level window is not
+            # specified in the handler name. Compare decorators for
+            # on_destroy and on_quit in python_name_window
+            if obj is callback_obj:
+                connect_if_present(sig, "on_%s" % sig)
 
-                def connect_if_present(sig, cb_name):
-                    if cb_name in funcs:
-                        obj.connect(sig, funcs[cb_name])
-                        unconnected_funcs.remove(cb_name)
+    for event_handler in unconnected_funcs:
+        logging.debug(' Cannot autoconnect %s.%s' % (callback_obj.__class__, event_handler))
 
-                # We avoid clearer on_OBJ_SIG pattern, because that is
-                # suggested by glade, and we don't have a way to detect if
-                # the user already defined a callback in glade.
-                for sig in sigs:
-                    connect_if_present(sig, "%s_%s_event" % (pyname, sig))
-                    # Special case where callback_obj is itself a builder obj
-                    if obj is callback_obj:
-                        connect_if_present(sig, "%s_event" % sig)
-
-        unconnected_event_handlers = [x for x in unconnected_funcs if '_event' in x]
-        for event_handler in unconnected_event_handlers:
-            logging.warn('%s.%s looks like a signal handler, but no signal was found to connect to it!' % (callback_obj, event_handler))

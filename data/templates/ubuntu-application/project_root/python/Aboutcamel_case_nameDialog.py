@@ -37,7 +37,7 @@ class Aboutcamel_case_nameDialog(gtk.AboutDialog):
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.ui = builder.ui(self)
+        self.ui = builder.get_ui(self)
 
         # Code for other initialization actions should be added here.
 
