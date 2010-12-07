@@ -178,7 +178,7 @@ if project_version < '11.03':
 if os.path.abspath(__file__).startswith('/opt'):
     syspath = sys.path[:] # copy to avoid infinite loop in pending objects
     for path in syspath:
-        opt_path = path.replace('/usr', '/opt/extras.ubuntu.com/%(python_name)s')
+        opt_path = path.replace('/usr', '/opt/extras.ubuntu.com/%(project_name)s')
         python_path.insert(0, opt_path)
         sys.path.insert(0, opt_path)
 if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, '%(python_name)s'))
@@ -186,7 +186,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, '%(python_name)s'))
     python_path.insert(0, PROJECT_ROOT_DIRECTORY)
     sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
 if python_path:
-    os.putenv('PYTHONPATH', "%%s:%%s" %% (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses''' % {'python_name' : python_name}
+    os.putenv('PYTHONPATH', "%%s:%%s" %% (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses''' % {'python_name' : python_name, 'project_name' : project_name}
 
     try:
         templatetools.update_file_content("./bin/%s" % project_name,
