@@ -9,7 +9,6 @@ import logging
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
 import python_name.helpers as helpers
-ui = helpers.ui
 from python_name.preferences import preferences
 
 import gettext
@@ -52,7 +51,7 @@ class Basecamel_case_nameWindow(gtk.Window):
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.ui = builder.get_ui(self)
+        self.ui = builder.get_ui(self, True)
         self.preferences_dialog = None
 
         # Optional Launchpad integration
@@ -79,19 +78,16 @@ class Basecamel_case_nameWindow(gtk.Window):
         except:
             pass
 
-    @ui('contentsMenuItem', 'activate')
-    def on_contents(self, widget, data=None):
+    def on_mnu_contents_activate(self, widget, data=None):
         helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
 
-    @ui('aboutMenuItem', 'activate')
-    def on_about(self, widget, data=None):
+    def on_mnu_about_activate(self, widget, data=None):
         """Display the about box for project_name."""
         about = Aboutcamel_case_nameDialog.Aboutcamel_case_nameDialog()
         response = about.run()
         about.destroy()
 
-    @ui('preferencesMenuItem', 'activate')
-    def on_preferences(self, widget, data=None):
+    def on_mnu_preferences_activate(self, widget, data=None):
         """Display the preferences window for project_name."""
 
         """ From the PyGTK Reference manual
@@ -109,12 +105,10 @@ class Basecamel_case_nameWindow(gtk.Window):
             self.preferences_dialog.show()
         # destroy command moved into dialog to allow for a help button
 
-    @ui('quitMenuItem', 'activate')
-    def on_quit(self, widget, data=None):
+    def on_mnu_quit_activate(self, widget, data=None):
         """Signal handler for closing the camel_case_nameWindow."""
         self.destroy()
 
-    @ui('python_name_window', 'destroy')
     def on_destroy(self, widget, data=None):
         """Called when the camel_case_nameWindow is closed."""
         # Clean up code for saving application state should be added here.

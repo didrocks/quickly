@@ -8,10 +8,8 @@
 import os
 import gtk
 
-# name mangling is incompatible with unittest :(
-if 'python_name' != 'python' + '_' + 'name':
-    from python_name.python_nameconfig import get_data_file
-    from python_name.BuilderGlue import Architect
+from python_name.python_nameconfig import get_data_file
+from python_name.BuilderGlue import Builder
 
 import gettext
 from gettext import gettext as _
@@ -29,7 +27,7 @@ def get_builder(builder_file_name):
     if not os.path.exists(ui_filename):
         ui_filename = None
 
-    builder = Architect()
+    builder = Builder()
     builder.set_translation_domain('project_name')
     builder.add_from_file(ui_filename)
     return builder
@@ -77,25 +75,3 @@ def get_help_uri(page=None):
 def show_uri(parent, link):
     screen = parent.get_screen()
     gtk.show_uri(screen, link, gtk.get_current_event_time())
-
-'''autoconnect using signal attribute, allows many widgets
- to single handler possibly reducing boilerplate'''
-def ui(widgets, signal):
-    def decorator(func):
-        # allow for repeating decoration
-        if not hasattr(func, 'signals'):
-            func.signals = {}
-
-        widget_list = []
-        
-        # duck type tests
-        if 'strip' in dir(widgets):
-            # it looks like 'widgets' is a string i.e. one widget
-            widget_list.append(widgets)
-        else:
-            # assume we are given a sequence
-            widget_list.extend(widgets)
-
-        func.signals.update({signal: widget_list})
-        return func
-    return decorator

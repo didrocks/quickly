@@ -124,10 +124,10 @@ to defaults in preferences module''')
         logging.debug('set_preference: %s = %s' % (key, str(value)))
         preferences[key] = value
 
-    def on_closeButton_clicked(self, widget, data=None):
+    def on_btn_close_clicked(self, widget, data=None):
         self.destroy()
 
-    def on_helpButton_clicked(self, widget, data=None):
+    def on_btn_help_clicked(self, widget, data=None):
         show_uri(self, "ghelp:%s" % get_help_uri('preferences'))
 
 if __name__ == "__main__":

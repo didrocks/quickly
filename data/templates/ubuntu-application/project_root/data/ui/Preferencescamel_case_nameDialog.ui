@@ -48,7 +48,7 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="helpButton">
+              <object class="GtkButton" id="btn_help">
                 <property name="label">gtk-help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -63,7 +63,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="closeButton">
+              <object class="GtkButton" id="btn_close">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -86,8 +86,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-11">helpButton</action-widget>
-      <action-widget response="-7">closeButton</action-widget>
+      <action-widget response="-11">btn_help</action-widget>
+      <action-widget response="-7">btn_close</action-widget>
     </action-widgets>
   </object>
 </interface>
