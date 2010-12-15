@@ -75,3 +75,13 @@ def get_help_uri(page=None):
 def show_uri(parent, link):
     screen = parent.get_screen()
     gtk.show_uri(screen, link, gtk.get_current_event_time())
+
+def alias(alternative_function_name):
+    '''see http://www.drdobbs.com/web-development/184406073#l9'''
+    def decorator(function):
+        '''attach alternative_function_name(s) to function'''
+        if not hasattr(function, 'aliases'):
+            function.aliases = []
+        function.aliases.append(alternative_function_name)
+        return function
+    return decorator
