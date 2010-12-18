@@ -9,7 +9,7 @@ import os
 import gtk
 
 from python_name.python_nameconfig import get_data_file
-from python_name.BuilderGlue import Builder
+from python_name.Builder import Builder
 
 import gettext
 from gettext import gettext as _

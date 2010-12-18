@@ -10,11 +10,11 @@ import inspect
 proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..","project_root"))
 sys.path.insert(0, proj_root)
 
-from python import BuilderGlue
+from python import Builder
 
 # Clean up after ourselves
 os.remove(os.path.join(proj_root, 'python', '__init__.pyc'))
-os.remove(os.path.join(proj_root, 'python', 'BuilderGlue.pyc'))
+os.remove(os.path.join(proj_root, 'python', 'Builder.pyc'))
 
 # alias belongs in helpers, but it cannot be imported
 def alias(alternative_function_name):
@@ -74,9 +74,9 @@ class App2():
     def foo(self, widget, data=None):
         self.messages.append('called by alias')
 
-class TestBuilderGlue(unittest.TestCase):
+class TestBuilder(unittest.TestCase):
     def setUp(self):
-        self.builder = BuilderGlue.Builder()
+        self.builder = Builder.Builder()
         self.builder.add_from_file(os.path.join(os.path.dirname(__file__), 'test.ui'))
         self.widget_keys = ['filefilter', 'wind?o-w two',
         'label', 'window', 'wind_o_w_two', '1wind-o w/3' ]
@@ -131,7 +131,7 @@ class TestBuilderGlue(unittest.TestCase):
 
     def test_dictionary_access_to_callback_obj(self):
         app = App()
-        dict_callback_obj = BuilderGlue.dict_from_callback_obj(app)
+        dict_callback_obj = Builder.dict_from_callback_obj(app)
         actual = dict_callback_obj.keys()
         actual.sort()
         expected = ['__init__', 'asterix', 'cartoon','doraemon',
@@ -154,7 +154,7 @@ class TestBuilderGlue(unittest.TestCase):
 
     def test_connect_auto(self):
         app = App()
-        BuilderGlue.auto_connect_by_name(app, self.builder)
+        Builder.auto_connect_by_name(app, self.builder)
 
         # glade does not have on_window_show
         window = self.builder.get_object('window')
@@ -163,7 +163,7 @@ class TestBuilderGlue(unittest.TestCase):
 
     def test_alias(self):
         app = App()
-        dict_callback_obj = BuilderGlue.dict_from_callback_obj(app)
+        dict_callback_obj = Builder.dict_from_callback_obj(app)
         expected = app.on_mnu_foo_activated
 
         for name in ['on_mnu_foo_activated',
@@ -173,7 +173,7 @@ class TestBuilderGlue(unittest.TestCase):
 
     def test_connect_alias(self):
         app = App2()
-        BuilderGlue.auto_connect_by_name(app, self.builder)
+        Builder.auto_connect_by_name(app, self.builder)
 
         window = self.builder.get_object('window')
         window.emit('show')
