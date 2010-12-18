@@ -98,28 +98,45 @@ class TestBuilder(unittest.TestCase):
         self.assertTrue('glade_handler_dict' not in builder)
         self.assertTrue('_reverse_widget_dict' not in builder)
 
-    def test_iterate(self):
-        glue = self.builder.get_ui()
-        objs = list(glue)
-        objs2 = []
-        for obj in glue:
-            objs2.append(obj)
-        self.assertTrue(len(objs) == 6)
-        self.assertEqual(objs, objs2)
+    #~ def test_ui_iterate(self):
+        #~ ui = self.builder.get_ui()
+        #~ objs = list(ui)
+        #~ objs2 = []
+        #~ for obj in ui:
+            #~ objs2.append(obj)
+        #~ self.assertTrue(len(objs) == 6)
+        #~ self.assertEqual(objs, objs2)
 
-    def test_dot_access(self):
-        glue = self.builder.get_ui()
-        
-        self.assertTrue(hasattr(glue, 'filefilter'))
-        self.assertTrue(hasattr(glue, 'window'))
-        self.assertTrue(hasattr(glue, 'label'))
-        self.assertTrue(hasattr(glue, 'wind?o-w two'))
-        self.assertTrue(hasattr(glue, 'wind_o_w_two'))
-        # Many glade names match one pythonic name
-        self.assertFalse(getattr(glue, 'wind?o-w two') == getattr(glue, 'wind_o_w_two'))
-        self.assertTrue(hasattr(glue, '1wind-o w/3'))
-        self.assertTrue(hasattr(glue, '_wind_o_w_3'))
-        self.assertTrue(getattr(glue, '1wind-o w/3') == getattr(glue, '_wind_o_w_3'))
+    def test_ui_dot_access(self):
+        ui = self.builder.get_ui()
+
+        self.assertTrue(hasattr(ui, 'filefilter'))
+        self.assertTrue(hasattr(ui, 'window'))
+        self.assertTrue(hasattr(ui, 'label'))
+        self.assertTrue(hasattr(ui, 'wind?o-w two'))
+        self.assertTrue(hasattr(ui, 'wind_o_w_two'))
+        self.assertTrue(hasattr(ui, '1wind-o w/3'))
+        self.assertFalse(hasattr(ui, '_wind_o_w_3'))
+
+        self.assertEqual(ui.filefilter, self.builder.get_object('filefilter'))
+        self.assertEqual(ui.window, self.builder.get_object('window'))
+        self.assertEqual(ui.label, self.builder.get_object('label'))
+        self.assertEqual(getattr(ui, 'wind?o-w two'), self.builder.get_object('wind?o-w two'))
+        self.assertEqual(getattr(ui, 'wind_o_w_two'), self.builder.get_object('wind_o_w_two'))
+        self.assertEqual(getattr(ui, '1wind-o w/3'), self.builder.get_object('1wind-o w/3'))
+
+    def test_ui_api(self):
+        # the users api is shown first in these equality tests
+        # both attribute and dictionary access - user chooses
+        ui = self.builder.get_ui()
+        self.assertEqual(ui.filefilter,      ui['filefilter'])
+        self.assertEqual(ui.window,          ui['window'])
+        self.assertEqual(ui.label,           ui['label'])
+        self.assertEqual(ui['wind?o-w two'], self.builder.get_object('wind?o-w two'))
+        self.assertEqual(ui['wind_o_w_two'], self.builder.get_object('wind_o_w_two'))
+        self.assertEqual(ui['1wind-o w/3'],  self.builder.get_object('1wind-o w/3'))
+        # widget access remains unique
+        self.assertTrue(ui['wind?o-w two'] != ui['wind_o_w_two'])
 
     def test_dictionary_access_to_builder(self):
         # expected glade handlers

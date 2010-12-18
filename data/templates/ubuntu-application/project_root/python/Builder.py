@@ -146,44 +146,30 @@ class Builder(gtk.Builder):
         return result
 
 
-# object interface
 # pylint: disable=R0903
 # this class deliberately does not provide any public interfaces
 # apart from the glade widgets
 class UiFactory():
     ''' provides an object with attributes as glade widgets'''
-    def __init__(self, data):
-        for item in data.items():
-            setattr(self, item[0], item[1])
+    def __init__(self, widget_dict):
+        self.widget_dict = widget_dict
 
-        # Mangle any non-usable names (like with spaces or dashes)
-        # into pythonic ones
-        for (name, obj) in data.items():
-            pyname = make_pyname(name)
-            if pyname != name:
-                if hasattr(self, pyname):
-                    logging.debug(
-                    "Builder: Not binding %s, name already exists", pyname)
-                else:
-                    setattr(self, pyname, obj)
+    def __getattr__(self, name):
+        'attribute access'
+        return self.widget_dict[name]
 
-        def iterator():
-            '''Support 'for o in self' '''
-            return iter(data.values())
-        setattr(self, '__iter__', iterator)
+    #~ def __len__(self):
+        #~ 'required for iterator'
+        #~ return len(self.widget_dict)
+#~ 
+    #~ def __iter__(self):
+        #~ 'iterator'
+        #~ return iter(self.widget_dict.values())
+
+    def __getitem__(self, name):
+        'access as dictionary where name might be non-pythonic'
+        return self.widget_dict[name]
 # pylint: enable=R0903
-
-
-def make_pyname(name):
-    ''' mangles non-pythonic names into pythonic ones'''
-    pyname = ''
-    for character in name:
-        if (character.isalpha() or character == '_' or
-            (pyname and character.isdigit())):
-            pyname += character
-        else:
-            pyname += '_'
-    return pyname
 
 
 def dict_from_callback_obj(callback_obj):
