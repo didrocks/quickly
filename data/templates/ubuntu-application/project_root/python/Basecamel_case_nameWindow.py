@@ -7,7 +7,7 @@ import gtk
 import logging
 
 from python_name import (
-    Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog, BuilderGlue)
+    Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
 import python_name.helpers as helpers
 from python_name.preferences import preferences
 
@@ -51,7 +51,7 @@ class Basecamel_case_nameWindow(gtk.Window):
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.ui = BuilderGlue.BuilderGlue(builder, self)
+        self.ui = builder.get_ui(self, True)
         self.preferences_dialog = None
 
         # Optional Launchpad integration
@@ -78,16 +78,16 @@ class Basecamel_case_nameWindow(gtk.Window):
         except:
             pass
 
-    def contentsMenuItem_activate_event(self, widget, data=None):
+    def on_mnu_contents_activate(self, widget, data=None):
         helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
 
-    def aboutMenuItem_activate_event(self, widget, data=None):
+    def on_mnu_about_activate(self, widget, data=None):
         """Display the about box for project_name."""
         about = Aboutcamel_case_nameDialog.Aboutcamel_case_nameDialog()
         response = about.run()
         about.destroy()
 
-    def preferencesMenuItem_activate_event(self, widget, data=None):
+    def on_mnu_preferences_activate(self, widget, data=None):
         """Display the preferences window for project_name."""
 
         """ From the PyGTK Reference manual
@@ -105,11 +105,11 @@ class Basecamel_case_nameWindow(gtk.Window):
             self.preferences_dialog.show()
         # destroy command moved into dialog to allow for a help button
 
-    def quitMenuItem_activate_event(self, widget, data=None):
+    def on_mnu_quit_activate(self, widget, data=None):
         """Signal handler for closing the camel_case_nameWindow."""
         self.destroy()
 
-    def destroy_event(self, widget, data=None):
+    def on_destroy(self, widget, data=None):
         """Called when the camel_case_nameWindow is closed."""
         # Clean up code for saving application state should be added here.
         gtk.main_quit()
