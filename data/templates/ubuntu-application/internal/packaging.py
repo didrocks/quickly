@@ -20,6 +20,7 @@ import datetime
 import re
 import subprocess
 import sys
+import os
 from launchpadlib.errors import HTTPError
 
 
@@ -157,6 +158,58 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
         return(_continue_if_errors(err_output, warn_output, proc.returncode,
                                      ask_on_warn_or_error))
 
+def update_metadata():
+    # See https://wiki.ubuntu.com/PostReleaseApps/Metadata for details
+
+    metadata = []
+    project_name = configurationhandler.project_config['project']
+
+    # Grab name and category from desktop file
+    with open('%s.desktop.in' % project_name, 'r') as f:
+        desktop = f.read()
+
+        match = re.search('\n_?Name=(.*)\n', desktop)
+        if match is not None:
+            metadata.append('XB-AppName: %s' % match.group(1))
+
+        match = re.search('\nCategories=(.*)\n', desktop)
+        if match is not None:
+            metadata.append('XB-Category: %s' % match.group(1))
+
+    # Grab distribution for screenshot URLs from debian/changelog
+    changelog = subprocess.Popen(['dpkg-parsechangelog'], stdout=subprocess.PIPE).communicate()[0]
+    match = re.search('\nDistribution: (.*)\n', changelog)
+    if match is not None:
+        distribution = match.group(1)
+        if project_name.startswith('lib'):
+            first_letter = project_name[0:4]
+        else:
+            first_letter = project_name[0]
+        urlbase = 'https://software-center.ubuntu.com/screenshots/%s' % first_letter
+        metadata.append('XB-Screenshot-Url: %s/%s-%s.png' % (urlbase, project_name, distribution))
+        metadata.append('XB-Thumbnail-Url: %s/%s-%s.thumb.png' % (urlbase, project_name, distribution))
+
+    # Now ship the icon as part of the debian packaging
+    if os.path.exists('data/media/%s.svg' % project_name):
+        contents = ''
+        with open('debian/rules', 'r') as f:
+            contents = f.read()
+        if contents and re.search('dpkg-distaddfile %s.svg' % project_name, contents) is None:
+            contents += """
+common-install-indep::
+	cp data/media/%(project_name)s.svg ..
+	dpkg-distaddfile %(project_name)s.svg raw-meta-data -""" % {'project_name': project_name}
+            templatetools.set_file_contents('debian/rules', contents)
+
+            metadata.append('XB-Icon: %s.svg' % project_name)
+
+    # Prepend the start-match line, because update_file_content replaces it
+    metadata.insert(0, 'XB-Python-Version: ${python:Versions}')
+    templatetools.update_file_content('debian/control',
+                                      'XB-Python-Version: ${python:Versions}',
+                                      'Depends: ${misc:Depends},',
+                                      '\n'.join(metadata) + '\n')
+
 def get_python_mkdebian_version():
     proc = subprocess.Popen(["python-mkdebian", "--version"], stdout=subprocess.PIPE)
     version = proc.communicate()[0]
@@ -200,6 +253,9 @@ def updatepackaging(changelog=None, no_changelog=False, installopt=False):
     if return_code != 0:
         print _("An error has occurred when creating debian packaging")
         return(return_code)
+
+    if installopt:
+        update_metadata()
 
     print _("Ubuntu packaging created in debian/")
 

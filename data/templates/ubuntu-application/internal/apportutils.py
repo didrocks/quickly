@@ -24,6 +24,7 @@ from gettext import gettext as _
 
 import quickly
 import quicklyutils
+from quickly import templatetools
 
 from lxml import etree
 
@@ -105,7 +106,7 @@ def insert_lpi_if_required(project_name):
             if new_lines:
                 print _("Adding launchpad integration to existing application")
                 new_content = ''.join(new_lines)
-                quicklyutils.set_file_contents(existing_base_filename, new_content)
+                templatetools.set_file_contents(existing_base_filename, new_content)
             return True
     return False
         
