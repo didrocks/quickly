@@ -21,7 +21,7 @@ import os
 import shutil
 import subprocess
 
-from quickly import templatetools
+from quickly import configurationhandler, templatetools
 from internal import quicklyutils
 
 import gettext
@@ -58,6 +58,11 @@ try:
 except:
     # user friendly message already caught in pre_create
     sys.exit(1)
+
+# these dependencies cannot be discovered automatically
+configurationhandler.loadConfig(True, project_name)
+configurationhandler.project_config['dependencies'] = 'yelp'
+configurationhandler.saveConfig(project_name)
 
 if len(path_and_project) > 1:
     os.chdir(str(os.path.sep).join(path_and_project[0:-1]))

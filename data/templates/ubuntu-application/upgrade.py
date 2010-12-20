@@ -196,5 +196,17 @@ if python_path:
     except templatetools.CantUpdateFile, e:
         print _("WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is: %s" % e)
 
+if project_version < '11.03.1':
+    # Make sure project depends on yelp
+    deps = None
+    if 'dependencies' not in configurationhandler.project_config:
+        deps = 'yelp'
+    else:
+        old_deps = [x.strip() for x in configurationhandler.project_config['dependencies'].split(',')]
+        if 'yelp' not in old_deps:
+            deps = configurationhandler.project_config['dependencies'] + ", yelp"
+    if deps is not None:
+        configurationhandler.project_config['dependencies'] = deps
+        configurationhandler.saveConfig(project_name)
 
 sys.exit(0)
