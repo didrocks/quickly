@@ -56,5 +56,33 @@ cat debian/rules
 # -include /usr/share/cdbs/1/rules/langpack.mk
 # 
 # common-install-indep::
-# 	cp data/media/test-project.svg ..
+# 	cp data/media/test-project.svg ../test-project.svg
 # 	dpkg-distaddfile test-project.svg raw-meta-data -
+
+## Older versions of quickly had logo.svg instead of project_name.svg, so test those too
+
+mv data/media/test-project.svg data/media/logo.svg
+
+quickly package --extras | sed 's/^\.\+//'
+# Ubuntu packaging created in debian/
+# Ubuntu package has been successfully created in ../test-project_0.1_all.deb
+
+grep XB-Icon debian/control
+# XB-Icon: test-project.svg
+
+tail -n 3 debian/rules
+# common-install-indep::
+# 	cp data/media/logo.svg ../test-project.svg
+# 	dpkg-distaddfile test-project.svg raw-meta-data -
+
+## Finally, make sure we gracefully handle no icon at all
+
+rm data/media/logo.svg
+
+quickly package --extras | sed 's/^\.\+//'
+# Ubuntu packaging created in debian/
+# Ubuntu package has been successfully created in ../test-project_0.1_all.deb
+
+grep XB-Icon debian/control
+
+grep dpkg-distaddfile debian/rules

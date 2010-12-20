@@ -190,15 +190,22 @@ def update_metadata():
         metadata.append('XB-Thumbnail-Url: %s/%s-%s.thumb.png' % (urlbase, project_name, distribution))
 
     # Now ship the icon as part of the debian packaging
-    if os.path.exists('data/media/%s.svg' % project_name):
+    icon_name = 'data/media/%s.svg' % project_name
+    if not os.path.exists(icon_name):
+        # Support pre-11.03.1 icon names
+        icon_name = 'data/media/logo.svg'
+        if not os.path.exists(icon_name):
+            icon_name = None
+    if icon_name:
         contents = ''
         with open('debian/rules', 'r') as f:
             contents = f.read()
         if contents and re.search('dpkg-distaddfile %s.svg' % project_name, contents) is None:
             contents += """
 common-install-indep::
-	cp data/media/%(project_name)s.svg ..
-	dpkg-distaddfile %(project_name)s.svg raw-meta-data -""" % {'project_name': project_name}
+	cp %(icon_name)s ../%(project_name)s.svg
+	dpkg-distaddfile %(project_name)s.svg raw-meta-data -""" % {
+                'project_name': project_name, 'icon_name': icon_name}
             templatetools.set_file_contents('debian/rules', contents)
 
             metadata.append('XB-Icon: %s.svg' % project_name)
