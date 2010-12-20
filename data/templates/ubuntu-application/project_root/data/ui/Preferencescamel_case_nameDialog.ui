@@ -6,7 +6,7 @@
   <object class="Preferencescamel_case_nameDialog" id="preferences_python_name_dialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">sentence_name Preferences</property>
-    <property name="icon">../media/icon.png</property>
+    <property name="icon">../media/project_name.svg</property>
     <property name="type_hint">normal</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">

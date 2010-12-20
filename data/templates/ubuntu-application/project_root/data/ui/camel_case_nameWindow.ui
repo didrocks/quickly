@@ -6,7 +6,7 @@
   <!-- interface-local-resource-path ../media -->
   <object class="camel_case_nameWindow" id="python_name_window">
     <property name="title" translatable="yes">sentence_name</property>
-    <property name="icon">../media/icon.png</property>
+    <property name="icon">../media/project_name.svg</property>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>

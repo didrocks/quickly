@@ -760,9 +760,9 @@ You should personalize your application a little before creating the archive. Th
 </itemizedlist>
 
 <para><title>Personalize your Application Icon</title>
-When users install your application, Ubuntu will display an icon next to it in the menus. You can create your own icon or edit the file called "icon.png" in the media directory (jotty/data/media). Ubuntu comes with a great image editing program called "Gimp." So you can go:</para>
+When users install your application, Ubuntu will display an icon next to it in the menus. You can create your own icon or edit the file called "jotty.svg" in the media directory (jotty/data/media). Ubuntu comes with a great image editing program called "Inkscape." So you can go:</para>
 <para><programlisting>
-gimp data/media/icon.png
+inkscape data/media/jotty.svg
 </programlisting></para>
    <figure>
     <graphic fileref="./images/package0.png"></graphic>
