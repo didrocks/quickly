@@ -21,9 +21,7 @@ bzr ls -R
 # data/
 # data/media/
 # data/media/background.png
-# data/media/icon.png
-# data/media/logo.png
-# data/media/logo.svg
+# data/media/test-project.svg
 # data/ui/
 # data/ui/AboutTestProjectDialog.ui
 # data/ui/PreferencesTestProjectDialog.ui

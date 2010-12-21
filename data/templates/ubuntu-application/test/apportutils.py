@@ -166,7 +166,7 @@ class camel_case_nameWindow(gtk.Window):
   <!-- interface-local-resource-path ../media -->
   <object class="camel_case_nameWindow" id="python_name_window">
     <property name="title" translatable="yes">sentence_name</property>
-    <property name="icon">../media/icon.png</property>
+    <property name="icon">../media/project_name.svg</property>
     <signal name="destroy" handler="on_destroy"/>
     <child>
       <object class="GtkVBox" id="vbox1">
