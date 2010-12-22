@@ -6,6 +6,8 @@ import sys
 import os
 import gtk
 import inspect
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..","project_root"))
 sys.path.insert(0, proj_root)
@@ -78,8 +80,8 @@ class TestBuilder(unittest.TestCase):
     def setUp(self):
         self.builder = Builder.Builder()
         self.builder.add_from_file(os.path.join(os.path.dirname(__file__), 'test.ui'))
-        self.widget_keys = ['filefilter', 'wind?o-w two',
-        'label', 'window', 'wind_o_w_two', '1wind-o w/3' ]
+        self.widget_keys = ['1wind-o w/3', 'filefilter', 'label',
+        'wind?o-w two', 'wind_o_w_two', 'window'] # sorted list
 
     def test_interface(self):
         builder = dir(gtk.Builder)
@@ -98,52 +100,59 @@ class TestBuilder(unittest.TestCase):
         self.assertTrue('glade_handler_dict' not in builder)
         self.assertTrue('_reverse_widget_dict' not in builder)
 
-    #~ def test_ui_iterate(self):
-        #~ ui = self.builder.get_ui()
-        #~ objs = list(ui)
-        #~ objs2 = []
-        #~ for obj in ui:
-            #~ objs2.append(obj)
-        #~ self.assertTrue(len(objs) == 6)
-        #~ self.assertEqual(objs, objs2)
+    def test_ui_iterate(self):
+        ui = self.builder.get_ui()
+        objs = list(ui)
+        objs2 = []
+        for obj in ui:
+            objs2.append(obj)
+        self.assertTrue(len(objs) == 6)
+        self.assertEqual(objs, objs2)
+
+        objs3 = self.builder.get_objects()
+        objs.sort()
+        objs3.sort()
+        self.assertEqual(objs, objs3)
 
     def test_ui_dot_access(self):
         ui = self.builder.get_ui()
 
-        self.assertTrue(hasattr(ui, 'filefilter'))
-        self.assertTrue(hasattr(ui, 'window'))
-        self.assertTrue(hasattr(ui, 'label'))
-        self.assertTrue(hasattr(ui, 'wind?o-w two'))
-        self.assertTrue(hasattr(ui, 'wind_o_w_two'))
-        self.assertTrue(hasattr(ui, '1wind-o w/3'))
-        self.assertFalse(hasattr(ui, '_wind_o_w_3'))
+        attribute_names = dir(ui)
+        public_attribute_names = [x for x in attribute_names if x[0] != '_']
+        public_attribute_names.sort()
+        expected = self.widget_keys
+        self.assertEqual(public_attribute_names, expected)
+        # we also expect an unusual one
+        self.assertTrue('_wind_o_w_3' in attribute_names)
 
         self.assertEqual(ui.filefilter, self.builder.get_object('filefilter'))
         self.assertEqual(ui.window, self.builder.get_object('window'))
         self.assertEqual(ui.label, self.builder.get_object('label'))
+        self.assertEqual(ui.wind_o_w_two, self.builder.get_object('wind_o_w_two'))
+        # simple dot access via name mangle with no clash
+        self.assertEqual(ui._wind_o_w_3, self.builder.get_object('1wind-o w/3'))
+        # name clash prevents simple dot access
         self.assertEqual(getattr(ui, 'wind?o-w two'), self.builder.get_object('wind?o-w two'))
-        self.assertEqual(getattr(ui, 'wind_o_w_two'), self.builder.get_object('wind_o_w_two'))
-        self.assertEqual(getattr(ui, '1wind-o w/3'), self.builder.get_object('1wind-o w/3'))
+        #confirm clash did not hide a widget
+        self.assertTrue(getattr(ui, 'wind?o-w two') != ui.wind_o_w_two)
 
-    def test_ui_api(self):
-        # the users api is shown first in these equality tests
-        # both attribute and dictionary access - user chooses
+    def test_ui_dictionary_access(self):
         ui = self.builder.get_ui()
-        self.assertEqual(ui.filefilter,      ui['filefilter'])
-        self.assertEqual(ui.window,          ui['window'])
-        self.assertEqual(ui.label,           ui['label'])
+        self.assertEqual(ui['filefilter'], self.builder.get_object('filefilter'))
+        self.assertEqual(ui['window'], self.builder.get_object('window'))
+        self.assertEqual(ui['label'], self.builder.get_object('label'))
         self.assertEqual(ui['wind?o-w two'], self.builder.get_object('wind?o-w two'))
         self.assertEqual(ui['wind_o_w_two'], self.builder.get_object('wind_o_w_two'))
         self.assertEqual(ui['1wind-o w/3'],  self.builder.get_object('1wind-o w/3'))
-        # widget access remains unique
-        self.assertTrue(ui['wind?o-w two'] != ui['wind_o_w_two'])
 
     def test_dictionary_access_to_builder(self):
         # expected glade handlers
         glade_handler_dict = {'on_label_show': None,
          'window_show_cb': None}
         
-        self.assertEqual(self.builder.widgets.keys(),self.widget_keys)
+        builder_keys = self.builder.widgets.keys()
+        builder_keys.sort()
+        self.assertEqual(builder_keys, self.widget_keys)
         self.assertEqual(self.builder.glade_handler_dict, glade_handler_dict)
 
     def test_dictionary_access_to_callback_obj(self):

@@ -3,7 +3,7 @@
 # This file is in the public domain
 ### END LICENSE
 
-'''Enhances builder connections, provides object to access uiglade objects'''
+'''Enhances builder connections, provides object to access glade objects'''
 
 from gi.repository import GObject  # pylint: disable=E0611
 
@@ -152,24 +152,46 @@ class Builder(gtk.Builder):
 class UiFactory():
     ''' provides an object with attributes as glade widgets'''
     def __init__(self, widget_dict):
-        self.widget_dict = widget_dict
+        self._widget_dict = widget_dict
+        for (widget_name, widget) in widget_dict.items():
+            setattr(self, widget_name, widget)
 
-    def __getattr__(self, name):
-        'attribute access'
-        return self.widget_dict[name]
+        # Mangle any non-usable names (like with spaces or dashes)
+        # into pythonic ones
+        cannot_message = """cannot bind ui.%s, name already exists
+        consider using a pythonic name instead of design name '%s'"""
+        consider_message = """consider using a pythonic name instead of design name '%s'"""
+        
+        for (widget_name, widget) in widget_dict.items():
+            pyname = make_pyname(widget_name)
+            if pyname != widget_name:
+                if hasattr(self, pyname):
+                    logging.debug(cannot_message, pyname, widget_name)
+                else:
+                    logging.debug(consider_message, widget_name)
+                    setattr(self, pyname, widget)
 
-    #~ def __len__(self):
-        #~ 'required for iterator'
-        #~ return len(self.widget_dict)
-#~ 
-    #~ def __iter__(self):
-        #~ 'iterator'
-        #~ return iter(self.widget_dict.values())
+        def iterator():
+            '''Support 'for o in self' '''
+            return iter(widget_dict.values())
+        setattr(self, '__iter__', iterator)
 
     def __getitem__(self, name):
         'access as dictionary where name might be non-pythonic'
-        return self.widget_dict[name]
+        return self._widget_dict[name]
 # pylint: enable=R0903
+
+
+def make_pyname(name):
+    ''' mangles non-pythonic names into pythonic ones'''
+    pyname = ''
+    for character in name:
+        if (character.isalpha() or character == '_' or
+            (pyname and character.isdigit())):
+            pyname += character
+        else:
+            pyname += '_'
+    return pyname
 
 
 def dict_from_callback_obj(callback_obj):
