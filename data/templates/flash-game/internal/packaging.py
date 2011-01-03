@@ -179,8 +179,17 @@ def updatepackaging(changelog=None, no_changelog=False):
         # we use gobject-introspection, which python-distutils-extra doesn't
         # correctly handle, and because we need the Flash plugin as a dependency,
         # which won't get noticed by the autodetector.
-        dependencies += ["flashplugin-installer", "gir1.0-webkit-1.0", 
-            "gir1.0-gtk-2.0"]
+        # "quickly package" builds a package for the release that you're running.
+        # We need different hardcoded dependencies depending on which release
+        # you're on, at least until python-distutils-extra handles g-i.
+        distro_name = subprocess.Popen(["lsb_release", "-s", "-c"], 
+            stdout=subprocess.PIPE).communicate()[0].strip()
+        DEPS = {
+            "maverick": ["gir1.0-webkit-1.0", "gir1.0-gtk-2.0"],
+            "natty": ["gir1.0-webkit-1.0", "gir1.2-gtk-2.0"],
+        }
+        dependencies += DEPS.get(distro_name, [])
+        dependencies += ["flashplugin-installer"]
         for dep in dependencies:
             command.extend(["--dependency", dep])
     try:
