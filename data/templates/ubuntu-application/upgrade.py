@@ -147,7 +147,7 @@ if project_version < '0.4':
         internal.apportutils.update_apport(project_name, lp_project_name, lp_project_name)
 
     # new dialog file needs helpers.py
-    if not os.path.isfile('%s/helpers.py' % python_name):
+    if not os.path.isfile('%s/helpers.py' % python_name) and os.path.isdir(python_name):
         source_dir = os.path.join(os.path.dirname(__file__), 'project_root',
                                   'python')
         quicklyutils.file_from_template(source_dir, 
