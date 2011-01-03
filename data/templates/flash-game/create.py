@@ -130,8 +130,14 @@ try:
 except:
     pass
 
+# Copy the specified SWF file into the project
 shutil.copyfile(swf, os.path.join("data", "game.swf"))
 
+# We require a specific version of the ubuntu-application template, so
+# edit the project's .quickly file to specify it
+fp = open(".quickly", "a")
+fp.write("\nversion_ubuntu-application = 11.03\n")
+fp.close()
 
 # add it to revision control
 print _("Creating bzr repository and commiting")
