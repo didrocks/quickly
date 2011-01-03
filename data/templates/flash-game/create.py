@@ -134,9 +134,10 @@ except:
 shutil.copyfile(swf, os.path.join("data", "game.swf"))
 
 # We require a specific version of the ubuntu-application template, so
-# edit the project's .quickly file to specify it
+# edit the project's .quickly file to specify it.
+#WORKAROUND
 fp = open(".quickly", "a")
-fp.write("\nversion_ubuntu-application = 11.03\n")
+fp.write("\nversion_ubuntu-application = 0.4\n")
 fp.close()
 
 # add it to revision control

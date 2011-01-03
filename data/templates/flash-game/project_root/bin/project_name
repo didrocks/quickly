@@ -18,8 +18,7 @@ WINDOW_SIZE = (swf_width, swf_height)
 ###########################################################################
 
 
-from gi.repository import WebKit, Gtk
-import gio # sigh, gi.repository.Gio doesn't seem to work yet
+import webkit, gtk, gio
 import json, os
 
 # Where your project will look for your data (for instance, images and ui
@@ -56,11 +55,11 @@ def get_data_path():
 
 
 if __name__ == "__main__":
-    w = Gtk.Window()
-    v = WebKit.WebView()
+    w = gtk.Window()
+    v = webkit.WebView()
     w.add(v)
     w.show_all() # have to have this before set_size_request
-    w.connect("destroy", lambda q: Gtk.main_quit())
+    w.connect("destroy", lambda q: gtk.main_quit())
     w.set_title(GAME_NAME)
     htmlfp = gio.File(get_data_file('index.html'))
     uri = htmlfp.get_uri()
@@ -68,5 +67,5 @@ if __name__ == "__main__":
     v.load_html_string(html, uri)
     w.set_size_request(*WINDOW_SIZE)
     v.queue_resize() # force a reallocation, https://bugs.webkit.org/show_bug.cgi?id=47742
-    Gtk.main()
+    gtk.main()
 
