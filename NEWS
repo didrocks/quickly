@@ -3,6 +3,9 @@ Quickly 11.03.1
 
  + ubuntu-application-template:
    - Use one scalable application icon, instead of 3 differently sized ones
+ + ubuntu-application-template and derivatives:
+   - Support writing metadata required by the Application Review Board when
+     packaging (can enable with 'submitubuntu' or 'package --extras')
 
 Quickly 11.03
 ------------------------------------

@@ -93,6 +93,16 @@ def apply_file_rights(src_file_name, dest_file_name):
     mode = stat.S_IMODE(st.st_mode)
     os.chmod(dest_file_name, mode)
 
+def set_file_contents(filename, contents):
+    new_filename = filename + '.new'
+    fout = file(new_filename, 'w')
+    fout.write(contents)
+    fout.flush()
+    fout.close()
+    if os.path.exists(filename):
+        apply_file_rights(filename, new_filename)
+    os.rename(new_filename, filename)
+
 def update_file_content(filename, start_marker, end_marker, replacing_content):
     """Safely replace the content of a file"""
 
