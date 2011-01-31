@@ -9,7 +9,7 @@ rm -rf subdir
 HOME=/ quickly create
 # ERROR: No template specified for command create.
 # Usage: quickly create <template> <project-name>
-# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-pygame
+# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-flash-game, ubuntu-pygame
 
 quickly create ubuntu-application
 # ERROR: No project name specified.
