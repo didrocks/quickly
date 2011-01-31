@@ -41,7 +41,8 @@ cat debian/control | sed "s/project-$(lsb_release -c | cut -f2)*\./project-RELEA
 #  python-gobject,
 #  python-launchpad-integration,
 #  python-gtk2,
-#  python-desktopcouch-records
+#  python-desktopcouch-records,
+#  yelp
 # Description: UNKNOWN
 #  UNKNOWN
 

@@ -219,6 +219,15 @@ def get_python_mkdebian_version():
     version = proc.communicate()[0]
     return float(version)
 
+def get_forced_dependencies():
+    deps = []
+
+    # check for yelp usage
+    if subprocess.call(["grep", "-rq", "['\"]ghelp:", "."]) == 0:
+        deps.append("yelp")
+
+    return deps
+
 def updatepackaging(changelog=None, no_changelog=False, installopt=False):
     """create or update a package using python-mkdebian.
 
@@ -238,14 +247,15 @@ def updatepackaging(changelog=None, no_changelog=False, installopt=False):
         command.extend(["--changelog", message])
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
+    dependencies = get_forced_dependencies()
     try:
-        dependencies = [elem.strip() for elem
-                        in configurationhandler.project_config['dependencies'].split(',')
-                        if elem]
-        for dep in dependencies:
-            command.extend(["--dependency", dep])
+        dependencies.extend([elem.strip() for elem
+                             in configurationhandler.project_config['dependencies'].split(',')
+                             if elem])
     except KeyError:
         pass
+    for dep in dependencies:
+        command.extend(["--dependency", dep])
     try:
         distribution = configurationhandler.project_config['target_distribution']
         command.extend(["--distribution", distribution])
