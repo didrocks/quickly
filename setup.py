@@ -103,6 +103,7 @@ DistUtilsExtra.auto.setup(name='quickly',
       author='Quickly Developer Team',
       author_email='quickly-talk@lists.launchpad.net',
       data_files=[('share/quickly/templates/ubuntu-application/project_root', glob.glob('data/templates/ubuntu-application/project_root/project_name.desktop.in')),
-                  ('share/quickly/templates/ubuntu-pygame/project_root', glob.glob('data/templates/ubuntu-pygame/project_root/project_name.desktop.in'))],
+                  ('share/quickly/templates/ubuntu-pygame/project_root', glob.glob('data/templates/ubuntu-pygame/project_root/project_name.desktop.in')),
+                  ('share/quickly/templates/ubuntu-flash-game/project_root', glob.glob('data/templates/ubuntu-flash-game/project_root/project_name.desktop.in'))],
       cmdclass={'install': InstallAndUpdateDataDirectory})
 
