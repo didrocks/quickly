@@ -6,6 +6,10 @@ Quickly 11.03.1
  + ubuntu-application-template and derivatives:
    - Support writing metadata required by the Application Review Board when
      packaging (can enable with 'submitubuntu' or 'package --extras')
+   - Add yelp to dependencies if your application uses ghelp: URLs
+   - Some minor cleanups
+ + ubuntu-flash-game-template:
+   - First release of a flash game template by Stuart Langridge
 
 Quickly 11.03
 ------------------------------------
