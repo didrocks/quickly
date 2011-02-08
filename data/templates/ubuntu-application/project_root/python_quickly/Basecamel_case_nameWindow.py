@@ -8,13 +8,8 @@ import logging
 
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
-import python_name.helpers as helpers
-from python_name.preferences import preferences
-
-import gettext
-from gettext import gettext as _
-gettext.textdomain('project_name')
-
+import python_name_quickly.helpers as helpers
+from python_name_quickly.preferences import preferences
 
 # This class is meant to be subclassed by camel_case_nameWindow.  It provides
 # common functions and some boilerplate.
@@ -78,6 +73,8 @@ class Basecamel_case_nameWindow(gtk.Window):
         except:
             pass
 
+        preferences.connect('changed', self.on_preferences_changed)
+
     def on_mnu_contents_activate(self, widget, data=None):
         helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
 
@@ -114,6 +111,11 @@ class Basecamel_case_nameWindow(gtk.Window):
         # Clean up code for saving application state should be added here.
         gtk.main_quit()
 
+    def on_preferences_changed(self, widget, data=None):
+        logging.debug('main window received preferences changed')
+        for key in data:
+            logging.debug('preference changed: %s = %s' % (key, preferences[key]))
+
     def on_preferences_dialog_destroyed(self, widget, data=None):
         '''only affects gui
         
@@ -123,7 +125,3 @@ class Basecamel_case_nameWindow(gtk.Window):
         # to determine whether to create or present preferences_dialog
         self.preferences_dialog = None
 
-if __name__ == "__main__":
-    window = Basecamel_case_nameWindow()
-    window.show()
-    gtk.main()

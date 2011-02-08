@@ -6,16 +6,18 @@
 """Provides a shared preferences dictionary"""
 import os
 
-# TODO: replace defaults with your own values
-defaults = {
-'example_entry': 'I remember stuff',
- }
-
 from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 import gtk
 import gobject
+import logging
 from UserDict import IterableUserDict
+
+try:
+    from python_name.Preferencescamel_case_nameDialog import defaults
+except:
+    defaults = {}
+    logging.debug("Preference defaults could not be found")
 
 class User_dict(IterableUserDict):
     ''' a dictionary with extra methods:

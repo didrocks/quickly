@@ -234,7 +234,9 @@ def licensing(license=None):
 
     # update license in config.py, setup.py and refresh COPYING if needed
     try:
-        config_file = '%s/%sconfig.py' % (python_name, python_name)
+        config_file = '%s_quickly/%sconfig.py' % (python_name, python_name)
+        if not os.path.exists(config_file):
+            config_file = '%s/%sconfig.py' % (python_name, python_name) # old location
         for line in file(config_file, 'r'):
             fields = line.split(' = ') # Separate variable from value
             if fields[0] == '__license__' and fields[1].strip() != "'%s'" % license:
@@ -260,7 +262,7 @@ def licensing(license=None):
             msg = _("Can't update license in setup.py file\n")
             raise LicenceError(msg)
     except (OSError, IOError), e:
-        msg = _("%s/%sconfig.py file not found.") % (python_name, python_name)
+        msg = _("%s file not found.") % (config_file)
         raise LicenceError(msg)
 
     # update About dialog, if present:
