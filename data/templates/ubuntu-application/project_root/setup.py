@@ -19,10 +19,7 @@ assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >= 
 def update_data_path(prefix, oldvalue=None):
 
     try:
-        config_file = 'python_name_quickly/python_nameconfig.py'
-        if not os.path.exists(config_file):
-            config_file = 'python_name/python_nameconfig.py' # old location
-        fin = file(config_file, 'r')
+        fin = file('python_name_quickly/python_nameconfig.py', 'r')
         fout = file(fin.name + '.new', 'w')
 
         for line in fin:            
@@ -41,7 +38,7 @@ def update_data_path(prefix, oldvalue=None):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find %s" % config_file)
+        print ("ERROR: Can't find python_name_quickly/python_nameconfig.py")
         sys.exit(1)
     return oldvalue
 
