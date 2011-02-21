@@ -51,5 +51,6 @@ bzr ls -R
 # test_project/enemy.py
 # test_project/game.py
 # test_project/guy.py
+# test_project/hiscores.py
 # test_project/homingmissle.py
 # test_project/test_projectconfig.py
