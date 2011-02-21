@@ -31,6 +31,8 @@ def getdatapath():
 screen_width = 800
 screen_height = 480
 
+hiscores_size = (620, 300)
+
 #images
 image_path = os.path.join(getdatapath(), "media/")
 

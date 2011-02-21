@@ -17,6 +17,7 @@ from python_name.guy import Guy
 from python_name.enemy import Enemy
 from python_name.homingmissle import HomingMissle
 from python_name.game import Game
+from python_name import hiscores
 import python_name.python_nameconfig
 
 #set up translations
@@ -50,11 +51,12 @@ enemies = pygame.sprite.RenderUpdates()
 g = Guy(bullets)
 guys.add(g)
 
-#set up the game over screen, center is by default
-gov = BaseSprite(python_name.python_nameconfig.game_over_background)
-gov.x = (sw - gov.rect.width)/2
-gov.y = (sh - gov.rect.height)/2
-gov.update()
+def update_hiscore_screen():
+    """Update the hiscore screen."""
+    hiscores_size = python_name.python_nameconfig.hiscores_size
+    hiscores.screen = hiscores.hiscores_screen(hiscores_size)
+    screen_center = screen.get_rect().center
+    hiscores.pos = hiscores.screen.get_rect(center=screen_center)
 
 def next_level():
     """next_level - go to the next game level
@@ -94,6 +96,10 @@ def controller_tick():
     #handle starting the game or quiting the game if the game
     #is over or has not started
     if game.lives < 1:
+        if game.playing:
+            game.playing = False
+            hiscores.save_score(game.score, game.level)
+            update_hiscore_screen()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -185,8 +191,9 @@ def view_tick():
     screen.blit(scoretxt, scorepos)
     screen.blit(leveltxt, levelpos)
     screen.blit(livestxt, livespos)
-    if game.lives < 1:
-        screen.blit(gov.image,gov.rect)
+    if not game.playing:
+        screen.blit(hiscores.screen, hiscores.pos)
+
 
     #now show the new drawing
     pygame.display.flip()
@@ -223,6 +230,7 @@ def main():
 
     """
 
+    update_hiscore_screen()
     while 1:
         #set the clock to tick 15 times per second
         clock.tick(15)
