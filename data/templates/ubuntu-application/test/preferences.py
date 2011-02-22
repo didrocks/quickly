@@ -24,11 +24,24 @@ class TestUser_dict(unittest.TestCase):
         self.assertTrue(callable(foo.load))
         self.assertTrue(callable(foo.save))
 
-    def test_update(self):
+    def test_update_from_dict(self):
         foo = User_dict()
         bar = {'pluto':2}
         foo.update(bar)
         self.assertEqual(foo.get('pluto'), 2)
+
+    def test_update_from_pairs(self):
+        a = User_dict([['position', 'Public Relations'], ['name', 'Jayne Cobb']])
+        b = {'name': 'Jayne Cobb', 'position': 'Public Relations'}
+        self.assertEqual(a, b)
+
+    def test_serialisation(self):
+        # used in couchdb for instance
+        import json
+        a = User_dict([['position', 'Public Relations'], ['name', 'Jayne Cobb']])
+        b = {'name': 'Jayne Cobb', 'position': 'Public Relations'}
+        c =  json.loads(json.dumps(a))
+        self.assertEqual(a, c)
 
     def test__setitem__(self):
         foo = User_dict()
