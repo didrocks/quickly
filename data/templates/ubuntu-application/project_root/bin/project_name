@@ -31,8 +31,8 @@ if python_path:
     os.putenv('PYTHONPATH', "%s:%s" % (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses
 
 from python_name import camel_case_nameWindow
-import python_name_quickly.helpers as helpers
-from python_name_quickly.preferences import preferences
+import python_name_lib.helpers as helpers
+from python_name_lib.preferences import preferences
 
 if __name__ == "__main__":
     # Support for command line options.  See helpers.py to add more.
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     # Run the application.
     preferences.db_connect()
     preferences.load()
-    window = camel_case_nameWindow()
+    window = camel_case_nameWindow.camel_case_nameWindow()
     window.show()
     gtk.main()
     preferences.save()

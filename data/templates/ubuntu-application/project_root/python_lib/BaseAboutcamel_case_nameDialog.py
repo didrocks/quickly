@@ -5,7 +5,7 @@
 
 import gtk
 
-from python_name_quickly.helpers import get_builder
+from python_name_lib.helpers import get_builder
 
 class BaseAboutcamel_case_nameDialog(gtk.AboutDialog):
     __gtype_name__ = "BaseAboutcamel_case_nameDialog"

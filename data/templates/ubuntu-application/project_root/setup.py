@@ -19,7 +19,7 @@ assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >= 
 def update_data_path(prefix, oldvalue=None):
 
     try:
-        fin = file('python_name_quickly/python_nameconfig.py', 'r')
+        fin = file('python_name_lib/python_nameconfig.py', 'r')
         fout = file(fin.name + '.new', 'w')
 
         for line in fin:            

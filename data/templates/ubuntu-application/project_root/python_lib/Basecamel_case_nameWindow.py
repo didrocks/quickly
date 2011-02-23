@@ -8,8 +8,8 @@ import logging
 
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
-import python_name_quickly.helpers as helpers
-from python_name_quickly.preferences import preferences
+import python_name_lib.helpers as helpers
+from python_name_lib.preferences import preferences
 
 # This class is meant to be subclassed by camel_case_nameWindow.  It provides
 # common functions and some boilerplate.

@@ -7,7 +7,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
-from python_name_quickly.BaseAboutcamel_case_nameDialog import BaseAboutcamel_case_nameDialog
+from python_name_lib.BaseAboutcamel_case_nameDialog import BaseAboutcamel_case_nameDialog
 
 # See BaseAboutcamel_case_nameWindow.py for more details about how this class works.
 class Aboutcamel_case_nameDialog(BaseAboutcamel_case_nameDialog):

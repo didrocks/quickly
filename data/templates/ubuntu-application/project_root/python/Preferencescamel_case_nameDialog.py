@@ -6,7 +6,7 @@
 # This is your preferences dialog.
 #
 # Define preferences and their defaults in the 'defaults' map below.  These
-# definitions are used in the python_name_quickly.preferences module to load
+# definitions are used in the python_name_lib.preferences module to load
 # from and save in desktopcouch.  The preference names need to correspond to
 # a widget in the Preferencescamel_case_nameDialog.ui file.
 #
@@ -26,14 +26,14 @@ defaults = {
 }
 
 widget_methods = {
-    'example_entry': ['get_text', 'set_text', 'focus-out'],
+    'example_entry': ['get_text', 'set_text', 'changed'],
 }
 
 import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
-from python_name_quickly.BasePreferencescamel_case_nameDialog import BasePreferencescamel_case_nameDialog
+from python_name_lib.BasePreferencescamel_case_nameDialog import BasePreferencescamel_case_nameDialog
 
 class Preferencescamel_case_nameDialog(BasePreferencescamel_case_nameDialog):
     __gtype_name__ = "Preferencescamel_case_nameDialog"

@@ -15,8 +15,8 @@ each widget calls set_preference(...) when it has adjusted value
 import gtk
 import logging
 
-from python_name_quickly.helpers import get_builder, show_uri, get_help_uri
-from python_name_quickly.preferences import preferences
+from python_name_lib.helpers import get_builder, show_uri, get_help_uri
+from python_name_lib.preferences import preferences
 
 try:
     from python_name.Preferencescamel_case_nameDialog import widget_methods
