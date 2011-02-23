@@ -13,8 +13,8 @@ from python_name_lib.preferences import preferences
 
 # This class is meant to be subclassed by camel_case_nameWindow.  It provides
 # common functions and some boilerplate.
-class Basecamel_case_nameWindow(gtk.Window):
-    __gtype_name__ = "Basecamel_case_nameWindow"
+class Window(gtk.Window):
+    __gtype_name__ = "Window"
 
     # To construct a new instance of this method, the following notable 
     # methods are called in this order:

@@ -24,14 +24,14 @@ except:
     widget_methods = []
     logging.debug("Preference widget methods could not be found")
 
-class BasePreferencescamel_case_nameDialog(gtk.Dialog):
-    __gtype_name__ = "BasePreferencescamel_case_nameDialog"
+class PreferencesDialog(gtk.Dialog):
+    __gtype_name__ = "PreferencesDialog"
 
     def __new__(cls):
         """Special static method that's automatically called by Python when 
         constructing a new instance of this class.
         
-        Returns a fully instantiated BasePreferencescamel_case_nameDialog object.
+        Returns a fully instantiated PreferencesDialog object.
         """
         builder = get_builder('Preferencescamel_case_nameDialog')
         new_object = builder.get_object("preferences_python_name_dialog")
@@ -42,7 +42,7 @@ class BasePreferencescamel_case_nameDialog(gtk.Dialog):
         """Called while initializing this instance in __new__
 
         finish_initalizing should be called after parsing the ui definition
-        and creating a BasePreferencescamel_case_nameDialog object with it in order to
+        and creating a PreferencesDialog object with it in order to
         finish initializing the start of the new Perferencescamel_case_nameDialog
         instance.
         

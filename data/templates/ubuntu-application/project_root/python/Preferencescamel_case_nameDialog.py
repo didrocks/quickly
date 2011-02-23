@@ -33,9 +33,9 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
-from python_name_lib.BasePreferencescamel_case_nameDialog import BasePreferencescamel_case_nameDialog
+from python_name_lib.PreferencesDialog import PreferencesDialog
 
-class Preferencescamel_case_nameDialog(BasePreferencescamel_case_nameDialog):
+class Preferencescamel_case_nameDialog(PreferencesDialog):
     __gtype_name__ = "Preferencescamel_case_nameDialog"
 
     def finish_initializing(self, builder):
