@@ -13,12 +13,6 @@ import gobject
 import logging
 from UserDict import IterableUserDict
 
-try:
-    from python_name.Preferencescamel_case_nameDialog import defaults
-except:
-    defaults = {}
-    logging.debug("Preference defaults could not be found")
-
 class User_dict(IterableUserDict):
     ''' a dictionary with extra methods:
 
@@ -97,4 +91,4 @@ class User_dict(IterableUserDict):
             self.emit('changed', (key,))
 
 preferences = User_dict()
-preferences.update(defaults)
+

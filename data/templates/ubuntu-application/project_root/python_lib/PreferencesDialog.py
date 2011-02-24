@@ -18,12 +18,6 @@ import logging
 from python_name_lib.helpers import get_builder, show_uri, get_help_uri
 from python_name_lib.preferences import preferences
 
-try:
-    from python_name.Preferencescamel_case_nameDialog import widget_methods
-except:
-    widget_methods = []
-    logging.debug("Preference widget methods could not be found")
-
 class PreferencesDialog(gtk.Dialog):
     __gtype_name__ = "PreferencesDialog"
 
@@ -54,7 +48,7 @@ class PreferencesDialog(gtk.Dialog):
         self.ui = builder.get_ui(self, True)
 
         # code for other initialization actions should be added here
-        self.set_widgets_from_preferences()
+        self.widget_methods = []
 
     def set_widgets_from_preferences(self):
         ''' these widgets show values in the preferences dictionary '''
@@ -74,7 +68,7 @@ class PreferencesDialog(gtk.Dialog):
 
         logging.debug('set_widget_from_preference: %s' % key)
         try:
-            write_method_name=widget_methods[key][1]
+            write_method_name = self.widget_methods[key][1]
         except KeyError:
             logging.warn('%s not in widget_methods' % key)
             return
@@ -85,7 +79,7 @@ class PreferencesDialog(gtk.Dialog):
             logging.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, write_method_name, __file__))
             return
 
-        widget.connect(widget_methods[key][2], self.set_preference)
+        widget.connect(self.widget_methods[key][2], self.set_preference)
 
         method(value)
 
@@ -108,7 +102,7 @@ to defaults in preferences module''')
 
         # set_widget_from_preference is called first
         # so no KeyError test is needed here
-        read_method_name=widget_methods[key][0]
+        read_method_name = self.widget_methods[key][0]
 
         try:
             read_method = getattr(widget, read_method_name)

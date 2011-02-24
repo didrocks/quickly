@@ -6,7 +6,6 @@
 
 import sys
 import os
-import gtk
 
 import gettext
 from gettext import gettext as _
@@ -30,18 +29,5 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
 if python_path:
     os.putenv('PYTHONPATH', "%s:%s" % (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses
 
-from python_name import camel_case_nameWindow
-import python_name_lib.helpers as helpers
-from python_name_lib.preferences import preferences
-
-if __name__ == "__main__":
-    # Support for command line options.  See helpers.py to add more.
-    helpers.parse_options()
-
-    # Run the application.
-    preferences.db_connect()
-    preferences.load()
-    window = camel_case_nameWindow.camel_case_nameWindow()
-    window.show()
-    gtk.main()
-    preferences.save()
+import python_name
+python_name.main()

@@ -47,7 +47,9 @@ templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 filelist = []
 for root, dirs, files in os.walk('./'):
     for name in files:
-        if name.endswith('.py') and name not in ('__init__.py', 'setup.py'):
+        hide_path = root.endswith('_lib')
+        py = name.endswith('.py')
+        if py and not hide_path and name not in ('setup.py'):
             filelist.append(os.path.join(root, name))
 
 # if config not already loaded
@@ -55,7 +57,7 @@ if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 
 # add launcher which does not end with .py
-filelist.append('bin/' + configurationhandler.project_config['project'])
+# filelist.append('bin/' + configurationhandler.project_config['project'])
 
 # add helpfile sources
 filelist.extend(glob.glob('help/C/*.page'))

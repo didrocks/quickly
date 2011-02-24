@@ -7,7 +7,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
-from python_name_lib.Window import Window
+from python_name_lib import Window
 
 # See python_name_lib.Window.py for more details about how this class works
 class camel_case_nameWindow(Window):

@@ -5,25 +5,23 @@
 
 # This is your preferences dialog.
 #
-# Define preferences and their defaults in the 'defaults' map below.  These
-# definitions are used in the python_name_lib.preferences module to load
-# from and save in desktopcouch.  The preference names need to correspond to
-# a widget in the Preferencescamel_case_nameDialog.ui file.
+# Define your preferences dictionary in the __init__.main() function.
+# The widget names in the PreferencesTestProjectDialog.ui
+# file need to correspond to the keys in the preferences dictionary.
 #
 # Each preference also need to be defined in the 'widget_methods' map below
 # to show up in the dialog itself.  Provide three bits of information:
-#  1) The first entry is the method on the widget that grabs a string from the
+#  1) The first entry is the method on the widget that grabs a value from the
 #     widget.
-#  2) The second entry is the method on the widget that sets the widget from a
-#     string.
-#  3) The third entry is a signal the widget will send when the contents should
-#     be saved to desktopcouch.
+#  2) The second entry is the method on the widget that sets the widgets value
+#      from a stored preference.
+#  3) The third entry is a signal the widget will send when the contents have
+#     been changed by the user. The preferences dictionary is always up to
+# date and will signal the rest of the application about these changes.
+# The values will be saved to desktopcouch when the application closes.
 #
-# TODO: replace defaults and widget_methods with your own values
+# TODO: replace widget_methods with your own values
 
-defaults = {
-    'example_entry': 'I remember stuff',
-}
 
 widget_methods = {
     'example_entry': ['get_text', 'set_text', 'changed'],
@@ -42,5 +40,8 @@ class Preferencescamel_case_nameDialog(PreferencesDialog):
         """Set up the preferences dialog"""
         super(Preferencescamel_case_nameDialog, self).finish_initializing(builder)
 
+        # populate the dialog from the preferences dictionary
+        # using the methods from widget_methods
+        self.widget_methods = widget_methods
+        self.set_widgets_from_preferences()
         # Code for other initialization actions should be added here.
-
