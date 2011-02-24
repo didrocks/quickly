@@ -4,8 +4,10 @@
 ### END LICENSE
 
 """Helpers for an Ubuntu application."""
-
+import logging
+import optparse
 import os
+
 import gtk
 
 from python_name_lib.python_nameconfig import get_data_file
@@ -41,21 +43,38 @@ def get_media_file(media_file_name):
 
     return "file:///"+media_filename
 
+def set_up_logging(opts):
+    formatter = logging.Formatter("%(levelname)s:%(name)s: %(funcName)s() '%(message)s'")
+    logger = logging.getLogger('python_name')
+    logger_sh = logging.StreamHandler()
+    logger_sh.setFormatter(formatter)
+    logger.addHandler(logger_sh)
+
+    # FIXME: 
+    # calling desktopcouch.records.server.CouchDatabase()
+    # adds a basic handler to lib_logger only !!!!!
+    lib_logger = logging.getLogger('python_name_lib')
+    #~ lib_logger_sh = logging.StreamHandler()
+    #~ lib_logger_sh.setFormatter(formatter)
+    #~ lib_logger.addHandler(lib_logger_sh)
+    #print lib_logger.handlers
+
+    # Set the logging level to show debug messages.
+    if opts.verbose:
+        logger.setLevel(logging.DEBUG)
+        logger.debug('logging enabled')
+    if opts.verbose > 1:
+        lib_logger.setLevel(logging.DEBUG)
 
 def parse_options():
     """Support for command line options"""
-    import logging
-    import optparse
     parser = optparse.OptionParser(version="%prog %ver")
     parser.add_option(
-        "-v", "--verbose", action="store_true", dest="verbose",
-        help=_("Show debug messages"))
+        "-v", "--verbose", action="count", dest="verbose",
+        help=_("Show debug messages (-vv debugs python_name_lib also)"))
     (options, args) = parser.parse_args()
 
-    # Set the logging level to show debug messages.
-    if options.verbose:
-        logging.basicConfig(level=logging.DEBUG)
-        logging.debug('logging enabled')
+    set_up_logging(options)
 
 def get_help_uri(page=None):
     # help_uri from source tree - default language

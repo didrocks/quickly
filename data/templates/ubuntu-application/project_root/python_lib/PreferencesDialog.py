@@ -14,6 +14,7 @@ each widget calls set_preference(...) when it has adjusted value
 
 import gtk
 import logging
+logger = logging.getLogger('python_name_lib')
 
 from python_name_lib.helpers import get_builder, show_uri, get_help_uri
 from python_name_lib.preferences import preferences
@@ -63,20 +64,20 @@ class PreferencesDialog(gtk.Dialog):
         if widget is None:
             # this preference is not adjustable by this dialog
             # for example: window and dialog geometries
-            logging.debug('no widget for preference: %s' % key)
+            logger.debug('no widget for preference: %s' % key)
             return
 
-        logging.debug('set_widget_from_preference: %s' % key)
+        logger.debug('set_widget_from_preference: %s' % key)
         try:
             write_method_name = self.widget_methods[key][1]
         except KeyError:
-            logging.warn('%s not in widget_methods' % key)
+            logger.warn('%s not in widget_methods' % key)
             return
 
         try:
             method = getattr(widget, write_method_name)
         except AttributeError:
-            logging.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, write_method_name, __file__))
+            logger.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, write_method_name, __file__))
             return
 
         widget.connect(self.widget_methods[key][2], self.set_preference)
@@ -95,7 +96,7 @@ class PreferencesDialog(gtk.Dialog):
         '''set a preference from a widget'''
         key = self.get_key_for_widget(widget)
         if key is None:
-            logging.warn('''This widget will not write to a preference.
+            logger.warn('''This widget will not write to a preference.
 The preference must already exist so add this widget's name
 to defaults in preferences module''')
             return
@@ -107,11 +108,11 @@ to defaults in preferences module''')
         try:
             read_method = getattr(widget, read_method_name)
         except AttributeError:
-            logging.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, read_method_name, __file__))
+            logger.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, read_method_name, __file__))
             return
 
         value=read_method()
-        logging.debug('set_preference: %s = %s' % (key, str(value)))
+        logger.debug('set_preference: %s = %s' % (key, str(value)))
         preferences[key] = value
 
     def on_btn_close_clicked(self, widget, data=None):

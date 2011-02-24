@@ -7,6 +7,9 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
+import logging
+logger = logging.getLogger('python_name')
+
 from python_name_lib.AboutDialog import AboutDialog
 
 # See python_name_lib.AboutDialog.py for more details about how this class works.

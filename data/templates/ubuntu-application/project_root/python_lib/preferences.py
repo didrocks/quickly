@@ -10,7 +10,6 @@ from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 import gtk
 import gobject
-import logging
 from UserDict import IterableUserDict
 
 class User_dict(IterableUserDict):

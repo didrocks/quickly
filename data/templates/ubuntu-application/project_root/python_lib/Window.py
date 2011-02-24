@@ -5,6 +5,7 @@
 
 import gtk
 import logging
+logger = logging.getLogger('python_name_lib')
 
 from python_name import (
     Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
@@ -69,10 +70,10 @@ class Window(gtk.Window):
            use the present() method to move the already-open dialog
            where the user can see it."""
         if self.preferences_dialog is not None:
-            logging.debug('show existing preferences_dialog')
+            logger.debug('show existing preferences_dialog')
             self.preferences_dialog.present()
         else:
-            logging.debug('create new preferences_dialog')
+            logger.debug('create new preferences_dialog')
             self.preferences_dialog = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()
             self.preferences_dialog.connect('destroy', self.on_preferences_dialog_destroyed)
             self.preferences_dialog.show()
@@ -88,16 +89,16 @@ class Window(gtk.Window):
         gtk.main_quit()
 
     def on_preferences_changed(self, widget, data=None):
-        logging.debug('main window received preferences changed')
+        logger.debug('main window received preferences changed')
         for key in data:
-            logging.debug('preference changed: %s = %s' % (key, preferences[key]))
+            logger.debug('preference changed: %s = %s' % (key, preferences[key]))
 
     def on_preferences_dialog_destroyed(self, widget, data=None):
         '''only affects gui
         
         logically there is no difference between the user closing,
         minimising or ignoring the preferences dialog'''
-        logging.debug('on_preferences_dialog_destroyed')
+        logger.debug('on_preferences_dialog_destroyed')
         # to determine whether to create or present preferences_dialog
         self.preferences_dialog = None
 
