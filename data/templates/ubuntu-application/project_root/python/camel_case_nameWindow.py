@@ -11,6 +11,8 @@ import logging
 logger = logging.getLogger('python_name')
 
 from python_name_lib import Window
+from python_name.Aboutcamel_case_nameDialog import Aboutcamel_case_nameDialog
+from python_name.Preferencescamel_case_nameDialog import Preferencescamel_case_nameDialog
 
 # See python_name_lib.Window.py for more details about how this class works
 class camel_case_nameWindow(Window):
@@ -19,6 +21,9 @@ class camel_case_nameWindow(Window):
     def finish_initializing(self, builder):
         """Set up the main window"""
         super(camel_case_nameWindow, self).finish_initializing(builder)
+
+        self.AboutDialog = Aboutcamel_case_nameDialog
+        self.PreferencesDialog = Preferencescamel_case_nameDialog
 
         # Optional Launchpad integration
         # This shouldn't crash if not found as it is simply used for bug reporting.
