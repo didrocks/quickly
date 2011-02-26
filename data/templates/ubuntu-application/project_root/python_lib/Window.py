@@ -7,8 +7,6 @@ import gtk
 import logging
 logger = logging.getLogger('python_name_lib')
 
-from python_name import (
-    Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
 import python_name_lib.helpers as helpers
 from python_name_lib.preferences import preferences
 
@@ -48,16 +46,19 @@ class Window(gtk.Window):
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.ui = builder.get_ui(self, True)
-        self.preferences_dialog = None
+        self.PreferencesDialog = None # class
+        self.preferences_dialog = None # instance
+        self.AboutDialog = None # class
 
         preferences.connect('changed', self.on_preferences_changed)
+
 
     def on_mnu_contents_activate(self, widget, data=None):
         helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
 
     def on_mnu_about_activate(self, widget, data=None):
         """Display the about box for project_name."""
-        about = Aboutcamel_case_nameDialog.Aboutcamel_case_nameDialog()
+        about = self.AboutDialog()
         response = about.run()
         about.destroy()
 
@@ -74,7 +75,7 @@ class Window(gtk.Window):
             self.preferences_dialog.present()
         else:
             logger.debug('create new preferences_dialog')
-            self.preferences_dialog = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()
+            self.preferences_dialog = self.PreferencesDialog()
             self.preferences_dialog.connect('destroy', self.on_preferences_dialog_destroyed)
             self.preferences_dialog.show()
         # destroy command moved into dialog to allow for a help button

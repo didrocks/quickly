@@ -12,6 +12,9 @@ gettext.textdomain('project_name')
 import gtk
 
 from python_name import camel_case_nameWindow
+from python_name.Aboutcamel_case_nameDialog import Aboutcamel_case_nameDialog
+from python_name.Preferencescamel_case_nameDialog import Preferencescamel_case_nameDialog
+
 from python_name_lib import set_up_logging, preferences
 
 def parse_options():
@@ -41,6 +44,8 @@ def main():
 
     # Run the application.    
     window = camel_case_nameWindow.camel_case_nameWindow()
+    window.AboutDialog = Aboutcamel_case_nameDialog
+    window.PreferencesDialog = Preferencescamel_case_nameDialog
     window.show()
     gtk.main()
     

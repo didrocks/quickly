@@ -77,10 +77,17 @@ class PreferencesDialog(gtk.Dialog):
         try:
             method = getattr(widget, write_method_name)
         except AttributeError:
-            logger.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, write_method_name, __file__))
+            logger.warn("""'%s' does not have a '%s' method.
+Please edit 'widget_methods' in %s"""
+            % (key, write_method_name, self.__gtype_name__))
             return
 
-        widget.connect(self.widget_methods[key][2], self.set_preference)
+        try:
+            widget.connect(self.widget_methods[key][2], self.set_preference)
+        except TypeError:
+            logger.warn("""'%s' unknown signal name '%s'
+Please edit 'widget_methods' in %s"""
+            % (key, self.widget_methods[key][2], self.__gtype_name__))
 
         method(value)
 
@@ -98,7 +105,7 @@ class PreferencesDialog(gtk.Dialog):
         if key is None:
             logger.warn('''This widget will not write to a preference.
 The preference must already exist so add this widget's name
-to defaults in preferences module''')
+to default_preferences in your main function''')
             return
 
         # set_widget_from_preference is called first
@@ -108,7 +115,9 @@ to defaults in preferences module''')
         try:
             read_method = getattr(widget, read_method_name)
         except AttributeError:
-            logger.warn("'%s' does not have a '%s' method.\n Please edit 'widget_methods' in %s" % (key, read_method_name, __file__))
+            logger.warn("""'%s' does not have a '%s' method.
+Please edit 'widget_methods' in %s"""
+            % (key, read_method_name, self.__gtype_name__))
             return
 
         value=read_method()
