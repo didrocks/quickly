@@ -42,7 +42,16 @@ def get_media_file(media_file_name):
 
     return "file:///"+media_filename
 
+class NullHandler(logging.Handler):
+    def emit(self, record):
+        pass
+
 def set_up_logging(opts):
+    # add a handler to prevent basicConfig
+    root = logging.getLogger()
+    null_handler = NullHandler()
+    root.addHandler(null_handler)
+
     formatter = logging.Formatter("%(levelname)s:%(name)s: %(funcName)s() '%(message)s'")
 
     logger = logging.getLogger('python_name')
@@ -50,14 +59,10 @@ def set_up_logging(opts):
     logger_sh.setFormatter(formatter)
     logger.addHandler(logger_sh)
 
-    # FIXME: 
-    # calling desktopcouch.records.server.CouchDatabase()
-    # makes lib_logger seem like it has a basic handler !!!!!
     lib_logger = logging.getLogger('python_name_lib')
-    #~ lib_logger_sh = logging.StreamHandler()
-    #~ lib_logger_sh.setFormatter(formatter)
-    #~ lib_logger.addHandler(lib_logger_sh)
-    #~ print lib_logger.handlers
+    lib_logger_sh = logging.StreamHandler()
+    lib_logger_sh.setFormatter(formatter)
+    lib_logger.addHandler(lib_logger_sh)
 
     # Set the logging level to show debug messages.
     if opts.verbose:
