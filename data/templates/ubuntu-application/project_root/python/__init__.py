@@ -3,15 +3,29 @@
 # This file is in the public domain
 ### END LICENSE
 
+import optparse
+
+import gettext
+from gettext import gettext as _
+gettext.textdomain('project_name')
+
 import gtk
 
 from python_name import camel_case_nameWindow
-from python_name_lib import parse_options, preferences
+from python_name_lib import set_up_logging, preferences
+
+def parse_options():
+    """Support for command line options"""
+    parser = optparse.OptionParser(version="%prog %ver")
+    parser.add_option(
+        "-v", "--verbose", action="count", dest="verbose",
+        help=_("Show debug messages (-vv debugs python_name_lib also)"))
+    (options, args) = parser.parse_args()
+
+    set_up_logging(options)
 
 def main():
     'constructor for your class instances'
-    # Support for command line options.
-    # See python_name_lib.helpers.py to add more.
     parse_options()
 
     # preferences
