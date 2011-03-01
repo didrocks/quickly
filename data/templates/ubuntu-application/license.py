@@ -234,7 +234,7 @@ def licensing(license=None):
 
     # update license in config.py, setup.py and refresh COPYING if needed
     try:
-        config_file = '%s_quickly/%sconfig.py' % (python_name, python_name)
+        config_file = '%s_lib/%sconfig.py' % (python_name, python_name)
         if not os.path.exists(config_file):
             config_file = '%s/%sconfig.py' % (python_name, python_name) # old location
         for line in file(config_file, 'r'):

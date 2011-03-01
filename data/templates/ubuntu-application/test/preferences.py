@@ -7,10 +7,10 @@ sys.path.insert(0, proj_root)
 import logging
 logging.debug(sys.path[0])
 
-from python_quickly.preferences import User_dict, preferences
+from python_lib.preferences import User_dict, preferences
 
 # Clean up after ourselves
-os.remove(os.path.join(proj_root, 'python_quickly', 'preferences.pyc'))
+os.remove(os.path.join(proj_root, 'python_lib', 'preferences.pyc'))
 
 class TestUser_dict(unittest.TestCase):
 

@@ -10,11 +10,11 @@ import inspect
 proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..","project_root"))
 sys.path.insert(0, proj_root)
 
-from python_quickly import Builder
+from python_lib import Builder
 
 # Clean up after ourselves
-os.remove(os.path.join(proj_root, 'python_quickly', '__init__.pyc'))
-os.remove(os.path.join(proj_root, 'python_quickly', 'Builder.pyc'))
+os.remove(os.path.join(proj_root, 'python_lib', '__init__.pyc'))
+os.remove(os.path.join(proj_root, 'python_lib', 'Builder.pyc'))
 
 # alias belongs in helpers, but it cannot be imported
 def alias(alternative_function_name):
@@ -32,7 +32,7 @@ class TestAlias(unittest.TestCase):
     def test_alias_is_in_helpers(self):
         # instead of importing alias check we have an exact copy
         str_alias = inspect.getsource(alias)
-        fp = open(os.path.join(proj_root, 'python_quickly', 'helpers.py'), 'r')
+        fp = open(os.path.join(proj_root, 'python_lib', 'helpers.py'), 'r')
         str_helpers = fp.read()
         fp.close()
 
