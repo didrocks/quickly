@@ -45,9 +45,9 @@ bzr ls -R
 # test_project/__init__.py
 # test_project_lib/
 # test_project_lib/AboutDialog.py
+# test_project_lib/Builder.py
 # test_project_lib/PreferencesDialog.py
 # test_project_lib/Window.py
-# test_project_lib/Builder.py
 # test_project_lib/__init__.py
 # test_project_lib/helpers.py
 # test_project_lib/preferences.py
