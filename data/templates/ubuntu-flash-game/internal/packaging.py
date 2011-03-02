@@ -1,6 +1,5 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # Copyright 2009 Didier Roche
-# Copyright 2010 Tony Byrne
 #
 # This file is part of Quickly ubuntu-application template
 #
@@ -20,8 +19,7 @@ import datetime
 import re
 import subprocess
 import sys
-import os
-from launchpadlib.errors import HTTPError # pylint: disable=E0611
+from launchpadlib.errors import HTTPError
 
 
 from quickly import configurationhandler
@@ -118,8 +116,6 @@ def _filter_out(line, output_domain, err_output, warn_output):
             if not(re.match('  .*\.pot', line)
                    or re.match('  .*\.in', line)
                    or re.match(' dpkg-genchanges  >.*', line)
-                   # python-mkdebian warns on help files
-                   or re.match('  help/.*/.*', line)
                    # FIXME: this warning is temporary: should be withed in p-d-e
                    or re.match('.*XS-Python-Version and XB-Python-Version.*', line)):
                 warn_output.append(line)
@@ -158,77 +154,8 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
         return(_continue_if_errors(err_output, warn_output, proc.returncode,
                                      ask_on_warn_or_error))
 
-def update_metadata():
-    # See https://wiki.ubuntu.com/PostReleaseApps/Metadata for details
 
-    metadata = []
-    project_name = configurationhandler.project_config['project']
-
-    # Grab name and category from desktop file
-    with open('%s.desktop.in' % project_name, 'r') as f:
-        desktop = f.read()
-
-        match = re.search('\n_?Name=(.*)\n', desktop)
-        if match is not None:
-            metadata.append('XB-AppName: %s' % match.group(1))
-
-        match = re.search('\nCategories=(.*)\n', desktop)
-        if match is not None:
-            metadata.append('XB-Category: %s' % match.group(1))
-
-    # Grab distribution for screenshot URLs from debian/changelog
-    changelog = subprocess.Popen(['dpkg-parsechangelog'], stdout=subprocess.PIPE).communicate()[0]
-    match = re.search('\nDistribution: (.*)\n', changelog)
-    if match is not None:
-        distribution = match.group(1)
-        first_letter = project_name[0]
-        urlbase = 'https://software-center.ubuntu.com/screenshots/%s' % first_letter
-        metadata.append('XB-Screenshot-Url: %s/%s-%s.png' % (urlbase, project_name, distribution))
-        metadata.append('XB-Thumbnail-Url: %s/%s-%s.thumb.png' % (urlbase, project_name, distribution))
-
-    # Now ship the icon as part of the debian packaging
-    icon_name = 'data/media/%s.svg' % project_name
-    if not os.path.exists(icon_name):
-        # Support pre-11.03.1 icon names
-        icon_name = 'data/media/logo.svg'
-        if not os.path.exists(icon_name):
-            icon_name = None
-    if icon_name:
-        contents = ''
-        with open('debian/rules', 'r') as f:
-            contents = f.read()
-        if contents and re.search('dpkg-distaddfile %s.svg' % project_name, contents) is None:
-            contents += """
-common-install-indep::
-	cp %(icon_name)s ../%(project_name)s.svg
-	dpkg-distaddfile %(project_name)s.svg raw-meta-data -""" % {
-                'project_name': project_name, 'icon_name': icon_name}
-            templatetools.set_file_contents('debian/rules', contents)
-
-            metadata.append('XB-Icon: %s.svg' % project_name)
-
-    # Prepend the start-match line, because update_file_content replaces it
-    metadata.insert(0, 'XB-Python-Version: ${python:Versions}')
-    templatetools.update_file_content('debian/control',
-                                      'XB-Python-Version: ${python:Versions}',
-                                      'Depends: ${misc:Depends},',
-                                      '\n'.join(metadata) + '\n')
-
-def get_python_mkdebian_version():
-    proc = subprocess.Popen(["python-mkdebian", "--version"], stdout=subprocess.PIPE)
-    version = proc.communicate()[0]
-    return float(version)
-
-def get_forced_dependencies():
-    deps = []
-
-    # check for yelp usage
-    if subprocess.call(["grep", "-rq", "['\"]ghelp:", "."]) == 0:
-        deps.append("yelp")
-
-    return deps
-
-def updatepackaging(changelog=None, no_changelog=False, installopt=False):
+def updatepackaging(changelog=None, no_changelog=False):
     """create or update a package using python-mkdebian.
 
     Commit after the first packaging creation"""
@@ -236,26 +163,25 @@ def updatepackaging(changelog=None, no_changelog=False, installopt=False):
     if not changelog:
         changelog = []
     command = ['python-mkdebian', '--force-control']
-    if get_python_mkdebian_version() > 2.22:
-        command.append("--force-copyright")
-        command.append("--force-rules")
     if no_changelog:
         command.append("--no-changelog")
-    if installopt:
-       command.append("--prefix=/opt/extras.ubuntu.com/%s" % configurationhandler.project_config['project'])
     for message in changelog:
         command.extend(["--changelog", message])
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
-    dependencies = get_forced_dependencies()
     try:
-        dependencies.extend([elem.strip() for elem
-                             in configurationhandler.project_config['dependencies'].split(',')
-                             if elem])
+        dependencies = [elem.strip() for elem
+                        in configurationhandler.project_config['dependencies'].split(',')
+                        if elem]
     except KeyError:
-        pass
+        dependencies = []
+
+    # Hardcode the Flash plugin as a dependency, because it won't 
+    # get noticed by the autodetector.
+    dependencies += ["flashplugin-installer"]
     for dep in dependencies:
         command.extend(["--dependency", dep])
+
     try:
         distribution = configurationhandler.project_config['target_distribution']
         command.extend(["--distribution", distribution])
@@ -267,9 +193,6 @@ def updatepackaging(changelog=None, no_changelog=False, installopt=False):
     if return_code != 0:
         print _("An error has occurred when creating debian packaging")
         return(return_code)
-
-    if installopt:
-        update_metadata()
 
     print _("Ubuntu packaging created in debian/")
 
@@ -340,7 +263,7 @@ def get_ppa_parameters(launchpad, full_ppa_name):
                     ppa_user = team[0]
                 else:
                     raise not_ppa_owner(ppa_user_name)
-        except (KeyError, HTTPError): # launchpadlib may give 404 instead
+        except KeyError:
             raise user_team_not_found(ppa_user_name)
     else:
         ppa_user = launchpad.me
@@ -414,7 +337,7 @@ def updateversion(proposed_version=None, sharing=False):
     '''Update versioning with year.month, handling intermediate release'''
 
     if proposed_version:
-        # check manual versioning is correct
+        # check manual versionning is correct
         try:
             for number in proposed_version.split('.'):
                 float(number)

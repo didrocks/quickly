@@ -9,6 +9,7 @@ import os
 import gtk
 
 from python_name.python_nameconfig import get_data_file
+from python_name.Builder import Builder
 
 import gettext
 from gettext import gettext as _
@@ -26,7 +27,7 @@ def get_builder(builder_file_name):
     if not os.path.exists(ui_filename):
         ui_filename = None
 
-    builder = gtk.Builder()
+    builder = Builder()
     builder.set_translation_domain('project_name')
     builder.add_from_file(ui_filename)
     return builder
@@ -74,3 +75,13 @@ def get_help_uri(page=None):
 def show_uri(parent, link):
     screen = parent.get_screen()
     gtk.show_uri(screen, link, gtk.get_current_event_time())
+
+def alias(alternative_function_name):
+    '''see http://www.drdobbs.com/web-development/184406073#l9'''
+    def decorator(function):
+        '''attach alternative_function_name(s) to function'''
+        if not hasattr(function, 'aliases'):
+            function.aliases = []
+        function.aliases.append(alternative_function_name)
+        return function
+    return decorator

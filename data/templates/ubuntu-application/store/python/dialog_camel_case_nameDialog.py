@@ -5,7 +5,9 @@
 
 import gtk
 
-from python_name import BuilderGlue
+#TODO remove
+#from python_name import Builder
+
 from python_name.helpers import get_builder
 
 import gettext
@@ -36,16 +38,16 @@ class dialog_camel_case_nameDialog(gtk.Dialog):
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
-        self.ui = BuilderGlue.BuilderGlue(builder, self)
+        self.ui = builder.get_ui(self)
 
-    def ok(self, widget, data=None):
+    def on_btn_ok_clicked(self, widget, data=None):
         """The user has elected to save the changes.
 
         Called before the dialog returns gtk.RESONSE_OK from run().
         """
         pass
 
-    def cancel(self, widget, data=None):
+    def on_btn_cancel_clicked(self, widget, data=None):
         """The user has elected cancel changes.
 
         Called before the dialog returns gtk.RESPONSE_CANCEL for run()

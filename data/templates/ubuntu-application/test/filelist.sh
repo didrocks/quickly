@@ -21,9 +21,7 @@ bzr ls -R
 # data/
 # data/media/
 # data/media/background.png
-# data/media/icon.png
-# data/media/logo.png
-# data/media/logo.svg
+# data/media/test-project.svg
 # data/ui/
 # data/ui/AboutTestProjectDialog.ui
 # data/ui/PreferencesTestProjectDialog.ui
@@ -43,7 +41,7 @@ bzr ls -R
 # test_project/
 # test_project/AboutTestProjectDialog.py
 # test_project/BaseTestProjectWindow.py
-# test_project/BuilderGlue.py
+# test_project/Builder.py
 # test_project/PreferencesTestProjectDialog.py
 # test_project/__init__.py
 # test_project/helpers.py

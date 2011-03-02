@@ -26,12 +26,12 @@ gettext.textdomain('quickly')
 from internal import quicklyutils, packaging
 from quickly import templatetools, configurationhandler
 
-options = ["--extras",]
 
-def usage():
-    templatetools.print_usage('quickly package [--extras]')
 def help():
-    print _("""Creates a debian file (deb) from your project. Before running
+    print _("""Usage:
+$quickly package
+
+Creates a debian file (deb) from your project. Before running
 the package command you can edit the Icon and Category entry of *.desktop.in 
 file, where * is the name of your project.
 
@@ -40,33 +40,8 @@ or quickly change-lp-project you may miss the name, email in
 setup.py. You can edit them if you don't want to use any of these
 commands afterwards. Those changes are not a mandatory at all for
 testing purpose.
-
-Passing --extras will create a package similar to one created by
-the submitubuntu command.  It will install files into /opt.""")
-def shell_completion(argv):
-    ''' Complete --args '''
-    # option completion
-    rv = []
-    if argv[-1].startswith("-"):
-        rv = options
-    if rv:
-        rv.sort()
-        print ' '.join(rv)
-
-templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usage=usage)
-
-for_extras = False
-i = 0
-
-while i < len(sys.argv):
-    arg = sys.argv[i]
-    if arg.startswith('-'):
-        if arg == '--extras':
-            for_extras = True
-        else:
-            cmd = commands.get_command('package', 'ubuntu-application')
-            templatetools.usage_error(_("Unknown option: %s."  % arg), cmd=cmd)
-    i += 1
+""")
+templatetools.handle_additional_parameters(sys.argv, help)
 
 # retrieve useful information
 if not configurationhandler.project_config:
@@ -80,10 +55,9 @@ except quicklyutils.cant_deal_with_setup_value:
 
 
 # creation/update debian packaging
-if packaging.updatepackaging(no_changelog=True, installopt=for_extras) != 0:
+if packaging.updatepackaging(no_changelog=True) != 0:
     print _("ERROR: can't create or update ubuntu package")
     sys.exit(1)
-
 
 # creating local binary package
 return_code = packaging.filter_exec_command(["dpkg-buildpackage", "-tc",

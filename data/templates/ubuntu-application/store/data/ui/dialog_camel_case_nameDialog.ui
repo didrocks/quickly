@@ -5,7 +5,7 @@
   <!-- interface-naming-policy project-wide -->
   <object class="dialog_camel_case_nameDialog" id="dialog_python_name_dialog">
     <property name="border_width">5</property>
-    <property name="icon">../media/icon.png</property>
+    <property name="icon">../media/project_name.svg</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
@@ -21,13 +21,12 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button2">
+              <object class="GtkButton" id="btn_cancel">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="cancel"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -36,13 +35,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="btn_ok">
                 <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="ok"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -60,8 +58,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-6">button2</action-widget>
-      <action-widget response="-5">button1</action-widget>
+      <action-widget response="-6">btn_cancel</action-widget>
+      <action-widget response="-5">btn_ok</action-widget>
     </action-widgets>
   </object>
 </interface>

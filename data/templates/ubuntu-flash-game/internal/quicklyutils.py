@@ -19,7 +19,6 @@ import os
 import re
 import sys
 import subprocess
-import tempfile
 from xml.etree import ElementTree as etree
 
 import gettext
@@ -64,29 +63,10 @@ def file_from_template(template_dir, template_file, target_dir, substitutions=[]
         print _("Failed to add file to project\n cannot add: %s - this file already exists." % target_path)
         sys.exit(4)        
 
-    templatetools.set_file_contents(target_path, file_contents)
-    fin.close()
-
-def update_file(target_file, substitutions=[], rename = True):
-
-    if not os.path.isfile(target_file):
-        return
-    target_dir = os.path.dirname(target_file)
-    target_basename = os.path.basename(target_file)
-    if rename:
-        for s in substitutions:
-            pattern, sub = s
-            target_basename = target_basename.replace(pattern,sub)
-
-    target_file = os.path.join(target_dir, target_basename)
-
-    fin = open(target_file, 'r')
-    file_contents = fin.read()
-    for s in substitutions:
-        pattern, sub = s
-        file_contents = file_contents.replace(pattern,sub)
-
-    templatetools.set_file_contents(target_file, file_contents)
+    fout = open(target_path, 'w')
+    fout.write(file_contents)
+    fout.flush()
+    fout.close()
     fin.close()
 
 def get_setup_value(key):
@@ -213,7 +193,7 @@ def collect_commit_messages(previous_version):
     buffered_message = ""
     collect_switch = False
     uncollect_msg = (_('quickly saved'), _('commit before release'))
-    for line in result.splitlines(): # pylint: disable=E1103
+    for line in result.splitlines():
         #print buffered_message
         if line == 'message:':
             collect_switch = True
@@ -233,39 +213,14 @@ def collect_commit_messages(previous_version):
 def get_quickly_editors():
     '''Return prefered editor for ubuntu-application template'''
 
-    default_editor = os.environ.get("QUICKLY_EDITOR")
-    if not default_editor:
-        default_editor = os.environ.get("EDITOR")
+    editor = "gedit"
+    default_editor = os.environ.get("EDITOR")
     if not default_editor:
         default_editor = os.environ.get("SELECTED_EDITOR")
     if default_editor:
-        editor = default_editor
-    elif templatetools.is_X_display():
-        editor = "gedit"
-    else:
-        editor = "nano"
+       editor = default_editor
     return editor
 
-def read_input(start=''):
-    depfile_name = tempfile.mkstemp()[1]
-    open(depfile_name,'w').write(start)
-
-    # Run the editor with a new tmpdir.  This is because gedit uses tmpdir
-    # to find other instances of gedit, and we don't want that.  If we allowed
-    # that, gedit would return immediately and open a new tab in the other
-    # gedit.  This makes it difficult to tell when user is done editing (how
-    # to detect that vs nano opening and closing without the user saving it?).
-    editor = get_quickly_editors()
-    subenv = dict(os.environ)
-    subenv['TMPDIR'] = tempfile.mkdtemp()
-    subprocess.call([editor, depfile_name], stdout=subprocess.PIPE, env=subenv)
-    os.rmdir(subenv['TMPDIR'])
-
-    # Grab file contents
-    rv = file(depfile_name, 'r').read().strip()
-    os.remove(depfile_name)
-
-    return rv
 
 def take_email_from_string(value):
     '''Try to take an email from a string'''
@@ -310,7 +265,7 @@ def get_all_emails(launchpad=None):
     result, err = gpg_instance.communicate()    
     if gpg_instance.returncode != 0:
         raise gpg_error(err)
-    for line in result.splitlines(): # pylint: disable=E1103
+    for line in result.splitlines():
         if 'sec' in line or 'uid' in line:
             email_list.append(take_email_from_string(line.split(':')[9]))
 
@@ -349,7 +304,7 @@ Expire-Date: 0
     if gpg_instance.returncode != 0:
         raise gpg_error(err)
     secret_key_id = None
-    for line in result.splitlines(): # pylint: disable=E1103
+    for line in result.splitlines():
         if 'sec' in line:
             secret_key_id = line.split(':')[4][-8:]
     if not secret_key_id:
@@ -379,7 +334,7 @@ def get_right_gpg_key_id(launchpad):
     if gpg_instance.returncode != 0:
         raise gpg_error(err)
     candidate_key_ids = {}
-    for line in result.splitlines(): # pylint: disable=E1103
+    for line in result.splitlines():
         if 'sec' in line:
             secret_key_id = line.split(':')[4][-8:]
             if verbose:

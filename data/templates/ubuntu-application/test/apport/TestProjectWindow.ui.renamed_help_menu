@@ -6,7 +6,7 @@
   <!-- interface-local-resource-path ../media -->
   <object class="TestProjectWindow" id="test_project_window">
     <property name="title" translatable="yes">Test Project</property>
-    <property name="icon">../media/icon.png</property>
+    <property name="icon">../media/test-project.svg</property>
     <signal name="destroy" handler="on_destroy"/>
     <child>
       <object class="GtkVBox" id="vbox1">

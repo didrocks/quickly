@@ -1,3 +1,16 @@
+Quickly 11.03.1
+------------------------------------
+
+ + ubuntu-application-template:
+   - Use one scalable application icon, instead of 3 differently sized ones
+ + ubuntu-application-template and derivatives:
+   - Support writing metadata required by the Application Review Board when
+     packaging (can enable with 'submitubuntu' or 'package --extras')
+   - Add yelp to dependencies if your application uses ghelp: URLs
+   - Some minor cleanups
+ + ubuntu-flash-game-template:
+   - First release of a flash game template by Stuart Langridge
+
 Quickly 11.03
 ------------------------------------
 
@@ -6,7 +19,9 @@ Quickly 11.03
      LP: #661699
    - refresh the branding to the new ubuntu brand (Daniel Fore) (LP: #666557)
    - Support self.ui.label1 syntax
-   - Support auto-connection of signal handlers named widget_signal_event()
+   - If glade defined handler is missing connect to default_handler.
+   - Support auto-connection of signal handlers named on_widget_signal()
+   - Support auto-connection of several widgets to a handler.
    - support submitubuntu command to install applications in /opt (LP: #625581)
  + ubuntu-application-template and derivatives:
    - Fix apport code to not fail when lp-project name changes

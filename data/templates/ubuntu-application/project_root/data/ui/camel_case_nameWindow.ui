@@ -6,7 +6,7 @@
   <!-- interface-local-resource-path ../media -->
   <object class="camel_case_nameWindow" id="python_name_window">
     <property name="title" translatable="yes">sentence_name</property>
-    <property name="icon">../media/icon.png</property>
+    <property name="icon">../media/project_name.svg</property>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
@@ -65,7 +65,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem" id="quitMenuItem">
+                      <object class="GtkImageMenuItem" id="mnu_quit">
                         <property name="label">gtk-quit</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
@@ -127,7 +127,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem" id="preferencesMenuItem">
+                      <object class="GtkImageMenuItem" id="mnu_preferences">
                         <property name="label">gtk-preferences</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
@@ -154,7 +154,7 @@
                   <object class="GtkMenu" id="helpMenu">
                     <property name="visible">True</property>
                     <child>
-                      <object class="GtkImageMenuItem" id="contentsMenuItem">
+                      <object class="GtkImageMenuItem" id="mnu_contents">
                         <property name="label" translatable="yes">Contents</property>
                         <property name="visible">True</property>
                         <property name="image">image2</property>
@@ -163,7 +163,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem" id="aboutMenuItem">
+                      <object class="GtkImageMenuItem" id="mnu_about">
                         <property name="label">gtk-about</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>

@@ -22,7 +22,7 @@ class Indicator:
         self.indicator.set_status(appindicator.STATUS_ACTIVE)
     
         #Can use self.icon once appindicator python api supports custom icons.
-        #icon = get_media_file("logo.png")
+        #icon = get_media_file("project_name.svg")
         #self.indicator.set_icon(icon)
  
         #Uncomment and choose an icon for attention state. 

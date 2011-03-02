@@ -6,11 +6,15 @@ if [ ! -e $(pwd)/bin ]; then
     exit 1
 fi
 
+rv=0
+
 run_tests() {
     testdir=$1
     category=$2
     for test in "$testdir"/*; do
-        test/one-test.sh "$test" "$category"
+        if ! test/one-test.sh "$test" "$category"; then
+            rv=2
+        fi
     done
 }
 
@@ -21,3 +25,5 @@ for template in data/templates/*; do
         run_tests "$template/test" $(basename "$template")
     fi
 done
+
+exit $rv
