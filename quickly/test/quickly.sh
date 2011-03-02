@@ -35,7 +35,7 @@ cat /tmp/quickly-test/quickly-templates/test-template/commandsconfig
 # COMMANDS_EXPOSED_IN_BAR = create;design;edit;package;release;save;share;tutorial
 # 
 # [ubuntu-application]
-# IMPORT=add;configure;create;debug;design;edit;license;package;release;run;save;share;submitubuntu;tutorial;upgrade
+# IMPORT=add;configure;create;debug;design;edit;license;package;release;run;save;share;submitubuntu;test;tutorial;upgrade
 
 diff -qr data/templates/ubuntu-application/available_licenses /tmp/quickly-test/quickly-templates/test-template/available_licenses
 

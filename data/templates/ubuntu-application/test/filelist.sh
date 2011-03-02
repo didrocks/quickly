@@ -47,3 +47,6 @@ bzr ls -R
 # test_project/helpers.py
 # test_project/preferences.py
 # test_project/test_projectconfig.py
+# tests/
+# tests/test_example.py
+# tests/test_lint.py

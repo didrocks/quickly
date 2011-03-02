@@ -81,10 +81,10 @@ quickly shell-completion quickly help commands foo
 # 
 
 quickly shell-completion quickly -t ubuntu-application help foo
-# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu tutorial upgrade
+# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade
 
 quickly shell-completion quickly help ubuntu-application foo
-# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu tutorial upgrade
+# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade
 
 quickly shell-completion quickly help ubuntu-application add foo
 # 
@@ -127,7 +127,7 @@ HOME=/ quickly shell-completion quickly -t foo
 # ubuntu-application ubuntu-cli ubuntu-flash-game ubuntu-pygame
 
 quickly shell-completion quickly foo
-# add commands configure debug design edit getstarted help license package quickly release run save share submitubuntu tutorial upgrade
+# add commands configure debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade
 
 quickly shell-completion quickly -t ubuntu-pygame foo
 # commands configure debug edit getstarted help license package quickly release run save share tutorial
@@ -177,16 +177,16 @@ quickly shell-completion quickly getstarted foo
 # 
 
 HOME=/ quickly shell-completion quickly help foo
-# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu tutorial upgrade
+# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade
 
 quickly shell-completion quickly help commands foo
 # 
 
 quickly shell-completion quickly -t ubuntu-application help foo
-# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu tutorial upgrade
+# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade
 
 quickly shell-completion quickly help ubuntu-application foo
-# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu tutorial upgrade
+# add commands configure create debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade
 
 quickly shell-completion quickly help ubuntu-application add foo
 # 
