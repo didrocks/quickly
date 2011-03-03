@@ -24,7 +24,7 @@ from gettext import gettext as _
 gettext.textdomain('quickly')
 
 from internal import quicklyutils, packaging
-from quickly import templatetools, configurationhandler
+from quickly import templatetools, configurationhandler, commands
 
 options = ["--extras",]
 
