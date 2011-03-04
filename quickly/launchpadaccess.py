@@ -81,7 +81,7 @@ def initialize_lpi(interactive = True):
     # load stored LP credentials
     if interactive:
         print _("Get Launchpad Settings")
-    launchpad = Launchpad.login_with(application_name=_('Quickly'),
+    launchpad = Launchpad.login_with(_('Quickly'),
                                      service_root=SERVICE_ROOT,
                                      allow_access_levels=["WRITE_PRIVATE"])
 
