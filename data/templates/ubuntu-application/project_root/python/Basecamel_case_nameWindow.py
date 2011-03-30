@@ -62,7 +62,7 @@ class Basecamel_case_nameWindow(gtk.Window):
             import LaunchpadIntegration
             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, False, True)
             LaunchpadIntegration.set_sourcepackagename('project_name')
-        except:
+        except ImportError:
             pass
 
         # Optional application indicator support
@@ -75,7 +75,7 @@ class Basecamel_case_nameWindow(gtk.Window):
             # self is passed so methods of this class can be called from indicator.py
             # Comment this next line out to disable appindicator
             self.indicator = indicator.new_application_indicator(self)
-        except:
+        except ImportError:
             pass
 
     def on_mnu_contents_activate(self, widget, data=None):

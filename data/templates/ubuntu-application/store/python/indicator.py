@@ -36,12 +36,12 @@ class Indicator:
         #Adding preferences button 
         #window represents the main Window object of your app
         self.preferences = gtk.MenuItem("Preferences")
-        self.preferences.connect("activate",window.preferences)
+        self.preferences.connect("activate",window.on_mnu_preferences_activate)
         self.preferences.show()
         self.menu.append(self.preferences)
 
         self.quit = gtk.MenuItem("Quit")
-        self.quit.connect("activate",window.quit)
+        self.quit.connect("activate",window.on_mnu_quit_activate)
         self.quit.show()
         self.menu.append(self.quit)
 
