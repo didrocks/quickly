@@ -16,21 +16,18 @@ except ImportError:
     sys.exit(1)
 assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >= 2.18'
 
-def update_data_path(prefix, oldvalue=None):
+def update_config(values = {}):
 
+    oldvalues = {}
     try:
         fin = file('python_name/python_nameconfig.py', 'r')
         fout = file(fin.name + '.new', 'w')
 
-        for line in fin:            
+        for line in fin:
             fields = line.split(' = ') # Separate variable from value
-            if fields[0] == '__python_name_data_directory__':
-                # update to prefix, store oldvalue
-                if not oldvalue:
-                    oldvalue = fields[1]
-                    line = "%s = '%s'\n" % (fields[0], prefix)
-                else: # restore oldvalue
-                    line = "%s = %s" % (fields[0], oldvalue)
+            if fields[0] in values:
+                oldvalues[fields[0]] = fields[1].strip()
+                line = "%s = %s\n" % (fields[0], values[fields[0]])
             fout.write(line)
 
         fout.flush()
@@ -40,14 +37,17 @@ def update_data_path(prefix, oldvalue=None):
     except (OSError, IOError), e:
         print ("ERROR: Can't find python_name/python_nameconfig.py")
         sys.exit(1)
-    return oldvalue
+    return oldvalues
 
 
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
-        previous_value = update_data_path(self.prefix + '/share/project_name/')
+        values = {'__python_name_data_directory__': self.prefix + '/share/project_name/',
+                  '__version__': self.distribution.get_version()}
+        previous_values = update_config(values)
+        update_version(self.version)
         DistUtilsExtra.auto.install_auto.run(self)
-        update_data_path(self.prefix, previous_value)
+        update_config(previous_values)
 
 
         

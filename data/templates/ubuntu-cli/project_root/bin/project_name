@@ -32,10 +32,10 @@ LEVELS = (  logging.ERROR,
 
 if __name__ == "__main__":
 
-    version = python_nameconfig.__python_name_data_directory__
+    version = python_nameconfig.__version__
     # Support for command line options.
     usage = _("project_name [options]")
-    parser = optparse.OptionParser(version="project_name %s" % version, usage=usage)
+    parser = optparse.OptionParser(version="%%prog %s" % version, usage=usage)
     parser.add_option('-d', '--debug', dest='debug_mode', action='store_true',
         help=_('Print the maximum debugging info (implies -vv)'))
     parser.add_option('-v', '--verbose', dest='logging_level', action='count',

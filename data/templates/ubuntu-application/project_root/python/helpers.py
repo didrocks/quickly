@@ -8,7 +8,7 @@
 import os
 import gtk
 
-from python_name.python_nameconfig import get_data_file
+from python_name.python_nameconfig import get_data_file, __version__
 from python_name.Builder import Builder
 
 import gettext
@@ -46,7 +46,7 @@ def parse_options():
     """Support for command line options"""
     import logging
     import optparse
-    parser = optparse.OptionParser(version="%prog %ver")
+    parser = optparse.OptionParser(version="%%prog %s" % __version__)
     parser.add_option(
         "-v", "--verbose", action="store_true", dest="verbose",
         help=_("Show debug messages"))
