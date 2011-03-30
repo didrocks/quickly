@@ -283,6 +283,7 @@ To change the behavior and edit the python code, run 'quickly edit', which will 
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="pack_type">end</property>
             <property name="position">3</property>
           </packing>
         </child>
