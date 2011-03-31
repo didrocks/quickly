@@ -33,24 +33,18 @@ except ImportError:
 
 assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >= 2.18'
 
-def update_data_path(prefix, oldvalue=None):
+def update_config(values = {}):
 
+    oldvalues = {}
     try:
         fin = file('quickly/quicklyconfig.py', 'r')
         fout = file(fin.name + '.new', 'w')
 
-        for line in fin:            
+        for line in fin:
             fields = line.split(' = ') # Separate variable from value
-            if fields[0] == '__quickly_data_directory__':
-                # update to prefix, store oldvalue
-                if not oldvalue:
-                    oldvalue = fields[1]
-                    line = "%s = '%s'\n" % (fields[0], prefix)
-                else: # restore oldvalue
-                    line = "%s = %s" % (fields[0], oldvalue)
-            # update version if we forget it
-            elif fields[0] == '__version__':
-                line = "%s = '%s'\n" % (fields[0], VERSION)
+            if fields[0] in values:
+                oldvalues[fields[0]] = fields[1].strip()
+                line = "%s = %s\n" % (fields[0], values[fields[0]])
             fout.write(line)
 
         fout.flush()
@@ -60,7 +54,7 @@ def update_data_path(prefix, oldvalue=None):
     except (OSError, IOError), e:
         print ("ERROR: Can't find quickly/quicklyconfig.py")
         sys.exit(1)
-    return oldvalue
+    return oldvalues
 
 def update_tutorial(tutorial_layouts):
 
@@ -82,13 +76,15 @@ def update_tutorial(tutorial_layouts):
 
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
-        previous_value = update_data_path(self.prefix + '/share/quickly/')
+        values = {'__quickly_data_directory__': "'%s'" % (self.prefix + '/share/quickly/'),
+                  '__version__': "'%s'" % self.distribution.get_version()}
+        previous_values = update_config(values)
         update_tutorial([("data/templates/ubuntu-application/help",
                            'tutorial'),
                          ("data/templates/ubuntu-pygame/help",
                            'tutorial')])
         DistUtilsExtra.auto.install_auto.run(self)
-        update_data_path(self.prefix, previous_value)
+        update_config(previous_values)
 
 
 DistUtilsExtra.auto.setup(name='quickly',

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-29 14:44-0500\n"
+"POT-Creation-Date: 2011-03-31 08:11-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1026,12 +1026,12 @@ msgid "Personalize your Application Icon"
 msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:762(para)
-msgid "<placeholder-1/> When users install your application, Ubuntu will display an icon next to it in the menus. You can create your own icon or edit the file called \"icon.png\" in the media directory (jotty/data/media). Ubuntu comes with a great image editing program called \"Gimp.\" So you can go:"
+msgid "<placeholder-1/> When users install your application, Ubuntu will display an icon next to it in the menus. You can create your own icon or edit the file called \"jotty.svg\" in the media directory (jotty/data/media). Ubuntu comes with a great image editing program called \"Inkscape.\" So you can go:"
 msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:764(programlisting)
 #, no-wrap
-msgid "\ngimp data/media/icon.png\n"
+msgid "\ninkscape data/media/jotty.svg\n"
 msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:770(para)

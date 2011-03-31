@@ -72,3 +72,17 @@ quickly package | sed 's/^\.\+//'
 # Ubuntu package has been successfully created in ../test-project_0.1_all.deb
 
 grep UNKNOWN debian/*
+
+## Now we want to verify that we set project variables correctly
+
+mkdir unpacked
+
+cd unpacked
+
+ar p ../../test-project_0.1_all.deb data.tar.gz | tar xz
+
+grep -Rh "__version__ = " .
+# __version__ = '0.1'
+
+grep -Rh "__test_project_data_directory__ = " .
+# __test_project_data_directory__ = '/usr/share/test-project/'

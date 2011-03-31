@@ -24,6 +24,6 @@ __version__ = '11.03.1'
 
 # where quickly will head for quickly data (for instance, templates)
 # by default, this is ../data, relative to trunk layout
-__quickly_data_directory__ = '../data/'
+__quickly_data_directory__ = '/usr/share/quickly/'
 
 

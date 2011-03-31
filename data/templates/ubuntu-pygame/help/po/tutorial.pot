@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-04-14 18:57+0200\n"
+"POT-Creation-Date: 2011-03-31 08:11-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -542,7 +542,7 @@ msgid "More special enemies, for example you could use the HomingMissle class to
 msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:532(listitem)
-msgid "There is no high scores list. You could use desktopcouch to store high scores and use the code in view_tick to see how to present the scores."
+msgid "The high score list is stored in desktopcouch, so it will sync with your other computers. But it will have to be adjusted to the size we set for the window, and perhaps you can also let the player choose the name that's stored."
 msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:515(para)
