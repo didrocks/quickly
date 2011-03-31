@@ -1,6 +1,7 @@
 import unittest
 import os
 import sys
+import glob
 
 proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","project_root"))
 sys.path.insert(0, proj_root)
@@ -10,7 +11,8 @@ logging.debug(sys.path[0])
 from python_lib.preferences import User_dict, preferences
 
 # Clean up after ourselves
-os.remove(os.path.join(proj_root, 'python_lib', 'preferences.pyc'))
+for f in glob.glob(os.path.join(proj_root, 'python_lib', '*.pyc')):
+    os.remove(f)
 
 class TestUser_dict(unittest.TestCase):
 
