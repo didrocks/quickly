@@ -60,7 +60,7 @@ class Basecamel_case_nameWindow(gtk.Window):
         # for more information about Launchpad integration.
         try:
             import LaunchpadIntegration
-            LaunchpadIntegration.add_items(self.ui.helpMenu, 1, False, True)
+            LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
             LaunchpadIntegration.set_sourcepackagename('project_name')
         except ImportError:
             pass
