@@ -60,7 +60,7 @@ class Window(gtk.Window):
             import LaunchpadIntegration
             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, False, True)
             LaunchpadIntegration.set_sourcepackagename('project_name')
-        except:
+        except ImportError:
             pass
 
         # Optional application indicator support
@@ -68,16 +68,13 @@ class Window(gtk.Window):
         # More information:
         #  http://owaislone.org/quickly-add-indicator/
         #  https://wiki.ubuntu.com/DesktopExperienceTeam/ApplicationIndicators
-        indicator = None
         try:
             from python_name import indicator
-        except ImportError:
-            pass
-        if indicator is not None:
             # self is passed so methods of this class can be called from indicator.py
             # Comment this next line out to disable appindicator
             self.indicator = indicator.new_application_indicator(self)
-
+        except ImportError:
+            pass
 
     def on_mnu_contents_activate(self, widget, data=None):
         helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())

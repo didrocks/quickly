@@ -52,3 +52,6 @@ bzr ls -R
 # test_project_lib/helpers.py
 # test_project_lib/preferences.py
 # test_project_lib/test_projectconfig.py
+# tests/
+# tests/test_example.py
+# tests/test_lint.py

@@ -78,7 +78,8 @@ Depends: ${misc:Depends},
          python-distutils-extra (>= 2.21),
          python-pygame,
          winpdb,
-         yelp
+         yelp,
+         python-nose
 Recommends: seahorse-plugins
 Suggests: python-quickly-widgets
 Description: quickly ubuntu application template

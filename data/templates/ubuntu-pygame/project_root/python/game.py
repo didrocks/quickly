@@ -26,6 +26,7 @@ class Game():
         self.free_guy_at = 10
         self.free_guy_sound = pygame.mixer.Sound(python_nameconfig.free_guy_sound)
         self.paused = False
+        self.playing = False
 
     def add_free_guy(self):
         """add_free_guy - increments the game's lives by 1 and plays a sound.
@@ -52,6 +53,7 @@ class Game():
 
     def reset(self):
         """reset - reset or start the game"""
+        self.playing = True
         self.level = 0
         self.lives = 5
         self.score = 0

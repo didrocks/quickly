@@ -1,7 +1,8 @@
+#!/usr/bin/python
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-# Copyright 2009 Didier Roche
+# Copyright 2011 Tony Byrne
 #
-# This file is part of Quickly
+# This file is part of Quickly ubuntu-application template
 #
 #This program is free software: you can redistribute it and/or modify it 
 #under the terms of the GNU General Public License version 3, as published 
@@ -15,15 +16,26 @@
 #You should have received a copy of the GNU General Public License along 
 #with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# THIS IS QUICKLY CONFIGURATION FILE
-# Do not touch until you know what you're doing.
-# you're warned :)
 
-# quickly version used for project format compatibility
-__version__ = '11.03.1'
+import sys
+import subprocess
 
-# where quickly will head for quickly data (for instance, templates)
-# by default, this is ../data, relative to trunk layout
-__quickly_data_directory__ = '/usr/share/quickly/'
+import gettext
+from gettext import gettext as _
+gettext.textdomain('quickly')
 
+from quickly import templatetools
+
+def usage():
+    templatetools.print_usage('quickly test')
+def help():
+    print _("""This command tests your project using the contents of the tests directory""")
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
+
+#search and find all tests
+command = ["nosetests"]
+command.extend(sys.argv[1:])
+return_code = subprocess.call(command)
+
+sys.exit(return_code)
 

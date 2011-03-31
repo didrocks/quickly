@@ -13,11 +13,11 @@ import gtk
 
 from python_name import camel_case_nameWindow
 
-from python_name_lib import set_up_logging, preferences
+from python_name_lib import set_up_logging, preferences, get_version
 
 def parse_options():
     """Support for command line options"""
-    parser = optparse.OptionParser(version="%prog %ver")
+    parser = optparse.OptionParser(version="%%prog %s" % get_version())
     parser.add_option(
         "-v", "--verbose", action="count", dest="verbose",
         help=_("Show debug messages (-vv debugs python_name_lib also)"))

@@ -18,6 +18,7 @@ __all__ = [
 # files). By default, this is ../data, relative your trunk layout
 __python_name_data_directory__ = '../data/'
 __license__ = ''
+__version__ = 'VERSION'
 
 import os
 
@@ -56,3 +57,7 @@ def get_data_path():
         raise project_path_not_found
 
     return abs_data_path
+
+
+def get_version():
+    return __version__

@@ -526,7 +526,7 @@ But there is still a lot to do to have a propper game. For example:
 <listitem>The default explosions are crayon drawings, they don't fit in much with the look of the game. Perhaps some new images for the explosion stages would be good.</listitem>
 <listitem>There are no power ups! You could create power up classes the derive from BaseSprite to give the guy extra powers, like bigger bullets, more bullets, or extra lives.</listitem>
 <listitem>More special enemies, for example you could use the HomingMissle class to create harder to kill enemies.</listitem>
-<listitem>There is no high scores list. You could use desktopcouch to store high scores and use the code in view_tick to see how to present the scores.</listitem>
+<listitem>The high score list is stored in desktopcouch, so it will sync with your other computers. But it will have to be adjusted to the size we set for the window, and perhaps you can also let the player choose the name that's stored.</listitem>
 </itemizedlist>
 </para>
 </chapter>

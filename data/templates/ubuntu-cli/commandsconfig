@@ -7,4 +7,4 @@ COMMANDS_LAUNCHED_OUTSIDE_PROJECT_ONLY = create
 #COMMANDS_FOLLOWED_BY_COMMAND = 
 
 [ubuntu-application]
-IMPORT=configure;create;debug;edit;license;package;release;run;save;share
+IMPORT=configure;create;debug;edit;license;package;release;run;save;share;test
