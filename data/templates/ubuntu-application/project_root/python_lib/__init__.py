@@ -6,8 +6,8 @@
 '''facade - makes python_name_lib package easy to refactor
 
 while keeping its api constant'''
-from python_name_lib.helpers import set_up_logging
-from python_name_lib.preferences import preferences
-from python_name_lib.Window import Window
-from python_name_lib.python_nameconfig.py import get_version
+from helpers import set_up_logging
+from preferences import preferences
+from Window import Window
+from python_nameconfig import get_version
 

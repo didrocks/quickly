@@ -9,8 +9,8 @@ import os
 
 import gtk
 
-from python_name_lib.python_nameconfig import get_data_file
-from python_name_lib.Builder import Builder
+from python_nameconfig import get_data_file
+from Builder import Builder
 
 import gettext
 from gettext import gettext as _

@@ -7,8 +7,8 @@ import gtk
 import logging
 logger = logging.getLogger('python_name_lib')
 
-import python_name_lib.helpers as helpers
-from python_name_lib.preferences import preferences
+import helpers as helpers
+from preferences import preferences
 
 # This class is meant to be subclassed by camel_case_nameWindow.  It provides
 # common functions and some boilerplate.
