@@ -45,7 +45,6 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
         values = {'__python_name_data_directory__': self.prefix + '/share/project_name/',
                   '__version__': self.distribution.get_version()}
         previous_values = update_config(values)
-        update_version(self.version)
         DistUtilsExtra.auto.install_auto.run(self)
         update_config(previous_values)
 
