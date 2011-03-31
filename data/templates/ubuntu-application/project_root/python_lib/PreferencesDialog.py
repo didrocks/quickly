@@ -16,8 +16,8 @@ import gtk
 import logging
 logger = logging.getLogger('python_name_lib')
 
-from helpers import get_builder, show_uri, get_help_uri
-from preferences import preferences
+from . helpers import get_builder, show_uri, get_help_uri
+from . preferences import preferences
 
 class PreferencesDialog(gtk.Dialog):
     __gtype_name__ = "PreferencesDialog"

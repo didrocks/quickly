@@ -7,8 +7,8 @@ import gtk
 import logging
 logger = logging.getLogger('python_name_lib')
 
-import helpers as helpers
-from preferences import preferences
+from . helpers import get_builder, show_uri, get_help_uri
+from . preferences import preferences
 
 # This class is meant to be subclassed by camel_case_nameWindow.  It provides
 # common functions and some boilerplate.
@@ -31,7 +31,7 @@ class Window(gtk.Window):
         
         Returns a fully instantiated Basecamel_case_nameWindow object.
         """
-        builder = helpers.get_builder('camel_case_nameWindow')
+        builder = get_builder('camel_case_nameWindow')
         new_object = builder.get_object("python_name_window")
         new_object.finish_initializing(builder)
         return new_object
@@ -77,7 +77,7 @@ class Window(gtk.Window):
             pass
 
     def on_mnu_contents_activate(self, widget, data=None):
-        helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
+        show_uri(self, "ghelp:%s" % get_help_uri())
 
     def on_mnu_about_activate(self, widget, data=None):
         """Display the about box for project_name."""

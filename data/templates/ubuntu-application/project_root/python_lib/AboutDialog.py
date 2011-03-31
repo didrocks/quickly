@@ -5,7 +5,7 @@
 
 import gtk
 
-from helpers import get_builder
+from . helpers import get_builder
 
 class AboutDialog(gtk.AboutDialog):
     __gtype_name__ = "AboutDialog"
