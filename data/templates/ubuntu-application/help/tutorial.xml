@@ -16,24 +16,28 @@
      <author role="maintainer">
        <firstname>Rick</firstname>
        <surname>Spencer</surname>
-     </author> 
+     </author>
+     <author role="maintainer">
+       <firstname>Michael</firstname>
+       <surname>Terry</surname>
+     </author>
    <corpauthor>
      Canonical ltd
    </corpauthor>
    </authorgroup>
    <date>
-     2010
+     2011
    </date>
    <productname class="trade">&appname;</productname>
    <productnumber>&appversion;</productnumber>
-   <invpartnumber>2010</invpartnumber>
+   <invpartnumber>2011</invpartnumber>
    <title>&appname; &appversion; User Guide</title>
  </bookinfo>
 
 
  <preface id="preface">
   <title>About This Guide</title>
-  <para><application>Quickly</application> is a set of choices about writing apps for Ubuntu. Out of all the wonderful richness and variety of programming for Linux, <application>Quickly</application> make some very opinionated choices about what tools to use, and how to combine them. The criteria for these choices was to make it easy and fun to write and release Linux applications, even if it's your first time trying, but also in a way that delivers the full power and flexibility of the platform. One benefit of these choices, is that it's also easier to write tools that make it even easier and more fun. So <application>Quickly</application> is also a set of commands.</para>
+  <para><application>Quickly</application> is a set of choices about writing apps for Ubuntu. Out of all the wonderful richness and variety of programming for Ubuntu, <application>Quickly</application> make some very opinionated choices about what tools to use, and how to combine them. The criteria for these choices was to make it easy and fun to write and release Ubuntu applications, even if it's your first time trying, but also in a way that delivers the full power and flexibility of the platform. One benefit of these choices, is that it's also easier to write tools that make it even easier and more fun. So <application>Quickly</application> is also a set of commands.</para>
   <itemizedlist>
    <listitem>
     <para><link linkend="getting-started">Getting Started</link></para>
@@ -43,23 +47,23 @@
 
  <chapter id="Quickly-part1">
   <title>Getting Started</title>
-  <para>This part 1 of the <application>Quickly</application> tutorial. This part is will introduce some key <application>Quickly</application> commands, editing a user interface in Glade, and editing code in Gedit. This part of the tutorial will familiarize you with these three tools, and how they work together with python and pygtk so that you can <application>Quickly</application> build applications.</para>
+  <para>This is part 1 of the <application>Quickly</application> tutorial. This part will introduce some key <application>Quickly</application> commands, editing a user interface in <application>Glade</application>, and editing code in <application>gedit</application>. This part of the tutorial will familiarize you with these three tools, and how they work together with Python and GTK+ so that you can quickly build applications.</para>
   
   <para><title>Creating a <application>Quickly</application> Project</title>Creating an empty but working program couldn't be simpler. First, open a terminal window to type commands into. When it's open, type the command: </para>
   <para><programlisting>quickly create ubuntu-application jotty</programlisting></para>
   <figure>
     <graphic fileref="./images/1.png"></graphic>
   </figure>
-  <para>This will create a jotty sub directory containing a complete directory tree and files for an empty python application. The command finishes by running the newly created empty application.</para>
+  <para>This will create a jotty subdirectory containing a complete directory tree and files for an empty Python application. The command finishes by running the newly created empty application.</para>
   <figure>
     <graphic fileref="./images/2.png"></graphic>
   </figure>
-  <para><title>Testing the Empty Application</title> In the window that pops up you have a menubar, text and a statusbar. Notice that <application>Quickly</application> inferred that the application title is "Jotty". Only a few of menu items do anything in the empty application, Help->About, Edit->Preferences, and File->Quit.</para>
+  <para><title>Testing the Empty Application</title> In the window that pops up you have a menubar, text and a statusbar. Notice that <application>Quickly</application> inferred that the application title is "Jotty". Only a few of menu items do anything in the empty application, Help->About, Edit->Preferences, and File->Close.</para>
   <figure>
     <graphic fileref="./images/3.png"></graphic>
   </figure>
   <para><title>Running the Application</title> 
-Close the application by closing the window or using the File->Quit menu item. Since the empty application isn't actually installed, you can't start the application from the application menu yet. To start the applicaton, use the terminal to first cd into the new subdirectory, and then use "quickly run" to start the program.</para> 
+Close the application by closing the window or using the File->Close menu item. Since the empty application isn't actually installed, you can't start the application from the application menu yet. To start the applicaton, use the terminal to first cd into the new subdirectory, and then use "quickly run".</para> 
   <para><programlisting>
 cd jotty
 quickly run
@@ -68,21 +72,21 @@ quickly run
     <graphic fileref="./images/4.png"></graphic>
   </figure>
   <para><title>Editing an Application</title></para>
-  <para><title>Edit the User Interface in Glade</title>
-<application>Quickly</application> programs use Glade to edit the user interface. Start Glade with "quickly design" in order to set up Glade for editing the empty applicaton. Don't start glade directly, or it won't load the necessary catalogue files for editing the classes that were automaticaly generated by <application>Quickly</application>.</para> 
+  <para><title>Edit the User Interface in <application>Glade</application></title>
+<application>Quickly</application> programs use <application>Glade</application> to edit the user interface. Start <application>Glade</application> with "quickly design" in order to set up <application>Glade</application> for editing the empty applicaton. Don't start <application>Glade</application> directly, or it won't load the necessary catalog files for editing the classes that were automatically generated by <application>Quickly</application>.</para> 
   <para><programlisting>quickly design</programlisting></para>  
   <figure>
     <graphic fileref="./images/5.png"></graphic>
   </figure>
-  <para>Glade will open with the project loaded up and ready to edit.</para>
+  <para><application>Glade</application> will open with the project loaded up and ready to edit.</para>
   <figure>
     <graphic fileref="./images/6.png"></graphic>
   </figure>
-  <para>Use the Projects Menu to choose "JottytWindow.ui" for editing.</para>
+  <para>Click on "jotty_window" in the right pane to open the window for editing.</para>
   <figure>
     <graphic fileref="./images/7.png"></graphic>
   </figure>
-  <para>The first thing we want to do is create a text area for typing into. There are some default Widgets added to the Window already, but we won't need these so we'll start with deleting them. Click on the label, and press delete, and it will disappear from the window.</para>
+  <para>The first thing we want to do is create a text area for typing into. There are some default widgets added to the window already, but we won't need these so we'll start by deleting them. Click on the label and press Delete to make it disappear from the window.</para>
   <figure>
     <graphic fileref="./images/8.png"></graphic>
   </figure>
@@ -93,19 +97,19 @@ quickly run
   <figure>
     <graphic fileref="./images/10.png"></graphic>
   </figure>
-  <para>We'll use the bottom slot to add a TextView widget for the user to type into. In the toolbox, click on the TextView widget. Then click in the empty slot.</para>
+  <para>We'll use the bottom slot to add a TextView widget for the user to type into. In the toolbox on the left, click on the "Text View" button in the "Controls and Display" section. Then click in the bottom empty slot.</para>
   <figure>
     <graphic fileref="./images/11.png"></graphic>
   </figure>
-  <para>Make sure you save the file in Glade, or your changes won't save! Then run the application from the terminal again. The window now has a place where the user can type.</para>
+  <para>Make sure you save the file in <application>Glade</application>, or your changes won't be kept! Then run the application from the terminal again. The window now has a place where the user can type.</para>
   <figure>
     <graphic fileref="./images/12.png"></graphic>
   </figure>
-  <para>Now we'll add the entry field for the title, and also a label for it. We'll use the top empty slot for that. First, click on Horizontal Box (HBox) from the "Containers" section of the pallette, and then click on the top slot. A dialog box will open, tell it that you want two items.</para>
+  <para>Now we'll add the entry field for the title and also a label for it. We'll use the top empty slot for that. First, click on "Horizontal Box" (HBox) from the "Containers" section of the toolbox, and then click on the top slot. A dialog box will open; tell it that you want two items.</para>
   <figure>
     <graphic fileref="./images/13.png"></graphic>
   </figure> 
-  <para>The HBox is a container that arranges whatever is in it horizontally. Add a label to the empty left hand box, and a Text Entry to the right hand one.</para>
+  <para>The HBox is a container that arranges its contents horizontally. Add a Label to the empty left hand box, and a Text Entry to the right hand one.</para>
   <figure>
     <graphic fileref="./images/14.png"></graphic>
   </figure>
@@ -113,75 +117,66 @@ quickly run
   <figure>
     <graphic fileref="./images/15.png"></graphic>
   </figure>
-  <para>Go to the General tab, and set spacing to 5.</para> 
+  <para>Go to the General tab, and set spacing to 6.</para> 
   <figure>
     <graphic fileref="./images/16.png"></graphic>
   </figure>
-  <para>Select the label. On the general tab, set "Label" to "Name:". Set expand and fill to "no" for the label, but keep them as "yes" for the entry. Set the padding for both to 5 (also on the Packing tab).</para>
+  <para>Select the label. On the General tab, set the Label field to "Name:". Set Expand and Fill to "No" for the label, but keep them as "Yes" for the entry. Set the Padding for both to 6 (also on the Packing tab).</para>
   <figure>
     <graphic fileref="./images/17.png"></graphic>
   </figure>
   <para><title>Add the Save, Open, and New Features</title> 
-After the user types something, they may want to save it. A File->Save menu item was automatically created when the empty applicaton was created, but it's not hooked up to any code. To make Save work, we need tell the menu item what function to call, and then create a function to actually do the saving.</para>
-  <para><title>Set the Signal Handler in Glade</title> 
-To tell the menu item what function to call. If glade is not still open, open up the application in glade:</para> 
+After the user types something, they may want to save it. A File->Save menu item was automatically created when the empty applicaton was created, but it's not hooked up to any code. To make Save work, we need tell the menu item what function to call and then create a function to actually do the saving.</para>
+  <para><title>Set the Signal Handler in <application>Glade</application></title> 
+First, we need to tell the menu item what function to call. If <application>Glade</application> is not still open, open up the application in <application>Glade</application>:</para> 
   <para><programlisting>quickly design</programlisting></para>
   <para>Click on the file menu, and the menu opens as if the application were running.</para>
   <figure>
     <graphic fileref="./images/18.png"></graphic>
   </figure>
-  <para>Choose the Save menu item, and it will be selected in Glade.</para>
+  <para>Choose the Save menu item, and it will be selected in <application>Glade</application>.</para>
   <figure>
     <graphic fileref="./images/19.png"></graphic>
   </figure>
-  <para>Then choose the Signals tab in the bottom right, near the Packing tab that we used earlier.</para> 
-  <figure>
-    <graphic fileref="./images/20.png"></graphic>
-  </figure> 
-  <para>In pygtk, menu items are "activated" when a user chooses the item from the menu.  Since we want a function to run when the user chooses Save, we want to specify a function to respond to the activate signal from the menu item. We'll call the function "save_file". Simply type the function name into the box for the "activate" signal. Make sure to save the glade file.</para> 
-  <figure>
-    <graphic fileref="./images/21.png"></graphic>
-  </figure> 
-  <para>Note that you will need to setup the "open_file" signal and the "new_file" signal as well when you get to those functions later.</para>
+  <para>In GTK+, menu items are "activated" when a user chooses the item from the menu.  Since we want a function to run when the user chooses Save, we want to specify a function to respond to the activate signal from the menu item. Note the name of the menu item is "mnu_save" in the right panel. You will use this in a second.</para>
 <para><title>Edit the Code in Gedit</title></para>
 <para><title>Create the Save File Signal Handler</title> 
-Now you're ready to write some code. Of course just telling the glade file what signal to emit won't make the file actually save, because we haven't created the "save_file" function yet. The code for JottyWindow is stored in the file "jotty". jotty is a special python file that is the entry point for your application. Other python files in your application have the ".py" suffix.</para>
-<para>Use the <application>Quickly</application> edit command to start editing your code files:</para> 
+Now you're ready to write some code. The code for the window is stored in the file "JottyWindow.py".</para>
+<para>Use the "quickly edit" command to start editing your code files:</para> 
 <para><programlisting>quickly edit</programlisting></para> 
-<para>This will open the default Ubuntu text editor "Gedit" with all the default python files in the <application>Jotty</application> directory.</para>
+<para>This will open the default Ubuntu text editor <application>gedit</application> with all the customizable Python files in the "jotty" directory.</para>
    <figure>
     <graphic fileref="./images/23.png"></graphic>
   </figure>
-<para>JottyWindow.ui is now expecting to find a function JottyWindow.save_file(), so we simply add one to the JottyWindow class in the jotty file right under the preferences_updated funtion.:</para> 
+<para>When signals are emitted, if the window's class has a method called "on_WIDGET_SIGNAL", it will be called.  In this case, we are interested in the "activate" signal on the "mnu_save" widget.  So we want to create an "on_mnu_save_activate" method in the JottyWindow class. So simply switch to the JottyWindow.py file and add the following right under the finish_initializing method:</para> 
 <para> 
     <literallayout><programlisting>
-    def save_file(self, widget, data=None):
+    def on_mnu_save_activate(self, widget, data=None):
         print "save"
-
 </programlisting></literallayout></para> 
 
 <para>This will print the word "save" to the terminal when run. The method signature is the standard signature expected in a signal handler. If you are new to python, be sure to copy the indentations exactly, as the indentation level is very important in python.</para>
 <para>Save the file, and run it again:</para> 
-<para><programlisting> 
+<para><programlisting>
 quickly run
 </programlisting></para> 
-<para>Choose "File->Save" from the menu, and you'll see the word "save" printing out interminal. That's all there is to hooking up the functions!</para>
+<para>Choose File->Save from the menu, and you'll see the word "save" printed out in the terminal. That's all there is to hooking up the signals!</para>
    <figure>
     <graphic fileref="./images/24.png"></graphic>
   </figure>
 <para><title>Implementing Save</title> 
-Now we'll write a little code in the signal handler to actually save the text. Because we want it to be easy for users to do things like syncronize their Jotty documents between computers, back it up, etc... we'll use couchdb as our backend, and we'll use desktopcouch for our api. We'll also use a widget from the Quickly Widgets library to make it really easy to use desktopcouch.
-Desktop couch and the desktopcouch records API should be installed for you already, but you may need to install Quickly Widgets. The fastest way to do this is from the terminal:</para> 
+Now we'll write a little code in the signal handler to actually save the text. Because we want it to be easy for users to do things like syncronize their <application>Jotty</application> documents between computers, back them up, etc... we'll use CouchDB as our backend, and we'll use desktopcouch for our API. We'll also use a widget from the Quickly Widgets library to make it really easy to use desktopcouch.
+Desktopcouch and the desktopcouch records library should be installed for you already, but you may need to install Quickly Widgets. The fastest way to do this is from the terminal:</para> 
 <para><programlisting>
-sudo apt-get install quickly-widgets
+sudo apt-get install python-quickly.widgets
 </programlisting></para>
-<para>This will install the api, and everything you need for the api to run. After everything is installed, you can write the code. The code will do the following:</para>
+<para>This will install the library and everything you need for the library to run. After everything is installed, you can write the code. The code will do the following:</para>
   <itemizedlist>
    <listitem>
     <para>Import the stuff you'll need from Quickly Widgets and desktopcouch.</para>
    </listitem>
    <listitem>
-    <para>Get a reference to the couchdb database to save into.</para>
+    <para>Get a reference to the CouchDB database to save into.</para>
    </listitem>
    <listitem>
     <para>Get the title of the document and the text from the user interface.</para>
@@ -194,19 +189,20 @@ sudo apt-get install quickly-widgets
    </listitem>
   </itemizedlist>
 <para><title>Import the stuff you'll need from python-desktopcouch-records.</title> 
-Add these import statements near the other imports at the top of the jotty file:</para><para>
+Add these import statements near the other imports at the top of the JottyWindow.py file:</para><para>
 <literallayout>
 <programlisting>
 from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 </programlisting></literallayout></para>
 <para><title>Get a Reference to the Database</title> 
-Desktopcouch will set up a database for us, or create a new one if it's needed. We'll use "jotty" for the name of the database. Since we want this line to run every time the Jotty Window is created, put it at the end of the finish_initializing function:</para> 
-<para><programlisting> 
+Desktopcouch will set up a database for us, or create a new one if it's needed. We'll use "jotty" for the name of the database. Since we want this line to run every time the JottyWindow is created, put it at the end of the finish_initializing function:</para> 
+<para><programlisting>
         self.database = CouchDatabase("jotty", create=True)
 </programlisting></para>
-<para>Now that we have an instance-wide reference to the database, we'll add code to the save_file function to run whenever the Save command is issued.</para> 
-<para>Here's the code to pull the title out of the title entry:</para> 
+<para>Now that we have an instance-wide reference to the database, we'll add code to the on_mnu_save_activate method to run whenever the Save command is issued.</para> 
+<para><title>Here's the code to pull the title out of the title entry:</title>
+Add this to the on_mnu_save_activate method.</para> 
 <para>
 <literallayout>
 <programlisting>
@@ -214,7 +210,7 @@ Desktopcouch will set up a database for us, or create a new one if it's needed. 
         title = self.ui.entry1.get_text()
 </programlisting></literallayout></para>
 <para><title>Here's the code to get pull the text out of the TextView:</title> 
-In pygtk, TextView widgets have a text buffer that stores the text. So you ask the TextView for it's TextBuffer, and then you ask the TextBuffer for the text. You use iters to determine from which part of the text buffer you want text. Since we want all the text, it's easy to just get the start and end iters.</para> 
+In pygtk, TextView widgets have a text buffer that stores the text. So you ask the TextView for it's TextBuffer, and then you ask the TextBuffer for the text. You use iterators (iters) to determine from which part of the text buffer you want text. Since we want all the text, it's easy to just get the start and end iters.</para> 
 <para>
 <literallayout><programlisting>
         #get the string
@@ -223,20 +219,20 @@ In pygtk, TextView widgets have a text buffer that stores the text. So you ask t
         end_iter = buff.get_end_iter()
         text = buff.get_text(start_iter,end_iter)
 </programlisting></literallayout></para>
-<para><title>Saving a document to Couchdb</title> 
-A record in desktopcouch is essentially a python dictionary with some extra key/value pairs to make the database work. So we can save the document to couch like this:</para> 
+<para><title>Saving a document to CouchDB</title> 
+A record in desktopcouch is essentially a Python dictionary with some extra key/value pairs to make the database work. So we can save the document to the couch database like this:</para> 
 <para>
 <literallayout><programlisting>
         record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        new_rec = Record({"record_type": record_type,"title":title, "text":text})
+        new_rec = Record({"record_type":record_type, "title":title, "text":text})
         self.database.put(new_rec)
 </programlisting></literallayout></para> 
-<para>The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a url to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever url you want, and put whatever you want at that URL.</para> 
+<para>The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a URL to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever URL you want, and put whatever you want at that URL.</para> 
 <para>
 
 <title>Check for a pre-existing note with the same title</title> 
 
-Before we just write the new document though, we have to take note of the fact that desktopcouch will allow you to create as many documents as you want with the same title. We probably don't want this, so we'll have to write a little code to check if there is already a document in desktopcouch with the same title, and if there is, update that document rather than create a new one.</para> 
+Before we just write the new document though, we have to take note of the fact that desktopcouch will allow you to create as many documents as you want with the same title. We probably don't want this, so we'll have to write a little code to check if there is already a document in CouchDB with the same title, and if there is, update that document rather than create a new one.</para> 
 
 <para>In CouchDB, you don't do a lot of data processing in the database like you would with a relational database. To be most efficient, we could use the desktopcouch API to create a view in CouchDB, but it's probably simplest just to do the necessary processing on the client for now. To do this, we'll use a desktopcouch function to retrieve all of the records of a specified record type.</para>
 
@@ -257,7 +253,7 @@ Before we just write the new document though, we have to take note of the fact t
 <literallayout><programlisting>
         #get all the records
         record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        results = self.database.get_records(record_type = record_type,create_view = True)
+        results = self.database.get_records(record_type = record_type, create_view = True)
         #update a record that has the same title
         for result in results:
             document = result.value
@@ -265,12 +261,11 @@ Before we just write the new document though, we have to take note of the fact t
                 key = document["_id"]
                 self.database.update_fields(key, {"text":text})
                 return
-
 </programlisting></literallayout></para>
 <para>So the whole function should look like this:</para> 
 <para> 
 <literallayout><programlisting>
-    def save_file(self, widget, data=None): 
+    def on_mnu_save_activate(self, widget, data=None): 
         #get the title for the note 
         title = self.ui.entry1.get_text() 
 
@@ -282,7 +277,7 @@ Before we just write the new document though, we have to take note of the fact t
 
         #get all the records 
         record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc" 
-        results = self.database.get_records(record_type = record_type,create_view = True) 
+        results = self.database.get_records(record_type = record_type, create_view = True) 
 
         #update a record that has the same title 
         for result in results: 
@@ -291,14 +286,17 @@ Before we just write the new document though, we have to take note of the fact t
                 key = document["_id"]
                 self.database.update_fields(key, {"text":text}) 
                 return
- 
+
         #if no records had the title, create it 
-        new_rec = Record({"record_type":record_type,"title":title, "text":text})
+        new_rec = Record({"record_type":record_type, "title":title, "text":text})
         self.database.put_record(new_rec)
 </programlisting></literallayout>
 </para>
-<para>Couchdb makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</para>
+<para>CouchDB makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</para>
 <para>file:///home/your_user_name/.local/share/desktop-couch/couchdb.html</para>
+   <figure>
+    <graphic fileref="./images/first-jotty-document.png"></graphic>
+  </figure>
    <figure>
     <graphic fileref="./images/25.png"></graphic>
   </figure>
@@ -309,7 +307,7 @@ To open a saved document, the user will type the title of the document that they
 Follow these steps:</para>
   <itemizedlist>
    <listitem>
-    <para>Add the open_file signal to the menu item in Glade.</para>
+    <para>Add the on_mnu_open_activate method to the JottyWindow class.</para>
    </listitem>
    <listitem>
     <para>Retrieve all of the documents with the CouchDatabase.get_records function.</para>
@@ -321,10 +319,10 @@ Follow these steps:</para>
     <para>If there is a match, pull out the text and display it in the text view.</para>
    </listitem>
   </itemizedlist>
-<para>So the open_file function looks like so:</para> 
+<para>So the on_mnu_open_activate method looks like so:</para> 
 <para>
     <literallayout><programlisting>
-    def open_file(self, widget, data=None):
+    def on_mnu_open_activate(self, widget, data=None):
         #get the name of the document to open
         title = self.ui.entry1.get_text()
         text = ""
@@ -338,32 +336,32 @@ Follow these steps:</para>
             document = result.value
             if document["title"] == title:
                 text = document["text"]
-        
+
         #set the UI to display the string
         buff = self.ui.textview1.get_buffer()
         buff.set_text(text)
 </programlisting></literallayout></para>
 <para><title>Implement New</title> 
-First, add the new_file signal to the menu item in Glade, then add this code to clear out the text:</para> 
+Add the on_mnu_new_activate method to the JottyWindow class:</para> 
 <para>
     <literallayout><programlisting>
-    def new_file(self, widget, data=None):
+    def on_mnu_new_activate(self, widget, data=None):
         self.ui.entry1.set_text("Note Title")
         buff = self.ui.textview1.get_buffer()
         buff.set_text("")
 </programlisting></literallayout></para>
-<para>To make them work, add these functions to the JottyWindow class, and save. Then go back and connect the functions to the "activate" signals for the Open and New menu items.</para>
-<ulink url="./code/jotty">Complete jotty file</ulink>
+<para>Remember to save your JottyWindow.py file.</para>
+<ulink url="./code/JottyWindow.py">Complete JottyWindow.py file</ulink>
 <para><title>Saving Your Work</title> 
 When <application>Quickly</application> created your application, it automatically added it to Bazaar, a source code versioning system. You can use Bazaar to roll back mistakes, see code history, compare versions, etc... <application>Quickly</application> has a convenience function for backing up your work:</para> 
-<para><programlisting> 
-<application>Quickly</application> save "First working version of Jotty"
+<para><programlisting>
+quickly save "First working version of Jotty"
 </programlisting></para> 
 <para>This will call <programlisting>bzr add</programlisting> and then <programlisting>bzr commit -m [your message]</programlisting> for you.</para>
 </chapter>
  <chapter id="Quickly-part2">
 <title>Using Dialogs</title>
-<para>In part 1, we created an application that can read and write text files, and persist them in the couchdb backend. However, the application has a hideous usability flaw, the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix that by adding a save and an open dialog.</para>
+<para>In part 1, we created an application that can read and write text files, and persist them in the CouchDB backend. However, the application has a hideous usability flaw: the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix that by adding a save and an open dialog.</para>
 
 <para><title>Creating an Empty Dialog</title>
 It's simple to add an empty, but working dialog to your project. Simply specify the name of the new dialog, and it will be added automatically. Assuming that you are in the jotty project directory:</para>
@@ -372,11 +370,11 @@ quickly add dialog save
 </programlisting></para>
 <para>This will add the dialog to your project.</para>
 <para><title>Editing the New Dialog</title>
-To edit the UI for the dialog, you'll need to load it into Glade again. If you already have an instance of glade running, you might want to go ahead and close it first, as it may get confusing if you have more than one open at a time. After closing glade, simply open it again:</para>
+To edit the UI for the dialog, you'll need to load it into <application>Glade</application> again. If you already have an instance of <application>Glade</application> running, you might want to go ahead and close it first, as it may get confusing if you have more than one open at a time. After closing <application>Glade</application>, simply open it again:</para>
 <para><programlisting>
 quickly design
 </programlisting></para>
-<para>Then use the Projects menu to switch to newly created SaveDialog.ui file.</para>
+<para>Then use the Projects menu to switch to the newly created SaveDialog.ui file.</para>
    <figure>
     <graphic fileref="./images/26.png"></graphic>
   </figure>
@@ -385,15 +383,15 @@ quickly design
     <graphic fileref="./images/27.png"></graphic>
   </figure>
 <para><title>Code the Dialog</title>
-You can use the "<application>Quickly</application> edit" command to open the SaveDialog.py file. This dialog needs very little additional code to work.  Essentially, you just need a way to retrieve the string specified by the user.  We'll add a quick accessor method for this:</para>
+You can use the "quickly edit" command to open the SaveDialog.py file. This dialog needs very little additional code to work.  Essentially, you just need a way to retrieve the string specified by the user.  We'll add a quick accessor method for this:</para>
 <para>
 <programlisting>
     @property
     def title_text(self):
         return self.ui.entry1.get_text()
 </programlisting></para>
-<para>We don't need to write any code for the Ok and Cancel buttons, as they were automatically hooked up by <application>Quickly</application> when it created the dialog.</para>
-<para>Before we go on to invoking the dialog, delete HBox from JottyWindow that holds the text entry and label, as we won't be needing those.</para>
+<para>We don't need to write any code for the OK and Cancel buttons, as they were automatically hooked up by <application>Quickly</application> when it created the dialog.</para>
+<para>Before we go on to invoking the dialog, delete the HBox from the original JottyWindow that holds the text entry and label, as we won't be needing those.</para>
    <figure>
     <graphic fileref="./images/28.png"></graphic>
   </figure>
@@ -404,7 +402,7 @@ To use the dialog in JottyWindow, we need to follow these steps:</para>
     <para>Import SaveDialog in JottyWindow</para>
    </listitem>
    <listitem>
-    <para>In the save_file function, create an instance of SaveDialog</para>
+    <para>In the on_mnu_save_activate method, create an instance of SaveDialog</para>
    </listitem>
    <listitem>
     <para>Run the Dialog</para>
@@ -418,17 +416,17 @@ To use the dialog in JottyWindow, we need to follow these steps:</para>
   </itemizedlist>
 
 <para><title>Importing the SaveDialog</title>
-Add the SaveDialog to the list of the imported modules at the top of the jotty file, so it looks like this:</para>
+Add the SaveDialog to the list of the imported modules at the top of the JottyWindow.py file, like this:</para>
 <para><programlisting>
-from jotty import (BaseJottyWindow, SaveDialog)
+from jotty.SaveDialog import SaveDialog
 </programlisting></para>
 
 <para><title>Create an instance of the dialog and run it</title>
-When the user chooses Save, we want to open the SaveDialog and collect the title of the note from the user. So we need to modify our save_file function.</para>
+When the user chooses Save, we want to open the SaveDialog and collect the title of the note from the user. So we need to modify our on_mnu_save_activate method.</para>
 
 <para>First, create an instance of the SaveDialog like this:</para>
 <para><programlisting>
-        saver = SaveDialog.SaveDialog()
+        saver = SaveDialog()
 </programlisting></para>
 <para>To make the dialog appear, simply use the run() method. However, we want to check the result, so we'll need to store that in a variable. After it runs, we want to collect the string from the user, like this:</para>
 <para><programlisting>
@@ -436,7 +434,7 @@ When the user chooses Save, we want to open the SaveDialog and collect the title
         title = saver.title_text
 </programlisting></para>
 <para><title>Clean up the dialog</title>
-We need to tell the dialog to not show itself anymore. We could call saver.hide() to make it hide, but since we don't need it hanging around, we'll just destroy it. Before we go on, though, we need to ensure that the user actually wants to save, so if we didn't get the Ok result, we should just return out of the function:</para>
+We need to tell the dialog to not show itself anymore. We could call saver.hide() to make it hide, but since we don't need it hanging around, we'll just destroy it. Before we go on, though, we need to ensure that the user actually wants to save, so if we didn't get the OK result, we should just return out of the method:</para>
 <para>
         <literallayout><programlisting>
         saver.destroy()
@@ -444,13 +442,13 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
             return
 </programlisting></literallayout></para>
 
-<para>Since we're now getting the title from the dialog instead of the text entry, we should delete the line of the code that gets it from the text entry. So except for the addition of the dialog code, the save_file function looks pretty much the same as it did in part 1:</para>
+<para>Since we're now getting the title from the dialog instead of the text entry, we should delete the line of the code that gets it from the text entry. So except for the addition of the dialog code, the on_mnu_save_activate method looks pretty much the same as it did in part 1:</para>
 
 <para>
     <literallayout><programlisting>
     def save_file(self, widget, data=None):
         #get the title from the user
-        saver = SaveDialog.SaveDialog()
+        saver = SaveDialog()
         result = saver.run()
         title = saver.title_text
 
@@ -477,7 +475,7 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
                 return
         
         #if no records had the title, create it  
-        new_rec = Record({"record_type":record_type,"title":title, "text":text})
+        new_rec = Record({"record_type":record_type, "title":title, "text":text})
         self.database.put_record(new_rec)
 </programlisting></literallayout></para>
 <para>Now when we choose save, we get the SaveDialog instead:</para>
@@ -486,18 +484,18 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
   </figure>
 
 <para><title>Creating a Dialog with a CouchGrid</title>
-We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. We'll use a widget called CouchGrid, which is included in the quickly-widgets package for this.
+We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. We'll use a widget called CouchGrid, which is included in the Quickly Widgets library.
 </para>
 <para><title>Create the Open Dialog</title></para>
 <para><programlisting>
 quickly add dialog open
 </programlisting></para>
 <para><title>Editing the New Dialog</title>
-Start out by closing, and then reopening glade again:</para>
+Start out by closing, and then reopening <application>Glade</application> again:</para>
 <para><programlisting>
 quickly design
 </programlisting></para>
-<para>Start by adding a VBox and a label in the same manner as in the Save Dialog above. Leave an empty space in the VBox, We will use code to put the CouchGrid there.</para>
+<para>Start by adding a VBox and a label in the same manner as in the Save Dialog above. Leave an empty space in the VBox, we will use code to put the CouchGrid there.</para>
    <figure>
     <graphic fileref="./images/30.png"></graphic>
   </figure>
@@ -517,12 +515,12 @@ It just takes a little bit of code to add a CouchGrid to the  dialog. We need to
   </itemizedlist>
 
 <para><title>Import the CouchGrid class</title>
-CouchGrid is part of the quickly.widgets api, so we import it like this:</para>
+CouchGrid is part of the quickly.widgets library, so we import it like this:</para>
 <para><programlisting>
 from quickly.widgets.couch_grid import CouchGrid
 </programlisting></para>
 <para><title>Create the CouchGrid</title>
-A CouchGrid needs to know three things, the name of the database, the name of the record type, and the name of the keys to use. "keys" is a list of fields that the widget will display, and by default will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initalizing function. All this is easily done in code like this:
+A CouchGrid needs to know three things: the name of the database, the name of the record type, and the name of the keys to use. "keys" is a list of fields that the widget will display, and by default will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initializing function. All this is easily done in code like this:
 </para>
 <para>
         <literallayout><programlisting>
@@ -530,20 +528,18 @@ A CouchGrid needs to know three things, the name of the database, the name of th
         keys = ["title"]
         record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
         self.couchgrid = CouchGrid(database, record_type=record_type,keys=keys)
-
 </programlisting></literallayout></para>
 <para><title>Add the CouchGrid to the Dialog</title>
-we added the VBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchGrid into the VBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
+When we added the VBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchGrid into the VBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
 </para>
 <para>
         <literallayout><programlisting>
         self.couchgrid.show()
         self.ui.vbox1.pack_end(self.couchgrid)
-
 </programlisting></literallayout></para>
 
 <para><title>Create the get_selection function</title>
-The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchGrid what is selected. This is easy using the widgets selected_record_ids function. But the CouchGrid supports multiple selection, so we'll do the following:</para>
+The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchGrid what is selected. This is easy using the widget's selected_record_ids function. But the CouchGrid supports multiple selection, so we'll do the following:</para>
   <itemizedlist>
    <listitem>
     <para>Use a decorator to define the function as a property accessor.</para>
@@ -568,16 +564,15 @@ The dialog still needs a bit more code to work. It needs to return the user's se
             return None
         else:
             return ids[0]
-
 </programlisting></literallayout></para>
 <para><title>Using the Open Dialog</title>
-Now we want to use the Open Dialog in the JottyWindow open_file function. To use it,we'll follow these steps:</para>
+Now we want to use the Open Dialog in JottyWindow's on_mnu_open_activate method. To use it, we'll follow these steps:</para>
   <itemizedlist>
    <listitem>
     <para>Import OpenDialog in JottyWindow</para>
    </listitem>
    <listitem>
-    <para>In the open_file function, create an instance of OpenDialog</para>
+    <para>In the on_mnu_open_activate method, create an instance of OpenDialog</para>
    </listitem>
    <listitem>
     <para>Run the Dialog</para>
@@ -602,13 +597,14 @@ Now we want to use the Open Dialog in the JottyWindow open_file function. To use
 <para><title>Import OpenDialog</title>
 Just like the SaveDialog, add the import line to the list of imports:</para>
 <para><programlisting>
-from jotty import (BaseJottyWindow, SaveDialog, OpenDialog)
+from jotty.OpenDialog import OpenDialog
 </programlisting></para>
 
 <para><title>Create an instance of the dialog and run it</title>
-So now we're ready to call the dialog from the JottyWindow's open_file function. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</para>
+So now we're ready to call the dialog from the JottyWindow's on_mnu_open_activate method. Creating the OpenDialog is exactly the same as creating the SaveDialog, except we also want to tell it to load the titles before we run it:</para>
 <para>
-        <literallayout><programlisting>opener = OpenDialog.OpenDialog()
+        <literallayout><programlisting>
+        opener = OpenDialog()
         result = opener.run()</programlisting></literallayout></para>
 
 <para><title>Get the id for the selected title</title>
@@ -634,7 +630,7 @@ If nothing was selected, we'll just return. Otherwise, we'll retrieve the record
         text = record["text"]</programlisting></literallayout></para>
 
 <para><title>Update the UI</title>
-Now just put the text into the texview:</para>
+Now just put the text into the TextView:</para>
 <para>
         <literallayout><programlisting>
         #set the UI to display the string
@@ -645,7 +641,7 @@ Now just put the text into the texview:</para>
     <literallayout><programlisting>
     def open_file(self, widget, data=None):
         #run the open dialog
-        opener = OpenDialog.OpenDialog()
+        opener = OpenDialog()
         result = opener.run()
 
         #get the record id from the dialog
@@ -665,7 +661,6 @@ Now just put the text into the texview:</para>
         #set the UI to display the string
         buff = self.ui.textview1.get_buffer()
         buff.set_text(text)
-
 </programlisting></literallayout></para>
 <para>Now users get a nice open dialog:</para>
    <figure>
@@ -684,10 +679,10 @@ Now just put the text into the texview:</para>
     <para>The OpenDialog should probably return when the user double clicks on an item in the list. Try connecting to the "select-cursor-row" signal on the TreeView, and calling self.response(gtk.RESPONSE_OK) in the handler.</para>
    </listitem>
    <listitem>
-    <para>Perhaps the Ok button in the OpenDialog should be disabled if nothing is selected. Try setting the "sensitivity" in Glade, and the set_sensitive function for the Ok button.</para>
+    <para>Perhaps the OK button in the OpenDialog should be disabled if nothing is selected. Try setting the "sensitivity" in <application>Glade</application> to "False" to start, and using the set_sensitive method on the OK button to adjust it as the selection changes.</para>
    </listitem>
    <listitem>
-    <para>It would be more consistent for the Open and Close dialogs to have "Open" and "Close" for buttons instead of "Ok". You can set a different type in the properties window in Glade.</para>
+    <para>It would be more consistent for the Open and Close dialogs to have "Open" and "Close" for buttons instead of "OK". You can set a different type in the properties window in <application>Glade</application>.</para>
    </listitem>
    <listitem>
     <para>Loading every document into the open dialog is probably a bit inefficient. Perhaps storing the document id and using that to retrieve the document would be a better implementation.</para>
@@ -699,7 +694,7 @@ Now just put the text into the texview:</para>
 <title>Packaging</title>
 <para>In parts 1 and 2, we showed how to create a simple Ubuntu application using <application>Quickly</application>. This section will cover how to package an application so that it is easy for you to share, and easy for other people to install.</para>
 <para><title>License your Application</title>
-It's important to license your code so users and other programmers know their rights in terms of redistributing or modifying it. To <application>Quickly</application> grant a GPL license to your  code, simply:</para>
+It's important to license your code so users and other programmers know their rights in terms of redistributing or modifying it. To quickly grant a GPL license to your code, simply:</para>
   <itemizedlist>
    <listitem>
     <para>Specify your name and email address in the AUTHORS file.</para>
@@ -710,13 +705,13 @@ It's important to license your code so users and other programmers know their ri
   </itemizedlist>
 
 <para><title>Specify your name and email</title>
-When <application>Quickly</application> created your ubuntu application, it added a file named AUTHORS in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. For example, I would change the entire file to look like this:</para>
+When <application>Quickly</application> created your Ubuntu application, it added a file named AUTHORS in the top level of the directory. Open this file in your text editor, and modify the top line so it has your name and email included. For example, I would change the entire file to look like this:</para>
 <para>
-<literallayout><programlisting>Copyright (C) 2009 Rick Spencer rick.spencer@canonical.com</programlisting></literallayout></para>
+<literallayout><programlisting>Copyright (C) 2011 Rick Spencer rick.spencer@canonical.com</programlisting></literallayout></para>
 <para><title>Run the "License" Command</title>
 By default, <application>Quickly</application> will use a GPL 3 license for your project. To use this license, use this command:</para>
 <para><programlisting>
-<application>Quickly</application> license
+quickly license
 </programlisting></para>
 <para>This will add the GPL 3 license to all of your code files that you've added to your project using <application>Quickly</application>.</para>
 <para>Keep in mind a couple of things:</para>
@@ -727,13 +722,13 @@ By default, <application>Quickly</application> will use a GPL 3 license for your
    <listitem>
     <para>If you prefer a GPL 2 license, you can specify that when you issue the license command:</para>  
 <para><programlisting>
-<application>Quickly</application> license GPL-2
+quickly license GPL-2
 </programlisting></para>
 </listitem>
 <listitem>
 <para><application>Quickly</application> doesn't care what license you use, but only knows natively what files and headers to include for BSD, GPL-2, GPL-3, LGPL-2 and LGPL-3. If you prefer another license, you can simply add whatever you license you like by creating a COPYING file and putting it there.  Then run:</para>
 <para><programlisting>
-<application>Quickly</application> license
+quickly license
 </programlisting></para>
 <para>to license every file.</para>
 </listitem>
@@ -746,7 +741,7 @@ By default, <application>Quickly</application> will use a GPL 3 license for your
 </itemizedlist>
 
 <para><title>Translate Your Application</title>
-To allow for users from other countries to use your application you may want to translate it. Glade automatically creates a pot file for you but to translate strings in your code you have to:</para>
+To allow for users from other countries to use your application you may want to translate it. <application>Glade</application> automatically creates a pot file for you but to translate strings in your code you have to:</para>
 <para><programlisting>import gettext</programlisting></para>
 <para><programlisting>gettext.gettext("What you want translated")</programlisting></para>
 
@@ -767,10 +762,10 @@ inkscape data/media/jotty.svg
    <figure>
     <graphic fileref="./images/package0.png"></graphic>
   </figure>
-<para>If you don't personalize the icon, it's ok, your app will just have the default icon, such as in the image below.
+<para>If you don't personalize the icon, it's ok, your app will just have the default icon, such as in the image above.
 </para>
 <para><title>Edit the Desktop File</title>
-By default, <application>Quickly</application> Ubuntu applications are classified as "utilities", so they show up under the Accessories menu in Ubuntu. If we wanted to make Jotty show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to a Linux desktop. The file "jottydesktop.in" was automatically created in the jotty project directory. To change Jotty from a Utility to an Office application, edit jotty.desktop.in and change this:
+By default, <application>Quickly</application> Ubuntu applications are classified as "utilities", so they show up under the Accessories category in Ubuntu. If we wanted to make <application>Jotty</application> show up in another category, we can do this by editing the desktop file. A desktop file is a file that describes your application to Ubuntu. The file "jotty.desktop.in" was automatically created in your project directory. To change <application>Jotty</application> from a Utility to an Office application, edit jotty.desktop.in and change this:
 </para>
 <para>
 <literallayout><programlisting>[Desktop Entry]
@@ -809,7 +804,7 @@ So I would change this section:
 <literallayout><programlisting>DistUtilsExtra.auto.setup(
     name='jotty',
     version='0.1',
-    license='GPL v3',
+    license='GPL-3',
     #author='Your Name',
     #author_email='email@ubuntu.com',
     #description='UI for managing …',
@@ -825,7 +820,7 @@ To look like this:
 <literallayout><programlisting>DistUtilsExtra.auto.setup(
     name='jotty',
     version='0.1',
-    license='GPL v3',
+    license='GPL-3',
     author='Rick Spencer',
     author_email='rick.spencer@canonical.com',
     description='Note taking application',
@@ -833,26 +828,26 @@ To look like this:
     #url='https://launchpad.net/jotty',
     cmdclass={'install': InstallAndUpdateDataDirectory}
     )</programlisting></literallayout></para>
-<para>Note that the license has already been set up for you, author and author_email are updated each time you connect to Launchpad (with <application>Quickly</application> release or <application>Quickly</application> share) with your Launchpad real name and preferred email adress.</para>
+<para>Note that the license has already been set up for you, author and author_email are updated each time you connect to Launchpad (with quickly release or quickly share) with your Launchpad real name and preferred email adress.</para>
 <para>
-Notice that Jotty doesn't have a web page yet, so I just left that line commented out. Also, you don't have to increment version number as <application>Quickly</application> share and <application>Quickly</application> release commands will make it for you..
+Notice that <application>Jotty</application> doesn't have a web page yet, so I just left that line commented out. Also, you don't have to increment the version number as quickly share and quickly release commands will do that for you.
 </para>
 
 <para><title>Create and Test the Debian Archive</title>
 After personalizing the project, we are now ready to create the package. This is easily done by issuing the package command:
 </para>
 <para><programlisting>
-<application>Quickly</application> package
+quickly package
 </programlisting></para>
-<para>This command will take a little while to discover dependencies and create all the required archives, etc... It will also report some errors as we haven't created a PGP key, for instance. None the less, when it is done, the package will be created. Using the file browser, you can see the created package next to the project directory:</para>
+<para>This command will take a little while to discover dependencies and create all the required archives, etc... It will also report some errors as we haven't created a PGP key, for instance. Nonetheless, when it is done, the package will be created. Using the file browser, you can see the created package next to the project directory:</para>
    <figure>
     <graphic fileref="./images/package1.png"></graphic>
   </figure>
-<para>Right now, the specific file we are interested in is "jotty_0.1_all.deb". To test it out, double click on it, to open it in Ubuntu's graphical installer program:</para>
+<para>Right now, the specific file we are interested in is "jotty_0.1_all.deb". To test it out, double click on it to open it in the Ubuntu Software Center:</para>
    <figure>
     <graphic fileref="./images/package2.png"></graphic>
   </figure>
-<para>Click "Install Package" to see how it  installs onto your desktop. After chugging for a bit, you'll see that it is installed in the Applications->Office menu. If you customized your icon, you'll see that the menu uses your custom icon as well.</para>
+<para>Click "Install" to see how it installs onto your desktop. After chugging for a bit, you'll see that it is installed in the Applications Office category. If you customized your icon, you'll see that the it uses your custom icon as well.</para>
    <figure>
     <graphic fileref="./images/package3.png"></graphic>
   </figure>
@@ -901,13 +896,13 @@ Now that you've packaged your application, you can share the .deb file. However,
 <para><title>create</title>
 Usage:</para>
 <para><programlisting>
-<application>Quickly</application> create ubuntu-application path/to/project_name</programlisting>
+quickly create ubuntu-application path/to/project_name</programlisting>
 </para><para>
 where "project_name" is one or more words separated by an underscore and
 path/to can be any existing path.
 </para><para>
 This will create and run a new project, including Python code, 
-Glade files, and packaging files to make the project work. After
+<application>Glade</application> files, and packaging files to make the project work. After
 creating the project, get started by:
 </para>
 <itemizedlist>
@@ -915,11 +910,11 @@ creating the project, get started by:
 Changing your working directory to the new project:</para>
 <para><programlisting>cd path/to/project_name</programlisting></para>
 </listitem><listitem>
-<para>Edit the UI with Glade:</para>
-<para><programlisting><application>Quickly</application> design</programlisting></para>
+<para>Edit the UI with <application>Glade</application>:</para>
+<para><programlisting>quickly design</programlisting></para>
 </listitem><listitem>
 <para>Edit the Python code:</para>
-<para><programlisting><application>Quickly</application> edit</programlisting></para>
+<para><programlisting>quickly edit</programlisting></para>
 </listitem>
 </itemizedlist>
 </sect1>
@@ -927,8 +922,8 @@ Changing your working directory to the new project:</para>
 <sect1 id="dialog"><title>add dialog</title>
 <para><title>dialog</title>
 Usage:</para>
-<para><programlisting><application>Quickly</application> add dialog dialog_name</programlisting></para>
-<para>where dialog_name is one or more words seperated with underscore</para>
+<para><programlisting>quickly add dialog dialog-name</programlisting></para>
+<para>where dialog-name is one or more words seperated with a dash</para>
 <para>
 This will create:
 </para>
@@ -937,18 +932,18 @@ This will create:
 A subclass of gtk.Dialog called DialogNameDialog in the module DialogNameDialog.py
 </para></listitem>
 <listitem><para>
-A glade file called DialogNameDialog.ui in the ui directory
+A <application>Glade</application> file called DialogNameDialog.ui in the ui directory
 </para></listitem>
 <listitem><para>
 A catalog file called dialog_name_dialog.xml also in the ui directory
 </para></listitem></itemizedlist>
 <para>
 To edit the UI for the dialog, run:</para>
-<para><programlisting><application>Quickly</application> design
+<para><programlisting>quickly design
 </programlisting></para>
 <para>
 To edit the behavior, run:</para>
-<para><programlisting><application>Quickly</application> edit</programlisting></para>
+<para><programlisting>quickly edit</programlisting></para>
 <para>
 To use the dialog you have to invoke it from another python file:
 </para>
@@ -973,7 +968,7 @@ dialog.hide()
 <para><title>edit</title>
 Usage:</para>
 <para><programlisting>
-<application>Quickly</application> edit
+quickly edit
 </programlisting></para><para>
 A convenience command to open all of your python files in your project 
 directory in your default editor, ready for editing.
@@ -983,12 +978,12 @@ directory in your default editor, ready for editing.
 <sect1 id="design"><title>design</title>
 <para><title>design</title>
 Usage:</para><para><programlisting>
-<application>Quickly</application> design
+quickly design
 </programlisting></para><para>
-Opens Glade UI editor so that you can edit the UI for dialogs
-and windows in your project. Note that you *must* open Glade
-in this manner for <application>Quickly</application> to work. If you try to open Glade
-directly, and the open the UI files, Glade will throw errors
+Opens <application>Glade</application> UI editor so that you can edit the UI for dialogs
+and windows in your project. Note that you *must* open <application>Glade</application>
+in this manner for <application>Quickly</application> to work. If you try to open <application>Glade</application>
+directly, and the open the UI files, <application>Glade</application> will throw errors
 and won't open the files.
 </para>
 </sect1>
@@ -996,7 +991,7 @@ and won't open the files.
 <sect1 id="help"><title>help</title>
 <para><title>help</title>
 Usage:</para><para><programlisting>
-<application>Quickly</application> help
+quickly help
 </programlisting></para><para>
 Opens a web browser with the help index.
 </para>
@@ -1005,7 +1000,7 @@ Opens a web browser with the help index.
 <sect1 id="license"><title>license</title>
 <para><title>license</title>
 Usage:</para><para><programlisting>
-<application>Quickly</application> license &#60;Your_Licence&#61;
+quickly license &#60;Your_Licence&#61;
 </programlisting></para><para>
 Adds license to project files. Before using this command, you should:
 </para>
@@ -1020,7 +1015,7 @@ If you want to put your own <application>Quickly</application> unsupported Licen
    ### BEGIN AUTOMATIC LICENCE GENERATION and ### END AUTOMATIC LICENCE GENERATION
    in it by your own licence.
 </para></listitem><listitem><para>
-Executes either <programlisting><application>Quickly</application> license</programlisting> or <programlisting><application>Quickly</application> licence &#60;License&#61;</programlisting>
+Executes either <programlisting>quickly license</programlisting> or <programlisting>quickly licence &#60;License&#61;</programlisting>
    where &#60;License&#61; can be either:
    - GPL-3 (default)
    - GPL-2
@@ -1044,7 +1039,7 @@ launchpad account if you didn't update it.
 <sect1 id="package"><title>package</title>
 <para><title>package</title>
 Usage:</para><para><programlisting>
-<application>Quickly</application> package
+quickly package
 </programlisting></para><para>
 Creates a debian file (deb) from your project. Before running
 the package command you can edit the Icon and Category entry of *.desktop.in 
@@ -1061,16 +1056,16 @@ testing purpose.
 <sect1 id="release"><title>release</title>
 <para><title>release</title>
 Usage:</para><para><programlisting>
-<application>Quickly</application> release
+quickly release
 </programlisting></para><para>
 Posts a release of your project to a PPA on launchpad so that
 users can install the application on their system. 
 </para><para>
 You can also execute:
-<programlisting><application>Quickly</application> release &#60;release_number&#61;</programlisting> of you don't want to use current
+<programlisting>quickly release &#60;release_number&#61;</programlisting> of you don't want to use current
 release_number. The release_number must be a number.
 </para><para>
-<programlisting><application>Quickly</application> release &#60;release_number&#61;</programlisting> notes about changes
+<programlisting>quickly release &#60;release_number&#61;</programlisting> notes about changes
 where "notes about changes" is optional text describing what changes
 were made since the last save
 </para><para>
@@ -1088,7 +1083,7 @@ will be dropped to release &#60;current_release&#61; version
 (&#60;current_release&#61;~publicX      &#60;current_release&#61;)
 You can modify the description and long description if you wish.
 </para><para>
-You can run <programlisting><application>Quickly</application> package</programlisting> and test your package to make sure it
+You can run <programlisting>quickly package</programlisting> and test your package to make sure it
 installs as expected. (This is not mandatory)
 </para>
 </sect1>
@@ -1096,7 +1091,7 @@ installs as expected. (This is not mandatory)
 <sect1 id="run"><title>run</title>
 <para><title>run</title>
 Usage:</para><para><programlisting>
-<application>Quickly</application> run
+quickly run
 </programlisting></para><para>
 Runs your application. This is the best way to try test it out
 while you are developing it. It starts up the main project window.
@@ -1106,7 +1101,7 @@ while you are developing it. It starts up the main project window.
 <sect1 id="save"><title>save</title>
 <para><title>save</title>
 Usage:</para><para><programlisting>
-<application>Quickly</application> save notes about changes
+quickly save notes about changes
 </programlisting></para><para>
 where "notes about changes" is optional text describing what changes
 were made since the last save.
@@ -1122,7 +1117,7 @@ or otherwise use the revision control, use bzr directly:
 <para>
 <title>share</title>
 Usage:</para><para><programlisting>
-<application>Quickly</application> share</programlisting>
+quickly share</programlisting>
 </para><para>
 Updates your PPA with the the latest saved project changes.
 </para><para>
@@ -1144,13 +1139,13 @@ You can modify the description and long description if you wish.
 <link linkend="Quickly-reference"><application>Quickly</application>: <application>Quickly</application> Command Reference</link>
   <itemizedlist>
    <listitem>
-    <para><ulink url="http://blog.didrocks.fr/index.php/post/Build-your-application-Quickly-with-Quickly%3A-part1">Blog post on <application>Quickly</application></ulink></para>
+    <para><ulink url="http://blog.didrocks.fr/post/Build-your-application-quickly-with-Quickly%3A-Inside-Quickly-part-1">Blog post on <application>Quickly</application></ulink></para>
    </listitem>
    <listitem>
     <para><ulink url="http://docs.python.org/reference/">Language: Python Language Reference</ulink></para>
    </listitem>
    <listitem>
-    <para><ulink url="http://www.python.org/doc/2.6/library/index.html">Core Library: Python 2.6 Library Reference</ulink></para>
+    <para><ulink url="http://www.python.org/doc/2.7/library/index.html">Core Library: Python 2.7 Library Reference</ulink></para>
    </listitem>
    <listitem>
     <para><ulink url="http://www.pygtk.org/docs/pygtk/">UI Library: PyGtk</ulink></para>
@@ -1159,13 +1154,13 @@ You can modify the description and long description if you wish.
     <para><ulink url="http://wiki.apache.org/couchdb/Reference">Database: CouchDB Reference</ulink></para>
    </listitem>
    <listitem>
-    <ulink url="http://library.gnome.org/devel/glade/stable/">UI Editing: Glade User Documenation</ulink>
+    <ulink url="http://library.gnome.org/devel/glade/stable/">UI Editing: <application>Glade</application> User Documenation</ulink>
    </listitem>
    <listitem>
     <ulink url="http://library.gnome.org/users/gedit/stable/index.html">Editor: Gedit Help</ulink>
    </listitem>
    <listitem>
-    <ulink url="http://bazaar.canonical.com/en/">Version Control: Bazaar</ulink>
+    <ulink url="http://bazaar.canonical.com/">Version Control: Bazaar</ulink>
    </listitem>
   </itemizedlist>
 </para>
