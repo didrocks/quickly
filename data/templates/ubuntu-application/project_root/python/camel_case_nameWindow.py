@@ -7,6 +7,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
+import gtk
 import logging
 logger = logging.getLogger('python_name')
 

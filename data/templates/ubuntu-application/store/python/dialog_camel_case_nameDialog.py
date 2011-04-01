@@ -5,10 +5,7 @@
 
 import gtk
 
-#TODO remove
-#from python_name import Builder
-
-from python_name.helpers import get_builder
+from python_name_lib.helpers import get_builder
 
 import gettext
 from gettext import gettext as _
