@@ -103,7 +103,7 @@ class Window(gtk.Window):
             self.preferences_dialog.show()
         # destroy command moved into dialog to allow for a help button
 
-    def on_mnu_quit_activate(self, widget, data=None):
+    def on_mnu_close_activate(self, widget, data=None):
         """Signal handler for closing the camel_case_nameWindow."""
         self.destroy()
 

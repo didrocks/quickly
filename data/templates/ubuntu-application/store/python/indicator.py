@@ -40,7 +40,7 @@ class Indicator:
         self.menu.append(self.preferences)
 
         self.quit = gtk.MenuItem("Quit")
-        self.quit.connect("activate",window.on_mnu_quit_activate)
+        self.quit.connect("activate",window.on_mnu_close_activate)
         self.quit.show()
         self.menu.append(self.quit)
 
