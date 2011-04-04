@@ -35,7 +35,7 @@ LPI_init_menu_block = """
         # for more information about Launchpad integration.
         try:
             import LaunchpadIntegration
-            LaunchpadIntegration.add_items(self.ui.%(help_menu)s, 1, False, True)
+            LaunchpadIntegration.add_items(self.ui.%(help_menu)s, 1, True, True)
             LaunchpadIntegration.set_sourcepackagename('%(project_name)s')
         except:
             pass
