@@ -11,11 +11,11 @@ quickly create ubuntu-application test-project
 
 cd test-project
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 quickly configure lp-project gpoweroff
@@ -24,11 +24,11 @@ quickly configure lp-project gpoweroff
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 bzr status
@@ -53,11 +53,11 @@ quickly configure lp-project hudson-notifier
 # Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 bzr status
@@ -118,11 +118,11 @@ quickly configure lp-project gpoweroff
 # Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 bzr status
@@ -148,11 +148,11 @@ quickly configure lp-project hudson-notifier
 # Updating project name references in existing apport crashdb configuration
 # Creating new apport hooks
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
@@ -187,11 +187,11 @@ quickly configure lp-project gpoweroff
 # Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
@@ -315,11 +315,11 @@ quickly upgrade 0.3 0.4
 # Creating new apport hooks
 # WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
@@ -349,7 +349,7 @@ cat apport/source_test-project.py
 #         report['ThirdParty'] = 'True'
 #         report['CrashDB'] = 'test_project'
 
-cp "$TEST_SCRIPT_DIR/BaseTestProjectWindow.py.no_lpi" ./test_project/BaseTestProjectWindow.py
+cp "$TEST_SCRIPT_DIR/TestProjectWindow.py.no_lpi" ./test_project_lib/Window.py
 
 cp "$TEST_SCRIPT_DIR/TestProjectWindow.ui.renamed_help_menu" ./data/ui/TestProjectWindow.ui
 
@@ -357,9 +357,9 @@ rm -rf apport
 
 rm -rf etc
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 
 quickly upgrade 0.3 0.4
 # Adding launchpad integration to existing application
@@ -367,11 +367,11 @@ quickly upgrade 0.3 0.4
 # Creating new apport hooks
 # WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.differentHelpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
-cp "$TEST_SCRIPT_DIR/BaseTestProjectWindow.py.no_lpi" ./test_project/BaseTestProjectWindow.py
+cp "$TEST_SCRIPT_DIR/TestProjectWindow.py.no_lpi" ./test_project_lib/Window.py
 
 cp "$TEST_SCRIPT_DIR/TestProjectWindow.ui.no_gtk-about" ./data/ui/TestProjectWindow.ui
 
@@ -379,16 +379,16 @@ rm -rf apport
 
 rm -rf etc
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 
 grep gtk-about data/ui/TestProjectWindow.ui
 
 bzr commit -m "Committing after removing all lpi integration"
 # Committing to: /tmp/test-project/
 # modified data/ui/TestProjectWindow.ui
-# modified test_project/BaseTestProjectWindow.py
+# modified test_project_lib/Window.py
 # Committed revision 6.
 
 quickly upgrade 0.3 0.4
@@ -396,22 +396,22 @@ quickly upgrade 0.3 0.4
 # Creating new apport hooks
 # WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 
 bzr status
 # unknown:
 #   apport/
 #   etc/
 
-cp "$TEST_SCRIPT_DIR/BaseTestProjectWindow.py.no_lpi" ./test_project/BaseTestProjectWindow.py
+cp "$TEST_SCRIPT_DIR/TestProjectWindow.py.no_lpi" ./test_project_lib/Window.py
 
 rm ./data/ui/TestProjectWindow.ui
 
-grep LaunchpadIntegration. test_project/BaseTestProjectWindow.py
+grep LaunchpadIntegration. test_project_lib/Window.py
 
-grep helpMenu test_project/BaseTestProjectWindow.py
+grep helpMenu test_project_lib/Window.py
 
 quickly upgrade 0.3 0.4
 # WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.

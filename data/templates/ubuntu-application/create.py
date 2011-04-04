@@ -86,8 +86,8 @@ for root, dirs, files in os.walk(abs_path_project_root):
         relative_dir = relative_dir.replace('python', python_name)
 
     for directory in dirs:
-        if directory == 'python':
-            directory = python_name
+        if directory.startswith('python'):
+            directory = directory.replace('python', python_name)
         os.mkdir(os.path.join(relative_dir, directory))
     for filename in files:
         quicklyutils.file_from_template(root, filename, relative_dir, substitutions)

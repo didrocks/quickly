@@ -20,7 +20,7 @@ def update_config(values = {}):
 
     oldvalues = {}
     try:
-        fin = file('python_name/python_nameconfig.py', 'r')
+        fin = file('python_name_lib/python_nameconfig.py', 'r')
         fout = file(fin.name + '.new', 'w')
 
         for line in fin:
@@ -35,7 +35,7 @@ def update_config(values = {}):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find python_name/python_nameconfig.py")
+        print ("ERROR: Can't find python_name_lib/python_nameconfig.py")
         sys.exit(1)
     return oldvalues
 

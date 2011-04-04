@@ -6,8 +6,6 @@
 
 import sys
 import os
-import gtk
-import logging
 
 import gettext
 from gettext import gettext as _
@@ -31,35 +29,5 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
 if python_path:
     os.putenv('PYTHONPATH', "%s:%s" % (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses
 
-
-from python_name import (Basecamel_case_nameWindow)
-import python_name.helpers as helpers
-from python_name.preferences import preferences
-
-# See Basecamel_case_nameWindow.py for more details about how this class works
-class camel_case_nameWindow(Basecamel_case_nameWindow.Basecamel_case_nameWindow):
-    __gtype_name__ = "camel_case_nameWindow"
-    
-    def finish_initializing(self, builder):
-        """Set up the main window"""
-        super(camel_case_nameWindow, self).finish_initializing(builder)
-
-        # Code for other initialization actions should be added here.
-        preferences.connect('changed', self.on_preferences_changed)
-
-    def on_preferences_changed(self, widget, data=None):
-        logging.debug('main window received preferences changed')
-        for key in data:
-            logging.debug('preference changed: %s = %s' % (key, preferences[key]))
-
-if __name__ == "__main__":
-    # Support for command line options.  See helpers.py to add more.
-    helpers.parse_options()
-
-    # Run the application.
-    preferences.db_connect()
-    preferences.load()
-    window = camel_case_nameWindow()
-    window.show()
-    gtk.main()
-    preferences.save()
+import python_name
+python_name.main()

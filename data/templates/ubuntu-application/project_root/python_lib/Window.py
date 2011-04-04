@@ -5,21 +5,15 @@
 
 import gtk
 import logging
+logger = logging.getLogger('python_name_lib')
 
-from python_name import (
-    Aboutcamel_case_nameDialog, Preferencescamel_case_nameDialog)
-import python_name.helpers as helpers
-from python_name.preferences import preferences
-
-import gettext
-from gettext import gettext as _
-gettext.textdomain('project_name')
-
+from . helpers import get_builder, show_uri, get_help_uri
+from . preferences import preferences
 
 # This class is meant to be subclassed by camel_case_nameWindow.  It provides
 # common functions and some boilerplate.
-class Basecamel_case_nameWindow(gtk.Window):
-    __gtype_name__ = "Basecamel_case_nameWindow"
+class Window(gtk.Window):
+    __gtype_name__ = "Window"
 
     # To construct a new instance of this method, the following notable 
     # methods are called in this order:
@@ -37,7 +31,7 @@ class Basecamel_case_nameWindow(gtk.Window):
         
         Returns a fully instantiated Basecamel_case_nameWindow object.
         """
-        builder = helpers.get_builder('camel_case_nameWindow')
+        builder = get_builder('camel_case_nameWindow')
         new_object = builder.get_object("python_name_window")
         new_object.finish_initializing(builder)
         return new_object
@@ -52,7 +46,11 @@ class Basecamel_case_nameWindow(gtk.Window):
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.ui = builder.get_ui(self, True)
-        self.preferences_dialog = None
+        self.PreferencesDialog = None # class
+        self.preferences_dialog = None # instance
+        self.AboutDialog = None # class
+
+        preferences.connect('changed', self.on_preferences_changed)
 
         # Optional Launchpad integration
         # This shouldn't crash if not found as it is simply used for bug reporting.
@@ -79,13 +77,14 @@ class Basecamel_case_nameWindow(gtk.Window):
             pass
 
     def on_mnu_contents_activate(self, widget, data=None):
-        helpers.show_uri(self, "ghelp:%s" % helpers.get_help_uri())
+        show_uri(self, "ghelp:%s" % get_help_uri())
 
     def on_mnu_about_activate(self, widget, data=None):
         """Display the about box for project_name."""
-        about = Aboutcamel_case_nameDialog.Aboutcamel_case_nameDialog()
-        response = about.run()
-        about.destroy()
+        if self.AboutDialog is not None:
+            about = self.AboutDialog() # pylint: disable=E1102
+            response = about.run()
+            about.destroy()
 
     def on_mnu_preferences_activate(self, widget, data=None):
         """Display the preferences window for project_name."""
@@ -96,11 +95,11 @@ class Basecamel_case_nameWindow(gtk.Window):
            use the present() method to move the already-open dialog
            where the user can see it."""
         if self.preferences_dialog is not None:
-            logging.debug('show existing preferences_dialog')
+            logger.debug('show existing preferences_dialog')
             self.preferences_dialog.present()
-        else:
-            logging.debug('create new preferences_dialog')
-            self.preferences_dialog = Preferencescamel_case_nameDialog.Preferencescamel_case_nameDialog()
+        elif self.PreferencesDialog is not None:
+            logger.debug('create new preferences_dialog')
+            self.preferences_dialog = self.PreferencesDialog() # pylint: disable=E1102
             self.preferences_dialog.connect('destroy', self.on_preferences_dialog_destroyed)
             self.preferences_dialog.show()
         # destroy command moved into dialog to allow for a help button
@@ -114,16 +113,17 @@ class Basecamel_case_nameWindow(gtk.Window):
         # Clean up code for saving application state should be added here.
         gtk.main_quit()
 
+    def on_preferences_changed(self, widget, data=None):
+        logger.debug('main window received preferences changed')
+        for key in data:
+            logger.debug('preference changed: %s = %s' % (key, preferences[key]))
+
     def on_preferences_dialog_destroyed(self, widget, data=None):
         '''only affects gui
         
         logically there is no difference between the user closing,
         minimising or ignoring the preferences dialog'''
-        logging.debug('on_preferences_dialog_destroyed')
+        logger.debug('on_preferences_dialog_destroyed')
         # to determine whether to create or present preferences_dialog
         self.preferences_dialog = None
 
-if __name__ == "__main__":
-    window = Basecamel_case_nameWindow()
-    window.show()
-    gtk.main()

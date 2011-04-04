@@ -8,7 +8,7 @@
 
 import gtk
 
-from python_name.helpers import get_media_file
+from python_name_lib.helpers import get_media_file
 
 import gettext
 from gettext import gettext as _
@@ -17,7 +17,7 @@ gettext.textdomain('project_name')
 import appindicator
 
 class Indicator:
-    def __init__(self,window):
+    def __init__(self, window):
         self.indicator = appindicator.Indicator('project_name','distributor-logo',appindicator.CATEGORY_APPLICATION_STATUS)
         self.indicator.set_status(appindicator.STATUS_ACTIVE)
     
@@ -30,8 +30,7 @@ class Indicator:
         
         self.menu = gtk.Menu()
 
-        # Add items to Menu and connect signals. 
-        # Can access methods from bin/python_name using window
+        # Add items to Menu and connect signals.
         
         #Adding preferences button 
         #window represents the main Window object of your app

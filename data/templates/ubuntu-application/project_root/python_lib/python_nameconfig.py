@@ -57,3 +57,7 @@ def get_data_path():
         raise project_path_not_found
 
     return abs_data_path
+
+
+def get_version():
+    return __version__

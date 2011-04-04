@@ -5,11 +5,6 @@
 
 """Provides a shared preferences dictionary"""
 
-# TODO: replace defaults with your own values
-defaults = {
-'example_entry': 'I remember stuff',
- }
-
 from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 import gtk
@@ -102,4 +97,4 @@ class User_dict(dict):
             self.emit('changed', (key,))
 
 preferences = User_dict()
-preferences.update(defaults)
+

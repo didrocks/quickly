@@ -90,8 +90,8 @@ def update_apport(project_name, old_lp_project, new_lp_project):
 
 def insert_lpi_if_required(project_name):
     camel_case_project_name = quickly.templatetools.get_camel_case_name(project_name)
-    existing_base_filename = os.path.join(quickly.templatetools.python_name(project_name),
-                                          "Base%sWindow.py"%camel_case_project_name)
+    existing_base_filename = os.path.join(quickly.templatetools.python_name(project_name) + '_lib',
+                                          "Window.py")
     existing_ui_filename = os.path.join("data", "ui", "%sWindow.ui"%camel_case_project_name)
     
     if os.path.isfile(existing_base_filename) and os.path.isfile(existing_ui_filename):

@@ -11,6 +11,8 @@ import gtk
 import inspect
 import functools
 import logging
+logger = logging.getLogger('python_name_lib')
+
 from xml.etree.cElementTree import ElementTree
 
 # this module is big so uses some conventional prefixes and postfixes
@@ -49,7 +51,7 @@ class Builder(gtk.Builder):
     now he can define any likely candidates in glade and notice which
     ones get triggered when he plays with the project.
     this method does not appear in gtk.Builder'''
-        logging.debug('''tried to call non-existent function:%s()
+        logger.debug('''tried to call non-existent function:%s()
         expected in %s
         args:%s
         kwargs:%s''', handler_name, filename, args, kwargs)
@@ -115,7 +117,7 @@ class Builder(gtk.Builder):
                 connection_dict[item[0]] = handler
 
                 # replace the run time warning
-                logging.warn("expected handler '%s' in %s",
+                logger.warn("expected handler '%s' in %s",
                  item[0], filename)
 
         # connect glade define handlers
@@ -124,7 +126,7 @@ class Builder(gtk.Builder):
         # let's tell the user how we applied the glade design
         for connection in self.connections:
             widget_name, signal_name, handler_name = connection
-            logging.debug("connect builder by design '%s', '%s', '%s'",
+            logger.debug("connect builder by design '%s', '%s', '%s'",
              widget_name, signal_name, handler_name)
 
     def get_ui(self, callback_obj=None, by_name=True):
@@ -162,7 +164,7 @@ class UiFactory():
             pyname = make_pyname(name)
             if pyname != name:
                 if hasattr(self, pyname):
-                    logging.debug(
+                    logger.debug(
                     "Builder: Not binding %s, name already exists", pyname)
                 else:
                     setattr(self, pyname, obj)
@@ -264,7 +266,7 @@ def do_connect(item, signal_name, handler_names,
             widget.connect(signal_name, callback_handler_dict[handler_name])
             connections.append(connection)
 
-            logging.debug("connect builder by name '%s','%s', '%s'",
+            logger.debug("connect builder by name '%s','%s', '%s'",
              widget_name, signal_name, handler_name)
 
 
@@ -283,4 +285,4 @@ def log_unconnected_functions(callback_handler_dict, connections):
             pass
 
     for handler_name in unconnected:
-        logging.debug("Not connected to builder '%s'", handler_name)
+        logger.debug("Not connected to builder '%s'", handler_name)
