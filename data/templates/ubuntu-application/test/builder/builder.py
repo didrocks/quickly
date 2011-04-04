@@ -15,8 +15,8 @@ sys.path.insert(0, proj_root)
 from python_lib import Builder
 
 # Clean up after ourselves
-os.remove(os.path.join(proj_root, 'python_lib', '__init__.pyc'))
-os.remove(os.path.join(proj_root, 'python_lib', 'Builder.pyc'))
+for f in glob.glob(os.path.join(proj_root, 'python_lib', '*.pyc')):
+    os.remove(f)
 
 # alias belongs in helpers, but it cannot be imported
 def alias(alternative_function_name):
