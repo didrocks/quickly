@@ -8,7 +8,7 @@ import vte
 
 try:
     from quickly import api as quicklyapi
-    from quickly import prompts
+    #from quickly import prompts
     has_quickly = True
 except:
     has_quickly = False
@@ -169,9 +169,10 @@ class UbuntuDevBar(gtk.HBox):
     def add_additional_actions(self, command):
         """Some commands needs additional args, filter them here"""
 
-        if command[1] == "create":
-            response, val = prompts.string("Project Name","Please enter a project name")
-            if response == gtk.RESPONSE_OK:
-                command.append(val)
+        # TODO: Add missing prompts module
+        #if command[1] == "create":
+        #    response, val = prompts.string("Project Name","Please enter a project name")
+        #    if response == gtk.RESPONSE_OK:
+        #        command.append(val)
 
         return command

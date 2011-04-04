@@ -20,6 +20,10 @@ import os
 import sys
 import subprocess
 
+import gettext
+from gettext import gettext as _
+gettext.textdomain('quickly')
+
 LAUNCHPAD_URL = "https://launchpad.net"
 LAUNCHPAD_STAGING_URL = "https://staging.launchpad.net"
 LAUNCHPAD_CODE_STAGING_URL = "https://code.staging.launchpad.net"
@@ -33,7 +37,7 @@ class launchpad_project_error(Exception):
 try:
     from launchpadlib.launchpad import Launchpad
     from launchpadlib.uris import LPNET_SERVICE_ROOT, STAGING_SERVICE_ROOT
-    from launchpadlib.errors import HTTPError
+    from launchpadlib.errors import HTTPError # pylint: disable=E0611
     from launchpadlib.credentials import Credentials
     import httplib2
 except ImportError:

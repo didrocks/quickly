@@ -389,7 +389,7 @@ class Command:
                 if instance.returncode != 0:
                     print err
                     sys.exit(1)
-                completion.extend(command_return_completion.strip().split(' '))
+                completion.extend(command_return_completion.strip().split(' ')) # pylint: disable=E1103
 
         return completion
 

@@ -7,6 +7,8 @@ base_sprite - contains BaseSprite class.
 import pygame, random
 from python_name import python_nameconfig
 
+# pylint: disable=E1101
+
 class BaseSprite(pygame.sprite.Sprite):
     """
     BaseSprite - handles all common sprite data and functionality

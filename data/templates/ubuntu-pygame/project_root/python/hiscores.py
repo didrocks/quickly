@@ -54,7 +54,7 @@ def save_score(score, level, player=get_user_fullname()):
 
 def hiscores_screen(screen_size, message="Press Enter to Start"):
     """A pygame surface with the hiscore board and start message."""
-    screen = pygame.Surface(screen_size)
+    screen = pygame.Surface(screen_size) # pylint: disable=E1121
     screen.fill(DARK_GRAY)
     screen_rect = screen.get_rect()
     centerx = screen_rect.centerx

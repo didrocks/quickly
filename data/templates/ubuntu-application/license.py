@@ -127,7 +127,7 @@ def copy_license_to_files(license_content):
                         os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
 
                 except (OSError, IOError), e:
-                    msg = _("%s file was not found") % fcopyright_name
+                    msg = _("%s file was not found") % target_file_name
                     raise LicenceError(msg)
 
 

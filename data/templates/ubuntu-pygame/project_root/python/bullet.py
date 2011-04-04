@@ -9,6 +9,8 @@ import pygame, random
 from python_name.base_sprite import BaseSprite
 from python_name import python_nameconfig
 
+# pylint: disable=E1101
+
 class Bullet(BaseSprite):
     """
     Bullet - A sprite that represents a bullet that lacks AI. The

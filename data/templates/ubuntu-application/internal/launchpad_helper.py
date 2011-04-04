@@ -22,6 +22,8 @@ import os
 import sys
 import subprocess
 
+from launchpadlib.errors import HTTPError # pylint: disable=E0611
+
 import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')

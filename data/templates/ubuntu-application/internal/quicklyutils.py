@@ -213,7 +213,7 @@ def collect_commit_messages(previous_version):
     buffered_message = ""
     collect_switch = False
     uncollect_msg = (_('quickly saved'), _('commit before release'))
-    for line in result.splitlines():
+    for line in result.splitlines(): # pylint: disable=E1103
         #print buffered_message
         if line == 'message:':
             collect_switch = True
@@ -310,7 +310,7 @@ def get_all_emails(launchpad=None):
     result, err = gpg_instance.communicate()    
     if gpg_instance.returncode != 0:
         raise gpg_error(err)
-    for line in result.splitlines():
+    for line in result.splitlines(): # pylint: disable=E1103
         if 'sec' in line or 'uid' in line:
             email_list.append(take_email_from_string(line.split(':')[9]))
 
@@ -349,7 +349,7 @@ Expire-Date: 0
     if gpg_instance.returncode != 0:
         raise gpg_error(err)
     secret_key_id = None
-    for line in result.splitlines():
+    for line in result.splitlines(): # pylint: disable=E1103
         if 'sec' in line:
             secret_key_id = line.split(':')[4][-8:]
     if not secret_key_id:
@@ -379,7 +379,7 @@ def get_right_gpg_key_id(launchpad):
     if gpg_instance.returncode != 0:
         raise gpg_error(err)
     candidate_key_ids = {}
-    for line in result.splitlines():
+    for line in result.splitlines(): # pylint: disable=E1103
         if 'sec' in line:
             secret_key_id = line.split(':')[4][-8:]
             if verbose:

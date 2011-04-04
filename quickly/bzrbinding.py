@@ -18,6 +18,10 @@
 import socket
 import subprocess
 
+import gettext
+from gettext import gettext as _
+gettext.textdomain('quickly')
+
 def bzr_set_login(display_name, preferred_email_adress, launchpad_name=None):
     ''' try to setup bzr whoami for commit and sshing and bzr launchpad_login if provided
 

@@ -18,6 +18,8 @@ from jotty.PreferencesJottyDialog import PreferencesJottyDialog
 from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
 
+# pylint: disable=E1002,E1101
+
 # See jotty_lib.Window.py for more details about how this class works
 class JottyWindow(Window):
     __gtype_name__ = "JottyWindow"

@@ -202,7 +202,7 @@ bzr_instance = subprocess.Popen(['bzr', 'tags', '--sort=time'],
                                  stdout=subprocess.PIPE)    
 result, err = bzr_instance.communicate()
 if bzr_instance.returncode == 0 and result:
-    output = result.split('\n')
+    output = result.split('\n') # pylint: disable=E1103
     output.reverse()
     for tag_line in output:
         tag_elem = tag_line.split (' ')

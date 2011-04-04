@@ -11,6 +11,8 @@ from python_name.base_sprite import BaseSprite
 from python_name.bullet import Bullet
 from python_name import python_nameconfig
 
+# pylint: disable=E1101
+
 class Guy(BaseSprite):
     """
     Guy - The sprite controlled by the player. managers 

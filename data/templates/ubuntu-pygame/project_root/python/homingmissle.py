@@ -9,6 +9,8 @@ from python_name.base_sprite import BaseSprite
 import math
 from python_name import python_nameconfig
 
+# pylint: disable=E1101
+
 class HomingMissle(BaseSprite):
     """
     HomingMissle - A useful sample class that derives from BaseSprite and 

@@ -9,6 +9,11 @@ if [ ! -e $(pwd)/bin ]; then
     exit 1
 fi
 
+if [ -z "$1" ]; then
+    echo "You must provide a test as an argument to this script"
+    exit 1
+fi
+
 exit_status() {
     if [ $1 -eq 0 ]; then
         echo -e '\e[32mPASSED\e[0m'
