@@ -18,7 +18,7 @@
 
 
 # UPDATE VERSION WHEN NEEDED (it updates all versions needed to be updated)
-VERSION = '11.03.1'
+VERSION = '11.04'
 
 import glob
 import os
