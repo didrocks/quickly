@@ -34,7 +34,7 @@ XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
          ${python:Depends},
          python-quickly-common
-Recommends: python-launchpadlib,
+Recommends: python-launchpadlib (>= 1.9.3),
             bzr
 Replaces: quickly (<< 0.4)
 Description: build new apps quickly
@@ -70,7 +70,7 @@ Depends: ${misc:Depends},
          python-gtk2,
          glade,
          python-desktopcouch-records (>= 0.3),
-         python-launchpadlib,
+         python-launchpadlib (>= 1.9.3),
          python-lxml,
          dput,
          gedit | editor,

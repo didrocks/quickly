@@ -31,7 +31,8 @@ class launchpad_project_error(Exception):
     pass
 
 try:
-    from launchpadlib.launchpad import Launchpad, EDGE_SERVICE_ROOT, STAGING_SERVICE_ROOT
+    from launchpadlib.launchpad import Launchpad
+    from launchpadlib.uris import LPNET_SERVICE_ROOT, STAGING_SERVICE_ROOT
     from launchpadlib.errors import HTTPError
     from launchpadlib.credentials import Credentials
     import httplib2
@@ -53,7 +54,7 @@ if os.getenv('QUICKLY') and "staging" in os.getenv('QUICKLY').lower():
     lp_server = "staging"
 else:
     launchpad_url = LAUNCHPAD_URL
-    lp_server = "edge"
+    lp_server = "production"
 
 
 
@@ -71,60 +72,28 @@ def initialize_lpi(interactive = True):
     launchpad = None
     return_code = 0
 
-    # setup right cache, credentials and server
-    lp_cred_dir = os.path.expanduser("~/.cache/lp_credentials/")
-    if not os.path.isdir(lp_cred_dir):
-        os.makedirs(lp_cred_dir)
-        os.chmod(lp_cred_dir, 0700)
-
-    lp_cache_dir = os.path.expanduser('~/.cache/lp_credentials/lp-cache/')
-    if not os.path.isdir(lp_cache_dir):
-        os.makedirs(lp_cache_dir)
-
     # check which server to address
     if lp_server == "staging":
-        lp_cred = lp_cred_dir + "quickly-cred-staging"
         SERVICE_ROOT = STAGING_SERVICE_ROOT
         print _("WARNING: you are using staging and not launchpad real production server")
     else:
-        lp_cred = lp_cred_dir + "quickly-cred"
-        SERVICE_ROOT = EDGE_SERVICE_ROOT
+        SERVICE_ROOT = LPNET_SERVICE_ROOT
 
     # load stored LP credentials
-    try:
-        if interactive:
-            print _("Get Launchpad Settings")
-        lp_cred_file = None
-        lp_cred_file = open(lp_cred, 'r')
-        credentials = Credentials()
-        credentials.load(lp_cred_file)
-        lp_cred_file.close()
-        try:
-            launchpad = Launchpad(credentials, SERVICE_ROOT, lp_cache_dir)
-        except httplib2.ServerNotFoundError, e:
-            raise launchpad_connection_error(e)
-    except (IOError, HTTPError):
-        if interactive:
-            # case where autorization on Launchpad was removed
-            if lp_cred_file:
-                os.remove(lp_cred_file.name)
-                print _('Previous Launchpad values seems to have been removed.')
-            else:
-                print _('Initial Launchpad binding.')
-            launchpad = Launchpad.get_token_and_login(_('Quickly'), SERVICE_ROOT, lp_cache_dir, allow_access_levels=["WRITE_PRIVATE"])
-            lp_cred_file = open(lp_cred, 'w')
-            launchpad.credentials.save(lp_cred_file)
-            lp_cred_file.close()
+    if interactive:
+        print _("Get Launchpad Settings")
+    launchpad = Launchpad.login_with(_('Quickly'),
+                                     service_root=SERVICE_ROOT,
+                                     allow_access_levels=["WRITE_PRIVATE"])
 
-            # try to setup bzr
-            me = launchpad.me
-            (return_code, suggestion) = bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email, me.name)
+    # try to setup bzr
+    me = launchpad.me
+    (return_code, suggestion) = bzrbinding.bzr_set_login(me.display_name, me.preferred_email_address.email, me.name)
 
     if interactive:
         if launchpad is None or return_code != 0:
             if suggestion is None:
                  suggestion = _("Unknown reason")
-            os.remove(lp_cred)
             raise launchpad_connection_error(_("Couldn't setup Launchpad for quickly ; %s") % suggestion)
         print _("Launchpad connection is ok")
 
