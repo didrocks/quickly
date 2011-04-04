@@ -3,7 +3,7 @@
 # This file is in the public domain
 ### END LICENSE
 
-'''Enhances builder connections, provides object to access uiglade objects'''
+'''Enhances builder connections, provides object to access glade objects'''
 
 from gi.repository import GObject  # pylint: disable=E0611
 
@@ -148,31 +148,39 @@ class Builder(gtk.Builder):
         return result
 
 
-# object interface
 # pylint: disable=R0903
 # this class deliberately does not provide any public interfaces
 # apart from the glade widgets
 class UiFactory():
     ''' provides an object with attributes as glade widgets'''
-    def __init__(self, data):
-        for item in data.items():
-            setattr(self, item[0], item[1])
+    def __init__(self, widget_dict):
+        self._widget_dict = widget_dict
+        for (widget_name, widget) in widget_dict.items():
+            setattr(self, widget_name, widget)
 
         # Mangle any non-usable names (like with spaces or dashes)
         # into pythonic ones
-        for (name, obj) in data.items():
-            pyname = make_pyname(name)
-            if pyname != name:
+        cannot_message = """cannot bind ui.%s, name already exists
+        consider using a pythonic name instead of design name '%s'"""
+        consider_message = """consider using a pythonic name instead of design name '%s'"""
+        
+        for (widget_name, widget) in widget_dict.items():
+            pyname = make_pyname(widget_name)
+            if pyname != widget_name:
                 if hasattr(self, pyname):
-                    logger.debug(
-                    "Builder: Not binding %s, name already exists", pyname)
+                    logger.debug(cannot_message, pyname, widget_name)
                 else:
-                    setattr(self, pyname, obj)
+                    logger.debug(consider_message, widget_name)
+                    setattr(self, pyname, widget)
 
         def iterator():
             '''Support 'for o in self' '''
-            return iter(data.values())
+            return iter(widget_dict.values())
         setattr(self, '__iter__', iterator)
+
+    def __getitem__(self, name):
+        'access as dictionary where name might be non-pythonic'
+        return self._widget_dict[name]
 # pylint: enable=R0903
 
 
