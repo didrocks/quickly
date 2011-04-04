@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-31 08:11-0400\n"
+"POT-Creation-Date: 2011-04-04 08:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,59 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../data/templates/ubuntu-application/configure.py:37
-msgid "quickly configure bzr <bzr-branch-string>"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:39
-msgid "quickly configure lp-project [project-name]"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:40
-msgid "quickly configure ppa <ppa-name>"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:41
-msgid "quickly configure target-distribution <ubuntu-release-name>"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:46
-msgid ""
-"Enable to set or change some parameters of the project, like which\n"
-"launchpad project should be bound with the current ubuntu application, what\n"
-"PPA should we use by default to share your package, what additional "
-"dependencies\n"
-"should be added…\n"
-"\n"
-"Note: If you are specifying a target-distribution apart from the one you "
-"are\n"
-"running, be warned that dependency detection may not be as accurate due to\n"
-"(rare) discrepancies between distributions."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:110
-msgid ""
-"\n"
-"Use shell completion to find all available PPAs"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:125
-#, python-format
-msgid "User or team %s not found on Launchpad"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:128
-#, python-format
-msgid "You have to be a member of %s team to upload to its PPAs"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:134
-#, python-format
-msgid ""
-"%s does not exist. Please create it on launchpad if you want to upload to "
-"it. %s has the following PPAs available:"
-msgstr ""
 
 #: ../data/templates/ubuntu-application/edit.py:39
 msgid ""
@@ -210,6 +157,59 @@ msgid ""
 "$ quickly tutorial\n"
 "\n"
 "Opens help file with the tutorial for the current template.\n"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:37
+msgid "quickly configure bzr <bzr-branch-string>"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:39
+msgid "quickly configure lp-project [project-name]"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:40
+msgid "quickly configure ppa <ppa-name>"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:41
+msgid "quickly configure target-distribution <ubuntu-release-name>"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:46
+msgid ""
+"Enable to set or change some parameters of the project, like which\n"
+"launchpad project should be bound with the current ubuntu application, what\n"
+"PPA should we use by default to share your package, what additional "
+"dependencies\n"
+"should be added…\n"
+"\n"
+"Note: If you are specifying a target-distribution apart from the one you "
+"are\n"
+"running, be warned that dependency detection may not be as accurate due to\n"
+"(rare) discrepancies between distributions."
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:110
+msgid ""
+"\n"
+"Use shell completion to find all available PPAs"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:125
+#, python-format
+msgid "User or team %s not found on Launchpad"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:128
+#, python-format
+msgid "You have to be a member of %s team to upload to its PPAs"
+msgstr ""
+
+#: ../data/templates/ubuntu-application/configure.py:134
+#, python-format
+msgid ""
+"%s does not exist. Please create it on launchpad if you want to upload to "
+"it. %s has the following PPAs available:"
 msgstr ""
 
 #: ../data/templates/ubuntu-flash-game/internal/apportutils.py:68
