@@ -1,3 +1,0 @@
-# script ubuntu-application/bin/project_name is not executable because
-# it is revamped when creating a ubuntu-application based project.
-quickly-ubuntu-template: script-not-executable ./usr/share/quickly/templates/ubuntu-application/bin/project_name
