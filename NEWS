@@ -4,14 +4,16 @@ Quickly 11.04
  + ubuntu-application-template:
    - Separated user-modifiable code from quickly-owned code by adding new
      *_lib module in new projects that contains quickly-maintained code
-   - Support self.ui['my crazy widget'] widget access
+   - Support self.ui['my widget'] widget access
    - Refresh tutorial for Ubuntu 11.04 with new screenshots and more editing
  + ubuntu-application-template and derivatives:
    - Add 'quickly test' command that will run unit tests on your code; some
      sample tests are included
-   - Fixed LP login support to work with latest liblaunchpad
  + ubuntu-pygame-template:
    - Add hiscores support by Alejandro J. Cura
+ + common:
+   - Fixed LP login support to work with latest liblaunchpad
+   - Updated translations
 
 Quickly 11.03.1
 ------------------------------------
