@@ -56,8 +56,11 @@ for root, dirs, files in os.walk('./'):
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
 
-# add launcher which does not end with .py
-# filelist.append('bin/' + configurationhandler.project_config['project'])
+# add launcher which does not end with .py for older projects (pre-lib split)
+project_name = configurationhandler.project_config['project']
+libdir = os.path.join(templatetools.python_name(project_name) + '_lib')
+if not os.path.exists(libdir):
+    filelist.append('bin/' + configurationhandler.project_config['project'])
 
 # add helpfile sources
 filelist.extend(glob.glob('help/C/*.page'))
