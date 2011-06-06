@@ -37,38 +37,6 @@ class gpg_error(Exception):
     def __str__(self):
         return repr(self.message)
 
-def conventional_names(name):
-    sentence_name = templatetools.get_sentence_name(name)
-    camel_case_name = templatetools.get_camel_case_name(name)
-    return sentence_name, camel_case_name
-
-def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
-
-    if not os.path.isfile(os.path.join(template_dir, template_file)):
-        return
-    target_file = os.path.basename(template_file) # to get only file name (template_file can be internal/file)
-    if rename:
-        for s in substitutions:
-            pattern, sub = s
-            target_file = target_file.replace(pattern,sub)
-
-    fin = open(os.path.join(template_dir, template_file),'r')
-    file_contents = fin.read()
-    for s in substitutions:
-        pattern, sub = s
-        file_contents = file_contents.replace(pattern,sub)
-
-    target_path = os.path.join(target_dir, target_file)
-    if os.path.exists(target_path):
-        print _("Failed to add file to project\n cannot add: %s - this file already exists." % target_path)
-        sys.exit(4)        
-
-    fout = open(target_path, 'w')
-    fout.write(file_contents)
-    fout.flush()
-    fout.close()
-    fin.close()
-
 def get_setup_value(key):
     """ get value from setup.py file.
     

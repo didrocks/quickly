@@ -85,7 +85,7 @@ pathname = templatetools.get_template_path_from_project()
 abs_path_project_root = os.path.join(pathname, 'project_root')
 
 python_name = templatetools.python_name(project_name)
-sentence_name, camel_case_name = quicklyutils.conventional_names(project_name)
+sentence_name, camel_case_name = templatetools.conventional_names(project_name)
 
 # Calculate the SWF's dimensions
 try:
@@ -121,7 +121,7 @@ for root, dirs, files in os.walk(abs_path_project_root):
             directory = python_name
         os.mkdir(os.path.join(relative_dir, directory))
     for filename in files:
-        quicklyutils.file_from_template(root, filename, relative_dir, substitutions)
+        templatetools.file_from_template(root, filename, relative_dir, substitutions)
 
 # set the mode to executable for executable file 
 exec_file = os.path.join('bin', project_name)

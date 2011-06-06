@@ -66,18 +66,18 @@ def update_apport(project_name, old_lp_project, new_lp_project):
 
         if os.path.isfile(existing_crashdb):
             print _("Updating project name references in existing apport crashdb configuration")
-            quicklyutils.file_from_template(relative_crashdb_dir, crashdb_file, relative_crashdb_dir, subst_existing)
+            templatetools.file_from_template(relative_crashdb_dir, crashdb_file, relative_crashdb_dir, subst_existing)
         elif os.path.isdir(template_crashdb_dir):
             print _("Creating new apport crashdb configuration")
             if not os.path.isdir(relative_crashdb_dir):
                 os.makedirs(relative_crashdb_dir)
-            quicklyutils.file_from_template(template_crashdb_dir, "project_name-crashdb.conf", relative_crashdb_dir, subst_new)
+            templatetools.file_from_template(template_crashdb_dir, "project_name-crashdb.conf", relative_crashdb_dir, subst_new)
 
         if not os.path.isfile(existing_hook) and os.path.isdir(template_hook_dir):
             print _("Creating new apport hooks")
             if not os.path.isdir(relative_apport_dir):
                 os.makedirs(relative_apport_dir)
-            quicklyutils.file_from_template(template_hook_dir, "source_project_name.py", relative_apport_dir, subst_new)
+            templatetools.file_from_template(template_hook_dir, "source_project_name.py", relative_apport_dir, subst_new)
 
 def insert_lpi_if_required(project_name):
     existing_bin_filename = os.path.join("bin",project_name)

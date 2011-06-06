@@ -24,7 +24,6 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
-import internal.quicklyutils as quicklyutils
 from quickly import configurationhandler, templatetools, commands
 
 option = 'quickly add indicator'
@@ -54,12 +53,12 @@ def add(options):
     target_python_dir = python_name
 
     project_sentence_name, project_camel_case_name = \
-        quicklyutils.conventional_names(project_name)
+        templatetools.conventional_names(project_name)
 
     substitutions = (("project_name",project_name),
                     ( "python_name",python_name))
 
-    quicklyutils.file_from_template(template_python_dir, 
+    templatetools.file_from_template(template_python_dir, 
                                     "indicator.py", 
                                     target_python_dir, 
                                     substitutions)
