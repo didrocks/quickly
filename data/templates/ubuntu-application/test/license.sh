@@ -71,8 +71,8 @@ grep "General Public License version" setup.py
 # # under the terms of the GNU General Public License version 2, as published 
 
 grep -A 1 -m 1 "GENERAL PUBLIC LICENSE" COPYING
-# 		    GNU GENERAL PUBLIC LICENSE
-# 		       Version 2, June 1991
+#                     GNU GENERAL PUBLIC LICENSE
+#                        Version 2, June 1991
 
 quickly license GPL-3
 
@@ -83,5 +83,5 @@ grep "General Public License version" setup.py
 # # under the terms of the GNU General Public License version 3, as published 
 
 grep -A 1 -m 1 "GENERAL PUBLIC LICENSE" COPYING
-# 		    GNU GENERAL PUBLIC LICENSE
-# 		       Version 3, 29 June 2007
+#                     GNU GENERAL PUBLIC LICENSE
+#                        Version 3, 29 June 2007
