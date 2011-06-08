@@ -9,7 +9,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
-import gtk
+from gi.repository import Gtk # pylint: disable=E0611
 
 from python_name import camel_case_nameWindow
 
@@ -43,6 +43,6 @@ def main():
     # Run the application.    
     window = camel_case_nameWindow.camel_case_nameWindow()
     window.show()
-    gtk.main()
+    Gtk.main()
     
     preferences.save()

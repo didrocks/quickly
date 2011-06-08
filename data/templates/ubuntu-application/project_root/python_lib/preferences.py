@@ -7,8 +7,7 @@
 
 from desktopcouch.records.server import CouchDatabase
 from desktopcouch.records.record import Record
-import gtk
-import gobject
+from gi.repository import GObject # pylint: disable=E0611
 
 class User_dict(dict):
     ''' a dictionary with extra methods:
@@ -29,14 +28,12 @@ class User_dict(dict):
             "http://wiki.ubuntu.com/Quickly/RecordTypes/camel_case_name/"
             "Preferences")
         
-        class Publisher(gtk.Invisible): # pylint: disable=R0904
-            '''set up signals in a separate class
-            
-            gtk.Invisible has 230 public methods'''
-            __gsignals__ = {'changed' : (gobject.SIGNAL_RUN_LAST,
-                 gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT,)),
-                 'loaded' : (gobject.SIGNAL_RUN_LAST,
-                 gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT,))}
+        class Publisher(GObject.Object): # pylint: disable=R0904
+            '''set up signals in a separate class'''
+            __gsignals__ = {'changed' : (GObject.SignalFlags.RUN_LAST,
+                 None, (GObject.TYPE_PYOBJECT,)),
+                 'loaded' : (GObject.SignalFlags.RUN_LAST,
+                 None, (GObject.TYPE_PYOBJECT,))}
         
         publisher = Publisher()
         self.emit  = publisher.emit
