@@ -2,8 +2,7 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 
 import nautilus
-import pygtk
-import gtk
+from gi.repository import GdkPixbuf, Gtk # pylint: disable=E0611
 import vte
 
 try:
@@ -73,7 +72,7 @@ class DevBar(nautilus.LocationWidgetProvider):
         return bar
 
 
-class UbuntuDevBar(gtk.HBox):
+class UbuntuDevBar(Gtk.HBox):
     '''Container to all buttons in nautilus.'''
 
     def __init__(self, *args, **kwargs):
@@ -87,16 +86,16 @@ class UbuntuDevBar(gtk.HBox):
 
     def add_image(self, image_name, subtitle=None):
         """Add an image to the bar and a subtitle below if one."""
-        self._logo = gtk.VBox(homogeneous=False, spacing=0)
-        self._image = gtk.Image()
+        self._logo = Gtk.VBox(homogeneous=False, spacing=0)
+        self._image = Gtk.Image()
         self._logo.pack_start(self._image, expand=True, fill=True, padding=0)
-        pixbuf = gtk.gdk.pixbuf_new_from_file(image_name)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(image_name)
         if pixbuf:
-            scaled_pixbuf = pixbuf.scale_simple(48, 48, gtk.gdk.INTERP_BILINEAR)
+            scaled_pixbuf = pixbuf.scale_simple(48, 48, GdkPixbuf.InterpType.BILINEAR)
             self._image.set_from_pixbuf(scaled_pixbuf)
             self._image.show()
         if subtitle:
-            self._subtitle = gtk.Label(subtitle)
+            self._subtitle = Gtk.Label(subtitle)
             self._logo.pack_start(self._subtitle, expand=True, fill=True, padding=0)
             self._subtitle.show()
         self.pack_start(self._logo, expand=False, fill=False, padding=0)
@@ -104,17 +103,17 @@ class UbuntuDevBar(gtk.HBox):
 
     def add_button(self, signal, label, command_line, path, icon=None):
         """Adds a new new button to the bar widget."""
-        button = gtk.Button()
+        button = Gtk.Button()
         button.connect("clicked", signal, command_line, path)
         button.set_label(label)
         if icon:
-            image = gtk.Image()
+            image = Gtk.Image()
             image.set_from_file(icon)
             settings = button.get_settings()
             settings.set_property("gtk-button-images", True)
             button.set_image(image)
         button.show()
-        vbox = gtk.VBox(homogeneous=False, spacing=0)
+        vbox = Gtk.VBox(homogeneous=False, spacing=0)
         vbox.pack_start(button, expand=True, fill=False, padding=0)
         vbox.show()
         self._buttons.append(button)
@@ -123,21 +122,21 @@ class UbuntuDevBar(gtk.HBox):
     def add_button_with_selection(self, signal, label, selection, command_line,
                                   path, icon=None):
         """Adds a new button with a multiple selection widget"""
-        combobox = gtk.combo_box_new_text()
+        combobox = Gtk.ComboBoxText()
         for item in selection:
             combobox.append_text(item)
         combobox.show()
-        button = gtk.Button()
+        button = Gtk.Button()
         button.set_label(label)
         button.connect("clicked", signal, command_line, path, combobox)
         if icon:
-            image = gtk.Image()
+            image = Gtk.Image()
             image.set_from_file(icon)
             settings = button.get_settings()
             settings.set_property("gtk-button-images", True)
             button.set_image(image)
         button.show()
-        vbox = gtk.VBox(homogeneous=False, spacing=0)
+        vbox = Gtk.VBox(homogeneous=False, spacing=0)
         vbox.pack_start(combobox, expand=True, fill=False, padding=0)
         vbox.pack_start(button, expand=True, fill=False, padding=0)
         self._buttons_with_selection.append((combobox,button))
@@ -160,11 +159,11 @@ class UbuntuDevBar(gtk.HBox):
         command = self.add_additional_actions(command)
         v = vte.Terminal()
         v.fork_command(command[0], argv=command, directory=argscommand[1])
-        window = gtk.Window()
+        window = Gtk.Window()
         window.add(v)
         if command[1] not in command_without_output:
             window.show_all()
-        gtk.main()
+        Gtk.main()
 
     def add_additional_actions(self, command):
         """Some commands needs additional args, filter them here"""
@@ -172,7 +171,7 @@ class UbuntuDevBar(gtk.HBox):
         # TODO: Add missing prompts module
         #if command[1] == "create":
         #    response, val = prompts.string("Project Name","Please enter a project name")
-        #    if response == gtk.RESPONSE_OK:
+        #    if response == Gtk.ResponseType.OK:
         #        command.append(val)
 
         return command

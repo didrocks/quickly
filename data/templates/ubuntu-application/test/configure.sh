@@ -17,7 +17,6 @@ grep url= setup.py
 #     #url='https://launchpad.net/test-project',
 
 grep website data/ui/AboutTestProjectDialog.ui
-#     <property name="website"></property>
 
 grep lp_id .quickly
 
@@ -33,7 +32,7 @@ grep lp_id .quickly
 grep url= setup.py
 #     url='https://launchpad.net/gpoweroff',
 
-grep website data/ui/AboutTestProjectDialog.ui
+grep website data/ui/AboutTestProjectDialog.ui | sed 's|</property>.*|</property>|'
 #     <property name="website">https://launchpad.net/gpoweroff</property>
 
 (echo hudson-notifier > tmp)
@@ -49,7 +48,7 @@ grep lp_id .quickly
 grep url= setup.py
 #     url='https://launchpad.net/hudson-notifier',
 
-grep website data/ui/AboutTestProjectDialog.ui
+grep website data/ui/AboutTestProjectDialog.ui | sed 's|</property>.*|</property>|'
 #     <property name="website">https://launchpad.net/hudson-notifier</property>
 
 ## Test configure bzr

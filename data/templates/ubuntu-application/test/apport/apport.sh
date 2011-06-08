@@ -12,6 +12,7 @@ quickly create ubuntu-application test-project
 cd test-project
 
 grep LaunchpadIntegration. test_project_lib/Window.py
+#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
@@ -25,6 +26,7 @@ quickly configure lp-project gpoweroff
 # Creating new apport hooks
 
 grep LaunchpadIntegration. test_project_lib/Window.py
+#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
@@ -54,6 +56,7 @@ quickly configure lp-project hudson-notifier
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. test_project_lib/Window.py
+#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
@@ -119,6 +122,7 @@ quickly configure lp-project gpoweroff
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. test_project_lib/Window.py
+#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
@@ -149,6 +153,7 @@ quickly configure lp-project hudson-notifier
 # Creating new apport hooks
 
 grep LaunchpadIntegration. test_project_lib/Window.py
+#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
@@ -188,6 +193,7 @@ quickly configure lp-project gpoweroff
 # Updating project name references in existing apport crashdb configuration
 
 grep LaunchpadIntegration. test_project_lib/Window.py
+#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 
@@ -316,6 +322,7 @@ quickly upgrade 0.3 0.4
 # WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 grep LaunchpadIntegration. test_project_lib/Window.py
+#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 #             LaunchpadIntegration.set_sourcepackagename('test-project')
 

@@ -7,7 +7,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('jotty')
 
-import gtk
+from gi.repository import Gtk # pylint: disable=E0611
 import logging
 logger = logging.getLogger('jotty')
 
