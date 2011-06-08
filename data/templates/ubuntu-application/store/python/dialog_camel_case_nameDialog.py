@@ -3,7 +3,7 @@
 # This file is in the public domain
 ### END LICENSE
 
-import gtk
+from gi.repository import Gtk # pylint: disable=E0611
 
 from python_name_lib.helpers import get_builder
 
@@ -11,7 +11,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
-class dialog_camel_case_nameDialog(gtk.Dialog):
+class dialog_camel_case_nameDialog(Gtk.Dialog):
     __gtype_name__ = "dialog_camel_case_nameDialog"
 
     def __new__(cls):
@@ -40,14 +40,14 @@ class dialog_camel_case_nameDialog(gtk.Dialog):
     def on_btn_ok_clicked(self, widget, data=None):
         """The user has elected to save the changes.
 
-        Called before the dialog returns gtk.RESONSE_OK from run().
+        Called before the dialog returns Gtk.ResponseType.OK from run().
         """
         pass
 
     def on_btn_cancel_clicked(self, widget, data=None):
         """The user has elected cancel changes.
 
-        Called before the dialog returns gtk.RESPONSE_CANCEL for run()
+        Called before the dialog returns Gtk.ResponseType.CANCEL for run()
         """
         pass
 
@@ -55,4 +55,4 @@ class dialog_camel_case_nameDialog(gtk.Dialog):
 if __name__ == "__main__":
     dialog = dialog_camel_case_nameDialog()
     dialog.show()
-    gtk.main()
+    Gtk.main()
