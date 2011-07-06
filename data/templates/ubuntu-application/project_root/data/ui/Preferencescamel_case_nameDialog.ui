@@ -4,7 +4,6 @@
   <!-- interface-requires preferences_python_name_dialog 1.0 -->
   <object class="Preferencescamel_case_nameDialog" id="preferences_python_name_dialog">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="title" translatable="yes">sentence_name Preferences</property>
     <property name="icon">../media/project_name.svg</property>
     <property name="type_hint">normal</property>
@@ -12,7 +11,8 @@
       <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="spacing">2</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
@@ -58,21 +58,25 @@
           </packing>
         </child>
         <child>
-          <object class="GtkTable" id="table1">
+          <object class="GtkGrid" id="table1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="n_columns">2</property>
-            <property name="column_spacing">6</property>
             <property name="row_spacing">6</property>
+            <property name="column_spacing">6</property>
+            <property name="n_rows">1</property>
+            <property name="n_columns">2</property>
             <child>
               <object class="GtkEntry" id="example_entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
                 <property name="invisible_char">•</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -84,6 +88,12 @@
                 <property name="use_underline">True</property>
                 <property name="mnemonic_widget">example_entry</property>
               </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
             </child>
           </object>
           <packing>
