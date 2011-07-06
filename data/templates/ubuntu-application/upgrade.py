@@ -44,7 +44,7 @@ if not configurationhandler.project_config:
 project_name = configurationhandler.project_config['project']
 python_name = templatetools.python_name(project_name)
 project_sentence_name, project_camel_case_name = \
-    quicklyutils.conventional_names(project_name)
+    templatetools.conventional_names(project_name)
 
 substitutions = (("project_name",project_name),
                  ("project_camel_case_name",project_camel_case_name),
@@ -150,7 +150,7 @@ if project_version < '0.4':
     if not os.path.isfile('%s/helpers.py' % python_name) and os.path.isdir(python_name):
         source_dir = os.path.join(os.path.dirname(__file__), 'project_root',
                                   'python')
-        quicklyutils.file_from_template(source_dir, 
+        templatetools.file_from_template(source_dir, 
                                         "helpers.py", 
                                         python_name, 
                                         substitutions)

@@ -25,7 +25,6 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
-import internal.quicklyutils as quicklyutils
 from quickly import configurationhandler, templatetools, commands
 
 option = 'quickly add help-topic <topic-name>'
@@ -76,13 +75,13 @@ def add(options):
         os.makedirs(target_help_dir)
 
     python_name = templatetools.python_name(topic_name)
-    sentence_name, cc_name = quicklyutils.conventional_names(topic_name)
+    sentence_name, cc_name = templatetools.conventional_names(topic_name)
 
     substitutions = (
     ('t_o_p_i_c', topic_name),
     ('sentence_name', sentence_name),
     )
 
-    quicklyutils.file_from_template(template_help_dir, 
+    templatetools.file_from_template(template_help_dir, 
                                     't_o_p_i_c.page', 
                                     target_help_dir, substitutions)

@@ -24,7 +24,6 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
-import internal.quicklyutils as quicklyutils
 from quickly import configurationhandler, templatetools, commands
 
 option = 'quickly add dialog <dialog-name>'
@@ -95,9 +94,9 @@ def add(options):
 
     dialog_python_name = templatetools.python_name(dialog_name)
     dialog_sentence_name, dialog_camel_case_name = \
-        quicklyutils.conventional_names(dialog_name)
+        templatetools.conventional_names(dialog_name)
     project_sentence_name, project_camel_case_name = \
-        quicklyutils.conventional_names(project_name)
+        templatetools.conventional_names(project_name)
     dialog_name = dialog_name.replace('-','_')
 
     substitutions = (("project_name",project_name),
@@ -109,17 +108,17 @@ def add(options):
                      ("dialog_sentence_name",dialog_sentence_name),
                      ("python_name",python_name))
 
-    quicklyutils.file_from_template(template_ui_dir, 
+    templatetools.file_from_template(template_ui_dir, 
                                     "dialog_camel_case_nameDialog.ui", 
                                     target_ui_dir, 
                                     substitutions)
 
-    quicklyutils.file_from_template(template_ui_dir, 
+    templatetools.file_from_template(template_ui_dir, 
                                     "dialog_python_name_dialog.xml", 
                                     target_ui_dir,
                                     substitutions)
 
-    quicklyutils.file_from_template(template_python_dir, 
+    templatetools.file_from_template(template_python_dir, 
                                     "dialog_camel_case_nameDialog.py", 
                                     target_python_dir, 
                                     substitutions)
