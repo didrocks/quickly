@@ -51,7 +51,7 @@ def help():
     print _("""Adds license to project files. Before using this command, you should:
 
 1. Edit the file AUTHORS to include your authorship (this step is automatically done
-   if you directly launch "$ quickly release" or "$ quickly share" before changing license)
+   if you directly launch 'quickly release' or 'quickly share' before changing license)
    In this case, license is GPL-3 by default.
 2. If you want to put your own quickly unsupported Licence, add a COPYING file containing
    your own licence and execute $ quickly license other.

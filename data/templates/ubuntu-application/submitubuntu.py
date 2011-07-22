@@ -43,7 +43,7 @@ def help():
 application review board so that any users can see and install the
 application ont their system.
 
-Before running quickly submitubuntu, you should: create your account
+Before running 'quickly submitubuntu', you should: create your account
 and a project page on http://launchpad.net.
 You also have to add a PPA to your launchpad account.
 
@@ -158,7 +158,7 @@ except packaging.ppa_not_found, e:
         print "%s - %s" % (ppa_name, ppa_display_name)
         user_has_ppa = True
     if user_has_ppa:
-        print(_("You can temporary choose one of them with --ppa switch or definitely by executing quickly configure ppa <ppa_name>."))
+        print(_("You can temporary choose one of them with --ppa switch or definitely by executing 'quickly configure ppa <ppa_name>'."))
     sys.exit(1)
 
 # update license if needed. Don't change anything if not needed

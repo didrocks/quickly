@@ -30,7 +30,7 @@ option = 'quickly add dialog <dialog-name>'
 
 help_text= _("""Here, dialog-name is one or more words separated with dash
 
-For instance $ quickly add dialog dialog-name will create:
+For instance 'quickly add dialog dialog-name' will create:
 1. A subclass of gtk.Dialog called DialogNameDialog in the module
    DialogNameDialog.py
 2. A glade file called DialogNameDialog.ui in the ui directory

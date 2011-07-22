@@ -44,7 +44,7 @@ def usage():
 def help():
     print _("""Updates your PPA with the the latest saved project changes.
 
-Before running quickly share, you should: create your account
+Before running 'quickly share', you should: create your account 
 on http://launchpad.net.
 You also have to add a PPA to your launchpad account.
 
@@ -130,7 +130,7 @@ except packaging.ppa_not_found, e:
         print "%s - %s" % (ppa_name, ppa_display_name)
         user_has_ppa = True
     if user_has_ppa:
-        print(_("You can temporary choose one of them with --ppa switch or definitely by executing quickly configure ppa <ppa_name>."))
+        print(_("You can temporary choose one of them with --ppa switch or definitely by executing 'quickly configure ppa <ppa_name>'."))
     sys.exit(1)
 
 # license if needed (default with author in setup.py and GPL-3). Don't change anything if not needed

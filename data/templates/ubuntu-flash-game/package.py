@@ -29,7 +29,7 @@ from quickly import templatetools, configurationhandler
 
 def help():
     print _("""Usage:
-$quickly package
+$ quickly package
 
 Creates a debian file (deb) from your project. Before running
 the package command you can edit the Icon and Category entry of *.desktop.in 
