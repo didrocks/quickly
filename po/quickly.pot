@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 11:22+0200\n"
+"POT-Creation-Date: 2011-07-25 12:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -963,8 +963,8 @@ msgid ""
 "in \n"
 "file, where * is the name of your project.\n"
 "\n"
-"Note that if you didn't run quickly release, quickly share\n"
-"or quickly change-lp-project you may miss the name, email in\n"
+"Note that if you didn't run 'quickly release', 'quickly share'\n"
+"or 'quickly change-lp-project' you may miss the name, email in\n"
 "setup.py. You can edit them if you don't want to use any of these\n"
 "commands afterwards. Those changes are not a mandatory at all for\n"
 "testing purpose.\n"
@@ -1225,14 +1225,6 @@ msgstr ""
 
 #: ../data/templates/ubuntu-cli/project_root/python/__init__.py:27
 msgid "foo should be assigned to bar"
-msgstr ""
-
-#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:39
-msgid "easter egg found"
-msgstr ""
-
-#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:40
-msgid "Schweet"
 msgstr ""
 
 #. Run your cli application there.

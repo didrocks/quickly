@@ -36,8 +36,8 @@ def main():
 
     # this is the easter egg (:
     if options.foo == 'bar':
-        logging.warning(_('easter egg found'))
-        print(_("Schweet"))
+        logging.warning('easter egg found')
+        print("Schweet")
 
     # Run your cli application there.
     print _("I'm launched and my args are: %s") % (" ".join(args))
