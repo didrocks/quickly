@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 12:53+0200\n"
+"POT-Creation-Date: 2011-07-26 09:29+0200\n"
 "PO-Revision-Date: 2011-07-25 12:50+0200\n"
 "Last-Translator: Paolo Sammicheli <paolo@sammicheli.net>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1605,6 +1605,10 @@ msgstr "imposta error_level a warning, info e infine debug"
 msgid "foo should be assigned to bar"
 msgstr "foo dovrebbe essere assegnato a bar"
 
+#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:39
+msgid "easter egg found"
+msgstr "Ester egg trovato"
+
 #. Run your cli application there.
 #: ../data/templates/ubuntu-cli/project_root/python/__init__.py:43
 #, python-format
@@ -1726,9 +1730,6 @@ msgstr ""
 "\n"
 "Fornendo il parametro --extras verrà creato il pacchetto simile a quello\n"
 "creato dal comando submitubuntu. I file verranno installati in /opt."
-
-#~ msgid "easter egg found"
-#~ msgstr "Ester egg trovato"
 
 #~ msgid "Schweet"
 #~ msgstr "Bazinga!"
