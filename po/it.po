@@ -6,69 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: quickly\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-31 08:11-0400\n"
-"PO-Revision-Date: 2011-02-23 16:36+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-26 09:29+0200\n"
+"PO-Revision-Date: 2011-07-25 12:50+0200\n"
+"Last-Translator: Paolo Sammicheli <paolo@sammicheli.net>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-01 04:51+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
-
-#: ../data/templates/ubuntu-application/configure.py:37
-msgid "quickly configure bzr <bzr-branch-string>"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:39
-msgid "quickly configure lp-project [project-name]"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:40
-msgid "quickly configure ppa <ppa-name>"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:41
-msgid "quickly configure target-distribution <ubuntu-release-name>"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:46
-msgid ""
-"Enable to set or change some parameters of the project, like which\n"
-"launchpad project should be bound with the current ubuntu application, what\n"
-"PPA should we use by default to share your package, what additional "
-"dependencies\n"
-"should be added…\n"
-"\n"
-"Note: If you are specifying a target-distribution apart from the one you "
-"are\n"
-"running, be warned that dependency detection may not be as accurate due to\n"
-"(rare) discrepancies between distributions."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:110
-msgid ""
-"\n"
-"Use shell completion to find all available PPAs"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:125
-#, python-format
-msgid "User or team %s not found on Launchpad"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:128
-#, python-format
-msgid "You have to be a member of %s team to upload to its PPAs"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/configure.py:134
-#, python-format
-msgid ""
-"%s does not exist. Please create it on launchpad if you want to upload to "
-"it. %s has the following PPAs available:"
-msgstr ""
+"X-Launchpad-Export-Date: 2011-07-25 09:54+0000\n"
+"X-Generator: Launchpad (build 13503)\n"
 
 #: ../data/templates/ubuntu-application/edit.py:39
 msgid ""
@@ -80,10 +27,16 @@ msgid ""
 "will be used. Also, if you configured sensible-editor, this one will be\n"
 "choosed."
 msgstr ""
+"Comodo comando per aprire tutti i file python della directory \n"
+"del progetto nell'editor predefinito, pronti per essere modificati.\n"
+"\n"
+"Si potrà modificare l'editor da usare impostando la variabile di ambiente\n"
+"EDITOR o SELECTED_EDITOR. Inoltre, se si imposta sensible-editor,\n"
+"verrà utilizzata come impostazione predefinita."
 
 #: ../data/templates/ubuntu-application/create.py:35
 msgid "quickly create <template> <project-name>"
-msgstr ""
+msgstr "quickly create <modello> <nome-progetto>"
 
 #: ../data/templates/ubuntu-application/create.py:37
 msgid ""
@@ -100,44 +53,860 @@ msgid ""
 "3. Edit the Python code:\n"
 "$ quickly edit\n"
 msgstr ""
+"Questa operazione crea ed esegue un nuovo progetto, includendo del codice "
+"Python, \n"
+"dei file Glade ed i file del packaging per permettere al progetto di "
+"funzionare.\n"
+"Dopo aver creato il progetto, iniziare con:\n"
+"\n"
+"1. Spostandosi nella directory di lavoro :\n"
+"$ cd percorso/del/progetto\n"
+"\n"
+"2. Modificando dell'interfaccia grafica con Glade:\n"
+"$ quickly design\n"
+"\n"
+"3. Scrivendo del codice Python:\n"
+"$ quickly edit\n"
 
 #. add it to revision control
 #: ../data/templates/ubuntu-application/create.py:103
 msgid "Creating bzr repository and committing"
-msgstr ""
+msgstr "Creazione repository bzr e commit"
 
 #: ../data/templates/ubuntu-application/create.py:112
 #: ../data/templates/ubuntu-flash-game/create.py:153
 msgid "Launching your newly created project!"
-msgstr ""
+msgstr "Esecuzione del progetto appena creato."
 
 #: ../data/templates/ubuntu-application/create.py:117
 #, python-format
 msgid "Congrats, your new project is setup! cd %s/ to start hacking."
 msgstr ""
+"Congratulazioni, il nuovo progetto è stato creato! Digitare cd %s/ per "
+"iniziare l'hacking."
+
+#: ../data/templates/ubuntu-pygame/tutorial.py:31
+msgid ""
+"Usage:\n"
+"$ quickly tutorial\n"
+"\n"
+"Opens help file with the tutorial for the current template.\n"
+msgstr ""
+"Uso:\n"
+"$ quickly tutorial\n"
+"\n"
+"Apre i file di aiuto con il tutorial per il modello corrente.\n"
+
+#: ../data/templates/ubuntu-application/configure.py:37
+msgid "quickly configure bzr <bzr-branch-string>"
+msgstr "quickly configure bzr <bzr-branch-string>"
+
+#: ../data/templates/ubuntu-application/configure.py:39
+msgid "quickly configure lp-project [project-name]"
+msgstr "quickly configure lp-project [nome-progetto]"
+
+#: ../data/templates/ubuntu-application/configure.py:40
+msgid "quickly configure ppa <ppa-name>"
+msgstr "quickly configure ppa <nome-ppa>"
+
+#: ../data/templates/ubuntu-application/configure.py:41
+msgid "quickly configure target-distribution <ubuntu-release-name>"
+msgstr "quickly configure target-distribution <nome-release-ubuntu>"
+
+#: ../data/templates/ubuntu-application/configure.py:46
+msgid ""
+"Enable to set or change some parameters of the project, like which\n"
+"launchpad project should be bound with the current ubuntu application, what\n"
+"PPA should we use by default to share your package, what additional "
+"dependencies\n"
+"should be added…\n"
+"\n"
+"Note: If you are specifying a target-distribution apart from the one you "
+"are\n"
+"running, be warned that dependency detection may not be as accurate due to\n"
+"(rare) discrepancies between distributions."
+msgstr ""
+"Permette di impostare o cambiare alcuni parametri del progetto, come\n"
+"il progetto launchpad da collegare all'applicazione corrente, quale\n"
+"PPA deve essere usato, quali dipendenze aggiuntive devono\n"
+"essere inserite...\n"
+"\n"
+"Nota: se viene specificato una target-distribution diversa da quella\n"
+"in uso, potrebbe capitare che il rilevamento automatico delle dipendenze\n"
+"non sia così accurata a causa di alcune (rare) discrepanze tra versioni."
+
+#: ../data/templates/ubuntu-application/configure.py:110
+msgid ""
+"\n"
+"Use shell completion to find all available PPAs"
+msgstr ""
+"\n"
+"Usa il completamento della shell per trovare tutti i PPA disponibili"
+
+#: ../data/templates/ubuntu-application/configure.py:125
+#, python-format
+msgid "User or team %s not found on Launchpad"
+msgstr "Utente o gruppo %s non presente in Launchpad"
+
+#: ../data/templates/ubuntu-application/configure.py:128
+#, python-format
+msgid "You have to be a member of %s team to upload to its PPAs"
+msgstr "Occorre essere membri del gruppo %s per poter caricare nel PPA"
+
+#: ../data/templates/ubuntu-application/configure.py:134
+#, python-format
+msgid ""
+"%s does not exist. Please create it on launchpad if you want to upload to "
+"it. %s has the following PPAs available:"
+msgstr ""
+"%s non esiste. Crearlo su Launchpad se si desidera caricarvi i pacchetti. %s "
+"ha i seguenti PPA:"
+
+#: ../data/templates/ubuntu-flash-game/internal/apportutils.py:68
+#: ../data/templates/ubuntu-application/internal/apportutils.py:77
+msgid ""
+"Updating project name references in existing apport crashdb configuration"
+msgstr ""
+"Aggiornamento referenze del nome progetto nella configurazione di apport "
+"crashdb esistente"
+
+#: ../data/templates/ubuntu-flash-game/internal/apportutils.py:71
+#: ../data/templates/ubuntu-application/internal/apportutils.py:80
+msgid "Creating new apport crashdb configuration"
+msgstr "Creazione nuova configurazione apport crashdb"
+
+#: ../data/templates/ubuntu-flash-game/internal/apportutils.py:77
+#: ../data/templates/ubuntu-application/internal/apportutils.py:86
+msgid "Creating new apport hooks"
+msgstr "Creazione nuovi apport hooks"
+
+#: ../data/templates/ubuntu-flash-game/internal/apportutils.py:97
+#: ../data/templates/ubuntu-application/internal/apportutils.py:107
+msgid "Adding launchpad integration to existing application"
+msgstr "Aggiunta dell'integrazione con Launchpad all'applicazione esistente"
+
+#: ../data/templates/ubuntu-application/license.py:46
+msgid "quickly license [license-name]"
+msgstr "quickly license [nome-licenza]"
+
+#: ../data/templates/ubuntu-application/license.py:49
+#, python-format
+msgid "Candidate licenses: %s"
+msgstr "Licenze disponibili: %s"
+
+#: ../data/templates/ubuntu-application/license.py:51
+msgid ""
+"Adds license to project files. Before using this command, you should:\n"
+"\n"
+"1. Edit the file AUTHORS to include your authorship (this step is "
+"automatically done\n"
+"   if you directly launch 'quickly release' or 'quickly share' before "
+"changing license)\n"
+"   In this case, license is GPL-3 by default.\n"
+"2. If you want to put your own quickly unsupported Licence, add a COPYING "
+"file containing\n"
+"   your own licence and execute $ quickly license other.\n"
+"3. Executes either 'quickly license' or 'quickly license <License>'\n"
+"   where <License> can be either:\n"
+"   - GPL-3 (default)\n"
+"   - GPL-2\n"
+"   - other\n"
+"\n"
+"This will modify the COPYING file with the chosen licence (with GPL-3 by "
+"default).\n"
+"Updating previous chosen Licence if needed.\n"
+"If you previously removed the tags to add your own licence, it will leave it "
+"pristine.\n"
+"If no name is attributed to the Copyright, it will try to retrieve it from "
+"Launchpad\n"
+"(in 'quickly release' or 'quickly share' command only)\n"
+"\n"
+"Finally, this will copy the Copyright at the head of every files.\n"
+"\n"
+"Note that if you don't run 'quickly licence' before calling 'quickly "
+"release' or 'quickly share',\n"
+"this one will execute it for you and guess the copyright holder from your\n"
+"launchpad account if you didn't update it."
+msgstr ""
+"Aggiunge la licenza ai file del progetto. Prima di eseguire questo comando "
+"occorre:\n"
+"\n"
+"1. Modificare il file AUTHORS per includere gli autori (questo passo viene "
+"eseguito automaticamente\n"
+"   se viene lanciato \"quickly release\" o \"quickly share\" prima di "
+"cambiare licenza)\n"
+"   In questo caso la licenza predefinita è la GPL-3.\n"
+"2. Se si desidera inserire una licenza personalizzata, aggiungere il file "
+"COPYING contenente\n"
+"   il testo della licenza ed eseguire il comando \"quickly license other\".\n"
+"3. Eseguire indifferentemente \"quickly license\" oppure \"quickly license "
+"<licenza>\"\n"
+"   dove <licenza> può essere:\n"
+"   - GPL-3 (predefinita)\n"
+"   - GPL-2\n"
+"   - other\n"
+"\n"
+"Questo modificherà il file COPYING con la licenza scelta (GPL-3 come "
+"predefinita).\n"
+"Modificare la licenza precedentemente scelta, se necessario.\n"
+"Se sono state precedentemente rimosse le intestazioni per aggiungere la "
+"licenza personalizzata,\n"
+"essa verrà mantenuta intatta.\n"
+"Se non viene specificato un nome nel Copyright, esso potrà essere recuperato "
+"da Launchpad\n"
+"(soltanto con i comandi \"quickly release\" o \"quickly share\")\n"
+"\n"
+"Alla fine, l'intestazione della licenza sarà inserita in cima ad ogni file "
+"del progetto.\n"
+"\n"
+"Notare che se non si esegue \"quickly licence\" prima di chiamare \"quickly "
+"release\" o\n"
+"\"quickly share\" questo verrà chiamato implicitamente e verranno "
+"determinate le informazioni\n"
+"sull'autore dall'account Launchpad."
+
+#. that means we didn't find the END_LICENCE_TAG, don't copy the file
+#: ../data/templates/ubuntu-application/license.py:123
+#, python-format
+msgid "WARNING: %s was not found in the file %s. No licence replacement"
+msgstr ""
+"ATTENZIONE: %s non è stato trovato nel file %s. La licenza non è stata "
+"cambiata"
+
+#: ../data/templates/ubuntu-application/license.py:130
+#: ../data/templates/ubuntu-application/license.py:215
+#, python-format
+msgid "%s file was not found"
+msgstr "File %s non trovato"
+
+#: ../data/templates/ubuntu-application/license.py:180
+msgid ""
+"COPYING contains an unknown license.  Please run 'quickly license other' to "
+"confirm that you want to use a custom license."
+msgstr ""
+"Il file COPYING contiene una licenza sconosciuta. Eseguire \"quickly license "
+"other\" per confermare che si intende usare una licenza personalizzata."
+
+#: ../data/templates/ubuntu-application/license.py:189
+#, python-format
+msgid "Unknown licence %s."
+msgstr "Licenza sconosciuta %s."
+
+#: ../data/templates/ubuntu-application/license.py:208
+msgid ""
+"Copyright is not attributed. Edit the AUTHORS file to include your name for "
+"the copyright replacing <Your Name> <Your E-mail>. Update it in setup.py or "
+"use quickly share/quickly release to fill it automatically"
+msgstr ""
+"Il copyright non è specificato. Modificare il file AUTHORS per includere il "
+"proprio nome sostituendolo a <Your Name> <Your E-mail>. Modificare anche il "
+"file setup.py o usare \"quickly share\" o \"quickly release\" per compilarlo "
+"automaticamente."
+
+#: ../data/templates/ubuntu-application/license.py:229
+#, python-format
+msgid "%s file was not found. It is compulsory for user defined license"
+msgstr ""
+"File %s non trovato. È obbligatorio per usare una licenza personalizzata"
+
+#: ../data/templates/ubuntu-application/license.py:231
+#, python-format
+msgid "Header of %s license not found. Quickly installation corrupted?"
+msgstr ""
+"Intestazione della licenza %s non trovata. È possibile che l'installazione "
+"di Quickly sia danneggiata."
+
+#: ../data/templates/ubuntu-application/license.py:262
+msgid "Can't update license in setup.py file\n"
+msgstr "Impossibile aggiornare la licenza nel file setup.py\n"
+
+#: ../data/templates/ubuntu-application/license.py:265
+#, python-format
+msgid "%s file not found."
+msgstr "File %s non trovato"
+
+#: ../data/templates/ubuntu-application/license.py:310
+msgid "This command only take one optional argument."
+msgstr "Questo comando richiede solo un argomento opzionale."
+
+#: ../data/templates/ubuntu-application/test/builder/test.ui.h:1
+msgid "label"
+msgstr "label"
+
+#: ../data/templates/ubuntu-application/run.py:33
+msgid "quickly run -- [program arguments]"
+msgstr "quickly run -- [program arguments]"
+
+#: ../data/templates/ubuntu-application/run.py:35
+msgid ""
+"Runs your application. This is the best way to try test it out\n"
+"while you are developing it. It starts up the main project window.\n"
+"\n"
+"$ quickly run -- values -<whathever>\n"
+"to pass '-whatever' and 'values' to the executed program. Without that\n"
+"if you use for instance --help, it would be Quickly help and not your\n"
+"program one."
+msgstr ""
+"Esegue l'applicazione. Questo è il modo migliore per provarla\n"
+"mentre si sta sviluppando. Verrà aperta la finestra principale del "
+"progetto.\n"
+"\n"
+"$ quickly run -- valori -<qualsiasi>\n"
+"per passare \"-qualsiasi\" e \"valori\" all'esecuzione del programma. Senza "
+"di essi\n"
+"se usate, per esempio, il parametro --help verrà lanciato l'help di Quickly "
+"e non\n"
+"quello del programma."
+
+#: ../data/templates/ubuntu-application/run.py:50
+msgid "Can't access to X server, so can't run gtk application"
+msgstr ""
+"Impossibile accedere al server X pertanto l'applicazione gtk non può essere "
+"eseguita"
+
+#: ../data/templates/ubuntu-application/run.py:63
+#, python-format
+msgid "Can't execute %s"
+msgstr "Impossibile eseguire %s"
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/Preferencescamel_case_nameDialog.ui.h:1
+msgid "_Example entry:"
+msgstr "Voce di _Esempio:"
+
+#: ../data/templates/ubuntu-application/project_root/data/ui/Preferencescamel_case_nameDialog.ui.h:2
+msgid "sentence_name Preferences"
+msgstr "sentence_name Preferenze"
+
+#: ../quickly/configurationhandler.py:43
+msgid "ERROR: Can't load configuration in current path or its parent ones."
+msgstr ""
+"ERRORE: impossibile caricare la configurazione nel percorso corrente o in "
+"quello superiore."
+
+#: ../quickly/configurationhandler.py:59
+#, python-format
+msgid "ERROR: Can't load configuration in %s: %s"
+msgstr "ERRORE: impossibile caricare la configurazione in %s: %s"
+
+#: ../quickly/configurationhandler.py:118
+#, python-format
+msgid "ERROR: Can't save configuration in %s\n"
+msgstr "ERRORE: impossibile salvare la configurazione in %s\n"
+
+#: ../data/templates/ubuntu-application/store/help-guide.py:32
+msgid ""
+"adds a help guide to your project.\n"
+"\n"
+"To edit the guide, run:\n"
+"$ quickly edit\n"
+"All the help pages are loaded into your editor as well as the python files.\n"
+msgstr ""
+"aggiunge una guida utente al progetto.\n"
+"\n"
+"Per modificare la guida, usare:\n"
+"$ quickly edit\n"
+"Tutte le pagine della guida sono caricate nell'editor così come i file "
+"Python.\n"
+
+#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:64
+#: ../data/templates/ubuntu-flash-game/internal/launchpad_helper.py:62
+msgid "Calling GPG to create tarball signature..."
+msgstr "Esecuzione di GPG per creazione archivio firmato..."
+
+#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:67
+#: ../data/templates/ubuntu-flash-game/internal/launchpad_helper.py:65
+msgid "Signing the tarball failed, not uploading the signature"
+msgstr "Firma dell'archivio non riuscita, mancato invio al server"
+
+#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:84
+#: ../data/templates/ubuntu-flash-game/internal/launchpad_helper.py:82
+#, python-format
+msgid "New release available: %s"
+msgstr "Nuova versione disponibile: %s"
+
+#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:92
+#: ../data/templates/ubuntu-flash-game/internal/launchpad_helper.py:90
+msgid "An error happened during tarball upload:"
+msgstr "Si è verificato un errore durante l'invio dell'archivio:"
+
+#: ../data/templates/ubuntu-application/tutorial.py:33
+msgid "Opens help file with the tutorial for the current template."
+msgstr "Apre i file di aiuto con il tutorial del modello corrente."
+
+#: ../data/templates/ubuntu-application/add.py:66
+msgid "Add something to your project\n"
+msgstr "Aggiunge un elemento al progetto\n"
+
+#: ../data/templates/ubuntu-application/add.py:90
+msgid "Cannot add, no plugin name provided."
+msgstr "Impossibile aggiungere, nome plugin mancante."
+
+#: ../data/templates/ubuntu-application/add.py:96
+#, python-format
+msgid "Cannot add, did not recognize plugin name: %s"
+msgstr "Impossibile aggiungere, nome plugin %s non riconosciuto"
+
+#: ../quickly/bzrbinding.py:55
+msgid "Bzr not properly installed"
+msgstr "Bzr non è installato correttamente"
+
+#: ../data/templates/ubuntu-application/debug.py:33
+msgid "quickly debug -- [program arguments]"
+msgstr "quickly debug -- [program arguments]"
+
+#: ../data/templates/ubuntu-application/debug.py:35
+msgid ""
+"Debugs your application with winpdb.\n"
+"\n"
+"$ quickly debug -- values -<whatever>\n"
+"to pass '-whatever' and 'values' to the executed program. Without that\n"
+"if you use for instance --help, it would be Quickly help and not your\n"
+"program one."
+msgstr ""
+"Esegue il debug dell'applicazione con winpdb.\n"
+"\n"
+"$ quickly debug -- valori -<qualsiasi>\n"
+"per passare \"-qualsiasi\" e \"qualsiasi\" all'esecuzione del programma. "
+"Senza di\n"
+"essi, se usate per esempio --help, verrà mostrato l'help di Quickly e non\n"
+"quello del programma."
+
+#: ../data/templates/ubuntu-application/debug.py:49
+msgid "Can't access to X server, so can't run winpdb"
+msgstr ""
+"Impossibile accedere al server X pertanto winpdb non può essere eseguito"
+
+#: ../data/templates/ubuntu-application/debug.py:63
+msgid "Can't execute winpdb"
+msgstr "Impossibile eseguire winpdb"
+
+#: ../data/templates/ubuntu-application/upgrade.py:65
+msgid "Can't rename LICENSE file, check your file permission\n"
+msgstr "Impossibile rinominare il file LICENSE, controllare i permessi\n"
+
+#: ../data/templates/ubuntu-application/upgrade.py:197
+#, python-format
+msgid ""
+"WARNING: can't update your project to support /opt. This doesn't matter if "
+"you don't plan to submit your project to the application review board. Cause "
+"is: %s"
+msgstr ""
+"ATTENZIONE: impossibile aggiornare il progetto per supportare "
+"l'installazione in /opt. Questo non è un problema se non si ha intenzione di "
+"inviare il progetto all'Application Review Board. La causa è: %s"
+
+#: ../data/templates/ubuntu-application/project_root/python/__init__.py:23
+msgid "Show debug messages (-vv debugs python_name_lib also)"
+msgstr "Mostra messaggi di debug (-vv debugs python_name_lib)"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:40
+msgid ""
+"quickly submitubuntu [--ppa <ppa | group/ppa>] [release-version] [comments]"
+msgstr "quickly submitubuntu [--ppa <ppa | group/ppa>] [versione] [commenti]"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:42
+msgid ""
+"Posts a release of your project and submit it the ubuntu\n"
+"application review board so that any users can see and install the\n"
+"application ont their system.\n"
+"\n"
+"Before running 'quickly submitubuntu', you should: create your account\n"
+"and a project page on http://launchpad.net.\n"
+"You also have to add a PPA to your launchpad account.\n"
+"\n"
+"Name, email, and version will be automatically changed in setup.py and\n"
+"bzr will tag the current source with the new version number.\n"
+"\n"
+"If not specified, the new version number will be 'YEAR.MONTH[.RELEASE]'.\n"
+"\n"
+"For example, the third release in July 2010 would be versioned 10.07.2.\n"
+"\n"
+"You may want to make sure that the description and long description in\n"
+"setup.py are up to date before releasing.\n"
+"\n"
+"You can optionally run 'quickly package' and test your package to make\n"
+"sure it installs as expected."
+msgstr ""
+"Pubblica una versione del vostro progetto e la invia\n"
+"all'Application Review Board di Ubuntu in modo da permettere\n"
+"a qualsiasi utente di vedere ed installare l'applicazione nel\n"
+"proprio sistema.\n"
+"\n"
+"Prima di eseguire \"quickly submitubuntu\", occorre creare il\n"
+"proprio account e la pagina progetto su http://launchpad.net.\n"
+"Sarà necessario anche aggiungere un PPA all'account launchpad.\n"
+"\n"
+"Nome, email e numero di versione verranno automaticamente cambiato in\n"
+"setup.py e bzr creerà un tag per la versione corrente.\n"
+"\n"
+"Se non specificato, il numero di versione sarà \"ANNO.MESE[.VERSIONE]\".\n"
+"\n"
+"Per esempio, il terzo rilascio del luglio 2010 sarà la versione 10.07.2.\n"
+"\n"
+"È opportuno assicurarsi che la descrizione breve e quella lunga nel file "
+"setup.py\n"
+"siano correttamente aggiornate prima del rilascio.\n"
+"\n"
+"È opzionalmente possibile eseguire \"quickly package\" per provare il\n"
+"pacchetto ed essere sicuri che venga installato come dovrebbe."
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:93
+#: ../data/templates/ubuntu-application/release.py:92
+#: ../data/templates/ubuntu-application/share.py:86
+msgid "No PPA provided."
+msgstr "Nessun PPA fornito."
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:96
+#: ../data/templates/ubuntu-application/release.py:95
+#: ../data/templates/ubuntu-application/share.py:89
+#: ../data/templates/ubuntu-application/package.py:68
+#, python-format
+msgid "Unknown option: %s."
+msgstr "Ozione sconosciuta: %s."
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:146
+#: ../data/templates/ubuntu-application/release.py:145
+#: ../data/templates/ubuntu-application/share.py:118
+#, python-format
+msgid "User or Team %s not found on Launchpad"
+msgstr "Utente o gruppo %s non presente su Launchpad"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:149
+#: ../data/templates/ubuntu-application/release.py:148
+#: ../data/templates/ubuntu-application/share.py:121
+#, python-format
+msgid "You have to be a member of %s team to upload to its ppas"
+msgstr "Occorre essere membro del gruppo %s per caricare pacchetti nel ppa"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:155
+#: ../data/templates/ubuntu-application/release.py:154
+#: ../data/templates/ubuntu-application/share.py:127
+#, python-format
+msgid ""
+"%s does not exist. Please create it on launchpad if you want to push a "
+"package to it. %s has the following ppas available:"
+msgstr ""
+"%s non esiste. Crearlo in Launchpad per caricarvi i pacchetti. %s ha i "
+"seguenti ppa:"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:161
+#: ../data/templates/ubuntu-application/release.py:160
+#: ../data/templates/ubuntu-application/share.py:133
+msgid ""
+"You can temporary choose one of them with --ppa switch or definitely by "
+"executing 'quickly configure ppa <ppa_name>'."
+msgstr ""
+"È possibile scegliere temporaneamente uno di essi specificando l'opzione --"
+"ppa o impostarlo lanciando il comando \"quickly configure ppa <nome_ppa>\""
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:179
+#: ../data/templates/ubuntu-application/release.py:178
+#, python-format
+msgid "quickly released: %s"
+msgstr "quickly versione: %s"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:189
+#: ../data/templates/ubuntu-application/release.py:188
+#, python-format
+msgid ""
+"ERROR: quickly can't release: %s seems to be already released. Choose "
+"another name."
+msgstr ""
+"ERRORE: quickly non può fare il rilascio: Sembra che %s sia già rilasciato. "
+"Scegliere un altro nome."
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:195
+#: ../data/templates/ubuntu-application/release.py:194
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:163
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:186
+msgid "commit before release"
+msgstr "Esecuzione commit prima del rilascio"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:197
+#: ../data/templates/ubuntu-application/submitubuntu.py:226
+#: ../data/templates/ubuntu-application/release.py:196
+#: ../data/templates/ubuntu-application/release.py:225
+msgid "ERROR: quickly can't release as it can't commit with bzr"
+msgstr ""
+"ERRORE: quickly non può eseguire il rilascio in quanto non può eseguire il "
+"commit su bzr"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:218
+#: ../data/templates/ubuntu-application/release.py:217
+#: ../data/templates/ubuntu-flash-game/package.py:59
+#: ../data/templates/ubuntu-application/share.py:153
+#: ../data/templates/ubuntu-application/package.py:84
+msgid "ERROR: can't create or update ubuntu package"
+msgstr "ERRORE: impossibile creare o aggiornare il pacchetto"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:257
+#: ../data/templates/ubuntu-application/release.py:256
+msgid "ERROR: quickly can't release: can't pull from launchpad."
+msgstr ""
+"ERRORE: quickly non può eseguire il rilascio: impossibile recuperare le "
+"informazioni da launchpad."
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:262
+#: ../data/templates/ubuntu-application/submitubuntu.py:269
+#: ../data/templates/ubuntu-application/release.py:261
+#: ../data/templates/ubuntu-application/release.py:268
+msgid "ERROR: quickly can't release: can't push to launchpad."
+msgstr ""
+"ERRORE: quickly non può eseguire il rilascio: impossibile inviare le "
+"informazioni a launchpad."
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:275
+#: ../data/templates/ubuntu-application/release.py:274
+msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
+msgstr ""
+"ERRORE: quickly non può eseguire il rilascio correttamente: impossibile "
+"recuperare le informazioni da launchpad."
+
+#. upload to launchpad
+#: ../data/templates/ubuntu-application/submitubuntu.py:280
+#: ../data/templates/ubuntu-application/release.py:279
+#: ../data/templates/ubuntu-application/share.py:157
+msgid "pushing to launchpad"
+msgstr "invio delle informazioni a launchpad"
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:290
+#, python-format
+msgid ""
+"%s %s released and submitted to ubuntu. Wait for half an hour and have look "
+"at %s."
+msgstr ""
+"%s %s rilasciato e sottomesso in ubuntu. Attendere circa mezz'ora e "
+"controllare su %s."
+
+#: ../data/templates/ubuntu-application/submitubuntu.py:291
+msgid "Then your application will be reviewed by the application review board."
+msgstr "Quindi l'applicazione verrà revisionata dall'Application Review Board."
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:67
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:65
+msgid "Command returned some ERRORS:"
+msgstr "Il comando ha restituito degli errori:"
+
+#. finish the current line
+#: ../data/templates/ubuntu-application/internal/packaging.py:89
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:87
+msgid "Command returned some WARNINGS:"
+msgstr "Il comando ha restituito dei warning:"
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:273
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:194
+msgid "An error has occurred when creating debian packaging"
+msgstr "Si è verificato un errore creando il pacchetto debian"
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:279
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:197
+msgid "Ubuntu packaging created in debian/"
+msgstr "Pacchetto Ubuntu creato in debian/"
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:384
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:302
+msgid "ERROR: an error occurred during source package creation"
+msgstr ""
+"ERRORE: si è verificato un errore durante la creazione del pacchetto sorgente"
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:389
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:307
+msgid "ERROR: an error occurred during source upload to launchpad"
+msgstr ""
+"ERRORE: si è verificato un errore durante il caricamento del sorgente su "
+"launchpad"
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:427
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:345
+msgid ""
+"Release version specified in command arguments is not a valid version scheme "
+"like 'x(.y)(.z)'."
+msgstr ""
+"Il numero di versione specificato nei parametri non è in un formato valido, "
+"come \"x(.y)(.z)\"."
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:436
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:354
+msgid "No previous version found in setup.py. Put one please"
+msgstr ""
+"Numero di versione precedente non trovato nel file setup.py. Inserirne uno"
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:446
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:364
+#, python-format
+msgid ""
+"Share version specified after -public in setup.py is not a valid number: %s"
+msgstr ""
+"Versione di rilascio specificata dopo -public nel file setup.py non è un "
+"valore valido: %s"
+
+#: ../data/templates/ubuntu-application/internal/packaging.py:466
+#: ../data/templates/ubuntu-flash-game/internal/packaging.py:384
+#, python-format
+msgid ""
+"Minor version specified in setup.py is not a valid number: %s. Fix this or "
+"specify a version as release command line argument"
+msgstr ""
+"Il valore di minor version specificato nel file setup.py non è valido: %s. "
+"Occorre correggerlo o specificarlo come paramentro del comando release"
+
+#: ../quickly/commands.py:308
+#, python-format
+msgid "ERROR: %s command failed"
+msgstr "ERRORE: comando %s non riuscito"
+
+#: ../quickly/commands.py:309 ../quickly/commands.py:450
+#: ../quickly/commands.py:460
+msgid "Aborting"
+msgstr "Interruzione"
+
+#: ../quickly/commands.py:447
+#, python-format
+msgid ""
+"ERROR: Can't find project in %s.\n"
+"Ensure you launch this command from a quickly project directory."
+msgstr ""
+"ERRORE: Impossibile trovare il progetto in %s.\n"
+"Occorre lanciare questo comando da una directory di un progetto creato con "
+"quickly"
+
+#: ../quickly/commands.py:457
+#, python-format
+msgid ""
+"ERROR: %s is a project. You can't launch %s command within a project. Please "
+"choose another path."
+msgstr ""
+"ERRORE: %s è un progetto. Impossibile lanciare il comando %s all'interno di "
+"un progetto. Scegliere un altro percorso."
+
+#: ../data/templates/ubuntu-flash-game/create.py:35
+msgid ""
+"Usage:\n"
+"$ quickly create ubuntu-flash-game path/to/project_name path/to/myflashgame."
+"swf\n"
+"\n"
+"where 'project_name' is one or more words separated by an underscore and\n"
+"path/to can be any existing path.\n"
+"\n"
+"This will create a new project which runs your existing SWF, myflashgame."
+"swf,\n"
+"on the Ubuntu desktop, and makes it ready to be packaged and distributed in\n"
+"the Ubuntu Software Centre.\n"
+"\n"
+"After creating the project, you'll want to specify the title of your game\n"
+"and the size of the window:\n"
+"\n"
+"1. Changing your working directory to the new project:\n"
+"$ cd path/to/project_name\n"
+"\n"
+"2. Edit the code and specify the title and window size:\n"
+"$ quickly edit\n"
+msgstr ""
+"Uso:\n"
+"$ quickly create ubuntu-flash-game percorso/del/nome_progetto percorso/del/"
+"miogiocoflash.swf\n"
+"\n"
+"dove \"nome_progetto\" è una o più parole separate da underscore e\n"
+"path/del deve essere un percorso esistente.\n"
+"\n"
+"Questo creerà un nuovo progetto che lanci il file SWF chiamato miogiocoflash."
+"swf,\n"
+"sul desktop di Ubuntu, e lo renda pronto per essere pacchettizzato e "
+"distribuito\n"
+"nel Software Center di Ubuntu.\n"
+"\n"
+"Dopo la creazione del progetto, è opportuno specificare il titolo del gioco\n"
+"a la dimensione della finestra:\n"
+"\n"
+"1. Spostarsi nella directory di lavoro del progetto:\n"
+"$ cd percorso/del/nome_progetto\n"
+"\n"
+"2. Modifica del codice per specificare il titolo e la dimensione della "
+"finestra:\n"
+"$ quickly edit\n"
+
+#: ../data/templates/ubuntu-flash-game/create.py:59
+msgid ""
+"Project name not defined.\n"
+"Usage:\n"
+"$ quickly create ubuntu-flash-game project_name myflashgame.swf"
+msgstr ""
+"Nome progetto non definito.\n"
+"Uso:\n"
+"$ quickly create ubuntu-flash-game nome_progetto miogiocoflash.swf"
+
+#: ../data/templates/ubuntu-flash-game/create.py:63
+msgid ""
+"Flash SWF file not defined.\n"
+"Usage:\n"
+"$ quickly create ubuntu-flash-game project_name myflashgame.swf"
+msgstr ""
+"File flash SWF non definito.\n"
+"Uso:\n"
+"$ quickly create ubuntu-flash-game nome_progetto miogiocoflash.swf"
+
+#: ../data/templates/ubuntu-flash-game/create.py:71
+#, python-format
+msgid ""
+"Flash SWF file %s not found.\n"
+"Usage:\n"
+"$ quickly create ubuntu-flash-game project_name myflashgame.swf"
+msgstr ""
+"File flash SWF \"%s\" non trovato.\n"
+"Uso:\n"
+"$ quickly create ubuntu-flash-game nome_progetto miogiocoflash.swf"
+
+#. add it to revision control
+#: ../data/templates/ubuntu-flash-game/create.py:144
+msgid "Creating bzr repository and commiting"
+msgstr "Creazione repository bzr e commit"
+
+#: ../data/templates/ubuntu-flash-game/create.py:156
+#, python-format
+msgid ""
+"Congratulations, your new project is set up! cd %s/ to edit the details."
+msgstr ""
+"Congratulazioni, il progetto è stato creato! Digitare cd %s/ per iniziare a "
+"modificarlo."
+
+#: ../data/templates/ubuntu-application/store/indicator.py:31
+msgid ""
+"This will add support for Ubuntu Application Indicator to your quickly "
+"project.\n"
+"Next time you run your app, the Indicator will show up in the panel on top "
+"right.\n"
+"You can add/remove/modify items from the indicator menu by editing indicator."
+"py\n"
+msgstr ""
+"Questo aggiungerà il supporto per l'Application Indicator di Ubuntu nel "
+"progetto.\n"
+"La prossima volta che verrà eseguita l'applicazione, l'indicatore sarà "
+"mostrato nel pannello in alto a destra.\n"
+"È possibile aggiungere, rimuovere o modificare le voci del menu modificando "
+"indicator.py\n"
 
 #: ../quickly/builtincommands.py:37
 msgid "No project name specified."
-msgstr ""
+msgstr "Nome progetto non specificato."
 
 #: ../quickly/builtincommands.py:58
 #, python-format
 msgid "There is already a file or directory named %s"
-msgstr ""
+msgstr "Esiste già un file o una directory chiamata %s"
 
 #. create directory and template file
 #: ../quickly/builtincommands.py:62
 #, python-format
 msgid "Creating project directory %s"
-msgstr ""
+msgstr "Creazione directory progetto %s"
 
 #: ../quickly/builtincommands.py:75
 msgid "List all commands ordered by templates"
-msgstr ""
+msgstr "Elenca tutti i comandi ordinati per modello"
 
 #: ../quickly/builtincommands.py:94
 msgid "Give some getstarted advice"
-msgstr ""
+msgstr "Fornisce alcuni consigli per iniziare"
 
 #: ../quickly/builtincommands.py:102
 msgid ""
@@ -167,612 +936,85 @@ msgid ""
 "\n"
 "BE WARNED: the two following commands will connect to Launchpad. Make sure "
 "that you have a Launchpad account and a PPA! You can find out more about "
-"setting up a Launchpad account and Launchpad features at "
-"https://launchpad.net/\n"
+"setting up a Launchpad account and Launchpad features at https://launchpad."
+"net/\n"
 "$ quickly release or $ quickly share\n"
 "\n"
 "Have Fun!"
 msgstr ""
+"-------------------------------\n"
+"    Benvenuti in Quickly!\n"
+"-------------------------------\n"
+"\n"
+"È possibile creare un progetto con il comando \"quickly create <nome-"
+"modello> <nome-progetto>\".\n"
+"\n"
+"Esempio con il modello ubuntu-application:\n"
+"1. creare un'applicazione ubuntu e lanciare il tutorial:\n"
+"$ quickly create ubuntu-application prova\n"
+"$ cd prova\n"
+"$ quickly tutorial\n"
+"\n"
+"2. Potete provare anche\n"
+"$ quickly edit\n"
+"$ quickly design\n"
+"$ quickly run\n"
+"Usare il completamento della bash per avere l'elenco dei comandi "
+"disponibili\n"
+"\n"
+"3. Come costruire il pacchetto e rilasciarlo:\n"
+"\n"
+"Passo opzionale (ma raccomandato): creare il pacchetto localmente:\n"
+"$ quickly package\n"
+"\n"
+"ATTENZIONE: i 2 comandi di seguito si connetteranno a Launchpad. "
+"Assicuratevi di avere un account su Launchpad e un PPA! È possibile trovare "
+"ulteriori informazioni riguardo Launchpad all'indirizzo https://launchpad."
+"net/\n"
+"$ quickly release oppure $ quickly share\n"
+"\n"
+"Buon divertimento!"
 
 #: ../quickly/builtincommands.py:131
 msgid "Get help from commands"
-msgstr ""
+msgstr "Fornisce aiuto sui comandi"
 
 #: ../quickly/builtincommands.py:132
 msgid "Usage: quickly help [template] <command>"
-msgstr ""
+msgstr "Uso: quickly help [modello] <comando>"
 
 #: ../quickly/builtincommands.py:151
 msgid "Create a new quickly template from an existing one"
-msgstr ""
+msgstr "Crea un nuovo modello da uno esistente"
 
 #: ../quickly/builtincommands.py:152
 msgid "Usage: quickly quickly [origin-template] destination-template"
-msgstr ""
+msgstr "Uso: quickly quickly [modello-originale] modello-destinazione"
 
 #: ../quickly/builtincommands.py:163
 msgid "No destination template name provided."
-msgstr ""
+msgstr "Nome del modello di destinazione mancante."
 
 #: ../quickly/builtincommands.py:172
 #, python-format
 msgid "%s already exists."
-msgstr ""
+msgstr "Esiste già %s."
 
 #: ../quickly/builtincommands.py:176
 #, python-format
 msgid "Copy %s to create new %s template"
-msgstr ""
-
-#: ../data/templates/ubuntu-pygame/tutorial.py:31
-msgid ""
-"Usage:\n"
-"$ quickly tutorial\n"
-"\n"
-"Opens help file with the tutorial for the current template.\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/internal/apportutils.py:68
-#: ../data/templates/ubuntu-application/internal/apportutils.py:77
-msgid ""
-"Updating project name references in existing apport crashdb configuration"
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/internal/apportutils.py:71
-#: ../data/templates/ubuntu-application/internal/apportutils.py:80
-msgid "Creating new apport crashdb configuration"
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/internal/apportutils.py:77
-#: ../data/templates/ubuntu-application/internal/apportutils.py:86
-msgid "Creating new apport hooks"
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/internal/apportutils.py:97
-#: ../data/templates/ubuntu-application/internal/apportutils.py:107
-msgid "Adding launchpad integration to existing application"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:46
-msgid "quickly license [license-name]"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:49
-#, python-format
-msgid "Candidate licenses: %s"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:51
-msgid ""
-"Adds license to project files. Before using this command, you should:\n"
-"\n"
-"1. Edit the file AUTHORS to include your authorship (this step is "
-"automatically done\n"
-"   if you directly launch \"$ quickly release\" or \"$ quickly share\" "
-"before changing license)\n"
-"   In this case, license is GPL-3 by default.\n"
-"2. If you want to put your own quickly unsupported Licence, add a COPYING "
-"file containing\n"
-"   your own licence and execute $ quickly license other.\n"
-"3. Executes either $ quickly license or $ quickly license <License>\n"
-"   where <License> can be either:\n"
-"   - GPL-3 (default)\n"
-"   - GPL-2\n"
-"   - other\n"
-"\n"
-"This will modify the COPYING file with the chosen licence (with GPL-3 by "
-"default).\n"
-"Updating previous chosen Licence if needed.\n"
-"If you previously removed the tags to add your own licence, it will leave it "
-"pristine.\n"
-"If no name is attributed to the Copyright, it will try to retrieve it from "
-"Launchpad\n"
-"(in quickly release or quickly share command only)\n"
-"\n"
-"Finally, this will copy the Copyright at the head of every files.\n"
-"\n"
-"Note that if you don't run quickly licence before calling quickly release or "
-"quickly\n"
-"share, this one will execute it for you and guess the copyright holder from "
-"your\n"
-"launchpad account if you didn't update it."
-msgstr ""
-
-#. that means we didn't find the END_LICENCE_TAG, don't copy the file
-#: ../data/templates/ubuntu-application/license.py:123
-#, python-format
-msgid "WARNING: %s was not found in the file %s. No licence replacement"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:130
-#: ../data/templates/ubuntu-application/license.py:215
-#, python-format
-msgid "%s file was not found"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:180
-msgid ""
-"COPYING contains an unknown license.  Please run 'quickly license other' to "
-"confirm that you want to use a custom license."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:189
-#, python-format
-msgid "Unknown licence %s."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:208
-msgid ""
-"Copyright is not attributed. Edit the AUTHORS file to include your name for "
-"the copyright replacing <Your Name> <Your E-mail>. Update it in setup.py or "
-"use quickly share/quickly release to fill it automatically"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:229
-#, python-format
-msgid "%s file was not found. It is compulsory for user defined license"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:231
-#, python-format
-msgid "Header of %s license not found. Quickly installation corrupted?"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:260
-msgid "Can't update license in setup.py file\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:263
-#, python-format
-msgid "%s/%sconfig.py file not found."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/license.py:308
-msgid "This command only take one optional argument."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/test/builder/test.ui.h:1
-msgid "label"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/project_root/data/ui/Preferencescamel_case_nameDialog.ui.h:1
-msgid "_Example entry:"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/project_root/data/ui/Preferencescamel_case_nameDialog.ui.h:2
-msgid "sentence_name Preferences"
-msgstr ""
-
-#: ../quickly/configurationhandler.py:43
-msgid "ERROR: Can't load configuration in current path or its parent ones."
-msgstr ""
-
-#: ../quickly/configurationhandler.py:59
-#, python-format
-msgid "ERROR: Can't load configuration in %s: %s"
-msgstr ""
-
-#: ../quickly/configurationhandler.py:118
-#, python-format
-msgid "ERROR: Can't save configuration in %s\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/project_root/python/helpers.py:52
-msgid "Show debug messages"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/store/help-guide.py:33
-msgid ""
-"adds a help guide to your project.\n"
-"\n"
-"To edit the guide, run:\n"
-"$ quickly edit\n"
-"All the help pages are loaded into your editor as well as the python files.\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:62
-#: ../data/templates/ubuntu-flash-game/internal/launchpad_helper.py:62
-msgid "Calling GPG to create tarball signature..."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:65
-#: ../data/templates/ubuntu-flash-game/internal/launchpad_helper.py:65
-msgid "Signing the tarball failed, not uploading the signature"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:82
-#: ../data/templates/ubuntu-flash-game/internal/launchpad_helper.py:82
-#, python-format
-msgid "New release available: %s"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/launchpad_helper.py:90
-#: ../data/templates/ubuntu-flash-game/internal/launchpad_helper.py:90
-msgid "An error happened during tarball upload:"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/tutorial.py:33
-msgid "Opens help file with the tutorial for the current template."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/add.py:46
-msgid "Add something to your project\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/add.py:69
-msgid "Cannot add, no plugin name provided."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/add.py:75
-#, python-format
-msgid "Cannot add, did not recognize plugin name: %s"
-msgstr ""
-
-#: ../quickly/bzrbinding.py:51
-msgid "Bzr not properly installed"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/debug.py:33
-msgid "quickly debug -- [program arguments]"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/debug.py:35
-msgid ""
-"Debugs your application with winpdb.\n"
-"\n"
-"$ quickly debug -- values -<whatever>\n"
-"to pass \"-whatever\" and \"values\" to the executed program. Without that\n"
-"if you use for instance --help, it would be Quickly help and not your\n"
-"program one."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/debug.py:49
-msgid "Can't access to X server, so can't run winpdb"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/debug.py:63
-msgid "Can't execute winpdb"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/run.py:33
-msgid "quickly run -- [program arguments]"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/run.py:35
-msgid ""
-"Runs your application. This is the best way to try test it out\n"
-"while you are developing it. It starts up the main project window.\n"
-"\n"
-"$ quickly run -- values -<whathever>\n"
-"to pass \"-whatever\" and \"values\" to the executed program. Without that\n"
-"if you use for instance --help, it would be Quickly help and not your\n"
-"program one."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/run.py:50
-msgid "Can't access to X server, so can't run gtk application"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/run.py:63
-#, python-format
-msgid "Can't execute %s"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/upgrade.py:65
-msgid "Can't rename LICENSE file, check your file permission\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/upgrade.py:197
-#, python-format
-msgid ""
-"WARNING: can't update your project to support /opt. This doesn't matter if "
-"you don't plan to submit your project to the application review board. Cause "
-"is: %s"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:40
-msgid ""
-"quickly submitubuntu [--ppa <ppa | group/ppa>] [release-version] [comments]"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:42
-msgid ""
-"Posts a release of your project and submit it the ubuntu\n"
-"application review board so that any users can see and install the\n"
-"application ont their system.\n"
-"\n"
-"Before running quickly submitubuntu, you should: create your account\n"
-"and a project page on http://launchpad.net.\n"
-"You also have to add a PPA to your launchpad account.\n"
-"\n"
-"Name, email, and version will be automatically changed in setup.py and\n"
-"bzr will tag the current source with the new version number.\n"
-"\n"
-"If not specified, the new version number will be 'YEAR.MONTH[.RELEASE]'.\n"
-"\n"
-"For example, the third release in July 2010 would be versioned 10.07.2.\n"
-"\n"
-"You may want to make sure that the description and long description in\n"
-"setup.py are up to date before releasing.\n"
-"\n"
-"You can optionally run 'quickly package' and test your package to make\n"
-"sure it installs as expected."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:93
-#: ../data/templates/ubuntu-application/release.py:92
-#: ../data/templates/ubuntu-application/share.py:86
-msgid "No PPA provided."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:96
-#: ../data/templates/ubuntu-application/release.py:95
-#: ../data/templates/ubuntu-application/share.py:89
-#: ../data/templates/ubuntu-application/package.py:68
-#, python-format
-msgid "Unknown option: %s."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:146
-#: ../data/templates/ubuntu-application/release.py:145
-#: ../data/templates/ubuntu-application/share.py:118
-#, python-format
-msgid "User or Team %s not found on Launchpad"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:149
-#: ../data/templates/ubuntu-application/release.py:148
-#: ../data/templates/ubuntu-application/share.py:121
-#, python-format
-msgid "You have to be a member of %s team to upload to its ppas"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:155
-#: ../data/templates/ubuntu-application/release.py:154
-#: ../data/templates/ubuntu-application/share.py:127
-#, python-format
-msgid ""
-"%s does not exist. Please create it on launchpad if you want to push a "
-"package to it. %s has the following ppas available:"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:161
-#: ../data/templates/ubuntu-application/release.py:160
-#: ../data/templates/ubuntu-application/share.py:133
-msgid ""
-"You can temporary choose one of them with --ppa switch or definitely by "
-"executing quickly configure ppa <ppa_name>."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:179
-#: ../data/templates/ubuntu-application/release.py:178
-#, python-format
-msgid "quickly released: %s"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:189
-#: ../data/templates/ubuntu-application/release.py:188
-#, python-format
-msgid ""
-"ERROR: quickly can't release: %s seems to be already released. Choose "
-"another name."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:195
-#: ../data/templates/ubuntu-application/release.py:194
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:195
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:215
-msgid "commit before release"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:197
-#: ../data/templates/ubuntu-application/submitubuntu.py:226
-#: ../data/templates/ubuntu-application/release.py:196
-#: ../data/templates/ubuntu-application/release.py:225
-msgid "ERROR: quickly can't release as it can't commit with bzr"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:218
-#: ../data/templates/ubuntu-application/release.py:217
-#: ../data/templates/ubuntu-flash-game/package.py:59
-#: ../data/templates/ubuntu-application/share.py:153
-#: ../data/templates/ubuntu-application/package.py:84
-msgid "ERROR: can't create or update ubuntu package"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:257
-#: ../data/templates/ubuntu-application/release.py:256
-msgid "ERROR: quickly can't release: can't pull from launchpad."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:262
-#: ../data/templates/ubuntu-application/submitubuntu.py:269
-#: ../data/templates/ubuntu-application/release.py:261
-#: ../data/templates/ubuntu-application/release.py:268
-msgid "ERROR: quickly can't release: can't push to launchpad."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:275
-#: ../data/templates/ubuntu-application/release.py:274
-msgid "ERROR: quickly can't release correctly: can't pull from launchpad."
-msgstr ""
-
-#. upload to launchpad
-#: ../data/templates/ubuntu-application/submitubuntu.py:280
-#: ../data/templates/ubuntu-application/release.py:279
-#: ../data/templates/ubuntu-application/share.py:157
-msgid "pushing to launchpad"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:290
-#, python-format
-msgid ""
-"%s %s released and submitted to ubuntu. Wait for half an hour and have look "
-"at %s."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/submitubuntu.py:291
-msgid ""
-"Then your application will be reviewed by the application review board."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:67
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:65
-msgid "Command returned some ERRORS:"
-msgstr ""
-
-#. finish the current line
-#: ../data/templates/ubuntu-application/internal/packaging.py:89
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:87
-msgid "Command returned some WARNINGS:"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:268
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:194
-msgid "An error has occurred when creating debian packaging"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:274
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:197
-msgid "Ubuntu packaging created in debian/"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:379
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:302
-msgid "ERROR: an error occurred during source package creation"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:384
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:307
-msgid "ERROR: an error occurred during source upload to launchpad"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:422
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:345
-msgid ""
-"Release version specified in command arguments is not a valid version scheme "
-"like 'x(.y)(.z)'."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:431
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:354
-msgid "No previous version found in setup.py. Put one please"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:441
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:364
-#, python-format
-msgid ""
-"Share version specified after -public in setup.py is not a valid number: %s"
-msgstr ""
-
-#: ../data/templates/ubuntu-application/internal/packaging.py:461
-#: ../data/templates/ubuntu-flash-game/internal/packaging.py:384
-#, python-format
-msgid ""
-"Minor version specified in setup.py is not a valid number: %s. Fix this or "
-"specify a version as release command line argument"
-msgstr ""
-
-#: ../quickly/commands.py:308
-#, python-format
-msgid "ERROR: %s command failed"
-msgstr ""
-
-#: ../quickly/commands.py:309 ../quickly/commands.py:450
-#: ../quickly/commands.py:460
-msgid "Aborting"
-msgstr ""
-
-#: ../quickly/commands.py:447
-#, python-format
-msgid ""
-"ERROR: Can't find project in %s.\n"
-"Ensure you launch this command from a quickly project directory."
-msgstr ""
-
-#: ../quickly/commands.py:457
-#, python-format
-msgid ""
-"ERROR: %s is a project. You can't launch %s command within a project. Please "
-"choose another path."
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/create.py:35
-msgid ""
-"Usage:\n"
-"$ quickly create ubuntu-flash-game path/to/project_name "
-"path/to/myflashgame.swf\n"
-"\n"
-"where \"project_name\" is one or more words separated by an underscore and\n"
-"path/to can be any existing path.\n"
-"\n"
-"This will create a new project which runs your existing SWF, "
-"myflashgame.swf,\n"
-"on the Ubuntu desktop, and makes it ready to be packaged and distributed in\n"
-"the Ubuntu Software Centre.\n"
-"\n"
-"After creating the project, you'll want to specify the title of your game\n"
-"and the size of the window:\n"
-"\n"
-"1. Changing your working directory to the new project:\n"
-"$ cd path/to/project_name\n"
-"\n"
-"3. Edit the code and specify the title and window size:\n"
-"$ quickly edit\n"
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/create.py:59
-msgid ""
-"Project name not defined.\n"
-"Usage is: quickly create ubuntu-flash-game project_name myflashgame.swf"
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/create.py:63
-msgid ""
-"Flash SWF file not defined.\n"
-"Usage is: quickly create ubuntu-flash-game project_name myflashgame.swf"
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/create.py:71
-#, python-format
-msgid ""
-"Flash SWF file '%s' not found.\n"
-"Usage is: quickly create ubuntu-flash-game project_name myflashgame.swf"
-msgstr ""
-
-#. add it to revision control
-#: ../data/templates/ubuntu-flash-game/create.py:144
-msgid "Creating bzr repository and commiting"
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/create.py:156
-#, python-format
-msgid ""
-"Congratulations, your new project is set up! cd %s/ to edit the details."
-msgstr ""
-
-#: ../data/templates/ubuntu-application/store/indicator.py:32
-msgid ""
-"This will add support for Ubuntu Application Indicator to your quickly "
-"project.\n"
-"Next time you run your app, the Indicator will show up in the panel on top "
-"right.\n"
-"You can add/remove/modify items from the indicator menu by editing "
-"indicator.py\n"
-msgstr ""
+msgstr "Copiare %s per creare il nuovo modello %s"
 
 #: ../data/templates/ubuntu-application/release.py:40
-msgid ""
-"quickly release [--ppa <ppa | group/ppa>] [release-version] [comments]"
-msgstr ""
+msgid "quickly release [--ppa <ppa | group/ppa>] [release-version] [comments]"
+msgstr "quickly release [--ppa <ppa | group/ppa>] [versione] [commenti]"
 
 #: ../data/templates/ubuntu-application/release.py:42
 msgid ""
 "Posts a release of your project to a PPA on launchpad so that\n"
 "users can install the application on their system.\n"
 "\n"
-"Before running quickly release, you should: create your account\n"
+"Before running 'quickly release', you should: create your account\n"
 "and a project page on http://launchpad.net.\n"
 "You also have to add a PPA to your launchpad account.\n"
 "\n"
@@ -789,6 +1031,25 @@ msgid ""
 "You can optionally run 'quickly package' and test your package to make\n"
 "sure it installs as expected."
 msgstr ""
+"Pubblica una versione del progetto su un PPA di launchpad in modo\n"
+"che gli utenti possano installare l'applicazione nel sistema.\n"
+"\n"
+"Prima di eseguire \"quickly release\" occorre creare un account e\n"
+"una pagina progetto su http://launchpad.net.\n"
+"Dovete aver aggiunto anche un PPA nell'account.\n"
+"\n"
+"Nome, email e numero di versione verrà automaticamente cambiato in\n"
+"setup.py e bzr creerà un tag per la versione corrente.\n"
+"\n"
+"Se non specificato, il numero di versione sarà \"ANNO.MESE[.VERSIONE]\".\n"
+"\n"
+"Per esempio, il terzo rilascio del Luglio 2010 sarà la versione 10.07.2.\n"
+"\n"
+"È opportuno assicurarsi che la descrizione breve e lunga nel file setup.py\n"
+"sia correttamente aggiornato prima del rilascio.\n"
+"\n"
+"È opzionalmente possibile eseguire \"quickly package\" per testare il \n"
+"pacchetto ed essere sicuri che venga installato come atteso."
 
 #: ../data/templates/ubuntu-application/release.py:289
 #, python-format
@@ -796,19 +1057,21 @@ msgid ""
 "%s %s released and building on Launchpad. Wait for half an hour and have "
 "look at %s."
 msgstr ""
+"%s %s rilasciato e in corso di building su Launchpad. Attendere circa "
+"mezz'ora e controllare su %s"
 
 #: ../data/templates/ubuntu-application/test.py:32
 msgid ""
 "This command tests your project using the contents of the tests directory"
-msgstr ""
+msgstr "Questo comando esegue i test usando il contenuto della directory tests"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Contents"
-msgstr ""
+msgstr "Contenuti"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:2
 msgid "Status Area"
-msgstr ""
+msgstr "Barra di stato"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:3
 msgid ""
@@ -820,128 +1083,128 @@ msgid ""
 "To change the behavior and edit the python code, run 'quickly edit', which "
 "will bring up a text editor."
 msgstr ""
+"L'applicazione è stata creata!\n"
+"\n"
+"Per iniziare a cambiare l'interfaccia utente eseguire \"quickly design\" che "
+"apre GLADE per permettere la modfica delle finestre.\n"
+"\n"
+"Per cambiare il codice python eseguite \"quickly edit\", che apre l'editor "
+"di testo."
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_Edit"
-msgstr ""
+msgstr "_Modifica"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_File"
-msgstr ""
+msgstr "_File"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_Help"
-msgstr ""
+msgstr "_Aiuto"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:11
 msgid "_View"
-msgstr ""
+msgstr "_Visualizza"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:12
 msgid "sentence_name"
-msgstr ""
+msgstr "sentence_name"
 
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:63
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:64
-#, python-format
-msgid ""
-"Failed to add file to project\n"
-" cannot add: %s - this file already exists."
-msgstr ""
-
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:96
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:137
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:116
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:157
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:64
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:105
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:87
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:128
 msgid "ERROR: Can't load setup.py file"
-msgstr ""
+msgstr "ERRORE: impossibile caricare il file setup.py"
 
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:195
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:163
 #: ../data/templates/ubuntu-application/save.py:41
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:215
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:186
 msgid "quickly saved"
-msgstr ""
+msgstr "quickly salvato"
 
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:278
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:323
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:246
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:294
 msgid ""
 "There is no GPG key detected for your Launchpad account. Please upload one "
 "as you can read on the tutorial"
 msgstr ""
+"Non esiste una chiave GPG nell'account Launchpad. Caricarne una come "
+"specificato nel tutorial"
 
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:288
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:333
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:256
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:304
 msgid "You choosed to not create your GPG key."
-msgstr ""
+msgstr "Si è scelto di non creare la chiave GPG."
 
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:311
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:356
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:279
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:327
 msgid "Can't create GPG key. Try to create it yourself."
-msgstr ""
+msgstr "Impossibile creare la chiave GPG. Provare a crearla manualmente."
 
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:326
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:371
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:294
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:342
 msgid ""
 "Can't sign the package as no adress email found. Fulfill the AUTHORS file "
 "with name <emailadress> or export DEBEMAIL/EMAIL."
 msgstr ""
+"Impossibile firmare il pacchetto per la mancanza dell'indirizzo email. "
+"Completare il file AUTHORS sostituendo <emailadress> oppure impostare la "
+"variabile DEBEMAIL o EMAIL"
 
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:367
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:412
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:335
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:383
 msgid ""
 "GPG keys found matching no prefered email. You can export DEBEMAIL or put it "
 "in AUTHORS file one matching your local gpg key."
 msgstr ""
+"La chiave GPG trovata non corrisponde all'email specificata. Esportare la "
+"variabile DEBEMAIL o inserirne una nel file AUTHORS che sia presente nella "
+"chiave GPG locale."
 
 #. shouldn't happen as other errors are caught
-#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:409
-#: ../data/templates/ubuntu-application/internal/quicklyutils.py:454
-msgid "No gpg key set matching launchpad one found.'"
-msgstr ""
+#: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:377
+#: ../data/templates/ubuntu-application/internal/quicklyutils.py:425
+msgid "No gpg key set matching launchpad one found."
+msgstr "La chiave gpg impostata non corrisponde a quella trovata su Launchpad."
 
-#: ../quickly/launchpadaccess.py:39
+#: ../quickly/launchpadaccess.py:44
 msgid "Check whether python-launchpadlib is installed"
+msgstr "Controllare anche se python-launchpadlib è installato"
+
+#: ../quickly/launchpadaccess.py:82
+msgid "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
+"ATTENZIONE: si sta usando \"staging\" e non l'istanza di launchpad di "
+"produzione"
 
 #: ../quickly/launchpadaccess.py:88
-msgid ""
-"WARNING: you are using staging and not launchpad real production server"
-msgstr ""
-
-#: ../quickly/launchpadaccess.py:96
 msgid "Get Launchpad Settings"
-msgstr ""
+msgstr "Recupero impostazioni di Launchpad"
 
-#: ../quickly/launchpadaccess.py:111
-msgid "Previous Launchpad values seems to have been removed."
-msgstr ""
-
-#: ../quickly/launchpadaccess.py:113
-msgid "Initial Launchpad binding."
-msgstr ""
-
-#: ../quickly/launchpadaccess.py:114
+#: ../quickly/launchpadaccess.py:89
 msgid "Quickly"
-msgstr ""
+msgstr "Quickly"
 
-#: ../quickly/launchpadaccess.py:126
+#: ../quickly/launchpadaccess.py:100
 msgid "Unknown reason"
-msgstr ""
+msgstr "Causa sconosciuta"
 
-#: ../quickly/launchpadaccess.py:128
+#: ../quickly/launchpadaccess.py:101
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr ""
+msgstr "Impossibile impostare Launchpad per quickly; %s"
+
+#: ../quickly/launchpadaccess.py:102
+msgid "Launchpad connection is ok"
+msgstr "Connessione con Launchpad funzionante"
+
+#: ../quickly/launchpadaccess.py:123
+msgid "No launchpad project given, aborting."
+msgstr "Nessun progetto Launchpad fornito, interruzione."
 
 #: ../quickly/launchpadaccess.py:129
-msgid "Launchpad connection is ok"
-msgstr ""
-
-#: ../quickly/launchpadaccess.py:150
-msgid "No launchpad project given, aborting."
-msgstr ""
-
-#: ../quickly/launchpadaccess.py:156
 #, python-format
 msgid ""
 "---------------- [%s] ----------------\n"
@@ -951,67 +1214,87 @@ msgid ""
 "Launchpad url: %s/%s\n"
 "%s\n"
 msgstr ""
+"---------------- [%s] ----------------\n"
+"   %s\n"
+"--------------------------------------\n"
+"Nome progetto: %s\n"
+"Indirizzo Launchpad: %s/%s\n"
+"%s\n"
 
-#: ../quickly/launchpadaccess.py:167
+#: ../quickly/launchpadaccess.py:140
 msgid "No project found"
-msgstr ""
+msgstr "Nessun progetto trovato"
 
-#: ../quickly/launchpadaccess.py:169
+#: ../quickly/launchpadaccess.py:142
 msgid "Choose your project number"
-msgstr ""
+msgstr "Scegliere il numero del progetto"
 
-#: ../quickly/launchpadaccess.py:179
+#: ../quickly/launchpadaccess.py:152
 msgid "No right number given, aborting."
-msgstr ""
+msgstr "Numero fornito errato, interruzione."
 
-#: ../quickly/launchpadaccess.py:186
+#: ../quickly/launchpadaccess.py:159
 #, python-format
 msgid ""
 "Can't find %s project on Launchpad. You can try to find it interactively "
 "without providing a project name."
 msgstr ""
+"Impossibile trovare il progetto %s su Launchpad. È possibile provare a "
+"cercarlo interattivamente senza fornirne il nome."
 
 #: ../data/templates/ubuntu-flash-game/package.py:31
 msgid ""
 "Usage:\n"
-"$quickly package\n"
+"$ quickly package\n"
 "\n"
 "Creates a debian file (deb) from your project. Before running\n"
-"the package command you can edit the Icon and Category entry of *.desktop.in "
-"\n"
+"the package command you can edit the Icon and Category entry of *.desktop."
+"in \n"
 "file, where * is the name of your project.\n"
 "\n"
-"Note that if you didn't run quickly release, quickly share\n"
-"or quickly change-lp-project you may miss the name, email in\n"
+"Note that if you didn't run 'quickly release', 'quickly share'\n"
+"or 'quickly change-lp-project' you may miss the name, email in\n"
 "setup.py. You can edit them if you don't want to use any of these\n"
 "commands afterwards. Those changes are not a mandatory at all for\n"
 "testing purpose.\n"
 msgstr ""
+"Uso:\n"
+"$quickly package\n"
+"\n"
+"Crea un pacchetto debian (deb) per il progetto. Prima di eseguire\n"
+"il comando è possibile modificare l'icona e la categoria nel file\n"
+"*.desktop.in, dove * rappresenta il nome del progetto.\n"
+"\n"
+"Notare che se non si esegue \"quickly release\", \"quickly share\"\n"
+"oppure \"quickly change-lp-project\" si può perdere il nome, email\n"
+"in setup.py. È possibile modificarlo manualmente se non si \n"
+"desidera usare uno di questo comandi. Questi cambiamenti\n"
+"non sono obbligatori per svolgere delle prove.\n"
 
 #: ../data/templates/ubuntu-flash-game/package.py:54
 #: ../data/templates/ubuntu-application/package.py:79
 msgid "Release version not found in setup.py."
-msgstr ""
+msgstr "Numero versione non trovato in setup.py."
 
 #: ../data/templates/ubuntu-flash-game/package.py:67
 #: ../data/templates/ubuntu-application/package.py:93
 #, python-format
 msgid "Ubuntu package has been successfully created in ../%s_%s_all.deb"
-msgstr ""
+msgstr "Il pacchetto Ubuntu è stato creato con successo in ../%s_%s_all.deb"
 
 #: ../data/templates/ubuntu-flash-game/package.py:69
 #: ../data/templates/ubuntu-application/package.py:95
 msgid "An error has occurred during package building"
-msgstr ""
+msgstr "Si è verificato un errore durante la creazione del pacchetto"
 
 #: ../quickly/version.py:34
 #, python-format
 msgid "No quickly data path found in %s."
-msgstr ""
+msgstr "Percorso dati non trovato in %s."
 
 #: ../quickly/version.py:38
 msgid "No template found."
-msgstr ""
+msgstr "Modello non trovato."
 
 #: ../quickly/version.py:40
 #, python-format
@@ -1026,68 +1309,100 @@ msgid ""
 "          %s\n"
 "\n"
 "Copyright 2009 Rick Spencer\n"
-"Copyright 2009-2010 Didier Roche\n"
+"Copyright 2009-2011 Didier Roche\n"
+"Copyright 2010-2011 Canonical Ltd\n"
 "https://launchpad.net/quickly\n"
 "\n"
 "quickly comes with ABSOLUTELY NO WARRANTY. quickly is free software, and\n"
 "you may use, modify and redistribute it under the terms of the GNU\n"
 "General Public License version 3 or later."
 msgstr ""
+"Quickly %s\n"
+"  Interprete Python: %s %s\n"
+"  Libreria Python standard: %s\n"
+"  \n"
+"  Libreria in uso da Quickly: %s\n"
+"  Percorso dei dati di Quickly: %s\n"
+"  Directory dei modelli Quickly:\n"
+"          %s\n"
+"\n"
+"Copyright 2009 Rick Spencer\n"
+"Copyright 2009-2010 Didier Roche\n"
+"Copyright 2010-2011 Canonical Ltd\n"
+"https://launchpad.net/quickly\n"
+"\n"
+"Quickly è fornito senza ALCUNA GARANZIA. Quickly è software libero ed è "
+"permesso\n"
+"l'uso, la modifica e la sua ridistribuzione secondo i termini della licenza "
+"GNU General\n"
+"Public License versione 3 o successive."
 
 #: ../quickly/templatetools.py:47
 msgid "No help for this command"
-msgstr ""
+msgstr "Aiuto non disponibile per questo comando"
 
 #: ../quickly/templatetools.py:70
 msgid ""
 "ERROR: unpermitted character in name.\n"
-"The name must start with a letter and contain only letters, spaces, dashes (-"
-"), and digits."
+"The name must start with a letter and contain only letters, spaces, dashes "
+"(-), and digits."
 msgstr ""
+"ERRORE: carattere non permesso nel nome.\n"
+"Il nome deve iniziare con una lettera e contenere soltanto lettere, spazi, "
+"trattini (-) e numeri."
 
 #: ../quickly/templatetools.py:74
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr ""
+msgstr "ERRORE: %s non è permesso come nome progetto"
 
 #: ../quickly/templatetools.py:133 ../quickly/templatetools.py:137
 #, python-format
 msgid "%s was not found in the file %s."
-msgstr ""
+msgstr "%s non è stato trovato nel file %s."
 
 #: ../quickly/templatetools.py:143
 #, python-format
 msgid "%s file was not found or can't update it"
-msgstr ""
+msgstr "Il file %s non è stato trovato o non è possibile aggiornarlo"
 
 #: ../quickly/templatetools.py:218 ../quickly/templatetools.py:220
 msgid "Usage:"
-msgstr ""
+msgstr "Uso:"
 
 #: ../quickly/templatetools.py:233
 #, python-format
 msgid "Candidate templates are: %s"
-msgstr ""
+msgstr "Modelli candidati sono: %s"
 
 #: ../quickly/templatetools.py:242
 #, python-format
 msgid "Candidate commands are: %s"
-msgstr ""
+msgstr "Comandi candidati sono: %s"
 
 #: ../quickly/templatetools.py:245
 #, python-format
 msgid "ERROR: %s"
+msgstr "ERRORE: %s"
+
+#: ../quickly/templatetools.py:282
+#, python-format
+msgid ""
+"Failed to add file to project\n"
+" cannot add: %s - this file already exists."
 msgstr ""
+"Impossibile aggiungere il file al progetto\n"
+" Il file %s non può essere aggiunto in quanto esiste già."
 
 #: ../data/templates/ubuntu-application/share.py:43
 msgid "quickly share [--ppa <ppa | group/ppa>]"
-msgstr ""
+msgstr "quickly share [--ppa <ppa | group/ppa>]"
 
 #: ../data/templates/ubuntu-application/share.py:45
 msgid ""
 "Updates your PPA with the the latest saved project changes.\n"
 "\n"
-"Before running quickly share, you should: create your account\n"
+"Before running 'quickly share', you should: create your account \n"
 "on http://launchpad.net.\n"
 "You also have to add a PPA to your launchpad account.\n"
 "\n"
@@ -1103,12 +1418,34 @@ msgid ""
 "You can optionally run 'quickly package' and test your package to make\n"
 "sure it installs as expected."
 msgstr ""
+"Aggiorna il PPA con l'ultima versione del progetto.\n"
+"\n"
+"Prima di eseguire \"quickly share\" occorre aver creato l'account\n"
+"su http://launchpad.net.\n"
+"Occorre aver aggiunto anche un PPA all'account launchpad.\n"
+"\n"
+"Nome, email e versione verranno automaticamente cambiati in setup.py.\n"
+"\n"
+"La nuova versione sarà \"CURRENT.VERSION-publicX\", dove X verrà "
+"incrementato\n"
+"ogni volta che si richiama il comando share.\n"
+"\n"
+"Ad esempio, se si è rilasciata recentemente la versione 10.07.2 e si è "
+"fatto\n"
+"lo share del pacchetto 3 volte, una successiva \"quickly share\" produrrà\n"
+"la nuova versione 10.07.2-public4.\n"
+"\n"
+"È possibile eseguire opzionalmente \"quickly package\" per provare "
+"localmente il\n"
+"pacchetto e assicurarsi che si installi come dovrebbe."
 
 #: ../data/templates/ubuntu-application/share.py:163
 #, python-format
 msgid ""
 "%s %s is building on Launchpad. Wait for half an hour and have look at %s."
 msgstr ""
+"%s %s è in corso di build in Launchpad. Attendere circa mezz'ora e "
+"controllare su %s"
 
 #: ../quickly/tools.py:48
 msgid ""
@@ -1134,66 +1471,87 @@ msgid ""
 "    quickly push 'awesome new comment system'\n"
 "    quickly -t cool-template push 'awesome new comment system'"
 msgstr ""
+"Uso:\n"
+"    quickly [OPZIONI] comando ...\n"
+"\n"
+"Opzioni:\n"
+"    -t, --template <modello>  Modello da usare se diverso da quello "
+"predefinito\n"
+"    --staging                  Istanza staging (di test) di launchpad\n"
+"    --verbose                  Modalità prolissa\n"
+"    -h, --help                 Mostra l'aiuto\n"
+"\n"
+"Comandi:\n"
+"    \"create <modello> <nome-progetto>\" (modello è obbligatorio in questo "
+"caso)\n"
+"    \"quickly <modello-origine> <modello-dest>\" per creare un template da "
+"personalizzare\n"
+"    \"getstarted\" per avere dei suggerimenti iniziali \n"
+"\n"
+"Esempi:\n"
+"    quickly create ubuntu-application prova\n"
+"    quickly push \"inserire qui un commento\"\n"
+"    quickly -t mio-template push \"inserire qui un commento\""
 
 #: ../quickly/tools.py:119
 #, python-format
 msgid "%s is an invalid data path.\n"
-msgstr ""
+msgstr "%s non è un percorso dati valido.\n"
 
 #: ../quickly/tools.py:120
 msgid "No template directory found. Aborting"
-msgstr ""
+msgstr "Directory del modello non trovata. Interruzione"
 
 #: ../quickly/tools.py:138
 #, python-format
-msgid "ERROR: Template '%s' not found. Aborting"
-msgstr ""
+msgid "ERROR: Template %s not found. Aborting"
+msgstr "ERROR: modello %s not found. Aborting"
 
 #: ../quickly/tools.py:202
 #, python-format
 msgid "ERROR: %s needs one argument: %s"
-msgstr ""
+msgstr "ERRORE: %s necessita di un parametro: %s"
 
 #: ../quickly/tools.py:231
 msgid "ERROR: No command provided in command line"
-msgstr ""
+msgstr "ERRORE: nessun comando fornito nella riga di comando"
 
 #: ../quickly/tools.py:333 ../quickly/tools.py:357 ../quickly/tools.py:375
 #, python-format
 msgid "No command provided to %s command."
-msgstr ""
+msgstr "Nessun comando fornito per %s."
 
 #: ../quickly/tools.py:335
 #, python-format
 msgid "No template or command provided to %s command."
-msgstr ""
+msgstr "Nessun modello o comando fornito per %s."
 
 #. Wasn't a command or a template name, but we are in the context of a template
 #: ../quickly/tools.py:343 ../quickly/tools.py:360
 #, python-format
 msgid "No %s command found in %s template."
-msgstr ""
+msgstr "Comando %s non trovato nel modello %s."
 
 #: ../quickly/tools.py:351
 #, python-format
 msgid "%s is neither a template nor a standard command."
-msgstr ""
+msgstr "%s non è un modello né un comando."
 
 #: ../quickly/tools.py:353 ../bin/quickly.py:57
 #, python-format
 msgid "Template %s does not exist."
-msgstr ""
+msgstr "Il modello %s non esiste."
 
 #: ../quickly/tools.py:367
 #, python-format
 msgid "No template provided to %s command."
-msgstr ""
+msgstr "Nessun modello fornito per il comando %s."
 
 #. there is really not such command, in any template
 #: ../quickly/tools.py:373 ../bin/quickly.py:82
 #, python-format
 msgid "No %s command found."
-msgstr ""
+msgstr "Comando %s non trovato."
 
 #: ../data/templates/ubuntu-application/design.py:33
 msgid ""
@@ -1203,10 +1561,15 @@ msgid ""
 "directly, and the open the UI files, Glade will throw errors\n"
 "and won't open the files."
 msgstr ""
+"Apre l'editor Glade per poter modificare le finestre del progetto\n"
+"Notare che *occorre* aprire Glade in questa maniera per far sì\n"
+"che Quickly funzioni. Se si apre Glade direttamente, e si aprono\n"
+"i file interfaccia, Glade produrrà degli errore e non aprirà\n"
+"i file."
 
 #: ../data/templates/ubuntu-application/save.py:30
 msgid "quickly save [comments]"
-msgstr ""
+msgstr "quickly save [commenti]"
 
 #: ../data/templates/ubuntu-application/save.py:32
 msgid ""
@@ -1215,26 +1578,62 @@ msgid ""
 "or otherwise use the revision control, use bzr directly:\n"
 "$ bzr help"
 msgstr ""
+"Questo comando applica tutte le modifiche dall'ultimo salvataggio a bzr.\n"
+"Notare che questo comando non salva le modifiche in alcun dispositivo\n"
+"di backup. Se si desidera recuperare una versione precedente o altre\n"
+"funzionalità del controllo di versione, usare bzr direttamente:\n"
+"$ bzr help"
 
 #: ../data/templates/ubuntu-application/save.py:47
 msgid "It seems that you have no change to record."
-msgstr ""
+msgstr "Pare che non ci siano modifiche da registrare."
+
+#. Support for command line options.
+#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:19
+msgid "project_name [options]"
+msgstr "nome_progetto [opzioni]"
+
+#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:22
+msgid "Print the maximum debugging info (implies -vv)"
+msgstr "Mostra il massimo delle informazioni di debug (implica -vv)"
+
+#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:24
+msgid "set error_level output to warning, info, and then debug"
+msgstr "imposta error_level a warning, info e infine debug"
+
+#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:27
+msgid "foo should be assigned to bar"
+msgstr "foo dovrebbe essere assegnato a bar"
+
+#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:39
+msgid "easter egg found"
+msgstr "Ester egg trovato"
+
+#. Run your cli application there.
+#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:43
+#, python-format
+msgid "I'm launched and my args are: %s"
+msgstr "Programma eseguito con i parametri: %s"
+
+#: ../data/templates/ubuntu-cli/project_root/python/__init__.py:44
+msgid "end of prog"
+msgstr "fine del programma"
 
 #: ../bin/quickly.py:62
 #, python-format
 msgid "No %s command found in template %s."
-msgstr ""
+msgstr "Comando %s non trovato nel modello %s."
 
 #: ../bin/quickly.py:79
 #, python-format
 msgid "No template specified for command %s."
-msgstr ""
+msgstr "Nessun modello specificato per il comando %s."
 
-#: ../data/templates/ubuntu-application/store/dialog.py:32
+#: ../data/templates/ubuntu-application/store/dialog.py:31
 msgid ""
 "Here, dialog-name is one or more words separated with dash\n"
 "\n"
-"For instance $ quickly add dialog dialog-name will create:\n"
+"For instance 'quickly add dialog dialog-name' will create:\n"
 "1. A subclass of gtk.Dialog called DialogNameDialog in the module\n"
 "   DialogNameDialog.py\n"
 "2. A glade file called DialogNameDialog.ui in the ui directory\n"
@@ -1257,8 +1656,33 @@ msgid ""
 "result = dialog.run()\n"
 "dialog.hide()"
 msgstr ""
+"In questo caso dialog-name è una o più parole separate dal trattino\n"
+"\n"
+"Ad esempio \"quickly add dialog dialog-name\" creerà:\n"
+"1. Una sotto-classe di gtk.Dialog chiamata DialogNameDialog nel modulo\n"
+"   DialogNameDialog.py\n"
+"2. Un file glade chiamato DialogNameDialog.ui nella directory ui\n"
+"3. Un file catalog chiamato dialog_name_dialog.xml sempre nella \n"
+"   directory ui\n"
+"\n"
+"Per modificare l'interfaccia della dialog:\n"
+"$ quickly design\n"
+"\n"
+"Per modificarne il comportamento:\n"
+"$ quickly edit\n"
+"\n"
+"Per usare la dialog occorre invocarla da un altro file python:\n"
+"1. Import della finestra dialog\n"
+"import DialogNameDialog\n"
+"\n"
+"2. Creazione di una istanza della dialog\n"
+"dialog = DialogNameDialog.NewDialogNameDialog()\n"
+"\n"
+"3. Esecuzione della finestra e successivamente viene nascosta\n"
+"result = dialog.run()\n"
+"dialog.hide()"
 
-#: ../data/templates/ubuntu-application/store/help-topic.py:33
+#: ../data/templates/ubuntu-application/store/help-topic.py:32
 msgid ""
 "adds a help topic to your project\n"
 "The topic will automatically appear as an item on the help contents page.\n"
@@ -1269,16 +1693,24 @@ msgid ""
 "$ quickly edit\n"
 "All the help pages are loaded into your editor as well as the python files.\n"
 msgstr ""
+"aggiunge un argomento nella guida del progetto.\n"
+"L'argomento apparirà come voce nella pagina contenuti. La pagina \n"
+"contenuti viene mostrata all'utente facendo clic nel menù\n"
+"aiuto->contenuti.\n"
+"\n"
+"Per modificare la pagina dell'argomento eseguire:\n"
+"$ quickly edit\n"
+"Tutte le pagine di aiuto sono caricate nell'editor assieme ai file python.\n"
 
 #: ../data/templates/ubuntu-application/package.py:34
 msgid ""
 "Creates a debian file (deb) from your project. Before running\n"
-"the package command you can edit the Icon and Category entry of *.desktop.in "
-"\n"
+"the package command you can edit the Icon and Category entry of *.desktop."
+"in \n"
 "file, where * is the name of your project.\n"
 "\n"
-"Note that if you didn't run quickly release, quickly share\n"
-"or quickly change-lp-project you may miss the name, email in\n"
+"Note that if you didn't run 'quickly release', 'quickly share'\n"
+"or 'quickly change-lp-project' you may miss the name, email in\n"
 "setup.py. You can edit them if you don't want to use any of these\n"
 "commands afterwards. Those changes are not a mandatory at all for\n"
 "testing purpose.\n"
@@ -1286,3 +1718,31 @@ msgid ""
 "Passing --extras will create a package similar to one created by\n"
 "the submitubuntu command.  It will install files into /opt."
 msgstr ""
+"Crea un pacchetto debian (deb) per il progetto. Prima di eseguira\n"
+"il comando è possibile modificare l'icona e la categoria nel file\n"
+"*.desktop.in, dove * rappresenta il nome del progetto.\n"
+"\n"
+"Notare che se non si esegue \"quickly release\", \"quickly share\"\n"
+"oppure \"quickly change-lp-project\" si può perdere il nome, email\n"
+"in setup.py. È possibile modificarlo manualmente se non si desidera\n"
+"usare uno di questo comandi. Questi cambiamenti non sono \n"
+"obbligatori per svolgere delle prove.\n"
+"\n"
+"Fornendo il parametro --extras verrà creato il pacchetto simile a quello\n"
+"creato dal comando submitubuntu. I file verranno installati in /opt."
+
+#~ msgid "Schweet"
+#~ msgstr "Bazinga!"
+
+#~ msgid "%s/%sconfig.py file not found."
+#~ msgstr "%s/%sconfig.py file non trovato."
+
+#~ msgid "Show debug messages"
+#~ msgstr "Mostra i messaggi di debug"
+
+#~ msgid "Previous Launchpad values seems to have been removed."
+#~ msgstr ""
+#~ "Le impostazioni di Launchpad precedenti sembrano essere state rimosse."
+
+#~ msgid "Initial Launchpad binding."
+#~ msgstr "Binding iniziale di Launchpad."

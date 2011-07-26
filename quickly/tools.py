@@ -135,7 +135,7 @@ def get_template_directory(template):
 
     # if still false, no template found in template_directories
     if not template_found:
-        raise template_not_found(_("ERROR: Template '%s' not found. Aborting")) % template
+        raise template_not_found(_("ERROR: Template %s not found. Aborting")) % template
 
     return template_path
 
