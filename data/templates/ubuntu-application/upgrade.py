@@ -188,13 +188,18 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, '%(python_name)s'))
 if python_path:
     os.putenv('PYTHONPATH', "%%s:%%s" %% (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses''' % {'python_name' : python_name, 'project_name' : project_name}
 
-    try:
-        templatetools.update_file_content("./bin/%s" % project_name,
-                'if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY',
-                "    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses",
-                content_to_update)
-    except templatetools.CantUpdateFile, e:
-        print _("WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is: %s" % e)
+    # projects based on ~/quickly-projects/template-name have no project_version
+    # so only upgrade if really necessary     
+    with open("./bin/%s" % project_name) as project_bin:
+        contents =  project_bin.read()
+    if not content_to_update in contents:
+        try:
+            templatetools.update_file_content("./bin/%s" % project_name,
+                    'if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY',
+                    "    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses",
+                    content_to_update)
+        except templatetools.CantUpdateFile, e:
+            print _("WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is: %s" % e)
 
 
 sys.exit(0)
