@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-26 09:29+0200\n"
+"POT-Creation-Date: 2011-07-29 10:06+0200\n"
 "PO-Revision-Date: 2011-07-25 12:50+0200\n"
 "Last-Translator: Paolo Sammicheli <paolo@sammicheli.net>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1002,8 +1002,8 @@ msgstr "Esiste già %s."
 
 #: ../quickly/builtincommands.py:176
 #, python-format
-msgid "Copy %s to create new %s template"
-msgstr "Copiare %s per creare il nuovo modello %s"
+msgid "Creating %s template from %s"
+msgstr "Creazione modello %s partendo da %s"
 
 #: ../data/templates/ubuntu-application/release.py:40
 msgid "quickly release [--ppa <ppa | group/ppa>] [release-version] [comments]"
@@ -1730,6 +1730,9 @@ msgstr ""
 "\n"
 "Fornendo il parametro --extras verrà creato il pacchetto simile a quello\n"
 "creato dal comando submitubuntu. I file verranno installati in /opt."
+
+#~ msgid "Copy %s to create new %s template"
+#~ msgstr "Copiare %s per creare il nuovo modello %s"
 
 #~ msgid "Schweet"
 #~ msgstr "Bazinga!"
