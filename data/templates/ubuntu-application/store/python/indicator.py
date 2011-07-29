@@ -18,13 +18,13 @@ import appindicator
 
 class Indicator:
     def __init__(self, window):
-        self.indicator = appindicator.Indicator('project_name','distributor-logo',appindicator.CATEGORY_APPLICATION_STATUS)
+        self.indicator = appindicator.Indicator('project_name','',appindicator.CATEGORY_APPLICATION_STATUS)
         self.indicator.set_status(appindicator.STATUS_ACTIVE)
-    
-        #Can use self.icon once appindicator python api supports custom icons.
-        #icon = get_media_file("project_name.svg")
-        #self.indicator.set_icon(icon)
- 
+
+        icon_uri = get_media_file("project_name.svg")
+        icon_path = icon_uri.replace("file:///", '')
+        self.indicator.set_icon(icon_path)
+
         #Uncomment and choose an icon for attention state. 
         #self.indicator.set_attention_icon("ICON-NAME")
         
