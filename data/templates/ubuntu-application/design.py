@@ -47,7 +47,7 @@ for ui_file in glob.glob("data/ui/*.ui"):
     else:
         files.append(ui_file)
 
-cmd = "GLADE_CATALOG_PATH=./data/ui glade-3 " + " ".join(files)
+cmd = "GLADE_CATALOG_PATH=./data/ui glade " + " ".join(files)
 
 #run glade with env variables pointing to catalogue xml files
 if templatetools.in_verbose_mode():
