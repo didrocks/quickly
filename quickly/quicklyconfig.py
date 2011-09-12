@@ -20,7 +20,7 @@
 # you're warned :)
 
 # quickly version used for project format compatibility
-__version__ = '11.06'
+__version__ = '11.09'
 
 # where quickly will head for quickly data (for instance, templates)
 # by default, this is ../data, relative to trunk layout

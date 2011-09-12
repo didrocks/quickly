@@ -3,7 +3,7 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 
  <!ENTITY appname "<application>Quickly</application>" >
- <!ENTITY appversion "11.06" >
+ <!ENTITY appversion "11.09" >
 ] >
 
 <book lang="en" id="index">
