@@ -1006,7 +1006,7 @@ Adds license to project files. Before using this command, you should:
 </para>
 <itemizedlist>
 <listitem><para>
-run <application>Quickly</application> save in case something goes wrong
+run "quickly save" in case something goes wrong
 </para></listitem>
 <listitem><para>
 Edit the file Copyright to include your authorship.
@@ -1111,6 +1111,7 @@ it does not push changes to any back up location. If you need revert
 or otherwise use the revision control, use bzr directly:
 <programlisting>bzr help</programlisting>
 </para>
+<para>Before running "save" for the first time, you should tell bzr who you are: <programlisting>bzr whoami "My Name &lt;my@email.com&gt;"</programlisting></para>
 </sect1>
 
 <sect1 id="share"><title>share</title>
