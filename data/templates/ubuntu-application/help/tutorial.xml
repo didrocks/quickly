@@ -225,7 +225,7 @@ A record in desktopcouch is essentially a Python dictionary with some extra key/
 <literallayout><programlisting>
         record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
         new_rec = Record({"record_type":record_type, "title":title, "text":text})
-        self.database.put(new_rec)
+        self.database.put_record(new_rec)
 </programlisting></literallayout></para> 
 <para>The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a URL to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever URL you want, and put whatever you want at that URL.</para> 
 <para>
