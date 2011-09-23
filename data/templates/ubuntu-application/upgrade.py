@@ -201,5 +201,13 @@ if python_path:
         except templatetools.CantUpdateFile, e:
             print _("WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is: %s" % e)
 
+### 11.09 update
+if project_version < '11.09':
+    filename = './%s_lib/Builder.py' % python_name
+    with open(filename) as fileobj:
+        contents = fileobj.read()
+    contents = contents.replace('from gi.repository import GObject', 'import gobject')
+    contents = contents.replace('GObject.', 'gobject.')
+    templatetools.set_file_contents(filename, contents)
 
 sys.exit(0)
