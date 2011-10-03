@@ -204,10 +204,13 @@ if python_path:
 ### 11.09 update
 if project_version < '11.09':
     filename = './%s_lib/Builder.py' % python_name
-    with open(filename) as fileobj:
-        contents = fileobj.read()
-    contents = contents.replace('from gi.repository import GObject', 'import gobject')
-    contents = contents.replace('GObject.', 'gobject.')
-    templatetools.set_file_contents(filename, contents)
+    try:
+        with open(filename) as fileobj:
+            contents = fileobj.read()
+        contents = contents.replace('from gi.repository import GObject', 'import gobject')
+        contents = contents.replace('GObject.', 'gobject.')
+        templatetools.set_file_contents(filename, contents)
+    except IOError:
+        pass
 
 sys.exit(0)
