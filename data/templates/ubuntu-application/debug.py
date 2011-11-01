@@ -35,7 +35,7 @@ def help():
     print _("""Debugs your application with winpdb.
 
 $ quickly debug -- values -<whatever>
-to pass "-whatever" and "values" to the executed program. Without that
+to pass '-whatever' and 'values' to the executed program. Without that
 if you use for instance --help, it would be Quickly help and not your
 program one.""")
 templatetools.handle_additional_parameters(sys.argv, help, usage=usage)

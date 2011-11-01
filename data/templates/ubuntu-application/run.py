@@ -36,7 +36,7 @@ def help():
 while you are developing it. It starts up the main project window.
 
 $ quickly run -- values -<whathever>
-to pass "-whatever" and "values" to the executed program. Without that
+to pass '-whatever' and 'values' to the executed program. Without that
 if you use for instance --help, it would be Quickly help and not your
 program one.""")
 templatetools.handle_additional_parameters(sys.argv, help, usage=usage)

@@ -51,11 +51,11 @@ def help():
     print _("""Adds license to project files. Before using this command, you should:
 
 1. Edit the file AUTHORS to include your authorship (this step is automatically done
-   if you directly launch "$ quickly release" or "$ quickly share" before changing license)
+   if you directly launch 'quickly release' or 'quickly share' before changing license)
    In this case, license is GPL-3 by default.
 2. If you want to put your own quickly unsupported Licence, add a COPYING file containing
    your own licence and execute $ quickly license other.
-3. Executes either $ quickly license or $ quickly license <License>
+3. Executes either 'quickly license' or 'quickly license <License>'
    where <License> can be either:
    - GPL-3 (default)
    - GPL-2
@@ -65,12 +65,12 @@ This will modify the COPYING file with the chosen licence (with GPL-3 by default
 Updating previous chosen Licence if needed.
 If you previously removed the tags to add your own licence, it will leave it pristine.
 If no name is attributed to the Copyright, it will try to retrieve it from Launchpad
-(in quickly release or quickly share command only)
+(in 'quickly release' or 'quickly share' command only)
 
 Finally, this will copy the Copyright at the head of every files.
 
-Note that if you don't run quickly licence before calling quickly release or quickly
-share, this one will execute it for you and guess the copyright holder from your
+Note that if you don't run 'quickly licence' before calling 'quickly release' or 'quickly share',
+this one will execute it for you and guess the copyright holder from your
 launchpad account if you didn't update it.""")
 
 def get_supported_licenses():

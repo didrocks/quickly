@@ -17,13 +17,13 @@ gettext.textdomain('project_name')
 
 class Indicator:
     def __init__(self, window):
-        self.indicator = AppIndicator3.Indicator('project_name','distributor-logo',AppIndicator3.IndicatorCategory.APPLICATION_STATUS)
+        self.indicator = AppIndicator3.Indicator('project_name', '', AppIndicator3.IndicatorCategory.APPLICATION_STATUS)
         self.indicator.set_status(AppIndicator3.IndicatorStatus.ACTIVE)
-    
-        #Can use self.icon once appindicator python api supports custom icons.
-        #icon = get_media_file("project_name.svg")
-        #self.indicator.set_icon(icon)
- 
+
+        icon_uri = get_media_file("project_name.svg")
+        icon_path = icon_uri.replace("file:///", '')
+        self.indicator.set_icon(icon_path)
+
         #Uncomment and choose an icon for attention state. 
         #self.indicator.set_attention_icon("ICON-NAME")
         

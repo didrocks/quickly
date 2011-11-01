@@ -196,7 +196,7 @@ def make_pyname(name):
 
 
 # Until bug https://bugzilla.gnome.org/show_bug.cgi?id=652127 is fixed, we 
-# need to reimplement inspect.getmembers.  Gobject introspection doesn't
+# need to reimplement inspect.getmembers.  GObject introspection doesn't
 # play nice with it.
 def getmembers(obj, check):
     members = []

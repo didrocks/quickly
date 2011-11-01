@@ -173,7 +173,7 @@ def quickly(project_template, project_dir, command_args, shell_completion=False)
         return 1
 
     if not os.path.exists(template_destination_path):
-        print _("Copy %s to create new %s template") % (project_template, template_destination_path)
+        print _("Creating %s template from %s") % (template_destination_path, project_template)
 
     try:
         template_source_path = tools.get_template_directory(project_template)

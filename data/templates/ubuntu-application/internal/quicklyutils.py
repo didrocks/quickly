@@ -422,6 +422,6 @@ def get_right_gpg_key_id(launchpad):
                 return key_id
 
     # shouldn't happen as other errors are caught
-    raise gpg_error(_("No gpg key set matching launchpad one found.'"))
+    raise gpg_error(_("No gpg key set matching launchpad one found."))
 
 

@@ -1,3 +1,37 @@
+Quickly 11.10
+------------------------------------
+
+ + ubuntu-application:
+   - upgrade: Fix 11.04 projects that mixed PyGI and PyGObject on upgrade
+
+Quickly 11.09
+------------------------------------
+
+ + ubuntu-application:
+   - add: Make indicator code set its icon to the project icon (Tony Byrne)
+   - design: Call new 'glade' executable, not 'glade-3' (Paolo Sammicheli)
+   - upgrade: Better detection for whether to use new /opt code (Tony Byrne)
+   - Fix some mistakes in the tutorial
+   - Don't mix PyGI and PyGObject calls in project code
+ + common:
+   - A lot of string cleanup and translation fixes (Paolo Sammicheli)
+   - Updated translations
+
+Quickly 11.06
+------------------------------------
+
+ + ubuntu-application:
+   - add: Support adding files from derived templates (Tony Byrne)
+   - edit: Correctly open bin/project-name wrapper on Ubuntu 10.10-era
+     projects (LP: #770294)
+   - package: Work with Ubuntu 11.10's version of python-mkdebian
+ + ubuntu-cli:
+   - package: Avoid creating bogus .deb files by properly quoting paths
+     (LP: #790011)
+ + common:
+   - Fix typo in man page (LP: #803258)
+   - Updated translations
+
 Quickly 11.04
 ------------------------------------
 
