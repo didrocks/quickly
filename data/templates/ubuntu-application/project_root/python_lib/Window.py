@@ -3,12 +3,11 @@
 # This file is in the public domain
 ### END LICENSE
 
-from gi.repository import Gtk # pylint: disable=E0611
+from gi.repository import Gio, Gtk # pylint: disable=E0611
 import logging
 logger = logging.getLogger('python_name_lib')
 
 from . helpers import get_builder, show_uri, get_help_uri
-from . preferences import preferences
 
 # This class is meant to be subclassed by camel_case_nameWindow.  It provides
 # common functions and some boilerplate.
@@ -50,7 +49,8 @@ class Window(Gtk.Window):
         self.preferences_dialog = None # instance
         self.AboutDialog = None # class
 
-        preferences.connect('changed', self.on_preferences_changed)
+        self.settings = Gio.Settings("net.launchpad.project_name")
+        self.settings.connect('changed', self.on_preferences_changed)
 
         # Optional Launchpad integration
         # This shouldn't crash if not found as it is simply used for bug reporting.
@@ -113,10 +113,8 @@ class Window(Gtk.Window):
         # Clean up code for saving application state should be added here.
         Gtk.main_quit()
 
-    def on_preferences_changed(self, widget, data=None):
-        logger.debug('main window received preferences changed')
-        for key in data:
-            logger.debug('preference changed: %s = %s' % (key, preferences[key]))
+    def on_preferences_changed(self, settings, key, data=None):
+        logger.debug('preference changed: %s = %s' % (key, str(settings.get_value(key))))
 
     def on_preferences_dialog_destroyed(self, widget, data=None):
         '''only affects gui
