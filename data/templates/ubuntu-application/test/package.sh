@@ -41,9 +41,9 @@ ls debian
 # rules
 
 ls ../test-project_0.1.dsc ../test-project_0.1.tar.gz ../test-project_0.1_all.deb
+# ../test-project_0.1_all.deb
 # ../test-project_0.1.dsc
 # ../test-project_0.1.tar.gz
-# ../test-project_0.1_all.deb
 
 grep UNKNOWN debian/*
 # debian/control:Maintainer: UNKNOWN <UNKNOWN>
