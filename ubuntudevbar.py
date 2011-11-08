@@ -1,9 +1,7 @@
 #!/usr/bin/python
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 
-import nautilus
-from gi.repository import GdkPixbuf, Gtk # pylint: disable=E0611
-import vte
+from gi.repository import GLib, GdkPixbuf, Gtk, Nautilus, Vte # pylint: disable=E0611
 
 try:
     from quickly import api as quicklyapi
@@ -15,7 +13,7 @@ except:
 command_order = ('create', 'edit', 'design', 'save', 'package', 'share', 'release', 'tutorial')
 command_without_output = ('edit', 'design', 'save', 'tutorial')
 
-class DevBar(nautilus.LocationWidgetProvider):
+class DevBar(Nautilus.LocationWidgetProvider):
     pass
     def __init__(self):
         self.bars = {}
@@ -77,7 +75,7 @@ class UbuntuDevBar(Gtk.HBox):
 
     def __init__(self, *args, **kwargs):
         '''create a Ubuntu Dev Bar'''
-        super(UbuntuDevBar, self).__init__(*args, **kwargs)
+        Gtk.HBox.__init__(*args, **kwargs)
         self._logo = None
         self._image = None
         self._subtitle = None
@@ -157,8 +155,9 @@ class UbuntuDevBar(Gtk.HBox):
         except IndexError:
             pass
         command = self.add_additional_actions(command)
-        v = vte.Terminal()
-        v.fork_command(command[0], argv=command, directory=argscommand[1])
+        v = Vte.Terminal()
+        v.fork_command_full(Vte.PtyFlags.DEFAULT, argscommand[1], command,
+                            None, GLib.SpawnFlags.SEARCH_PATH, None, None)
         window = Gtk.Window()
         window.add(v)
         if command[1] not in command_without_output:

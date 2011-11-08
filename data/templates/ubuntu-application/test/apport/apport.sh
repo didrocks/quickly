@@ -289,7 +289,7 @@ bzr commit -m "Prior to upgrade"
 # modified etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # Committed revision 4.
 
-quickly upgrade 0.3 0.4
+quickly upgrade 0.3
 
 bzr status
 
@@ -315,7 +315,7 @@ bzr commit -m "Re-running upgrade again"
 
 bzr status
 
-quickly upgrade 0.3 0.4
+quickly upgrade 0.3
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
@@ -366,7 +366,7 @@ grep LaunchpadIntegration. test_project_lib/Window.py
 
 grep helpMenu test_project_lib/Window.py
 
-quickly upgrade 0.3 0.4
+quickly upgrade 0.3
 # Adding launchpad integration to existing application
 # Creating new apport crashdb configuration
 # Creating new apport hooks
@@ -395,7 +395,7 @@ bzr commit -m "Committing after removing all lpi integration"
 # modified test_project_lib/Window.py
 # Committed revision 6.
 
-quickly upgrade 0.3 0.4
+quickly upgrade 0.3
 # Creating new apport crashdb configuration
 # Creating new apport hooks
 
@@ -416,4 +416,4 @@ grep LaunchpadIntegration. test_project_lib/Window.py
 
 grep helpMenu test_project_lib/Window.py
 
-quickly upgrade 0.3 0.4
+quickly upgrade 0.3

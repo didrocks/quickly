@@ -34,6 +34,8 @@ gettext.textdomain('quickly')
 # get project version and template version if no argument given
 if len(sys.argv) < 3:
     (project_version, template_version) = templatetools.get_project_and_template_versions("ubuntu-application")
+    if len(sys.argv) == 2: # we have been given project but not template version
+        project_version = sys.argv[1]
 else:
     project_version = sys.argv[1]
     template_version = sys.argv[2]
@@ -201,8 +203,8 @@ if python_path:
         except templatetools.CantUpdateFile, e:
             print _("WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is: %s" % e)
 
-### 11.09 update
-if project_version < '11.09':
+### 11.09 update (but only through 11.10; later versions don't want this change)
+if project_version < '11.09' and template_version <= '11.10':
     filename = './%s_lib/Builder.py' % python_name
     try:
         with open(filename) as fileobj:

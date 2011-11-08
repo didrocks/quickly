@@ -9,7 +9,7 @@
 # data/glib-2.0/schemas/net.launchpad.project_name.gschema.xml
 # See http://developer.gnome.org/gio/stable/GSettings.html for more info.
 
-from gi.repository import Gio
+from gi.repository import Gio # pylint: disable=E0611
 
 import gettext
 from gettext import gettext as _
