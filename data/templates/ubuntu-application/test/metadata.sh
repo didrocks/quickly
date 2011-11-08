@@ -38,10 +38,8 @@ cat debian/control | sed "s/project-$(lsb_release -c | cut -f2)*\./project-RELEA
 # XB-Icon: test-project.svg
 # Depends: ${misc:Depends},
 #  ${python:Depends},
-#  python-gobject-2,
-#  python-launchpad-integration,
-#  python-gtk2,
-#  python-desktopcouch-records,
+#  gir1.2-glib-2.0,
+#  gir1.2-launchpad-integration-3.0,
 #  yelp
 # Description: UNKNOWN
 #  UNKNOWN
