@@ -7,7 +7,7 @@ quickly quickly ubuntu-application
 # Usage: quickly quickly [origin-template] destination-template
 
 export HOME=/tmp/quickly-test; quickly quickly ubuntu-application test-template
-# Copy ubuntu-application to create new /tmp/quickly-test/quickly-templates/test-template template
+# Creating /tmp/quickly-test/quickly-templates/test-template template from ubuntu-application
 
 export HOME=/tmp/quickly-test; quickly quickly ubuntu-application test-template
 # /tmp/quickly-test/quickly-templates/test-template already exists.

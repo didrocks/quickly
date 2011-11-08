@@ -38,7 +38,7 @@ cat debian/control | sed "s/project-$(lsb_release -c | cut -f2)*\./project-RELEA
 # XB-Icon: test-project.svg
 # Depends: ${misc:Depends},
 #  ${python:Depends},
-#  python-gobject,
+#  python-gobject-2,
 #  python-launchpad-integration,
 #  python-gtk2,
 #  python-desktopcouch-records,
@@ -55,6 +55,12 @@ cat debian/rules
 # include /usr/share/cdbs/1/class/python-distutils.mk
 # # langpack.mk is relevant on Ubuntu only, not Debian; it does not matter if it's missing
 # -include /usr/share/cdbs/1/rules/langpack.mk
+# 
+# common-binary-post-install-arch::
+# 	-dh_icons -a
+# 
+# common-binary-post-install-indep::
+# 	-dh_icons -i
 # 
 # common-install-indep::
 # 	cp data/media/test-project.svg ../test-project.svg
