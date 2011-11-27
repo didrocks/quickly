@@ -284,7 +284,6 @@ bzr commit -m "Prior to upgrade"
 # Committed revision 4.
 
 quickly upgrade 0.3 0.4
-# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 bzr status
 
@@ -295,17 +294,17 @@ rm -rf etc
 bzr commit -m "Re-running upgrade again"
 # Committing to: /tmp/test-project/
 # missing apport
-# modified apport
+# deleted apport
 # missing etc
-# modified etc
+# deleted etc
 # missing apport/source_test-project.py
-# modified apport/source_test-project.py
+# deleted apport/source_test-project.py
 # missing etc/apport
-# modified etc/apport
+# deleted etc/apport
 # missing etc/apport/crashdb.conf.d
-# modified etc/apport/crashdb.conf.d
+# deleted etc/apport/crashdb.conf.d
 # missing etc/apport/crashdb.conf.d/test-project-crashdb.conf
-# modified etc/apport/crashdb.conf.d/test-project-crashdb.conf
+# deleted etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # Committed revision 5.
 
 bzr status
@@ -313,7 +312,6 @@ bzr status
 quickly upgrade 0.3 0.4
 # Creating new apport crashdb configuration
 # Creating new apport hooks
-# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
@@ -365,7 +363,6 @@ quickly upgrade 0.3 0.4
 # Adding launchpad integration to existing application
 # Creating new apport crashdb configuration
 # Creating new apport hooks
-# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 grep LaunchpadIntegration. test_project_lib/Window.py
 #             LaunchpadIntegration.add_items(self.ui.differentHelpMenu, 1, True, True)
@@ -394,7 +391,6 @@ bzr commit -m "Committing after removing all lpi integration"
 quickly upgrade 0.3 0.4
 # Creating new apport crashdb configuration
 # Creating new apport hooks
-# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
 
 grep LaunchpadIntegration. test_project_lib/Window.py
 
@@ -414,4 +410,3 @@ grep LaunchpadIntegration. test_project_lib/Window.py
 grep helpMenu test_project_lib/Window.py
 
 quickly upgrade 0.3 0.4
-# WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is:     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses was not found in the file /tmp/test-project/bin/test-project.
