@@ -377,7 +377,8 @@ class Command:
 
         # give to the command the opportunity of giving some shell-completion
         # features
-        if template_in_cli == self.template and len(completion) == 0:
+        
+        if self.allow_template(template_in_cli) and len(completion) == 0:
             if callable(self.command): # Internal function
                 completion.extend(
                     self.command(template_in_cli, "", args, True))
@@ -392,6 +393,41 @@ class Command:
                 completion.extend(command_return_completion.strip().split(' ')) # pylint: disable=E1103
 
         return completion
+
+    def allow_template(self, template_in_cli):
+        # get completion from this template
+        if template_in_cli == self.template:
+            return True
+        
+        # check if parent template can provide completion
+        parent = None
+        template_path = tools.get_template_directory(template_in_cli)
+
+        try:
+            files_command_parameters = file(
+                os.path.join(template_path, "commandsconfig"), 'rb')
+            for line in files_command_parameters:
+                # Suppress commentary after the value in configuration
+                # file and in full line.
+                fields = line.split('#')[0]
+                fields = fields.split('=') # Separate variable from value
+                reg_result = re.search('\[(.*)\]', fields[0].strip())
+                if reg_result:
+                    parent = reg_result.group(1)
+
+                if len(fields) == 2:
+                    if fields[0].strip() == 'IMPORT':
+                        imports = [x.strip() for x in fields[1].split(';')]
+                        if self.name in imports:
+                            if parent == self.template:
+                                return True
+
+            # finished reading commandsconfig
+            return False
+
+        except (OSError, IOError):
+            # cannot read commandsconfig
+            return False
 
     def usage(self):
         """Print usage of the current command"""
@@ -519,3 +555,5 @@ class Command:
                 return return_code
 
         return 0
+
+    
