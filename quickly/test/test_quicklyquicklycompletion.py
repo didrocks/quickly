@@ -3,13 +3,14 @@ import nose
 import subprocess
 import shutil
 
-COMPLETION_DATA = [
-[['quickly', "shell-completion", 'quickly', ''], '/tmp', 'commands create getstarted help quickly tutorial'],
-[['quickly', "shell-completion", 'quickly', ''], '/tmp/bar', 'add commands configure debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade'],
-[['quickly', "shell-completion", 'quickly', ''], '/tmp/baz', 'add commands configure debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade'],
-]
+INSIDE_PROJECT = 'add commands configure debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade'
+OUTSIDE_PROJECT = 'commands create getstarted help quickly tutorial'
 
-COUNT_PROJECT_COMMANDS = 19
+COMPLETION_DATA = [
+[['quickly', "shell-completion", 'quickly', ''], '/tmp', OUTSIDE_PROJECT],
+[['quickly', "shell-completion", 'quickly', ''], '/tmp/bar', INSIDE_PROJECT],
+[['quickly', "shell-completion", 'quickly', ''], '/tmp/baz', INSIDE_PROJECT],
+]
 
 def run(cmdlist, cwd='/tmp'):
     my_env = os.environ.copy()
@@ -24,8 +25,7 @@ def run(cmdlist, cwd='/tmp'):
     stdout, stderr = instance.communicate()
     return stdout, stderr
 
-def setup_project(project, template):
-    # use a mock project because it is quicker
+def create_mock_project(project, template):
     path = os.path.join('/tmp', project)
     os.makedirs(path)
 
@@ -45,35 +45,24 @@ def setup():
     stdout, stderr = run(['quickly', 'quickly', 'ubuntu-application', 'foo'])
     assert 'foo template from ubuntu-application' in stdout, stdout
 
-    setup_project('bar', 'ubuntu-application')
-    setup_project('baz', 'foo')
+    create_mock_project('bar', 'ubuntu-application')
+    create_mock_project('baz', 'foo')
 
-def test_command_list_completion():
+def test_setup():
     # sanity check that quickly reacts to mock projects
     for cmdlist, cwd, expected in COMPLETION_DATA: 
-        yield ensure_command_list_completion, cmdlist, cwd, expected
+        yield assert_setup, cmdlist, cwd, expected
 
-def ensure_command_list_completion(cmdlist, cwd,  expected):
+def assert_setup(cmdlist, cwd,  expected):
     stdout, stderr = run(cmdlist, cwd)
     assert expected in stdout, stdout
 
+# now for the real tests
 def test_same_child_and_parent_completion():
-    cmdlist = ['quickly', "shell-completion", 'quickly', '']
-    parent_path = '/tmp/bar'
-    parent_stdout, stderr = run(cmdlist, parent_path)
-    str_project_commands = parent_stdout.split('\n')[0]
-    # these fail with version 11.10
-    # add configure license
-
-    list_project_commands = str_project_commands.split(' ')
-
-    # a simple sanity check
-    assert len(list_project_commands) == COUNT_PROJECT_COMMANDS
-
-    for project_command in list_project_commands:
-        yield ensure_same_child_and_parent_completion, project_command
+    for project_command in INSIDE_PROJECT.split(' '):
+        yield assert_same_child_and_parent_completion, project_command
         
-def ensure_same_child_and_parent_completion(project_command):
+def assert_same_child_and_parent_completion(project_command):
     cmdlist = ['quickly', "shell-completion", 'quickly', project_command, '']
     parent_path = '/tmp/bar'
     child_path = '/tmp/baz'
