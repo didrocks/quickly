@@ -247,6 +247,7 @@ def auto_connect_by_name(callback_obj, builder):
         # Now, automatically find any the user didn't specify in glade
         for sig in signal_names:
             # using convention suggested by glade
+            sig = sig.replace("-", "_")
             handler_names = ["on_%s_%s" % (widget_name, sig)]
 
             # Using the convention that the top level window is not
