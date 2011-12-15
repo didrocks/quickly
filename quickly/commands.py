@@ -527,10 +527,8 @@ class Command:
             (project_version, template_version) = templatetools.get_project_and_template_versions(self.template)
             if project_version < template_version:
                 try:
-                    return_code = get_all_commands()[self.template]['upgrade'].launch( current_dir, [project_version, template_version], project_template)
-                    if return_code == 0:
-                        templatetools.update_version_in_project_file(template_version, self.template)
-                    else:
+                    return_code = get_all_commands()[self.template]['upgrade'].launch( current_dir, ["--internal", project_version, template_version], project_template)
+                    if return_code != 0:
                         sys.exit(return_code)
                 except KeyError: # if KeyError, no upgrade command for this template
                     pass
