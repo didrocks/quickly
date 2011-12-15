@@ -49,11 +49,11 @@ for ui_file in glob.glob("data/ui/*.ui"):
 
 (project_version, template_version) = templatetools.get_project_and_template_versions("ubuntu-application")
 if project_version < '11.12': # GTK+ 3 changeover
-    glade_cmd = 'glade-gtk2'
+    glade_cmd = 'GLADE_CATALOG_PATH=./data/ui glade-gtk2'
 else:
-    glade_cmd = 'glade'
+    glade_cmd = 'GLADE_CATALOG_SEARCH_PATH=./data/ui glade'
 
-cmd = "GLADE_CATALOG_PATH=./data/ui %s " % (glade_cmd) + " ".join(files)
+cmd = glade_cmd + " " + " ".join(files)
 
 #run glade with env variables pointing to catalogue xml files
 if templatetools.in_verbose_mode():
