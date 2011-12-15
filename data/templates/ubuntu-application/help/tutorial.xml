@@ -1137,10 +1137,12 @@ You can modify the description and long description if you wish.
 <chapter id="Quickly-links">
 <title>Links</title>
 <para>
-<link linkend="Quickly-reference"><application>Quickly</application>: <application>Quickly</application> Command Reference</link>
   <itemizedlist>
    <listitem>
-    <para><ulink url="http://blog.didrocks.fr/post/Build-your-application-quickly-with-Quickly%3A-Inside-Quickly-part-1">Blog post on <application>Quickly</application></ulink></para>
+    <para><ulink url="http://developer.ubuntu.com/">Ubuntu App Developer portal</ulink></para>
+   </listitem>
+   <listitem>
+    <para><ulink url="http://blog.didrocks.fr/post/Build-your-application-quickly-with-Quickly%3A-Inside-Quickly-part-1">Blog series on <application>Quickly</application></ulink></para>
    </listitem>
    <listitem>
     <para><ulink url="http://docs.python.org/reference/">Language: Python Language Reference</ulink></para>
@@ -1149,10 +1151,7 @@ You can modify the description and long description if you wish.
     <para><ulink url="http://www.python.org/doc/2.7/library/index.html">Core Library: Python 2.7 Library Reference</ulink></para>
    </listitem>
    <listitem>
-    <para><ulink url="http://www.pygtk.org/docs/pygtk/">UI Library: PyGtk</ulink></para>
-   </listitem>
-   <listitem>
-    <para><ulink url="http://wiki.apache.org/couchdb/Reference">Database: CouchDB Reference</ulink></para>
+    <para><ulink url="http://readthedocs.org/docs/python-gtk-3-tutorial/en/latest/index.html">UI Library: Python GTK+ 3 Tutorial</ulink></para>
    </listitem>
    <listitem>
     <ulink url="http://library.gnome.org/devel/glade/stable/">UI Editing: <application>Glade</application> User Documenation</ulink>
