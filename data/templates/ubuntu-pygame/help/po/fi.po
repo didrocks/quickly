@@ -1,16 +1,21 @@
+# Finnish translation for quickly
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the quickly package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: quickly\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-04-04 08:43-0400\n"
-"PO-Revision-Date: 2011-04-05 03:53+0000\n"
-"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2011-12-12 17:16+0000\n"
+"Last-Translator: Tuomas Lähteenmäki <Unknown>\n"
+"Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-06 04:42+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-12-13 05:03+0000\n"
+"X-Generator: Launchpad (build 14458)\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:13(firstname)
 msgid "Rick"
@@ -22,11 +27,11 @@ msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:16(corpauthor)
 msgid "Canonical ltd"
-msgstr ""
+msgstr "Canonical ltd"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:20(date) data/templates/ubuntu-pygame/help/tutorial.xml:25(invpartnumber)
 msgid "2010"
-msgstr ""
+msgstr "2010"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:0(application)
 msgid "Quickly PyGame Template"
@@ -34,7 +39,7 @@ msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:24(productnumber)
 msgid "0.6.1"
-msgstr ""
+msgstr "0.6.1"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:26(title)
 msgid "<application>Quickly PyGame Template</application> 0.6.1 Tutorial"
@@ -42,7 +47,7 @@ msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:31(title)
 msgid "About This Guide"
-msgstr "Maidir leis an treoir"
+msgstr "Tietoja tästä oppaasta"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:32(para)
 msgid ""
@@ -63,7 +68,7 @@ msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:41(title)
 msgid "Creating and Running Your Game"
-msgstr ""
+msgstr "Luo ja käynnistä pelisi"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:44(para)
 msgid ""
@@ -90,6 +95,9 @@ msgid ""
 "$quickly create ubuntu-pygame shooter\n"
 " "
 msgstr ""
+"\n"
+"$quickly create ubuntu-pygame shooter\n"
+" "
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:60(para)
 msgid ""
@@ -125,10 +133,14 @@ msgid ""
 "$quickly run\n"
 " "
 msgstr ""
+"\n"
+"$cd shooter\n"
+"$quickly run\n"
+" "
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:75(title)
 msgid "Creating your own Sprites"
-msgstr ""
+msgstr "Luo omat spritet."
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:79(listitem)
 msgid ""
@@ -176,7 +188,7 @@ msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:98(title)
 msgid "Changing the Screen Dimensions"
-msgstr ""
+msgstr "Muuta näytön kokoa"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:99(para)
 msgid ""
@@ -188,7 +200,7 @@ msgstr ""
 #: data/templates/ubuntu-pygame/help/tutorial.xml:102(programlisting)
 #, no-wrap
 msgid "$quickly edit"
-msgstr ""
+msgstr "$quickly edit"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:104(programlisting)
 #, no-wrap
@@ -198,6 +210,10 @@ msgid ""
 "screen_width = 400\n"
 "screen_height = 500\n"
 msgstr ""
+"\n"
+"#screen dimensions\n"
+"screen_width = 400\n"
+"screen_height = 500\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:103(para)
 msgid ""
@@ -259,22 +275,35 @@ msgid ""
 "        self.x = sw/2\n"
 "        self.y = sh - 80\n"
 msgstr ""
+"\n"
+"     def init_position(self):\n"
+"        \"\"\"init_position - resets the Guy's position near the\n"
+"        bottom of the screen\n"
+"        \n"
+"        \"\"\"\n"
+"        sw = shooterconfig.screen_width\n"
+"        sh = shooterconfig.screen_height\n"
+"\n"
+"        self.x = sw/2\n"
+"        self.y = sh - 80\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:143(listitem)
 msgid "start_moving_left: the user pressed the \"s\" key"
-msgstr ""
+msgstr "aloittaa_liikkumisen_vasemmalle: kun pelaaja painaa \"s\" -kirjainta"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:144(listitem)
 msgid "stop_moving_left: the user released the \"s\" key"
 msgstr ""
+"vasemmalle_liikkumisen_lopetus: kun pelaaja nostaa sormensa \"s\" - "
+"kirjaimelta"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:145(listitem)
 msgid "start_moving_right: the user pressed the \"f\" key"
-msgstr ""
+msgstr "aloita_siirtymään_oikealle: käyttäjä painaa \"f\"-näppäintä"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:146(listitem)
 msgid "stop_moving_right: the user released the \"f\" key"
-msgstr ""
+msgstr "pysäytä_siirtyminen_oikealle: käyttäjä päästää irti \"f\"-näppäimen"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:150(listitem)
 msgid "Create two tracking variables, _moving_left and _moving_right"
@@ -317,6 +346,9 @@ msgid ""
 "        self._moving_left = False\n"
 "        self._moving_right = False\n"
 msgstr ""
+"\n"
+"        self._moving_left = False\n"
+"        self._moving_right = False\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:164(programlisting)
 #, no-wrap
@@ -337,6 +369,21 @@ msgid ""
 "        self._moving_right = False\n"
 "\n"
 msgstr ""
+"\n"
+"    def start_moving_right(self):\n"
+"        self._moving_left = False\n"
+"        self._moving_right = True\n"
+"\n"
+"    def start_moving_left(self):\n"
+"        self._moving_left = True\n"
+"        self._moving_right = False\n"
+"\n"
+"    def stop_moving_left(self):\n"
+"        self._moving_left = False\n"
+"\n"
+"    def stop_moving_right(self):\n"
+"        self._moving_right = False\n"
+"\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:156(para)
 msgid ""
@@ -376,6 +423,20 @@ msgid ""
 "            if self.x + self.rect.width &gt; shooterconfig.screen_width:\n"
 "                self.x = shooterconfig.screen_width - self.rect.width\n"
 msgstr ""
+"\n"
+"    def update(self):\n"
+"        \"\"\"Päivttää - päivittää pelin sisäisiä tietoja\"\"\" \n"
+"    \n"
+"        BaseSprite.update(self)\n"
+"\n"
+"        if self._moving_left:\n"
+"            self.x -= 5\n"
+"            if self.x &lt; 0:\n"
+"                self.x = 0\n"
+"        if self._moving_right:\n"
+"            self.x += 5\n"
+"            if self.x + self.rect.width &gt; shooterconfig.screen_width:\n"
+"                self.x = shooterconfig.screen_width - self.rect.width\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:184(para)
 msgid ""
@@ -425,6 +486,16 @@ msgid ""
 "                    g.shoot()\n"
 "\n"
 msgstr ""
+"\n"
+"            #kaverin ohjaus\n"
+"            if not game.paused: \n"
+"                if event.key == pygame.K_f:\n"
+"                    g.start_moving_right()\n"
+"                if event.key == pygame.K_s:\n"
+"                    g.start_moving_left()\n"
+"                if event.key == pygame.K_j:\n"
+"                    g.shoot()\n"
+"\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:208(para)
 msgid ""
@@ -448,6 +519,16 @@ msgid ""
 "                g.stop_moving_left()\n"
 "\n"
 msgstr ""
+"\n"
+"        #näppäimen nouseminen ylös, pysäyttää toimet\n"
+"        if event.type == pygame.KEYUP:\n"
+"            if event.key == pygame.K_F11:\n"
+"                pygame.display.toggle_fullscreen() \n"
+"            if event.key == pygame.K_f:\n"
+"                g.stop_moving_right()\n"
+"            if event.key == pygame.K_s:\n"
+"                g.stop_moving_left()\n"
+"\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:228(para)
 msgid ""
@@ -479,6 +560,9 @@ msgid ""
 "        self.max_velocity = 20\n"
 "        self.max_ticks = 20\n"
 msgstr ""
+"\n"
+"        self.max_velocity = 20\n"
+"        self.max_ticks = 20\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:258(programlisting)
 #, no-wrap
@@ -498,6 +582,20 @@ msgid ""
 "        if self.y == shooterconfig.screen_height:\n"
 "            self.kill()\n"
 msgstr ""
+"\n"
+"    def update(self):\n"
+"        \"\"\"update - update internal data and position.\n"
+"        Typically called by the game controller each game\n"
+"        tick.\n"
+"\n"
+"        \"\"\"\n"
+"\n"
+"        BaseSprite.update(self)\n"
+"\n"
+"        if self.y &lt; 1:\n"
+"            self.kill()\n"
+"        if self.y == shooterconfig.screen_height:\n"
+"            self.kill()\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:282(programlisting)
 #, no-wrap
@@ -562,7 +660,7 @@ msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:308(title)
 msgid "Programming Enemies"
-msgstr ""
+msgstr "Vihollisten ohjelmointi"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:309(para)
 msgid ""
@@ -584,6 +682,12 @@ msgid ""
 "    for i in xrange(0,game.level + 3):\n"
 "        enemies.add(Enemy())\n"
 msgstr ""
+"\n"
+"    #TEHTÄVÄÄ: aseta vihollisia tänne\n"
+"    #Voit lisätä vihollisia tai lisätä erilaisia vihollisia\n"
+"    #Riippuen tasosta\n"
+"    for i in xrange(0,game.level + 3):\n"
+"        enemies.add(Enemy())\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:312(para)
 msgid ""
@@ -628,6 +732,9 @@ msgid ""
 "        sh = shooterconfig.screen_height\n"
 "        sw = shooterconfig.screen_width\n"
 msgstr ""
+"\n"
+"        sh = shooterconfig.screen_height\n"
+"        sw = shooterconfig.screen_width\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:339(programlisting)
 #, no-wrap
@@ -635,6 +742,8 @@ msgid ""
 "\n"
 "import random\n"
 msgstr ""
+"\n"
+"import random\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:343(programlisting)
 #, no-wrap
@@ -643,6 +752,9 @@ msgid ""
 "        self.x = random.randint(20,sw - self.rect.width - 20)\n"
 "        self.y = random.randint(20,sh/2)\n"
 msgstr ""
+"\n"
+"        self.x = random.randint(20,sw - self.rect.width - 20)\n"
+"        self.y = random.randint(20,sh/2)\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:348(programlisting)
 #, no-wrap
@@ -650,6 +762,8 @@ msgid ""
 "\n"
 "        self.velocity_x = random.randint(-30,30)\n"
 msgstr ""
+"\n"
+"        self.velocity_x = random.randint(-30,30)\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:352(programlisting)
 #, no-wrap
@@ -663,6 +777,14 @@ msgid ""
 "        self.y = random.randint(20,sh/2)\n"
 "        self.velocity_x = random.randint(-30,30)\n"
 msgstr ""
+"\n"
+"    def init_position(self):\n"
+"        sh = shooterconfig.screen_height\n"
+"        sw = shooterconfig.screen_width\n"
+"\n"
+"        self.x = random.randint(20,sw - self.rect.width - 20)\n"
+"        self.y = random.randint(20,sh/2)\n"
+"        self.velocity_x = random.randint(-30,30)\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:332(para)
 msgid ""
@@ -708,6 +830,12 @@ msgid ""
 "enemies = pygame.sprite.RenderUpdates()\n"
 "enemy_bullets = pygame.sprite.RenderUpdates()\n"
 msgstr ""
+"\n"
+"#Luo pelaajan ja vähän vihollisia\n"
+"bullets = pygame.sprite.RenderUpdates()\n"
+"g = Guy(bullets)\n"
+"enemies = pygame.sprite.RenderUpdates()\n"
+"enemy_bullets = pygame.sprite.RenderUpdates()\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:380(listitem)
 msgid ""
@@ -736,6 +864,8 @@ msgid ""
 "\n"
 "    enemies.empty()\n"
 msgstr ""
+"\n"
+"    enemies.empty()\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:390(programlisting)
 #, no-wrap
@@ -748,6 +878,13 @@ msgid ""
 "    enemies.update() \n"
 "    enemy_bullets.update()\n"
 msgstr ""
+"\n"
+"def update_sprites():\n"
+"    \"\"\"update_sprites - kutsuu update() kaikkia spritejä\"\"\"\n"
+"    g.update()\n"
+"    bullets.update()\n"
+"    enemies.update() \n"
+"    enemy_bullets.update()\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:399(programlisting)
 #, no-wrap
@@ -757,6 +894,10 @@ msgid ""
 "    enemies.draw(screen)\n"
 "    enemy_bullets.draw(screen)\n"
 msgstr ""
+"\n"
+"    #piirtää viholliset\n"
+"    enemies.draw(screen)\n"
+"    enemy_bullets.draw(screen)\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:405(programlisting)
 #, no-wrap
@@ -767,6 +908,11 @@ msgid ""
 "        self.enemy_bullets = enemy_bullets\n"
 "\n"
 msgstr ""
+"\n"
+"    def __init__(self,enemy_bullets):\n"
+"        \"\"\"Luo vihollinen \"\"\"\n"
+"        self.enemy_bullets = enemy_bullets\n"
+"\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:412(programlisting)
 #, no-wrap
@@ -774,6 +920,8 @@ msgid ""
 "\n"
 "        enemies.add(Enemy(enemy_bullets))\n"
 msgstr ""
+"\n"
+"        enemies.add(Enemy(enemy_bullets))\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:416(programlisting)
 #, no-wrap
@@ -781,6 +929,8 @@ msgid ""
 "\n"
 "from bullet import Bullet\n"
 msgstr ""
+"\n"
+"from bullet import Bullet\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:421(programlisting)
 #, no-wrap
@@ -793,6 +943,13 @@ msgid ""
 "            b.max_ticks = 50\n"
 "            self.enemy_bullets.add(b)\n"
 msgstr ""
+"\n"
+"    def shoot(self):\n"
+"        if self.alive:\n"
+"            b = Bullet(self.x,self.y, 180)\n"
+"            b.max_velocity = 6\n"
+"            b.max_ticks = 50\n"
+"            self.enemy_bullets.add(b)\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:431(programlisting)
 #, no-wrap
@@ -803,6 +960,11 @@ msgid ""
 "            if random.randint(0,20) == 1:\n"
 "                e.shoot()\n"
 msgstr ""
+"\n"
+"    if not game.paused:\n"
+"        for e in enemies:\n"
+"            if random.randint(0,20) == 1:\n"
+"                e.shoot()\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:441(programlisting)
 #, no-wrap
@@ -810,6 +972,8 @@ msgid ""
 "\n"
 "enemy_bullet_image = image_path + \"enemy_bullet.png\"\n"
 msgstr ""
+"\n"
+"enemy_bullet_image = image_path + \"enemy_bullet.png\"\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:445(programlisting)
 #, no-wrap
@@ -823,6 +987,14 @@ msgid ""
 "            b.max_ticks = 50\n"
 "            self.enemy_bullets.add(b)\n"
 msgstr ""
+"\n"
+"    def shoot(self):\n"
+"        if self.alive:\n"
+"            img = shooterconfig.enemy_bullet_image\n"
+"            b = Bullet(self.x,self.y, 180, img)\n"
+"            b.max_velocity = 6\n"
+"            b.max_ticks = 50\n"
+"            self.enemy_bullets.add(b)\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:363(para)
 msgid ""
@@ -920,6 +1092,11 @@ msgid ""
 "            g.explode()\n"
 "            b.kill()\n"
 msgstr ""
+"\n"
+"        b = pygame.sprite.spritecollideany(g, enemy_bullets)\n"
+"        if b != None:\n"
+"            g.explode()\n"
+"            b.kill()\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:481(programlisting)
 #, no-wrap
@@ -928,6 +1105,9 @@ msgid ""
 "    hits_dict = pygame.sprite.groupcollide(bullets, enemy_bullets, True, "
 "False)\n"
 msgstr ""
+"\n"
+"    hits_dict = pygame.sprite.groupcollide(bullets, enemy_bullets, True, "
+"False)\n"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:468(para)
 msgid ""
@@ -966,7 +1146,7 @@ msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:488(title)
 msgid "Playing Sounds"
-msgstr ""
+msgstr "Soittaa ääniä"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:491(programlisting)
 #, no-wrap
@@ -975,6 +1155,9 @@ msgid ""
 "tink_sound = sound_path + \"tink.wav\" \n"
 " "
 msgstr ""
+"\n"
+"tink_sound = sound_path + \"tink.wav\" \n"
+" "
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:495(programlisting)
 #, no-wrap
@@ -984,6 +1167,10 @@ msgid ""
 "tink_sound = pygame.mixer.Sound(shooter.shooterconfig.tink_sound) \n"
 " "
 msgstr ""
+"\n"
+"#Asettaa objekteja ja modeleja\n"
+"tink_sound = pygame.mixer.Sound(shooter.shooterconfig.tink_sound) \n"
+" "
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:500(programlisting)
 #, no-wrap
@@ -995,6 +1182,12 @@ msgid ""
 "        tink_sound.play() \n"
 " "
 msgstr ""
+"\n"
+"    hits_dict = pygame.sprite.groupcollide(bullets, enemy_bullets, True, "
+"False)\n"
+"    if len(hits_dict) &gt; 0:\n"
+"        tink_sound.play() \n"
+" "
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:506(programlisting)
 #, no-wrap
@@ -1006,6 +1199,12 @@ msgid ""
 "        self.launch_sound.play() \n"
 " "
 msgstr ""
+"\n"
+"        self.launch_sound = "
+"pygame.mixer.Sound(shooterconfig.guy_shoot_sound)\n"
+"        self.launch_sound.set_volume(.2)\n"
+"        self.launch_sound.play() \n"
+" "
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:489(para)
 msgid ""
@@ -1034,27 +1233,29 @@ msgstr ""
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:514(title)
 msgid "Conclusion"
-msgstr ""
+msgstr "Johtopäätös"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:518(listitem)
 msgid "Creating a game using $quickly create ubuntu-pygame"
-msgstr ""
+msgstr "Luodaan peli käyttäen käskyä $quickly create ubuntu-pygame"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:519(listitem)
 msgid "Adding your own sprites to the game"
-msgstr ""
+msgstr "Lisää omat spritet peliisi"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:520(listitem)
 msgid "Setting the screen size and other info in the config file"
-msgstr ""
+msgstr "Lisää näytönkoko ja muut tiedot asetustiedostoon"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:521(listitem)
 msgid "Programming a player's guy to respond to keyboard input and to shoot"
 msgstr ""
+"Ohjelmoidaan liikkuva ja ampuva pelaaja, jota liikutellaan näppäimistön "
+"avulla."
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:522(listitem)
 msgid "Programming enemies to move and shoot"
-msgstr ""
+msgstr "Ohjelmoidaan liikkuvat ja ampuvat viholliset"
 
 #: data/templates/ubuntu-pygame/help/tutorial.xml:523(listitem)
 msgid "Using collision detection to blow up Sprites"
@@ -1110,4 +1311,4 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Michael Terry https://launchpad.net/~mterry"
+"  Tuomas Lähteenmäki https://launchpad.net/~lahtis"

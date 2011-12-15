@@ -1,64 +1,69 @@
+# Finnish translation for quickly
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the quickly package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: quickly\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-04-04 08:43-0400\n"
-"PO-Revision-Date: 2011-04-05 03:44+0000\n"
-"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2011-12-12 17:30+0000\n"
+"Last-Translator: Tuomas Lähteenmäki <Unknown>\n"
+"Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-06 04:42+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-12-13 05:03+0000\n"
+"X-Generator: Launchpad (build 14458)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:13(firstname)
 msgid "Shane"
-msgstr ""
+msgstr "Shane"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:14(surname)
 msgid "Fagan"
-msgstr ""
+msgstr "Fagan"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:17(firstname)
 msgid "Rick"
-msgstr ""
+msgstr "Rick"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:18(surname)
 msgid "Spencer"
-msgstr ""
+msgstr "Spencer"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:21(firstname)
 msgid "Michael"
-msgstr ""
+msgstr "Michael"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:22(surname)
 msgid "Terry"
-msgstr ""
+msgstr "Terry"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:24(corpauthor)
 msgid "Canonical ltd"
-msgstr ""
+msgstr "Canonical ltd"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:28(date) data/templates/ubuntu-application/help/tutorial.xml:33(invpartnumber)
 msgid "2011"
-msgstr ""
+msgstr "2011"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:0(application) data/templates/ubuntu-application/help/tutorial.xml:1139(application) data/templates/ubuntu-application/help/tutorial.xml:1139(application) data/templates/ubuntu-application/help/tutorial.xml:1142(application)
 msgid "Quickly"
-msgstr ""
+msgstr "Quickly"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:32(productnumber)
 msgid "0.6.1"
-msgstr ""
+msgstr "0.6.1"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:34(title)
 msgid "<application>Quickly</application> 0.6.1 User Guide"
-msgstr ""
+msgstr "<application>Quickly</application> 0.6.1 Käyttäjän opas"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:39(title)
 msgid "About This Guide"
-msgstr "Maidir leis an treoir"
+msgstr "Tietoja tästä oppaasta"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:40(para)
 msgid ""
@@ -76,7 +81,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:43(link) data/templates/ubuntu-application/help/tutorial.xml:49(title)
 msgid "Getting Started"
-msgstr ""
+msgstr "Käytön aloitus"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:50(para)
 msgid ""
@@ -90,7 +95,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:52(title)
 msgid "Creating a <application>Quickly</application> Project"
-msgstr ""
+msgstr "Luo <application>Quickly</application> projekti"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:52(para)
 msgid ""
@@ -102,7 +107,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:53(programlisting)
 #, no-wrap
 msgid "quickly create ubuntu-application jotty"
-msgstr ""
+msgstr "quickly create ubuntu-application jotty"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:57(para)
 msgid ""
@@ -113,7 +118,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:61(title)
 msgid "Testing the Empty Application"
-msgstr ""
+msgstr "Testataan tyhjää ohjelmaa"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:61(para)
 msgid ""
@@ -125,7 +130,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:65(title)
 msgid "Running the Application"
-msgstr ""
+msgstr "Käynnistä ohjelma"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:65(para)
 msgid ""
@@ -143,10 +148,13 @@ msgid ""
 "cd jotty\n"
 "quickly run\n"
 msgstr ""
+"\n"
+"cd jotty\n"
+"quickly run\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:74(title)
 msgid "Editing an Application"
-msgstr ""
+msgstr "Muokkaa ohjelmaa"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:75(title)
 msgid "Edit the User Interface in <application>Glade</application>"
@@ -166,7 +174,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:77(programlisting) data/templates/ubuntu-application/help/tutorial.xml:132(programlisting) data/templates/ubuntu-application/help/tutorial.xml:914(programlisting)
 #, no-wrap
 msgid "quickly design"
-msgstr ""
+msgstr "quickly design"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:81(para)
 msgid ""
@@ -303,7 +311,7 @@ msgstr ""
 #: data/templates/ubuntu-application/help/tutorial.xml:146(programlisting) data/templates/ubuntu-application/help/tutorial.xml:917(programlisting) data/templates/ubuntu-application/help/tutorial.xml:946(programlisting)
 #, no-wrap
 msgid "quickly edit"
-msgstr ""
+msgstr "quickly edit"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:147(para)
 msgid ""
@@ -329,6 +337,9 @@ msgid ""
 "    def on_mnu_save_activate(self, widget, data=None):\n"
 "        print \"save\"\n"
 msgstr ""
+"\n"
+"    def on_mnu_save_activate(self, widget, data=None):\n"
+"        print \"save\"\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:158(para)
 msgid ""
@@ -340,7 +351,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:159(para)
 msgid "Save the file, and run it again:"
-msgstr ""
+msgstr "Tallenna tiedosto ja käynnistä uudelleen:"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:160(programlisting) data/templates/ubuntu-application/help/tutorial.xml:1093(programlisting)
 #, no-wrap
@@ -348,6 +359,8 @@ msgid ""
 "\n"
 "quickly run\n"
 msgstr ""
+"\n"
+"quickly run\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:163(para)
 msgid ""
@@ -378,6 +391,8 @@ msgid ""
 "\n"
 "sudo apt-get install python-quickly.widgets\n"
 msgstr ""
+"\n"
+"sudo apt-get install python-quickly.widgets\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:173(para)
 msgid ""
@@ -425,6 +440,9 @@ msgid ""
 "from desktopcouch.records.server import CouchDatabase\n"
 "from desktopcouch.records.record import Record\n"
 msgstr ""
+"\n"
+"from desktopcouch.records.server import CouchDatabase\n"
+"from desktopcouch.records.record import Record\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:198(title)
 msgid "Get a Reference to the Database"
@@ -444,6 +462,8 @@ msgid ""
 "\n"
 "        self.database = CouchDatabase(\"jotty\", create=True)\n"
 msgstr ""
+"\n"
+"        self.database = CouchDatabase(\"jotty\", create=True)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:203(para)
 msgid ""
@@ -512,6 +532,11 @@ msgid ""
 "\"text\":text})\n"
 "        self.database.put(new_rec)\n"
 msgstr ""
+"\n"
+"        record_type = \"http://wiki.ubuntu.com/Quickly/JottyDoc\"\n"
+"        new_rec = Record({\"record_type\":record_type, \"title\":title, "
+"\"text\":text})\n"
+"        self.database.put(new_rec)\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:230(para)
 msgid ""
@@ -634,7 +659,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:296(para)
 msgid "file:///home/your_user_name/.local/share/desktop-couch/couchdb.html"
-msgstr ""
+msgstr "file:///home/käyttäjän_nimi/.local/share/desktop-couch/couchdb.html"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:303(para)
 msgid ""
@@ -721,18 +746,23 @@ msgid ""
 "        buff = self.ui.textview1.get_buffer()\n"
 "        buff.set_text(\"\")\n"
 msgstr ""
+"\n"
+"    def on_mnu_new_activate(self, widget, data=None):\n"
+"        self.ui.entry1.set_text(\"Note Title\")\n"
+"        buff = self.ui.textview1.get_buffer()\n"
+"        buff.set_text(\"\")\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:353(para)
 msgid "Remember to save your JottyWindow.py file."
-msgstr ""
+msgstr "Muista tallentaa JottyWindow.py tiedosto."
 
 #: data/templates/ubuntu-application/help/tutorial.xml:354(ulink)
 msgid "Complete JottyWindow.py file"
-msgstr ""
+msgstr "Käännä JottyWindow.py tiedosto"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:355(title)
 msgid "Saving Your Work"
-msgstr ""
+msgstr "Tallenna työsi"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:355(para)
 msgid ""
@@ -749,16 +779,18 @@ msgid ""
 "\n"
 "quickly save \"First working version of Jotty\"\n"
 msgstr ""
+"\n"
+"quickly save \"Ensimmäinen versiosi Jotystä\"\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:360(programlisting)
 #, no-wrap
 msgid "bzr add"
-msgstr ""
+msgstr "bzr add"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:360(programlisting)
 #, no-wrap
 msgid "bzr commit -m [your message]"
-msgstr ""
+msgstr "bzr commit -m [sinun viestisi]"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:360(para)
 msgid "This will call <placeholder-1/> and then <placeholder-2/> for you."
@@ -779,7 +811,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:366(title)
 msgid "Creating an Empty Dialog"
-msgstr ""
+msgstr "Luodaan tyhä dialogi"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:366(para)
 msgid ""
@@ -794,14 +826,16 @@ msgid ""
 "\n"
 "quickly add dialog save\n"
 msgstr ""
+"\n"
+"quickly add dialog save\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:371(para)
 msgid "This will add the dialog to your project."
-msgstr ""
+msgstr "Tämä lisää dialogin sinun projektiisi"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:372(title) data/templates/ubuntu-application/help/tutorial.xml:493(title)
 msgid "Editing the New Dialog"
-msgstr ""
+msgstr "Muokkaa uutta dialogia"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:372(para)
 msgid ""
@@ -818,6 +852,8 @@ msgid ""
 "\n"
 "quickly design\n"
 msgstr ""
+"\n"
+"quickly design\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:377(para)
 msgid ""
@@ -834,7 +870,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:385(title)
 msgid "Code the Dialog"
-msgstr ""
+msgstr "Dialogin koodi"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:385(para)
 msgid ""
@@ -852,6 +888,10 @@ msgid ""
 "    def title_text(self):\n"
 "        return self.ui.entry1.get_text()\n"
 msgstr ""
+"\n"
+"    @property\n"
+"    def title_text(self):\n"
+"        return self.ui.entry1.get_text()\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:393(para)
 msgid ""
@@ -879,7 +919,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:402(para)
 msgid "Import SaveDialog in JottyWindow"
-msgstr ""
+msgstr "Import SaveDialog in JottyWindow"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:405(para)
 msgid "In the on_mnu_save_activate method, create an instance of SaveDialog"
@@ -887,15 +927,15 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:408(para) data/templates/ubuntu-application/help/tutorial.xml:578(para)
 msgid "Run the Dialog"
-msgstr ""
+msgstr "Käynnistä dialogi"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:411(para)
 msgid "Get the String"
-msgstr ""
+msgstr "Hae String"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:414(para) data/templates/ubuntu-application/help/tutorial.xml:584(para)
 msgid "Destroy the dialog"
-msgstr ""
+msgstr "Tuhoa dialogi"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:418(title)
 msgid "Importing the SaveDialog"
@@ -913,6 +953,8 @@ msgid ""
 "\n"
 "from jotty.SaveDialog import SaveDialog\n"
 msgstr ""
+"\n"
+"from jotty.SaveDialog import SaveDialog\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:424(title) data/templates/ubuntu-application/help/tutorial.xml:603(title)
 msgid "Create an instance of the dialog and run it"
@@ -935,6 +977,8 @@ msgid ""
 "\n"
 "        saver = SaveDialog()\n"
 msgstr ""
+"\n"
+"        saver = SaveDialog()\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:431(para)
 msgid ""
@@ -950,10 +994,13 @@ msgid ""
 "        result = saver.run()\n"
 "        title = saver.title_text\n"
 msgstr ""
+"\n"
+"        result = saver.run()\n"
+"        title = saver.title_text\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:436(title)
 msgid "Clean up the dialog"
-msgstr ""
+msgstr "puhistetaan dialogi"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:436(para)
 msgid ""
@@ -972,6 +1019,10 @@ msgid ""
 "        if result != gtk.RESPONSE_OK:\n"
 "            return\n"
 msgstr ""
+"\n"
+"        saver.destroy()\n"
+"        if result != gtk.RESPONSE_OK:\n"
+"            return\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:445(para)
 msgid ""
@@ -1038,7 +1089,7 @@ msgstr ""
 
 #: data/templates/ubuntu-application/help/tutorial.xml:489(title)
 msgid "Create the Open Dialog"
-msgstr ""
+msgstr "Luo ja avaa dialogi"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:490(programlisting)
 #, no-wrap
@@ -1046,6 +1097,8 @@ msgid ""
 "\n"
 "quickly add dialog open\n"
 msgstr ""
+"\n"
+"quickly add dialog open\n"
 
 #: data/templates/ubuntu-application/help/tutorial.xml:493(para)
 msgid ""
@@ -2227,4 +2280,4 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Michael Terry https://launchpad.net/~mterry"
+"  Tuomas Lähteenmäki https://launchpad.net/~lahtis"

@@ -1,21 +1,21 @@
-# Polish translation for quickly
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Finnish translation for quickly
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the quickly package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-07-29 10:06+0200\n"
-"PO-Revision-Date: 2011-10-04 16:33+0000\n"
-"Last-Translator: Jerzy Spendel <Unknown>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"PO-Revision-Date: 2011-12-12 16:33+0000\n"
+"Last-Translator: Tuomas Lähteenmäki <Unknown>\n"
+"Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-05 04:46+0000\n"
-"X-Generator: Launchpad (build 14085)\n"
+"X-Launchpad-Export-Date: 2011-12-13 05:03+0000\n"
+"X-Generator: Launchpad (build 14458)\n"
 
 #: ../data/templates/ubuntu-application/edit.py:39
 msgid ""
@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/create.py:35
 msgid "quickly create <template> <project-name>"
-msgstr "quickly create <template> <project-name>"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/create.py:37
 msgid ""
@@ -51,17 +51,17 @@ msgstr ""
 #. add it to revision control
 #: ../data/templates/ubuntu-application/create.py:103
 msgid "Creating bzr repository and committing"
-msgstr "Tworzenie repozytorium bzr"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/create.py:112
 #: ../data/templates/ubuntu-flash-game/create.py:153
 msgid "Launching your newly created project!"
-msgstr "Uruchamianie nowego projektu!"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/create.py:117
 #, python-format
 msgid "Congrats, your new project is setup! cd %s/ to start hacking."
-msgstr "Gratulacje, twój projekt jest zakończony! cd%s/ żeby zacząć hackować"
+msgstr ""
 
 #: ../data/templates/ubuntu-pygame/tutorial.py:31
 msgid ""
@@ -77,7 +77,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/configure.py:39
 msgid "quickly configure lp-project [project-name]"
-msgstr "szybko skonfiguruj lp-project [nazwa projektu]"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/configure.py:40
 msgid "quickly configure ppa <ppa-name>"
@@ -199,7 +199,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/license.py:215
 #, python-format
 msgid "%s file was not found"
-msgstr "Nie znaleziono pliku %s"
+msgstr "%s tiedostoa ei löydy"
 
 #: ../data/templates/ubuntu-application/license.py:180
 msgid ""
@@ -210,7 +210,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/license.py:189
 #, python-format
 msgid "Unknown licence %s."
-msgstr ""
+msgstr "Tuntematon lisenssi %s."
 
 #: ../data/templates/ubuntu-application/license.py:208
 msgid ""
@@ -231,12 +231,12 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/license.py:262
 msgid "Can't update license in setup.py file\n"
-msgstr ""
+msgstr "Lisenssiä ei voida päivittää setup.py tiedostoon\n"
 
 #: ../data/templates/ubuntu-application/license.py:265
 #, python-format
 msgid "%s file not found."
-msgstr ""
+msgstr "%s tiedostoa ei löydy."
 
 #: ../data/templates/ubuntu-application/license.py:310
 msgid "This command only take one optional argument."
@@ -244,7 +244,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/test/builder/test.ui.h:1
 msgid "label"
-msgstr ""
+msgstr "nimike"
 
 #: ../data/templates/ubuntu-application/run.py:33
 msgid "quickly run -- [program arguments]"
@@ -263,12 +263,12 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/run.py:50
 msgid "Can't access to X server, so can't run gtk application"
-msgstr "Nie można uruchomić programu gtk z powodu braku dostępu do serwera X"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/run.py:63
 #, python-format
 msgid "Can't execute %s"
-msgstr "Nie można uruchomić %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/Preferencescamel_case_nameDialog.ui.h:1
 msgid "_Example entry:"
@@ -341,7 +341,7 @@ msgstr ""
 
 #: ../quickly/bzrbinding.py:55
 msgid "Bzr not properly installed"
-msgstr "Program Bzr nie jest poprawnie zainstalowany"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/debug.py:33
 msgid "quickly debug -- [program arguments]"
@@ -368,8 +368,6 @@ msgstr ""
 #: ../data/templates/ubuntu-application/upgrade.py:65
 msgid "Can't rename LICENSE file, check your file permission\n"
 msgstr ""
-"Nie można zmienić nazwy pliku LICENSE, proszę sprawdzić prawa dostępu do "
-"pliku\n"
 
 #: ../data/templates/ubuntu-application/upgrade.py:197
 #, python-format
@@ -431,14 +429,14 @@ msgstr ""
 #: ../data/templates/ubuntu-application/share.py:118
 #, python-format
 msgid "User or Team %s not found on Launchpad"
-msgstr "Nie znaleziono użytkownika lub grupy %s w serwisie Launchpad"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/submitubuntu.py:149
 #: ../data/templates/ubuntu-application/release.py:148
 #: ../data/templates/ubuntu-application/share.py:121
 #, python-format
 msgid "You have to be a member of %s team to upload to its ppas"
-msgstr "Aby publikować pakiety musisz być członkiem zespołu %s"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/submitubuntu.py:155
 #: ../data/templates/ubuntu-application/release.py:154
@@ -491,7 +489,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/share.py:153
 #: ../data/templates/ubuntu-application/package.py:84
 msgid "ERROR: can't create or update ubuntu package"
-msgstr "BŁĄD: nie można utworzyć lub zaktualizować pakietu Ubuntu"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/submitubuntu.py:257
 #: ../data/templates/ubuntu-application/release.py:256
@@ -515,7 +513,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/release.py:279
 #: ../data/templates/ubuntu-application/share.py:157
 msgid "pushing to launchpad"
-msgstr "wysyłanie do serwisu Launchpad"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/submitubuntu.py:290
 #, python-format
@@ -595,7 +593,7 @@ msgstr ""
 #: ../quickly/commands.py:309 ../quickly/commands.py:450
 #: ../quickly/commands.py:460
 msgid "Aborting"
-msgstr "Przerywanie"
+msgstr "Peruutetaan"
 
 #: ../quickly/commands.py:447
 #, python-format
@@ -680,7 +678,7 @@ msgstr ""
 
 #: ../quickly/builtincommands.py:37
 msgid "No project name specified."
-msgstr ""
+msgstr "Projektin nimeä ei ole määritelty."
 
 #: ../quickly/builtincommands.py:58
 #, python-format
@@ -759,7 +757,7 @@ msgstr ""
 #: ../quickly/builtincommands.py:172
 #, python-format
 msgid "%s already exists."
-msgstr "%s już istnieje."
+msgstr "%s on jo olemassa."
 
 #: ../quickly/builtincommands.py:176
 #, python-format
@@ -808,11 +806,11 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:1
 msgid "Contents"
-msgstr ""
+msgstr "Sisältö"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:2
 msgid "Status Area"
-msgstr "Pasek stanu"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:3
 msgid ""
@@ -827,19 +825,19 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:8
 msgid "_Edit"
-msgstr "_Edycja"
+msgstr "_Muokkaa"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:9
 msgid "_File"
-msgstr "_Plik"
+msgstr "_Tiedosto"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:10
 msgid "_Help"
-msgstr "Pomo_c"
+msgstr "_Ohje"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:11
 msgid "_View"
-msgstr "_Widok"
+msgstr "_Näytä"
 
 #: ../data/templates/ubuntu-application/project_root/data/ui/camel_case_nameWindow.ui.h:12
 msgid "sentence_name"
@@ -850,7 +848,7 @@ msgstr ""
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:87
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:128
 msgid "ERROR: Can't load setup.py file"
-msgstr "BŁĄD: Nie można wczytać pliku setup.py"
+msgstr "Virhe: setup.py tiedostoa ei voida ladata"
 
 #: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:163
 #: ../data/templates/ubuntu-application/save.py:41
@@ -864,8 +862,6 @@ msgid ""
 "There is no GPG key detected for your Launchpad account. Please upload one "
 "as you can read on the tutorial"
 msgstr ""
-"Nie odnaleziono klucza GPG dla konta w serwisie Launchpad. Proszę wysłać "
-"klucz, tak jak podano w samouczku."
 
 #: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:256
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:304
@@ -876,7 +872,6 @@ msgstr ""
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:327
 msgid "Can't create GPG key. Try to create it yourself."
 msgstr ""
-"Nie można utworzyć klucza GPG. Proszę spróbować utworzyć go samodzielnie."
 
 #: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:294
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:342
@@ -884,8 +879,6 @@ msgid ""
 "Can't sign the package as no adress email found. Fulfill the AUTHORS file "
 "with name <emailadress> or export DEBEMAIL/EMAIL."
 msgstr ""
-"Nie można podpisać pakietu, ponieważ nie odnaleziono adresu e-mail. Prosze "
-"wypełnić plik AUTHORS lub ustawić zmienną DEBEMAIL/EMAIL."
 
 #: ../data/templates/ubuntu-flash-game/internal/quicklyutils.py:335
 #: ../data/templates/ubuntu-application/internal/quicklyutils.py:383
@@ -902,17 +895,16 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:44
 msgid "Check whether python-launchpadlib is installed"
-msgstr "Upewnij się, że pakiet python-launchpadlib jest zainstalowany."
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:82
 msgid ""
 "WARNING: you are using staging and not launchpad real production server"
 msgstr ""
-"UWAGA: korzystasz z testowego a nie z produkcyjnego serwera Launchpad."
 
 #: ../quickly/launchpadaccess.py:88
 msgid "Get Launchpad Settings"
-msgstr "Pobierz ustawienia serwisu Launchpad"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:89
 msgid "Quickly"
@@ -920,20 +912,20 @@ msgstr ""
 
 #: ../quickly/launchpadaccess.py:100
 msgid "Unknown reason"
-msgstr "Nieznany powód"
+msgstr "Tuntematon syy"
 
 #: ../quickly/launchpadaccess.py:101
 #, python-format
 msgid "Couldn't setup Launchpad for quickly ; %s"
-msgstr "Nie można ustawić współpracy serwisu Launchpad z quickly ; %s"
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:102
 msgid "Launchpad connection is ok"
-msgstr "Połączenie z serwisem Launchpad jest poprawne."
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:123
 msgid "No launchpad project given, aborting."
-msgstr "Przerywanie, nie podano nazwy projektu w serwisie Launchpad."
+msgstr ""
 
 #: ../quickly/launchpadaccess.py:129
 #, python-format
@@ -945,24 +937,18 @@ msgid ""
 "Launchpad url: %s/%s\n"
 "%s\n"
 msgstr ""
-"---------------- [%s] ----------------\n"
-"   %s\n"
-"--------------------------------------\n"
-"Nazwa projektu: %s\n"
-"Adres URL: %s/%s\n"
-"%s\n"
 
 #: ../quickly/launchpadaccess.py:140
 msgid "No project found"
-msgstr "Nie znaleziono projektu"
+msgstr "Projektia ei löytynyt"
 
 #: ../quickly/launchpadaccess.py:142
 msgid "Choose your project number"
-msgstr "Wybierz numer projektu"
+msgstr "Valitse projektisi numero"
 
 #: ../quickly/launchpadaccess.py:152
 msgid "No right number given, aborting."
-msgstr "Podano niepoprawny numer, przerywanie."
+msgstr "Annoit väärän numeron, peruutetaan."
 
 #: ../quickly/launchpadaccess.py:159
 #, python-format
@@ -970,8 +956,8 @@ msgid ""
 "Can't find %s project on Launchpad. You can try to find it interactively "
 "without providing a project name."
 msgstr ""
-"Nie można znaleźć projektu %s w serwisie Launchpad. Możesz spróbować "
-"odnaleźć ją interaktywnie, nie podając żadnej nazwy."
+"%s projektia ei löydy Launchpad:ista. Voit yrittää etsiä sitä ilman "
+"projektin nimeä."
 
 #: ../data/templates/ubuntu-flash-game/package.py:31
 msgid ""
@@ -1009,11 +995,11 @@ msgstr ""
 #: ../quickly/version.py:34
 #, python-format
 msgid "No quickly data path found in %s."
-msgstr "Nie znaleziono ścieżki danych programu quickly w %s."
+msgstr ""
 
 #: ../quickly/version.py:38
 msgid "No template found."
-msgstr "Nie znaleziono szablonów."
+msgstr ""
 
 #: ../quickly/version.py:40
 #, python-format
@@ -1039,7 +1025,7 @@ msgstr ""
 
 #: ../quickly/templatetools.py:47
 msgid "No help for this command"
-msgstr "Nie znaleziono pomocy dla tego polecenia."
+msgstr ""
 
 #: ../quickly/templatetools.py:70
 msgid ""
@@ -1051,7 +1037,7 @@ msgstr ""
 #: ../quickly/templatetools.py:74
 #, python-format
 msgid "ERROR: %s is not permitted as a quickly project name"
-msgstr "ERROR: %s nie jest dozwoloną nazwą projektu quickly"
+msgstr ""
 
 #: ../quickly/templatetools.py:133 ../quickly/templatetools.py:137
 #, python-format
@@ -1080,7 +1066,7 @@ msgstr ""
 #: ../quickly/templatetools.py:245
 #, python-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "VIRHE: %s"
 
 #: ../quickly/templatetools.py:282
 #, python-format
@@ -1152,7 +1138,7 @@ msgstr ""
 
 #: ../quickly/tools.py:120
 msgid "No template directory found. Aborting"
-msgstr "Przerywanie, nie znaleziono katalogu z szablonami."
+msgstr ""
 
 #: ../quickly/tools.py:138
 #, python-format
@@ -1166,7 +1152,7 @@ msgstr ""
 
 #: ../quickly/tools.py:231
 msgid "ERROR: No command provided in command line"
-msgstr "BŁĄD: Nie podano polecenia w linii poleceń"
+msgstr ""
 
 #: ../quickly/tools.py:333 ../quickly/tools.py:357 ../quickly/tools.py:375
 #, python-format
@@ -1264,12 +1250,12 @@ msgstr ""
 #: ../bin/quickly.py:62
 #, python-format
 msgid "No %s command found in template %s."
-msgstr "Brak %s poleceń w szablonie %s."
+msgstr ""
 
 #: ../bin/quickly.py:79
 #, python-format
 msgid "No template specified for command %s."
-msgstr "Brak szablonów dla polecenia %s."
+msgstr ""
 
 #: ../data/templates/ubuntu-application/store/dialog.py:31
 msgid ""
@@ -1309,7 +1295,7 @@ msgid ""
 "To edit the topic, run:\n"
 "$ quickly edit\n"
 "All the help pages are loaded into your editor as well as the python files.\n"
-msgstr "dodaje\n"
+msgstr ""
 
 #: ../data/templates/ubuntu-application/package.py:34
 msgid ""
@@ -1327,14 +1313,3 @@ msgid ""
 "Passing --extras will create a package similar to one created by\n"
 "the submitubuntu command.  It will install files into /opt."
 msgstr ""
-"Tworzy paczkę debiana z twojego projektu. Przed wlączeniem\n"
-"paczki, możesz edytować ikonę oraz kategorię pliku *desktop.in\n"
-"gdzie * jest nazwą twojego projektu.\n"
-"\n"
-"Zauważ, że jeśli nie wpiszesz \"quickly release\", \"quickly share\" albo "
-"\"quickly change-ip-project\" może brakować imienia, emailu w\n"
-"setup.py. Możesz edytować je, jeśli nie chcesz używać innych komend. Te "
-"zmiany nie są konieczne w testowaniu.\n"
-"\n"
-"Podanie --extras stworzy paczkę podobną do do stworzonej przez polecenie "
-"submitubuntu. Spowoduje to zainstalowanie plikół do /opt."
