@@ -1,3 +1,12 @@
+Quickly 11.12
+------------------------------------
+
+ + ubuntu-application:
+   - Use GTK+ 3, gobject-introspection, and GSettings for new projects
+ + common:
+   - Fix shell completion when running "quickly quickly" to create a new
+     template
+
 Quickly 11.10
 ------------------------------------
 
