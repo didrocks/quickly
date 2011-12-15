@@ -396,6 +396,8 @@ class Command:
 
     def allow_template(self, template_in_cli):
         # get completion from this template
+        if template_in_cli is None:
+            return False
         if template_in_cli == self.template:
             return True
         
