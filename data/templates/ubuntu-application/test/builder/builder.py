@@ -4,7 +4,7 @@
 import unittest
 import sys
 import os
-import gtk
+from gi.repository import Gtk # pylint: disable=E0611
 import inspect
 import logging
 import glob
@@ -85,7 +85,7 @@ class TestBuilder(unittest.TestCase):
         'wind?o-w two', 'wind_o_w_two', 'window'] # sorted list
 
     def test_interface(self):
-        builder = dir(gtk.Builder)
+        builder = dir(Gtk.Builder)
         
         # sanity test
         self.assertTrue('add_from_file' in builder)

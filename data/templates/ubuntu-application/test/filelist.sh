@@ -13,12 +13,16 @@ cd test-project
 
 bzr status
 
-bzr ls -R
+bzr ls -RV
+# .bzrignore
 # .quickly
 # AUTHORS
 # bin/
 # bin/test-project
 # data/
+# data/glib-2.0/
+# data/glib-2.0/schemas/
+# data/glib-2.0/schemas/net.launchpad.test-project.gschema.xml
 # data/media/
 # data/media/background.png
 # data/media/test-project.svg
@@ -50,7 +54,6 @@ bzr ls -R
 # test_project_lib/Window.py
 # test_project_lib/__init__.py
 # test_project_lib/helpers.py
-# test_project_lib/preferences.py
 # test_project_lib/test_projectconfig.py
 # tests/
 # tests/test_example.py

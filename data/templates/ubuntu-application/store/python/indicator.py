@@ -6,7 +6,8 @@
 
 """Code to add AppIndicator."""
 
-import gtk
+from gi.repository import Gtk # pylint: disable=E0611
+from gi.repository import AppIndicator3 # pylint: disable=E0611
 
 from python_name_lib.helpers import get_media_file
 
@@ -14,12 +15,10 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('project_name')
 
-import appindicator
-
 class Indicator:
     def __init__(self, window):
-        self.indicator = appindicator.Indicator('project_name','',appindicator.CATEGORY_APPLICATION_STATUS)
-        self.indicator.set_status(appindicator.STATUS_ACTIVE)
+        self.indicator = AppIndicator3.Indicator('project_name', '', AppIndicator3.IndicatorCategory.APPLICATION_STATUS)
+        self.indicator.set_status(AppIndicator3.IndicatorStatus.ACTIVE)
 
         icon_uri = get_media_file("project_name.svg")
         icon_path = icon_uri.replace("file:///", '')
@@ -28,18 +27,18 @@ class Indicator:
         #Uncomment and choose an icon for attention state. 
         #self.indicator.set_attention_icon("ICON-NAME")
         
-        self.menu = gtk.Menu()
+        self.menu = Gtk.Menu()
 
         # Add items to Menu and connect signals.
         
         #Adding preferences button 
         #window represents the main Window object of your app
-        self.preferences = gtk.MenuItem("Preferences")
+        self.preferences = Gtk.MenuItem("Preferences")
         self.preferences.connect("activate",window.on_mnu_preferences_activate)
         self.preferences.show()
         self.menu.append(self.preferences)
 
-        self.quit = gtk.MenuItem("Quit")
+        self.quit = Gtk.MenuItem("Quit")
         self.quit.connect("activate",window.on_mnu_close_activate)
         self.quit.show()
         self.menu.append(self.quit)

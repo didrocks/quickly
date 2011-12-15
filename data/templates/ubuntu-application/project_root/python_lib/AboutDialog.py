@@ -3,11 +3,11 @@
 # This file is in the public domain
 ### END LICENSE
 
-import gtk
+from gi.repository import Gtk # pylint: disable=E0611
 
 from . helpers import get_builder
 
-class AboutDialog(gtk.AboutDialog):
+class AboutDialog(Gtk.AboutDialog):
     __gtype_name__ = "AboutDialog"
 
     def __new__(cls):

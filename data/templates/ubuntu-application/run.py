@@ -50,6 +50,18 @@ if not templatetools.is_X_display():
     print _("Can't access to X server, so can't run gtk application")
     sys.exit(1)
 
+# Compile schema if present
+schemapath = os.path.abspath("data/glib-2.0/schemas")
+if os.path.exists(schemapath):
+    subprocess.call(["glib-compile-schemas", schemapath])
+
+    env = os.environ.copy()
+    datadir = os.path.abspath("data")
+    if 'XDG_DATA_DIRS' in env:
+        env['XDG_DATA_DIRS'] = "%s:%s" % (datadir, env['XDG_DATA_DIRS'])
+    else:
+        env['XDG_DATA_DIRS'] = datadir
+
 project_bin = 'bin/' + configurationhandler.project_config['project']
 command_line = [project_bin]
 command_line.extend([arg for arg in sys.argv[1:] if arg != "--"])
@@ -58,7 +70,7 @@ command_line.extend([arg for arg in sys.argv[1:] if arg != "--"])
 st = os.stat(project_bin)
 mode = st[stat.ST_MODE]
 if mode & stat.S_IEXEC:
-    subprocess.call(command_line)
+    subprocess.call(command_line, env=env)
 else:
     print _("Can't execute %s") % project_bin
     sys.exit(1)

@@ -107,10 +107,22 @@ bzr_instance = subprocess.Popen(["bzr", "add"], stdout=subprocess.PIPE)
 bzr_instance.wait()
 bzr_instance = subprocess.Popen(["bzr", "commit", "-m", "Initial project creation with Quickly!"], stderr=subprocess.PIPE)
 
+# Compile schema if present
+schemapath = os.path.abspath("data/glib-2.0/schemas")
+if os.path.exists(schemapath):
+    subprocess.call(["glib-compile-schemas", schemapath])
+
+    env = os.environ.copy()
+    datadir = os.path.abspath("data")
+    if 'XDG_DATA_DIRS' in env:
+        env['XDG_DATA_DIRS'] = "%s:%s" % (datadir, env['XDG_DATA_DIRS'])
+    else:
+        env['XDG_DATA_DIRS'] = datadir
+
 # run the new application if X display
 if templatetools.is_X_display() and os.path.isfile(exec_file):
     print _("Launching your newly created project!")
-    subprocess.call(['./' + project_name], cwd='bin/')
+    subprocess.call(['./' + project_name], cwd='bin/', env=env)
 
 bzr_instance.wait()
 
