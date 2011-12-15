@@ -1154,7 +1154,7 @@ You can modify the description and long description if you wish.
     <para><ulink url="http://readthedocs.org/docs/python-gtk-3-tutorial/en/latest/index.html">UI Library: Python GTK+ 3 Tutorial</ulink></para>
    </listitem>
    <listitem>
-    <ulink url="http://library.gnome.org/devel/glade/stable/">UI Editing: <application>Glade</application> User Documenation</ulink>
+    <ulink url="http://library.gnome.org/devel/glade/stable/">UI Editing: <application>Glade</application> User Documentation</ulink>
    </listitem>
    <listitem>
     <ulink url="http://library.gnome.org/users/gedit/stable/index.html">Editor: Gedit Help</ulink>
