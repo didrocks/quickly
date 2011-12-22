@@ -24,7 +24,7 @@ import sys
 import internal.apportutils
 
 from internal import quicklyutils
-from quickly import configurationhandler, templatetools
+from quickly import commands, configurationhandler, templatetools
 
 import gettext
 from gettext import gettext as _
@@ -41,7 +41,7 @@ the latest framework.""")
 
 templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
 
-i = 0
+i = 1
 internal_run = False
 project_version = None
 template_version = None
