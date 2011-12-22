@@ -31,14 +31,40 @@ from gettext import gettext as _
 # set domain text
 gettext.textdomain('quickly')
 
-# get project version and template version if no argument given
-if len(sys.argv) < 3:
-    (project_version, template_version) = templatetools.get_project_and_template_versions("ubuntu-application")
-    if len(sys.argv) == 2: # we have been given project but not template version
-        project_version = sys.argv[1]
-else:
-    project_version = sys.argv[1]
-    template_version = sys.argv[2]
+options = ["--internal",]
+
+def usage():
+    templatetools.print_usage('quickly upgrade')
+def help():
+    print _("""Tells Quickly that you have manually upgraded your project to
+the latest framework.""")
+
+templatetools.handle_additional_parameters(sys.argv, help, usage=usage)
+
+i = 0
+internal_run = False
+project_version = None
+template_version = None
+while i < len(sys.argv):
+    arg = sys.argv[i]
+    if arg.startswith('-'):
+        if arg == '--internal':
+            internal_run = True
+        else:
+            cmd = commands.get_command('upgrade', 'ubuntu-application')
+            templatetools.usage_error(_("Unknown option: %s."  % arg), cmd=cmd)
+    else:
+        if project_version is None:
+            project_version = arg
+        elif template_version is None:
+            template_version = arg
+    i += 1
+
+(project_version_inspected, template_version_inspected) = templatetools.get_project_and_template_versions("ubuntu-application")
+if project_version is None:
+    project_version = project_version_inspected
+if template_version is None:
+    template_version = template_version_inspected
 
 if not configurationhandler.project_config:
     configurationhandler.loadConfig()
@@ -215,4 +241,15 @@ if project_version < '11.09' and template_version <= '11.10':
     except IOError:
         pass
 
+### EPOCH CHANGE
+### This is where we upgraded the default projects to GTK3, PyGI, and GSettings.
+### Warn the user that this happened and they should upgrade manually to fix.
+if project_version < '11.12' and internal_run:
+    print _("""WARNING: Your project is out of date.  Newly created projects use
+GTK+ 3, PyGI, and GSettings.  See https://wiki.ubuntu.com/Quickly/GTK3 for
+porting information and when you have finished porting your code, run
+'quickly upgrade' to get rid of this message.""")
+    sys.exit(0)
+
+templatetools.update_version_in_project_file(template_version, 'ubuntu-application')
 sys.exit(0)
