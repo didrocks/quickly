@@ -15,20 +15,7 @@ quickly package --extras | sed 's/^\.\+//'
 # Ubuntu packaging created in debian/
 # Ubuntu package has been successfully created in ../test-project_0.1_all.deb
 
-cat debian/control | sed "s/project-$(lsb_release -c | cut -f2)*\./project-RELEASE./"
-# Source: test-project
-# Section: python
-# Priority: extra
-# Build-Depends: cdbs (>= 0.4.43),
-#  debhelper (>= 6),
-#  python,
-#  python-support (>= 0.6.4),
-#  python-distutils-extra (>= 2.10)
-# Maintainer: UNKNOWN <UNKNOWN>
-# Standards-Version: 3.8.3
-# XS-Python-Version: current
-# 
-# Package: test-project
+grep -C1 "^XB-" debian/control | sed "s/project-$(lsb_release -c | cut -f2)*\./project-RELEASE./"
 # Architecture: all
 # XB-Python-Version: ${python:Versions}
 # XB-AppName: Test Project
@@ -37,30 +24,25 @@ cat debian/control | sed "s/project-$(lsb_release -c | cut -f2)*\./project-RELEA
 # XB-Thumbnail-Url: https://software-center.ubuntu.com/screenshots/t/test-project-RELEASE.thumb.png
 # XB-Icon: test-project.svg
 # Depends: ${misc:Depends},
-#  ${python:Depends},
-#  gir1.2-glib-2.0,
-#  gir1.2-launchpad-integration-3.0,
-#  yelp
-# Description: UNKNOWN
-#  UNKNOWN
 
 cat debian/rules
 # #!/usr/bin/make -f
-# DEB_PYTHON_SYSTEM := pysupport
-# DEB_PYTHON_PREFIX_ARG := /opt/extras.ubuntu.com/test-project
+# %:
+# ifneq ($(shell dh -l | grep -xF translations),)
+# 	dh $@ --with python2,translations
+# else
+# 	dh $@ --with python2
+# endif
 # 
-# include /usr/share/cdbs/1/rules/debhelper.mk
-# include /usr/share/cdbs/1/class/python-distutils.mk
-# # langpack.mk is relevant on Ubuntu only, not Debian; it does not matter if it's missing
-# -include /usr/share/cdbs/1/rules/langpack.mk
+# override_dh_auto_install:
+# 	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/test-project                 --install-lib=/opt/extras.ubuntu.com/test-project
 # 
-# common-binary-post-install-arch::
-# 	-dh_icons -a
+# override_dh_python2:
+# 	dh_python2 /opt/extras.ubuntu.com/test-project
 # 
-# common-binary-post-install-indep::
-# 	-dh_icons -i
 # 
-# common-install-indep::
+# override_dh_install::
+# 	dh_install
 # 	cp data/media/test-project.svg ../test-project.svg
 # 	dpkg-distaddfile test-project.svg raw-meta-data -
 
@@ -75,8 +57,9 @@ quickly package --extras | sed 's/^\.\+//'
 grep XB-Icon debian/control
 # XB-Icon: test-project.svg
 
-tail -n 3 debian/rules
-# common-install-indep::
+tail -n 4 debian/rules
+# override_dh_install::
+# 	dh_install
 # 	cp data/media/logo.svg ../test-project.svg
 # 	dpkg-distaddfile test-project.svg raw-meta-data -
 

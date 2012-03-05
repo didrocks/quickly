@@ -199,7 +199,8 @@ def update_metadata():
             contents = f.read()
         if contents and re.search('dpkg-distaddfile %s.svg' % project_name, contents) is None:
             contents += """
-common-install-indep::
+override_dh_install::
+	dh_install
 	cp %(icon_name)s ../%(project_name)s.svg
 	dpkg-distaddfile %(project_name)s.svg raw-meta-data -""" % {
                 'project_name': project_name, 'icon_name': icon_name}
