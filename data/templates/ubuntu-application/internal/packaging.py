@@ -75,7 +75,7 @@ def _continue_if_errors(err_output, warn_output, return_code,
         for line in warn_output:
             if (re.match(".*not recognized by DistUtilsExtra.auto.*", line)):
                 try:
-                    if not re.match('  .*',  warn_output[line_number + 1]):
+                    if not re.match('  [^ ].*',  warn_output[line_number + 1]):
                         warn_output.remove(line)
                         line_number -= 1
                 except IndexError:
@@ -103,7 +103,7 @@ def _filter_out(line, output_domain, err_output, warn_output):
         output_domain = DomainLevel.ERROR
     elif 'WARN' in line:
         output_domain = DomainLevel.WARNING
-    elif not line.startswith('  '):
+    elif not line.startswith('  ') or line.startswith('   dh_'):
         output_domain = DomainLevel.NONE
         if '[not found]' in line:
             output_domain = DomainLevel.WARNING

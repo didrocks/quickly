@@ -81,8 +81,8 @@ cd unpacked
 
 ar p ../../test-project_0.1_all.deb data.tar.gz | tar xz
 
-grep -Rh "__version__ = " .
+grep -Rh "__version__ = " usr/share/pyshared
 # __version__ = '0.1'
 
-grep -Rh "__test_project_data_directory__ = " .
+grep -Rh "__test_project_data_directory__ = " usr/share/pyshared
 # __test_project_data_directory__ = '/usr/share/test-project/'
