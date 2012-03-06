@@ -20,7 +20,7 @@ import re
 import sys
 import subprocess
 import tempfile
-from xml.etree import ElementTree as etree
+from lxml import etree
 
 import gettext
 from gettext import gettext as _
@@ -149,7 +149,8 @@ def change_xml_elem(xml_file, path, attribute_name, attribute_value, value, attr
     value -> new value
     attributes_if_new -> dictionnary of additional attributes if we create a new node"""
     found = False
-    xml_tree = etree.parse(xml_file)
+    parser = etree.XMLParser(remove_comments=False)
+    xml_tree = etree.parse(xml_file, parser=parser)
     if not attributes_if_new:
         attributes_if_new = {}
     attributes_if_new[attribute_name] = attribute_value
