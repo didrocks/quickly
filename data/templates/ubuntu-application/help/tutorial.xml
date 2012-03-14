@@ -105,15 +105,15 @@ quickly run
   <figure>
     <graphic fileref="./images/12.png"></graphic>
   </figure>
-  <para>Now we'll add the entry field for the title and also a label for it. We'll use the top empty slot for that. First, click on "Horizontal Box" (HBox) from the "Containers" section of the toolbox, and then click on the top slot. A dialog box will open; tell it that you want two items.</para>
+  <para>Now we'll add the entry field for the title and also a label for it. We'll use the top empty slot for that. First, click on "Box" from the "Containers" section of the toolbox, and then click on the top slot. A dialog box will open; tell it that you want two items.</para>
   <figure>
     <graphic fileref="./images/13.png"></graphic>
   </figure> 
-  <para>The HBox is a container that arranges its contents horizontally. Add a Label to the empty left hand box, and a Text Entry to the right hand one.</para>
+  <para>A Box is a container that arranges its contents either vertically or horizontally. We want a horizontal one, so on the right bottom pane, change the "Orientation" setting to "Horizontal". Then add a Label to the empty left hand slot, and a Text Entry to the right hand one.</para>
   <figure>
     <graphic fileref="./images/14.png"></graphic>
   </figure>
-  <para>Before going on, let's clean up the UI just a tad here. Select the new HBox from the list on the right. Then go to the Packing tab in the bottom right, and set Expand and Fill to "No".</para>
+  <para>Before going on, let's clean up the UI just a tad here. Select the horizontal box from the list on the right. Then go to the Packing tab in the bottom right, and set Expand and Fill to "No".</para>
   <figure>
     <graphic fileref="./images/15.png"></graphic>
   </figure>
@@ -121,7 +121,7 @@ quickly run
   <figure>
     <graphic fileref="./images/16.png"></graphic>
   </figure>
-  <para>Select the label. On the General tab, set the Label field to "Name:". Set Expand and Fill to "No" for the label, but keep them as "Yes" for the entry. Set the Padding for both to 6 (also on the Packing tab).</para>
+  <para>Select the label. On the General tab, set the Label field to "Name:". Set Expand and Fill to "No" for the label, and set them to "Yes" for the entry. Set the Padding for both to 6 (also on the Packing tab).</para>
   <figure>
     <graphic fileref="./images/17.png"></graphic>
   </figure>
@@ -165,142 +165,95 @@ quickly run
     <graphic fileref="./images/24.png"></graphic>
   </figure>
 <para><title>Implementing Save</title> 
-Now we'll write a little code in the signal handler to actually save the text. Because we want it to be easy for users to do things like syncronize their <application>Jotty</application> documents between computers, back them up, etc... we'll use CouchDB as our backend, and we'll use desktopcouch for our API. We'll also use a widget from the Quickly Widgets library to make it really easy to use desktopcouch.
-Desktopcouch and the desktopcouch records library should be installed for you already, but you may need to install Quickly Widgets. The fastest way to do this is from the terminal:</para> 
-<para><programlisting>
-sudo apt-get install python-quickly.widgets
-</programlisting></para>
-<para>This will install the library and everything you need for the library to run. After everything is installed, you can write the code. The code will do the following:</para>
+Now we'll write a little code in the signal handler to actually save the text. This code will do the following:</para>
   <itemizedlist>
    <listitem>
-    <para>Import the stuff you'll need from Quickly Widgets and desktopcouch.</para>
-   </listitem>
-   <listitem>
-    <para>Get a reference to the CouchDB database to save into.</para>
+    <para>Import any new modules you'll need.</para>
    </listitem>
    <listitem>
     <para>Get the title of the document and the text from the user interface.</para>
    </listitem>
    <listitem>
-    <para>Check if there is already a document with the same title, and if so overwrite it.</para>
-   </listitem>
-   <listitem>
-    <para>If there is not a document already, create one.</para>
+    <para>Write the file to disk.</para>
    </listitem>
   </itemizedlist>
-<para><title>Import the stuff you'll need from python-desktopcouch-records.</title> 
-Add these import statements near the other imports at the top of the JottyWindow.py file:</para><para>
+
+<para><title>Import new modules:</title>
+Add these import statements near the other imports at the top of the JottyWindow.py file. The comment on the right is there for the benefit of the Python static code analysis tool <application>pylint</application>, if you happen to use it.</para> 
+<para>
 <literallayout>
 <programlisting>
-from desktopcouch.records.server import CouchDatabase
-from desktopcouch.records.record import Record
-</programlisting></literallayout></para>
-<para><title>Get a Reference to the Database</title> 
-Desktopcouch will set up a database for us, or create a new one if it's needed. We'll use "jotty" for the name of the database. Since we want this line to run every time the JottyWindow is created, put it at the end of the finish_initializing function:</para> 
-<para><programlisting>
-        self.database = CouchDatabase("jotty", create=True)
-</programlisting></para>
-<para>Now that we have an instance-wide reference to the database, we'll add code to the on_mnu_save_activate method to run whenever the Save command is issued.</para> 
+import os
+from gi.repository import GLib # pylint: disable=E0611
+</programlisting></literallayout>
+</para>
+
 <para><title>Here's the code to pull the title out of the title entry:</title>
-Add this to the on_mnu_save_activate method.</para> 
+Add this to the on_mnu_save_activate method.</para>
 <para>
 <literallayout>
 <programlisting>
         #get the title for the note
         title = self.ui.entry1.get_text()
 </programlisting></literallayout></para>
+
 <para><title>Here's the code to get pull the text out of the TextView:</title> 
-In pygtk, TextView widgets have a text buffer that stores the text. So you ask the TextView for it's TextBuffer, and then you ask the TextBuffer for the text. You use iterators (iters) to determine from which part of the text buffer you want text. Since we want all the text, it's easy to just get the start and end iters.</para> 
+In GTK+, TextView widgets have a text buffer that stores the text. So you ask the TextView for it's TextBuffer, and then you ask the TextBuffer for the text. You use iterators (iters) to determine from which part of the text buffer you want text. Since we want all the text, it's easy to just get the start and end iters.</para> 
 <para>
 <literallayout><programlisting>
         #get the string
         buff = self.ui.textview1.get_buffer()
         start_iter = buff.get_start_iter()
         end_iter = buff.get_end_iter()
-        text = buff.get_text(start_iter,end_iter)
+        text = buff.get_text(start_iter, end_iter, True)
 </programlisting></literallayout></para>
-<para><title>Saving a document to CouchDB</title> 
-A record in desktopcouch is essentially a Python dictionary with some extra key/value pairs to make the database work. So we can save the document to the couch database like this:</para> 
+
+<para><title>Deciding where to save the note:</title> 
+We'll store the document in the system hidden folder designated for user-specific data. It's simple enough to ask GLib where that folder is and then add a jotty subfolder.</para> 
 <para>
 <literallayout><programlisting>
-        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        new_rec = Record({"record_type":record_type, "title":title, "text":text})
-        self.database.put_record(new_rec)
-</programlisting></literallayout></para> 
-<para>The "record_type" field is not strictly required, but among other things, it makes it easy to fetch the documents later. By convention, we use a URL to specify the record type. This provides a place for other developers to go to read about the record type. The description only needs to be human readable. Couchdb is not a typed database, so don't expect that the url will have any kind of schema definition or anything. You can use whatever URL you want, and put whatever you want at that URL.</para> 
-<para>
+        #create the filename
+        data_dir = GLib.get_user_data_dir()
+        jotty_dir = os.path.join(data_dir, "jotty")
+        filename = os.path.join(jotty_dir, title)
+</programlisting></literallayout></para>
 
-<title>Check for a pre-existing note with the same title</title> 
-
-Before we just write the new document though, we have to take note of the fact that desktopcouch will allow you to create as many documents as you want with the same title. We probably don't want this, so we'll have to write a little code to check if there is already a document in CouchDB with the same title, and if there is, update that document rather than create a new one.</para> 
-
-<para>In CouchDB, you don't do a lot of data processing in the database like you would with a relational database. To be most efficient, we could use the desktopcouch API to create a view in CouchDB, but it's probably simplest just to do the necessary processing on the client for now. To do this, we'll use a desktopcouch function to retrieve all of the records of a specified record type.</para>
-
-<para>To find and update documents with a matching title we will:</para>
-  <itemizedlist>
-   <listitem>
-    <para>Retrieve all of the documents with the CouchDatabase.get_records function.</para>
-   </listitem>
-   <listitem>
-    <para>Check each of the returned records for a matching title.</para>
-   </listitem>
-   <listitem>
-    <para>If there is a match, update the record using the CouchDatabase.update_fields function and return.</para>
-   </listitem>
-  </itemizedlist>
-<para>This all may sound very weird, but in code, it's not quite so complicated:</para> 
+<para><title>Saving a document to user's disk:</title> 
+GLib provides a convenience function for directly writing a string to a file.</para> 
 <para>
 <literallayout><programlisting>
-        #get all the records
-        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        results = self.database.get_records(record_type = record_type, create_view = True)
-        #update a record that has the same title
-        for result in results:
-            document = result.value
-            if document["title"] == title:
-                key = document["_id"]
-                self.database.update_fields(key, {"text":text})
-                return
+        #write the data
+        GLib.mkdir_with_parents(jotty_dir, 0o700)
+        GLib.file_set_contents(filename, text)
 </programlisting></literallayout></para>
+
 <para>So the whole function should look like this:</para> 
 <para> 
 <literallayout><programlisting>
-    def on_mnu_save_activate(self, widget, data=None): 
-        #get the title for the note 
-        title = self.ui.entry1.get_text() 
+    def on_mnu_save_activate(self, widget, data=None):
+        #get the title for the note
+        title = self.ui.entry1.get_text()
 
-        #get the text to save 
-        buff = self.ui.textview1.get_buffer() 
-        start_iter = buff.get_start_iter() 
-        end_iter = buff.get_end_iter() 
-        text = buff.get_text(start_iter,end_iter) 
+        #get the string
+        buff = self.ui.textview1.get_buffer()
+        start_iter = buff.get_start_iter()
+        end_iter = buff.get_end_iter()
+        text = buff.get_text(start_iter, end_iter, True)
 
-        #get all the records 
-        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc" 
-        results = self.database.get_records(record_type = record_type, create_view = True) 
+        #create the filename
+        data_dir = GLib.get_user_data_dir()
+        jotty_dir = os.path.join(data_dir, "jotty")
+        filename = os.path.join(jotty_dir, title)
 
-        #update a record that has the same title 
-        for result in results: 
-            document = result.value 
-            if document["title"] == title: 
-                key = document["_id"]
-                self.database.update_fields(key, {"text":text}) 
-                return
-
-        #if no records had the title, create it 
-        new_rec = Record({"record_type":record_type, "title":title, "text":text})
-        self.database.put_record(new_rec)
+        #write the data
+        GLib.mkdir_with_parents(jotty_dir, 0o700)
+        GLib.file_set_contents(filename, text)
 </programlisting></literallayout>
 </para>
-<para>CouchDB makes it really easy to see if your save function is working. You can just point your web browser at it and explore the database:</para>
-<para>file:///home/your_user_name/.local/share/desktop-couch/couchdb.html</para>
-   <figure>
-    <graphic fileref="./images/first-jotty-document.png"></graphic>
-  </figure>
-   <figure>
-    <graphic fileref="./images/25.png"></graphic>
-  </figure>
-<para>If you are redirected to a page that doesn't work, you probably just need to clear your browser cache and try again.</para>
+
+<para>It's easy to see if your save function is working. You can just explore the jotty data folder:</para>
+<para><programlisting>gvfs-open ~/.local/share/jotty</programlisting></para>
+
 <para><title>Implementing Open and New</title> 
 To open a saved document, the user will type the title of the document that they want to open in the text entry, and choose "Open" from the main menu. If there is no matching document there, it will just clear out the text view, ready for input. This is probably not too intuitive, so we'll add a dialog box for prompting the user for the title, but that's for later in the tutorial. For now, we'll just use the same text entry field.</para>
 <para><title>Implementing Open is essentially the reverse of Save:</title> 
@@ -310,10 +263,10 @@ Follow these steps:</para>
     <para>Add the on_mnu_open_activate method to the JottyWindow class.</para>
    </listitem>
    <listitem>
-    <para>Retrieve all of the documents with the CouchDatabase.get_records function.</para>
+    <para>Find all of the existing document names.</para>
    </listitem>
    <listitem>
-    <para>Check each of the returned records for a matching title.</para>
+    <para>Check if any have a matching title.</para>
    </listitem>
    <listitem>
     <para>If there is a match, pull out the text and display it in the text view.</para>
@@ -326,21 +279,23 @@ Follow these steps:</para>
         #get the name of the document to open
         title = self.ui.entry1.get_text()
         text = ""
- 
-        #get all the records
-        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        results = self.database.get_records(record_type = record_type,create_view = True)
- 
-        #get the text if there is a matching title
-        for result in results:
-            document = result.value
-            if document["title"] == title:
-                text = document["text"]
+
+        #create the filename
+        data_dir = GLib.get_user_data_dir()
+        jotty_dir = os.path.join(data_dir, "jotty")
+        filename = os.path.join(jotty_dir, title)
+
+        #try to get the data from the file if it exists
+        try:
+            success, text = GLib.file_get_contents(filename)
+        except Exception:
+            text = ""
 
         #set the UI to display the string
         buff = self.ui.textview1.get_buffer()
         buff.set_text(text)
 </programlisting></literallayout></para>
+
 <para><title>Implement New</title> 
 Add the on_mnu_new_activate method to the JottyWindow class:</para> 
 <para>
@@ -350,8 +305,10 @@ Add the on_mnu_new_activate method to the JottyWindow class:</para>
         buff = self.ui.textview1.get_buffer()
         buff.set_text("")
 </programlisting></literallayout></para>
+
 <para>Remember to save your JottyWindow.py file.</para>
 <ulink url="./code/JottyWindow.py">Complete JottyWindow.py file</ulink>
+
 <para><title>Saving Your Work</title> 
 When <application>Quickly</application> created your application, it automatically added it to Bazaar, a source code versioning system. You can use Bazaar to roll back mistakes, see code history, compare versions, etc... <application>Quickly</application> has a convenience function for backing up your work:</para> 
 <para><programlisting>
@@ -359,9 +316,11 @@ quickly save "First working version of Jotty"
 </programlisting></para> 
 <para>This will call <programlisting>bzr add</programlisting> and then <programlisting>bzr commit -m [your message]</programlisting> for you.</para>
 </chapter>
+
+
  <chapter id="Quickly-part2">
 <title>Using Dialogs</title>
-<para>In part 1, we created an application that can read and write text files, and persist them in the CouchDB backend. However, the application has a hideous usability flaw: the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix that by adding a save and an open dialog.</para>
+<para>In part 1, we created an application that can read and write text files, and persist them on the disk. However, the application has a hideous usability flaw: the text box for specifying titles when saving and opening files is very confusing. In part 2, we'll fix that by adding a save and an open dialog.</para>
 
 <para><title>Creating an Empty Dialog</title>
 It's simple to add an empty, but working dialog to your project. Simply specify the name of the new dialog, and it will be added automatically. Assuming that you are in the jotty project directory:</para>
@@ -378,7 +337,7 @@ quickly design
    <figure>
     <graphic fileref="./images/26.png"></graphic>
   </figure>
-<para>Then add some widgets for the UI. Start with a Vertical Box (VBox) with two items. Put a label in the top, and an HBox in the bottom slot. In the HBox, add a label and a text widget, just like you did for JottyWindow in part 1. Set the padding and expand properties as well.</para>
+<para>Then add some widgets for the UI. Start with a vertical Box with two items. Put a label in the top, and a horizontal Box in the bottom slot. In the horizontal box, add a label and a text entry, just like you did for JottyWindow in part 1. Set the expand property of the text entry to true.</para>
    <figure>
     <graphic fileref="./images/27.png"></graphic>
   </figure>
@@ -391,7 +350,7 @@ You can use the "quickly edit" command to open the SaveDialog.py file. This dial
         return self.ui.entry1.get_text()
 </programlisting></para>
 <para>We don't need to write any code for the OK and Cancel buttons, as they were automatically hooked up by <application>Quickly</application> when it created the dialog.</para>
-<para>Before we go on to invoking the dialog, delete the HBox from the original JottyWindow that holds the text entry and label, as we won't be needing those.</para>
+<para>Before we go on to invoking the dialog, delete the Box from the original JottyWindow that holds the text entry and label, as we won't be needing those.</para>
    <figure>
     <graphic fileref="./images/28.png"></graphic>
   </figure>
@@ -438,7 +397,7 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
 <para>
         <literallayout><programlisting>
         saver.destroy()
-        if result != gtk.RESPONSE_OK:
+        if result != Gtk.ResponseType.OK:
             return
 </programlisting></literallayout></para>
 
@@ -453,39 +412,36 @@ We need to tell the dialog to not show itself anymore. We could call saver.hide(
         title = saver.title_text
 
         saver.destroy()
-        if result != gtk.RESPONSE_OK:
+        if result != Gtk.ResponseType.OK:
             return
 
-        #get the text to save
+        #get the string
         buff = self.ui.textview1.get_buffer()
         start_iter = buff.get_start_iter()
         end_iter = buff.get_end_iter()
-        text = buff.get_text(start_iter,end_iter)
+        text = buff.get_text(start_iter, end_iter, True)
 
-        #get all the records
-        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        results = self.database.get_records(record_type = record_type,create_view = True)
+        #create the filename
+        data_dir = GLib.get_user_data_dir()
+        jotty_dir = os.path.join(data_dir, "jotty")
+        filename = os.path.join(jotty_dir, title)
 
-        #update a record that has the same title
-        for result in results:
-            record = result.value
-            if record["title"] == title:
-                key = result.key
-                self.database.update_fields(key, {"text":text})
-                return
-        
-        #if no records had the title, create it  
-        new_rec = Record({"record_type":record_type, "title":title, "text":text})
-        self.database.put_record(new_rec)
+        #write the data
+        GLib.mkdir_with_parents(jotty_dir, 0o700)
+        GLib.file_set_contents(filename, text)
 </programlisting></literallayout></para>
 <para>Now when we choose save, we get the SaveDialog instead:</para>
    <figure>
     <graphic fileref="./images/29.png"></graphic>
   </figure>
 
-<para><title>Creating a Dialog with a CouchGrid</title>
-We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. We'll use a widget called CouchGrid, which is included in the Quickly Widgets library.
+<para><title>Creating a Dialog with a DictionaryGrid</title>
+We'll use a similar approach in the Open dialog that we did with Save. However, there is one big difference, we want to provide the user with a list of documents that you could choose to open. We'll use a widget called DictionaryGrid, which is included in the Quickly Widgets library.
 </para>
+<para><title>Installing the Quickly Widgets library</title></para>
+<para><programlisting>
+sudo apt-get install python-quickly.widgets
+</programlisting></para>
 <para><title>Create the Open Dialog</title></para>
 <para><programlisting>
 quickly add dialog open
@@ -495,57 +451,77 @@ Start out by closing, and then reopening <application>Glade</application> again:
 <para><programlisting>
 quickly design
 </programlisting></para>
-<para>Start by adding a VBox and a label in the same manner as in the Save Dialog above. Leave an empty space in the VBox, we will use code to put the CouchGrid there.</para>
+<para>Start by adding a vertical Box and a label in the same manner as in the Save Dialog above. Leave an empty space in the Box, we will use code to put the DictionaryGrid there.</para>
    <figure>
     <graphic fileref="./images/30.png"></graphic>
   </figure>
 <para><title>Coding the Open Dialog</title></para>
-<para><title>Creating and Adding a CouchGrid</title>
-It just takes a little bit of code to add a CouchGrid to the  dialog. We need to:</para>
+<para><title>Creating and Adding a DictionaryGrid</title>
+It just takes a little bit of code to add a DictionaryGrid to the  dialog. We need to:</para>
   <itemizedlist>
    <listitem>
-    <para>Import the CouchGrid class.</para>
+    <para>Import the DictionaryGrid class.</para>
    </listitem>
    <listitem>
-    <para>Create a CouchGrid pointing at the jotty database, and the desired record type.</para>
+    <para>Get the list of jotty files.</para>
    </listitem>
    <listitem>
-    <para>Add the CouchGrid to the dialog.</para>
+    <para>Throw that list into a DictionaryGrid.</para>
+   </listitem>
+   <listitem>
+    <para>Add the DictionaryGrid to the Dialog.</para>
+   </listitem>
+   <listitem>
+    <para>Create the get_selection function.</para>
    </listitem>
   </itemizedlist>
 
-<para><title>Import the CouchGrid class</title>
-CouchGrid is part of the quickly.widgets library, so we import it like this:</para>
+<para><title>Import the DictionaryGrid class</title>
+Open the "OpenDialog.py" file with "quickly edit". DictionaryGrid is part of the quickly.widgets library, so we import it as below. Note we also want to import GLib and os, since we'll use some of their functions.</para>
 <para><programlisting>
-from quickly.widgets.couch_grid import CouchGrid
+import os
+from quickly.widgets.dictionary_grid import DictionaryGrid
+from gi.repository import GLib # pylint: disable=E0611
 </programlisting></para>
-<para><title>Create the CouchGrid</title>
-A CouchGrid needs to know three things: the name of the database, the name of the record type, and the name of the keys to use. "keys" is a list of fields that the widget will display, and by default will also use the same text for the heading of any columns. This set up should be done in the OpenDialog's finish_initializing function. All this is easily done in code like this:
+<para><title>Get the list of jotty files</title>
+First things first, we need to know the names of the existing documents. If you recall, we stored the files in the user's data directory. So we just need to list the files in that directory. This set up should be done in the OpenDialog's finish_initializing function.
 </para>
 <para>
         <literallayout><programlisting>
-        database = "jotty"
-        keys = ["title"]
-        record_type = "http://wiki.ubuntu.com/Quickly/JottyDoc"
-        self.couchgrid = CouchGrid(database, record_type=record_type,keys=keys)
+        #get the jotty document names
+        data_dir = GLib.get_user_data_dir()
+        jotty_dir = os.path.join(data_dir, "jotty")
+        filenames = os.listdir(jotty_dir)
 </programlisting></literallayout></para>
-<para><title>Add the CouchGrid to the Dialog</title>
-When we added the VBox to the dialog, we left an open space at the bottom. We'll use this by "packing" the CouchGrid into the VBox. We need to show it as well. So add the following lines to the finish_initializing function as well:
+
+<para><title>Throw that list into a DictionaryGrid</title>
+Now that we have a list of files, we need to massage it into the format DictionaryGrid expects. Namely, a list of dictionaries that hold header/value pairs. So we'll add a header to each filename and keep track of the full filename.
 </para>
 <para>
         <literallayout><programlisting>
-        self.couchgrid.show()
-        self.ui.vbox1.pack_end(self.couchgrid)
+        #put them into a grid
+        dicts = [{'Name': x, 'File': os.path.join(jotty_dir, x)} for x in filenames]
+        self.grid = DictionaryGrid(dictionaries=dicts, keys=['Name'])
+</programlisting></literallayout></para>
+
+<para><title>Add the DictionaryGrid to the Dialog</title>
+When we added the vertical Box to the dialog, we left an open space at the bottom. We'll use this by "packing" the DictionaryGrid into the Box. We need to show it as well. So add the following lines to the finish_initializing function as well:
+</para>
+<para>
+        <literallayout><programlisting>
+        #add grid to dialog
+        self.grid.show()
+        self.ui.box1.pack_end(self.grid, True, True, 0)
 </programlisting></literallayout></para>
 
 <para><title>Create the get_selection function</title>
-The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the CouchGrid what is selected. This is easy using the widget's selected_record_ids function. But the CouchGrid supports multiple selection, so we'll do the following:</para>
+The dialog still needs a bit more code to work. It needs to return the user's selection, if there is one. To do this, we need to ask the DictionaryGrid what is selected. This is easy using the widget's selected_rows member. But DictionaryGrid supports multiple selection, so we'll do the following:</para>
   <itemizedlist>
    <listitem>
     <para>Use a decorator to define the function as a property accessor.</para>
    </listitem>
    <listitem>
-    <para>Get all the selected record ids.</para>
+    <para>Get all the selected rows.</para>
    </listitem>
    <listitem>
     <para>If none are selected, return None.</para>
@@ -558,12 +534,12 @@ The dialog still needs a bit more code to work. It needs to return the user's se
 <para>
     <literallayout><programlisting>
     @property
-    def selected_record_id(self):
-        ids = self.couchgrid.selected_record_ids
-        if len(ids) &#60; 1:
+    def selected_file(self):
+        rows = self.grid.selected_rows
+        if len(rows) &#60; 1:
             return None
         else:
-            return ids[0]
+            return rows[0]['Name']
 </programlisting></literallayout></para>
 <para><title>Using the Open Dialog</title>
 Now we want to use the Open Dialog in JottyWindow's on_mnu_open_activate method. To use it, we'll follow these steps:</para>
@@ -578,7 +554,7 @@ Now we want to use the Open Dialog in JottyWindow's on_mnu_open_activate method.
     <para>Run the Dialog</para>
    </listitem>
    <listitem>
-    <para>Get the id for the selected title</para>
+    <para>Get the filename for the selected title</para>
    </listitem>
    <listitem>
     <para>Destroy the dialog</para>
@@ -587,7 +563,7 @@ Now we want to use the Open Dialog in JottyWindow's on_mnu_open_activate method.
     <para>Check the response before proceeding</para>
    </listitem>   
    <listitem>
-    <para>Use the id to get the record from CouchDB</para>
+    <para>Get the file contents</para>
    </listitem>   
    <listitem>
     <para>Update the UI</para>
@@ -605,34 +581,31 @@ So now we're ready to call the dialog from the JottyWindow's on_mnu_open_activat
 <para>
         <literallayout><programlisting>
         opener = OpenDialog()
-        result = opener.run()</programlisting></literallayout></para>
+        result = opener.run()
+</programlisting></literallayout></para>
 
-<para><title>Get the id for the selected title</title>
+<para><title>Get the filename for the selected title</title>
 Now use the property that we created to retrieve the title and text from the dialog. Don't forget to check the response type before going on.</para>
 <para>
         <literallayout><programlisting>
-        rec_id = opener.selected_record_id
+        filename = opener.selected_file
 
         #close the dialog, and check whether to proceed
         opener.destroy()
-        if result != gtk.RESPONSE_OK:
-            return</programlisting></literallayout></para>
-
-
-<para><title>Use the id to get the record from CouchDB</title>
-If nothing was selected, we'll just return. Otherwise, we'll retrieve the record from CouchDB and pull out the text for the document:</para>
-<para>
-        <literallayout><programlisting>
-        #get the record from CouchDB and extract the text
-        if rec_id == None:
+        if result != Gtk.ResponseType.OK:
             return
-        record = self.database.get_record(rec_id)
-        text = record["text"]</programlisting></literallayout></para>
+</programlisting></literallayout></para>
 
-<para><title>Update the UI</title>
-Now just put the text into the TextView:</para>
+<para><title>Get the file contents</title>
+If nothing was selected, we'll just return. Otherwise, we'll retrieve the file contents just like we did before and update the UI.  That is, this code does not need to change, but is presented again here for completeness.</para>
 <para>
         <literallayout><programlisting>
+        #try to get the data from the file if it exists
+        try:
+            success, text = GLib.file_get_contents(filename)
+        except Exception:
+            text = ""
+
         #set the UI to display the string
         buff = self.ui.textview1.get_buffer()
         buff.set_text(text)</programlisting></literallayout></para>
@@ -640,23 +613,21 @@ Now just put the text into the TextView:</para>
 <para>
     <literallayout><programlisting>
     def open_file(self, widget, data=None):
-        #run the open dialog
+        #get the name of the document to open
         opener = OpenDialog()
         result = opener.run()
-
-        #get the record id from the dialog
-        rec_id = opener.selected_record_id
+        filename = opener.selected_file
 
         #close the dialog, and check whether to proceed
         opener.destroy()
-        if result != gtk.RESPONSE_OK:
+        if result != Gtk.ResponseType.OK:
             return
 
-        #get the record from CouchDB and extract the text
-        if rec_id == None:
-            return
-        record = self.database.get_record(rec_id)
-        text = record["text"]
+        #try to get the data from the file if it exists
+        try:
+            success, text = GLib.file_get_contents(filename)
+        except Exception:
+            text = ""
 
         #set the UI to display the string
         buff = self.ui.textview1.get_buffer()
@@ -676,16 +647,13 @@ Now just put the text into the TextView:</para>
     <para>The Save command works more like "Save As". The application probably shouldn't pop up a SaveDialog every time you want to save. If it's already been saved, you probably just want to save it, but use a SaveDialog when the user choose Save As, or is saving a document for the first time.</para>
    </listitem>
    <listitem>
-    <para>The OpenDialog should probably return when the user double clicks on an item in the list. Try connecting to the "select-cursor-row" signal on the TreeView, and calling self.response(gtk.RESPONSE_OK) in the handler.</para>
+    <para>The OpenDialog should probably return when the user double clicks on an item in the list. Try connecting to the "select-cursor-row" signal on the TreeView, and calling self.response(Gtk.ResponseType.OK) in the handler.</para>
    </listitem>
    <listitem>
     <para>Perhaps the OK button in the OpenDialog should be disabled if nothing is selected. Try setting the "sensitivity" in <application>Glade</application> to "False" to start, and using the set_sensitive method on the OK button to adjust it as the selection changes.</para>
    </listitem>
    <listitem>
     <para>It would be more consistent for the Open and Close dialogs to have "Open" and "Close" for buttons instead of "OK". You can set a different type in the properties window in <application>Glade</application>.</para>
-   </listitem>
-   <listitem>
-    <para>Loading every document into the open dialog is probably a bit inefficient. Perhaps storing the document id and using that to retrieve the document would be a better implementation.</para>
    </listitem>
   </itemizedlist>
 </chapter>
