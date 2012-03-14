@@ -1,3 +1,13 @@
+Quickly 12.03
+------------------------------------
+
+ + ubuntu-application:
+   - Don't strip comments from glade files (Frederik Elwert)
+   - Update tutorial to match current code
+ + common:
+   - Fix inheriting 'create' in derived templates
+   - Fix crash during 'create' for derived templates (Paolo Sammicheli)
+
 Quickly 11.12
 ------------------------------------
 
