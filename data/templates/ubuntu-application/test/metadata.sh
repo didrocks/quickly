@@ -35,7 +35,7 @@ cat debian/rules
 # endif
 # 
 # override_dh_auto_install:
-# 	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/test-project                 --install-lib=/opt/extras.ubuntu.com/test-project
+# 	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/test-project                 --install-data=/opt/extras.ubuntu.com/test-project                 --install-lib=/opt/extras.ubuntu.com/test-project
 # 
 # override_dh_python2:
 # 	dh_python2 /opt/extras.ubuntu.com/test-project
