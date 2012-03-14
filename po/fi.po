@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: quickly\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-07-29 10:06+0200\n"
-"PO-Revision-Date: 2011-12-12 16:33+0000\n"
+"PO-Revision-Date: 2011-12-25 05:51+0000\n"
 "Last-Translator: Tuomas Lähteenmäki <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-13 05:03+0000\n"
-"X-Generator: Launchpad (build 14458)\n"
+"X-Launchpad-Export-Date: 2011-12-26 04:54+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../data/templates/ubuntu-application/edit.py:39
 msgid ""
@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/create.py:35
 msgid "quickly create <template> <project-name>"
-msgstr ""
+msgstr "quickly create <template> <projektin_nimi>"
 
 #: ../data/templates/ubuntu-application/create.py:37
 msgid ""
@@ -51,7 +51,7 @@ msgstr ""
 #. add it to revision control
 #: ../data/templates/ubuntu-application/create.py:103
 msgid "Creating bzr repository and committing"
-msgstr ""
+msgstr "Luo bzr-varaston ja kommentoi sen"
 
 #: ../data/templates/ubuntu-application/create.py:112
 #: ../data/templates/ubuntu-flash-game/create.py:153
@@ -70,10 +70,14 @@ msgid ""
 "\n"
 "Opens help file with the tutorial for the current template.\n"
 msgstr ""
+"Käyttö:\n"
+"$ quickly tutorial\n"
+"\n"
+"Avaa opastusohjelman nykyiselle mallille.\n"
 
 #: ../data/templates/ubuntu-application/configure.py:37
 msgid "quickly configure bzr <bzr-branch-string>"
-msgstr ""
+msgstr "quickly configure bzr <bzr-branch-string>"
 
 #: ../data/templates/ubuntu-application/configure.py:39
 msgid "quickly configure lp-project [project-name]"
@@ -81,7 +85,7 @@ msgstr ""
 
 #: ../data/templates/ubuntu-application/configure.py:40
 msgid "quickly configure ppa <ppa-name>"
-msgstr ""
+msgstr "quickly configure ppa <ppa-nimi>"
 
 #: ../data/templates/ubuntu-application/configure.py:41
 msgid "quickly configure target-distribution <ubuntu-release-name>"
