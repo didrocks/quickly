@@ -14,7 +14,7 @@ from python_name import Aboutcamel_case_nameDialog
 class TestExample(unittest.TestCase):
     def setUp(self):
         self.Aboutcamel_case_nameDialog_members = [
-        'Aboutcamel_case_nameDialog', 'get_builder', 'gettext', 'Gtk']
+        'AboutDialog', 'Aboutcamel_case_nameDialog', 'gettext', 'logger', 'logging']
 
     def test_Aboutcamel_case_nameDialog_members(self):
         all_members = dir(Aboutcamel_case_nameDialog)
