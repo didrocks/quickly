@@ -1,3 +1,10 @@
+Quickly 12.04
+------------------------------------
+
+ + ubuntu-pygame:
+   - Drop, as it relies on deprecated desktopcouch.  Users are encouraged to
+     use ubuntu-application and embed pygame instead.
+
 Quickly 12.03
 ------------------------------------
 

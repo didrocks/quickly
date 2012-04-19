@@ -52,21 +52,21 @@ quickly shell-completion quickly -
 # --help --staging --template --verbose --version -h -t
 
 HOME=/ quickly shell-completion quickly -t foo
-# ubuntu-application ubuntu-cli ubuntu-flash-game ubuntu-pygame
+# ubuntu-application ubuntu-cli ubuntu-flash-game
 
 quickly shell-completion quickly foo
 # commands create getstarted help quickly tutorial
 
 ## This next one doesn't actually list all the commands, because quickly also checks if we're in a project and thus whether such commands would actually work
 
-quickly shell-completion quickly -t ubuntu-pygame foo
-# commands create getstarted help quickly tutorial
+quickly shell-completion quickly -t ubuntu-cli foo
+# commands create getstarted help quickly
 
 quickly shell-completion quickly commands foo
 # 
 
 HOME=/ quickly shell-completion quickly create foo
-# ubuntu-application ubuntu-cli ubuntu-flash-game ubuntu-pygame
+# ubuntu-application ubuntu-cli ubuntu-flash-game
 
 quickly shell-completion quickly create ubuntu-application foo
 # 
@@ -75,7 +75,7 @@ quickly shell-completion quickly getstarted foo
 # 
 
 HOME=/ quickly shell-completion quickly help foo
-# commands getstarted help quickly ubuntu-application ubuntu-cli ubuntu-flash-game ubuntu-pygame
+# commands getstarted help quickly ubuntu-application ubuntu-cli ubuntu-flash-game
 
 quickly shell-completion quickly help commands foo
 # 
@@ -90,7 +90,7 @@ quickly shell-completion quickly help ubuntu-application add foo
 # 
 
 HOME=/ quickly shell-completion quickly quickly foo
-# ubuntu-application ubuntu-cli ubuntu-flash-game ubuntu-pygame
+# ubuntu-application ubuntu-cli ubuntu-flash-game
 
 quickly shell-completion quickly quickly -t ubuntu-application foo
 # 
@@ -99,7 +99,7 @@ quickly shell-completion quickly quickly ubuntu-application foo
 # 
 
 HOME=/ quickly shell-completion quickly tutorial foo
-# ubuntu-application ubuntu-pygame
+# ubuntu-application
 
 quickly shell-completion quickly -t ubuntu-application tutorial foo
 # 
@@ -124,13 +124,13 @@ quickly shell-completion quickly -
 # --help --staging --template --verbose --version -h -t
 
 HOME=/ quickly shell-completion quickly -t foo
-# ubuntu-application ubuntu-cli ubuntu-flash-game ubuntu-pygame
+# ubuntu-application ubuntu-cli ubuntu-flash-game
 
 quickly shell-completion quickly foo
 # add commands configure debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade
 
-quickly shell-completion quickly -t ubuntu-pygame foo
-# commands configure debug edit getstarted help license package quickly release run save share test tutorial
+quickly shell-completion quickly -t ubuntu-cli foo
+# commands configure debug edit getstarted help license package quickly release run save share test
 
 quickly shell-completion quickly add foo
 # dialog help-guide help-topic indicator

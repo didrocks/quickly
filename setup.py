@@ -80,8 +80,6 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
                   '__version__': "'%s'" % self.distribution.get_version()}
         previous_values = update_config(values)
         update_tutorial([("data/templates/ubuntu-application/help",
-                           'tutorial'),
-                         ("data/templates/ubuntu-pygame/help",
                            'tutorial')])
         DistUtilsExtra.auto.install_auto.run(self)
         update_config(previous_values)
@@ -99,7 +97,6 @@ DistUtilsExtra.auto.setup(name='quickly',
       author='Quickly Developer Team',
       author_email='quickly-talk@lists.launchpad.net',
       data_files=[('share/quickly/templates/ubuntu-application/project_root', glob.glob('data/templates/ubuntu-application/project_root/project_name.desktop.in')),
-                  ('share/quickly/templates/ubuntu-pygame/project_root', glob.glob('data/templates/ubuntu-pygame/project_root/project_name.desktop.in')),
                   ('share/quickly/templates/ubuntu-flash-game/project_root', glob.glob('data/templates/ubuntu-flash-game/project_root/project_name.desktop.in'))],
       cmdclass={'install': InstallAndUpdateDataDirectory})
 

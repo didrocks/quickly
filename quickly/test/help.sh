@@ -26,7 +26,7 @@ quickly --help
 HOME=/ quickly help
 # ERROR: No template or command provided to help command.
 # Usage: quickly help [template] <command>
-# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-flash-game, ubuntu-pygame
+# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-flash-game
 # Candidate commands are: commands, getstarted, help, quickly
 
 HOME=/ quickly help help
@@ -47,13 +47,13 @@ HOME=/ quickly help ubuntu-application help
 HOME=/ quickly help not-a-template
 # ERROR: not-a-template is neither a template nor a standard command.
 # Usage: quickly help [template] <command>
-# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-flash-game, ubuntu-pygame
+# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-flash-game
 # Candidate commands are: commands, getstarted, help, quickly
 
 HOME=/ quickly help not-a-template help
 # ERROR: Template not-a-template does not exist.
 # Usage: quickly help [template] <command>
-# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-flash-game, ubuntu-pygame
+# Candidate templates are: ubuntu-application, ubuntu-cli, ubuntu-flash-game
 
 cd /tmp
 
