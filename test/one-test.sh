@@ -61,6 +61,7 @@ CMD="$ORIGINAL_DIR/next-cmd.sh"
 CMD_OUTPUT="$ORIGINAL_DIR/output.log"
 DISPLAY="" # to avoid popup projects when creating them
 export EDITOR="$(pwd)/test/editor"
+export QUICKLY_EDITOR="$(pwd)/test/editor"
 
 head -n1 "$SCRIPT" >> "$LOGFILE"
 egrep -v '(^#[^#]|^\s*$)' "$SCRIPT" | while read -r line; do
