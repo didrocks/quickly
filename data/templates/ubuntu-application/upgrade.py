@@ -169,7 +169,6 @@ if project_version < '0.4':
         pass
 
     # add apport hooks if launchpad application is configured
-    internal.apportutils.insert_lpi_if_required(project_name)
     lp_project_name = configurationhandler.project_config.get('lp_id', None)
     if lp_project_name is not None:
         internal.apportutils.update_apport(project_name, lp_project_name, lp_project_name)
