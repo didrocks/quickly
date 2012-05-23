@@ -19,13 +19,6 @@ quickly package --extras | sed 's/^\.\+//'
 # Ubuntu packaging created in debian/
 # Ubuntu package has been successfully created in ../test-project_0.1_all.deb
 
-ls debian
-# changelog
-# compat
-# control
-# copyright
-# rules
-
 ls ../test-project_0.1.dsc ../test-project_0.1.tar.gz ../test-project_0.1_all.deb
 # ../test-project_0.1_all.deb
 # ../test-project_0.1.dsc
@@ -63,6 +56,13 @@ ls -F ./opt/extras.ubuntu.com/test-project/share
 # glib-2.0/
 # gnome/
 # test-project/
+
+ls -F ./opt/extras.ubuntu.com/test-project/share/glib-2.0
+# schemas/
+
+ls -F ./opt/extras.ubuntu.com/test-project/share/glib-2.0/schemas
+# gschemas.compiled
+# net.launchpad.test-project.gschema.xml
 
 ls -F ./usr
 # share/

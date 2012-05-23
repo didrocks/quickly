@@ -253,6 +253,12 @@ override_dh_install:
         'opt_root': opt_root, 'project_name': project_name,
         'python_name': python_name, 'config_debpath': config_debpath}
 
+    # Compile the glib schema, since it is in a weird place that normal glib
+    # triggers won't catch during package install.
+    install_rules += """
+	glib-compile-schemas debian/%(project_name)s%(opt_root)s/share/glib-2.0/schemas""" % {
+        'opt_root': opt_root, 'project_name': project_name}
+
     # Set rules back to include our changes
     rules = ''
     with open('debian/rules', 'r') as f:
