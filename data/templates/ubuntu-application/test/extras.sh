@@ -73,11 +73,11 @@ ls -F ./usr/share
 # python/
 
 ls -F ./usr/share/applications
-# test-project.desktop
+# extras-test-project.desktop
 
 ## Now confirm the contents of some of these files
 
-cat ./usr/share/applications/test-project.desktop
+cat ./usr/share/applications/extras-test-project.desktop
 # [Desktop Entry]
 # Name=Test Project
 # Comment=TestProject application
@@ -86,3 +86,6 @@ cat ./usr/share/applications/test-project.desktop
 # Icon=/opt/extras.ubuntu.com/test-project/share/test-project/media/test-project.svg
 # Terminal=false
 # Type=Application
+
+grep -Rh "__test_project_data_directory__ = " ./opt/extras.ubuntu.com/test-project
+# __test_project_data_directory__ = '/opt/extras.ubuntu.com/test-project/share/test-project/'
