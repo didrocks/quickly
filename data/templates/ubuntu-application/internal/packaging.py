@@ -186,6 +186,10 @@ def update_metadata():
         metadata.append('XB-Screenshot-Url: %s/%s-%s.png' % (urlbase, project_name, distribution))
         metadata.append('XB-Thumbnail-Url: %s/%s-%s.thumb.png' % (urlbase, project_name, distribution))
 
+    install_rules = """
+override_dh_install:
+	dh_install"""
+
     # Now ship the icon as part of the debian packaging
     icon_name = 'data/media/%s.svg' % project_name
     if not os.path.exists(icon_name):
@@ -194,19 +198,55 @@ def update_metadata():
         if not os.path.exists(icon_name):
             icon_name = None
     if icon_name:
-        contents = ''
-        with open('debian/rules', 'r') as f:
-            contents = f.read()
-        if contents and re.search('dpkg-distaddfile %s.svg' % project_name, contents) is None:
-            contents += """
-override_dh_install::
-	dh_install
+        install_rules += """
 	cp %(icon_name)s ../%(project_name)s.svg
 	dpkg-distaddfile %(project_name)s.svg raw-meta-data -""" % {
-                'project_name': project_name, 'icon_name': icon_name}
-            templatetools.set_file_contents('debian/rules', contents)
+            'project_name': project_name, 'icon_name': icon_name}
+        metadata.append('XB-Icon: %s.svg' % project_name)
 
-            metadata.append('XB-Icon: %s.svg' % project_name)
+    opt_root = "/opt/extras.ubuntu.com/" + project_name
+
+    # Move script to bin/ folder.
+    # There are some complications here.  As of this writing, current versions
+    # of python-mkdebian do not correctly install our executable script in a
+    # bin/ subdirectory.  Instead, they either install it in the opt-project
+    # root or in the opt-project python library folder (depending on whether
+    # the project name is the same as its python name).  So if we find that to
+    # be the case, we move the script accordingly.
+    bin_path = "%(opt_root)s/bin/%(project_name)s" % {
+        'opt_root': opt_root, 'project_name': project_name}
+    bad_bin_debpath = "debian/%(project_name)s%(opt_root)s/%(project_name)s" % {
+        'opt_root': opt_root, 'project_name': project_name}
+    python_name = templatetools.python_name(project_name)
+    if project_name == python_name:
+        bad_bin_debpath += "/" + project_name
+    install_rules += """
+	mkdir -p debian/%(project_name)s%(opt_root)s/bin
+	if [ -x %(bad_bin_debpath)s ]; then mv %(bad_bin_debpath)s debian/%(project_name)s%(opt_root)s/bin; fi""" % {
+        'project_name': project_name, 'opt_root': opt_root, 'bad_bin_debpath': bad_bin_debpath}
+
+    # Move desktop file and update it to point to our /opt locations.
+    # The file starts, as expected, under /opt.  But the ARB wants and allows
+    # us to install it in /usr, so we do.
+    old_desktop_debdir = "debian/%(project_name)s%(opt_root)s/share/applications" % {
+        'project_name': project_name, 'opt_root': opt_root}
+    new_share_debdir = "debian/%(project_name)s/usr/share" % {'project_name': project_name}
+    new_desktop_debdir = new_share_debdir + "/applications"
+    install_rules += """
+	mkdir -p %(new_share_debdir)s
+	mv %(old_desktop_debdir)s %(new_share_debdir)s
+	sed -i 's|Exec=.*|Exec=%(bin_path)s|' %(new_desktop_debdir)s/%(project_name)s.desktop
+	sed -i 's|Icon=/usr/|Icon=%(opt_root)s/|' %(new_desktop_debdir)s/%(project_name)s.desktop""" % {
+        'bin_path': bin_path, 'old_desktop_debdir': old_desktop_debdir,
+        'new_desktop_debdir': new_desktop_debdir, 'project_name': project_name,
+        'opt_root': opt_root, 'new_share_debdir': new_share_debdir}
+
+    # Set rules back to include our changes
+    rules = ''
+    with open('debian/rules', 'r') as f:
+        rules = f.read()
+    rules += install_rules
+    templatetools.set_file_contents('debian/rules', rules)
 
     # Prepend the start-match line, because update_file_content replaces it
     metadata.insert(0, 'XB-Python-Version: ${python:Versions}')
