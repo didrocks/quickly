@@ -158,51 +158,12 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
         return(_continue_if_errors(err_output, warn_output, proc.returncode,
                                      ask_on_warn_or_error))
 
-def update_metadata():
-    # See https://wiki.ubuntu.com/PostReleaseApps/Metadata for details
-
-    metadata = []
+def update_rules():
     project_name = configurationhandler.project_config['project']
-
-    # Grab name and category from desktop file
-    with open('%s.desktop.in' % project_name, 'r') as f:
-        desktop = f.read()
-
-        match = re.search('\n_?Name=(.*)\n', desktop)
-        if match is not None:
-            metadata.append('XB-AppName: %s' % match.group(1))
-
-        match = re.search('\nCategories=(.*)\n', desktop)
-        if match is not None:
-            metadata.append('XB-Category: %s' % match.group(1))
-
-    # Grab distribution for screenshot URLs from debian/changelog
-    changelog = subprocess.Popen(['dpkg-parsechangelog'], stdout=subprocess.PIPE).communicate()[0]
-    match = re.search('\nDistribution: (.*)\n', changelog)
-    if match is not None:
-        distribution = match.group(1)
-        first_letter = project_name[0]
-        urlbase = 'https://software-center.ubuntu.com/screenshots/%s' % first_letter
-        metadata.append('XB-Screenshot-Url: %s/%s-%s.png' % (urlbase, project_name, distribution))
-        metadata.append('XB-Thumbnail-Url: %s/%s-%s.thumb.png' % (urlbase, project_name, distribution))
 
     install_rules = """
 override_dh_install:
 	dh_install"""
-
-    # Now ship the icon as part of the debian packaging
-    icon_name = 'data/media/%s.svg' % project_name
-    if not os.path.exists(icon_name):
-        # Support pre-11.03.1 icon names
-        icon_name = 'data/media/logo.svg'
-        if not os.path.exists(icon_name):
-            icon_name = None
-    if icon_name:
-        install_rules += """
-	cp %(icon_name)s ../%(project_name)s.svg
-	dpkg-distaddfile %(project_name)s.svg raw-meta-data -""" % {
-            'project_name': project_name, 'icon_name': icon_name}
-        metadata.append('XB-Icon: %s.svg' % project_name)
 
     opt_root = "/opt/extras.ubuntu.com/" + project_name
 
@@ -281,13 +242,6 @@ override_dh_install:
     rules += install_rules
     templatetools.set_file_contents('debian/rules', rules)
 
-    # Prepend the start-match line, because update_file_content replaces it
-    metadata.insert(0, 'Package: ' + project_name)
-    templatetools.update_file_content('debian/control',
-                                      'Package: ' + project_name,
-                                      'Architecture: all',
-                                      '\n'.join(metadata) + '\n')
-
 def get_python_mkdebian_version():
     proc = subprocess.Popen(["python-mkdebian", "--version"], stdout=subprocess.PIPE)
     version = proc.communicate()[0]
@@ -348,7 +302,7 @@ def updatepackaging(changelog=None, no_changelog=False, installopt=False):
         return(return_code)
 
     if installopt:
-        update_metadata()
+        update_rules()
 
     print _("Ubuntu packaging created in debian/")
 
