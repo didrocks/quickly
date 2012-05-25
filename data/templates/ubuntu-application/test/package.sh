@@ -49,7 +49,7 @@ grep UNKNOWN debian/*
 # debian/control:Maintainer: UNKNOWN <UNKNOWN>
 # debian/control:Description: UNKNOWN
 # debian/control: UNKNOWN
-# debian/copyright:Maintainer: UNKNOWN <UNKNOWN>
+# debian/copyright:Upstream-Contact: UNKNOWN <UNKNOWN>
 # debian/copyright:Source: UNKNOWN
 # debian/copyright:License: UNKNOWN
 
