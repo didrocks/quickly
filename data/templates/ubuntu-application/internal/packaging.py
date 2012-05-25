@@ -263,6 +263,11 @@ override_dh_install:
         'opt_root': opt_root, 'project_name': project_name,
         'python_name': python_name, 'config_debpath': config_debpath}
 
+    # Adjust XDG_DATA_DIRS so we can find schemas and help files
+    install_rules += """
+	sed -i 's|        sys.path.insert(0, opt_path)|\\0\\n    os.putenv("XDG_DATA_DIRS", "%%s:%%s" %% ("%(opt_root)s/share/", os.getenv("XDG_DATA_DIRS", "")))|' debian/%(project_name)s%(bin_path)s""" % {
+        'opt_root': opt_root, 'project_name': project_name, 'bin_path': bin_path}
+
     # Compile the glib schema, since it is in a weird place that normal glib
     # triggers won't catch during package install.
     install_rules += """
