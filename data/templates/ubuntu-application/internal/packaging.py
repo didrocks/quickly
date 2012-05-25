@@ -267,10 +267,10 @@ override_dh_install:
     templatetools.set_file_contents('debian/rules', rules)
 
     # Prepend the start-match line, because update_file_content replaces it
-    metadata.insert(0, 'XB-Python-Version: ${python:Versions}')
+    metadata.insert(0, 'Package: ' + project_name)
     templatetools.update_file_content('debian/control',
-                                      'XB-Python-Version: ${python:Versions}',
-                                      'Depends: ${misc:Depends},',
+                                      'Package: ' + project_name,
+                                      'Architecture: all',
                                       '\n'.join(metadata) + '\n')
 
 def get_python_mkdebian_version():
