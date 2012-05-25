@@ -23,7 +23,7 @@ if os.path.abspath(__file__).startswith('/opt'):
         python_path.insert(0, opt_path)
         sys.path.insert(0, opt_path)
     # Adjust XDG_DATA_DIRS so we can find schemas and help files
-    os.putenv('XDG_DATA_DIRS', "%s:%s" % ('/opt/extras.ubuntu.com/project_name/share/', os.getenv('XDG_DATA_DIRS', ''))
+    os.putenv('XDG_DATA_DIRS', "%s:%s" % ('/opt/extras.ubuntu.com/project_name/share/', os.getenv('XDG_DATA_DIRS', '')))
 if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'python_name'))
     and PROJECT_ROOT_DIRECTORY not in sys.path):
     python_path.insert(0, PROJECT_ROOT_DIRECTORY)
