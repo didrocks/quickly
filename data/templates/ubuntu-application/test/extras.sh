@@ -89,3 +89,8 @@ cat ./usr/share/applications/extras-test-project.desktop
 
 grep -Rh "__test_project_data_directory__ = " ./opt/extras.ubuntu.com/test-project
 # __test_project_data_directory__ = '/opt/extras.ubuntu.com/test-project/share/test-project/'
+
+grep -Rh "locale.bindtextdomain" ./opt/extras.ubuntu.com/test-project/bin/test-project
+# locale.bindtextdomain('test-project', '/opt/extras.ubuntu.com/test-project/share/locale')
+
+grep -Rh "^import gettext" ./opt/extras.ubuntu.com/test-project

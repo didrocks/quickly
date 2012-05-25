@@ -242,6 +242,16 @@ override_dh_install:
         'new_desktop_debdir': new_desktop_debdir, 'project_name': project_name,
         'opt_root': opt_root, 'new_desktop_debpath': new_desktop_debpath}
 
+    # Set gettext's bindtextdomain to point to /opt and use the locale
+    # module (gettext's C API) instead of the gettext module (gettext's Python
+    # API), so that translations are loaded from /opt
+    localedir = os.path.join(opt_root, 'share/locale') 
+    install_rules += """
+	grep -RlZ 'import gettext' debian/%(project_name)s/* | xargs -0 -r sed -i 's|\(import\) gettext$$|\\1 locale|'
+	grep -RlZ 'from gettext import gettext as _' debian/%(project_name)s/* | xargs -0 -r sed -i 's|from gettext \(import gettext as _\)|from locale \\1|'
+	grep -RlZ "gettext.textdomain('%(project_name)s')" debian/%(project_name)s/* | xargs -0 -r sed -i "s|gettext\(\.textdomain('%(project_name)s')\)|locale\.bindtextdomain('%(project_name)s', '%(localedir)s')\\nlocale\\1|" """ % {
+        'project_name': project_name, 'localedir': localedir}
+
     # We install a python_nameconfig.py file that contains a pointer to the
     # data directory.  But that will be determined by setup.py, so it will be
     # wrong (python-mkdebian's --prefix command only affects where it moves
