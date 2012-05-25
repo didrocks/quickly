@@ -194,11 +194,13 @@ override_dh_install:
     new_desktop_debdir = "debian/%(project_name)s/usr/share/applications" % {'project_name': project_name}
     new_desktop_debpath = new_desktop_debdir + "/extras-" + project_name + ".desktop"
     install_rules += """
-	mkdir -p %(new_desktop_debdir)s
-	mv %(old_desktop_debdir)s/%(project_name)s.desktop %(new_desktop_debpath)s
-	rmdir --ignore-fail-on-non-empty %(old_desktop_debdir)s
-	sed -i 's|Exec=.*|Exec=%(bin_path)s|' %(new_desktop_debpath)s
-	sed -i 's|Icon=/usr/|Icon=%(opt_root)s/|' %(new_desktop_debpath)s""" % {
+	if [ -f %(old_desktop_debdir)s/%(project_name)s.desktop ]; then \\
+		mkdir -p %(new_desktop_debdir)s; \\
+		mv %(old_desktop_debdir)s/%(project_name)s.desktop %(new_desktop_debpath)s; \\
+		rmdir --ignore-fail-on-non-empty %(old_desktop_debdir)s; \\
+		sed -i 's|Exec=.*|Exec=%(bin_path)s|' %(new_desktop_debpath)s; \\
+		sed -i 's|Icon=/usr/|Icon=%(opt_root)s/|' %(new_desktop_debpath)s; \\
+	fi""" % {
         'bin_path': bin_path, 'old_desktop_debdir': old_desktop_debdir,
         'new_desktop_debdir': new_desktop_debdir, 'project_name': project_name,
         'opt_root': opt_root, 'new_desktop_debpath': new_desktop_debpath}
@@ -217,7 +219,7 @@ override_dh_install:
     # data directory.  But that will be determined by setup.py, so it will be
     # wrong (python-mkdebian's --prefix command only affects where it moves
     # files during build, but not what it passes to setup.py)
-    config_debpath = "debian/%(project_name)s%(opt_root)s/%(python_name)s_lib/%(python_name)sconfig.py" % {
+    config_debpath = "debian/%(project_name)s%(opt_root)s/%(python_name)s*/%(python_name)sconfig.py" % {
         'project_name': project_name, 'opt_root': opt_root, 'python_name': python_name}
     install_rules += """
 	sed -i "s|__%(python_name)s_data_directory__ =.*|__%(python_name)s_data_directory__ = '%(opt_root)s/share/%(project_name)s/'|" %(config_debpath)s""" % {
@@ -231,9 +233,11 @@ override_dh_install:
 
     # Compile the glib schema, since it is in a weird place that normal glib
     # triggers won't catch during package install.
-    install_rules += """
-	glib-compile-schemas debian/%(project_name)s%(opt_root)s/share/glib-2.0/schemas""" % {
+    schema_debdir = "debian/%(project_name)s%(opt_root)s/share/glib-2.0/schemas" % {
         'opt_root': opt_root, 'project_name': project_name}
+    install_rules += """
+	if [ -d %(schema_debdir)s ]; then glib-compile-schemas %(schema_debdir)s; fi""" % {
+        'schema_debdir': schema_debdir}
 
     # Set rules back to include our changes
     rules = ''
