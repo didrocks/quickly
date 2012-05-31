@@ -244,7 +244,7 @@ if project_version < '11.09' and template_version <= '11.10':
 ### EPOCH CHANGE
 ### This is where we upgraded the default projects to GTK3, PyGI, and GSettings.
 ### Warn the user that this happened and they should upgrade manually to fix.
-if project_version < '11.12' and internal_run:
+if project_version and project_version < '11.12' and internal_run:
     print _("""WARNING: Your project is out of date.  Newly created projects use
 GTK+ 3, PyGI, and GSettings.  See https://wiki.ubuntu.com/Quickly/GTK3 for
 porting information and when you have finished porting your code, run
