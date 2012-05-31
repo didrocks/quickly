@@ -1,3 +1,14 @@
+Quickly 12.05
+------------------------------------
+
+ + ubuntu-cli:
+   - Fix to not warn about upgrading to PyGI all the time.
+ + ubuntu-flash-game:
+   - Fix to use GTK+ 2 again.  Flash doesn't work with GTK+ 3.
+ + common:
+   - Fix 'quickly package --extras' and 'quickly submitubuntu' to actually
+     create usable packages for the ARB process.
+
 Quickly 12.04
 ------------------------------------
 
