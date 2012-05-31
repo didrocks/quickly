@@ -158,62 +158,98 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
         return(_continue_if_errors(err_output, warn_output, proc.returncode,
                                      ask_on_warn_or_error))
 
-def update_metadata():
-    # See https://wiki.ubuntu.com/PostReleaseApps/Metadata for details
 
-    metadata = []
+# TODO: Vastly simplify this function.  This was implemented post-12.04 to
+# make it easier to get an SRU for these fixes.  But the only things here
+# that can't be done in-code (either wrapper code or setup.py) is compiling
+# the schemas and moving the desktop file.
+def update_rules():
     project_name = configurationhandler.project_config['project']
 
-    # Grab name and category from desktop file
-    with open('%s.desktop.in' % project_name, 'r') as f:
-        desktop = f.read()
+    install_rules = """
+override_dh_install:
+	dh_install"""
 
-        match = re.search('\n_?Name=(.*)\n', desktop)
-        if match is not None:
-            metadata.append('XB-AppName: %s' % match.group(1))
+    opt_root = "/opt/extras.ubuntu.com/" + project_name
 
-        match = re.search('\nCategories=(.*)\n', desktop)
-        if match is not None:
-            metadata.append('XB-Category: %s' % match.group(1))
+    # Move script to bin/ folder.
+    # There are some complications here.  As of this writing, current versions
+    # of python-mkdebian do not correctly install our executable script in a
+    # bin/ subdirectory.  Instead, they either install it in the opt-project
+    # root or in the opt-project python library folder (depending on whether
+    # the project name is the same as its python name).  So if we find that to
+    # be the case, we move the script accordingly.
+    bin_path = "%(opt_root)s/bin/%(project_name)s" % {
+        'opt_root': opt_root, 'project_name': project_name}
+    bad_bin_debpath = "debian/%(project_name)s%(opt_root)s/%(project_name)s" % {
+        'opt_root': opt_root, 'project_name': project_name}
+    python_name = templatetools.python_name(project_name)
+    if project_name == python_name:
+        bad_bin_debpath += "/" + project_name
+    install_rules += """
+	mkdir -p debian/%(project_name)s%(opt_root)s/bin
+	if [ -x %(bad_bin_debpath)s ]; then mv %(bad_bin_debpath)s debian/%(project_name)s%(opt_root)s/bin; fi""" % {
+        'project_name': project_name, 'opt_root': opt_root, 'bad_bin_debpath': bad_bin_debpath}
 
-    # Grab distribution for screenshot URLs from debian/changelog
-    changelog = subprocess.Popen(['dpkg-parsechangelog'], stdout=subprocess.PIPE).communicate()[0]
-    match = re.search('\nDistribution: (.*)\n', changelog)
-    if match is not None:
-        distribution = match.group(1)
-        first_letter = project_name[0]
-        urlbase = 'https://software-center.ubuntu.com/screenshots/%s' % first_letter
-        metadata.append('XB-Screenshot-Url: %s/%s-%s.png' % (urlbase, project_name, distribution))
-        metadata.append('XB-Thumbnail-Url: %s/%s-%s.thumb.png' % (urlbase, project_name, distribution))
+    # Move desktop file and update it to point to our /opt locations.
+    # The file starts, as expected, under /opt.  But the ARB wants and allows
+    # us to install it in /usr, so we do.
+    old_desktop_debdir = "debian/%(project_name)s%(opt_root)s/share/applications" % {
+        'project_name': project_name, 'opt_root': opt_root}
+    new_desktop_debdir = "debian/%(project_name)s/usr/share/applications" % {'project_name': project_name}
+    new_desktop_debpath = new_desktop_debdir + "/extras-" + project_name + ".desktop"
+    install_rules += """
+	if [ -f %(old_desktop_debdir)s/%(project_name)s.desktop ]; then \\
+		mkdir -p %(new_desktop_debdir)s; \\
+		mv %(old_desktop_debdir)s/%(project_name)s.desktop %(new_desktop_debpath)s; \\
+		rmdir --ignore-fail-on-non-empty %(old_desktop_debdir)s; \\
+		sed -i 's|Exec=.*|Exec=%(bin_path)s|' %(new_desktop_debpath)s; \\
+		sed -i 's|Icon=/usr/|Icon=%(opt_root)s/|' %(new_desktop_debpath)s; \\
+	fi""" % {
+        'bin_path': bin_path, 'old_desktop_debdir': old_desktop_debdir,
+        'new_desktop_debdir': new_desktop_debdir, 'project_name': project_name,
+        'opt_root': opt_root, 'new_desktop_debpath': new_desktop_debpath}
 
-    # Now ship the icon as part of the debian packaging
-    icon_name = 'data/media/%s.svg' % project_name
-    if not os.path.exists(icon_name):
-        # Support pre-11.03.1 icon names
-        icon_name = 'data/media/logo.svg'
-        if not os.path.exists(icon_name):
-            icon_name = None
-    if icon_name:
-        contents = ''
-        with open('debian/rules', 'r') as f:
-            contents = f.read()
-        if contents and re.search('dpkg-distaddfile %s.svg' % project_name, contents) is None:
-            contents += """
-override_dh_install::
-	dh_install
-	cp %(icon_name)s ../%(project_name)s.svg
-	dpkg-distaddfile %(project_name)s.svg raw-meta-data -""" % {
-                'project_name': project_name, 'icon_name': icon_name}
-            templatetools.set_file_contents('debian/rules', contents)
+    # Set gettext's bindtextdomain to point to /opt and use the locale
+    # module (gettext's C API) instead of the gettext module (gettext's Python
+    # API), so that translations are loaded from /opt
+    localedir = os.path.join(opt_root, 'share/locale') 
+    install_rules += """
+	grep -RlZ 'import gettext' debian/%(project_name)s/* | xargs -0 -r sed -i 's|\(import\) gettext$$|\\1 locale|'
+	grep -RlZ 'from gettext import gettext as _' debian/%(project_name)s/* | xargs -0 -r sed -i 's|from gettext \(import gettext as _\)|from locale \\1|'
+	grep -RlZ "gettext.textdomain('%(project_name)s')" debian/%(project_name)s/* | xargs -0 -r sed -i "s|gettext\(\.textdomain('%(project_name)s')\)|locale\.bindtextdomain('%(project_name)s', '%(localedir)s')\\nlocale\\1|" """ % {
+        'project_name': project_name, 'localedir': localedir}
 
-            metadata.append('XB-Icon: %s.svg' % project_name)
+    # We install a python_nameconfig.py file that contains a pointer to the
+    # data directory.  But that will be determined by setup.py, so it will be
+    # wrong (python-mkdebian's --prefix command only affects where it moves
+    # files during build, but not what it passes to setup.py)
+    config_debpath = "debian/%(project_name)s%(opt_root)s/%(python_name)s*/%(python_name)sconfig.py" % {
+        'project_name': project_name, 'opt_root': opt_root, 'python_name': python_name}
+    install_rules += """
+	sed -i "s|__%(python_name)s_data_directory__ =.*|__%(python_name)s_data_directory__ = '%(opt_root)s/share/%(project_name)s/'|" %(config_debpath)s""" % {
+        'opt_root': opt_root, 'project_name': project_name,
+        'python_name': python_name, 'config_debpath': config_debpath}
 
-    # Prepend the start-match line, because update_file_content replaces it
-    metadata.insert(0, 'XB-Python-Version: ${python:Versions}')
-    templatetools.update_file_content('debian/control',
-                                      'XB-Python-Version: ${python:Versions}',
-                                      'Depends: ${misc:Depends},',
-                                      '\n'.join(metadata) + '\n')
+    # Adjust XDG_DATA_DIRS so we can find schemas and help files
+    install_rules += """
+	sed -i 's|        sys.path.insert(0, opt_path)|\\0\\n    os.putenv("XDG_DATA_DIRS", "%%s:%%s" %% ("%(opt_root)s/share/", os.getenv("XDG_DATA_DIRS", "")))|' debian/%(project_name)s%(bin_path)s""" % {
+        'opt_root': opt_root, 'project_name': project_name, 'bin_path': bin_path}
+
+    # Compile the glib schema, since it is in a weird place that normal glib
+    # triggers won't catch during package install.
+    schema_debdir = "debian/%(project_name)s%(opt_root)s/share/glib-2.0/schemas" % {
+        'opt_root': opt_root, 'project_name': project_name}
+    install_rules += """
+	if [ -d %(schema_debdir)s ]; then glib-compile-schemas %(schema_debdir)s; fi""" % {
+        'schema_debdir': schema_debdir}
+
+    # Set rules back to include our changes
+    rules = ''
+    with open('debian/rules', 'r') as f:
+        rules = f.read()
+    rules += install_rules
+    templatetools.set_file_contents('debian/rules', rules)
 
 def get_python_mkdebian_version():
     proc = subprocess.Popen(["python-mkdebian", "--version"], stdout=subprocess.PIPE)
@@ -275,7 +311,7 @@ def updatepackaging(changelog=None, no_changelog=False, installopt=False):
         return(return_code)
 
     if installopt:
-        update_metadata()
+        update_rules()
 
     print _("Ubuntu packaging created in debian/")
 
