@@ -173,15 +173,6 @@ if project_version < '0.4':
     if lp_project_name is not None:
         internal.apportutils.update_apport(project_name, lp_project_name, lp_project_name)
 
-    # new dialog file needs helpers.py
-    if not os.path.isfile('%s/helpers.py' % python_name) and os.path.isdir(python_name):
-        source_dir = os.path.join(os.path.dirname(__file__), 'project_root',
-                                  'python')
-        templatetools.file_from_template(source_dir, 
-                                        "helpers.py", 
-                                        python_name, 
-                                        substitutions)
-
 if project_version < '0.4.3':
     ## update dependencies format
     if 'dependencies' in configurationhandler.project_config \
@@ -196,49 +187,6 @@ if project_version < '0.4.4':
     # Use full modelines for all python files
     sedline = "sed -i 's/-\*- coding: utf-8 -\*-/-*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-/'"
     os.system("find . -name '*.py' -exec %s {} \;" % sedline)
-    os.system("%s bin/%s" % (sedline, project_name))
-
-### 11.03 update
-if project_version < '11.03':
-    # support /opt installation
-    content_to_update = '''python_path = []
-if os.path.abspath(__file__).startswith('/opt'):
-    syspath = sys.path[:] # copy to avoid infinite loop in pending objects
-    for path in syspath:
-        opt_path = path.replace('/usr', '/opt/extras.ubuntu.com/%(project_name)s')
-        python_path.insert(0, opt_path)
-        sys.path.insert(0, opt_path)
-if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, '%(python_name)s'))
-    and PROJECT_ROOT_DIRECTORY not in sys.path):
-    python_path.insert(0, PROJECT_ROOT_DIRECTORY)
-    sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
-if python_path:
-    os.putenv('PYTHONPATH', "%%s:%%s" %% (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses''' % {'python_name' : python_name, 'project_name' : project_name}
-
-    # projects based on ~/quickly-projects/template-name have no project_version
-    # so only upgrade if really necessary     
-    with open("./bin/%s" % project_name) as project_bin:
-        contents =  project_bin.read()
-    if not content_to_update in contents:
-        try:
-            templatetools.update_file_content("./bin/%s" % project_name,
-                    'if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY',
-                    "    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses",
-                    content_to_update)
-        except templatetools.CantUpdateFile, e:
-            print _("WARNING: can't update your project to support /opt. This doesn't matter if you don't plan to submit your project to the application review board. Cause is: %s" % e)
-
-### 11.09 update (but only through 11.10; later versions don't want this change)
-if project_version < '11.09' and template_version <= '11.10':
-    filename = './%s_lib/Builder.py' % python_name
-    try:
-        with open(filename) as fileobj:
-            contents = fileobj.read()
-        contents = contents.replace('from gi.repository import GObject', 'import gobject')
-        contents = contents.replace('GObject.', 'gobject.')
-        templatetools.set_file_contents(filename, contents)
-    except IOError:
-        pass
 
 ### EPOCH CHANGE
 ### This is where we upgraded the default projects to GTK3, PyGI, and GSettings.
