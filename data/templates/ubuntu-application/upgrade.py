@@ -250,5 +250,10 @@ porting information and when you have finished porting your code, run
 'quickly upgrade' to get rid of this message.""")
     sys.exit(0)
 
+# Overwrite quickly-owned files as necessary
+if project_version < template_version:
+    templatetools.copy_dirs_from_template(dirs = ['bin', 'python_lib'])
+    templatetools.copy_setup_py_from_template()
+
 templatetools.update_version_in_project_file(template_version, 'ubuntu-application')
 sys.exit(0)
