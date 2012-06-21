@@ -80,13 +80,6 @@ except templatetools.bad_project_name, e:
 
 os.chdir(project_name)
 
-# get origin path
-pathname = templatetools.get_template_path_from_project()
-abs_path_project_root = os.path.join(pathname, 'project_root')
-
-python_name = templatetools.python_name(project_name)
-sentence_name, camel_case_name = templatetools.conventional_names(project_name)
-
 # Calculate the SWF's dimensions
 try:
     width, height = SWF.dimensions(swf)
@@ -98,30 +91,9 @@ except SWF.SWFNoDimensions:
     width, height = (640, 480)
 
 
-substitutions = (("project_name",project_name),
-            ("camel_case_name",camel_case_name),
-            ("python_name",python_name),
-            ("sentence_name",sentence_name),
-            ("swf_height",str(height)),
-            ("swf_width",str(width)),
-            )
-
-
-for root, dirs, files in os.walk(abs_path_project_root):
-    try:
-        relative_dir = root.split('project_root/')[1]
-    except:
-        relative_dir = ""
-    # python dir should be replace by python_name (project "pythonified" name)
-    if relative_dir.startswith('python'):
-        relative_dir = relative_dir.replace('python', python_name)
-
-    for directory in dirs:
-        if directory == 'python':
-            directory = python_name
-        os.mkdir(os.path.join(relative_dir, directory))
-    for filename in files:
-        templatetools.file_from_template(root, filename, relative_dir, substitutions)
+substitutions = [("swf_height",str(height)),
+                 ("swf_width",str(width))]
+templatetools.copy_dirs_from_template(extra_substitutions = substitutions)
 
 # set the mode to executable for executable file 
 exec_file = os.path.join('bin', project_name)

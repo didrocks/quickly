@@ -288,7 +288,7 @@ def file_from_template(template_dir, template_file, target_dir, substitutions=[]
     set_file_contents(target_path, file_contents)
     fin.close()
 
-def copy_dirs_from_template(dirs = ["."]):
+def copy_dirs_from_template(dirs = ["."], extra_substitutions = []):
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
     project_name = configurationhandler.project_config['project']
@@ -298,10 +298,10 @@ def copy_dirs_from_template(dirs = ["."]):
 
     py_name = python_name(project_name)
     sentence_name, camel_case_name = conventional_names(project_name)
-    substitutions = (("project_name",project_name),
+    substitutions = [("project_name",project_name),
                      ("camel_case_name",camel_case_name),
                      ("python_name",py_name),
-                     ("sentence_name",sentence_name),)
+                     ("sentence_name",sentence_name),] + extra_substitutions
 
     for top_dir in dirs:
         full_top_dir = os.path.join(abs_path_project_root, top_dir)
@@ -324,7 +324,7 @@ def copy_dirs_from_template(dirs = ["."]):
                 file_from_template(root, filename, relative_dir,
                                    substitutions, overwrite = True)
 
-def copy_setup_py_from_template():
+def copy_setup_py_from_template(extra_substitutions = []):
     if not configurationhandler.project_config:
         configurationhandler.loadConfig()
     project_name = configurationhandler.project_config['project']
@@ -334,10 +334,10 @@ def copy_setup_py_from_template():
 
     py_name = python_name(project_name)
     sentence_name, camel_case_name = conventional_names(project_name)
-    substitutions = (("project_name",project_name),
+    substitutions = [("project_name",project_name),
                      ("camel_case_name",camel_case_name),
                      ("python_name",py_name),
-                     ("sentence_name",sentence_name),)
+                     ("sentence_name",sentence_name),] + extra_substitutions
 
     template_setup = os.path.join(abs_path_project_root, 'setup.py')
     project_setup = 'setup.py'
