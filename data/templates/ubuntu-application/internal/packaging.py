@@ -252,6 +252,14 @@ override_dh_install:
     rules += install_rules
     templatetools.set_file_contents('debian/rules', rules)
 
+    # Also update debian/control to add a new Build-Depends needed for
+    # glib-compile-schemas
+    templatetools.update_file_content(
+        'debian/control',
+        "Build-Depends: debhelper (>= 8),",
+        " python (>= 2.6.6-3~),",
+        "Build-Depends: debhelper (>= 8), libglib2.0-bin,")
+
 def get_python_mkdebian_version():
     proc = subprocess.Popen(["python-mkdebian", "--version"], stdout=subprocess.PIPE)
     version = proc.communicate()[0]
