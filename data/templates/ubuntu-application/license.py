@@ -98,34 +98,16 @@ def copy_license_to_files(license_content):
     for root, dirs, files in os.walk('./'):
         for name in files:
             if name.endswith('.py') or os.path.join(root, name) == "./bin/" + project_name:
-                skip_until_end_found = False
+                target_file_name = os.path.join(root, name)
                 try:
-                    target_file_name = os.path.join(root, name)
-                    ftarget_file_name = file(target_file_name, 'r')
-                    ftarget_file_name_out = file(ftarget_file_name.name + '.new', 'w')
-                    for line in ftarget_file_name:
-                        # seek if we have to add or Replace a License
-                        if BEGIN_LICENCE_TAG in line:
-                            ftarget_file_name_out.write(line) # write this line, otherwise will be skipped
-                            skip_until_end_found = True
-                            ftarget_file_name_out.write(license_content)
-
-                        if END_LICENCE_TAG in line:
-                            skip_until_end_found = False
-
-                        if not skip_until_end_found:
-                            ftarget_file_name_out.write(line)
-
-                    ftarget_file_name.close()
-                    ftarget_file_name_out.close()
-
-                    if skip_until_end_found: # that means we didn't find the END_LICENCE_TAG, don't copy the file
-                        print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_LICENCE_TAG, ftarget_file_name.name)
-                        os.remove(ftarget_file_name_out.name)
-                    else:
-                        templatetools.apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
-                        os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
-
+                    templatetools.update_file_content(
+                        target_file_name,
+                        BEGIN_LICENCE_TAG,
+                        END_LICENCE_TAG,
+                        '%s\n%s' % (BEGIN_LICENCE_TAG, license_content)
+                        )
+                except templatetools.CantUpdateFile, e:
+                    print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_LICENCE_TAG, target_file_name)
                 except (OSError, IOError), e:
                     msg = _("%s file was not found") % target_file_name
                     raise LicenceError(msg)
