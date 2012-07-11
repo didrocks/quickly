@@ -206,6 +206,7 @@ def licensing(license=None):
     try:
         for line in file(header_file_path, 'r'):
             license_content += "# %s" % line
+        license_content = license_content.decode('UTF-8')
     except (OSError, IOError), e:
         if header_file_path == flicense_name:
             msg = _("%s file was not found. It is compulsory for user defined license") % flicense_name
@@ -254,7 +255,7 @@ def licensing(license=None):
         authors_holders = ""
         # get copyright holders and authors
         for line in file(fauthors_name, 'r'):
-            if "copyright" in line.lower() or "(c)" in line.lower(): 
+            if "copyright" in line.lower() or "(c)" in line.lower() or u"©" in line.decode('UTF-8', 'ignore'):
                 copyright_holders += line.decode('UTF-8')
                 authors_holders += line.decode('UTF-8')
             else:
