@@ -206,7 +206,6 @@ def licensing(license=None):
     try:
         for line in file(header_file_path, 'r'):
             license_content += "# %s" % line
-        license_content = license_content.decode('UTF-8')
     except (OSError, IOError), e:
         if header_file_path == flicense_name:
             msg = _("%s file was not found. It is compulsory for user defined license") % flicense_name
@@ -225,7 +224,7 @@ def licensing(license=None):
             if fields[0] == '__license__' and fields[1].strip() != "'%s'" % license:
                 fin = file(config_file, 'r')
                 fout = file(fin.name + '.new', 'w')
-                for line_input in fin:            
+                for line_input in fin:
                     fields = line_input.split(' = ') # Separate variable from value
                     if fields[0] == '__license__':
                         line_input = "%s = '%s'\n" % (fields[0], license)
@@ -269,7 +268,7 @@ def licensing(license=None):
                                      "name", "authors", authors_holders[:-1],
                                      {})
         quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
-                                     "name", "license", license_content,
+                                     "name", "license", license_content.decode('UTF-8'),
                                      {'translatable': 'yes'})
     copy_license_to_files(license_content)
 
