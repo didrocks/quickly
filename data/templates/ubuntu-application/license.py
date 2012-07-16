@@ -98,34 +98,16 @@ def copy_license_to_files(license_content):
     for root, dirs, files in os.walk('./'):
         for name in files:
             if name.endswith('.py') or os.path.join(root, name) == "./bin/" + project_name:
-                skip_until_end_found = False
+                target_file_name = os.path.join(root, name)
                 try:
-                    target_file_name = os.path.join(root, name)
-                    ftarget_file_name = file(target_file_name, 'r')
-                    ftarget_file_name_out = file(ftarget_file_name.name + '.new', 'w')
-                    for line in ftarget_file_name:
-                        # seek if we have to add or Replace a License
-                        if BEGIN_LICENCE_TAG in line:
-                            ftarget_file_name_out.write(line) # write this line, otherwise will be skipped
-                            skip_until_end_found = True
-                            ftarget_file_name_out.write(license_content)
-
-                        if END_LICENCE_TAG in line:
-                            skip_until_end_found = False
-
-                        if not skip_until_end_found:
-                            ftarget_file_name_out.write(line)
-
-                    ftarget_file_name.close()
-                    ftarget_file_name_out.close()
-
-                    if skip_until_end_found: # that means we didn't find the END_LICENCE_TAG, don't copy the file
-                        print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_LICENCE_TAG, ftarget_file_name.name)
-                        os.remove(ftarget_file_name_out.name)
-                    else:
-                        templatetools.apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
-                        os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
-
+                    templatetools.update_file_content(
+                        target_file_name,
+                        BEGIN_LICENCE_TAG,
+                        END_LICENCE_TAG,
+                        '%s\n%s' % (BEGIN_LICENCE_TAG, license_content)
+                        )
+                except templatetools.CantUpdateFile, e:
+                    print _("WARNING: %s was not found in the file %s. No licence replacement") % (END_LICENCE_TAG, target_file_name)
                 except (OSError, IOError), e:
                     msg = _("%s file was not found") % target_file_name
                     raise LicenceError(msg)
@@ -242,7 +224,7 @@ def licensing(license=None):
             if fields[0] == '__license__' and fields[1].strip() != "'%s'" % license:
                 fin = file(config_file, 'r')
                 fout = file(fin.name + '.new', 'w')
-                for line_input in fin:            
+                for line_input in fin:
                     fields = line_input.split(' = ') # Separate variable from value
                     if fields[0] == '__license__':
                         line_input = "%s = '%s'\n" % (fields[0], license)
@@ -272,7 +254,7 @@ def licensing(license=None):
         authors_holders = ""
         # get copyright holders and authors
         for line in file(fauthors_name, 'r'):
-            if "copyright" in line.lower() or "(c)" in line.lower(): 
+            if "copyright" in line.lower() or "(c)" in line.lower() or u"©" in line.decode('UTF-8', 'ignore'):
                 copyright_holders += line.decode('UTF-8')
                 authors_holders += line.decode('UTF-8')
             else:
@@ -286,7 +268,7 @@ def licensing(license=None):
                                      "name", "authors", authors_holders[:-1],
                                      {})
         quicklyutils.change_xml_elem(about_dialog_file_name, "object/property",
-                                     "name", "license", license_content,
+                                     "name", "license", license_content.decode('UTF-8'),
                                      {'translatable': 'yes'})
     copy_license_to_files(license_content)
 
