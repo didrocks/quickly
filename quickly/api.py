@@ -90,6 +90,14 @@ def get_current_template(path=None):
         return configurationhandler.project_config['template']
     except KeyError:
         return None
+        
+def get_current_name(path=None):
+    '''return project name if we are in a project'''
+    configurationhandler.loadConfig(can_stop=False, config_file_path=path)
+    try:
+        return configurationhandler.project_config['project']
+    except KeyError:
+        return None            
 
 def list_template_for_command(command_name):
     '''from the command_name, return all templates containing it'''
