@@ -34,10 +34,10 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('quickly')
 
-options = ["--ppa", "--extras"]
+options = ["--ppa",]
 
 def usage():
-    templatetools.print_usage(_('quickly release [--extras] [--ppa <ppa | group/ppa>] [release-version] [comments]'))
+    templatetools.print_usage(_('quickly release [--ppa <ppa | group/ppa>] [release-version] [comments]'))
 def help():
     print _("""Posts a release of your project to a PPA on launchpad so that
 users can install the application on their system.
@@ -55,9 +55,6 @@ For example, the third release in July 2010 would be versioned 10.07.2.
 
 You may want to make sure that the description and long description in
 setup.py are up to date before releasing.
-
-Passing --extras will create a package similar to one created by
-the "quickly package --extras" command.  It will install files into /opt.
 
 You can optionally run 'quickly package' and test your package to make
 sure it installs as expected.""")
@@ -79,7 +76,6 @@ templatetools.handle_additional_parameters(sys.argv, help, shell_completion, usa
 launchpad = None
 project = None
 ppa_name = None
-for_extras = False
 i = 0
 args = []
 argv = sys.argv
@@ -94,8 +90,6 @@ while i < len(argv):
             else:
                 cmd = commands.get_command('release', 'ubuntu-application')
                 templatetools.usage_error(_("No PPA provided."), cmd=cmd)
-        elif arg == '--extras':
-            for_extras = True
         else:
             cmd = commands.get_command('release', 'ubuntu-application')
             templatetools.usage_error(_("Unknown option: %s."  % arg), cmd=cmd)
@@ -218,7 +212,7 @@ if bzr_instance.returncode == 0 and result:
 
 changelog = quicklyutils.collect_commit_messages(previous_version)
 # creation/update debian packaging
-return_code = packaging.updatepackaging(changelog, installopt=for_extras)
+return_code = packaging.updatepackaging(changelog)
 if return_code != 0:
     print _("ERROR: can't create or update ubuntu package")
     sys.exit(1)
