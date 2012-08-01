@@ -172,25 +172,9 @@ override_dh_install:
 	dh_install"""
 
     opt_root = "/opt/extras.ubuntu.com/" + project_name
-
-    # Move script to bin/ folder.
-    # There are some complications here.  As of this writing, current versions
-    # of python-mkdebian do not correctly install our executable script in a
-    # bin/ subdirectory.  Instead, they either install it in the opt-project
-    # root or in the opt-project python library folder (depending on whether
-    # the project name is the same as its python name).  So if we find that to
-    # be the case, we move the script accordingly.
     bin_path = "%(opt_root)s/bin/%(project_name)s" % {
         'opt_root': opt_root, 'project_name': project_name}
-    bad_bin_debpath = "debian/%(project_name)s%(opt_root)s/%(project_name)s" % {
-        'opt_root': opt_root, 'project_name': project_name}
     python_name = templatetools.python_name(project_name)
-    if project_name == python_name:
-        bad_bin_debpath += "/" + project_name
-    install_rules += """
-	mkdir -p debian/%(project_name)s%(opt_root)s/bin
-	if [ -x %(bad_bin_debpath)s ]; then mv %(bad_bin_debpath)s debian/%(project_name)s%(opt_root)s/bin; fi""" % {
-        'project_name': project_name, 'opt_root': opt_root, 'bad_bin_debpath': bad_bin_debpath}
 
     # Move desktop file and update it to point to our /opt locations.
     # The file starts, as expected, under /opt.  But the ARB wants and allows
