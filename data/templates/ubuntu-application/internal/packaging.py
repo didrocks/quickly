@@ -188,12 +188,10 @@ override_dh_install:
 		mkdir -p %(new_desktop_debdir)s; \\
 		mv %(old_desktop_debdir)s/%(project_name)s.desktop %(new_desktop_debpath)s; \\
 		rmdir --ignore-fail-on-non-empty %(old_desktop_debdir)s; \\
-		sed -i 's|Exec=[^ ]*|Exec=%(bin_path)s|' %(new_desktop_debpath)s; \\
-		sed -i 's|Icon=/usr/|Icon=%(opt_root)s/|' %(new_desktop_debpath)s; \\
 	fi""" % {
-        'bin_path': bin_path, 'old_desktop_debdir': old_desktop_debdir,
+        'old_desktop_debdir': old_desktop_debdir,
         'new_desktop_debdir': new_desktop_debdir, 'project_name': project_name,
-        'opt_root': opt_root, 'new_desktop_debpath': new_desktop_debpath}
+        'new_desktop_debpath': new_desktop_debpath}
 
     # Set gettext's bindtextdomain to point to /opt and use the locale
     # module (gettext's C API) instead of the gettext module (gettext's Python

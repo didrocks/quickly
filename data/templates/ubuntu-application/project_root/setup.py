@@ -40,15 +40,17 @@ def update_config(values = {}):
     return oldvalues
 
 
-def update_desktop_file(datadir):
+def update_desktop_file(target_pkgdata, target_scripts):
 
     try:
         fin = file('project_name.desktop.in', 'r')
         fout = file(fin.name + '.new', 'w')
 
-        for line in fin:            
+        for line in fin:
             if 'Icon=' in line:
-                line = "Icon=%s\n" % (datadir + 'media/project_name.svg')
+                line = "Icon=%s\n" % (target_pkgdata + 'media/project_name.svg')
+            elif 'Exec=' in line:
+                line = "Exec=%s\n" % (target_scripts + 'project_name')
             fout.write(line)
         fout.flush()
         fout.close()
@@ -61,10 +63,14 @@ def update_desktop_file(datadir):
 
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
-        values = {'__python_name_data_directory__': "'%s'" % (self.prefix + '/share/project_name/'),
+        target_data = '/' + os.path.relpath(self.install_data, self.root) + '/'
+        target_pkgdata = target_data + 'share/project_name/'
+        target_scripts = '/' + os.path.relpath(self.install_scripts, self.root) + '/'
+        update_desktop_file(target_pkgdata, target_scripts)
+
+        values = {'__python_name_data_directory__': "'%s'" % (target_pkgdata),
                   '__version__': "'%s'" % self.distribution.get_version()}
         previous_values = update_config(values)
-        update_desktop_file(self.prefix + '/share/project_name/')
         DistUtilsExtra.auto.install_auto.run(self)
         update_config(previous_values)
 
