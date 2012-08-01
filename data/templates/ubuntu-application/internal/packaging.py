@@ -176,23 +176,6 @@ override_dh_install:
         'opt_root': opt_root, 'project_name': project_name}
     python_name = templatetools.python_name(project_name)
 
-    # Move desktop file and update it to point to our /opt locations.
-    # The file starts, as expected, under /opt.  But the ARB wants and allows
-    # us to install it in /usr, so we do.
-    old_desktop_debdir = "debian/%(project_name)s%(opt_root)s/share/applications" % {
-        'project_name': project_name, 'opt_root': opt_root}
-    new_desktop_debdir = "debian/%(project_name)s/usr/share/applications" % {'project_name': project_name}
-    new_desktop_debpath = new_desktop_debdir + "/extras-" + project_name + ".desktop"
-    install_rules += """
-	if [ -f %(old_desktop_debdir)s/%(project_name)s.desktop ]; then \\
-		mkdir -p %(new_desktop_debdir)s; \\
-		mv %(old_desktop_debdir)s/%(project_name)s.desktop %(new_desktop_debpath)s; \\
-		rmdir --ignore-fail-on-non-empty %(old_desktop_debdir)s; \\
-	fi""" % {
-        'old_desktop_debdir': old_desktop_debdir,
-        'new_desktop_debdir': new_desktop_debdir, 'project_name': project_name,
-        'new_desktop_debpath': new_desktop_debpath}
-
     # Set gettext's bindtextdomain to point to /opt and use the locale
     # module (gettext's C API) instead of the gettext module (gettext's Python
     # API), so that translations are loaded from /opt

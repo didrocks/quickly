@@ -40,10 +40,38 @@ def update_config(values = {}):
     return oldvalues
 
 
-def update_desktop_file(target_pkgdata, target_scripts):
+def move_desktop_file(root, target_data, prefix):
+    # The desktop file is rightly installed into install_data.  But it should
+    # always really be installed into prefix, because while we can install
+    # normal data files anywhere we want, the desktop file needs to exist in
+    # the main system to be found.  Only actually useful for /opt installs.
+
+    old_desktop_path = os.path.normpath(root + target_data +
+                                        '/share/applications')
+    old_desktop_file = old_desktop_path + '/project_name.desktop'
+    desktop_path = os.path.normpath(root + prefix + '/share/applications')
+    desktop_file = desktop_path + '/project_name.desktop'
+
+    if not os.path.exists(old_desktop_file):
+        print ("ERROR: Can't find", old_desktop_file)
+        sys.exit(1)
+    elif target_data != prefix + '/':
+        # This is an /opt install, so rename desktop file to use extras-
+        desktop_file = desktop_path + '/extras-project_name.desktop'
+        try:
+            os.makedirs(desktop_path)
+            os.rename(old_desktop_file, desktop_file)
+            os.rmdir(old_desktop_path)
+        except OSError as e:
+            print ("ERROR: Can't rename", old_desktop_file, ":", e)
+            sys.exit(1)
+
+    return desktop_file
+
+def update_desktop_file(filepath, target_pkgdata, target_scripts):
 
     try:
-        fin = file('project_name.desktop.in', 'r')
+        fin = file(filepath, 'r')
         fout = file(fin.name + '.new', 'w')
 
         for line in fin:
@@ -57,7 +85,7 @@ def update_desktop_file(target_pkgdata, target_scripts):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find project_name.desktop.in")
+        print ("ERROR: Can't find", filepath)
         sys.exit(1)
 
 
@@ -66,7 +94,6 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
         target_data = '/' + os.path.relpath(self.install_data, self.root) + '/'
         target_pkgdata = target_data + 'share/project_name/'
         target_scripts = '/' + os.path.relpath(self.install_scripts, self.root) + '/'
-        update_desktop_file(target_pkgdata, target_scripts)
 
         values = {'__python_name_data_directory__': "'%s'" % (target_pkgdata),
                   '__version__': "'%s'" % self.distribution.get_version()}
@@ -74,6 +101,8 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
         DistUtilsExtra.auto.install_auto.run(self)
         update_config(previous_values)
 
+        desktop_file = move_desktop_file(self.root, target_data, self.prefix)
+        update_desktop_file(desktop_file, target_pkgdata, target_scripts)
 
         
 ##################################################################################
