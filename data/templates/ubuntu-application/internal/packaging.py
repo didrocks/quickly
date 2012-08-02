@@ -172,20 +172,6 @@ override_dh_install:
 	dh_install"""
 
     opt_root = "/opt/extras.ubuntu.com/" + project_name
-    bin_path = "%(opt_root)s/bin/%(project_name)s" % {
-        'opt_root': opt_root, 'project_name': project_name}
-    python_name = templatetools.python_name(project_name)
-
-    # We install a python_nameconfig.py file that contains a pointer to the
-    # data directory.  But that will be determined by setup.py, so it will be
-    # wrong (python-mkdebian's --prefix command only affects where it moves
-    # files during build, but not what it passes to setup.py)
-    config_debpath = "debian/%(project_name)s%(opt_root)s/%(python_name)s*/%(python_name)sconfig.py" % {
-        'project_name': project_name, 'opt_root': opt_root, 'python_name': python_name}
-    install_rules += """
-	sed -i "s|__%(python_name)s_data_directory__ =.*|__%(python_name)s_data_directory__ = '%(opt_root)s/share/%(project_name)s/'|" %(config_debpath)s""" % {
-        'opt_root': opt_root, 'project_name': project_name,
-        'python_name': python_name, 'config_debpath': config_debpath}
 
     # Compile the glib schema, since it is in a weird place that normal glib
     # triggers won't catch during package install.
