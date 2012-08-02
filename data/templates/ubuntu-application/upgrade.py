@@ -25,6 +25,7 @@ import internal.apportutils
 
 from internal import quicklyutils
 from quickly import commands, configurationhandler, templatetools
+import license
 
 import gettext
 from gettext import gettext as _
@@ -113,9 +114,9 @@ if project_version < '0.4':
         pass
     # update config file to add __license__
     try:
-        license = quicklyutils.get_setup_value('license')
+        setup_license = quicklyutils.get_setup_value('license')
     except quicklyutils.cant_deal_with_setup_value:
-        license = ''
+        setup_license = ''
     try:
         skip = 0
         config_file = '%s/%sconfig.py' % (python_name, python_name)
@@ -134,7 +135,7 @@ if project_version < '0.4':
                 continue
             if fields[0] == '__%s_data_directory__' % python_name:
                 fout.write(line)
-                line = "__license__ = '%s'\n" % license
+                line = "__license__ = '%s'\n" % setup_license
             if "get_data_file(*path_segments):" in line:
                 data_file_function_found = True
                 skip = 9
@@ -212,7 +213,6 @@ bzr diff""" % python_name)
     templatetools.copy_setup_py_from_template()
     try:
         # License new files as needed
-        import license
         license.licensing()
     except license.LicenceError as e:
         pass  # Don't worry about it, user may not have set it up yet

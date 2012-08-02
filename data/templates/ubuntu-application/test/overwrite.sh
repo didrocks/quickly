@@ -56,6 +56,10 @@ cp -a setup.py setup.py.test-bak
 
 rm test_project_lib/Builder.py
 
+## We also make sure that we correctly keep the wrapper executable
+
+rm bin/test-project
+
 quickly upgrade 11.04
 # Note: This is the first time you have run Quickly since it has been updated.
 # Quickly will now upgrade its files (bin/*, test_project_lib/*, and setup.py).
@@ -67,6 +71,9 @@ quickly upgrade 11.04
 
 ls test_project_lib/Builder.py
 # test_project_lib/Builder.py
+
+ls -F bin/test-project
+# bin/test-project*
 
 ## A run to see if we change anything when version hasn't changed
 
