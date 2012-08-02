@@ -206,7 +206,8 @@ Quickly will now upgrade its files (bin/*, %s_lib/*, and setup.py).
 But first it will save your project.  View Quickly's changes by running:
 bzr diff""" % python_name)
     subprocess.call(["bzr", "add", "-q"])
-    subprocess.call(["bzr", "commit", "-q", "-m", "Pre-upgrade checkpoint"])
+    subprocess.call(["bzr", "commit", "--unchanged", "-q",
+                     "-m", "Pre-upgrade checkpoint"])
     templatetools.copy_dirs_from_template(dirs = ['bin', 'python_lib'])
     templatetools.copy_setup_py_from_template()
     try:
