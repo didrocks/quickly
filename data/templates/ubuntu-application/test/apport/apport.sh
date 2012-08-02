@@ -330,8 +330,20 @@ grep gtk-about data/ui/TestProjectWindow.ui
 
 bzr commit -m "Committing after removing all lpi integration"
 # Committing to: /tmp/test-project/
+# missing apport
+# deleted apport
+# missing etc
+# deleted etc
+# missing apport/source_test-project.py
+# deleted apport/source_test-project.py
 # modified data/ui/TestProjectWindow.ui
-# Committed revision 6.
+# missing etc/apport
+# deleted etc/apport
+# missing etc/apport/crashdb.conf.d
+# deleted etc/apport/crashdb.conf.d
+# missing etc/apport/crashdb.conf.d/test-project-crashdb.conf
+# deleted etc/apport/crashdb.conf.d/test-project-crashdb.conf
+# Committed revision 9.
 
 quickly upgrade 0.3
 # Creating new apport crashdb configuration
@@ -341,10 +353,9 @@ quickly upgrade 0.3
 # But first it will save your project.  View Quickly's changes by running:
 # bzr diff
 
-bzr status
-# unknown:
-#   apport/
-#   etc/
+ls -dF apport etc
+# apport/
+# etc/
 
 rm ./data/ui/TestProjectWindow.ui
 
