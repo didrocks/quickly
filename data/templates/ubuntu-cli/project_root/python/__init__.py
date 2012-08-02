@@ -1,9 +1,7 @@
 import logging
 import optparse
 
-import gettext
-from gettext import gettext as _
-gettext.textdomain('project_name')
+from locale import gettext as _
 
 from python_name import python_nameconfig
 
