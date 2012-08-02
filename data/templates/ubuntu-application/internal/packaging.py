@@ -159,35 +159,7 @@ def _exec_and_log_errors(command, ask_on_warn_or_error=False):
         return(_continue_if_errors(err_output, warn_output, proc.returncode,
                                      ask_on_warn_or_error))
 
-
-# TODO: Vastly simplify this function.  This was implemented post-12.04 to
-# make it easier to get an SRU for these fixes.  But the only things here
-# that can't be done in-code (either wrapper code or setup.py) is compiling
-# the schemas and moving the desktop file.
 def update_rules():
-    project_name = configurationhandler.project_config['project']
-
-    install_rules = """
-override_dh_install:
-	dh_install"""
-
-    opt_root = "/opt/extras.ubuntu.com/" + project_name
-
-    # Compile the glib schema, since it is in a weird place that normal glib
-    # triggers won't catch during package install.
-    schema_debdir = "debian/%(project_name)s%(opt_root)s/share/glib-2.0/schemas" % {
-        'opt_root': opt_root, 'project_name': project_name}
-    install_rules += """
-	if [ -d %(schema_debdir)s ]; then glib-compile-schemas %(schema_debdir)s; fi""" % {
-        'schema_debdir': schema_debdir}
-
-    # Set rules back to include our changes
-    rules = ''
-    with open('debian/rules', 'r') as f:
-        rules = f.read()
-    rules += install_rules
-    templatetools.set_file_contents('debian/rules', rules)
-
     # Also update debian/control to add a new Build-Depends needed for
     # glib-compile-schemas
     templatetools.update_file_content(

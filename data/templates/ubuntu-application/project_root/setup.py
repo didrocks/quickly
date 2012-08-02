@@ -88,6 +88,14 @@ def update_desktop_file(filepath, target_pkgdata, target_scripts):
         print ("ERROR: Can't find", filepath)
         sys.exit(1)
 
+def compile_schemas(root, target_data):
+    if target_data == '/usr/':
+        return  # /usr paths don't need this, they will be handled by dpkg
+    schemadir = os.path.normpath(root + target_data + 'share/glib-2.0/schemas')
+    if (os.path.isdir(schemadir) and
+            os.path.isfile('/usr/bin/glib-compile-schemas')):
+        os.system('/usr/bin/glib-compile-schemas "%s"' % schemadir)
+
 
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
@@ -103,6 +111,7 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 
         desktop_file = move_desktop_file(self.root, target_data, self.prefix)
         update_desktop_file(desktop_file, target_pkgdata, target_scripts)
+        compile_schemas(self.root, target_data)
 
         
 ##################################################################################
