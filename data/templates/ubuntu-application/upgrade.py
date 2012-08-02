@@ -208,6 +208,12 @@ bzr diff""" % python_name)
     subprocess.call(["bzr", "commit", "-q", "-m", "Pre-upgrade checkpoint"])
     templatetools.copy_dirs_from_template(dirs = ['bin', 'python_lib'])
     templatetools.copy_setup_py_from_template()
+    try:
+        # License new files as needed
+        import license
+        license.licensing()
+    except license.LicenceError as e:
+        pass  # Don't worry about it, user may not have set it up yet
     subprocess.call(["bzr", "add", "-q"])  # bzr diff will show new files
 
 templatetools.update_version_in_project_file(template_version, 'ubuntu-application')
