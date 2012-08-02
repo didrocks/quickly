@@ -28,19 +28,6 @@ from quickly import templatetools
 
 from lxml import etree
 
-LPI_init_menu_block = """
-        # Optional Launchpad integration
-        # This shouldn't crash if not found as it is simply used for bug reporting.
-        # See https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding
-        # for more information about Launchpad integration.
-        try:
-            import LaunchpadIntegration
-            LaunchpadIntegration.add_items(self.ui.%(help_menu)s, 1, True, True)
-            LaunchpadIntegration.set_sourcepackagename('%(project_name)s')
-        except:
-            pass
-"""
-
 def update_apport(project_name, old_lp_project, new_lp_project):
     if not new_lp_project:
         return
@@ -87,50 +74,6 @@ def update_apport(project_name, old_lp_project, new_lp_project):
             if not os.path.isdir(relative_apport_dir):
                 os.makedirs(relative_apport_dir)
             templatetools.file_from_template(template_hook_dir, "source_project_name.py", relative_apport_dir, subst_new)
-
-def insert_lpi_if_required(project_name):
-    camel_case_project_name = quickly.templatetools.get_camel_case_name(project_name)
-    existing_base_filename = os.path.join(quickly.templatetools.python_name(project_name) + '_lib',
-                                          "Window.py")
-    existing_ui_filename = os.path.join("data", "ui", "%sWindow.ui"%camel_case_project_name)
-    
-    if os.path.isfile(existing_base_filename) and os.path.isfile(existing_ui_filename):
-        tree = etree.parse(existing_ui_filename)
-        help_menu = find_about_menu(tree)
-        
-        if help_menu:
-            existing_base_file = file(existing_base_filename, "r")
-            existing_lines = existing_base_file.readlines()
-            existing_base_file.close()
-            new_lines = detect_or_insert_lpi(existing_lines, project_name, help_menu)
-            if new_lines:
-                print _("Adding launchpad integration to existing application")
-                new_content = ''.join(new_lines)
-                templatetools.set_file_contents(existing_base_filename, new_content)
-            return True
-    return False
-        
-def detect_or_insert_lpi(existing_lines, project_name, help_menu):
-    integration_present = False
-    init_insert_line = None
-    current_line = 0
-    for line in existing_lines:
-        if "import LaunchpadIntegration" in line:
-            integration_present = True
-            break
-        if not init_insert_line and "self.builder.connect_signals(self)" in line:
-            init_insert_line = current_line
-        current_line += 1
-    
-    if not integration_present and init_insert_line:
-        init_menu_block = LPI_init_menu_block%{"project_name":project_name, "help_menu":help_menu}
-        existing_lines = existing_lines[:init_insert_line+1] + \
-            ["%s\n"%l for l in init_menu_block.splitlines()] + \
-            existing_lines[init_insert_line+1:]
-        return existing_lines
-    else:
-        return None
-
 
 def find_about_menu(tree):
     """Finds the current help menu in the passed xml document by looking for the gtk-about element"""

@@ -1,3 +1,14 @@
+Quickly 12.08
+------------------------------------
+
+ + ubuntu-application:
+   - Build-Depend on libglib2.0-bin when building for extras
+   - Support Exec desktop keys with arguments to the executable for extras
+   - Support © symbol in license command (Vsevolod Velichko)
+   - Fix appindicator support (Voidcode)
+ + common:
+   - Add get_current_name() to quickly API (Denis Kovalskiy)
+
 Quickly 12.05
 ------------------------------------
 

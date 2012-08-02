@@ -94,6 +94,13 @@ def apply_file_rights(src_file_name, dest_file_name):
     os.chmod(dest_file_name, mode)
 
 def set_file_contents(filename, contents):
+    # First, don't write anything if we don't need to
+    if os.path.exists(filename):
+        with file(filename, 'r') as ftest:
+            if ftest.read() == contents:
+                return
+
+    # OK, we have novel content, let's write it out
     new_filename = filename + '.new'
     fout = file(new_filename, 'w')
     fout.write(contents)
@@ -111,33 +118,29 @@ def update_file_content(filename, start_marker, end_marker, replacing_content):
     try:
         filename = os.path.abspath(filename)
         ftarget_file_name = file(filename, 'r')
-        ftarget_file_name_out = file(ftarget_file_name.name + '.new', 'w')
+        new_content = ''
         for line in ftarget_file_name:
             # seek if we have to add something
             if start_marker in line:
                 skip_until_end_found = True
                 marker_found = True
-                ftarget_file_name_out.write(replacing_content)
+                new_content = new_content + replacing_content
 
             if end_marker in line:
                 skip_until_end_found = False
 
             if not skip_until_end_found:
-                ftarget_file_name_out.write(line)
+                new_content = new_content + line
 
         ftarget_file_name.close()
-        ftarget_file_name_out.close()
 
         if skip_until_end_found: # that means we didn't find the end_tag, don't copy the file
-            os.remove(ftarget_file_name_out.name)
             raise CantUpdateFile(_("%s was not found in the file %s.") % (end_marker, ftarget_file_name.name))
 
         if not marker_found:
-             os.remove(ftarget_file_name_out.name)
              raise CantUpdateFile(_("%s was not found in the file %s.") % (start_marker, ftarget_file_name.name))
 
-        apply_file_rights(ftarget_file_name.name, ftarget_file_name_out.name)
-        os.rename(ftarget_file_name_out.name, ftarget_file_name.name)
+        set_file_contents(ftarget_file_name.name, new_content)
 
     except (OSError, IOError), e:
         msg = _("%s file was not found or can't update it") % ftarget_file_name
@@ -261,7 +264,7 @@ def conventional_names(name):
     camel_case_name = get_camel_case_name(name)
     return sentence_name, camel_case_name
 
-def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True):
+def file_from_template(template_dir, template_file, target_dir, substitutions=[], rename = True, overwrite = False):
 
     if not os.path.isfile(os.path.join(template_dir, template_file)):
         return
@@ -278,9 +281,85 @@ def file_from_template(template_dir, template_file, target_dir, substitutions=[]
         file_contents = file_contents.replace(pattern,sub)
 
     target_path = os.path.join(target_dir, target_file)
-    if os.path.exists(target_path):
+    if os.path.exists(target_path) and not overwrite:
         print _("Failed to add file to project\n cannot add: %s - this file already exists." % target_path)
-        sys.exit(4)        
+        sys.exit(4)
 
     set_file_contents(target_path, file_contents)
     fin.close()
+
+def copy_dirs_from_template(dirs = ["."], extra_substitutions = []):
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    project_name = configurationhandler.project_config['project']
+
+    pathname = get_template_path_from_project()
+    abs_path_project_root = os.path.join(pathname, 'project_root')
+
+    py_name = python_name(project_name)
+    sentence_name, camel_case_name = conventional_names(project_name)
+    substitutions = [("project_name",project_name),
+                     ("camel_case_name",camel_case_name),
+                     ("python_name",py_name),
+                     ("sentence_name",sentence_name),] + extra_substitutions
+
+    for top_dir in dirs:
+        full_top_dir = os.path.join(abs_path_project_root, top_dir)
+        for root, subdirs, files in os.walk(full_top_dir):
+            try:
+                relative_dir = root.split('project_root/')[1]
+            except:
+                relative_dir = ""
+            # python dir should be replace by py_name (project "pythonified"
+            # name)
+            if os.path.basename(relative_dir).startswith('python'):
+                relative_dir = relative_dir.replace('python', py_name)
+
+            for directory in subdirs:
+                if os.path.basename(directory).startswith('python'):
+                    directory = directory.replace('python', py_name)
+                if not os.path.exists(os.path.join(relative_dir, directory)):
+                    os.mkdir(os.path.join(relative_dir, directory))
+            for filename in files:
+                file_from_template(root, filename, relative_dir,
+                                   substitutions, overwrite = True)
+
+def copy_setup_py_from_template(extra_substitutions = []):
+    if not configurationhandler.project_config:
+        configurationhandler.loadConfig()
+    project_name = configurationhandler.project_config['project']
+
+    pathname = get_template_path_from_project()
+    abs_path_project_root = os.path.join(pathname, 'project_root')
+
+    py_name = python_name(project_name)
+    sentence_name, camel_case_name = conventional_names(project_name)
+    substitutions = [("project_name",project_name),
+                     ("camel_case_name",camel_case_name),
+                     ("python_name",py_name),
+                     ("sentence_name",sentence_name),] + extra_substitutions
+
+    template_setup = os.path.join(abs_path_project_root, 'setup.py')
+    project_setup = 'setup.py'
+
+    # Grab quickly-owned bits in our original and copy them to user's version
+    start_marker = "###################### DO NOT TOUCH THIS (HEAD TO THE SECOND PART) ######################"
+    end_marker = "##################################################################################"
+    try:
+        with file(template_setup, 'r') as template_fd:
+            template_contents = ''
+            for line in template_fd.readlines():
+                if line == end_marker + '\n':
+                    break
+                elif template_contents:
+                    template_contents = template_contents + line
+                elif line == start_marker + '\n':
+                    template_contents = line
+        for s in substitutions:
+            pattern, sub = s
+            template_contents = template_contents.replace(pattern, sub)
+        update_file_content(project_setup, start_marker, end_marker, template_contents)
+    except Exception as e:
+        print(_("Failed to update setup.py:\n%s" % e))
+        sys.exit(4)
+
