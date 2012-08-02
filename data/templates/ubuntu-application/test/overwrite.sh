@@ -33,6 +33,9 @@ grep -R "#test-blarg" .
 # ./test_project/TestProjectWindow.py:#test-blarg
 
 quickly upgrade 11.04
+# Note: Quickly is upgrading its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
 
 (test "$(ls --full-time test_project_lib/helpers.py)" = "$(ls --full-time test_project_lib/helpers.py.test-bak | sed 's/\.test-bak//')" && echo "Same")
 # Same
@@ -53,6 +56,9 @@ cp -a setup.py setup.py.test-bak
 rm test_project_lib/Builder.py
 
 quickly upgrade 11.04
+# Note: Quickly is upgrading its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
 
 (test "$(ls --full-time setup.py)" = "$(ls --full-time setup.py.test-bak | sed 's/\.test-bak//')" && echo "Same")
 # Same
