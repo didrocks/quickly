@@ -204,7 +204,7 @@ override_dh_install:
 		mkdir -p %(new_desktop_debdir)s; \\
 		mv %(old_desktop_debdir)s/%(project_name)s.desktop %(new_desktop_debpath)s; \\
 		rmdir --ignore-fail-on-non-empty %(old_desktop_debdir)s; \\
-		sed -i 's|Exec=.*|Exec=%(bin_path)s|' %(new_desktop_debpath)s; \\
+		sed -i 's|Exec=[^ ]*|Exec=%(bin_path)s|' %(new_desktop_debpath)s; \\
 		sed -i 's|Icon=/usr/|Icon=%(opt_root)s/|' %(new_desktop_debpath)s; \\
 	fi""" % {
         'bin_path': bin_path, 'old_desktop_debdir': old_desktop_debdir,
@@ -251,6 +251,14 @@ override_dh_install:
         rules = f.read()
     rules += install_rules
     templatetools.set_file_contents('debian/rules', rules)
+
+    # Also update debian/control to add a new Build-Depends needed for
+    # glib-compile-schemas
+    templatetools.update_file_content(
+        'debian/control',
+        "Build-Depends: debhelper (>= 8),",
+        " python (>= 2.6.6-3~),",
+        "Build-Depends: debhelper (>= 8), libglib2.0-bin,")
 
 def get_python_mkdebian_version():
     proc = subprocess.Popen(["python-mkdebian", "--version"], stdout=subprocess.PIPE)

@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # This file is in the public domain
@@ -17,7 +16,7 @@ gettext.textdomain('project_name')
 
 class Indicator:
     def __init__(self, window):
-        self.indicator = AppIndicator3.Indicator('project_name', '', AppIndicator3.IndicatorCategory.APPLICATION_STATUS)
+        self.indicator = AppIndicator3.Indicator.new('projectname', '', AppIndicator3.IndicatorCategory.APPLICATION_STATUS)
         self.indicator.set_status(AppIndicator3.IndicatorStatus.ACTIVE)
 
         icon_uri = get_media_file("project_name.svg")
