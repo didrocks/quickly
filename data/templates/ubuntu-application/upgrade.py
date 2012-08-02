@@ -201,7 +201,8 @@ porting information and when you have finished porting your code, run
 # Overwrite quickly-owned files as necessary
 if project_version < template_version:
     print _(
-"""Note: Quickly is upgrading its files (bin/*, %s_lib/*, and setup.py).
+"""Note: This is the first time you have run Quickly since it has been updated.
+Quickly will now upgrade its files (bin/*, %s_lib/*, and setup.py).
 But first it will save your project.  View Quickly's changes by running:
 bzr diff""" % python_name)
     subprocess.call(["bzr", "add", "-q"])
