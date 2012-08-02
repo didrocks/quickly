@@ -26,6 +26,10 @@ grep -R "#test-blarg" .
 # ./test_project/__init__.py:#test-blarg
 
 quickly upgrade 11.04
+# Note: This is the first time you have run Quickly since it has been updated.
+# Quickly will now upgrade its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
 
 grep -R "#test-blarg" .
 # ./setup.py:#test-blarg

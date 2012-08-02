@@ -286,6 +286,7 @@ def file_from_template(template_dir, template_file, target_dir, substitutions=[]
         sys.exit(4)
 
     set_file_contents(target_path, file_contents)
+    apply_file_rights(os.path.join(template_dir, template_file), target_path)
     fin.close()
 
 def copy_dirs_from_template(dirs = ["."], extra_substitutions = []):

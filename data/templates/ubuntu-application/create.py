@@ -66,13 +66,6 @@ os.chdir(project_name)
 
 templatetools.copy_dirs_from_template()
 
-# set the mode to executable for executable file 
-exec_file = os.path.join('bin', project_name)
-try:
-    os.chmod(exec_file, 0755)
-except:
-    pass
-
 # add it to revision control
 print _("Creating bzr repository and committing")
 bzr_instance = subprocess.Popen(["bzr", "init"], stdout=subprocess.PIPE)
@@ -94,6 +87,7 @@ if os.path.exists(schemapath):
         env['XDG_DATA_DIRS'] = datadir
 
 # run the new application if X display
+exec_file = os.path.join('bin', project_name)
 if templatetools.is_X_display() and os.path.isfile(exec_file):
     print _("Launching your newly created project!")
     subprocess.call(['./' + project_name], cwd='bin/', env=env)

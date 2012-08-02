@@ -34,6 +34,10 @@ grep '11\.10' .quickly
 # version = 11.10
 
 quickly upgrade
+# Note: This is the first time you have run Quickly since it has been updated.
+# Quickly will now upgrade its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
 
 grep '11\.10' .quickly
 
