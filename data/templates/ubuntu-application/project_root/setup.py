@@ -78,7 +78,11 @@ def update_desktop_file(filepath, target_pkgdata, target_scripts):
             if 'Icon=' in line:
                 line = "Icon=%s\n" % (target_pkgdata + 'media/project_name.svg')
             elif 'Exec=' in line:
-                line = "Exec=%s\n" % (target_scripts + 'project_name')
+                cmd = line.split("=")[1].split(None, 1)
+                line = "Exec=%s" % (target_scripts + 'project_name')
+                if len(cmd) > 1:
+                    line += " %s" % cmd[1].strip()  # Add script arguments back
+                line += "\n"
             fout.write(line)
         fout.flush()
         fout.close()

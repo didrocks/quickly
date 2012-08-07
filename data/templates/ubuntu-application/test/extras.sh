@@ -15,6 +15,8 @@ cd test-project
 
 quickly license GPL-3
 
+sed -i 's/Exec=.*/Exec=test-project arg1 arg2/' test-project.desktop.in
+
 quickly package --extras | sed 's/^\.\+//'
 # Ubuntu packaging created in debian/
 # Ubuntu package has been successfully created in ../test-project_0.1_all.deb
@@ -82,7 +84,7 @@ cat ./usr/share/applications/extras-test-project.desktop
 # Name=Test Project
 # Comment=TestProject application
 # Categories=GNOME;Utility;
-# Exec=/opt/extras.ubuntu.com/test-project/bin/test-project
+# Exec=/opt/extras.ubuntu.com/test-project/bin/test-project arg1 arg2
 # Icon=/opt/extras.ubuntu.com/test-project/share/test-project/media/test-project.svg
 # Terminal=false
 # Type=Application
