@@ -33,14 +33,15 @@ from quickly import launchpadaccess
 
 launchpad = None
 ppa_name = None
+for_extras = False
 i = 0
 args = []
 argv = sys.argv
 
-options = ["--ppa",]
+options = ["--ppa", "--extras",]
 
 def usage():
-    templatetools.print_usage(_('quickly share [--ppa <ppa | group/ppa>]'))
+    templatetools.print_usage(_('quickly share [--extras] [--ppa <ppa | group/ppa>]'))
 def help():
     print _("""Updates your PPA with the the latest saved project changes.
 
@@ -56,6 +57,9 @@ be incremented each time you share.
 For example, if you most recently released 10.07.2 and you have shared
 the package three times since then, another run of 'quickly share' will
 use a new version of 10.07.2-public4.
+
+Passing --extras will create a package similar to one created by
+the "quickly package --extras" command.  It will install files into /opt.
 
 You can optionally run 'quickly package' and test your package to make
 sure it installs as expected.""")
@@ -84,6 +88,8 @@ while i < len(argv):
             else:
                 cmd = commands.get_command('share', 'ubuntu-application')
                 templatetools.usage_error(_("No PPA provided."), cmd=cmd)
+        elif arg == '--extras':
+            for_extras = True
         else:
             cmd = commands.get_command('share', 'ubuntu-application')
             templatetools.usage_error(_("Unknown option: %s."  % arg), cmd=cmd)
@@ -148,7 +154,7 @@ except (packaging.invalid_versionning_scheme,
     sys.exit(1)
 
 # creation/update debian packaging
-return_code = packaging.updatepackaging()
+return_code = packaging.updatepackaging(installopt=for_extras)
 if return_code != 0:
     print _("ERROR: can't create or update ubuntu package")
     sys.exit(1)
