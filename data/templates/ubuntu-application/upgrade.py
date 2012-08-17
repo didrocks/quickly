@@ -199,7 +199,6 @@ porting information and when you have finished porting your code, run
 'quickly upgrade' to get rid of this message.""")
     sys.exit(0)
 
-print (project_version, template_version)
 if project_version < '12.08.1':
     sedline = "sed -i '" + \
               "s|^import gettext$|import locale|g;" + \
@@ -208,7 +207,6 @@ if project_version < '12.08.1':
               "'"
     # This find only hits the main module, and that is fine, other files will
     # be updated by normal overwriting mechanism below.
-    print("running", "find %s -name '*.py' -exec %s {} \;" % (python_name, sedline))
     os.system("find %s -name '*.py' -exec %s {} \;" % (python_name, sedline))
 
 # Overwrite quickly-owned files as necessary

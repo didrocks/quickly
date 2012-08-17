@@ -98,4 +98,4 @@ grep -Rh "locale.bindtextdomain" ./opt/extras.ubuntu.com/test-project/bin/test-p
 grep -Rh "^import gettext" ./opt/extras.ubuntu.com/test-project
 
 grep -Rh "XDG_DATA_DIRS" ./opt/extras.ubuntu.com/test-project/bin/test-project
-#     os.putenv("XDG_DATA_DIRS", "%s:%s" % ("/opt/extras.ubuntu.com/test-project/share/", os.getenv("XDG_DATA_DIRS", "")))
+#     os.putenv("XDG_DATA_DIRS", "%s:%s" % ("/opt/extras.ubuntu.com/test-project/share/", os.getenv("XDG_DATA_DIRS", "/usr/local/share/:/usr/share/")))
