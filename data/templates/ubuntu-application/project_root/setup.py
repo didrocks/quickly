@@ -16,12 +16,13 @@ except ImportError:
     sys.exit(1)
 assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >= 2.18'
 
-def update_config(values = {}):
+def update_config(libdir, values = {}):
 
+    filename = os.path.join(libdir, 'python_name_lib/python_nameconfig.py')
     oldvalues = {}
     try:
-        fin = file('python_name_lib/python_nameconfig.py', 'r')
-        fout = file(fin.name + '.new', 'w')
+        fin = file(filename, 'r')
+        fout = file(filename + '.new', 'w')
 
         for line in fin:
             fields = line.split(' = ') # Separate variable from value
@@ -35,7 +36,7 @@ def update_config(values = {}):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find python_name_lib/python_nameconfig.py")
+        print ("ERROR: Can't find %s" % filename)
         sys.exit(1)
     return oldvalues
 
@@ -68,11 +69,11 @@ def move_desktop_file(root, target_data, prefix):
 
     return desktop_file
 
-def update_desktop_file(filepath, target_pkgdata, target_scripts):
+def update_desktop_file(filename, target_pkgdata, target_scripts):
 
     try:
-        fin = file(filepath, 'r')
-        fout = file(fin.name + '.new', 'w')
+        fin = file(filename, 'r')
+        fout = file(filename + '.new', 'w')
 
         for line in fin:
             if 'Icon=' in line:
@@ -89,7 +90,7 @@ def update_desktop_file(filepath, target_pkgdata, target_scripts):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find", filepath)
+        print ("ERROR: Can't find %s" % filename)
         sys.exit(1)
 
 def compile_schemas(root, target_data):
@@ -103,15 +104,15 @@ def compile_schemas(root, target_data):
 
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
+        DistUtilsExtra.auto.install_auto.run(self)
+
         target_data = '/' + os.path.relpath(self.install_data, self.root) + '/'
         target_pkgdata = target_data + 'share/project_name/'
         target_scripts = '/' + os.path.relpath(self.install_scripts, self.root) + '/'
 
         values = {'__python_name_data_directory__': "'%s'" % (target_pkgdata),
                   '__version__': "'%s'" % self.distribution.get_version()}
-        previous_values = update_config(values)
-        DistUtilsExtra.auto.install_auto.run(self)
-        update_config(previous_values)
+        update_config(self.install_lib, values)
 
         desktop_file = move_desktop_file(self.root, target_data, self.prefix)
         update_desktop_file(desktop_file, target_pkgdata, target_scripts)
