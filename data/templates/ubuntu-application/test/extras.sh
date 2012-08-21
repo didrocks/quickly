@@ -15,6 +15,8 @@ cd test-project
 
 quickly license GPL-3
 
+sed -i 's/Exec=.*/Exec=test-project arg1 arg2/' test-project.desktop.in
+
 quickly package --extras | sed 's/^\.\+//'
 # Ubuntu packaging created in debian/
 # Ubuntu package has been successfully created in ../test-project_0.1_all.deb
@@ -82,7 +84,7 @@ cat ./usr/share/applications/extras-test-project.desktop
 # Name=Test Project
 # Comment=TestProject application
 # Categories=GNOME;Utility;
-# Exec=/opt/extras.ubuntu.com/test-project/bin/test-project
+# Exec=/opt/extras.ubuntu.com/test-project/bin/test-project arg1 arg2
 # Icon=/opt/extras.ubuntu.com/test-project/share/test-project/media/test-project.svg
 # Terminal=false
 # Type=Application
@@ -91,9 +93,9 @@ grep -Rh "__test_project_data_directory__ = " ./opt/extras.ubuntu.com/test-proje
 # __test_project_data_directory__ = '/opt/extras.ubuntu.com/test-project/share/test-project/'
 
 grep -Rh "locale.bindtextdomain" ./opt/extras.ubuntu.com/test-project/bin/test-project
-# locale.bindtextdomain('test-project', '/opt/extras.ubuntu.com/test-project/share/locale')
+#     locale.bindtextdomain('test-project', '/opt/extras.ubuntu.com/test-project/share/locale')
 
 grep -Rh "^import gettext" ./opt/extras.ubuntu.com/test-project
 
 grep -Rh "XDG_DATA_DIRS" ./opt/extras.ubuntu.com/test-project/bin/test-project
-#     os.putenv("XDG_DATA_DIRS", "%s:%s" % ("/opt/extras.ubuntu.com/test-project/share/", os.getenv("XDG_DATA_DIRS", "")))
+#     os.putenv("XDG_DATA_DIRS", "%s:%s" % ("/opt/extras.ubuntu.com/test-project/share/", os.getenv("XDG_DATA_DIRS", "/usr/local/share/:/usr/share/")))

@@ -3,9 +3,7 @@
 # This file is in the public domain
 ### END LICENSE
 
-import gettext
-from gettext import gettext as _
-gettext.textdomain('project_name')
+from locale import gettext as _
 
 from gi.repository import Gtk # pylint: disable=E0611
 import logging
