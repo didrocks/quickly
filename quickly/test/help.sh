@@ -84,7 +84,7 @@ HOME=/ quickly help ubuntu-cli help
 HOME=/ quickly help ubuntu-cli
 # ERROR: No command provided to help command.
 # Usage: quickly help [template] <command>
-# Candidate commands are: commands, configure, create, debug, edit, getstarted, help, license, package, quickly, release, run, save, share, test
+# Candidate commands are: commands, configure, create, debug, edit, getstarted, help, license, package, quickly, release, run, save, share, test, upgrade
 
 HOME=/ quickly help foobar
 # ERROR: No foobar command found in ubuntu-application template.

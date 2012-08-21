@@ -21,17 +21,8 @@ quickly package | sed 's/^\.\+//'
 # Ubuntu package has been successfully created in ../test-project_0.1_all.deb
 
 bzr status
-# modified:
-#   test-project.desktop.in
 # unknown:
 #   po/
-
-bzr diff --diff-options="-e"
-# === modified file 'test-project.desktop.in'
-# 6c
-# Icon=/usr/share/test-project/media/test-project.svg
-# .
-# 
 
 ls debian
 # changelog

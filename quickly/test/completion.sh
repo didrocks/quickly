@@ -130,7 +130,7 @@ quickly shell-completion quickly foo
 # add commands configure debug design edit getstarted help license package quickly release run save share submitubuntu test tutorial upgrade
 
 quickly shell-completion quickly -t ubuntu-cli foo
-# commands configure debug edit getstarted help license package quickly release run save share test
+# commands configure debug edit getstarted help license package quickly release run save share test upgrade
 
 quickly shell-completion quickly add foo
 # dialog help-guide help-topic indicator

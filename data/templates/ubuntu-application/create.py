@@ -64,40 +64,7 @@ if len(path_and_project) > 1:
 
 os.chdir(project_name)
 
-# get origin path
-pathname = templatetools.get_template_path_from_project()
-abs_path_project_root = os.path.join(pathname, 'project_root')
-
-python_name = templatetools.python_name(project_name)
-sentence_name, camel_case_name = templatetools.conventional_names(project_name)
-substitutions = (("project_name",project_name),
-            ("camel_case_name",camel_case_name),
-            ("python_name",python_name),
-            ("sentence_name",sentence_name),)
-
-
-for root, dirs, files in os.walk(abs_path_project_root):
-    try:
-        relative_dir = root.split('project_root/')[1]
-    except:
-        relative_dir = ""
-    # python dir should be replace by python_name (project "pythonified" name)
-    if relative_dir.startswith('python'):
-        relative_dir = relative_dir.replace('python', python_name)
-
-    for directory in dirs:
-        if directory.startswith('python'):
-            directory = directory.replace('python', python_name)
-        os.mkdir(os.path.join(relative_dir, directory))
-    for filename in files:
-        templatetools.file_from_template(root, filename, relative_dir, substitutions)
-
-# set the mode to executable for executable file 
-exec_file = os.path.join('bin', project_name)
-try:
-    os.chmod(exec_file, 0755)
-except:
-    pass
+templatetools.copy_dirs_from_template()
 
 # add it to revision control
 print _("Creating bzr repository and committing")
@@ -120,6 +87,7 @@ if os.path.exists(schemapath):
         env['XDG_DATA_DIRS'] = datadir
 
 # run the new application if X display
+exec_file = os.path.join('bin', project_name)
 if templatetools.is_X_display() and os.path.isfile(exec_file):
     print _("Launching your newly created project!")
     subprocess.call(['./' + project_name], cwd='bin/', env=env)

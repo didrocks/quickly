@@ -11,27 +11,11 @@ quickly create ubuntu-application test-project
 
 cd test-project
 
-grep LaunchpadIntegration. test_project_lib/Window.py
-#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-
-grep helpMenu test_project_lib/Window.py
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-
 quickly configure lp-project gpoweroff
 # Get Launchpad Settings
 # Launchpad connection is ok
 # Creating new apport crashdb configuration
 # Creating new apport hooks
-
-grep LaunchpadIntegration. test_project_lib/Window.py
-#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-
-grep helpMenu test_project_lib/Window.py
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 bzr status
 # modified:
@@ -54,14 +38,6 @@ quickly configure lp-project hudson-notifier
 # Get Launchpad Settings
 # Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
-
-grep LaunchpadIntegration. test_project_lib/Window.py
-#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-
-grep helpMenu test_project_lib/Window.py
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 bzr status
 # added:
@@ -121,14 +97,6 @@ quickly configure lp-project gpoweroff
 # Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 
-grep LaunchpadIntegration. test_project_lib/Window.py
-#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-
-grep helpMenu test_project_lib/Window.py
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-
 bzr status
 # modified:
 #   .quickly
@@ -151,14 +119,6 @@ quickly configure lp-project hudson-notifier
 # Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
 # Creating new apport hooks
-
-grep LaunchpadIntegration. test_project_lib/Window.py
-#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-
-grep helpMenu test_project_lib/Window.py
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -191,14 +151,6 @@ quickly configure lp-project gpoweroff
 # Get Launchpad Settings
 # Launchpad connection is ok
 # Updating project name references in existing apport crashdb configuration
-
-grep LaunchpadIntegration. test_project_lib/Window.py
-#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-
-grep helpMenu test_project_lib/Window.py
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -290,6 +242,10 @@ bzr commit -m "Prior to upgrade"
 # Committed revision 4.
 
 quickly upgrade 0.3
+# Note: This is the first time you have run Quickly since it has been updated.
+# Quickly will now upgrade its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
 
 bzr status
 
@@ -311,21 +267,17 @@ bzr commit -m "Re-running upgrade again"
 # deleted etc/apport/crashdb.conf.d
 # missing etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # deleted etc/apport/crashdb.conf.d/test-project-crashdb.conf
-# Committed revision 5.
+# Committed revision 6.
 
 bzr status
 
 quickly upgrade 0.3
 # Creating new apport crashdb configuration
 # Creating new apport hooks
-
-grep LaunchpadIntegration. test_project_lib/Window.py
-#             from gi.repository import LaunchpadIntegration # pylint: disable=E0611
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-
-grep helpMenu test_project_lib/Window.py
-#             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
+# Note: This is the first time you have run Quickly since it has been updated.
+# Quickly will now upgrade its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
 
 cat etc/apport/crashdb.conf.d/test-project-crashdb.conf
 # ### BEGIN LICENSE
@@ -354,28 +306,19 @@ cat apport/source_test-project.py
 #         report['ThirdParty'] = 'True'
 #         report['CrashDB'] = 'test_project'
 
-cp "$TEST_SCRIPT_DIR/TestProjectWindow.py.no_lpi" ./test_project_lib/Window.py
-
 cp "$TEST_SCRIPT_DIR/TestProjectWindow.ui.renamed_help_menu" ./data/ui/TestProjectWindow.ui
 
 rm -rf apport
 
 rm -rf etc
 
-grep LaunchpadIntegration. test_project_lib/Window.py
-
-grep helpMenu test_project_lib/Window.py
-
 quickly upgrade 0.3
-# Adding launchpad integration to existing application
 # Creating new apport crashdb configuration
 # Creating new apport hooks
-
-grep LaunchpadIntegration. test_project_lib/Window.py
-#             LaunchpadIntegration.add_items(self.ui.differentHelpMenu, 1, True, True)
-#             LaunchpadIntegration.set_sourcepackagename('test-project')
-
-cp "$TEST_SCRIPT_DIR/TestProjectWindow.py.no_lpi" ./test_project_lib/Window.py
+# Note: This is the first time you have run Quickly since it has been updated.
+# Quickly will now upgrade its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
 
 cp "$TEST_SCRIPT_DIR/TestProjectWindow.ui.no_gtk-about" ./data/ui/TestProjectWindow.ui
 
@@ -383,37 +326,41 @@ rm -rf apport
 
 rm -rf etc
 
-grep LaunchpadIntegration. test_project_lib/Window.py
-
-grep helpMenu test_project_lib/Window.py
-
 grep gtk-about data/ui/TestProjectWindow.ui
 
 bzr commit -m "Committing after removing all lpi integration"
 # Committing to: /tmp/test-project/
+# missing apport
+# deleted apport
+# missing etc
+# deleted etc
+# missing apport/source_test-project.py
+# deleted apport/source_test-project.py
 # modified data/ui/TestProjectWindow.ui
-# modified test_project_lib/Window.py
-# Committed revision 6.
+# missing etc/apport
+# deleted etc/apport
+# missing etc/apport/crashdb.conf.d
+# deleted etc/apport/crashdb.conf.d
+# missing etc/apport/crashdb.conf.d/test-project-crashdb.conf
+# deleted etc/apport/crashdb.conf.d/test-project-crashdb.conf
+# Committed revision 9.
 
 quickly upgrade 0.3
 # Creating new apport crashdb configuration
 # Creating new apport hooks
+# Note: This is the first time you have run Quickly since it has been updated.
+# Quickly will now upgrade its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
 
-grep LaunchpadIntegration. test_project_lib/Window.py
-
-grep helpMenu test_project_lib/Window.py
-
-bzr status
-# unknown:
-#   apport/
-#   etc/
-
-cp "$TEST_SCRIPT_DIR/TestProjectWindow.py.no_lpi" ./test_project_lib/Window.py
+ls -dF apport etc
+# apport/
+# etc/
 
 rm ./data/ui/TestProjectWindow.ui
 
-grep LaunchpadIntegration. test_project_lib/Window.py
-
-grep helpMenu test_project_lib/Window.py
-
 quickly upgrade 0.3
+# Note: This is the first time you have run Quickly since it has been updated.
+# Quickly will now upgrade its files (bin/*, test_project_lib/*, and setup.py).
+# But first it will save your project.  View Quickly's changes by running:
+# bzr diff
