@@ -1,3 +1,11 @@
+Quickly 12.08.1
+------------------------------------
+
+ + ubuntu-application:
+   - Add --extras option to 'quickly share' (Vsevolod Velichko)
+   - Overwrite quickly-owned files when upgrading to a new Quickly
+   - Clean up the packaging for extras to not be as insane
+
 Quickly 12.08
 ------------------------------------
 
