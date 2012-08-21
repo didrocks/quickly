@@ -225,7 +225,7 @@ quickly shell-completion quickly save foo
 # 
 
 quickly shell-completion quickly share -
-# --help --ppa --staging --template --verbose --version -h -t
+# --extras --help --ppa --staging --template --verbose --version -h -t
 
 quickly shell-completion quickly share --ppa quickly/
 # quickly/daily-build quickly/ppa
