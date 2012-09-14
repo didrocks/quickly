@@ -143,7 +143,7 @@ def update_file_content(filename, start_marker, end_marker, replacing_content):
         set_file_contents(ftarget_file_name.name, new_content)
 
     except (OSError, IOError), e:
-        msg = _("%s file was not found or can't update it") % ftarget_file_name
+        msg = _("%s file was not found or can't update it") % filename
         raise CantUpdateFile(msg)
 
 def in_verbose_mode():
